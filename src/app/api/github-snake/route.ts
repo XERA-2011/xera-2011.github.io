@@ -1,5 +1,8 @@
 import { NextResponse } from 'next/server';
 
+// 配置路由为静态导出模式
+export const dynamic = 'force-static';
+
 /**
  * GitHub Snake SVG 代理 API
  * 

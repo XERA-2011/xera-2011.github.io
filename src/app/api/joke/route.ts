@@ -3,6 +3,9 @@ import { jokes } from '@/data/jokes/jokes';
 import { themes } from '@/data/jokes/themes';
 import { renderQnACard, renderQuoteCard } from '@/utils/joke-render';
 
+// 配置路由为静态导出模式
+export const dynamic = 'force-static';
+
 // 缓存时间（秒）
 const CACHE_SECONDS = 10;
 

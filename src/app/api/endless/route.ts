@@ -1,7 +1,10 @@
 import { NextResponse } from 'next/server';
 import { battleScenes } from '@/data/endless/endless';
 
-// Battle scene response type
+// 配置路由为静态导出模式
+export const dynamic = 'force-static';
+
+// 战斗场景响应类型
 interface BattleSceneResponse {
   enemyName: string;
   successMessage: string;
@@ -11,12 +14,12 @@ interface BattleSceneResponse {
 
 export async function GET() {
   try {
-    // Get random battle scene from endless data
+    // 从无尽模式数据中获取随机战斗场景
     const sceneKeys = Object.keys(battleScenes);
     const randomKey = sceneKeys[Math.floor(Math.random() * sceneKeys.length)];
     const scene = battleScenes[randomKey];
 
-    // Validate scene exists
+    // 验证场景是否存在
     if (!scene) {
       console.error('Battle scene not found for key:', randomKey);
       return NextResponse.json(
@@ -25,7 +28,7 @@ export async function GET() {
       );
     }
 
-    // Return battle scene
+    // 返回战斗场景
     const response: BattleSceneResponse = {
       enemyName: scene.enemyName,
       successMessage: scene.successMessage,
