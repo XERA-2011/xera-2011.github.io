@@ -30,14 +30,15 @@ export default function HeroSection() {
   });
   const { setIsMenuActive } = useApp();
 
-  // 判断是否在 GitHub Pages 环境（所有 .github.io 域名）
-  const isGitHubPages = typeof window !== 'undefined' &&
-    window.location.hostname.endsWith('.github.io');
-
   // 根据环境选择 SVG 源
-  const snakeSvgSrc = isGitHubPages
-    ? 'https://cdn.jsdelivr.net/gh/XERA-2011/XERA-2011/profile-snake-contrib/github-contribution-grid-snake-dark.svg'
-    : '/api/github-snake';
+  const [snakeSvgSrc, setSnakeSvgSrc] = useState('/api/github-snake');
+
+  useEffect(() => {
+    // 在客户端判断是否在 GitHub Pages 环境（所有 .github.io 域名）
+    if (window.location.hostname.endsWith('.github.io')) {
+      setSnakeSvgSrc('https://cdn.jsdelivr.net/gh/XERA-2011/XERA-2011/profile-snake-contrib/github-contribution-grid-snake-dark.svg');
+    }
+  }, []);
 
   useEffect(() => {
     const tl = gsap.timeline({ defaults: { ease: "power3.out" } });
