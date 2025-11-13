@@ -8,7 +8,6 @@ import React, {
 } from "react";
 import { gsap } from "gsap";
 import { cn } from '@/utils/cn';
-import { usePreloader } from "../preloader";
 import { useMediaQuery } from "@/hooks/use-media-query";
 
 // 类型定义
@@ -49,7 +48,6 @@ function getAngle(diffX: number, diffY: number): number {
 const CURSOR_DIAMETER = 50;
 
 function ElasticCursor() {
-  const { loadingPercent, isLoading } = usePreloader();
   const isMobile = useMediaQuery("(max-width: 768px)");
 
   const jellyRef = useRef<HTMLDivElement>(null);
@@ -83,7 +81,7 @@ function ElasticCursor() {
     const rotation = getAngle(vel.x, vel.y);
     const scale = getScale(vel.x, vel.y);
 
-    if (!isHovering && !isLoading) {
+    if (!isHovering) {
       set.x?.(pos.x);
       set.y?.(pos.y);
       set.r?.(rotation);
@@ -98,14 +96,35 @@ function ElasticCursor() {
       set.sy?.(1);
     }
 
-    if (!isLoading && cursorMoved) {
+    if (cursorMoved) {
       rafRef.current = requestAnimationFrame(loop);
     }
-  }, [isHovering, isLoading, cursorMoved, pos, vel, set]);
+  }, [isHovering, cursorMoved, pos, vel, set]);
+
+  // 初始化光标位置到鼠标当前位置
+  useLayoutEffect(() => {
+    if (isMobile) return;
+
+    const initCursor = (e: MouseEvent) => {
+      pos.x = e.clientX;
+      pos.y = e.clientY;
+      if (set.x && set.y) {
+        set.x(e.clientX);
+        set.y(e.clientY);
+      }
+    };
+
+    // 立即获取鼠标位置
+    window.addEventListener("mousemove", initCursor, { once: true });
+
+    return () => {
+      window.removeEventListener("mousemove", initCursor);
+    };
+  }, [isMobile, pos, set]);
 
   // 鼠标移动事件处理
   useLayoutEffect(() => {
-    if (isMobile || isLoading) return;
+    if (isMobile) return;
 
     const setFromEvent = (e: MouseEvent) => {
       if (!jellyRef.current) return;
@@ -198,24 +217,11 @@ function ElasticCursor() {
     return () => {
       window.removeEventListener("mousemove", setFromEvent);
     };
-  }, [isLoading, isMobile, cursorMoved, isHovering, pos, vel]);
-
-  // 加载动画
-  useEffect(() => {
-    if (!jellyRef.current || !isLoading) return;
-
-    gsap.to(jellyRef.current, {
-      height: "2rem",
-      borderRadius: "1rem",
-      width: loadingPercent * 2 + "vw",
-      duration: 0.3,
-      ease: "power2.out",
-    });
-  }, [loadingPercent, isLoading]);
+  }, [isMobile, cursorMoved, isHovering, pos, vel]);
 
   // 启动/停止动画循环
   useEffect(() => {
-    if (!isLoading && cursorMoved && !isMobile) {
+    if (cursorMoved && !isMobile) {
       rafRef.current = requestAnimationFrame(loop);
     }
 
@@ -224,7 +230,7 @@ function ElasticCursor() {
         cancelAnimationFrame(rafRef.current);
       }
     };
-  }, [loop, isLoading, cursorMoved, isMobile]);
+  }, [loop, cursorMoved, isMobile]);
 
   if (isMobile) return null;
 
@@ -236,7 +242,8 @@ function ElasticCursor() {
         "jelly-blob fixed left-0 top-0 pointer-events-none",
         "translate-x-[-50%] translate-y-[-50%]",
         "border-2 border-transparent rounded-full",
-        "will-change-transform"
+        "will-change-transform",
+        !cursorMoved && "opacity-0"
       )}
       style={{
         width: CURSOR_DIAMETER,
@@ -245,6 +252,7 @@ function ElasticCursor() {
         backdropFilter: "invert(100%)",
         backfaceVisibility: "hidden",
         perspective: 1000,
+        transition: cursorMoved ? "none" : "opacity 0.3s ease-out",
       }}
     />
   );

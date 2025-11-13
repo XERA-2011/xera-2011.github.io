@@ -5,7 +5,6 @@ import Background from "@/components/background/star";
 import Header from "@/components/header";
 import SmoothScroll from "@/components/SmoothScroll";
 import ElasticCursor from "@/components/ui/ElasticCursor";
-import Preloader from "@/components/preloader";
 import { AppProvider } from "@/contexts/AppContext";
 
 export const metadata: Metadata = {
@@ -24,15 +23,13 @@ export default function RootLayout({
         className="antialiased theme-scrollbar"
       >
         <AppProvider>
-          <Preloader>
-            <SmoothScroll>
-              <Background />
-              <Header />
-              {children}
-              {/* <Footer /> */}
-              <ElasticCursor />
-            </SmoothScroll>
-          </Preloader>
+          <SmoothScroll>
+            <Background />
+            <Header />
+            {children}
+            {/* <Footer /> */}
+            <ElasticCursor />
+          </SmoothScroll>
         </AppProvider>
       </body>
     </html>
