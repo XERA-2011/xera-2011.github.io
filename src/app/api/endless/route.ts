@@ -9,9 +9,6 @@ interface BattleSceneResponse {
   description?: string;
 }
 
-// 标记为动态路由，不进行静态导出
-export const dynamic = 'force-dynamic';
-
 export async function GET() {
   try {
     // 从无尽模式数据中获取随机战斗场景

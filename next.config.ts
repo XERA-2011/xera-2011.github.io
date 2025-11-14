@@ -11,6 +11,12 @@ const nextConfig: NextConfig = {
         pathname: '/**',
       },
     ],
+    localPatterns: [
+      {
+        pathname: '/api/**',
+        search: '',
+      },
+    ],
   },
   // 优化字体加载
   experimental: {

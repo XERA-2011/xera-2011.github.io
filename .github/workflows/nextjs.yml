@@ -86,6 +86,7 @@ jobs:
         run: pnpm --version
       - name: Install dependencies
         run: pnpm install
+      # 为了让 nextjs在使用api的情况下 能在github上正常打包
       - name: Remove API routes for static export
         run: |
           if [ -d "src/app/api" ]; then

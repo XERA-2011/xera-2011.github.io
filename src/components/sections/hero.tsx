@@ -31,12 +31,14 @@ export default function HeroSection() {
   const { setIsMenuActive } = useApp();
 
   // 根据环境选择 SVG 源
-  const [snakeSvgSrc, setSnakeSvgSrc] = useState('/api/github-snake');
+  const [snakeSvgSrc, setSnakeSvgSrc] = useState('');
 
   useEffect(() => {
     // 在客户端判断是否在 GitHub Pages 环境（所有 .github.io 域名）
     if (window.location.hostname.endsWith('.github.io')) {
-      setSnakeSvgSrc('https://cdn.jsdelivr.net/gh/XERA-2011/XERA-2011/profile-snake-contrib/github-contribution-grid-snake-dark.svg');
+      setSnakeSvgSrc('https://xera-2011.vercel.app/api/github-snake');
+    } else {
+      setSnakeSvgSrc('/api/github-snake');
     }
   }, []);
 
@@ -207,22 +209,24 @@ export default function HeroSection() {
           </div>
         </motion.div>
 
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ delay: 1.2, duration: 0.6 }}
-          className="mt-12"
-        >
-          <Image
-            alt="github-snake"
-            src={snakeSvgSrc}
-            width={800}
-            height={200}
-            style={{ width: "auto", height: "auto" }}
-            priority
-            unoptimized
-          />
-        </motion.div>
+        {snakeSvgSrc && (
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ delay: 1.2, duration: 0.6 }}
+            className="mt-12"
+          >
+            <Image
+              alt="github-snake"
+              src={snakeSvgSrc}
+              width={800}
+              height={200}
+              style={{ width: "auto", height: "auto" }}
+              priority
+              unoptimized
+            />
+          </motion.div>
+        )}
       </div>
     </section>
   );

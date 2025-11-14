@@ -6,9 +6,6 @@ import { renderQnACard, renderQuoteCard } from '@/utils/joke-render';
 // 缓存时间（秒）
 const CACHE_SECONDS = 10;
 
-// 标记为动态路由，不进行静态导出
-export const dynamic = 'force-dynamic';
-
 /**
  * 从数组中随机获取一个元素
  */
