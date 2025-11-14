@@ -1,60 +1,60 @@
 # Global Breaking News TOP10
 
-**Date**: 2025年11月12日
-**Update Time**: 22:21 UTC
+**Date**: 2025年11月14日
+**Update Time**: 22:12 UTC
 **AI Model**: Google Gemini / Google Gemini
 
 ---
 
-### 1. **Israel Reopens Zikim Crossing for Gaza Aid** / **以色列重新开放Zikim口岸以运送加沙援助物资**
-- **Time**: 2025-11-12
-- **Content**: Israel has reopened the Zikim crossing in northern Gaza to allow the entry of humanitarian aid trucks for the first time in months. / 以色列数月来首次重新开放加沙北部的Zikim口岸，允许人道主义援助卡车进入。
+### 1. **Russia-Ukraine War Developments** / **俄乌战争动态**
+- **Time**: 2025-11-14
+- **Content**: Fighting continues with Russia making gains in southern Ukraine, drone and missile attacks have hit Kyiv, and a significant corruption scandal involving a $100M energy sector graft investigation has led to the resignation of top Ukrainian ministers. / 战斗仍在继续，俄罗斯在乌克兰南部取得进展，无人机和导弹袭击了基辅，涉及1亿美元能源部门贪污调查的重大腐败丑闻导致乌克兰高级部长辞职。
+- **Source**: Associated Press
+
+### 2. **Israel-Hamas Conflict** / **以色列-哈马斯冲突**
+- **Time**: 2025-11-14
+- **Content**: Israel has returned 15 Palestinian bodies to Gaza, while settler violence against Palestinians has been condemned. Discussions are also underway regarding a US proposal for a Gaza stabilization force. / 以色列已将15具巴勒斯坦人尸体送回加沙，定居者对巴勒斯坦人的暴力行为受到谴责。有关美国提出的加沙稳定部队的讨论也正在进行中。
+- **Source**: Al Jazeera
+
+### 3. **Epstein Documents Released** / **爱泼斯坦文件公布**
+- **Time**: 2025-11-14
+- **Content**: Further emails and documents revealing Jeffrey Epstein's network of powerful individuals have been released, sparking renewed interest and scrutiny. / 更多揭示杰弗里·爱泼斯坦与权势人物网络的电子邮件和文件被公布，引发了新的关注和审查。
+- **Source**: The Guardian
+
+### 4. **COP30 Climate Summit Protests** / **COP30气候峰会抗议**
+- **Time**: 2025-11-14
+- **Content**: Indigenous groups are actively protesting at the UN Climate Summit (COP30) in Brazil, demanding attention and action against development projects in the Amazon rainforest. / 土著团体正在巴西举行的联合国气候峰会（COP30）上积极抗议，要求关注并采取行动，反对在亚马逊雨林进行的开发项目。
+- **Source**: CTV News
+
+### 5. **Iran Seizes Tanker in Strait of Hormuz** / **伊朗在霍尔木兹海峡扣押油轮**
+- **Time**: 2025-11-14
+- **Content**: Tensions in the Middle East remain high after Iran seized a tanker in the strategically important Strait of Hormuz. / 伊朗在具有重要战略意义的霍尔木兹海峡扣押一艘油轮后，中东紧张局势依然高度紧张。
+- **Source**: Associated Press
+
+### 6. **Fatal Bus Crash in Stockholm** / **斯德哥尔摩发生致命公交车祸**
+- **Time**: 2025-11-14
+- **Content**: Several people have been killed and injured after a bus crashed into a bus stop in central Stockholm, Sweden. / 瑞典斯德哥尔摩市中心一辆公交车撞上公交车站，造成数人死伤。
 - **Source**: The Hindu
 
-### 2. **Ukrainian Government Ministers Resign Amid Corruption Scandal** / **乌克兰政府部长因腐败丑闻辞职**
-- **Time**: 2025-11-12
-- **Content**: Several top Ukrainian ministers have submitted their resignations following a major corruption investigation related to energy contracts. / 在一项与能源合同有关的重大腐败调查之后，几位乌克兰高级部长提交了辞呈。
-- **Source**: AP News
+### 7. **South Africa Investigates Mysterious Plane** / **南非调查神秘飞机**
+- **Time**: 2025-11-14
+- **Content**: South Africa is investigating the arrival of a plane carrying over 150 Palestinians from Gaza, an event described as "mysterious." / 南非正在调查一架载有超过150名来自加沙的巴勒斯坦人的飞机的抵达，该事件被描述为“神秘”。
+- **Source**: Al Jazeera
 
-### 3. **Deadly Tornado Strikes Southern Brazil** / **致命龙卷风袭击巴西南里奥格兰德州**
-- **Time**: 2025-11-12
-- **Content**: A powerful tornado in Brazil's southern state of Paraná has resulted in at least six fatalities and over 400 injuries, causing widespread destruction. / 巴西南部的巴拉那州发生强烈龙卷风，造成至少6人死亡，400多人受伤，并造成大范围破坏。
+### 8. **London Judge Holds BHP Group Liable** / **伦敦法官裁定必和必拓集团承担责任**
+- **Time**: 2025-11-14
+- **Content**: A London judge has found the global mining company BHP Group liable for Brazil's worst environmental disaster. / 伦敦一名法官裁定，全球矿业公司必和必拓集团对巴西有史以来最严重的环境灾难负有责任。
+- **Source**: The Hindu
+
+### 9. **US Approves Military Sale to Taiwan** / **美国批准对台军售**
+- **Time**: 2025-11-14
+- **Content**: The United States has approved its first military sale to Taiwan since Donald Trump's return, a move likely to draw reaction from China. / 美国批准了自唐纳德·特朗普重返政坛以来对台湾的首次军售，此举可能会引起中国的反应。
+- **Source**: The Hindu
+
+### 10. **China Linked to AI Hacking Attacks** / **中国被指与人工智能黑客攻击有关**
+- **Time**: 2025-11-14
+- **Content**: An AI firm has claimed to have stopped a state-sponsored cyber-attack campaign linked to China. / 一家人工智能公司声称已阻止了一场与中国有关的国家支持的网络攻击活动。
 - **Source**: Global News
-
-### 4. **Bus Plunges into Ravine in Peru, Killing 37** / **秘鲁巴士坠入峡谷，造成37人死亡**
-- **Time**: 2025-11-12
-- **Content**: A tragic bus accident in Peru has left at least 37 people dead and 24 injured after the vehicle fell into a ravine following a collision with a truck. / 秘鲁发生一起悲惨的巴士事故，一辆巴士与一辆卡车相撞后坠入峡谷，造成至少37人死亡，24人受伤。
-- **Source**: NDTV
-
-### 5. **Newly Built Bridge Collapses in Southwest China** / **中国西南部一座新建桥梁坍塌**
-- **Time**: 2025-11-12
-- **Content**: A recently constructed bridge in a mountainous region of southwest China has collapsed, raising concerns about infrastructure safety and construction standards. / 中国西南部山区一座新建成的桥梁发生坍塌，引发了人们对基础设施安全和建筑标准的担忧。
-- **Source**: The Guardian
-
-### 6. **UN Warns of Worsening Hunger Crisis in Sudan** / **联合国警告苏丹饥饿危机日益严重**
-- **Time**: 2025-11-12
-- **Content**: Following the capture of a key city by the Rapid Support Forces (RSF), aid agencies are issuing dire warnings about a deepening hunger crisis in Sudan. / 在快速支援部队（RSF）占领一个主要城市后，援助机构就苏丹日益严重的饥饿危机发出了严重警告。
-- **Source**: The Guardian
-
-### 7. **Algeria to Release French-Algerian Writer Boualem Sansal** / **阿尔及利亚将释放法裔阿尔及利亚作家Boualem Sansal**
-- **Time**: 2025-11-12
-- **Content**: Algeria has pardoned and is set to release the prominent French-Algerian writer Boualem Sansal, who had been imprisoned on charges criticized by human rights groups. / 阿尔及利亚已赦免并准备释放著名的法裔阿尔及利亚作家Boualem Sansal，他此前因受到人权组织批评的指控而被监禁。
-- **Source**: The Guardian
-
-### 8. **TikTok Influencer Publicly Executed in Mali** / **TikTok网红在马里被公开处决**
-- **Time**: 2025-11-12
-- **Content**: A well-known TikTok influencer was publicly executed in Mali, highlighting the worsening security situation and the growing threat of jihadist groups in the region. / 一位知名的TikTok网红在马里被公开处决，凸显了该地区日益恶化的安全局势和圣战组织的日益增长的威胁。
-- **Source**: The Guardian
-
-### 9. **Hundreds of Paramount Skydance Employees Resign Over Return-to-Office Mandate** / **数百名派拉蒙Skydance员工因重返办公室强制令而辞职**
-- **Time**: 2025-11-12
-- **Content**: Approximately 600 employees at Paramount Skydance have resigned in protest of a new strict five-day return-to-office policy implemented by the company's new CEO. / 派拉蒙Skydance约有600名员工辞职，以抗议公司新任首席执行官实施的严格的五天重返办公室政策。
-- **Source**: NDTV
-
-### 10. **Scientists Link Epstein-Barr Virus to Lupus** / **科学家将爱泼斯坦-巴尔病毒与狼疮联系起来**
-- **Time**: 2025-11-12
-- **Content**: New research suggests that the Epstein-Barr virus, a common virus that causes mononucleosis, may be a trigger for the autoimmune disease lupus. / 新的研究表明，引起单核细胞增多症的常见病毒爱泼斯坦-巴尔病毒可能是自身免疫性疾病狼疮的诱因。
-- **Source**: The Guardian
 
 ---
 
