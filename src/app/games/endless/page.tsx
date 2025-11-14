@@ -3,6 +3,7 @@
 import { useState, useRef } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { usePageTitle } from '@/hooks/use-page-title';
+import { getApiUrl } from '@/utils/api';
 
 interface BattleLog {
   id: number;
@@ -31,7 +32,7 @@ export default function EndlessPage() {
 
     try {
       // Get battle scene from server
-      const response = await fetch('/api/endless');
+      const response = await fetch(getApiUrl('/api/endless'));
       const result = await response.json();
 
       // Calculate win rate based on current level

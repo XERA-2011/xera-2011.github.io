@@ -6,6 +6,7 @@ import gsap from 'gsap';
 import Image from 'next/image';
 import Logo from '@/components/ui/Logo';
 import { useApp } from '@/contexts/AppContext';
+import { getApiUrl } from '@/utils/api';
 
 interface CurrentTime {
   year: number;
@@ -34,12 +35,7 @@ export default function HeroSection() {
   const [snakeSvgSrc, setSnakeSvgSrc] = useState('');
 
   useEffect(() => {
-    // 在客户端判断是否在 GitHub Pages 环境（所有 .github.io 域名）
-    if (window.location.hostname.endsWith('.github.io')) {
-      setSnakeSvgSrc('https://xera-2011.vercel.app/api/github-snake');
-    } else {
-      setSnakeSvgSrc('/api/github-snake');
-    }
+    setSnakeSvgSrc(getApiUrl('/api/github-snake'));
   }, []);
 
   useEffect(() => {
