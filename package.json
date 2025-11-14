@@ -4,6 +4,7 @@
   "private": true,
   "scripts": {
     "dev": "next dev --turbopack -p 2011",
+    "prebuild": "node scripts/remove-api-if-static.js",
     "build": "next build",
     "start": "next start -p 2011",
     "lint": "next lint"
