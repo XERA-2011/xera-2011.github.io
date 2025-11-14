@@ -11,6 +11,10 @@ import { NextResponse } from 'next/server';
  * - Next.js 缓存：1 小时 (revalidate: 3600)
  * - 浏览器缓存：1 小时 (Cache-Control)
  */
+
+// 标记为动态路由，不进行静态导出
+export const dynamic = 'force-dynamic';
+
 export async function GET() {
   try {
     const response = await fetch(
