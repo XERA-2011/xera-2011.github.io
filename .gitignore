@@ -35,6 +35,7 @@ yarn-error.log*
 
 # local env files
 .env*.local
+.env
 
 # Sentry Config File
 .env.sentry-build-plugin
@@ -64,3 +65,5 @@ build-archive.log
 
 .vercel
 .env*.local
+
+/src/generated/prisma

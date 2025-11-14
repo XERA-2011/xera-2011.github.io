@@ -3,9 +3,11 @@ import '../styles/globals.css';
 import Background from "@/components/background/star";
 // import Footer from "@/components/footer";
 import Header from "@/components/header";
+import UserAuth from "@/components/header/UserAuth";
 import SmoothScroll from "@/components/SmoothScroll";
 import ElasticCursor from "@/components/ui/ElasticCursor";
 import { AppProvider } from "@/contexts/AppContext";
+import SessionProvider from "@/components/SessionProvider";
 
 export const metadata: Metadata = {
   title: "XERA-2011",
@@ -22,15 +24,17 @@ export default function RootLayout({
       <body
         className="antialiased theme-scrollbar"
       >
-        <AppProvider>
-          <SmoothScroll>
-            <Background />
-            <Header />
-            {children}
-            {/* <Footer /> */}
-            <ElasticCursor />
-          </SmoothScroll>
-        </AppProvider>
+        <SessionProvider>
+          <AppProvider>
+            <SmoothScroll>
+              <Background />
+              <Header userAuth={<UserAuth />} />
+              {children}
+              {/* <Footer /> */}
+              <ElasticCursor />
+            </SmoothScroll>
+          </AppProvider>
+        </SessionProvider>
       </body>
     </html>
   );

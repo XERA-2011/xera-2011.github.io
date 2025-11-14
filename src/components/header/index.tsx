@@ -8,12 +8,14 @@ import Nav from "./nav";
 import { cn } from "@/utils/cn";
 import Breadcrumb from "./Breadcrumb";
 import { useApp } from "@/contexts/AppContext";
+import { ReactNode } from "react";
 
 interface HeaderProps {
   loader?: boolean;
+  userAuth?: ReactNode;
 }
 
-const Header = ({ loader }: HeaderProps) => {
+const Header = ({ loader, userAuth }: HeaderProps) => {
   const { isMenuActive: isActive, setIsMenuActive: setIsActive } = useApp();
 
   return (
@@ -43,6 +45,8 @@ const Header = ({ loader }: HeaderProps) => {
         <Breadcrumb />
 
         <div className="flex items-center gap-4">
+          {userAuth}
+
           <Link
             href="https://github.com/XERA-2011"
             target="_blank"
