@@ -42,7 +42,7 @@ pnpm up eslint
 
 ```bash
 # 安装 Vercel CLI
-pnpm install -g vercel
+npm install -g vercel
 
 # 登录
 vercel login
