@@ -9,12 +9,6 @@ const nextConfig: NextConfig = {
   
   images: { 
     unoptimized: true,     // 关闭 Next.js 默认图片优化
-    localPatterns: [
-      {
-        pathname: '/api/joke',
-        search: '',
-      },
-    ],
     remotePatterns: [
       {
         protocol: 'https',
