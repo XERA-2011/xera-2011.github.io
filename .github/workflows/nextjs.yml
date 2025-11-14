@@ -85,6 +85,8 @@ jobs:
       - name: Check pnpm version
         run: pnpm --version
       - name: Install dependencies
+        env:
+          DATABASE_URL: "postgresql://dummy:dummy@localhost:5432/dummy"
         run: pnpm install
       # 为了让 nextjs在使用api的情况下 能在github上正常打包
       - name: Remove API routes for static export
