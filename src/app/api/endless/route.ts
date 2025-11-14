@@ -1,9 +1,6 @@
 import { NextResponse } from 'next/server';
 import { battleScenes } from '@/data/endless/endless';
 
-// 配置路由为静态导出模式
-export const dynamic = 'force-static';
-
 // 战斗场景响应类型
 interface BattleSceneResponse {
   enemyName: string;
