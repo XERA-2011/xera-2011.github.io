@@ -1,5 +1,6 @@
 import { auth, signOut } from "@/auth"
 import { redirect } from "next/navigation"
+import Image from "next/image"
 
 export default async function DashboardPage() {
   const session = await auth()
@@ -20,9 +21,11 @@ export default async function DashboardPage() {
                 <p><strong>姓名:</strong> {session.user.name}</p>
                 <p><strong>邮箱:</strong> {session.user.email}</p>
                 {session.user.image && (
-                  <img
+                  <Image
                     src={session.user.image}
                     alt="头像"
+                    width={64}
+                    height={64}
                     className="h-16 w-16 rounded-full"
                   />
                 )}

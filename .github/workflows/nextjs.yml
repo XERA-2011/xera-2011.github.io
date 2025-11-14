@@ -96,6 +96,8 @@ jobs:
             echo "API folder not found, skipping."
           fi
       - name: Build with Next.js
+        env:
+          DATABASE_URL: "postgresql://dummy:dummy@localhost:5432/dummy"
         run: ${{ steps.detect-package-manager.outputs.runner }} build
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v3
