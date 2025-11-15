@@ -1,60 +1,60 @@
 # Global Breaking News TOP10
 
-**Date**: 2025年11月14日
-**Update Time**: 22:12 UTC
+**Date**: 2025年11月15日
+**Update Time**: 22:09 UTC
 **AI Model**: Google Gemini / Google Gemini
 
 ---
 
-### 1. **Russia-Ukraine War Developments** / **俄乌战争动态**
-- **Time**: 2025-11-14
-- **Content**: Fighting continues with Russia making gains in southern Ukraine, drone and missile attacks have hit Kyiv, and a significant corruption scandal involving a $100M energy sector graft investigation has led to the resignation of top Ukrainian ministers. / 战斗仍在继续，俄罗斯在乌克兰南部取得进展，无人机和导弹袭击了基辅，涉及1亿美元能源部门贪污调查的重大腐败丑闻导致乌克兰高级部长辞职。
-- **Source**: Associated Press
+### 1. **Iran Seizes Oil Tanker in Strait of Hormuz** / **伊朗在霍尔木兹海峡扣押油轮**
+- **Time**: 2025-11-15
+- **Content**: Iran has confirmed the seizure of an oil tanker in the strategically vital Strait of Hormuz. / 伊朗已确认在具有重要战略意义的霍尔木兹海峡扣押了一艘油轮。
+- **Source**: Indian Express
 
-### 2. **Israel-Hamas Conflict** / **以色列-哈马斯冲突**
-- **Time**: 2025-11-14
-- **Content**: Israel has returned 15 Palestinian bodies to Gaza, while settler violence against Palestinians has been condemned. Discussions are also underway regarding a US proposal for a Gaza stabilization force. / 以色列已将15具巴勒斯坦人尸体送回加沙，定居者对巴勒斯坦人的暴力行为受到谴责。有关美国提出的加沙稳定部队的讨论也正在进行中。
-- **Source**: Al Jazeera
-
-### 3. **Epstein Documents Released** / **爱泼斯坦文件公布**
-- **Time**: 2025-11-14
-- **Content**: Further emails and documents revealing Jeffrey Epstein's network of powerful individuals have been released, sparking renewed interest and scrutiny. / 更多揭示杰弗里·爱泼斯坦与权势人物网络的电子邮件和文件被公布，引发了新的关注和审查。
+### 2. **UNRWA Official Accuses Israel of Breaching International Law on Gaza Aid** / **联合国近东救济工程处官员指责以色列在加沙援助问题上违反国际法**
+- **Time**: 2025-11-15
+- **Content**: A senior official from the UN agency for Palestinian refugees (UNRWA) stated that Israel is violating international law by continuing to restrict aid flows into Gaza, where the population faces critical shortages. / 联合国巴勒斯坦难民机构（UNRWA）的一名高级官员表示，以色列继续限制援助物资进入加沙，违反了国际法，当地民众面临严重短缺。
 - **Source**: The Guardian
 
-### 4. **COP30 Climate Summit Protests** / **COP30气候峰会抗议**
-- **Time**: 2025-11-14
-- **Content**: Indigenous groups are actively protesting at the UN Climate Summit (COP30) in Brazil, demanding attention and action against development projects in the Amazon rainforest. / 土著团体正在巴西举行的联合国气候峰会（COP30）上积极抗议，要求关注并采取行动，反对在亚马逊雨林进行的开发项目。
-- **Source**: CTV News
-
-### 5. **Iran Seizes Tanker in Strait of Hormuz** / **伊朗在霍尔木兹海峡扣押油轮**
-- **Time**: 2025-11-14
-- **Content**: Tensions in the Middle East remain high after Iran seized a tanker in the strategically important Strait of Hormuz. / 伊朗在具有重要战略意义的霍尔木兹海峡扣押一艘油轮后，中东紧张局势依然高度紧张。
-- **Source**: Associated Press
-
-### 6. **Fatal Bus Crash in Stockholm** / **斯德哥尔摩发生致命公交车祸**
-- **Time**: 2025-11-14
-- **Content**: Several people have been killed and injured after a bus crashed into a bus stop in central Stockholm, Sweden. / 瑞典斯德哥尔摩市中心一辆公交车撞上公交车站，造成数人死伤。
+### 3. **Japan Protests China's Travel Warning Amid Taiwan Tensions** / **日本就台湾紧张局势抗议中国的旅行警告**
+- **Time**: 2025-11-15
+- **Content**: Japan has issued a protest against China's travel warning to its citizens, which followed remarks from Tokyo's new premier regarding a hypothetical attack on Taiwan. / 日本就中国对其公民发布的旅行警告提出抗议，此前东京新任首相就 hypothetical 攻击台湾发表了言论。
 - **Source**: The Hindu
 
-### 7. **South Africa Investigates Mysterious Plane** / **南非调查神秘飞机**
-- **Time**: 2025-11-14
-- **Content**: South Africa is investigating the arrival of a plane carrying over 150 Palestinians from Gaza, an event described as "mysterious." / 南非正在调查一架载有超过150名来自加沙的巴勒斯坦人的飞机的抵达，该事件被描述为“神秘”。
-- **Source**: Al Jazeera
-
-### 8. **London Judge Holds BHP Group Liable** / **伦敦法官裁定必和必拓集团承担责任**
-- **Time**: 2025-11-14
-- **Content**: A London judge has found the global mining company BHP Group liable for Brazil's worst environmental disaster. / 伦敦一名法官裁定，全球矿业公司必和必拓集团对巴西有史以来最严重的环境灾难负有责任。
-- **Source**: The Hindu
-
-### 9. **US Approves Military Sale to Taiwan** / **美国批准对台军售**
-- **Time**: 2025-11-14
-- **Content**: The United States has approved its first military sale to Taiwan since Donald Trump's return, a move likely to draw reaction from China. / 美国批准了自唐纳德·特朗普重返政坛以来对台湾的首次军售，此举可能会引起中国的反应。
-- **Source**: The Hindu
-
-### 10. **China Linked to AI Hacking Attacks** / **中国被指与人工智能黑客攻击有关**
-- **Time**: 2025-11-14
-- **Content**: An AI firm has claimed to have stopped a state-sponsored cyber-attack campaign linked to China. / 一家人工智能公司声称已阻止了一场与中国有关的国家支持的网络攻击活动。
+### 4. **Pope Returns 62 Indigenous Artifacts to Canada** / **教皇将62件原住民文物归还加拿大**
+- **Time**: 2025-11-15
+- **Content**: In a significant act of reconciliation, 62 Indigenous artifacts have been returned to Canada as a gift from the Pope. / 作为和解的重要举措，教皇将62件原住民文物作为礼物归还给加拿大。
 - **Source**: Global News
+
+### 5. **Global Funds Reduce Exposure to U.S. Markets Amidst Correction Concerns** / **全球基金因担心市场调整而减少对美国市场的敞口**
+- **Time**: 2025-11-15
+- **Content**: The CEO of Sanlam Group reported that global funds are beginning to trim their exposures in U.S. markets, anticipating an imminent correction. / Sanlam集团首席执行官报告称，全球基金正开始削减在美国市场的敞口，预计市场即将进行调整。
+- **Source**: The Hindu
+
+### 6. **Massive Solar Storm Expected, Global Agencies on Alert** / **预计将发生大规模太阳风暴，全球机构保持警惕**
+- **Time**: 2025-11-15
+- **Content**: A significant solar storm is anticipated, prompting global agencies to be on alert due to its potential impact on satellite communication. / 预计将发生一次强烈的太阳风暴，由于其可能对卫星通信产生影响，全球各机构已进入戒备状态。
+- **Source**: Career India
+
+### 7. **U.S. and China Hold High-Level Economic Talks** / **中美举行高层经济会谈**
+- **Time**: 2025-11-15
+- **Content**: High-level economic discussions between the USA and China have commenced, focusing on critical areas such as trade, technology, and AI cooperation. / 中美高层经济对话已经开始，重点讨论贸易、技术和人工智能合作等关键领域。
+- **Source**: Career India
+
+### 8. **Indonesia Landslide Kills 11, 12 Missing in Central Java** / **印度尼西亚中爪哇省山体滑坡致11人死亡，12人失踪**
+- **Time**: 2025-11-15
+- **Content**: A landslide in Central Java, Indonesia, has resulted in the deaths of 11 people, with 12 others reported missing. / 印度尼西亚中爪哇省发生山体滑坡，造成11人死亡，另有12人失踪。
+- **Source**: Indian Express
+
+### 9. **U.S. Lawmaker to Introduce Bill to Eliminate H-1B Visa Program** / **美国议员将提出法案取消H-1B签证计划**
+- **Time**: 2025-11-15
+- **Content**: A U.S. lawmaker is set to introduce legislation aimed at completely eliminating the H-1B visa program. / 一位美国国会议员将提出一项旨在完全取消H-1B签证计划的法案。
+- **Source**: India Today
+
+### 10. **Lahore High Court Judge Resigns Over Constitutional Amendment in Pakistan** / **巴基斯坦拉合尔高等法院法官因宪法修正案辞职**
+- **Time**: 2025-11-15
+- **Content**: A senior judge of the Lahore High Court in Pakistan has resigned in protest against a new constitutional amendment, deepening a judicial crisis in the country. / 巴基斯坦拉合尔高等法院的一名高级法官因抗议一项新的宪法修正案而辞职，加深了该国的司法危机。
+- **Source**: The Hindu
 
 ---
 
