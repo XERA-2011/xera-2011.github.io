@@ -22,6 +22,19 @@ const nextConfig: NextConfig = {
   experimental: {
     optimizePackageImports: ['next/font/google'],
   },
+  // 确保 Prisma 引擎文件被正确打包
+  webpack: (config, { isServer }) => {
+    if (isServer) {
+      config.externals.push({
+        'utf-8-validate': 'commonjs utf-8-validate',
+        'bufferutil': 'commonjs bufferutil',
+      });
+    }
+    return config;
+  },
+  outputFileTracingIncludes: {
+    '/api/**/*': ['./src/generated/prisma/**/*'],
+  },
 };
 
 export default nextConfig;
