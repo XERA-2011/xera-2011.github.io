@@ -18,6 +18,7 @@ export default async function UserAuth() {
             alt={session.user.name || "用户头像"}
             width={32}
             height={32}
+            priority
             className="rounded-full"
           />
         )}

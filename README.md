@@ -18,6 +18,8 @@ pnpm install
 
 ```bash
 pnpm dev
+
+pnpm dev:proxy
 ```
 
 ## Deploy
