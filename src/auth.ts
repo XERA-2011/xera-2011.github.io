@@ -47,7 +47,7 @@ export const authConfig: NextAuthConfig = {
       // 否则返回 baseUrl
       return baseUrl
     },
-    async jwt({ token, user, account }) {
+    async jwt({ token, user }) {
       // 首次登录时，将用户信息保存到 token
       if (user) {
         token.id = user.id

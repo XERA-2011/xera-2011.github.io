@@ -10,7 +10,7 @@ export default function LoginPage() {
     setIsLoading(true)
     try {
       await signIn("google", { callbackUrl: "/dashboard" })
-    } catch (error) {
+    } catch {
       setIsLoading(false)
     }
   }
