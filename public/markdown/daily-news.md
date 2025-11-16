@@ -1,60 +1,62 @@
+(node:2377) MaxListenersExceededWarning: Possible EventTarget memory leak detected. 11 abort listeners added to [AbortSignal]. MaxListeners is 10. Use events.setMaxListeners() to increase limit
+(Use `node --trace-warnings ...` to show where the warning was created)
 # Global Breaking News TOP10
 
-**Date**: 2025年11月15日
-**Update Time**: 22:09 UTC
+**Date**: 2025年11月16日
+**Update Time**: 22:11 UTC
 **AI Model**: Google Gemini / Google Gemini
 
 ---
 
-### 1. **Iran Seizes Oil Tanker in Strait of Hormuz** / **伊朗在霍尔木兹海峡扣押油轮**
-- **Time**: 2025-11-15
-- **Content**: Iran has confirmed the seizure of an oil tanker in the strategically vital Strait of Hormuz. / 伊朗已确认在具有重要战略意义的霍尔木兹海峡扣押了一艘油轮。
-- **Source**: Indian Express
+### 1. **Iran Ceases Uranium Enrichment** / **伊朗停止铀浓缩活动**
+- **Time**: 2025-11-16
+- **Content**: Iran's Foreign Minister announced that the country has completely stopped uranium enrichment activities at all its sites. This comes after Israeli and US airstrikes on its nuclear facilities in June. / 伊朗外交部长宣布，该国已全面停止其境内所有地点的铀浓缩活动。此举是在以色列和美国于六月对其核设施进行空袭之后发生的。
+- **Source**: Associated Press
 
-### 2. **UNRWA Official Accuses Israel of Breaching International Law on Gaza Aid** / **联合国近东救济工程处官员指责以色列在加沙援助问题上违反国际法**
-- **Time**: 2025-11-15
-- **Content**: A senior official from the UN agency for Palestinian refugees (UNRWA) stated that Israel is violating international law by continuing to restrict aid flows into Gaza, where the population faces critical shortages. / 联合国巴勒斯坦难民机构（UNRWA）的一名高级官员表示，以色列继续限制援助物资进入加沙，违反了国际法，当地民众面临严重短缺。
+### 2. **Israel's Aid Restrictions in Gaza Breach International Law, UN Says** / **联合国称以色列对加沙的援助限制违反国际法**
+- **Time**: 2025-11-16
+- **Content**: An UNRWA official stated that Israel's ongoing limitations on aid to Gaza are in breach of international law. The UN is calling for increased pressure on the Israeli government to allow unrestricted access for humanitarian supplies. / 联合国近东救济工程处一名官员表示，以色列持续限制对加沙的援助，违反了国际法。联合国呼吁加大对以色列政府的压力，允许人道主义物资无限制进入。
 - **Source**: The Guardian
 
-### 3. **Japan Protests China's Travel Warning Amid Taiwan Tensions** / **日本就台湾紧张局势抗议中国的旅行警告**
-- **Time**: 2025-11-15
-- **Content**: Japan has issued a protest against China's travel warning to its citizens, which followed remarks from Tokyo's new premier regarding a hypothetical attack on Taiwan. / 日本就中国对其公民发布的旅行警告提出抗议，此前东京新任首相就 hypothetical 攻击台湾发表了言论。
-- **Source**: The Hindu
+### 3. **Ukraine and Russia Agree on Major Prisoner Exchange** / **乌克兰与俄罗斯就大规模战俘交换达成协议**
+- **Time**: 2025-11-16
+- **Content**: Ukraine is working on a prisoner exchange deal with Russia to bring home 1,200 prisoners. The agreement, mediated by Turkey and the UAE, aims to see the prisoners released before the New Year. / 乌克兰正与俄罗斯商讨一项战俘交换协议，计划接回1200名被俘人员。该协议由土耳其和阿联酋斡旋达成，旨在新年之前释放这些战俘。
+- **Source**: Reuters
 
-### 4. **Pope Returns 62 Indigenous Artifacts to Canada** / **教皇将62件原住民文物归还加拿大**
-- **Time**: 2025-11-15
-- **Content**: In a significant act of reconciliation, 62 Indigenous artifacts have been returned to Canada as a gift from the Pope. / 作为和解的重要举措，教皇将62件原住民文物作为礼物归还给加拿大。
-- **Source**: Global News
+### 4. **China Issues Travel Advisory for Japan Amid Taiwan Row** / **因台湾问题争端，中国发布赴日旅行警告**
+- **Time**: 2025-11-16
+- **Content**: China has advised its citizens to avoid travel to Japan, citing safety risks following comments by Japan's Prime Minister on Taiwan that have soured bilateral relations. / 中国建议其公民避免前往日本旅行，理由是日本首相就台湾问题发表的言论导致双边关系恶化，带来了安全风险。
+- **Source**: Xinhua News Agency
 
-### 5. **Global Funds Reduce Exposure to U.S. Markets Amidst Correction Concerns** / **全球基金因担心市场调整而减少对美国市场的敞口**
-- **Time**: 2025-11-15
-- **Content**: The CEO of Sanlam Group reported that global funds are beginning to trim their exposures in U.S. markets, anticipating an imminent correction. / Sanlam集团首席执行官报告称，全球基金正开始削减在美国市场的敞口，预计市场即将进行调整。
-- **Source**: The Hindu
+### 5. **Gen Z Protests Erupt Across Mexico Over Corruption and Violence** / **墨西哥各地爆发Z世代反腐败与暴力抗议**
+- **Time**: 2025-11-16
+- **Content**: Thousands of young people in Mexico have taken to the streets to protest against government corruption and escalating drug-related violence. The demonstrations, led by the "Gen Z Mexico" movement, turned violent in Mexico City, resulting in over 120 injuries. / 数千名墨西哥年轻走上街头，抗议政府腐败和不断升级的毒品暴力。这场由“Z世代墨西哥”运动领导的示威活动在墨西哥城演变为暴力冲突，导致超过120人受伤。
+- **Source**: The Guardian
 
-### 6. **Massive Solar Storm Expected, Global Agencies on Alert** / **预计将发生大规模太阳风暴，全球机构保持警惕**
-- **Time**: 2025-11-15
-- **Content**: A significant solar storm is anticipated, prompting global agencies to be on alert due to its potential impact on satellite communication. / 预计将发生一次强烈的太阳风暴，由于其可能对卫星通信产生影响，全球各机构已进入戒备状态。
-- **Source**: Career India
+### 6. **Chile Holds Presidential Election Focused on Security and Migration** / **智利举行总统选举，安全与移民问题成焦点**
+- **Time**: 2025-11-16
+- **Content**: Chileans are voting in a presidential election where rising crime and migration are the main issues. The race is tight between a communist candidate and a far-right leader. / 智利民众正在进行总统选举投票，日益严峻的犯罪和移民问题是本次选举的主要议题。竞选在一名共产主义候选人和一名极右翼领袖之间激烈进行。
+- **Source**: Associated Press
 
-### 7. **U.S. and China Hold High-Level Economic Talks** / **中美举行高层经济会谈**
-- **Time**: 2025-11-15
-- **Content**: High-level economic discussions between the USA and China have commenced, focusing on critical areas such as trade, technology, and AI cooperation. / 中美高层经济对话已经开始，重点讨论贸易、技术和人工智能合作等关键领域。
-- **Source**: Career India
+### 7. **Asbestos Scare Closes Dozens of Schools in Australia** / **石棉恐慌致澳大利亚数十所学校关闭**
+- **Time**: 2025-11-16
+- **Content**: Over 70 schools in Australia have been closed after asbestos was found in colored sand products used in classrooms. The recall of the "magic sand" products has prompted widespread safety checks. / 在教室使用的彩色沙子产品中发现石棉后，澳大利亚已有超过70所学校关闭。此次“魔力沙”产品的召回引发了大规模的安全检查。
+- **Source**: The Sydney Morning Herald
 
-### 8. **Indonesia Landslide Kills 11, 12 Missing in Central Java** / **印度尼西亚中爪哇省山体滑坡致11人死亡，12人失踪**
-- **Time**: 2025-11-15
-- **Content**: A landslide in Central Java, Indonesia, has resulted in the deaths of 11 people, with 12 others reported missing. / 印度尼西亚中爪哇省发生山体滑坡，造成11人死亡，另有12人失踪。
-- **Source**: Indian Express
+### 8. **China Conducts Bomber Patrol Over South China Sea Amid Joint Drills** / **美菲日联合军演期间，中国在南中国海进行轰炸机巡逻**
+- **Time**: 2025-11-16
+- **Content**: China's military conducted a "bomber patrol" over the South China Sea as the Philippines, US, and Japan held joint maritime drills. Beijing stated the patrol was a response to "provocative actions." / 在菲律宾、美国和日本举行联合海上军事演习之际，中国军方在南中国海进行了“轰炸机巡逻”。北京方面称，此次巡逻是对“挑衅行为”的回应。
+- **Source**: Reuters
 
-### 9. **U.S. Lawmaker to Introduce Bill to Eliminate H-1B Visa Program** / **美国议员将提出法案取消H-1B签证计划**
-- **Time**: 2025-11-15
-- **Content**: A U.S. lawmaker is set to introduce legislation aimed at completely eliminating the H-1B visa program. / 一位美国国会议员将提出一项旨在完全取消H-1B签证计划的法案。
-- **Source**: India Today
+### 9. **Greece and Ukraine Sign US Gas Supply Deal** / **希腊与乌克兰签署美国天然气供应协议**
+- **Time**: 2025-11-16
+- **Content**: During a visit by President Zelenskyy to Athens, Greece and Ukraine signed a deal for the supply of US liquefied natural gas (LNG) to help Ukraine meet its winter energy needs. / 在乌克兰总统泽连斯基访问雅典期间，希腊与乌克兰签署了一项关于美国液化天然气供应的协议，以帮助乌克兰满足冬季能源需求。
+- **Source**: Associated Press
 
-### 10. **Lahore High Court Judge Resigns Over Constitutional Amendment in Pakistan** / **巴基斯坦拉合尔高等法院法官因宪法修正案辞职**
-- **Time**: 2025-11-15
-- **Content**: A senior judge of the Lahore High Court in Pakistan has resigned in protest against a new constitutional amendment, deepening a judicial crisis in the country. / 巴基斯坦拉合尔高等法院的一名高级法官因抗议一项新的宪法修正案而辞职，加深了该国的司法危机。
-- **Source**: The Hindu
+### 10. **UK Announces Major Overhaul of Asylum System** / **英国宣布对庇护系统进行重大改革**
+- **Time**: 2025-11-16
+- **Content**: The UK government is set to overhaul its asylum system, making refugee status temporary and extending the wait for permanent residency to 20 years. The reforms are aimed at deterring illegal immigration. / 英国政府将对其庇护系统进行全面改革，将难民身份临时化，并将获得永久居留权的等待时间延长至20年。此项改革旨在遏制非法移民。
+- **Source**: BBC News
 
 ---
 
