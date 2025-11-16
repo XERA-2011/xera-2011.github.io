@@ -3,7 +3,6 @@ import type { NextConfig } from "next";
 const nextConfig: NextConfig = {
   
   images: { 
-    unoptimized: true,     // 关闭 Next.js 默认图片优化
     remotePatterns: [
       {
         protocol: 'https',

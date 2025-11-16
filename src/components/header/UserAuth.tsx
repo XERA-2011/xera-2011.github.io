@@ -19,7 +19,7 @@ export default async function UserAuth() {
             width={32}
             height={32}
             priority
-            className="rounded-full"
+            className="rounded-full w-8 h-8"
           />
         )}
       </Link>
