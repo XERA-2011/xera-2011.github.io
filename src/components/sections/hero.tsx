@@ -80,7 +80,7 @@ export default function HeroSection() {
       <div className="absolute inset-0 bg-gradient-to-br from-white/5 via-transparent to-white/10 opacity-30" />
 
       {/* Logo Section */}
-      <div className="mb-8 hover:scale-105 transition-transform duration-300 transition-all duration-300 backdrop-blur-md">
+      <div className="my-8 hover:scale-105 transition-transform duration-300 transition-all duration-300 backdrop-blur-md">
         <motion.div
           ref={logoRef}
           onHoverStart={() => setIsHovered(true)}
