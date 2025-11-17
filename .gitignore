@@ -34,8 +34,9 @@ yarn-error.log*
 .pnpm-debug.log*
 
 # local env files
-.env*.local
 .env
+.env*.local
+!.env.development.local
 
 # Sentry Config File
 .env.sentry-build-plugin
@@ -62,8 +63,5 @@ build-archive.log
 /test-results/
 /playwright-report/
 /playwright/.cache/
-
-.vercel
-.env*.local
 
 /src/generated/prisma
