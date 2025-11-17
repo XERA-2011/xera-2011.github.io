@@ -1,18 +1,59 @@
 "use client";
 
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { motion } from 'framer-motion';
 import { usePageTitle } from '@/hooks/use-page-title';
+import { useSession } from 'next-auth/react';
 
 export default function LifeCountdownPage() {
   usePageTitle('人生倒计时');
+  const { status } = useSession();
   const [currentAge, setCurrentAge] = useState('');
   const [targetAge, setTargetAge] = useState('');
   const [remainingDays, setRemainingDays] = useState<number | null>(null);
   const [error, setError] = useState('');
+  const [isSaving, setIsSaving] = useState(false);
+  const [isLoading, setIsLoading] = useState(true);
+  const [saveMessage, setSaveMessage] = useState('');
 
-  const calculateDays = () => {
+  // 加载用户保存的设置
+  useEffect(() => {
+    const loadSettings = async () => {
+      // 等待认证状态确定
+      if (status === 'loading') {
+        return;
+      }
+
+      if (status === 'authenticated') {
+        try {
+          const response = await fetch('/api/life-countdown');
+          if (response.ok) {
+            const data = await response.json();
+            if (data.settings) {
+              setCurrentAge(data.settings.currentAge.toString());
+              setTargetAge(data.settings.targetAge.toString());
+              // 自动计算剩余天数
+              const yearsDiff = data.settings.targetAge - data.settings.currentAge;
+              const days = Math.floor(yearsDiff * 365.25);
+              setRemainingDays(days);
+            }
+          }
+        } catch (error) {
+          console.error('加载设置失败:', error);
+        }
+      }
+
+      setIsLoading(false);
+    };
+
+    loadSettings();
+  }, [status]);
+
+
+
+  const handleCalculateAndSave = async () => {
     setError('');
+    setSaveMessage('');
 
     const current = parseFloat(currentAge);
     const target = parseFloat(targetAge);
@@ -43,11 +84,40 @@ export default function LifeCountdownPage() {
       return;
     }
 
-    // 计算剩余天数（1年 = 365.25天，考虑闰年）
+    // 先计算剩余天数
     const yearsDiff = target - current;
     const days = Math.floor(yearsDiff * 365.25);
-
     setRemainingDays(days);
+
+    // 如果已登录，保存设置
+    if (status === 'authenticated') {
+      setIsSaving(true);
+      try {
+        const response = await fetch('/api/life-countdown', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify({
+            currentAge: current,
+            targetAge: target,
+          }),
+        });
+
+        if (response.ok) {
+          setSaveMessage('已保存设置！');
+          setTimeout(() => setSaveMessage(''), 3000);
+        } else {
+          const data = await response.json();
+          setError(data.error || '保存失败');
+        }
+      } catch (error) {
+        console.error('保存失败:', error);
+        // 保存失败不影响计算结果的显示
+      } finally {
+        setIsSaving(false);
+      }
+    }
   };
 
   const handleClear = () => {
@@ -55,11 +125,23 @@ export default function LifeCountdownPage() {
     setTargetAge('');
     setRemainingDays(null);
     setError('');
+    setSaveMessage('');
   };
 
   const formatNumber = (num: number) => {
     return num.toLocaleString('zh-CN');
   };
+
+  if (isLoading) {
+    return (
+      <div className="relative w-full min-h-screen flex items-center justify-center">
+        <div className="flex flex-col items-center gap-4">
+          <div className="w-12 h-12 border-4 border-white/20 border-t-white rounded-full animate-spin"></div>
+          <p className="text-white/60 text-lg">加载中...</p>
+        </div>
+      </div>
+    );
+  }
 
   return (
     <div className="relative w-full min-h-screen py-20">
@@ -74,6 +156,9 @@ export default function LifeCountdownPage() {
           <h2 className="text-3xl sm:text-4xl lg:text-5xl font-bold text-white mb-4">
             人生倒计时
           </h2>
+          {status === 'authenticated' && (
+            <p className="text-white/60 text-sm">已登录，设置将自动保存</p>
+          )}
         </motion.div>
 
         <motion.div
@@ -119,18 +204,26 @@ export default function LifeCountdownPage() {
           {/* Action Buttons */}
           <div className="flex gap-4 mb-6">
             <button
-              onClick={calculateDays}
-              className="flex-1 bg-white !text-black font-medium py-3 px-6 rounded-lg hover:bg-gray-100 transition-colors shadow-sm cursor-can-hover"
+              onClick={handleCalculateAndSave}
+              disabled={isSaving}
+              className="cursor-can-hove flex-1 bg-white !text-black font-medium py-3 px-6 rounded-lg hover:bg-gray-100 transition-colors shadow-sm cursor-can-hover disabled:opacity-50 disabled:cursor-not-allowed"
             >
-              计算剩余天数
+              {isSaving ? '处理中...' : status === 'authenticated' ? '计算并保存' : '计算剩余天数'}
             </button>
             <button
               onClick={handleClear}
-              className="px-6 py-3 bg-white/10 text-white rounded-lg hover:bg-white/20 transition-colors border border-white/20 cursor-can-hover"
+              className="cursor-can-hove px-6 py-3 bg-white/10 text-white rounded-lg hover:bg-white/20 transition-colors border border-white/20 cursor-can-hover"
             >
               清空
             </button>
           </div>
+
+          {/* Success Message */}
+          {saveMessage && (
+            <div className="mb-6 p-4 bg-green-500/20 border border-green-500/30 rounded-lg text-green-300">
+              {saveMessage}
+            </div>
+          )}
 
           {/* Error Message */}
           {error && (

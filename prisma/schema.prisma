@@ -9,19 +9,20 @@ datasource db {
 }
 
 model User {
-  id            String       @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
-  email         String       @unique @db.VarChar(64)
-  password      String?      @db.VarChar(64)
-  name          String?
-  emailVerified DateTime?
-  image         String?
-  createdAt     DateTime?    @default(now()) @db.Timestamp(6)
-  updatedAt     DateTime?    @default(now()) @db.Timestamp(6)
-  Chat          Chat[]
-  Document      Document[]
-  Suggestion    Suggestion[]
-  accounts      Account[]
-  sessions      Session[]
+  id                     String                  @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
+  email                  String                  @unique @db.VarChar(64)
+  password               String?                 @db.VarChar(64)
+  name                   String?
+  emailVerified          DateTime?
+  image                  String?
+  createdAt              DateTime?               @default(now()) @db.Timestamp(6)
+  updatedAt              DateTime?               @default(now()) @db.Timestamp(6)
+  Chat                   Chat[]
+  Document               Document[]
+  Suggestion             Suggestion[]
+  accounts               Account[]
+  sessions               Session[]
+  lifeCountdownSettings  LifeCountdownSettings?
 }
 
 model Chat {
@@ -149,4 +150,14 @@ model VerificationToken {
   expires    DateTime @db.Timestamp(6)
 
   @@id([identifier, token])
+}
+
+model LifeCountdownSettings {
+  id         String   @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
+  userId     String   @unique @db.Uuid
+  currentAge Float
+  targetAge  Float
+  createdAt  DateTime @default(now()) @db.Timestamp(6)
+  updatedAt  DateTime @updatedAt @db.Timestamp(6)
+  user       User     @relation(fields: [userId], references: [id], onDelete: Cascade)
 }
