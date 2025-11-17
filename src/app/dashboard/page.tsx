@@ -5,6 +5,7 @@ import { useRouter } from "next/navigation"
 import { signOut, useSession } from "next-auth/react"
 import Image from "next/image"
 import { motion } from 'framer-motion'
+import GlowCard from "@/components/ui/GlowCard"
 
 export default function DashboardPage() {
   const { data: session, status } = useSession()
@@ -57,64 +58,58 @@ export default function DashboardPage() {
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8, delay: 0.2 }}
         >
-          <div className="relative group">
-            {/* Glow effect */}
-            <div className="absolute -inset-0.5 bg-gradient-to-r from-blue-500 to-purple-600 rounded-2xl blur opacity-20 group-hover:opacity-40 transition duration-500"></div>
-
-            {/* Card content */}
-            <div className="relative bg-black/40 backdrop-blur-sm border border-white/10 rounded-2xl p-8">
-              <div className="flex flex-col sm:flex-row items-center gap-6">
-                {/* Avatar */}
-                {session.user.image && (
-                  <div className="relative">
-                    <div className="absolute -inset-1 bg-gradient-to-r from-blue-500 to-purple-600 rounded-full blur opacity-50"></div>
-                    <Image
-                      src={session.user.image}
-                      alt="头像"
-                      width={96}
-                      height={96}
-                      priority
-                      className="relative rounded-full border-2 border-white/20"
-                    />
-                  </div>
-                )}
-
-                {/* User details */}
-                <div className="flex-1 text-center sm:text-left">
-                  <h2 className="text-2xl font-bold text-white mb-2">
-                    {session.user.name}
-                  </h2>
-                  <p className="text-white/60 mb-4">
-                    {session.user.email}
-                  </p>
-
-                  {/* Sign out button */}
-                  <button
-                    onClick={handleSignOut}
-                    disabled={isLoggingOut}
-                    className="relative inline-flex items-center gap-2 px-6 py-2.5 bg-red-500/10 hover:bg-red-500/20 border border-red-500/30 hover:border-red-500/50 text-red-400 rounded-lg transition-all duration-300 disabled:opacity-50 disabled:cursor-not-allowed"
-                  >
-                    {isLoggingOut ? (
-                      <>
-                        <svg className="animate-spin h-4 w-4" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
-                          <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4"></circle>
-                          <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
-                        </svg>
-                        <span>退出中...</span>
-                      </>
-                    ) : (
-                      <>
-                        <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 16l4-4m0 0l-4-4m4 4H7m6 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h4a3 3 0 013 3v1" />
-                        </svg>
-                        <span>退出登录</span>
-                      </>
-                    )}
-                  </button>
+          <GlowCard className="bg-black/40 backdrop-blur-sm p-8">
+            <div className="flex flex-col sm:flex-row items-center gap-6">
+              {/* Avatar */}
+              {session.user.image && (
+                <div className="relative">
+                  <div className="absolute -inset-1 bg-gradient-to-r from-white/30 to-white/10 rounded-full blur opacity-50"></div>
+                  <Image
+                    src={session.user.image}
+                    alt="头像"
+                    width={96}
+                    height={96}
+                    priority
+                    className="relative rounded-full border-2 border-white/20"
+                  />
                 </div>
+              )}
+
+              {/* User details */}
+              <div className="flex-1 text-center sm:text-left">
+                <h2 className="text-2xl font-bold text-white mb-2">
+                  {session.user.name}
+                </h2>
+                <p className="text-white/60">
+                  {session.user.email}
+                </p>
+
+                {/* Sign out button */}
+                <button
+                  onClick={handleSignOut}
+                  disabled={isLoggingOut}
+                  className="cursor-can-hover relative inline-flex items-center gap-3 px-8 py-2.5 mt-8 bg-white/10 hover:bg-white/20 border border-white/30 hover:border-white/50 text-white rounded-full transition-all duration-300 disabled:opacity-50 disabled:cursor-not-allowed cursor-can-hover"
+                >
+                  {isLoggingOut ? (
+                    <>
+                      <svg className="animate-spin h-4 w-4" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
+                        <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4"></circle>
+                        <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
+                      </svg>
+                      <span>退出中...</span>
+                    </>
+                  ) : (
+                    <>
+                      <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 16l4-4m0 0l-4-4m4 4H7m6 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h4a3 3 0 013 3v1" />
+                      </svg>
+                      <span>退出登录</span>
+                    </>
+                  )}
+                </button>
               </div>
             </div>
-          </div>
+          </GlowCard>
         </motion.div>
       </div>
     </div>
