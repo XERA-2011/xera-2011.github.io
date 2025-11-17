@@ -78,7 +78,7 @@ export default function JokeCard({
               id="theme-select"
               value={currentTheme}
               onChange={(e) => setCurrentTheme(e.target.value)}
-              className="rounded-md border border-theme-white/20 bg-theme-black/50 px-3 py-1.5 text-sm text-theme-white backdrop-blur-sm transition-colors hover:border-theme-white/40 focus:border-theme-white/60 focus:outline-none"
+              className="cursor-can-hover rounded-md border border-theme-white/20 bg-theme-black/50 px-3 py-1.5 text-sm text-theme-white backdrop-blur-sm transition-colors hover:border-theme-white/40 focus:border-theme-white/60 focus:outline-none"
             >
               {themes.map((t) => (
                 <option key={t} value={t}>
@@ -94,7 +94,7 @@ export default function JokeCard({
             onClick={refreshJoke}
             disabled={isLoading}
             className={cn(
-              'rounded-md border border-theme-white/20 bg-theme-black/50 px-4 py-1.5 text-sm font-medium text-theme-white backdrop-blur-sm transition-all hover:border-theme-white/40 hover:bg-theme-white/10',
+              'cursor-can-hover rounded-full border border-theme-white/20 bg-theme-black/50 px-4 py-1.5 text-sm font-medium text-theme-white backdrop-blur-sm transition-all hover:border-theme-white/40 hover:bg-theme-white/10',
               isLoading && 'cursor-not-allowed opacity-50'
             )}
           >

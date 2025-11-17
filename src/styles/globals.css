@@ -184,6 +184,17 @@ a:focus-visible {
   outline: none;
 }
 
+/* Cursor styles for interactive elements */
+.cursor-can-hover {
+  cursor: pointer !important;
+}
+
+button,
+a,
+[role="button"] {
+  cursor: pointer;
+}
+
 /* GlowCard component styles - Black and white theme matching original effect */
 .glow-effect::after {
   content: "";

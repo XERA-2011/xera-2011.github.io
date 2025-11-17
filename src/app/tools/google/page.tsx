@@ -2,6 +2,7 @@
 import { useCallback, useEffect, useLayoutEffect, useRef, useState } from 'react';
 import { motion } from 'framer-motion';
 import { usePageTitle } from '@/hooks/use-page-title';
+import GlowCard from '@/components/ui/GlowCard';
 
 export default function Home() {
   usePageTitle('Gemini API');
@@ -165,7 +166,7 @@ export default function Home() {
           </h2>
         </motion.div>
 
-        <div className="p-6 flex flex-col gap-6">
+        <GlowCard className="p-6 flex flex-col gap-6">
           <form
             className="flex flex-col gap-4"
             onSubmit={(e) => {
@@ -191,7 +192,7 @@ export default function Home() {
                 />
                 <button
                   type="button"
-                  className="py-2 px-4 rounded text-neutral-900 font-semibold transition border border-neutral-300 mb-2"
+                  className="cursor-can-hover py-2 px-4 rounded-full bg-white text-black font-semibold transition hover:bg-gray-100 mb-2 disabled:opacity-50 disabled:cursor-not-allowed"
                   onClick={() => fetchModels(apiKey)}
                   disabled={!apiKey || loadingModels}
                 >
@@ -237,7 +238,7 @@ export default function Home() {
             </div>
             <button
               type="submit"
-              className="w-full py-2 rounded bg-white text-neutral-900 font-semibold transition hover:bg-neutral-200 border border-neutral-300"
+              className="cursor-can-hover w-full py-3 rounded-full bg-white text-black font-semibold transition hover:bg-gray-100"
             >
               发送请求
             </button>
@@ -248,8 +249,8 @@ export default function Home() {
               {displayedResult}
             </div>
           </div>
-        </div>
-        <div className="mt-4 text-sm text-neutral-400 p-4">
+        </GlowCard>
+        <GlowCard className="mt-4 text-sm text-neutral-400 p-4">
           <h3 className="font-bold text-neutral-300 mb-2">使用说明</h3>
           <ul className="list-disc pl-5 mb-0">
             <li>API Key 可在 Google Cloud Console 获取</li>
@@ -257,7 +258,7 @@ export default function Home() {
             <li>响应结果将以格式化文本展示</li>
             <li>请勿在公共网络环境下泄露你的 API Key</li>
           </ul>
-        </div>
+        </GlowCard>
       </div>
     </div>
   );

@@ -4,6 +4,8 @@ import { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { usePageTitle } from '@/hooks/use-page-title';
 import PieChart from '@/components/ui/PieChart';
+import GlowCard from '@/components/ui/GlowCard';
+import Button from '@/components/ui/Button';
 
 interface Asset {
   id: string;
@@ -156,7 +158,7 @@ export default function AssetAllocationPage() {
           transition={{ duration: 0.8, delay: 0.2 }}
         >
           {/* 左侧：输入区域 */}
-          <div className="bg-white/5 backdrop-blur-sm rounded-2xl p-8 border border-white/10">
+          <GlowCard className="p-8">
             {/* 输入表单 */}
             <div className="space-y-4 mb-6">
               <div>
@@ -203,16 +205,19 @@ export default function AssetAllocationPage() {
 
             {/* 操作按钮 */}
             <div className="flex gap-4 mb-8">
-              <button
+              <Button
+                variant="primary"
+                size="md"
                 onClick={handleAddAsset}
-                className="flex-1 bg-white !text-black font-medium py-3 px-6 rounded-lg hover:bg-gray-100 transition-colors shadow-sm cursor-can-hover"
+                className="flex-1"
               >
                 添加资产
-              </button>
-              <button
+              </Button>
+              <Button
+                variant="secondary"
+                size="md"
                 onClick={handleCopyData}
                 disabled={assets.length === 0}
-                className="px-6 py-3 bg-white/10 text-white rounded-lg hover:bg-white/20 transition-colors border border-white/20 cursor-can-hover disabled:opacity-50 disabled:cursor-not-allowed relative"
               >
                 {copySuccess ? (
                   <span className="flex items-center gap-2">
@@ -229,13 +234,14 @@ export default function AssetAllocationPage() {
                     复制
                   </span>
                 )}
-              </button>
-              <button
+              </Button>
+              <Button
+                variant="secondary"
+                size="md"
                 onClick={handleClear}
-                className="px-6 py-3 bg-white/10 text-white rounded-lg hover:bg-white/20 transition-colors border border-white/20 cursor-can-hover"
               >
                 清空
-              </button>
+              </Button>
             </div>
 
             {/* 资产列表 */}
@@ -290,10 +296,10 @@ export default function AssetAllocationPage() {
                 )}
               </div>
             </div>
-          </div>
+          </GlowCard>
 
           {/* 右侧：可视化区域 */}
-          <div className="bg-white/5 backdrop-blur-sm rounded-2xl p-8 border border-white/10">
+          <GlowCard className="p-8">
             {/* 总资产 */}
             {totalAmount > 0 && (
               <motion.div
@@ -341,7 +347,7 @@ export default function AssetAllocationPage() {
                 ))}
               </motion.div>
             )}
-          </div>
+          </GlowCard>
         </motion.div>
       </div>
     </div>

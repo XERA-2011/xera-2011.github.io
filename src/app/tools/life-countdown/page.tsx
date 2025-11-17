@@ -4,6 +4,8 @@ import { useState, useEffect } from 'react';
 import { motion } from 'framer-motion';
 import { usePageTitle } from '@/hooks/use-page-title';
 import { useSession } from 'next-auth/react';
+import GlowCard from '@/components/ui/GlowCard';
+import Button from '@/components/ui/Button';
 
 export default function LifeCountdownPage() {
   usePageTitle('人生倒计时');
@@ -162,117 +164,121 @@ export default function LifeCountdownPage() {
         </motion.div>
 
         <motion.div
-          className="bg-white/5 backdrop-blur-sm rounded-2xl p-8 border border-white/10"
           initial={{ opacity: 0, y: 30 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8, delay: 0.2 }}
         >
+          <GlowCard className="p-8">
 
-          {/* Input Fields */}
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-6">
-            <div>
-              <label className="block text-white font-medium mb-3">
-                当前年龄
-              </label>
-              <input
-                type="number"
-                value={currentAge}
-                onChange={(e) => setCurrentAge(e.target.value)}
-                placeholder="例如：25"
-                step="0.1"
-                min="0"
-                className="w-full bg-white/10 border border-white/20 rounded-lg px-4 py-3 text-white placeholder-white/50 focus:outline-none focus:border-white/40"
-              />
-            </div>
-
-            <div>
-              <label className="block text-white font-medium mb-3">
-                目标年龄
-              </label>
-              <input
-                type="number"
-                value={targetAge}
-                onChange={(e) => setTargetAge(e.target.value)}
-                placeholder="例如：80"
-                step="0.1"
-                min="0"
-                className="w-full bg-white/10 border border-white/20 rounded-lg px-4 py-3 text-white placeholder-white/50 focus:outline-none focus:border-white/40"
-              />
-            </div>
-          </div>
-
-          {/* Action Buttons */}
-          <div className="flex gap-4 mb-6">
-            <button
-              onClick={handleCalculateAndSave}
-              disabled={isSaving}
-              className="cursor-can-hove flex-1 bg-white !text-black font-medium py-3 px-6 rounded-lg hover:bg-gray-100 transition-colors shadow-sm cursor-can-hover disabled:opacity-50 disabled:cursor-not-allowed"
-            >
-              {isSaving ? '处理中...' : status === 'authenticated' ? '计算并保存' : '计算剩余天数'}
-            </button>
-            <button
-              onClick={handleClear}
-              className="cursor-can-hove px-6 py-3 bg-white/10 text-white rounded-lg hover:bg-white/20 transition-colors border border-white/20 cursor-can-hover"
-            >
-              清空
-            </button>
-          </div>
-
-          {/* Success Message */}
-          {saveMessage && (
-            <div className="mb-6 p-4 bg-green-500/20 border border-green-500/30 rounded-lg text-green-300">
-              {saveMessage}
-            </div>
-          )}
-
-          {/* Error Message */}
-          {error && (
-            <div className="mb-6 p-4 bg-red-500/20 border border-red-500/30 rounded-lg text-red-300">
-              {error}
-            </div>
-          )}
-
-          {/* Result Display */}
-          {remainingDays !== null && !error && (
-            <motion.div
-              initial={{ opacity: 0, scale: 0.95 }}
-              animate={{ opacity: 1, scale: 1 }}
-              transition={{ duration: 0.5 }}
-              className="bg-white/5 border border-white/20 rounded-xl p-8 text-center"
-            >
-              <div className="mb-4">
-                <p className="text-white/70 text-lg mb-2">剩余天数</p>
-                <p className="text-5xl md:text-6xl font-bold text-white mb-2">
-                  {formatNumber(remainingDays)}
-                </p>
-                <p className="text-white/60 text-lg">天</p>
+            {/* Input Fields */}
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-6">
+              <div>
+                <label className="block text-white font-medium mb-3">
+                  当前年龄
+                </label>
+                <input
+                  type="number"
+                  value={currentAge}
+                  onChange={(e) => setCurrentAge(e.target.value)}
+                  placeholder="例如：25"
+                  step="0.1"
+                  min="0"
+                  className="w-full bg-white/10 border border-white/20 rounded-lg px-4 py-3 text-white placeholder-white/50 focus:outline-none focus:border-white/40"
+                />
               </div>
 
-              <div className="grid grid-cols-3 gap-4 mt-6 pt-6 border-t border-white/10">
-                <div>
-                  <p className="text-white/60 text-sm mb-1">约</p>
-                  <p className="text-2xl font-semibold text-white">
-                    {formatNumber(Math.floor(remainingDays / 365.25))}
-                  </p>
-                  <p className="text-white/60 text-sm mt-1">年</p>
-                </div>
-                <div>
-                  <p className="text-white/60 text-sm mb-1">约</p>
-                  <p className="text-2xl font-semibold text-white">
-                    {formatNumber(Math.floor(remainingDays / 30.44))}
-                  </p>
-                  <p className="text-white/60 text-sm mt-1">月</p>
-                </div>
-                <div>
-                  <p className="text-white/60 text-sm mb-1">约</p>
-                  <p className="text-2xl font-semibold text-white">
-                    {formatNumber(Math.floor(remainingDays / 7))}
-                  </p>
-                  <p className="text-white/60 text-sm mt-1">周</p>
-                </div>
+              <div>
+                <label className="block text-white font-medium mb-3">
+                  目标年龄
+                </label>
+                <input
+                  type="number"
+                  value={targetAge}
+                  onChange={(e) => setTargetAge(e.target.value)}
+                  placeholder="例如：80"
+                  step="0.1"
+                  min="0"
+                  className="w-full bg-white/10 border border-white/20 rounded-lg px-4 py-3 text-white placeholder-white/50 focus:outline-none focus:border-white/40"
+                />
               </div>
-            </motion.div>
-          )}
+            </div>
+
+            {/* Action Buttons */}
+            <div className="flex gap-4 mb-6">
+              <Button
+                variant="primary"
+                size="md"
+                onClick={handleCalculateAndSave}
+                disabled={isSaving}
+                className="flex-1"
+              >
+                {isSaving ? '处理中...' : status === 'authenticated' ? '计算并保存' : '计算剩余天数'}
+              </Button>
+              <Button
+                variant="secondary"
+                size="md"
+                onClick={handleClear}
+              >
+                清空
+              </Button>
+            </div>
+
+            {/* Success Message */}
+            {saveMessage && (
+              <div className="mb-6 p-4 bg-green-500/20 border border-green-500/30 rounded-lg text-green-300">
+                {saveMessage}
+              </div>
+            )}
+
+            {/* Error Message */}
+            {error && (
+              <div className="mb-6 p-4 bg-red-500/20 border border-red-500/30 rounded-lg text-red-300">
+                {error}
+              </div>
+            )}
+
+            {/* Result Display */}
+            {remainingDays !== null && !error && (
+              <motion.div
+                initial={{ opacity: 0, scale: 0.95 }}
+                animate={{ opacity: 1, scale: 1 }}
+                transition={{ duration: 0.5 }}
+                className="bg-white/5 border border-white/20 rounded-xl p-8 text-center"
+              >
+                <div className="mb-4">
+                  <p className="text-white/70 text-lg mb-2">剩余天数</p>
+                  <p className="text-5xl md:text-6xl font-bold text-white mb-2">
+                    {formatNumber(remainingDays)}
+                  </p>
+                  <p className="text-white/60 text-lg">天</p>
+                </div>
+
+                <div className="grid grid-cols-3 gap-4 mt-6 pt-6 border-t border-white/10">
+                  <div>
+                    <p className="text-white/60 text-sm mb-1">约</p>
+                    <p className="text-2xl font-semibold text-white">
+                      {formatNumber(Math.floor(remainingDays / 365.25))}
+                    </p>
+                    <p className="text-white/60 text-sm mt-1">年</p>
+                  </div>
+                  <div>
+                    <p className="text-white/60 text-sm mb-1">约</p>
+                    <p className="text-2xl font-semibold text-white">
+                      {formatNumber(Math.floor(remainingDays / 30.44))}
+                    </p>
+                    <p className="text-white/60 text-sm mt-1">月</p>
+                  </div>
+                  <div>
+                    <p className="text-white/60 text-sm mb-1">约</p>
+                    <p className="text-2xl font-semibold text-white">
+                      {formatNumber(Math.floor(remainingDays / 7))}
+                    </p>
+                    <p className="text-white/60 text-sm mt-1">周</p>
+                  </div>
+                </div>
+              </motion.div>
+            )}
+          </GlowCard>
         </motion.div>
       </div>
     </div>

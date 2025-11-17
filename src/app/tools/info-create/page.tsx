@@ -3,6 +3,8 @@
 import { useState } from 'react';
 import { motion } from 'framer-motion';
 import { usePageTitle } from '@/hooks/use-page-title';
+import GlowCard from '@/components/ui/GlowCard';
+import Button from '@/components/ui/Button';
 
 const generatePhoneNumber = () => {
   const prefixes = ['130', '131', '132', '133', '134', '135', '136', '137', '138', '139'];
@@ -123,163 +125,177 @@ export default function InfoCreatePage() {
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8, delay: 0.2 }}
         >
-          <button
+          <Button
+            variant="primary"
+            size="lg"
             onClick={generateAllInfo}
-            className="bg-white text-black font-medium py-4 px-8 rounded-full hover:bg-white/90 transition-all duration-300 text-lg shadow-lg hover:shadow-xl transform hover:scale-105 cursor-can-hover"
+            className="shadow-lg hover:shadow-xl transform hover:scale-105"
           >
             生成随机信息
-          </button>
+          </Button>
         </motion.div>
 
         {generatedInfo && (
           <motion.div
-            className="bg-white/5 backdrop-blur-sm rounded-2xl p-6 sm:p-8 border border-white/10"
             initial={{ opacity: 0, y: 30 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8, delay: 0.6 }}
           >
-            <div className="flex flex-col sm:flex-row sm:justify-between sm:items-center mb-6 gap-4">
-              <h2 className="text-xl font-bold text-white cursor-can-hover">生成的信息</h2>
-              <div className="relative">
-                <button
-                  onClick={copyAllInfo}
-                  className="bg-white text-black hover:bg-white/90 px-4 py-2 rounded-full text-sm font-medium transition-all duration-300 w-full sm:w-auto cursor-can-hover"
-                >
-                  复制全部
-                </button>
-                {copySuccess === '全部信息' && (
-                  <motion.div
-                    className="absolute -top-10 left-1/2 transform -translate-x-1/2 bg-white text-black px-3 py-1 rounded text-xs whitespace-nowrap"
-                    initial={{ opacity: 0, y: 10 }}
-                    animate={{ opacity: 1, y: 0 }}
-                    exit={{ opacity: 0, y: 10 }}
-                  >
-                    已复制全部信息！
-                  </motion.div>
-                )}
-              </div>
-            </div>
-
-            <div className="space-y-4">
-              <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between p-4 bg-white/5 rounded-lg gap-3">
-                <div className="flex-1">
-                  <span className="text-white/75 text-sm">手机号码</span>
-                  <div className="text-white font-medium text-lg break-all">{generatedInfo.phone}</div>
-                </div>
+            <GlowCard className="p-6 sm:p-8">
+              <div className="flex flex-col sm:flex-row sm:justify-between sm:items-center mb-6 gap-4">
+                <h2 className="text-xl font-bold text-white">生成的信息</h2>
                 <div className="relative">
-                  <button
-                    onClick={() => copyToClipboard(generatedInfo.phone, '手机号')}
-                    className="bg-white text-black hover:bg-white/90 px-3 py-1 rounded-full text-sm transition-all duration-300 w-full sm:w-auto cursor-can-hover"
+                  <Button
+                    variant="primary"
+                    size="sm"
+                    onClick={copyAllInfo}
+                    className="w-full sm:w-auto"
                   >
-                    复制
-                  </button>
-                  {copySuccess === '手机号' && (
+                    复制全部
+                  </Button>
+                  {copySuccess === '全部信息' && (
                     <motion.div
-                      className="absolute -top-8 left-1/2 transform -translate-x-1/2 bg-white text-black px-2 py-1 rounded text-xs whitespace-nowrap"
+                      className="absolute -top-10 left-1/2 transform -translate-x-1/2 bg-white text-black px-3 py-1 rounded text-xs whitespace-nowrap"
                       initial={{ opacity: 0, y: 10 }}
                       animate={{ opacity: 1, y: 0 }}
                       exit={{ opacity: 0, y: 10 }}
                     >
-                      已复制！
+                      已复制全部信息！
                     </motion.div>
                   )}
                 </div>
               </div>
 
-              <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between p-4 bg-white/5 rounded-lg gap-3">
-                <div className="flex-1">
-                  <span className="text-white/75 text-sm">身份证号</span>
-                  <div className="text-white font-medium text-lg break-all">{generatedInfo.idCard}</div>
-                </div>
-                <div className="relative">
-                  <button
-                    onClick={() => copyToClipboard(generatedInfo.idCard, '身份证')}
-                    className="bg-white text-black hover:bg-white/90 px-3 py-1 rounded-full text-sm transition-all duration-300 w-full sm:w-auto cursor-can-hover"
-                  >
-                    复制
-                  </button>
-                  {copySuccess === '身份证' && (
-                    <motion.div
-                      className="absolute -top-8 left-1/2 transform -translate-x-1/2 bg-white text-black px-2 py-1 rounded text-xs whitespace-nowrap"
-                      initial={{ opacity: 0, y: 10 }}
-                      animate={{ opacity: 1, y: 0 }}
-                      exit={{ opacity: 0, y: 10 }}
+              <div className="space-y-4">
+                <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between p-4 bg-white/5 rounded-lg gap-3">
+                  <div className="flex-1">
+                    <span className="text-white/75 text-sm">手机号码</span>
+                    <div className="text-white font-medium text-lg break-all">{generatedInfo.phone}</div>
+                  </div>
+                  <div className="relative">
+                    <Button
+                      variant="primary"
+                      size="sm"
+                      onClick={() => copyToClipboard(generatedInfo.phone, '手机号')}
+                      className="w-full sm:w-auto"
                     >
-                      已复制！
-                    </motion.div>
-                  )}
+                      复制
+                    </Button>
+                    {copySuccess === '手机号' && (
+                      <motion.div
+                        className="absolute -top-8 left-1/2 transform -translate-x-1/2 bg-white text-black px-2 py-1 rounded text-xs whitespace-nowrap"
+                        initial={{ opacity: 0, y: 10 }}
+                        animate={{ opacity: 1, y: 0 }}
+                        exit={{ opacity: 0, y: 10 }}
+                      >
+                        已复制！
+                      </motion.div>
+                    )}
+                  </div>
                 </div>
-              </div>
 
-              <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between p-4 bg-white/5 rounded-lg gap-3">
-                <div className="flex-1">
-                  <span className="text-white/75 text-sm">银行卡号</span>
-                  <div className="text-white font-medium text-lg break-all">{generatedInfo.bankCard}</div>
-                </div>
-                <div className="relative">
-                  <button
-                    onClick={() => copyToClipboard(generatedInfo.bankCard, '银行卡')}
-                    className="bg-white text-black hover:bg-white/90 px-3 py-1 rounded-full text-sm transition-all duration-300 w-full sm:w-auto cursor-can-hover"
-                  >
-                    复制
-                  </button>
-                  {copySuccess === '银行卡' && (
-                    <motion.div
-                      className="absolute -top-8 left-1/2 transform -translate-x-1/2 bg-white text-black px-2 py-1 rounded text-xs whitespace-nowrap"
-                      initial={{ opacity: 0, y: 10 }}
-                      animate={{ opacity: 1, y: 0 }}
-                      exit={{ opacity: 0, y: 10 }}
+                <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between p-4 bg-white/5 rounded-lg gap-3">
+                  <div className="flex-1">
+                    <span className="text-white/75 text-sm">身份证号</span>
+                    <div className="text-white font-medium text-lg break-all">{generatedInfo.idCard}</div>
+                  </div>
+                  <div className="relative">
+                    <Button
+                      variant="primary"
+                      size="sm"
+                      onClick={() => copyToClipboard(generatedInfo.idCard, '身份证')}
+                      className="w-full sm:w-auto"
                     >
-                      已复制！
-                    </motion.div>
-                  )}
+                      复制
+                    </Button>
+                    {copySuccess === '身份证' && (
+                      <motion.div
+                        className="absolute -top-8 left-1/2 transform -translate-x-1/2 bg-white text-black px-2 py-1 rounded text-xs whitespace-nowrap"
+                        initial={{ opacity: 0, y: 10 }}
+                        animate={{ opacity: 1, y: 0 }}
+                        exit={{ opacity: 0, y: 10 }}
+                      >
+                        已复制！
+                      </motion.div>
+                    )}
+                  </div>
                 </div>
-              </div>
 
-              <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between p-4 bg-white/5 rounded-lg gap-3">
-                <div className="flex-1">
-                  <span className="text-white/75 text-sm">统一信用代码</span>
-                  <div className="text-white font-medium text-lg break-all">{generatedInfo.creditCode}</div>
-                </div>
-                <div className="relative">
-                  <button
-                    onClick={() => copyToClipboard(generatedInfo.creditCode, '信用代码')}
-                    className="bg-white text-black hover:bg-white/90 px-3 py-1 rounded-full text-sm transition-all duration-300 w-full sm:w-auto cursor-can-hover"
-                  >
-                    复制
-                  </button>
-                  {copySuccess === '信用代码' && (
-                    <motion.div
-                      className="absolute -top-8 left-1/2 transform -translate-x-1/2 bg-white text-black px-2 py-1 rounded text-xs whitespace-nowrap"
-                      initial={{ opacity: 0, y: 10 }}
-                      animate={{ opacity: 1, y: 0 }}
-                      exit={{ opacity: 0, y: 10 }}
+                <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between p-4 bg-white/5 rounded-lg gap-3">
+                  <div className="flex-1">
+                    <span className="text-white/75 text-sm">银行卡号</span>
+                    <div className="text-white font-medium text-lg break-all">{generatedInfo.bankCard}</div>
+                  </div>
+                  <div className="relative">
+                    <Button
+                      variant="primary"
+                      size="sm"
+                      onClick={() => copyToClipboard(generatedInfo.bankCard, '银行卡')}
+                      className="w-full sm:w-auto"
                     >
-                      已复制！
-                    </motion.div>
-                  )}
+                      复制
+                    </Button>
+                    {copySuccess === '银行卡' && (
+                      <motion.div
+                        className="absolute -top-8 left-1/2 transform -translate-x-1/2 bg-white text-black px-2 py-1 rounded text-xs whitespace-nowrap"
+                        initial={{ opacity: 0, y: 10 }}
+                        animate={{ opacity: 1, y: 0 }}
+                        exit={{ opacity: 0, y: 10 }}
+                      >
+                        已复制！
+                      </motion.div>
+                    )}
+                  </div>
+                </div>
+
+                <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between p-4 bg-white/5 rounded-lg gap-3">
+                  <div className="flex-1">
+                    <span className="text-white/75 text-sm">统一信用代码</span>
+                    <div className="text-white font-medium text-lg break-all">{generatedInfo.creditCode}</div>
+                  </div>
+                  <div className="relative">
+                    <Button
+                      variant="primary"
+                      size="sm"
+                      onClick={() => copyToClipboard(generatedInfo.creditCode, '信用代码')}
+                      className="w-full sm:w-auto"
+                    >
+                      复制
+                    </Button>
+                    {copySuccess === '信用代码' && (
+                      <motion.div
+                        className="absolute -top-8 left-1/2 transform -translate-x-1/2 bg-white text-black px-2 py-1 rounded text-xs whitespace-nowrap"
+                        initial={{ opacity: 0, y: 10 }}
+                        animate={{ opacity: 1, y: 0 }}
+                        exit={{ opacity: 0, y: 10 }}
+                      >
+                        已复制！
+                      </motion.div>
+                    )}
+                  </div>
                 </div>
               </div>
-            </div>
+            </GlowCard>
           </motion.div>
         )}
 
         <motion.div
-          className="mt-12 bg-white/5 backdrop-blur-sm rounded-2xl p-6 border border-white/10"
           initial={{ opacity: 0, y: 30 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8, delay: 0.8 }}
         >
-          <h3 className="text-white font-medium mb-4 flex items-center gap-2">
-            <span className="text-white/75">⚠️</span>
-            重要提示
-          </h3>
-          <ul className="text-white/75 space-y-2 text-sm leading-relaxed">
-            <li>• 本工具生成的所有信息均为随机虚拟数据，仅供测试使用</li>
-            <li>• 请勿将生成的信息用于任何违法违规活动</li>
-            <li>• 生成的身份证号码符合格式规范但并非真实有效证件</li>
-            <li>• 银行卡号和统一信用代码同样为测试数据，不具备实际效力</li>
-          </ul>
+          <GlowCard className="mt-12 p-6">
+            <h3 className="text-white font-medium mb-4 flex items-center gap-2">
+              <span className="text-white/75">⚠️</span>
+              重要提示
+            </h3>
+            <ul className="text-white/75 space-y-2 text-sm leading-relaxed">
+              <li>• 本工具生成的所有信息均为随机虚拟数据，仅供测试使用</li>
+              <li>• 请勿将生成的信息用于任何违法违规活动</li>
+              <li>• 生成的身份证号码符合格式规范但并非真实有效证件</li>
+              <li>• 银行卡号和统一信用代码同样为测试数据，不具备实际效力</li>
+            </ul>
+          </GlowCard>
         </motion.div>
       </div>
     </div>

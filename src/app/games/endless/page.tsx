@@ -4,6 +4,7 @@ import { useState, useRef } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { usePageTitle } from '@/hooks/use-page-title';
 import { getApiUrl } from '@/utils/api';
+import Button from '@/components/ui/Button';
 
 interface BattleLog {
   id: number;
@@ -168,30 +169,33 @@ export default function EndlessPage() {
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8, delay: 0.2 }}
         >
-          <button
+          <Button
             onClick={startBattle}
             disabled={isBattling || isGameOver || level >= 100}
+            size="lg"
             className={`
-              px-8 py-3 rounded-xl font-semibold text-lg
-              transition-all duration-300 transform
               ${isBattling || isGameOver || level >= 100
-                ? 'bg-white/10 text-white/40 cursor-not-allowed'
-                : 'bg-gradient-to-r from-red-500 to-orange-500 text-white hover:scale-105 hover:shadow-lg hover:shadow-red-500/50'
+                ? 'bg-white/10 text-white/40 hover:bg-white/10'
+                : 'bg-gradient-to-r from-red-500 to-orange-500 text-white hover:scale-105 hover:shadow-lg hover:shadow-red-500/50 hover:from-red-600 hover:to-orange-600'
               }
             `}
           >
             {isBattling ? 'Fighting...' : isGameOver ? 'Game Over' : level >= 100 ? 'Max Level' : '⚔️ Start Battle'}
-          </button>
+          </Button>
 
           {(isGameOver || level >= 100) && (
-            <motion.button
-              onClick={resetGame}
-              className="px-8 py-3 rounded-xl font-semibold text-lg bg-gradient-to-r from-blue-500 to-cyan-500 text-white hover:scale-105 transition-all duration-300 hover:shadow-lg hover:shadow-blue-500/50"
+            <motion.div
               initial={{ opacity: 0, scale: 0.8 }}
               animate={{ opacity: 1, scale: 1 }}
             >
-              🔄 Restart
-            </motion.button>
+              <Button
+                onClick={resetGame}
+                size="lg"
+                className="bg-gradient-to-r from-blue-500 to-cyan-500 text-white hover:scale-105 hover:shadow-lg hover:shadow-blue-500/50 hover:from-blue-600 hover:to-cyan-600"
+              >
+                🔄 Restart
+              </Button>
+            </motion.div>
           )}
         </motion.div>
 

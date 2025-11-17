@@ -88,7 +88,7 @@ export default function DashboardPage() {
                 <button
                   onClick={handleSignOut}
                   disabled={isLoggingOut}
-                  className="cursor-can-hover relative inline-flex items-center gap-3 px-8 py-2.5 mt-8 bg-white/10 hover:bg-white/20 border border-white/30 hover:border-white/50 text-white rounded-full transition-all duration-300 disabled:opacity-50 disabled:cursor-not-allowed cursor-can-hover"
+                  className="cursor-can-hover cursor-pointer relative inline-flex items-center gap-3 px-8 py-2.5 mt-8 bg-white/10 hover:bg-white/20 border border-white/30 hover:border-white/50 text-white rounded-full transition-all duration-300 disabled:opacity-50 disabled:cursor-not-allowed"
                 >
                   {isLoggingOut ? (
                     <>
