@@ -16,10 +16,10 @@ export default async function UserAuth() {
           <Image
             src={session.user.image}
             alt={session.user.name || "用户头像"}
-            width={32}
-            height={32}
+            width={24}
+            height={24}
             priority
-            className="rounded-full w-8 h-8"
+            className="rounded-full w-6 h-6"
           />
         )}
       </Link>
