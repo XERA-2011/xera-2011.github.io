@@ -2,14 +2,13 @@
 #
 # To get started with Next.js see: https://nextjs.org/docs/getting-started
 #
-name: Deploy Next.js site to Pages
+name: Deploy Next.js site to Pages (Disabled)
 
+# 已禁用：现在使用简单的重定向页面
+# 如需重新启用完整部署，取消下面的注释
 on:
-  # Runs on pushes targeting the default branch
-  push:
-    branches: ["main"]
-
-  # Allows you to run this workflow manually from the Actions tab
+  # push:
+  #   branches: ["main"]
   workflow_dispatch:
 
 # Sets permissions of the GITHUB_TOKEN to allow deployment to GitHub Pages
@@ -100,6 +99,7 @@ jobs:
       - name: Build with Next.js
         env:
           DATABASE_URL: "postgresql://dummy:dummy@localhost:5432/dummy"
+          GITHUB_PAGES: "true"
         run: ${{ steps.detect-package-manager.outputs.runner }} build
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v3
