@@ -70,7 +70,7 @@ export default function AssetAllocationPage() {
     const fetchCelebrityPortfolios = async () => {
       try {
         setIsLoadingCelebrity(true);
-        const response = await fetch('/api/asset-allocation/celebrity');
+        const response = await fetch('/api/asset-allocation?type=celebrity');
         const result = await response.json();
 
         if (result.success && result.data) {
