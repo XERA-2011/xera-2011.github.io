@@ -2,6 +2,7 @@
 
 import { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
+import { useSession } from 'next-auth/react';
 import { usePageTitle } from '@/hooks/use-page-title';
 import PieChart from '@/components/ui/PieChart';
 import GlowCard from '@/components/ui/GlowCard';
@@ -30,6 +31,10 @@ const STORAGE_KEY = 'asset-portfolios';
 export default function AssetAllocationPage() {
   usePageTitle('资产配置占比');
 
+  // 获取用户登录状态
+  const { status } = useSession();
+  const isLoggedIn = status === 'authenticated';
+
   // 用户资产配置
   const [myAssets, setMyAssets] = useState<Asset[]>([]);
   const [myAssetsUpdatedAt, setMyAssetsUpdatedAt] = useState<string>('');
@@ -50,6 +55,7 @@ export default function AssetAllocationPage() {
   // UI 状态
   const [copySuccess, setCopySuccess] = useState(false);
   const [showCelebrityDropdown, setShowCelebrityDropdown] = useState(false);
+  const [isSyncing, setIsSyncing] = useState(false);
 
   // 当前查看的资产列表
   const isViewingMy = currentViewId === 'my';
@@ -58,12 +64,38 @@ export default function AssetAllocationPage() {
   const totalAmount = assets.reduce((sum, asset) => sum + asset.amount, 0);
   const isReadOnly = !isViewingMy;
 
-  // 初始化：从 localStorage 加载用户数据
+  // 初始化：从数据库或 localStorage 加载用户数据
   useEffect(() => {
-    const data = getLocalStorage(STORAGE_KEY, { myAssets: [], myAssetsUpdatedAt: '' });
-    setMyAssets(data.myAssets);
-    setMyAssetsUpdatedAt(data.myAssetsUpdatedAt);
-  }, []);
+    const loadUserAssets = async () => {
+      if (isLoggedIn) {
+        // 如果已登录，从数据库加载
+        try {
+          const response = await fetch('/api/asset-allocation?type=user');
+          const result = await response.json();
+
+          if (result.success && result.data) {
+            setMyAssets(result.data);
+            setMyAssetsUpdatedAt(new Date().toISOString().split('T')[0]);
+          }
+        } catch (err) {
+          console.error('加载用户资产配置失败:', err);
+          // 如果加载失败，从 localStorage 加载
+          const data = getLocalStorage(STORAGE_KEY, { myAssets: [], myAssetsUpdatedAt: '' });
+          setMyAssets(data.myAssets);
+          setMyAssetsUpdatedAt(data.myAssetsUpdatedAt);
+        }
+      } else {
+        // 如果未登录，从 localStorage 加载
+        const data = getLocalStorage(STORAGE_KEY, { myAssets: [], myAssetsUpdatedAt: '' });
+        setMyAssets(data.myAssets);
+        setMyAssetsUpdatedAt(data.myAssetsUpdatedAt);
+      }
+    };
+
+    if (status !== 'loading') {
+      loadUserAssets();
+    }
+  }, [isLoggedIn, status]);
 
   // 初始化：从 API 加载名人持仓数据
   useEffect(() => {
@@ -86,13 +118,44 @@ export default function AssetAllocationPage() {
     fetchCelebrityPortfolios();
   }, []);
 
-  // 保存到 localStorage
+  // 保存到 localStorage 和数据库
   useEffect(() => {
+    // 总是保存到 localStorage
     setLocalStorage(STORAGE_KEY, {
       myAssets,
       myAssetsUpdatedAt,
     });
-  }, [myAssets, myAssetsUpdatedAt]);
+
+    // 如果已登录，同步到数据库
+    const syncToDatabase = async () => {
+      if (isLoggedIn && myAssets.length >= 0) {
+        try {
+          setIsSyncing(true);
+          await fetch('/api/asset-allocation', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({
+              assets: myAssets.map(asset => ({
+                name: asset.name,
+                amount: asset.amount,
+              })),
+            }),
+          });
+        } catch (err) {
+          console.error('同步到数据库失败:', err);
+        } finally {
+          setIsSyncing(false);
+        }
+      }
+    };
+
+    // 使用防抖，避免频繁请求
+    const timer = setTimeout(() => {
+      syncToDatabase();
+    }, 500);
+
+    return () => clearTimeout(timer);
+  }, [myAssets, myAssetsUpdatedAt, isLoggedIn]);
 
 
   const handleAddAsset = () => {
@@ -173,16 +236,7 @@ export default function AssetAllocationPage() {
     setError('');
   };
 
-  const handleClear = () => {
-    if (!confirm('确定要清空所有资产吗？')) {
-      return;
-    }
-    setMyAssets([]);
-    setMyAssetsUpdatedAt('');
-    setAssetName('');
-    setAssetAmount('');
-    setError('');
-  };
+
 
   const getPercentage = (amount: number) => {
     if (totalAmount === 0) return 0;
@@ -224,6 +278,25 @@ export default function AssetAllocationPage() {
           <h2 className="text-3xl sm:text-4xl lg:text-5xl font-bold text-white mb-4">
             资产配置占比
           </h2>
+          {isLoggedIn && (
+            <div className="flex items-center justify-center gap-2 text-sm text-white/60">
+              {isSyncing ? (
+                <>
+                  <svg className="w-4 h-4 animate-spin" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15" />
+                  </svg>
+                  <span>正在同步到云端...</span>
+                </>
+              ) : (
+                <>
+                  <svg className="w-4 h-4 text-green-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
+                  </svg>
+                  <span>已同步到云端</span>
+                </>
+              )}
+            </div>
+          )}
         </motion.div>
 
         {/* 视图切换器 */}
@@ -442,13 +515,6 @@ export default function AssetAllocationPage() {
                         复制
                       </span>
                     )}
-                  </Button>
-                  <Button
-                    variant="secondary"
-                    size="md"
-                    onClick={handleClear}
-                  >
-                    清空
                   </Button>
                 </div>
 
