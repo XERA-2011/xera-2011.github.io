@@ -2,7 +2,6 @@
 
 import { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { div } from 'framer-motion/client';
 
 interface Asset {
   id: string;
@@ -18,17 +17,22 @@ interface PieChartProps {
 export default function PieChart({ assets, totalAmount }: PieChartProps) {
   const [hoveredAsset, setHoveredAsset] = useState<string | null>(null);
   const [isHoveringChart, setIsHoveringChart] = useState(false);
-  // 固定的白灰黑渐变色（10个颜色）
+  // 固定的白灰黑渐变色（15个颜色）
   const FIXED_COLORS = [
     '#FFFFFF', // 白色
-    '#E0E0E0', // 浅灰1
-    '#C0C0C0', // 浅灰2
-    '#A0A0A0', // 浅灰3
-    '#808080', // 中灰
-    '#606060', // 深灰1
-    '#484848', // 深灰2
-    '#303030', // 深灰3
-    '#181818', // 深灰4
+    '#E8E8E8', // 浅灰1
+    '#D0D0D0', // 浅灰2
+    '#B8B8B8', // 浅灰3
+    '#A0A0A0', // 浅灰4
+    '#888888', // 中灰1
+    '#707070', // 中灰2
+    '#585858', // 中灰3
+    '#484848', // 深灰1
+    '#383838', // 深灰2
+    '#282828', // 深灰3
+    '#202020', // 深灰4
+    '#181818', // 深灰5
+    '#101010', // 深灰6
     '#000000', // 纯黑色
   ];
 
@@ -241,8 +245,8 @@ export default function PieChart({ assets, totalAmount }: PieChartProps) {
                 <div className="flex items-center gap-2">
                   <div
                     className={`w-3 h-3 rounded-full transition-all duration-200 ${isHovered
-                        ? 'border-2 border-white shadow-[0_0_12px_rgba(255,255,255,0.8)]'
-                        : 'border border-white/30'
+                      ? 'border-2 border-white shadow-[0_0_12px_rgba(255,255,255,0.8)]'
+                      : 'border border-white/30'
                       }`}
                     style={{ backgroundColor: invertedColor }}
                   />

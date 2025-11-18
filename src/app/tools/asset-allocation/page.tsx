@@ -99,8 +99,8 @@ export default function AssetAllocationPage() {
     setError('');
 
     // 检查是否已达到最大数量限制
-    if (myAssets.length >= 10) {
-      setError('最多只能配置10个资产');
+    if (myAssets.length >= 15) {
+      setError('最多只能配置15个资产');
       return;
     }
 
@@ -285,15 +285,15 @@ export default function AssetAllocationPage() {
                         暂无数据
                       </div>
                     ) : (
-                      celebrityPortfolios.map((portfolio, index) => (
+                      celebrityPortfolios.map((portfolio) => (
                         <button
                           key={portfolio.id}
                           onClick={() => {
                             setCurrentViewId(portfolio.id);
                             setShowCelebrityDropdown(false);
                           }}
-                          className={`w-full px-4 py-3 text-left hover:bg-white/15 transition-colors ${currentViewId === portfolio.id ? 'bg-white/20 text-white' : 'text-white/80'
-                            } ${index !== celebrityPortfolios.length - 1 ? 'border-b border-white/10' : ''}`}
+                          className={`w-full px-4 py-3 text-left hover:bg-white/15 transition-colors border-b border-white/10 last:border-b-0 ${currentViewId === portfolio.id ? 'bg-white/20 text-white' : 'text-white/80'
+                            }`}
                         >
                           <div className="flex items-center justify-between">
                             <div className="font-medium">{portfolio.name}</div>
@@ -455,11 +455,11 @@ export default function AssetAllocationPage() {
                 {/* 资产列表 */}
                 <div>
                   <h3 className="text-lg font-semibold text-white mb-4">
-                    资产列表 {assets.length > 0 && `(${assets.length}/10)`}
+                    资产列表 {assets.length > 0 && `(${assets.length}/15)`}
                   </h3>
                   <div className="space-y-2 max-h-96 overflow-y-auto">
                     <AnimatePresence>
-                      {assets.map((asset, index) => (
+                      {assets.map((asset) => (
                         <motion.div
                           key={asset.id}
                           initial={{ opacity: 0, x: -20 }}

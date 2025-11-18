@@ -8,7 +8,6 @@ export function formatCurrency(
   amount: number,
   options?: {
     locale?: string;
-    currency?: string;
     minimumFractionDigits?: number;
     maximumFractionDigits?: number;
     showSymbol?: boolean;
@@ -16,7 +15,6 @@ export function formatCurrency(
 ): string {
   const {
     locale = 'zh-CN',
-    currency = 'CNY',
     minimumFractionDigits = 2,
     maximumFractionDigits = 2,
     showSymbol = true,
