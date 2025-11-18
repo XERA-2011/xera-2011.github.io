@@ -94,24 +94,6 @@ export default function AssetAllocationPage() {
     });
   }, [myAssets, myAssetsUpdatedAt]);
 
-  // 固定的白灰黑渐变色（10个颜色）
-  const FIXED_COLORS = [
-    '#FFFFFF', // 白色
-    '#E0E0E0', // 浅灰1
-    '#C0C0C0', // 浅灰2
-    '#A0A0A0', // 浅灰3
-    '#808080', // 中灰
-    '#606060', // 深灰1
-    '#484848', // 深灰2
-    '#303030', // 深灰3
-    '#181818', // 深灰4
-    '#000000', // 纯黑色
-  ];
-
-  // 根据索引获取颜色
-  const getColorByIndex = (index: number) => {
-    return FIXED_COLORS[index % FIXED_COLORS.length];
-  };
 
   const handleAddAsset = () => {
     setError('');
@@ -489,10 +471,6 @@ export default function AssetAllocationPage() {
                             } flex items-center justify-between`}
                         >
                           <div className="flex items-center gap-3 flex-1">
-                            <div
-                              className="w-4 h-4 rounded-full flex-shrink-0"
-                              style={{ backgroundColor: getColorByIndex(index) }}
-                            />
                             <div className="flex-1 min-w-0">
                               <div className="text-white font-medium truncate">
                                 {asset.name}
