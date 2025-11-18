@@ -1,33 +1,40 @@
 # 应用文
 
-## A postcard from your exchange program abroad
-- 一张来自你海外交换项目的明信片
+## An email to a language school asking about English courses and prices
+- 一封致语言学校的电子邮件，询问英语课程和价格
 
 **正文**：
 
-Hi Sarah,
+Dear Sir/Madam,
 
-Greetings from London! My exchange program here is absolutely amazing. I'm staying with a lovely host family, and they've been so welcoming. Every day is an adventure! I've already visited the Tower of London, Buckingham Palace, and even caught a West End show. The city is bustling, and there's always something new to discover. My English classes are challenging but fun, and I'm making friends from all over the world. I'm learning so much, not just academically, but about different cultures too. Wish you were here! See you soon.
+I am writing to inquire about the English courses offered at your school. I am a student hoping to improve my general English skills, especially my speaking and listening. I would like to know if you have any courses suitable for my level, perhaps B1 or B2.
 
-Love,
-Emily
+Could you please provide information on the types of courses available, such as part-time or intensive options? I would also appreciate details on course start dates, durations, and, most importantly, the tuition fees. Are there any discounts for students? Finally, please let me know about the application process.
 
-- 嗨，莎拉，
-- 伦敦问候！我的交换项目真是太棒了。我住在一个很棒的寄宿家庭，他们非常热情。每天都是一次冒险！我已经参观了伦敦塔、白金汉宫，甚至还看了一场西区演出。这座城市熙熙攘攘，总有新事物等待发现。我的英语课很有挑战性但也很有趣，我结交了来自世界各地的朋友。我学到了很多，不仅是学术上的，还有关于不同文化的知识。希望你在这里！很快再见。
-- 爱你的，
-- 艾米丽
+Thank you for your time and I look forward to your reply.
+
+Yours faithfully,
+[Your Name]
+
+- 尊敬的先生/女士，
+- 我写这封信是为了询问贵校提供的英语课程。我是一名学生，希望提高我的综合英语能力，特别是口语和听力。我想知道您是否有适合我水平的课程，可能是B1或B2。
+- 请您提供有关现有课程类型的信息，例如兼职或强化课程选项。我还会感谢您提供课程开课日期、持续时间以及最重要的是学费的详细信息。学生是否有任何折扣？最后，请告诉我申请流程。
+- 感谢您的时间，期待您的回复。
+- 您忠实的，
+- [你的名字]
 
 ---
 
 # 记叙文/短文
 
-## Write a story about a misunderstanding that had a happy ending
-- 写一个关于一场误会最终以快乐结局收场的故事
+## An article explaining how students can help protect the environment
+- 一篇解释学生如何帮助保护环境的文章
 
 **正文**：
 
-It was a sunny afternoon when Leo saw his friend Mia talking animatedly with a new student, Alex. Leo felt a pang of jealousy; he thought Mia was ignoring him for her new friend. He walked away, feeling hurt. Later, Mia found him looking glum. "Why are you upset?" she asked. Leo confessed his feelings. Mia laughed. "Oh, Leo! Alex was just asking for directions to the library. I was explaining the shortcut!" Leo felt foolish but relieved. They all ended up going for ice cream together, and Leo realized his quick judgment had almost cost him a fun afternoon.
+Protecting our environment is crucial, and students can play a significant role. Firstly, reducing waste is essential. Students can use reusable water bottles and bags instead of disposable ones. Recycling paper, plastic, and glass at school and home also makes a big difference.
 
-- 那是一个阳光明媚的下午，Leo看到他的朋友Mia正和一个新同学Alex热烈地交谈。Leo感到一阵嫉妒；他以为Mia为了新朋友而忽略了他。他带着受伤的心情走开了。
-- 后来，Mia发现他闷闷不乐。“你为什么不高兴？”她问道。Leo坦白了他的感受。Mia笑了。“哦，Leo！Alex只是在问去图书馆的路。我正在给他解释捷径呢！”
-- Leo感到很傻，但也松了一口气。他们最后一起去吃了冰淇淋，Leo意识到他仓促的判断差点让他错过了一个愉快的下午。
+Secondly, conserving energy is vital. Remember to switch off lights and unplug electronic devices when not in use. Walking or cycling to school instead of using cars can reduce carbon emissions. Lastly, joining school environmental clubs or participating in local clean-up events helps create a healthier planet. Every small action counts towards a greener future.
+
+- 保护我们的环境至关重要，学生可以在其中发挥重要作用。首先，减少浪费是必不可少的。学生可以使用可重复使用的水瓶和袋子，而不是一次性的。在学校和家里回收纸张、塑料和玻璃也能带来很大的改变。
+- 其次，节约能源至关重要。请记住在不使用时关掉电灯并拔掉电子设备的插头。步行或骑自行车上学而不是开车可以减少碳排放。最后，加入学校环保俱乐部或参与当地的清洁活动有助于创造一个更健康的地球。每一个小行动都为更绿色的未来做出了贡献。
