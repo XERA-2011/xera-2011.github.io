@@ -1,12 +1,13 @@
 "use client";
 
 import { useState, useEffect } from 'react';
-import { motion, AnimatePresence, animate } from 'framer-motion';
+import { motion, AnimatePresence } from 'framer-motion';
 import { usePageTitle } from '@/hooks/use-page-title';
 import PieChart from '@/components/ui/PieChart';
 import GlowCard from '@/components/ui/GlowCard';
 import Button from '@/components/ui/Button';
 import { getLocalStorage, setLocalStorage } from '@/utils/storage';
+import { formatCurrency, formatPercentage } from '@/utils/format';
 
 interface Asset {
   id: string;
@@ -27,77 +28,16 @@ interface Portfolio {
 
 const STORAGE_KEY = 'asset-portfolios';
 
-// 名人持仓模板（只读）
-const CELEBRITY_PORTFOLIOS: Portfolio[] = [
-  {
-    id: 'buffett',
-    name: '巴菲特持仓参考',
-    description: '基于伯克希尔·哈撒韦公开持仓（2024Q3）',
-    assets: [
-      { id: '1', name: '苹果 (AAPL)', amount: 69.9, color: 'hsl(210, 45%, 60%)' },
-      { id: '2', name: '美国银行 (BAC)', amount: 10.1, color: 'hsl(150, 45%, 60%)' },
-      { id: '3', name: '美国运通 (AXP)', amount: 8.8, color: 'hsl(30, 45%, 60%)' },
-      { id: '4', name: '可口可乐 (KO)', amount: 7.5, color: 'hsl(0, 45%, 60%)' },
-      { id: '5', name: '雪佛龙 (CVX)', amount: 3.7, color: 'hsl(270, 45%, 60%)' },
-    ],
-    createdAt: '2024-09-30',
-    updatedAt: '2024-09-30',
-    isReadOnly: true,
-  },
-  {
-    id: 'duan',
-    name: '段永平持仓参考',
-    description: '基于公开信息整理的大致配置',
-    assets: [
-      { id: '1', name: '苹果 (AAPL)', amount: 40, color: 'hsl(210, 45%, 60%)' },
-      { id: '2', name: '茅台', amount: 25, color: 'hsl(0, 45%, 60%)' },
-      { id: '3', name: '腾讯', amount: 15, color: 'hsl(180, 45%, 60%)' },
-      { id: '4', name: '拼多多 (PDD)', amount: 10, color: 'hsl(280, 45%, 60%)' },
-      { id: '5', name: '现金及其他', amount: 10, color: 'hsl(120, 45%, 60%)' },
-    ],
-    createdAt: '2024-06-30',
-    updatedAt: '2024-06-30',
-    isReadOnly: true,
-  },
-  {
-    id: 'cathie',
-    name: '木头姐持仓参考',
-    description: '基于 ARK Innovation ETF (ARKK) 主要持仓',
-    assets: [
-      { id: '1', name: 'Coinbase (COIN)', amount: 9.8, color: 'hsl(30, 45%, 60%)' },
-      { id: '2', name: 'Roku (ROKU)', amount: 8.5, color: 'hsl(270, 45%, 60%)' },
-      { id: '3', name: 'Tesla (TSLA)', amount: 7.2, color: 'hsl(0, 45%, 60%)' },
-      { id: '4', name: 'Block (SQ)', amount: 6.9, color: 'hsl(210, 45%, 60%)' },
-      { id: '5', name: 'UiPath (PATH)', amount: 5.8, color: 'hsl(150, 45%, 60%)' },
-      { id: '6', name: '其他科技股', amount: 61.8, color: 'hsl(180, 45%, 60%)' },
-    ],
-    createdAt: '2024-10-31',
-    updatedAt: '2024-10-31',
-    isReadOnly: true,
-  },
-  {
-    id: 'dalio',
-    name: '达里奥全天候策略',
-    description: '桥水基金全天候投资组合参考',
-    assets: [
-      { id: '1', name: '股票', amount: 30, color: 'hsl(210, 45%, 60%)' },
-      { id: '2', name: '长期国债', amount: 40, color: 'hsl(150, 45%, 60%)' },
-      { id: '3', name: '中期国债', amount: 15, color: 'hsl(120, 45%, 60%)' },
-      { id: '4', name: '大宗商品', amount: 7.5, color: 'hsl(30, 45%, 60%)' },
-      { id: '5', name: '黄金', amount: 7.5, color: 'hsl(45, 45%, 60%)' },
-    ],
-    createdAt: '2024-01-01',
-    updatedAt: '2024-01-01',
-    isReadOnly: true,
-  },
-];
-
 export default function AssetAllocationPage() {
   usePageTitle('资产配置占比');
 
   // 用户资产配置
   const [myAssets, setMyAssets] = useState<Asset[]>([]);
   const [myAssetsUpdatedAt, setMyAssetsUpdatedAt] = useState<string>('');
+
+  // 名人持仓数据
+  const [celebrityPortfolios, setCelebrityPortfolios] = useState<Portfolio[]>([]);
+  const [isLoadingCelebrity, setIsLoadingCelebrity] = useState(true);
 
   // 当前查看的组合 ID（'my' 或名人模板 ID）
   const [currentViewId, setCurrentViewId] = useState<string>('my');
@@ -115,16 +55,37 @@ export default function AssetAllocationPage() {
 
   // 当前查看的资产列表
   const isViewingMy = currentViewId === 'my';
-  const currentCelebrity = CELEBRITY_PORTFOLIOS.find(p => p.id === currentViewId);
+  const currentCelebrity = celebrityPortfolios.find(p => p.id === currentViewId);
   const assets = isViewingMy ? myAssets : (currentCelebrity?.assets || []);
   const totalAmount = assets.reduce((sum, asset) => sum + asset.amount, 0);
   const isReadOnly = !isViewingMy;
 
-  // 初始化：从 localStorage 加载数据
+  // 初始化：从 localStorage 加载用户数据
   useEffect(() => {
     const data = getLocalStorage(STORAGE_KEY, { myAssets: [], myAssetsUpdatedAt: '' });
     setMyAssets(data.myAssets);
     setMyAssetsUpdatedAt(data.myAssetsUpdatedAt);
+  }, []);
+
+  // 初始化：从 API 加载名人持仓数据
+  useEffect(() => {
+    const fetchCelebrityPortfolios = async () => {
+      try {
+        setIsLoadingCelebrity(true);
+        const response = await fetch('/api/asset-allocation/celebrity');
+        const result = await response.json();
+
+        if (result.success && result.data) {
+          setCelebrityPortfolios(result.data);
+        }
+      } catch (err) {
+        console.error('加载名人持仓数据失败:', err);
+      } finally {
+        setIsLoadingCelebrity(false);
+      }
+    };
+
+    fetchCelebrityPortfolios();
   }, []);
 
   // 保存到 localStorage
@@ -275,12 +236,12 @@ export default function AssetAllocationPage() {
     if (assets.length === 0) return;
 
     const copyText = [
-      `总资产：¥${totalAmount.toLocaleString('zh-CN', { minimumFractionDigits: 2, maximumFractionDigits: 2 })}`,
+      `总资产：${formatCurrency(totalAmount)}`,
       '',
       ...assets.map((asset) => {
-        const percentage = getPercentage(asset.amount).toFixed(2);
-        const amount = asset.amount.toLocaleString('zh-CN', { minimumFractionDigits: 2, maximumFractionDigits: 2 });
-        return `${asset.name}：¥${amount} (${percentage}%)`;
+        const percentage = formatPercentage(getPercentage(asset.amount));
+        const amount = formatCurrency(asset.amount, { showSymbol: false });
+        return `${asset.name}：¥${amount} (${percentage})`;
       }),
     ].join('\n');
 
@@ -358,27 +319,37 @@ export default function AssetAllocationPage() {
                     exit={{ opacity: 0, y: -10 }}
                     className="absolute top-full mt-2 left-0 min-w-[280px] bg-gray-900 border border-white/30 rounded-lg shadow-2xl z-50 overflow-hidden"
                   >
-                    {CELEBRITY_PORTFOLIOS.map((portfolio, index) => (
-                      <button
-                        key={portfolio.id}
-                        onClick={() => {
-                          setCurrentViewId(portfolio.id);
-                          setShowCelebrityDropdown(false);
-                        }}
-                        className={`w-full px-4 py-3 text-left hover:bg-white/15 transition-colors ${currentViewId === portfolio.id ? 'bg-white/20 text-white' : 'text-white/80'
-                          } ${index !== CELEBRITY_PORTFOLIOS.length - 1 ? 'border-b border-white/10' : ''}`}
-                      >
-                        <div className="flex items-center justify-between">
-                          <div className="font-medium">{portfolio.name}</div>
-                          {portfolio.createdAt && (
-                            <div className="text-xs text-white/40">{portfolio.createdAt}</div>
+                    {isLoadingCelebrity ? (
+                      <div className="px-4 py-8 text-center text-white/50 text-sm">
+                        加载中...
+                      </div>
+                    ) : celebrityPortfolios.length === 0 ? (
+                      <div className="px-4 py-8 text-center text-white/50 text-sm">
+                        暂无数据
+                      </div>
+                    ) : (
+                      celebrityPortfolios.map((portfolio, index) => (
+                        <button
+                          key={portfolio.id}
+                          onClick={() => {
+                            setCurrentViewId(portfolio.id);
+                            setShowCelebrityDropdown(false);
+                          }}
+                          className={`w-full px-4 py-3 text-left hover:bg-white/15 transition-colors ${currentViewId === portfolio.id ? 'bg-white/20 text-white' : 'text-white/80'
+                            } ${index !== celebrityPortfolios.length - 1 ? 'border-b border-white/10' : ''}`}
+                        >
+                          <div className="flex items-center justify-between">
+                            <div className="font-medium">{portfolio.name}</div>
+                            {portfolio.createdAt && (
+                              <div className="text-xs text-white/40">{portfolio.createdAt}</div>
+                            )}
+                          </div>
+                          {portfolio.description && (
+                            <div className="text-xs text-white/50 mt-1">{portfolio.description}</div>
                           )}
-                        </div>
-                        {portfolio.description && (
-                          <div className="text-xs text-white/50 mt-1">{portfolio.description}</div>
-                        )}
-                      </button>
-                    ))}
+                        </button>
+                      ))
+                    )}
                   </motion.div>
                 </>
               )}
@@ -416,20 +387,6 @@ export default function AssetAllocationPage() {
                     </p>
                   )}
                 </div>
-
-                {/* 名人总资产 */}
-                {totalAmount > 0 && (
-                  <motion.div
-                    initial={{ opacity: 0, y: 10 }}
-                    animate={{ opacity: 1, y: 0 }}
-                    className="bg-white/10 rounded-lg p-4 mb-6 text-center"
-                  >
-                    <div className="text-white/70 text-sm mb-1">总资产</div>
-                    <div className="text-white text-3xl font-bold">
-                      ¥{totalAmount.toLocaleString('zh-CN', { minimumFractionDigits: 2, maximumFractionDigits: 2 })}
-                    </div>
-                  </motion.div>
-                )}
 
                 {/* 名人饼图 */}
                 <PieChart
@@ -594,12 +551,12 @@ export default function AssetAllocationPage() {
                                 {asset.name}
                               </div>
                               <div className="text-white/60 text-sm">
-                                ¥{asset.amount.toLocaleString('zh-CN', { minimumFractionDigits: 2, maximumFractionDigits: 2 })}
+                                {formatCurrency(asset.amount)}
                               </div>
                             </div>
                             <div className="text-right">
                               <div className="text-white font-semibold">
-                                {getPercentage(asset.amount).toFixed(2)}%
+                                {formatPercentage(getPercentage(asset.amount))}
                               </div>
                             </div>
                           </div>
@@ -661,17 +618,6 @@ export default function AssetAllocationPage() {
                 {/* 我的总资产 */}
                 {myAssets.length > 0 ? (
                   <>
-                    <motion.div
-                      initial={{ opacity: 0, y: 10 }}
-                      animate={{ opacity: 1, y: 0 }}
-                      className="bg-white/10 rounded-lg p-4 mb-6 text-center"
-                    >
-                      <div className="text-white/70 text-sm mb-1">总资产</div>
-                      <div className="text-white text-3xl font-bold">
-                        ¥{myAssets.reduce((sum, asset) => sum + asset.amount, 0).toLocaleString('zh-CN', { minimumFractionDigits: 2, maximumFractionDigits: 2 })}
-                      </div>
-                    </motion.div>
-
                     {/* 我的饼图 */}
                     <PieChart
                       assets={myAssets}
@@ -701,7 +647,7 @@ export default function AssetAllocationPage() {
                               <span className="text-white">{asset.name}</span>
                             </div>
                             <span className="text-white/70">
-                              {percentage.toFixed(2)}%
+                              {formatPercentage(percentage)}
                             </span>
                           </div>
                         );
@@ -727,20 +673,6 @@ export default function AssetAllocationPage() {
             ) : (
               /* 编辑模式：显示当前配置的饼图 */
               <div>
-                {/* 总资产 */}
-                {totalAmount > 0 && (
-                  <motion.div
-                    initial={{ opacity: 0, y: 10 }}
-                    animate={{ opacity: 1, y: 0 }}
-                    className="bg-white/10 rounded-lg p-4 mb-6 text-center"
-                  >
-                    <div className="text-white/70 text-sm mb-1">总资产</div>
-                    <div className="text-white text-3xl font-bold">
-                      ¥{totalAmount.toLocaleString('zh-CN', { minimumFractionDigits: 2, maximumFractionDigits: 2 })}
-                    </div>
-                  </motion.div>
-                )}
-
                 {/* 饼图 */}
                 <PieChart
                   assets={assets}
@@ -768,7 +700,7 @@ export default function AssetAllocationPage() {
                           <span className="text-white">{asset.name}</span>
                         </div>
                         <span className="text-white/70">
-                          {getPercentage(asset.amount).toFixed(2)}%
+                          {formatPercentage(getPercentage(asset.amount))}
                         </span>
                       </div>
                     ))}
