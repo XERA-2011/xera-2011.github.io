@@ -1,59 +1,59 @@
 # Global Breaking News TOP10
 
-**Date**: 2025年11月17日
-**Update Time**: 22:12 UTC
+**Date**: 2025年11月18日
+**Update Time**: 04:18 UTC
 **AI Model**: Google Gemini / Google Gemini
 
 ---
 
-### 1. **Ousted Bangladeshi Prime Minister Sheikh Hasina Sentenced to Death** / **孟加拉国前总理谢赫·哈西娜被判处死刑**
-- **Time**: 2025-11-17
-- **Content**: Ousted Bangladeshi Prime Minister Sheikh Hasina has been sentenced to death for crimes against humanity. / 孟加拉国前总理谢赫·哈西娜因危害人类罪被判处死刑。
-- **Source**: The Guardian
+### 1. **Former Bangladesh PM Sheikh Hasina Sentenced to Death** / **孟加拉国前总理谢赫·哈西娜被判处死刑**
+- **Time**: 2025-11-18
+- **Content**: Former Bangladesh Prime Minister Sheikh Hasina has been sentenced to death for crimes against humanity during a crackdown on an uprising that ousted her. / 孟加拉国前总理谢赫·哈西娜因在镇压推翻她的起义期间犯下反人类罪被判处死刑。
+- **Source**: Associated Press
 
-### 2. **UN Security Council to Vote on Gaza Stabilization Force** / **联合国安理会将就加沙稳定部队进行投票**
-- **Time**: 2025-11-17
-- **Content**: The UN Security Council is set to vote on a Gaza stabilization force plan that references a Palestinian state. / 联合国安理会将就一项提及巴勒斯坦国的加沙稳定部队计划进行投票。
-- **Source**: The Guardian
+### 2. **UN Security Council Approves US Plan for Gaza's Future** / **联合国安理会批准美国对加沙未来的计划**
+- **Time**: 2025-11-18
+- **Content**: The UN Security Council has approved a US plan for the future of Gaza, which includes a new stabilization force and endorses a 20-point ceasefire plan. / 联合国安理会批准了美国对加沙未来的计划，其中包括一支新的稳定部队，并认可了一项20点停火计划。
+- **Source**: Al Jazeera
 
-### 3. **US Judge Finds "Government Misconduct" in James Comey Case** / **美国法官在詹姆斯·科米案中发现“政府不当行为”**
-- **Time**: 2025-11-17
-- **Content**: A US judge has found evidence of "government misconduct" in the federal case against James Comey. / 一名美国法官在针对詹姆斯·科米的联邦案件中发现了“政府不当行为”的证据。
-- **Source**: The Guardian
+### 3. **South Africa Accuses Israel of Planning to Expel Palestinians from Gaza** / **南非指责以色列计划将巴勒斯坦人驱逐出加沙**
+- **Time**: 2025-11-18
+- **Content**: South Africa's foreign minister stated that charter flights are part of a plan to clear Palestinians out of Gaza. / 南非外交部长表示，包机是将巴勒斯坦人清出加沙计划的一部分。
+- **Source**: Al Jazeera
 
-### 4. **Poland's PM Calls Railway Blast an "Unprecedented Act of Sabotage"** / **波兰总理称铁路爆炸是“史无前例的破坏行为”**
-- **Time**: 2025-11-17
-- **Content**: Poland's Prime Minister Donald Tusk stated that a railway blast was an "unprecedented act of sabotage," with foreign state services suspected. / 波兰总理唐纳德·图斯克表示，铁路爆炸是“史无前例的破坏行为”，怀疑有外国国家机构参与。
+### 4. **Finnish President Urges European Resolve on Ukraine** / **芬兰总统敦促欧洲在乌克兰问题上保持坚定**
+- **Time**: 2025-11-18
+- **Content**: Finland's president has urged Europe to remain resolute, warning that a ceasefire in Ukraine is unlikely soon. / 芬兰总统敦促欧洲保持坚定，并警告说乌克兰的停火短期内不大可能实现。
+- **Source**: Associated Press
+
+### 5. **Suspected Russian Drone Hits Turkish Tanker in Odesa** / **疑似俄罗斯无人机袭击敖德萨的土耳其油轮**
+- **Time**: 2025-11-18
+- **Content**: A suspected Russian drone strike hit a Turkish tanker in the Ukrainian port of Odesa. / 一架疑似俄罗斯无人机在乌克兰敖德萨港口袭击了一艘土耳其油轮。
+- **Source**: Fox News
+
+### 6. **Gunmen Abduct 25 Schoolgirls in Nigeria** / **枪手在尼日利亚绑架25名女学生**
+- **Time**: 2025-11-18
+- **Content**: Gunmen abducted 25 schoolgirls from a high school in northwestern Nigeria. / 枪手在尼日利亚西北部的一所中学绑架了25名女学生。
 - **Source**: Sky News
 
-### 5. **25 Schoolgirls Abducted in Nigeria** / **25名女学生在尼日利亚被绑架**
-- **Time**: 2025-11-17
-- **Content**: 25 schoolgirls were abducted in an armed attack in Nigeria, with one person killed. / 25名女学生在尼日利亚的一次武装袭击中被绑架，造成一人死亡。
-- **Source**: CBS News
+### 7. **Poland Calls Railway Blast 'Unprecedented Sabotage'** / **波兰称铁路爆炸为“史无前例的破坏活动”**
+- **Time**: 2025-11-18
+- **Content**: Poland has stated that a railway blast was an "unprecedented act of sabotage." / 波兰方面表示，一起铁路爆炸是“史无前例的破坏活动”。
+- **Source**: Sky News
 
-### 6. **US Conducts Strike on Alleged Drug Boat in Eastern Pacific** / **美国在东太平洋对一艘涉嫌贩毒的船只进行打击**
-- **Time**: 2025-11-17
-- **Content**: The US has conducted another strike on an alleged drug boat in the Eastern Pacific, killing three people. / 美国在东太平洋对一艘涉嫌贩毒的船只再次进行打击，造成三人死亡。
-- **Source**: CBS News
+### 8. **Thousands Protest Crime and Corruption in Mexico City** / **数千人在墨西哥城抗议犯罪和腐败**
+- **Time**: 2025-11-18
+- **Content**: Thousands are protesting crime and corruption in Mexico City, with "Gen Z" protests gaining momentum. / 数千人在墨西哥城抗议犯罪和腐败，“Z世代”的抗议活动势头日益高涨。
+- **Source**: Associated Press
 
-### 7. **Acting FEMA Head Resigns After Controversy** / **代理FEMA负责人因争议辞职**
-- **Time**: 2025-11-17
-- **Content**: The acting FEMA head has resigned after controversy surrounding the handling of deadly Texas flooding. / 代理FEMA负责人在处理德克萨斯州致命洪水的争议后辞职。
-- **Source**: The Guardian
+### 9. **US Supreme Court to Review Asylum Seeker Policy** / **美国最高法院将审查庇护寻求者政策**
+- **Time**: 2025-11-18
+- **Content**: The US Supreme Court will review an old policy used to turn away asylum seekers at the US border. / 美国最高法院将审查一项用于在美国边境拒绝庇护寻求者的旧政策。
+- **Source**: Associated Press
 
-### 8. **81 Monkeys and Meth Found in Car Linked to Wildlife Smuggling** / **在与野生动物走私有关的汽车中发现81只猴子和冰毒**
-- **Time**: 2025-11-17
-- **Content**: 81 monkeys and meth were found in a car linked to a wildlife smuggling network. / 在一辆与野生动物走私网络有关的汽车中发现了81只猴子和冰毒。
-- **Source**: CBS News
-
-### 9. **New Zealand Schools Close Over Asbestos Fears in Play Sand** / **新西兰学校因游戏沙中石棉恐慌而关闭**
-- **Time**: 2025-11-17
-- **Content**: Schools in New Zealand have closed after play sand was recalled over asbestos fears. / 在因石棉恐慌召回游戏沙后，新西兰的学校已经关闭。
-- **Source**: The Guardian
-
-### 10. **At Least 98 Palestinians Have Died in Israeli Custody Since October 2023** / **自2023年10月以来，至少有98名巴勒斯坦人在以色列拘留期间死亡**
-- **Time**: 2025-11-17
-- **Content**: At least 98 Palestinians have died in Israeli custody since October 2023, according to Israeli data. / 根据以色列的数据，自2023年10月以来，至少有98名巴勒斯坦人在以色列拘留期间死亡。
+### 10. **Louvre Closes Gallery Due to Structural Problem** / **卢浮宫因结构问题关闭一间画廊**
+- **Time**: 2025-11-18
+- **Content**: The Louvre museum in France has been forced to close a gallery due to a structural problem. / 法国卢浮宫博物馆因结构问题被迫关闭一间画廊。
 - **Source**: The Guardian
 
 ---
