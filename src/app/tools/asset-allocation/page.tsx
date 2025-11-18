@@ -13,7 +13,6 @@ interface Asset {
   id: string;
   name: string;
   amount: number;
-  color: string;
 }
 
 interface Portfolio {
@@ -49,7 +48,6 @@ export default function AssetAllocationPage() {
   const [editingAsset, setEditingAsset] = useState<Asset | null>(null);
 
   // UI 状态
-  const [hoveredAsset, setHoveredAsset] = useState<string | null>(null);
   const [copySuccess, setCopySuccess] = useState(false);
   const [showCelebrityDropdown, setShowCelebrityDropdown] = useState(false);
 
@@ -96,55 +94,33 @@ export default function AssetAllocationPage() {
     });
   }, [myAssets, myAssetsUpdatedAt]);
 
-  // 生成与现有颜色差异最大的颜色
-  const generateDistinctColor = () => {
-    if (assets.length === 0) {
-      // 第一个颜色随机生成
-      const hue = Math.floor(Math.random() * 360);
-      return `hsl(${hue}, 45%, 60%)`;
-    }
+  // 固定的白灰黑渐变色（10个颜色）
+  const FIXED_COLORS = [
+    '#FFFFFF', // 白色
+    '#E0E0E0', // 浅灰1
+    '#C0C0C0', // 浅灰2
+    '#A0A0A0', // 浅灰3
+    '#808080', // 中灰
+    '#606060', // 深灰1
+    '#484848', // 深灰2
+    '#303030', // 深灰3
+    '#181818', // 深灰4
+    '#000000', // 纯黑色
+  ];
 
-    // 提取现有颜色的色相值
-    const existingHues = assets.map(asset => {
-      const match = asset.color.match(/hsl\((\d+)/);
-      return match ? parseInt(match[1]) : 0;
-    }).sort((a, b) => a - b);
-
-    let bestHue = 0;
-    let maxMinDistance = 0;
-
-    // 尝试多个候选色相，选择与所有现有颜色距离最大的
-    for (let i = 0; i < 36; i++) {
-      const candidateHue = i * 10; // 每10度一个候选
-
-      // 计算该候选色相与所有现有色相的最小距离
-      let minDistance = 360;
-      for (const existingHue of existingHues) {
-        // 计算色环上的最短距离
-        const distance = Math.min(
-          Math.abs(candidateHue - existingHue),
-          360 - Math.abs(candidateHue - existingHue)
-        );
-        minDistance = Math.min(minDistance, distance);
-      }
-
-      // 选择最小距离最大的候选（即与所有现有颜色都尽可能远）
-      if (minDistance > maxMinDistance) {
-        maxMinDistance = minDistance;
-        bestHue = candidateHue;
-      }
-    }
-
-    // 在最佳色相附近添加一些随机性，避免颜色过于规律
-    const finalHue = (bestHue + Math.floor(Math.random() * 20 - 10) + 360) % 360;
-    const saturation = 40 + Math.floor(Math.random() * 15); // 40-55% (降低饱和度)
-    const lightness = 55 + Math.floor(Math.random() * 15); // 55-70% (提高亮度)
-
-    return `hsl(${finalHue}, ${saturation}%, ${lightness}%)`;
+  // 根据索引获取颜色
+  const getColorByIndex = (index: number) => {
+    return FIXED_COLORS[index % FIXED_COLORS.length];
   };
 
   const handleAddAsset = () => {
     setError('');
+
+    // 检查是否已达到最大数量限制
+    if (myAssets.length >= 10) {
+      setError('最多只能配置10个资产');
+      return;
+    }
 
     if (!assetName.trim()) {
       setError('请输入资产名称');
@@ -161,7 +137,6 @@ export default function AssetAllocationPage() {
       id: Date.now().toString(),
       name: assetName.trim(),
       amount: amount,
-      color: generateDistinctColor(),
     };
 
     setMyAssets(prev => [...prev, newAsset]);
@@ -392,35 +367,7 @@ export default function AssetAllocationPage() {
                 <PieChart
                   assets={assets}
                   totalAmount={totalAmount}
-                  hoveredAsset={hoveredAsset}
-                  onAssetHover={setHoveredAsset}
                 />
-
-                {/* 名人图例 */}
-                {assets.length > 0 && (
-                  <motion.div
-                    initial={{ opacity: 0 }}
-                    animate={{ opacity: 1 }}
-                    transition={{ delay: 0.3 }}
-                    className="mt-8 space-y-2"
-                  >
-                    <h3 className="text-sm font-semibold text-white/70 mb-3">图例</h3>
-                    {assets.map((asset) => (
-                      <div key={asset.id} className="flex items-center justify-between text-sm">
-                        <div className="flex items-center gap-2">
-                          <div
-                            className="w-3 h-3 rounded-full"
-                            style={{ backgroundColor: asset.color }}
-                          />
-                          <span className="text-white">{asset.name}</span>
-                        </div>
-                        <span className="text-white/70">
-                          {getPercentage(asset.amount).toFixed(2)}%
-                        </span>
-                      </div>
-                    ))}
-                  </motion.div>
-                )}
               </div>
             ) : (
               /* 编辑模式：显示输入表单 */
@@ -526,11 +473,11 @@ export default function AssetAllocationPage() {
                 {/* 资产列表 */}
                 <div>
                   <h3 className="text-lg font-semibold text-white mb-4">
-                    资产列表 {assets.length > 0 && `(${assets.length})`}
+                    资产列表 {assets.length > 0 && `(${assets.length}/10)`}
                   </h3>
                   <div className="space-y-2 max-h-96 overflow-y-auto">
                     <AnimatePresence>
-                      {assets.map((asset) => (
+                      {assets.map((asset, index) => (
                         <motion.div
                           key={asset.id}
                           initial={{ opacity: 0, x: -20 }}
@@ -544,7 +491,7 @@ export default function AssetAllocationPage() {
                           <div className="flex items-center gap-3 flex-1">
                             <div
                               className="w-4 h-4 rounded-full flex-shrink-0"
-                              style={{ backgroundColor: asset.color }}
+                              style={{ backgroundColor: getColorByIndex(index) }}
                             />
                             <div className="flex-1 min-w-0">
                               <div className="text-white font-medium truncate">
@@ -622,37 +569,7 @@ export default function AssetAllocationPage() {
                     <PieChart
                       assets={myAssets}
                       totalAmount={myAssets.reduce((sum, asset) => sum + asset.amount, 0)}
-                      hoveredAsset={hoveredAsset}
-                      onAssetHover={setHoveredAsset}
                     />
-
-                    {/* 我的图例 */}
-                    <motion.div
-                      initial={{ opacity: 0 }}
-                      animate={{ opacity: 1 }}
-                      transition={{ delay: 0.3 }}
-                      className="mt-8 space-y-2"
-                    >
-                      <h3 className="text-sm font-semibold text-white/70 mb-3">图例</h3>
-                      {myAssets.map((asset) => {
-                        const myTotal = myAssets.reduce((sum, a) => sum + a.amount, 0);
-                        const percentage = myTotal > 0 ? (asset.amount / myTotal) * 100 : 0;
-                        return (
-                          <div key={asset.id} className="flex items-center justify-between text-sm">
-                            <div className="flex items-center gap-2">
-                              <div
-                                className="w-3 h-3 rounded-full"
-                                style={{ backgroundColor: asset.color }}
-                              />
-                              <span className="text-white">{asset.name}</span>
-                            </div>
-                            <span className="text-white/70">
-                              {formatPercentage(percentage)}
-                            </span>
-                          </div>
-                        );
-                      })}
-                    </motion.div>
                   </>
                 ) : (
                   <div className="text-center py-12">
@@ -677,35 +594,7 @@ export default function AssetAllocationPage() {
                 <PieChart
                   assets={assets}
                   totalAmount={totalAmount}
-                  hoveredAsset={hoveredAsset}
-                  onAssetHover={setHoveredAsset}
                 />
-
-                {/* 图例 */}
-                {assets.length > 0 && (
-                  <motion.div
-                    initial={{ opacity: 0 }}
-                    animate={{ opacity: 1 }}
-                    transition={{ delay: 0.3 }}
-                    className="mt-8 space-y-2"
-                  >
-                    <h3 className="text-sm font-semibold text-white/70 mb-3">图例</h3>
-                    {assets.map((asset) => (
-                      <div key={asset.id} className="flex items-center justify-between text-sm">
-                        <div className="flex items-center gap-2">
-                          <div
-                            className="w-3 h-3 rounded-full"
-                            style={{ backgroundColor: asset.color }}
-                          />
-                          <span className="text-white">{asset.name}</span>
-                        </div>
-                        <span className="text-white/70">
-                          {formatPercentage(getPercentage(asset.amount))}
-                        </span>
-                      </div>
-                    ))}
-                  </motion.div>
-                )}
               </div>
             )}
           </GlowCard>
