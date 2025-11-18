@@ -2,7 +2,7 @@ name: Generate Daily News
 
 on:
   schedule:
-    - cron: '0 22 * * *' # Runs at 22:00 UTC, which is 6:00 AM Beijing time
+    - cron: '0 16,4 * * *' # Runs at 16:00 and 04:00 UTC, which is 00:00 and 12:00 Beijing time
   workflow_dispatch:
 
 permissions:
