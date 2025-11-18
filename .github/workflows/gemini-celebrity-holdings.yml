@@ -101,11 +101,7 @@ jobs:
           请更新以下名人的持仓数据（基于最新公开的13F文件、年报或可靠财经媒体报道）：
 
           1. **巴菲特 (Warren Buffett)** - 伯克希尔·哈撒韦最新持仓
-          2. **段永平** - 基于公开信息的配置
-          3. **木头姐 (Cathie Wood)** - ARK Innovation ETF (ARKK) 主要持仓
-          4. **达里奥 (Ray Dalio)** - 全天候投资组合策略
-          5. **查理·芒格 (Charlie Munger)** - Daily Journal Corporation 持仓（历史参考）
-          6. **索罗斯 (George Soros)** - Soros Fund Management 公开持仓
+          2. **木头姐 (Cathie Wood)** - ARK Innovation ETF (ARKK) 主要持仓
 
           要求：
           - 每个持仓的 amount 是百分比，总和应为 100
