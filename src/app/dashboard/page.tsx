@@ -45,10 +45,15 @@ export default function DashboardPage() {
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8 }}
         >
-          <h1 className="text-3xl sm:text-4xl lg:text-5xl font-bold text-white mb-4">
-            仪表板
+          <h1 className="text-3xl sm:text-4xl lg:text-5xl font-bold text-white">
+            {(() => {
+              const hour = new Date().getHours();
+              if (hour >= 5 && hour < 12) return '早上好';
+              if (hour >= 12 && hour < 18) return '下午好';
+              if (hour >= 18 && hour < 22) return '晚上好';
+              return '夜深了';
+            })()}，{session.user.name}
           </h1>
-          <p className="text-white/60">欢迎回来，{session.user.name}</p>
         </motion.div>
 
         {/* User Info Card */}
@@ -112,50 +117,67 @@ export default function DashboardPage() {
           </GlowCard>
         </motion.div>
 
-        {/* Tools Quick Access */}
+        {/* Tools Section */}
         <motion.div
           className="max-w-4xl mx-auto"
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8, delay: 0.4 }}
         >
-          <h2 className="text-2xl font-bold text-white mb-6 text-center">快捷工具</h2>
-          <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
+          <div className="flex flex-wrap justify-center gap-4">
             {/* Life Countdown Tool */}
             <GlowCard
-              className="bg-black/40 backdrop-blur-sm p-6 cursor-pointer hover:bg-black/50 transition-all duration-300"
+              className="bg-black/40 backdrop-blur-sm p-6 cursor-pointer hover:bg-black/50 transition-all duration-300 group w-full sm:w-[calc(50%-0.5rem)] lg:w-[calc(33.333%-0.667rem)] max-w-xs"
               onClick={() => router.push('/tools/life-countdown')}
             >
-              <div className="flex items-start gap-4">
-                <div className="flex-shrink-0 w-12 h-12 rounded-lg bg-gradient-to-br from-purple-500/20 to-pink-500/20 flex items-center justify-center">
-                  <svg className="w-6 h-6 text-purple-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <div className="flex flex-col items-center text-center gap-4">
+                <div className="w-14 h-14 rounded-xl bg-gradient-to-br from-purple-500/20 to-pink-500/20 flex items-center justify-center group-hover:scale-110 transition-transform duration-300">
+                  <svg className="w-7 h-7 text-purple-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" />
                   </svg>
                 </div>
-                <div className="flex-1">
-                  <h3 className="text-lg font-semibold text-white mb-2">人生倒计时</h3>
-                  <p className="text-sm text-white/60">可视化你的人生时间，珍惜每一刻</p>
-                </div>
+                <h3 className="text-base font-semibold text-white">人生倒计时</h3>
               </div>
             </GlowCard>
 
             {/* Asset Allocation Tool */}
             <GlowCard
-              className="bg-black/40 backdrop-blur-sm p-6 cursor-pointer hover:bg-black/50 transition-all duration-300"
+              className="bg-black/40 backdrop-blur-sm p-6 cursor-pointer hover:bg-black/50 transition-all duration-300 group w-full sm:w-[calc(50%-0.5rem)] lg:w-[calc(33.333%-0.667rem)] max-w-xs"
               onClick={() => router.push('/tools/asset-allocation')}
             >
-              <div className="flex items-start gap-4">
-                <div className="flex-shrink-0 w-12 h-12 rounded-lg bg-gradient-to-br from-blue-500/20 to-cyan-500/20 flex items-center justify-center">
-                  <svg className="w-6 h-6 text-blue-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <div className="flex flex-col items-center text-center gap-4">
+                <div className="w-14 h-14 rounded-xl bg-gradient-to-br from-blue-500/20 to-cyan-500/20 flex items-center justify-center group-hover:scale-110 transition-transform duration-300">
+                  <svg className="w-7 h-7 text-blue-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z" />
                   </svg>
                 </div>
-                <div className="flex-1">
-                  <h3 className="text-lg font-semibold text-white mb-2">资产配置</h3>
-                  <p className="text-sm text-white/60">管理和优化你的投资组合配置</p>
-                </div>
+                <h3 className="text-base font-semibold text-white">资产配置</h3>
               </div>
             </GlowCard>
+          </div>
+        </motion.div>
+
+        {/* Footer Links */}
+        <motion.div
+          className="max-w-4xl mx-auto mt-16 text-center"
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          transition={{ duration: 0.8, delay: 0.6 }}
+        >
+          <div className="flex items-center justify-center gap-6 text-sm">
+            <button
+              onClick={() => router.push('/privacy')}
+              className="cursor-can-hover text-white/60 hover:text-white transition-colors"
+            >
+              隐私政策
+            </button>
+            <span className="text-white/30">•</span>
+            <button
+              onClick={() => router.push('/terms')}
+              className="cursor-can-hover text-white/60 hover:text-white transition-colors"
+            >
+              服务条款
+            </button>
           </div>
         </motion.div>
       </div>
