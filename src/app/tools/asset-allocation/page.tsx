@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useRef } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { useSession } from 'next-auth/react';
 import { usePageTitle } from '@/hooks/use-page-title';
@@ -56,6 +56,9 @@ export default function AssetAllocationPage() {
   const [copySuccess, setCopySuccess] = useState(false);
   const [showCelebrityDropdown, setShowCelebrityDropdown] = useState(false);
   const [isSyncing, setIsSyncing] = useState(false);
+
+  // 使用 ref 跟踪是否是初始加载，避免触发不必要的同步
+  const isInitialLoadRef = useRef(true);
 
   // 当前查看的资产列表
   const isViewingMy = currentViewId === 'my';
@@ -120,6 +123,12 @@ export default function AssetAllocationPage() {
 
   // 保存到 localStorage 和数据库
   useEffect(() => {
+    // 跳过初始加载时的同步
+    if (isInitialLoadRef.current) {
+      isInitialLoadRef.current = false;
+      return;
+    }
+
     // 总是保存到 localStorage
     setLocalStorage(STORAGE_KEY, {
       myAssets,
