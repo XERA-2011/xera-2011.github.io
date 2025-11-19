@@ -1,40 +1,40 @@
 # 应用文
 
-## An email to a language school asking about English courses and prices
-- 一封致语言学校的电子邮件，询问英语课程和价格
+## An email applying for a weekend job at a bookshop
+- 一封申请书店周末工作的邮件
 
-**正文**：
+**正文**:
 
-Dear Sir/Madam,
+Dear Sir or Madam,
 
-I am writing to inquire about the English courses offered at your school. I am a student hoping to improve my general English skills, especially my speaking and listening. I would like to know if you have any courses suitable for my level, perhaps B1 or B2.
+I am writing to apply for the weekend job at your bookshop, which I saw advertised in the local newspaper.
 
-Could you please provide information on the types of courses available, such as part-time or intensive options? I would also appreciate details on course start dates, durations, and, most importantly, the tuition fees. Are there any discounts for students? Finally, please let me know about the application process.
+I am a sixteen-year-old student and an enthusiastic reader. I have always loved books and spending time in bookshops. I believe my passion for literature would make me a great fit for your team. I am a responsible and friendly person, and I enjoy helping people, so I am confident I can provide excellent service to your customers. I am available to work every Saturday and Sunday.
 
-Thank you for your time and I look forward to your reply.
+I have attached my CV for your consideration. I look forward to hearing from you soon.
 
 Yours faithfully,
-[Your Name]
+Chris Green
 
-- 尊敬的先生/女士，
-- 我写这封信是为了询问贵校提供的英语课程。我是一名学生，希望提高我的综合英语能力，特别是口语和听力。我想知道您是否有适合我水平的课程，可能是B1或B2。
-- 请您提供有关现有课程类型的信息，例如兼职或强化课程选项。我还会感谢您提供课程开课日期、持续时间以及最重要的是学费的详细信息。学生是否有任何折扣？最后，请告诉我申请流程。
-- 感谢您的时间，期待您的回复。
-- 您忠实的，
-- [你的名字]
+- 尊敬的先生/女士：
+- 我写信是为了申请贵书店的周末工作，我是在当地报纸上看到这则招聘广告的。
+- 我是一名十六岁的学生，也是一位热情的读者。我一直很喜欢书籍和在书店里度过的时光。我相信我对文学的热情会让我非常适合你们的团队。我是一个有责任心且友好的人，并且乐于助人，所以我相信我能为顾客提供优质的服务。我每周六和周日都有空工作。
+- 随信附上我的简历供您参考。期待能尽快收到您的回复。
+- 此致，
+- 克里斯·格林
 
 ---
 
 # 记叙文/短文
 
-## An article explaining how students can help protect the environment
-- 一篇解释学生如何帮助保护环境的文章
+## An article giving advice on how to make new friends
+- 一篇关于如何结交新朋友的建议文章
 
-**正文**：
+**正文**:
 
-Protecting our environment is crucial, and students can play a significant role. Firstly, reducing waste is essential. Students can use reusable water bottles and bags instead of disposable ones. Recycling paper, plastic, and glass at school and home also makes a big difference.
+Making new friends can feel challenging, but it doesn't have to be! Here are some simple tips to help you.
 
-Secondly, conserving energy is vital. Remember to switch off lights and unplug electronic devices when not in use. Walking or cycling to school instead of using cars can reduce carbon emissions. Lastly, joining school environmental clubs or participating in local clean-up events helps create a healthier planet. Every small action counts towards a greener future.
+First, get involved in activities you enjoy. Joining a club, a sports team, or a volunteer group is a fantastic way to meet people who share your interests. When you see a familiar face, be brave and say hello. A simple smile can make a big difference. Ask them questions about themselves; people usually enjoy talking about their hobbies. Finally, be a good friend yourself. Be a supportive listener and be kind. Friendship takes time, so be patient.
 
-- 保护我们的环境至关重要，学生可以在其中发挥重要作用。首先，减少浪费是必不可少的。学生可以使用可重复使用的水瓶和袋子，而不是一次性的。在学校和家里回收纸张、塑料和玻璃也能带来很大的改变。
-- 其次，节约能源至关重要。请记住在不使用时关掉电灯并拔掉电子设备的插头。步行或骑自行车上学而不是开车可以减少碳排放。最后，加入学校环保俱乐部或参与当地的清洁活动有助于创造一个更健康的地球。每一个小行动都为更绿色的未来做出了贡献。
+- 结交新朋友可能感觉很有挑战性，但其实不必如此！这里有一些简单的建议可以帮助你。
+- 首先，参与你喜欢的活动。加入一个俱乐部、运动队或志愿者团体是认识与你有共同兴趣的人的绝佳方式。当你看到熟悉的面孔时，勇敢地上前打个招呼。一个简单的微笑就能带来很大的不同。问他们一些关于他们自己的问题；人们通常喜欢谈论自己的爱好。最后，自己也要成为一个好朋友。做一个善于倾听、待人友善的人。友谊需要时间，所以请保持耐心。
