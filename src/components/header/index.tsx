@@ -64,7 +64,7 @@ const Header = ({ loader, userAuth }: HeaderProps) => {
             </svg>
           </Link>
 
-          <div onClick={(e) => e.stopPropagation()}>
+          <div onClick={(e) => e.stopPropagation()} className="flex items-center justify-center">
             <ThemeToggle />
           </div>
 
