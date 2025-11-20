@@ -123,7 +123,7 @@ export default function Time() {
             >
               {/* 日期 */}
               <div className="absolute top-[58%] left-1/2 -translate-x-1/2 z-[5]">
-                <span className="text-muted-foreground text-[8px] sm:text-[10px] font-light tracking-tight whitespace-nowrap">
+                <span className="text-muted-foreground text-[8px] sm:text-[10px] font-light whitespace-nowrap">
                   {currentTime.year}.{formatNumber(currentTime.month)}.{formatNumber(currentTime.day)}
                 </span>
               </div>
