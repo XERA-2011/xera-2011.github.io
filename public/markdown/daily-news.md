@@ -1,60 +1,60 @@
 # Global Breaking News TOP10
 
-**Date**: 2025年11月19日
-**Update Time**: 04:18 UTC
+**Date**: 2025年11月20日
+**Update Time**: 04:17 UTC
 **AI Model**: Google Gemini / Google Gemini
 
 ---
 
-### 1. **Israeli Airstrike Kills 13 in Lebanon Refugee Camp** / **以色列空袭黎巴嫩难民营，造成13人死亡**
-- **Time**: 2025-11-19
-- **Content**: An Israeli airstrike on a Palestinian refugee camp in southern Lebanon has resulted in the deaths of at least 13 people, with numerous others wounded. The attack has heightened tensions in the region. / 以色列对黎巴嫩南部一处巴勒斯坦难民营发动空袭，导致至少13人死亡，多人受伤。此次袭击加剧了地区紧张局势。
-- **Source**: Al Jazeera
-
-### 2. **UN Security Council Endorses Gaza Peace Plan** / **联合国安理会投票支持加沙和平计划**
-- **Time**: 2025-11-19
-- **Content**: The United Nations Security Council has voted to endorse a Gaza peace plan, aimed at transforming the current fragile ceasefire into a lasting peace agreement. / 联合国安理会投票通过一项加沙和平计划，旨在将当前脆弱的停火协议转变为持久的和平协议。
+### 1. **Deadly Russian Attack in Ukraine** / **俄罗斯对乌克兰发动致命袭击**
+- **Time**: 2025-11-20
+- **Content**: A Russian drone and missile attack on Ukraine's western city of Ternopil has killed at least 25 people, including three children. This comes as Ukrainian President Zelenskyy meets with Turkish President Erdogan. / 俄罗斯无人机和导弹袭击了乌克兰西部城市捷尔诺波尔，造成至少25人死亡，其中包括3名儿童。与此同时，乌克兰总统泽连斯基正在与土耳其总统埃尔多安举行会晤。
 - **Source**: Associated Press
 
-### 3. **West Bank Settler Violence Surges After Ceasefire** / **停火后约旦河西岸定居者暴力事件激增**
-- **Time**: 2025-11-19
-- **Content**: Following the recent Gaza ceasefire, there has been a significant surge in violence by settlers in the West Bank, leading to increased instability and clashes. / 在最近的加沙停火之后，约旦河西岸的定居者暴力事件大幅增加，导致不稳定和冲突加剧。
+### 2. **US and Russia Draft Ukraine Peace Plan** / **美国和俄罗斯起草乌克兰和平计划**
+- **Time**: 2025-11-20
+- **Content**: US and Russian officials have reportedly drafted a plan to end the Ukraine war, based on capitulation from Kyiv. / 据报道，美国和俄罗斯官员起草了一份结束乌克兰战争的计划，该计划以基辅投降为基础。
 - **Source**: The Guardian
 
-### 4. **Poland Accuses Ukrainians of Sabotage for Russia** / **波兰指控为俄罗斯工作的乌克兰人从事破坏活动**
-- **Time**: 2025-11-19
-- **Content**: Poland has alleged that Ukrainians working for Russia were behind recent railway explosions. Two saboteurs reportedly crossed the border from Belarus to carry out the attack. / 波兰声称，为俄罗斯工作的乌克兰人是近期铁路爆炸事件的幕后黑手。据报道，两名破坏分子从白俄罗斯越境发动袭击。
-- **Source**: The Guardian
-
-### 5. **EU Seeks UK Budget Contribution for Closer Ties** / **欧盟寻求英国预算贡献以换取更紧密关系**
-- **Time**: 2025-11-19
-- **Content**: The European Union has reiterated its stance that the United Kingdom would need to contribute to the EU budget in exchange for establishing closer political and economic ties. / 欧盟重申其立场，即英国需要为欧盟预算做出贡献，以换取建立更紧密的政治和经济关系。
-- **Source**: The Guardian
-
-### 6. **Mexican President Dismisses Trump's Troop Threat** / **墨西哥总统驳斥特朗普的军队威胁**
-- **Time**: 2025-11-19
-- **Content**: Mexican President Claudia Sheinbaum has firmly dismissed threats from Donald Trump about sending US troops to Mexico, stating unequivocally, "we do not want intervention." / 墨西哥总统克劳迪娅·辛鲍姆坚决驳斥了唐纳德·特朗普关于向墨西哥派遣美军的威胁，明确表示“我们不希望干预”。
+### 3. **Israeli strikes kill at least 27 in Gaza despite truce** / **尽管有休战协议，以色列的罢工在加沙造成至少27人死亡**
+- **Time**: 2025-11-20
+- **Content**: Israeli strikes have killed at least 27 people in Gaza despite a fragile truce, with Gaza's Health Ministry reporting 77 wounded. / 尽管达成了脆弱的休战协议，以色列的袭击仍在加沙造成至少27人死亡，加沙卫生部报告有77人受伤。
 - **Source**: Al Jazeera
 
-### 7. **US Congress Passes Bill to Release "Epstein Files"** / **美国国会通过法案，公布“爱泼斯坦档案”**
-- **Time**: 2025-11-19
-- **Content**: The U.S. Congress has passed a bill that mandates the release of the "Epstein files." The bill has been sent to President Trump, who is expected to sign it into law. / 美国国会通过了一项法案，要求公布“爱泼斯坦档案”。该法案已送交特朗普总统，预计他将签署成为法律。
+### 4. **Trump Signs Bill to Release Jeffrey Epstein Case Files** / **特朗普签署法案公布杰弗里·爱泼斯坦案卷宗**
+- **Time**: 2025-11-20
+- **Content**: Donald Trump has signed a bill to release the Jeffrey Epstein case files. The US House passed the legislation with a 427-1 vote, and the Senate later approved it unanimously. / 唐纳德·特朗普签署了一项法案，公布杰弗里·爱泼斯坦的案件档案。美国众议院以427票对1票通过了该法案，参议院随后也一致通过。
 - **Source**: Business Standard
 
-### 8. **Ousted Bangladesh PM Sentenced to Death** / **被罢免的孟加拉国总理被判处死刑**
-- **Time**: 2025-11-19
-- **Content**: Sheikh Hasina, the ousted Prime Minister of Bangladesh, has been sentenced to death for crimes against humanity, a decision that has sparked significant controversy and political unrest. / 孟加拉国被罢免的总理谢赫·哈西娜因危害人类罪被判处死刑，这一判决引发了巨大的争议和政治动荡。
-- **Source**: Global News
+### 5. **EU boosts military mobility to deploy troops faster** / **欧盟加强军事机动性以加快军队部署**
+- **Time**: 2025-11-20
+- **Content**: With an eye on Russia, the EU is looking to make it easier to deploy tanks and troops at short notice across Europe. / 鉴于俄罗斯的形势，欧盟正寻求更便捷地在欧洲各地快速部署坦克和军队。
+- **Source**: Associated Press
 
-### 9. **Major Cloudflare Outage Disrupts Global Internet Services** / **Cloudflare大规模中断，扰乱全球互联网服务**
-- **Time**: 2025-11-19
-- **Content**: A significant outage at Cloudflare has caused widespread disruptions across the internet, affecting major websites and online services including X, ChatGPT, and Google Cloud. / Cloudflare的一次严重中断导致互联网大范围瘫痪，影响了包括X、ChatGPT和谷歌云在内的主要网站和在线服务。
+### 6. **Turkey to host COP31 climate talks in 2026** / **土耳其将于2026年主办COP31气候谈判**
+- **Time**: 2025-11-20
+- **Content**: Turkey has won the bid to host COP31 in Antalya, following an agreement with Australia. / 继与澳大利亚达成协议后，土耳其成功申办在安塔利亚举办COP31。
+- **Source**: Associated Press
+
+### 7. **US charges ex-Olympic snowboarder with murder of witness** / **美国指控前奥运滑雪板运动员谋杀证人**
+- **Time**: 2025-11-20
+- **Content**: The US has charged a former Olympic snowboarder, who allegedly became a drug kingpin, with the murder of a witness. / 美国指控一名前奥运滑雪板运动员谋杀一名证人，据称他已成为一名大毒枭。
+- **Source**: The Guardian
+
+### 8. **UK accuses Russian spy ship of pointing lasers at RAF pilots** / **英国指控俄罗斯间谍船向皇家空军飞行员照射激光**
+- **Time**: 2025-11-20
+- **Content**: The UK has accused a Russian spy ship of pointing lasers at RAF pilots who were observing the vessel. / 英国指控一艘俄罗斯间谍船在皇家空军飞行员观察该船时向他们照射激光。
 - **Source**: The Hindu
 
-### 10. **Gustav Klimt Portrait Sells for Record $236.4 Million** / **古斯塔夫·克里姆特肖像画以2.364亿美元创纪录高价售出**
-- **Time**: 2025-11-19
-- **Content**: A portrait by Austrian painter Gustav Klimt has been sold at auction for $236.4 million, making it the second most expensive artwork ever sold at auction. / 奥地利画家古斯塔夫·克里姆特的一幅肖像画在拍卖会上以2.364亿美元的价格售出，成为有史以来第二昂贵的拍卖艺术品。
-- **Source**: The Guardian
+### 9. **Brazil's Lula joins UN climate talks, but major deal elusive** / **巴西总统卢拉参加联合国气候谈判，但重大协议仍遥遥无期**
+- **Time**: 2025-11-20
+- **Content**: Brazil's President Lula has joined negotiators at UN climate talks, but a deal on major issues has not yet been reached. / 巴西总统卢拉已加入联合国气候谈判的谈判代表行列，但尚未就重大问题达成协议。
+- **Source**: Al Jazeera
+
+### 10. **Trump welcomes Saudi crown prince to White House** / **特朗普在白宫迎接沙特王储**
+- **Time**: 2025-11-20
+- **Content**: Donald Trump has welcomed Saudi Crown Prince Mohammed bin Salman at the White House, amid diplomatic shifts in the region. Trump also stated that the Saudi Crown Prince urged him to take action to help end Sudan's civil war. / 在该地区外交格局变化的背景下，唐纳德·特朗普在白宫迎接了沙特王储穆罕默德·本·萨勒曼。特朗普还表示，沙特王储敦促他采取行动，帮助结束苏丹的内战。
+- **Source**: Fox News
 
 ---
 
