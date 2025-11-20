@@ -4,7 +4,6 @@ import { useState, useCallback, useEffect } from 'react';
 import { motion } from 'framer-motion';
 import Image from 'next/image';
 import { cn } from '@/utils/cn';
-import { getApiUrl } from '@/utils/api';
 
 interface JokeCardProps {
   theme?: string;
@@ -52,8 +51,7 @@ export default function JokeCard({
       theme: currentTheme,
     });
     // 添加刷新 key 来强制刷新
-    const endpoint = `/api/joke?${params.toString()}&r=${refreshKey}`;
-    return getApiUrl(endpoint);
+    return `/api/joke?${params.toString()}&r=${refreshKey}`;
   }, [currentTheme, refreshKey, isMounted]);
 
   return (

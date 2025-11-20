@@ -43,7 +43,7 @@ export default function Time() {
         marker.style.textAlign = 'center';
 
         const span = document.createElement('span');
-        span.className = `block mx-auto ${i % 5 === 0 ? 'w-[1.5px] h-[4%] bg-white' : 'w-[1px] h-[3%] bg-[#444444]'}`;
+        span.className = `block mx-auto ${i % 5 === 0 ? 'w-[1.5px] h-[4%] bg-foreground' : 'w-[1px] h-[3%] bg-border'}`;
 
         marker.appendChild(span);
         clock.appendChild(marker);
@@ -119,36 +119,27 @@ export default function Time() {
             {/* 时钟表盘 */}
             <div
               ref={clockRef}
-              className="relative w-full h-full rounded-full bg-[#0a0a0a] flex items-center justify-center"
-              style={{
-                boxShadow: `
-                  0 0 20px rgba(255, 255, 255, 0.15),
-                  0 0 40px rgba(255, 255, 255, 0.1),
-                  0 0 60px rgba(255, 255, 255, 0.05),
-                  inset 0 0 10px rgba(0, 0, 0, 0.8),
-                  inset 0 0 20px rgba(255, 255, 255, 0.05)
-                `
-              }}
+              className="relative w-full h-full rounded-full bg-card border border-border flex items-center justify-center shadow-lg"
             >
               {/* 日期 */}
               <div className="absolute top-[58%] left-1/2 -translate-x-1/2 z-[5]">
-                <span className="text-white/70 text-[8px] sm:text-[10px] font-light tracking-tight whitespace-nowrap">
+                <span className="text-muted-foreground text-[8px] sm:text-[10px] font-light tracking-tight whitespace-nowrap">
                   {currentTime.year}.{formatNumber(currentTime.month)}.{formatNumber(currentTime.day)}
                 </span>
               </div>
 
               {/* 中心圆点 */}
               <div
-                className="absolute w-[4%] h-[4%] bg-white rounded-full z-[13]"
+                className="absolute w-[4%] h-[4%] bg-foreground rounded-full z-[13]"
                 style={{
-                  boxShadow: '0 0 4px rgba(255, 255, 255, 0.4)'
+                  boxShadow: '0 0 4px hsl(var(--foreground) / 0.4)'
                 }}
               />
 
               {/* 时针 */}
               <div
                 ref={hourHandRef}
-                className="absolute bottom-1/2 left-1/2 w-[3px] h-[23%] bg-white z-10"
+                className="absolute bottom-1/2 left-1/2 w-[3px] h-[23%] bg-foreground z-10"
                 style={{
                   transformOrigin: 'bottom center',
                   marginLeft: '-1.5px'
@@ -158,7 +149,7 @@ export default function Time() {
               {/* 分针 */}
               <div
                 ref={minHandRef}
-                className="absolute bottom-1/2 left-1/2 w-[2px] h-[31%] bg-white z-[11]"
+                className="absolute bottom-1/2 left-1/2 w-[2px] h-[31%] bg-foreground z-[11]"
                 style={{
                   transformOrigin: 'bottom center',
                   marginLeft: '-1px'
@@ -168,13 +159,13 @@ export default function Time() {
               {/* 秒针 */}
               <div
                 ref={secHandRef}
-                className="absolute bottom-1/2 left-1/2 w-[1px] h-[37%] bg-[#aaaaaa] z-[12]"
+                className="absolute bottom-1/2 left-1/2 w-[1px] h-[37%] bg-muted-foreground z-[12]"
                 style={{
                   transformOrigin: 'bottom center',
                   marginLeft: '-0.5px'
                 }}
               >
-                <div className="absolute bottom-[-6%] left-[-1.5px] w-[4px] h-[6%] bg-[#aaaaaa]" />
+                <div className="absolute bottom-[-6%] left-[-1.5px] w-[4px] h-[6%] bg-muted-foreground" />
               </div>
             </div>
           </div>
@@ -183,7 +174,7 @@ export default function Time() {
 
       {/* 时间 - 重点显示 */}
       <motion.div
-        className="flex justify-center items-center text-white"
+        className="flex justify-center items-center"
         initial={{ opacity: 0, y: 30 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ delay: 1.0, duration: 0.6 }}
@@ -192,7 +183,7 @@ export default function Time() {
           {/* 小时 */}
           <div className="relative">
             <motion.span
-              className="text-6xl sm:text-7xl lg:text-8xl font-bold bg-gradient-to-b from-white to-white/70 bg-clip-text text-transparent tabular-nums"
+              className="text-6xl sm:text-7xl lg:text-8xl font-bold bg-gradient-to-b from-foreground to-foreground/70 bg-clip-text text-transparent tabular-nums"
               key={`hours-${currentTime.hours}`}
               initial={{ scale: 1.1 }}
               animate={{ scale: 1 }}
@@ -203,14 +194,14 @@ export default function Time() {
           </div>
 
           {/* 分隔符 */}
-          <motion.span className="text-5xl sm:text-6xl lg:text-7xl text-white/60">
+          <motion.span className="text-5xl sm:text-6xl lg:text-7xl text-muted-foreground">
             :
           </motion.span>
 
           {/* 分钟 */}
           <div className="relative">
             <motion.span
-              className="text-6xl sm:text-7xl lg:text-8xl font-bold bg-gradient-to-b from-white to-white/70 bg-clip-text text-transparent tabular-nums"
+              className="text-6xl sm:text-7xl lg:text-8xl font-bold bg-gradient-to-b from-foreground to-foreground/70 bg-clip-text text-transparent tabular-nums"
               key={`minutes-${currentTime.minutes}`}
               initial={{ scale: 1.1 }}
               animate={{ scale: 1 }}
@@ -221,14 +212,14 @@ export default function Time() {
           </div>
 
           {/* 分隔符 */}
-          <motion.span className="text-5xl sm:text-6xl lg:text-7xl text-white/60">
+          <motion.span className="text-5xl sm:text-6xl lg:text-7xl text-muted-foreground">
             :
           </motion.span>
 
           {/* 秒 */}
           <div className="relative">
             <motion.span
-              className="text-6xl sm:text-7xl lg:text-8xl font-bold bg-gradient-to-b from-white via-white/90 to-white/70 bg-clip-text text-transparent tabular-nums"
+              className="text-6xl sm:text-7xl lg:text-8xl font-bold bg-gradient-to-b from-foreground via-foreground/90 to-foreground/70 bg-clip-text text-transparent tabular-nums"
               key={`seconds-${currentTime.seconds}`}
               initial={{ scale: 1.2 }}
               animate={{ scale: 1 }}

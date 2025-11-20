@@ -1,20 +1,24 @@
 "use client";
 
-import { useEffect, useRef, useState } from 'react';
+import { useRef, useState, useEffect } from 'react';
 import { motion } from 'framer-motion';
 import Image from 'next/image';
+import { useTheme } from 'next-themes';
 import Time from '@/components/ui/Time';
-import { getApiUrl } from '@/utils/api';
 
 export default function HeroSection() {
   const containerRef = useRef<HTMLDivElement>(null);
+  const { theme, resolvedTheme } = useTheme();
+  const [mounted, setMounted] = useState(false);
 
-  // 根据环境选择 SVG 源
-  const [snakeSvgSrc, setSnakeSvgSrc] = useState('');
-
+  // 等待客户端挂载后再使用主题
   useEffect(() => {
-    setSnakeSvgSrc(getApiUrl('/api/github-snake'));
+    setMounted(true);
   }, []);
+
+  // 根据主题获取对应的 SVG
+  const currentTheme = mounted ? (resolvedTheme || theme || 'dark') : 'dark';
+  const snakeSvgSrc = `/api/github-snake?theme=${currentTheme}`;
 
   return (
     <section
@@ -30,12 +34,14 @@ export default function HeroSection() {
 
       {snakeSvgSrc && (
         <motion.div
+          key={currentTheme}
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ delay: 1.2, duration: 0.6 }}
           className="mt-2"
         >
           <Image
+            key={currentTheme}
             alt="github-snake"
             src={snakeSvgSrc}
             width={800}

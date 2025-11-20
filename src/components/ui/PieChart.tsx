@@ -182,7 +182,7 @@ export default function PieChart({ assets, totalAmount }: PieChartProps) {
                     animate={{ opacity: 1, scale: 1 }}
                     exit={{ opacity: 0, scale: 0.8 }}
                     transition={{ duration: 0.2 }}
-                    className="bg-black/80 backdrop-blur-sm rounded-xl p-4 border border-white/30 shadow-2xl max-w-[200px]"
+                    className="bg-card/90 backdrop-blur-sm rounded-xl p-4 border border-border shadow-2xl max-w-[200px]"
                   >
                     {(() => {
                       const assetIndex = assets.findIndex(a => a.id === hoveredAsset);
@@ -195,12 +195,12 @@ export default function PieChart({ assets, totalAmount }: PieChartProps) {
                               className="w-3 h-3 rounded-full"
                               style={{ backgroundColor: getColorByIndex(assetIndex) }}
                             />
-                            <div className="text-white font-semibold text-base truncate">{asset.name}</div>
+                            <div className="font-semibold text-base truncate">{asset.name}</div>
                           </div>
-                          <div className="text-white/70 text-xs mb-1">
+                          <div className="text-muted-foreground text-xs mb-1">
                             ¥{asset.amount.toLocaleString('zh-CN', { minimumFractionDigits: 2, maximumFractionDigits: 2 })}
                           </div>
-                          <div className="text-white text-xl font-bold">
+                          <div className="text-xl font-bold">
                             {getPercentage(asset.amount).toFixed(2)}%
                           </div>
                         </div>
@@ -212,7 +212,7 @@ export default function PieChart({ assets, totalAmount }: PieChartProps) {
             </div>
           </>
         ) : (
-          <div className="text-center text-white/50 py-20">
+          <div className="text-center text-muted-foreground py-20">
             <svg className="w-24 h-24 mx-auto mb-4 opacity-30" fill="none" stroke="currentColor" viewBox="0 0 24 24">
               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M11 3.055A9.001 9.001 0 1020.945 13H11V3.055z" />
               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M20.488 9H15V3.512A9.025 9.025 0 0120.488 9z" />
@@ -245,17 +245,17 @@ export default function PieChart({ assets, totalAmount }: PieChartProps) {
                 <div className="flex items-center gap-2">
                   <div
                     className={`w-3 h-3 rounded-full transition-all duration-200 ${isHovered
-                      ? 'border-2 border-white shadow-[0_0_12px_rgba(255,255,255,0.8)]'
-                      : 'border border-white/30'
+                      ? 'border-2 border-primary shadow-[0_0_12px_rgba(128,128,128,0.5)]'
+                      : 'border border-border'
                       }`}
                     style={{ backgroundColor: invertedColor }}
                   />
-                  <span className={`text-white transition-all duration-200 ${isHovered ? 'font-semibold' : ''
+                  <span className={`transition-all duration-200 ${isHovered ? 'font-semibold' : ''
                     }`}>
                     {asset.name}
                   </span>
                 </div>
-                <span className={`text-white/70 transition-all duration-200 ${isHovered ? 'text-white font-semibold' : ''
+                <span className={`text-muted-foreground transition-all duration-200 ${isHovered ? 'text-foreground font-semibold' : ''
                   }`}>
                   {formatPercentage(getPercentage(asset.amount))}
                 </span>

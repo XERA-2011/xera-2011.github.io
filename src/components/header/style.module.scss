@@ -7,7 +7,7 @@
   backdrop-filter: blur(6px);
 
   .background {
-    background-color: #000000;
+    background-color: hsl(var(--background));
     opacity: 0.95;
     height: 100%;
     width: 100%;
@@ -32,7 +32,7 @@
 
     a {
       text-decoration: none;
-      color: #ffffff;
+      color: hsl(var(--foreground));
       text-transform: none;
     }
 
@@ -71,7 +71,7 @@
           content: '';
           height: 1px;
           width: 100%;
-          background-color: #ffffff;
+          background-color: hsl(var(--foreground));
           position: relative;
           display: block;
           transition: all 1s cubic-bezier(0.76, 0, 0.24, 1);

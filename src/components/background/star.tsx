@@ -4,6 +4,7 @@
 
 import React, { useRef, useEffect, useMemo, useCallback } from "react";
 import { useMousePosition } from "@/utils/mouse";
+import { useTheme } from "next-themes";
 
 interface ParticlesProps {
   /** 粒子/星星的数量，默认值为100 */
@@ -45,6 +46,7 @@ export default function Particles({
   starMode = true, // 默认启用星空模式
   colorful = true, // 默认启用彩色模式
 }: ParticlesProps) {
+  const { theme, resolvedTheme } = useTheme();
   const canvasRef = useRef<HTMLCanvasElement>(null);
   const canvasContainerRef = useRef<HTMLDivElement>(null);
   const context = useRef<CanvasRenderingContext2D | null>(null);
@@ -196,6 +198,14 @@ export default function Particles({
     initCanvas();
   }, [refresh]);
 
+  // 主题切换时重新创建所有星星
+  useEffect(() => {
+    if (theme || resolvedTheme) {
+      circles.current = [];
+      initCanvas();
+    }
+  }, [theme, resolvedTheme]);
+
   const resizeCanvas = () => {
     if (canvasContainerRef.current && canvasRef.current && context.current) {
       circles.current.length = 0;
@@ -209,19 +219,38 @@ export default function Particles({
     }
   };
 
-  // 星空颜色调色板 - 更加自然的星空色彩
-  const starColors = useMemo(() => [
-    "#ffffff", // 纯白
-    "#fffaf0", // 花白
-    "#f8f8ff", // 幽灵白
-    "#f0f8ff", // 爱丽丝蓝
-    "#f5f5f5", // 白烟
-    "#fffafa", // 雪白
-    "#ffe4e1", // 薄雾玫瑰
-    "#e6e6fa", // 薰衣草
-    "#b0e0e6", // 粉蓝
-    "#87cefa", // 浅天蓝
-  ], []);
+  // 星空颜色调色板 - 根据主题切换
+  const starColors = useMemo(() => {
+    const currentTheme = resolvedTheme || theme || 'dark';
+
+    if (currentTheme === 'light') {
+      // Light 主题：深色星星，更明显
+      return [
+        "#000000", // 纯黑
+        "#1a1a1a", // 深灰
+        "#2d2d2d", // 炭灰
+        "#404040", // 中灰
+        "#333333", // 深灰
+        "#262626", // 接近黑
+        "#4a4a4a", // 灰色
+        "#1f1f1f", // 深灰黑
+      ];
+    } else {
+      // Dark 主题：浅色星星
+      return [
+        "#ffffff", // 纯白
+        "#fffaf0", // 花白
+        "#f8f8ff", // 幽灵白
+        "#f0f8ff", // 爱丽丝蓝
+        "#f5f5f5", // 白烟
+        "#fffafa", // 雪白
+        "#ffe4e1", // 薄雾玫瑰
+        "#e6e6fa", // 薰衣草
+        "#b0e0e6", // 粉蓝
+        "#87cefa", // 浅天蓝
+      ];
+    }
+  }, [theme, resolvedTheme]);
 
   const circleParams = useCallback((): Circle => {
     const x = Math.floor(Math.random() * canvasSize.current.w);
@@ -383,9 +412,10 @@ export default function Particles({
 
   return (
     <div
-      className={"dark:bg-gradient-to-tl from-black via-zinc-600/20 to-black fixed inset-0 -z-10 animate-fade-in"}
+      className="fixed inset-0 -z-10 animate-fade-in bg-background"
       ref={canvasContainerRef}
       aria-hidden="true"
+      suppressHydrationWarning
     >
       <canvas ref={canvasRef} />
     </div>

@@ -92,10 +92,10 @@ export default function PrivacyPage() {
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8 }}
         >
-          <h1 className="text-3xl sm:text-4xl lg:text-5xl font-bold text-white mb-4">
+          <h1 className="text-3xl sm:text-4xl lg:text-5xl font-bold text-foreground mb-4">
             Privacy Policy
           </h1>
-          <p className="text-white/60">
+          <p className="text-muted-foreground">
             Last Updated: {new Date().toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric' })}
           </p>
         </motion.div>
@@ -106,33 +106,33 @@ export default function PrivacyPage() {
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8, delay: 0.2 }}
         >
-          <GlowCard className="bg-black/40 backdrop-blur-sm p-8 sm:p-12">
+          <GlowCard className="bg-card/40 backdrop-blur-sm p-8 sm:p-12">
             <div className="space-y-10">
               {sections.map((section, index) => (
                 <div key={index} className="space-y-4">
-                  <h2 className="text-xl sm:text-2xl font-semibold text-white">
+                  <h2 className="text-xl sm:text-2xl font-semibold text-foreground">
                     {section.title}
                   </h2>
-                  <p className="text-white/80 leading-relaxed">
+                  <p className="text-foreground/80 leading-relaxed">
                     {section.content}
                   </p>
                   {section.items.length > 0 && (
                     <ul className="space-y-2 pl-6">
                       {section.items.map((item, itemIndex) => (
-                        <li key={itemIndex} className="text-white/70 relative before:content-['•'] before:absolute before:-left-4 before:text-white/50">
+                        <li key={itemIndex} className="text-muted-foreground relative before:content-['•'] before:absolute before:-left-4 before:text-muted-foreground/50">
                           {item}
                         </li>
                       ))}
                     </ul>
                   )}
                   {section.link && (
-                    <p className="text-white/80">
+                    <p className="text-foreground/80">
                       We recommend reviewing the{' '}
                       <Link
                         href={section.link.url}
                         target="_blank"
                         rel="noopener noreferrer"
-                        className="text-white hover:text-white/80 underline underline-offset-4 transition-colors cursor-can-hover"
+                        className="text-foreground hover:text-foreground/80 underline underline-offset-4 transition-colors cursor-can-hover"
                       >
                         {section.link.text}
                       </Link>
@@ -166,7 +166,7 @@ export default function PrivacyPage() {
         >
           <Link
             href="/"
-            className="cursor-can-hover inline-flex items-center gap-2 text-white/60 hover:text-white transition-colors"
+            className="cursor-can-hover inline-flex items-center gap-2 text-muted-foreground hover:text-foreground transition-colors"
           >
             <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M10 19l-7-7m0 0l7-7m-7 7h18" />

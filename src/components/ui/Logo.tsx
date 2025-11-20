@@ -33,8 +33,8 @@ const sizeClasses = {
 };
 
 const colorClasses = {
-  white: 'text-white',
-  black: 'text-black',
+  white: 'text-foreground dark:text-background',
+  black: 'text-background dark:text-foreground',
   inherit: ''
 };
 

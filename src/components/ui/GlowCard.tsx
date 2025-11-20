@@ -85,7 +85,9 @@ const GlowCard: React.FC<GlowCardProps> = ({
     <div
       ref={cardRef}
       className={cn(
-        'relative flex flex-col justify-between overflow-hidden rounded-xl bg-black border border-white/20 transition-all duration-300',
+        'relative flex flex-col justify-between overflow-hidden rounded-xl',
+        'bg-card border border-border transition-all duration-300',
+        'hover:border-border/50',
         className
       )}
       style={
@@ -100,7 +102,7 @@ const GlowCard: React.FC<GlowCardProps> = ({
       <div className="absolute inset-0 pointer-events-none transition-opacity duration-150 ease-out rounded-xl">
         <div className="relative w-full h-full rounded-xl glow-effect"></div>
       </div>
-      <div className="relative z-10 flex flex-col justify-between text-white">
+      <div className="relative z-10 flex flex-col justify-between text-card-foreground">
         {children}
       </div>
     </div>

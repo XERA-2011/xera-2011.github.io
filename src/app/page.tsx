@@ -9,7 +9,7 @@ import SmoothScroll from '@/components/SmoothScroll';
 
 // Fallback components for when animations are loading
 const FallbackSection = () => (
-  <div className="animate-pulse bg-white/5 rounded-xl h-40 w-full"></div>
+  <div className="animate-pulse bg-muted/50 rounded-xl h-40 w-full"></div>
 );
 
 export default function Home() {

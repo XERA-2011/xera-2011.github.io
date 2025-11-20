@@ -5,10 +5,15 @@ import { motion, AnimatePresence } from 'framer-motion';
 import { useSession } from 'next-auth/react';
 import { usePageTitle } from '@/hooks/use-page-title';
 import PieChart from '@/components/ui/PieChart';
-import GlowCard from '@/components/ui/GlowCard';
-import Button from '@/components/ui/Button';
+import { Card, CardContent, CardHeader, CardTitle, CardDescription } from '@/components/ui/card';
+import { Button } from '@/components/ui/button';
+import { Input } from '@/components/ui/input';
+import { Label } from '@/components/ui/label';
+import { Badge } from '@/components/ui/badge';
+import { Separator } from '@/components/ui/separator';
 import { getLocalStorage, setLocalStorage } from '@/utils/storage';
 import { formatCurrency, formatPercentage } from '@/utils/format';
+import { TrendingUp, Copy, Check, Edit, X, ChevronDown, Lock, User, Calendar } from 'lucide-react';
 
 interface Asset {
   id: string;
@@ -286,11 +291,14 @@ export default function AssetAllocationPage() {
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8 }}
         >
-          <h2 className="text-3xl sm:text-4xl lg:text-5xl font-bold text-white mb-4">
-            资产配置占比
-          </h2>
+          <div className="flex items-center justify-center gap-3 mb-4">
+            <TrendingUp className="w-8 h-8 text-primary" />
+            <h2 className="text-3xl sm:text-4xl lg:text-5xl font-bold">
+              资产配置占比
+            </h2>
+          </div>
           {isLoggedIn && syncStatus !== 'idle' && (
-            <div className="flex items-center justify-center gap-2 text-sm text-white/60">
+            <div className="flex items-center justify-center gap-2 text-sm text-muted-foreground">
               {syncStatus === 'syncing' ? (
                 <>
                   <svg className="w-4 h-4 animate-spin" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -300,9 +308,7 @@ export default function AssetAllocationPage() {
                 </>
               ) : (
                 <>
-                  <svg className="w-4 h-4 text-green-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
-                  </svg>
+                  <Check className="w-4 h-4 text-primary" />
                   <span>已同步到云端</span>
                 </>
               )}
@@ -318,33 +324,29 @@ export default function AssetAllocationPage() {
           transition={{ duration: 0.8, delay: 0.1 }}
         >
           {/* 我的配置按钮 */}
-          <button
+          <Button
             onClick={() => setCurrentViewId('my')}
-            className={`px-4 py-2 rounded-lg transition-all ${isViewingMy
-              ? 'bg-white/20 text-white border-2 border-white/40'
-              : 'bg-white/5 text-white/70 border border-white/10 hover:bg-white/10'
-              }`}
+            variant={isViewingMy ? 'default' : 'outline'}
+            className="gap-2"
           >
+            <User className="w-4 h-4" />
             我的资产配置
-          </button>
+          </Button>
 
           {/* 分隔线 */}
-          <div className="h-8 w-px bg-white/20"></div>
+          <Separator orientation="vertical" className="h-8" />
 
           {/* 名人持仓下拉选择器 */}
           <div className="relative z-50">
-            <button
+            <Button
               onClick={() => setShowCelebrityDropdown(!showCelebrityDropdown)}
-              className="px-4 py-2 rounded-lg bg-white/10 border border-white/30 text-white hover:bg-white/15 transition-all flex items-center gap-2"
+              variant="outline"
+              className="gap-2"
             >
-              <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z" />
-              </svg>
+              <Lock className="w-4 h-4" />
               <span>名人持仓参考</span>
-              <svg className={`w-4 h-4 transition-transform ${showCelebrityDropdown ? 'rotate-180' : ''}`} fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
-              </svg>
-            </button>
+              <ChevronDown className={`w-4 h-4 transition-transform ${showCelebrityDropdown ? 'rotate-180' : ''}`} />
+            </Button>
 
             {/* 下拉菜单 */}
             <AnimatePresence>
@@ -358,14 +360,14 @@ export default function AssetAllocationPage() {
                     initial={{ opacity: 0, y: -10 }}
                     animate={{ opacity: 1, y: 0 }}
                     exit={{ opacity: 0, y: -10 }}
-                    className="absolute top-full mt-2 left-0 min-w-[280px] bg-gray-900 border border-white/30 rounded-lg shadow-2xl z-50 overflow-hidden"
+                    className="absolute top-full mt-2 left-0 min-w-[280px] bg-card border border-border rounded-lg shadow-2xl z-50 overflow-hidden"
                   >
                     {isLoadingCelebrity ? (
-                      <div className="px-4 py-8 text-center text-white/50 text-sm">
+                      <div className="px-4 py-8 text-center text-muted-foreground text-sm">
                         加载中...
                       </div>
                     ) : celebrityPortfolios.length === 0 ? (
-                      <div className="px-4 py-8 text-center text-white/50 text-sm">
+                      <div className="px-4 py-8 text-center text-muted-foreground text-sm">
                         暂无数据
                       </div>
                     ) : (
@@ -376,17 +378,20 @@ export default function AssetAllocationPage() {
                             setCurrentViewId(portfolio.id);
                             setShowCelebrityDropdown(false);
                           }}
-                          className={`w-full px-4 py-3 text-left hover:bg-white/15 transition-colors border-b border-white/10 last:border-b-0 ${currentViewId === portfolio.id ? 'bg-white/20 text-white' : 'text-white/80'
+                          className={`w-full px-4 py-3 text-left hover:bg-accent transition-colors border-b border-border last:border-b-0 ${currentViewId === portfolio.id ? 'bg-accent' : ''
                             }`}
                         >
                           <div className="flex items-center justify-between">
                             <div className="font-medium">{portfolio.name}</div>
                             {portfolio.createdAt && (
-                              <div className="text-xs text-white/40">{portfolio.createdAt}</div>
+                              <Badge variant="outline" className="text-xs">
+                                <Calendar className="w-3 h-3 mr-1" />
+                                {portfolio.createdAt}
+                              </Badge>
                             )}
                           </div>
                           {portfolio.description && (
-                            <div className="text-xs text-white/50 mt-1">{portfolio.description}</div>
+                            <div className="text-xs text-muted-foreground mt-1">{portfolio.description}</div>
                           )}
                         </button>
                       ))
@@ -405,78 +410,72 @@ export default function AssetAllocationPage() {
           transition={{ duration: 0.8, delay: 0.2 }}
         >
           {/* 左侧：名人持仓或我的配置编辑 */}
-          <GlowCard className="p-8">
+          <Card>
             {isReadOnly ? (
               /* 对比模式：显示名人持仓饼图 */
-              <div>
-                <div className="mb-4 pb-4 border-b border-white/10">
-                  <h3 className="text-lg font-semibold text-white flex items-center gap-2">
-                    <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z" />
-                    </svg>
+              <>
+                <CardHeader>
+                  <CardTitle className="flex items-center gap-2">
+                    <Lock className="w-5 h-5" />
                     {currentCelebrity?.name}
-                  </h3>
+                  </CardTitle>
                   {currentCelebrity?.description && (
-                    <p className="text-white/60 text-sm mt-2">{currentCelebrity.description}</p>
+                    <CardDescription>{currentCelebrity.description}</CardDescription>
                   )}
                   {currentCelebrity?.createdAt && (
-                    <p className="text-white/50 text-xs mt-2 flex items-center gap-1">
-                      <svg className="w-3 h-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z" />
-                      </svg>
+                    <div className="text-muted-foreground text-xs flex items-center gap-1 mt-2">
+                      <Calendar className="w-3 h-3" />
                       录入时间：{currentCelebrity.createdAt}
-                    </p>
+                    </div>
                   )}
-                </div>
-
-                {/* 名人饼图 */}
-                <PieChart
-                  assets={assets}
-                  totalAmount={totalAmount}
-                />
-              </div>
+                </CardHeader>
+                <CardContent>
+                  {/* 名人饼图 */}
+                  <PieChart
+                    assets={assets}
+                    totalAmount={totalAmount}
+                  />
+                </CardContent>
+              </>
             ) : (
               /* 编辑模式：显示输入表单 */
-              <div>
+              <CardContent className="p-8">
                 {/* 输入表单 */}
                 <div className="space-y-4 mb-6">
                   {editingAsset && (
-                    <div className="bg-white/10 border border-white/30 rounded-lg p-3 mb-2">
+                    <div className="bg-accent border border-border rounded-lg p-3 mb-2">
                       <div className="flex items-center justify-between">
-                        <span className="text-white text-sm">正在编辑资产</span>
-                        <button
+                        <span className="text-sm">正在编辑资产</span>
+                        <Button
+                          variant="ghost"
+                          size="sm"
                           onClick={handleCancelEdit}
-                          className="text-white/70 hover:text-white text-sm"
                         >
                           取消
-                        </button>
+                        </Button>
                       </div>
                     </div>
                   )}
-                  <div>
-                    <label className="block text-white font-medium mb-2">
-                      资产名称
-                    </label>
-                    <input
+                  <div className="space-y-2">
+                    <Label htmlFor="assetName">资产名称</Label>
+                    <Input
+                      id="assetName"
                       type="text"
                       value={assetName}
                       onChange={(e) => setAssetName(e.target.value)}
                       placeholder="例如：股票、债券、现金..."
-                      className="w-full bg-white/10 border border-white/20 rounded-lg px-4 py-3 text-white placeholder-white/50 focus:outline-none focus:border-white/40"
                       onKeyDown={(e) => e.key === 'Enter' && (editingAsset ? handleUpdateAsset() : handleAddAsset())}
                     />
                   </div>
 
-                  <div>
-                    <label className="block text-white font-medium mb-2">
-                      金额
-                    </label>
-                    <input
+                  <div className="space-y-2">
+                    <Label htmlFor="assetAmount">金额</Label>
+                    <Input
+                      id="assetAmount"
                       type="number"
                       value={assetAmount}
                       onChange={(e) => setAssetAmount(e.target.value)}
                       placeholder="请输入金额"
-                      className="w-full bg-white/10 border border-white/20 rounded-lg px-4 py-3 text-white placeholder-white/50 focus:outline-none focus:border-white/40"
                       onKeyDown={(e) => e.key === 'Enter' && (editingAsset ? handleUpdateAsset() : handleAddAsset())}
                       step="0.01"
                       min="0"
@@ -489,7 +488,7 @@ export default function AssetAllocationPage() {
                   <motion.div
                     initial={{ opacity: 0, y: -10 }}
                     animate={{ opacity: 1, y: 0 }}
-                    className="mb-4 p-3 bg-red-500/20 border border-red-500/30 rounded-lg text-red-300 text-sm"
+                    className="mb-4 p-3 bg-destructive/20 border border-destructive/30 rounded-lg text-destructive text-sm"
                   >
                     {error}
                   </motion.div>
@@ -498,8 +497,6 @@ export default function AssetAllocationPage() {
                 {/* 操作按钮 */}
                 <div className="flex gap-4 mb-8">
                   <Button
-                    variant="primary"
-                    size="md"
                     onClick={editingAsset ? handleUpdateAsset : handleAddAsset}
                     className="flex-1"
                   >
@@ -507,22 +504,17 @@ export default function AssetAllocationPage() {
                   </Button>
                   <Button
                     variant="secondary"
-                    size="md"
                     onClick={handleCopyData}
                     disabled={assets.length === 0}
                   >
                     {copySuccess ? (
                       <span className="flex items-center gap-2">
-                        <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
-                        </svg>
+                        <Check className="w-4 h-4" />
                         已复制
                       </span>
                     ) : (
                       <span className="flex items-center gap-2">
-                        <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M8 16H6a2 2 0 01-2-2V6a2 2 0 012-2h8a2 2 0 012 2v2m-6 12h8a2 2 0 002-2v-8a2 2 0 00-2-2h-8a2 2 0 00-2 2v8a2 2 0 002 2z" />
-                        </svg>
+                        <Copy className="w-4 h-4" />
                         复制
                       </span>
                     )}
@@ -531,7 +523,7 @@ export default function AssetAllocationPage() {
 
                 {/* 资产列表 */}
                 <div>
-                  <h3 className="text-lg font-semibold text-white mb-4">
+                  <h3 className="text-lg font-semibold mb-4">
                     资产列表 {assets.length > 0 && `(${assets.length}/15)`}
                   </h3>
                   <div className="space-y-2 max-h-96 overflow-y-auto">
@@ -542,117 +534,110 @@ export default function AssetAllocationPage() {
                           initial={{ opacity: 0, x: -20 }}
                           animate={{ opacity: 1, x: 0 }}
                           exit={{ opacity: 0, x: 20 }}
-                          className={`bg-white/5 rounded-lg p-4 border transition-all ${editingAsset?.id === asset.id
-                            ? 'border-white/50 bg-white/10'
-                            : 'border-white/10'
+                          className={`bg-secondary rounded-lg p-4 border transition-all ${editingAsset?.id === asset.id
+                            ? 'border-primary bg-accent'
+                            : 'border-border'
                             } flex items-center justify-between`}
                         >
                           <div className="flex items-center gap-3 flex-1">
                             <div className="flex-1 min-w-0">
-                              <div className="text-white font-medium truncate">
+                              <div className="font-medium truncate">
                                 {asset.name}
                               </div>
-                              <div className="text-white/60 text-sm">
+                              <div className="text-muted-foreground text-sm">
                                 {formatCurrency(asset.amount)}
                               </div>
                             </div>
                             <div className="text-right">
-                              <div className="text-white font-semibold">
+                              <div className="font-semibold">
                                 {formatPercentage(getPercentage(asset.amount))}
                               </div>
                             </div>
                           </div>
                           <div className="flex items-center gap-2 ml-4">
-                            <button
+                            <Button
+                              variant="ghost"
+                              size="sm"
                               onClick={() => handleEditAsset(asset)}
-                              className="text-white/60 hover:text-white transition-colors cursor-can-hover"
                             >
-                              <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z" />
-                              </svg>
-                            </button>
-                            <button
+                              <Edit className="w-4 h-4" />
+                            </Button>
+                            <Button
+                              variant="ghost"
+                              size="sm"
                               onClick={() => handleRemoveAsset(asset.id)}
-                              className="text-white/60 hover:text-white transition-colors cursor-can-hover"
                             >
-                              <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
-                              </svg>
-                            </button>
+                              <X className="w-4 h-4" />
+                            </Button>
                           </div>
                         </motion.div>
                       ))}
                     </AnimatePresence>
                     {assets.length === 0 && (
-                      <div className="text-center text-white/50 py-8">
+                      <div className="text-center text-muted-foreground py-8">
                         暂无资产，请添加
                       </div>
                     )}
                   </div>
                 </div>
-              </div>
+              </CardContent>
             )}
-          </GlowCard>
+          </Card>
 
           {/* 右侧：我的配置饼图 */}
-          <GlowCard className="p-8">
+          <Card>
             {isReadOnly ? (
               /* 对比模式：显示我的配置饼图 */
-              <div>
-                <div className="mb-4 pb-4 border-b border-white/10">
-                  <h3 className="text-lg font-semibold text-white flex items-center gap-2">
-                    <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z" />
-                    </svg>
+              <>
+                <CardHeader>
+                  <CardTitle className="flex items-center gap-2">
+                    <User className="w-5 h-5" />
                     我的资产配置
-                  </h3>
-                  <p className="text-white/60 text-sm mt-2">我的个人资产配置</p>
+                  </CardTitle>
+                  <CardDescription>我的个人资产配置</CardDescription>
                   {myAssetsUpdatedAt && (
-                    <p className="text-white/50 text-xs mt-2 flex items-center gap-1">
-                      <svg className="w-3 h-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z" />
-                      </svg>
+                    <div className="text-muted-foreground text-xs flex items-center gap-1 mt-2">
+                      <Calendar className="w-3 h-3" />
                       录入时间：{myAssetsUpdatedAt}
-                    </p>
+                    </div>
                   )}
-                </div>
+                </CardHeader>
+                <CardContent>
 
-                {/* 我的总资产 */}
-                {myAssets.length > 0 ? (
-                  <>
-                    {/* 我的饼图 */}
-                    <PieChart
-                      assets={myAssets}
-                      totalAmount={myAssets.reduce((sum, asset) => sum + asset.amount, 0)}
-                    />
-                  </>
-                ) : (
-                  <div className="text-center py-20">
-                    <svg className="w-20 h-20 mx-auto mb-6 text-white/30" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M20 13V6a2 2 0 00-2-2H6a2 2 0 00-2 2v7m16 0v5a2 2 0 01-2 2H6a2 2 0 01-2-2v-5m16 0h-2.586a1 1 0 00-.707.293l-2.414 2.414a1 1 0 01-.707.293h-3.172a1 1 0 01-.707-.293l-2.414-2.414A1 1 0 006.586 13H4" />
-                    </svg>
-                    <p className="text-white/50 text-base mb-5">你还没有配置资产</p>
-                    <Button
-                      variant="primary"
-                      size="sm"
-                      onClick={() => setCurrentViewId('my')}
-                    >
-                      去添加资产
-                    </Button>
-                  </div>
-                )}
-              </div>
+                  {/* 我的总资产 */}
+                  {myAssets.length > 0 ? (
+                    <>
+                      {/* 我的饼图 */}
+                      <PieChart
+                        assets={myAssets}
+                        totalAmount={myAssets.reduce((sum, asset) => sum + asset.amount, 0)}
+                      />
+                    </>
+                  ) : (
+                    <div className="text-center py-20">
+                      <TrendingUp className="w-20 h-20 mx-auto mb-6 text-muted-foreground opacity-30" />
+                      <p className="text-muted-foreground text-base mb-5">你还没有配置资产</p>
+                      <Button
+                        size="sm"
+                        onClick={() => setCurrentViewId('my')}
+                      >
+                        去添加资产
+                      </Button>
+                    </div>
+                  )}
+                </CardContent>
+              </>
             ) : (
               /* 编辑模式：显示当前配置的饼图 */
-              <div>
+              <CardContent>
                 {/* 饼图 */}
                 <PieChart
                   assets={assets}
                   totalAmount={totalAmount}
                 />
-              </div>
+              </CardContent>
             )}
-          </GlowCard>
+          </Card>
         </motion.div>
       </div>
     </div>

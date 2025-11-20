@@ -3,8 +3,7 @@
 import { useState, useRef } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { usePageTitle } from '@/hooks/use-page-title';
-import { getApiUrl } from '@/utils/api';
-import Button from '@/components/ui/Button';
+import { Button } from '@/components/ui/button';
 
 interface BattleLog {
   id: number;
@@ -33,7 +32,7 @@ export default function EndlessPage() {
 
     try {
       // Get battle scene from server
-      const response = await fetch(getApiUrl('/api/endless'));
+      const response = await fetch('/api/endless');
       const result = await response.json();
 
       // Calculate win rate based on current level
@@ -119,27 +118,27 @@ export default function EndlessPage() {
 
         {/* Game Status Panel */}
         <motion.div
-          className="bg-white/5 backdrop-blur-sm rounded-2xl p-6 border border-white/10 mb-6"
+          className="bg-card backdrop-blur-sm rounded-2xl p-6 border border-border mb-6"
           initial={{ opacity: 0, y: 30 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8, delay: 0.1 }}
         >
           <div className="grid grid-cols-3 gap-4">
             <div className="text-center">
-              <div className="text-white/60 text-sm mb-1">Current Level</div>
-              <div className="text-2xl font-bold text-white">
+              <div className="text-muted-foreground text-sm mb-1">Current Level</div>
+              <div className="text-2xl font-bold">
                 Lv.{level}
               </div>
             </div>
             <div className="text-center">
-              <div className="text-white/60 text-sm mb-1">Win Rate</div>
-              <div className="text-2xl font-bold text-yellow-400">
+              <div className="text-muted-foreground text-sm mb-1">Win Rate</div>
+              <div className="text-2xl font-bold text-primary">
                 {currentWinRate}%
               </div>
             </div>
             <div className="text-center">
-              <div className="text-white/60 text-sm mb-1">Battles</div>
-              <div className="text-2xl font-bold text-blue-400">
+              <div className="text-muted-foreground text-sm mb-1">Battles</div>
+              <div className="text-2xl font-bold text-primary">
                 {battleLogs.length}
               </div>
             </div>
@@ -147,13 +146,13 @@ export default function EndlessPage() {
 
           {/* Progress Bar */}
           <div className="mt-6">
-            <div className="flex justify-between text-xs text-white/60 mb-2">
+            <div className="flex justify-between text-xs text-muted-foreground mb-2">
               <span>Progress</span>
               <span>{level}/100</span>
             </div>
-            <div className="w-full h-2 bg-white/10 rounded-full overflow-hidden">
+            <div className="w-full h-2 bg-secondary rounded-full overflow-hidden">
               <motion.div
-                className="h-full bg-gradient-to-r from-blue-500 to-purple-500"
+                className="h-full bg-primary"
                 initial={{ width: 0 }}
                 animate={{ width: `${level}%` }}
                 transition={{ duration: 0.5 }}
@@ -173,12 +172,7 @@ export default function EndlessPage() {
             onClick={startBattle}
             disabled={isBattling || isGameOver || level >= 100}
             size="lg"
-            className={`
-              ${isBattling || isGameOver || level >= 100
-                ? 'bg-white/10 text-white/40 hover:bg-white/10'
-                : 'bg-gradient-to-r from-red-500 to-orange-500 text-white hover:scale-105 hover:shadow-lg hover:shadow-red-500/50 hover:from-red-600 hover:to-orange-600'
-              }
-            `}
+            variant={isBattling || isGameOver || level >= 100 ? "secondary" : "default"}
           >
             {isBattling ? 'Fighting...' : isGameOver ? 'Game Over' : level >= 100 ? 'Max Level' : '⚔️ Start Battle'}
           </Button>
@@ -191,7 +185,7 @@ export default function EndlessPage() {
               <Button
                 onClick={resetGame}
                 size="lg"
-                className="bg-gradient-to-r from-blue-500 to-cyan-500 text-white hover:scale-105 hover:shadow-lg hover:shadow-blue-500/50 hover:from-blue-600 hover:to-cyan-600"
+                variant="outline"
               >
                 🔄 Restart
               </Button>
@@ -201,20 +195,20 @@ export default function EndlessPage() {
 
         {/* Battle Log */}
         <motion.div
-          className="bg-white/5 backdrop-blur-sm rounded-2xl p-6 border border-white/10"
+          className="bg-card backdrop-blur-sm rounded-2xl p-6 border border-border"
           initial={{ opacity: 0, y: 30 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8, delay: 0.3 }}
         >
-          <h2 className="text-xl font-semibold text-white mb-4">Battle Log</h2>
+          <h2 className="text-xl font-semibold mb-4">Battle Log</h2>
 
           <div
             ref={logContainerRef}
-            className="space-y-2 max-h-96 overflow-y-auto pr-2 scrollbar-thin scrollbar-thumb-white/20 scrollbar-track-transparent"
+            className="space-y-2 max-h-96 overflow-y-auto pr-2"
           >
             <AnimatePresence initial={false}>
               {battleLogs.length === 0 ? (
-                <div className="text-center text-white/40 py-8">
+                <div className="text-center text-muted-foreground py-8">
                   Click &quot;Start Battle&quot; to begin your adventure
                 </div>
               ) : (
@@ -228,18 +222,18 @@ export default function EndlessPage() {
                     className={`
                       p-3 rounded-lg border
                       ${log.success
-                        ? 'bg-green-500/10 border-green-500/30 text-green-300'
-                        : 'bg-red-500/10 border-red-500/30 text-red-300'
+                        ? 'bg-primary/10 border-primary/30'
+                        : 'bg-destructive/10 border-destructive/30'
                       }
                     `}
                   >
                     <div className="flex items-start gap-2">
                       <div className="flex-1">
-                        <div className="text-xs opacity-60 mb-1">
+                        <div className="text-xs text-muted-foreground mb-1">
                           Lv.{log.level} - {log.enemyName}
                         </div>
                         {log.description && (
-                          <div className="text-xs opacity-50 mb-1 italic">
+                          <div className="text-xs text-muted-foreground mb-1 italic">
                             {log.description}
                           </div>
                         )}

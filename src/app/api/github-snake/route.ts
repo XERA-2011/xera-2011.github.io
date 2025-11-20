@@ -7,15 +7,28 @@ import { NextResponse } from 'next/server';
  * 原因：部分浏览器的跟踪防护功能会阻止直接访问第三方 CDN (jsdelivr.net)
  * 解决方案：通过服务端 API 代理请求，绕过浏览器的跟踪防护限制
  * 
+ * 支持主题：
+ * - theme=dark (默认): 深色主题
+ * - theme=light: 浅色主题
+ * 
  * 缓存策略：
  * - Next.js 缓存：1 小时 (revalidate: 3600)
  * - 浏览器缓存：1 小时 (Cache-Control)
  */
 
-export async function GET() {
+export async function GET(request: Request) {
   try {
+    // 获取主题参数
+    const { searchParams } = new URL(request.url);
+    const theme = searchParams.get('theme') || 'dark';
+    
+    // 根据主题选择对应的 SVG 文件
+    const svgFile = theme === 'light' 
+      ? 'github-contribution-grid-snake.svg'
+      : 'github-contribution-grid-snake-dark.svg';
+    
     const response = await fetch(
-      'https://cdn.jsdelivr.net/gh/XERA-2011/XERA-2011/profile-snake-contrib/github-contribution-grid-snake-dark.svg',
+      `https://cdn.jsdelivr.net/gh/XERA-2011/XERA-2011/profile-snake-contrib/${svgFile}`,
       {
         next: { revalidate: 3600 } // 缓存 1 小时
       }

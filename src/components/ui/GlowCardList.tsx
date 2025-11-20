@@ -73,10 +73,10 @@ function ItemCard({ item, index }: { item: GlowCardItem; index: number }) {
       <Link href={item.href} className="block h-full no-underline">
         <GlowCard
           spread={80}
-          className="rounded-xl transition duration-300 group h-full overflow-hidden bg-white/5 hover:bg-white/10"
+          className="rounded-xl transition duration-300 group h-full overflow-hidden hover:bg-accent"
         >
           <div className="relative text-center p-6 h-full flex items-center justify-center">
-            <div className="text-xl font-bold text-white group-hover:text-white/90 transition-colors duration-300">
+            <div className="text-xl font-bold group-hover:text-accent-foreground transition-colors duration-300">
               {item.title}
             </div>
           </div>
@@ -95,7 +95,7 @@ export default function GlowCardList({
   if (!items || items.length === 0) {
     return (
       <div className="text-center py-12">
-        <p className="text-white/60">No items to display</p>
+        <p className="text-muted-foreground">No items to display</p>
       </div>
     );
   }

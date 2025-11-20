@@ -5,7 +5,10 @@ import { useRouter } from "next/navigation"
 import { signOut, useSession } from "next-auth/react"
 import Image from "next/image"
 import { motion } from 'framer-motion'
-import GlowCard from "@/components/ui/GlowCard"
+import { Card, CardContent } from "@/components/ui/card"
+import { Button } from "@/components/ui/button"
+import { Separator } from "@/components/ui/separator"
+import { LogOut, Clock, TrendingUp } from "lucide-react"
 
 export default function DashboardPage() {
   const { data: session, status } = useSession()
@@ -21,7 +24,7 @@ export default function DashboardPage() {
   if (status === "loading") {
     return (
       <div className="relative w-full min-h-screen flex items-center justify-center">
-        <div className="animate-pulse text-white/60">加载中...</div>
+        <div className="animate-pulse text-muted-foreground">加载中...</div>
       </div>
     )
   }
@@ -45,7 +48,7 @@ export default function DashboardPage() {
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8 }}
         >
-          <h1 className="text-3xl sm:text-4xl lg:text-5xl font-bold text-white">
+          <h1 className="text-3xl sm:text-4xl lg:text-5xl font-bold text-foreground">
             {(() => {
               const hour = new Date().getHours();
               if (hour >= 5 && hour < 12) return '早上好';
@@ -63,58 +66,61 @@ export default function DashboardPage() {
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8, delay: 0.2 }}
         >
-          <GlowCard className="bg-black/40 backdrop-blur-sm p-8">
-            <div className="flex flex-col sm:flex-row items-center gap-6">
-              {/* Avatar */}
-              {session.user.image && (
-                <div className="relative">
-                  <div className="absolute -inset-1 bg-gradient-to-r from-white/30 to-white/10 rounded-full blur opacity-50"></div>
-                  <Image
-                    src={session.user.image}
-                    alt="头像"
-                    width={96}
-                    height={96}
-                    priority
-                    className="relative rounded-full border-2 border-white/20"
-                  />
+          <Card className="backdrop-blur-sm">
+            <CardContent className="p-8">
+              <div className="flex flex-col sm:flex-row items-center gap-6">
+                {/* Avatar */}
+                {session.user.image && (
+                  <div className="relative">
+                    <div className="absolute -inset-1 bg-gradient-to-r from-primary/30 to-primary/10 rounded-full blur opacity-50"></div>
+                    <Image
+                      src={session.user.image}
+                      alt="头像"
+                      width={96}
+                      height={96}
+                      priority
+                      className="relative rounded-full border-2 border-border"
+                    />
+                  </div>
+                )}
+
+                {/* User details */}
+                <div className="flex-1 text-center sm:text-left">
+                  <h2 className="text-2xl font-bold mb-2">
+                    {session.user.name}
+                  </h2>
+                  <p className="text-muted-foreground">
+                    {session.user.email}
+                  </p>
+
+                  <Separator className="my-4" />
+
+                  {/* Sign out button */}
+                  <Button
+                    onClick={handleSignOut}
+                    disabled={isLoggingOut}
+                    variant="outline"
+                    className="mt-4"
+                  >
+                    {isLoggingOut ? (
+                      <>
+                        <svg className="animate-spin h-4 w-4 mr-2" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
+                          <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4"></circle>
+                          <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
+                        </svg>
+                        退出中...
+                      </>
+                    ) : (
+                      <>
+                        <LogOut className="w-4 h-4 mr-2" />
+                        退出登录
+                      </>
+                    )}
+                  </Button>
                 </div>
-              )}
-
-              {/* User details */}
-              <div className="flex-1 text-center sm:text-left">
-                <h2 className="text-2xl font-bold text-white mb-2">
-                  {session.user.name}
-                </h2>
-                <p className="text-white/60">
-                  {session.user.email}
-                </p>
-
-                {/* Sign out button */}
-                <button
-                  onClick={handleSignOut}
-                  disabled={isLoggingOut}
-                  className="cursor-can-hover cursor-pointer relative inline-flex items-center gap-3 px-8 py-2.5 mt-8 bg-white/10 hover:bg-white/20 border border-white/30 hover:border-white/50 text-white rounded-full transition-all duration-300 disabled:opacity-50 disabled:cursor-not-allowed"
-                >
-                  {isLoggingOut ? (
-                    <>
-                      <svg className="animate-spin h-4 w-4" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
-                        <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4"></circle>
-                        <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
-                      </svg>
-                      <span>退出中...</span>
-                    </>
-                  ) : (
-                    <>
-                      <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 16l4-4m0 0l-4-4m4 4H7m6 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h4a3 3 0 013 3v1" />
-                      </svg>
-                      <span>退出登录</span>
-                    </>
-                  )}
-                </button>
               </div>
-            </div>
-          </GlowCard>
+            </CardContent>
+          </Card>
         </motion.div>
 
         {/* Tools Section */}
@@ -124,36 +130,36 @@ export default function DashboardPage() {
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8, delay: 0.4 }}
         >
-          <div className="flex flex-wrap justify-center gap-4">
+          <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
             {/* Life Countdown Tool */}
-            <GlowCard
-              className="bg-black/40 backdrop-blur-sm p-6 cursor-pointer hover:bg-black/50 transition-all duration-300 group w-full sm:w-[calc(50%-0.5rem)] lg:w-[calc(33.333%-0.667rem)] max-w-xs"
+            <Card
+              className="cursor-pointer hover:bg-accent transition-all duration-300 group"
               onClick={() => router.push('/tools/life-countdown')}
             >
-              <div className="flex flex-col items-center text-center gap-4">
-                <div className="w-14 h-14 rounded-xl bg-gradient-to-br from-purple-500/20 to-pink-500/20 flex items-center justify-center group-hover:scale-110 transition-transform duration-300">
-                  <svg className="w-7 h-7 text-purple-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" />
-                  </svg>
+              <CardContent className="p-6">
+                <div className="flex flex-col items-center text-center gap-4">
+                  <div className="w-14 h-14 rounded-xl bg-primary/10 flex items-center justify-center group-hover:scale-110 transition-transform duration-300">
+                    <Clock className="w-7 h-7 text-primary" />
+                  </div>
+                  <h3 className="text-base font-semibold">人生倒计时</h3>
                 </div>
-                <h3 className="text-base font-semibold text-white">人生倒计时</h3>
-              </div>
-            </GlowCard>
+              </CardContent>
+            </Card>
 
             {/* Asset Allocation Tool */}
-            <GlowCard
-              className="bg-black/40 backdrop-blur-sm p-6 cursor-pointer hover:bg-black/50 transition-all duration-300 group w-full sm:w-[calc(50%-0.5rem)] lg:w-[calc(33.333%-0.667rem)] max-w-xs"
+            <Card
+              className="cursor-pointer hover:bg-accent transition-all duration-300 group"
               onClick={() => router.push('/tools/asset-allocation')}
             >
-              <div className="flex flex-col items-center text-center gap-4">
-                <div className="w-14 h-14 rounded-xl bg-gradient-to-br from-blue-500/20 to-cyan-500/20 flex items-center justify-center group-hover:scale-110 transition-transform duration-300">
-                  <svg className="w-7 h-7 text-blue-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z" />
-                  </svg>
+              <CardContent className="p-6">
+                <div className="flex flex-col items-center text-center gap-4">
+                  <div className="w-14 h-14 rounded-xl bg-primary/10 flex items-center justify-center group-hover:scale-110 transition-transform duration-300">
+                    <TrendingUp className="w-7 h-7 text-primary" />
+                  </div>
+                  <h3 className="text-base font-semibold">资产配置</h3>
                 </div>
-                <h3 className="text-base font-semibold text-white">资产配置</h3>
-              </div>
-            </GlowCard>
+              </CardContent>
+            </Card>
           </div>
         </motion.div>
 
@@ -165,19 +171,21 @@ export default function DashboardPage() {
           transition={{ duration: 0.8, delay: 0.6 }}
         >
           <div className="flex items-center justify-center gap-6 text-sm">
-            <button
+            <Button
+              variant="link"
               onClick={() => router.push('/privacy')}
-              className="cursor-can-hover text-white/60 hover:text-white transition-colors"
+              className="text-muted-foreground hover:text-foreground"
             >
               隐私政策
-            </button>
-            <span className="text-white/30">•</span>
-            <button
+            </Button>
+            <span className="text-muted-foreground">•</span>
+            <Button
+              variant="link"
               onClick={() => router.push('/terms')}
-              className="cursor-can-hover text-white/60 hover:text-white transition-colors"
+              className="text-muted-foreground hover:text-foreground"
             >
               服务条款
-            </button>
+            </Button>
           </div>
         </motion.div>
       </div>

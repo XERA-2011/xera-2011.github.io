@@ -40,6 +40,17 @@ pnpm audit
 pnpm up eslint
 ```
 
+## [shadcn/ui](https://ui.shadcn.com/)
+
+**Adding new components:**
+```bash
+# Add a specific component
+npx shadcn@latest add button
+
+# Add multiple components
+npx shadcn@latest add card dialog dropdown-menu
+```
+
 ## Vercel
 
 ```bash

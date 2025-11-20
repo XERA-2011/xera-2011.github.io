@@ -41,18 +41,18 @@ const Breadcrumb = () => {
       </Link>
       {breadcrumbs.length > 0 && (
         <>
-          <span className="text-gray-400">/</span>
+          <span className="text-muted-foreground">/</span>
           {breadcrumbs.map((crumb, index) => (
             <div key={crumb.href} className="flex items-center gap-2">
               {index > 0 && (
-                <span className="text-gray-400">/</span>
+                <span className="text-muted-foreground">/</span>
               )}
               {index === breadcrumbs.length - 1 ? (
-                <span className="text-gray-400 font-medium">{crumb.label}</span>
+                <span className="text-muted-foreground font-medium">{crumb.label}</span>
               ) : (
                 <Link
                   href={crumb.href}
-                  className="text-white font-bold hover:opacity-80 transition-opacity cursor-can-hover"
+                  className="font-bold hover:text-muted-foreground transition-colors cursor-can-hover"
                 >
                   {crumb.label}
                 </Link>

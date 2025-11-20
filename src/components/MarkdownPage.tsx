@@ -22,7 +22,7 @@ export function MarkdownPage({
     h2: ({ ...props }) => <h2 className="text-xl font-semibold mt-6 mb-3" {...props} />,
     h3: ({ ...props }) => <h3 className="text-lg font-medium mt-4 mb-2" {...props} />,
     p: ({ ...props }) => <p className="text-base leading-7 mb-2" {...props} />,
-    ul: ({ ...props }) => <ul className="text-white/80 mb-4 list-none p-0" {...props} />,
+    ul: ({ ...props }) => <ul className="text-muted-foreground mb-4 list-none p-0" {...props} />,
     li: ({ ...props }) => <li className="mb-1 pl-0" {...props} />,
     hr: ({ ...props }) => <hr className="my-6 border-gray-500" {...props} />,
     a: ({ ...props }) => (
@@ -33,14 +33,14 @@ export function MarkdownPage({
         {...props}
       />
     ),
-    strong: ({ ...props }) => <strong className="font-semibold text-white" {...props} />,
+    strong: ({ ...props }) => <strong className="font-semibold text-foreground" {...props} />,
     // 表格样式 - 移动端优化
     table: ({ ...props }) => (
       <div className="overflow-x-auto -mx-2 sm:mx-0 my-4">
         <table className="min-w-full border-collapse border border-gray-600" {...props} />
       </div>
     ),
-    thead: ({ ...props }) => <thead className="bg-white/5" {...props} />,
+    thead: ({ ...props }) => <thead className="bg-muted/50" {...props} />,
     tbody: ({ ...props }) => <tbody {...props} />,
     tr: ({ ...props }) => <tr className="border-b border-gray-600" {...props} />,
     th: ({ ...props }) => (
@@ -53,17 +53,17 @@ export function MarkdownPage({
     code: (props) => {
       const { inline, ...rest } = props as { inline?: boolean;[key: string]: unknown };
       return inline ? (
-        <code className="bg-white/10 px-1.5 py-0.5 rounded text-sm" {...rest} />
+        <code className="bg-muted px-1.5 py-0.5 rounded text-sm" {...rest} />
       ) : (
-        <code className="block bg-white/5 p-3 rounded-lg overflow-x-auto text-sm" {...rest} />
+        <code className="block bg-muted/50 p-3 rounded-lg overflow-x-auto text-sm" {...rest} />
       );
     },
     pre: ({ ...props }) => (
-      <pre className="bg-white/5 rounded-lg overflow-x-auto my-4 -mx-2 sm:mx-0" {...props} />
+      <pre className="bg-muted/50 rounded-lg overflow-x-auto my-4 -mx-2 sm:mx-0" {...props} />
     ),
     // 块引用样式
     blockquote: ({ ...props }) => (
-      <blockquote className="border-l-4 border-blue-400 pl-4 my-4 italic text-white/80" {...props} />
+      <blockquote className="border-l-4 border-blue-400 pl-4 my-4 italic text-muted-foreground" {...props} />
     ),
   };
 
@@ -72,7 +72,7 @@ export function MarkdownPage({
 
   return (
     <div className="min-h-screen pb-16 px-4">
-      <div className={`mx-auto ${maxWidth} bg-white/10 rounded-3xl p-6 md:p-8`}>
+      <div className={`mx-auto ${maxWidth} bg-card rounded-3xl p-6 md:p-8`}>
         <div className="prose prose-invert max-w-none">
           <ReactMarkdown components={components}>
             {content}
