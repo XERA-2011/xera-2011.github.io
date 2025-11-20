@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useEffect, useRef } from 'react';
+import { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { useSession } from 'next-auth/react';
 import { usePageTitle } from '@/hooks/use-page-title';
@@ -55,10 +55,7 @@ export default function AssetAllocationPage() {
   // UI 状态
   const [copySuccess, setCopySuccess] = useState(false);
   const [showCelebrityDropdown, setShowCelebrityDropdown] = useState(false);
-  const [isSyncing, setIsSyncing] = useState(false);
-
-  // 使用 ref 跟踪是否是初始加载，避免触发不必要的同步
-  const isInitialLoadRef = useRef(true);
+  const [syncStatus, setSyncStatus] = useState<'idle' | 'syncing' | 'synced'>('idle');
 
   // 当前查看的资产列表
   const isViewingMy = currentViewId === 'my';
@@ -121,53 +118,40 @@ export default function AssetAllocationPage() {
     fetchCelebrityPortfolios();
   }, []);
 
-  // 保存到 localStorage 和数据库
-  useEffect(() => {
-    // 跳过初始加载时的同步
-    if (isInitialLoadRef.current) {
-      isInitialLoadRef.current = false;
-      return;
-    }
-
-    // 总是保存到 localStorage
+  // 手动保存到 localStorage 和数据库
+  const saveAssets = async (assets: Asset[], updatedAt: string) => {
+    // 保存到 localStorage
     setLocalStorage(STORAGE_KEY, {
-      myAssets,
-      myAssetsUpdatedAt,
+      myAssets: assets,
+      myAssetsUpdatedAt: updatedAt,
     });
 
     // 如果已登录，同步到数据库
-    const syncToDatabase = async () => {
-      if (isLoggedIn && myAssets.length >= 0) {
-        try {
-          setIsSyncing(true);
-          await fetch('/api/asset-allocation', {
-            method: 'POST',
-            headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify({
-              assets: myAssets.map(asset => ({
-                name: asset.name,
-                amount: asset.amount,
-              })),
-            }),
-          });
-        } catch (err) {
-          console.error('同步到数据库失败:', err);
-        } finally {
-          setIsSyncing(false);
-        }
+    if (isLoggedIn && assets.length >= 0) {
+      try {
+        setSyncStatus('syncing');
+        await fetch('/api/asset-allocation', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({
+            assets: assets.map(asset => ({
+              name: asset.name,
+              amount: asset.amount,
+            })),
+          }),
+        });
+        setSyncStatus('synced');
+        // 2秒后重置状态
+        setTimeout(() => setSyncStatus('idle'), 2000);
+      } catch (err) {
+        console.error('同步到数据库失败:', err);
+        setSyncStatus('idle');
       }
-    };
-
-    // 使用防抖，避免频繁请求
-    const timer = setTimeout(() => {
-      syncToDatabase();
-    }, 500);
-
-    return () => clearTimeout(timer);
-  }, [myAssets, myAssetsUpdatedAt, isLoggedIn]);
+    }
+  };
 
 
-  const handleAddAsset = () => {
+  const handleAddAsset = async () => {
     setError('');
 
     // 检查是否已达到最大数量限制
@@ -193,15 +177,27 @@ export default function AssetAllocationPage() {
       amount: amount,
     };
 
-    setMyAssets(prev => [...prev, newAsset]);
-    setMyAssetsUpdatedAt(new Date().toISOString().split('T')[0]);
+    const updatedAssets = [...myAssets, newAsset];
+    const updatedAt = new Date().toISOString().split('T')[0];
+
+    setMyAssets(updatedAssets);
+    setMyAssetsUpdatedAt(updatedAt);
     setAssetName('');
     setAssetAmount('');
+
+    // 保存数据
+    await saveAssets(updatedAssets, updatedAt);
   };
 
-  const handleRemoveAsset = (id: string) => {
-    setMyAssets(prev => prev.filter(asset => asset.id !== id));
-    setMyAssetsUpdatedAt(new Date().toISOString().split('T')[0]);
+  const handleRemoveAsset = async (id: string) => {
+    const updatedAssets = myAssets.filter(asset => asset.id !== id);
+    const updatedAt = new Date().toISOString().split('T')[0];
+
+    setMyAssets(updatedAssets);
+    setMyAssetsUpdatedAt(updatedAt);
+
+    // 保存数据
+    await saveAssets(updatedAssets, updatedAt);
   };
 
   const handleEditAsset = (asset: Asset) => {
@@ -210,7 +206,7 @@ export default function AssetAllocationPage() {
     setAssetAmount(asset.amount.toString());
   };
 
-  const handleUpdateAsset = () => {
+  const handleUpdateAsset = async () => {
     if (!editingAsset) return;
 
     setError('');
@@ -226,16 +222,22 @@ export default function AssetAllocationPage() {
       return;
     }
 
-    setMyAssets(prev => prev.map(asset =>
+    const updatedAssets = myAssets.map(asset =>
       asset.id === editingAsset.id
         ? { ...asset, name: assetName.trim(), amount }
         : asset
-    ));
-    setMyAssetsUpdatedAt(new Date().toISOString().split('T')[0]);
+    );
+    const updatedAt = new Date().toISOString().split('T')[0];
+
+    setMyAssets(updatedAssets);
+    setMyAssetsUpdatedAt(updatedAt);
 
     setEditingAsset(null);
     setAssetName('');
     setAssetAmount('');
+
+    // 保存数据
+    await saveAssets(updatedAssets, updatedAt);
   };
 
   const handleCancelEdit = () => {
@@ -287,9 +289,9 @@ export default function AssetAllocationPage() {
           <h2 className="text-3xl sm:text-4xl lg:text-5xl font-bold text-white mb-4">
             资产配置占比
           </h2>
-          {isLoggedIn && (
+          {isLoggedIn && syncStatus !== 'idle' && (
             <div className="flex items-center justify-center gap-2 text-sm text-white/60">
-              {isSyncing ? (
+              {syncStatus === 'syncing' ? (
                 <>
                   <svg className="w-4 h-4 animate-spin" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15" />
@@ -625,11 +627,11 @@ export default function AssetAllocationPage() {
                     />
                   </>
                 ) : (
-                  <div className="text-center py-12">
-                    <svg className="w-16 h-16 mx-auto mb-4 text-white/30" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <div className="text-center py-20">
+                    <svg className="w-20 h-20 mx-auto mb-6 text-white/30" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                       <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M20 13V6a2 2 0 00-2-2H6a2 2 0 00-2 2v7m16 0v5a2 2 0 01-2 2H6a2 2 0 01-2-2v-5m16 0h-2.586a1 1 0 00-.707.293l-2.414 2.414a1 1 0 01-.707.293h-3.172a1 1 0 01-.707-.293l-2.414-2.414A1 1 0 006.586 13H4" />
                     </svg>
-                    <p className="text-white/50 text-sm mb-4">你还没有配置资产</p>
+                    <p className="text-white/50 text-base mb-5">你还没有配置资产</p>
                     <Button
                       variant="primary"
                       size="sm"
