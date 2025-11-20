@@ -139,7 +139,7 @@ export default function Time() {
 
               {/* 中心圆点 */}
               <div
-                className="absolute w-[4%] h-[4%] bg-white rounded-full z-[100]"
+                className="absolute w-[4%] h-[4%] bg-white rounded-full z-[13]"
                 style={{
                   boxShadow: '0 0 4px rgba(255, 255, 255, 0.4)'
                 }}
