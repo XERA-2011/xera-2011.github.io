@@ -1,60 +1,60 @@
 # Global Breaking News TOP10
 
 **Date**: 2025年11月21日
-**Update Time**: 10:20 UTC
+**Update Time**: 22:19 UTC
 **AI Model**: Google Gemini / Google Gemini
 
 ---
 
-### 1. **US Proposes Peace Plan for Ukraine Involving Territorial Concessions** / **美国提出乌克兰和平计划，涉及领土让步**
+### 1. **Israeli attacks in Gaza kill at least 32 Palestinians in 24 hours** / **以色列袭击加沙，24小时内造成至少32名巴勒斯坦人死亡**
 - **Time**: 2025-11-21
-- **Content**: A US-drafted peace plan for Ukraine reportedly suggests ceding territory to Russia and placing limitations on Ukraine's military. President Zelenskyy is expected to discuss the proposal with former President Trump. / 据报道，美国起草的一项乌克兰和平计划建议向俄罗斯割让领土并限制乌克兰的军事力量。预计泽连斯基总统将与前总统特朗普讨论该提议。
-- **Source**: The Hindu
-
-### 2. **Russia Continues Aggression in Ukraine, Downing 33 Drones** / **俄罗斯继续侵略乌克兰，击落33架无人机**
-- **Time**: 2025-11-21
-- **Content**: The conflict in Ukraine continues with ongoing Russian aggression. A recent strike in Ternopil resulted in 25 casualties, and Russia's air defense reportedly downed 33 Ukrainian drones overnight. / 乌克兰冲突持续，俄罗斯的侵略行动仍在继续。最近对捷尔诺波尔的袭击造成25人伤亡，据报道，俄罗斯防空系统在一夜之间击落了33架乌克兰无人机。
-- **Source**: CTV News
-
-### 3. **Dozens Killed in Israeli Airstrikes on Gaza** / **以色列空袭加沙，数十人丧生**
-- **Time**: 2025-11-21
-- **Content**: The Israel-Hamas conflict continues to escalate, with Israeli airstrikes in Gaza causing dozens of fatalities. In a separate incident in the West Bank, a stabbing attack left one Israeli dead and three others wounded. / 以色列与哈马斯的冲突持续升级，以色列对加沙的空袭导致数十人死亡。在约旦河西岸的另一起事件中，一起持刀袭击事件造成一名以色列人死亡，三人受伤。
+- **Content**: Israeli attacks in Gaza have reportedly killed at least 32 Palestinians and wounded 88 others in the last 24 hours, even as a "ceasefire" began, with at least 67 Palestinian children killed since the start of the ceasefire. / 据报道，即使在“停火”开始后，以色列在过去24小时内对加沙的袭击仍造成至少32名巴勒斯坦人死亡，88人受伤，停火开始以来至少有67名巴勒斯坦儿童丧生。
 - **Source**: Al Jazeera
 
-### 4. **G20 Summit in South Africa Addresses Global Issues** / **G20峰会在南非举行，讨论全球问题**
+### 2. **Zelenskyy faces "difficult choice" as Trump pushes for end to Ukraine war** / **特朗普力促乌克兰战争结束，泽连斯基面临“艰难选择”**
 - **Time**: 2025-11-21
-- **Content**: The G20 Summit is currently underway in South Africa, with the US now considering attendance after an initial boycott. Brazil's president is expected to present a plan for phasing out fossil fuels. / G20峰会目前正在南非举行，美国在最初抵制后现在正考虑出席。预计巴西总统将提出一项逐步淘汰化石燃料的计划。
-- **Source**: Business Standard
-
-### 5. **Flooding in Central Vietnam Claims 41 Lives** / **越南中部洪水已致41人死亡**
-- **Time**: 2025-11-21
-- **Content**: The death toll from severe flooding in central Vietnam has risen to 41, with forecasts predicting more heavy rainfall in the coming days. / 越南中部严重洪水的死亡人数已上升至41人，预报显示未来几天将有更多强降雨。
-- **Source**: The Hindu
-
-### 6. **Separate Explosions in Pakistan Kill Over 30 People** / **巴基斯坦发生多起爆炸，已致30余人死亡**
-- **Time**: 2025-11-21
-- **Content**: Two separate explosions in Pakistan have resulted in a significant loss of life. An explosion at a boiler factory in Punjab killed 15 people, while another at a glue factory in eastern Pakistan killed at least 16. / 巴基斯坦发生的两起独立爆炸事件造成重大人员伤亡。旁遮普省一家锅炉厂的爆炸导致15人死亡，而巴基斯坦东部一家胶水厂的另一起爆炸导致至少16人死亡。
-- **Source**: The Hindu
-
-### 7. **COP30 Climate Summit in Brazil Faces Challenges** / **巴西COP30气候峰会面临挑战**
-- **Time**: 2025-11-21
-- **Content**: A fire broke out at the venue of the COP30 climate summit in Brazil, as participating countries remain divided on the issue of phasing out fossil fuels on the final day of the conference. / COP30气候峰会在巴西的会场发生火灾，与会国在会议最后一天在逐步淘汰化石燃料问题上仍然存在分歧。
+- **Content**: Zelenskyy states Kyiv faces a "difficult choice" as Trump pushes for an end to the war, and Ukraine risks losing a key partner or its dignity. / 泽连斯基表示，随着特朗普推动结束战争，基辅面临“艰难的选择”，乌克兰冒着失去一个关键伙伴或其尊严的风险。
 - **Source**: The Guardian
 
-### 8. **Nobel Laureate Machado Faces "Fugitive" Status if She Leaves Venezuela** / **诺贝尔奖得主马查多若离开委内瑞拉将面临“逃犯”身份**
+### 3. **Ex-leader of Reform UK in Wales jailed for 10 years over pro-Russia bribes** / **英国改革党前威尔士领导人因亲俄贿赂被判10年**
 - **Time**: 2025-11-21
-- **Content**: Nobel Peace Prize laureate Maria Corina Machado could be declared a "fugitive" by the Venezuelan government if she leaves the country to accept her award. / 诺贝尔和平奖得主玛丽亚·科里纳·马查多如果离开该国接受颁奖，可能会被委内瑞拉政府宣布为“逃犯”。
-- **Source**: The Hindu
+- **Content**: An ex-leader of Reform UK in Wales has been jailed for 10 years over pro-Russia bribes. / 英国改革党前威尔士领导人因亲俄贿赂被判处10年徒刑。
+- **Source**: Al Jazeera
 
-### 9. **Fugees Rapper Pras Michel Sentenced to 14 Years in Prison** / **Fugees说唱歌手普拉斯·米歇尔被判14年监禁**
+### 4. **Magnitude 5.5 earthquake hits Bangladesh, killing at least five** / **孟加拉国发生5.5级地震，造成至少5人死亡**
 - **Time**: 2025-11-21
-- **Content**: Pras Michel, a member of the hip-hop group The Fugees, has been sentenced to 14 years in prison for his role in an illegal campaign donation scheme. / 嘻哈团体The Fugees成员普拉斯·米歇尔因在非法竞选捐款计划中扮演的角色而被判处14年监禁。
-- **Source**: CTV News
+- **Content**: At least five people were killed as a magnitude 5.5 earthquake hit Bangladesh. / 孟加拉国发生5.5级地震，造成至少5人死亡。
+- **Source**: Al Jazeera
 
-### 10. **Frida Kahlo Self-Portrait Sells for Record $54.7 Million** / **弗里达·卡罗自画像以5470万美元的价格创下拍卖纪录**
+### 5. **Students taken from Catholic school in central Nigeria in latest abduction** / **尼日利亚中部天主教学校学生在最新绑架事件中被带走**
 - **Time**: 2025-11-21
-- **Content**: A self-portrait by iconic Mexican artist Frida Kahlo has sold for $54.7 million at auction, setting a new record for a work by a female artist. / 标志性的墨西哥艺术家弗里达·卡罗的一幅自画像在拍卖会上以5470万美元的价格售出，创下了女性艺术家作品的新纪录。
+- **Content**: Students were taken from a Catholic school in central Nigeria in the latest abduction, days after armed men kidnapped 25 schoolgirls from another secondary school in northwestern Nigeria. / 在尼日利亚西北部另一所中学25名女学生被武装人员绑架几天后，尼日利亚中部一所天主教学校的学生在最新一起绑架事件中被带走。
 - **Source**: The Guardian
+
+### 6. **Grizzly bear attacks schoolchildren and teachers in western Canada, injuring 11** / **加拿大西部灰熊袭击师生，致11人受伤**
+- **Time**: 2025-11-21
+- **Content**: Eleven people were injured after a grizzly bear attacked schoolchildren and teachers in western Canada. / 加拿大西部一只灰熊袭击师生，造成11人受伤。
+- **Source**: CBS News
+
+### 7. **Pilot killed in fighter jet crash at Dubai Air Show** / **迪拜航展一架战斗机坠毁，一名飞行员丧生**
+- **Time**: 2025-11-21
+- **Content**: A pilot was killed in a fighter jet crash during a demo flight at the Dubai Air Show. / 迪拜航展期间，一架战斗机在演示飞行中坠毁，一名飞行员丧生。
+- **Source**: CBS News
+
+### 8. **Four charged in scheme to export Nvidia AI chips to China** / **四人因涉嫌向中国出口英伟达AI芯片被起诉**
+- **Time**: 2025-11-21
+- **Content**: Four individuals have been charged in a scheme to export Nvidia AI chips to China. / 四人因涉嫌向中国出口英伟达AI芯片而被起诉。
+- **Source**: CBS News
+
+### 9. **Fugees rapper Pras sentenced to 14 years for illegal Obama campaign donations** / **Fugees说唱歌手Pras因非法向奥巴马竞选活动捐款被判14年**
+- **Time**: 2025-11-21
+- **Content**: The Fugees rapper Pras was sentenced to 14 years in prison over illegal donations to the Obama campaign. / Fugees说唱歌手Pras因向奥巴马竞选活动提供非法捐款被判处14年徒刑。
+- **Source**: The Guardian
+
+### 10. **1,700-year-old Roman sarcophagus unearthed, revealing treasures** / **1700年历史的罗马石棺出土，揭示宝藏**
+- **Time**: 2025-11-21
+- **Content**: A 1,700-year-old Roman sarcophagus has been unearthed, revealing treasures. / 一具1700年历史的罗马石棺被发掘出土，揭示了其中的宝藏。
+- **Source**: CBS News
 
 ---
 
