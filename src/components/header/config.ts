@@ -28,6 +28,10 @@ export const links: Link[] = [
     title: 'Generate',
     href: '/generate',
   },
+  {
+    title: 'Privacy Policy',
+    href: '/privacy',
+  },
 ];
 
 /**

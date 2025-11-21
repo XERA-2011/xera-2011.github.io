@@ -1,7 +1,7 @@
 import type { Metadata } from "next/types";
 import '../styles/globals.css';
 import Background from "@/components/background/star";
-// import Footer from "@/components/footer";
+import Footer from "@/components/footer";
 import Header from "@/components/header";
 import UserAuth from "@/components/header/UserAuth";
 import SmoothScroll from "@/components/SmoothScroll";
@@ -38,7 +38,7 @@ export default function RootLayout({
                 <Background />
                 <Header userAuth={<UserAuth />} />
                 {children}
-                {/* <Footer /> */}
+                <Footer />
                 <ElasticCursor />
               </SmoothScroll>
             </AppProvider>

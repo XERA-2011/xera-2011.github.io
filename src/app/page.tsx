@@ -4,8 +4,6 @@
 import { Suspense } from 'react';
 // 显示主要标题和介绍内容
 import HeroSection from '@/components/sections/hero';
-// 提供页面平滑滚动行为的组件
-import SmoothScroll from '@/components/SmoothScroll';
 
 // Fallback components for when animations are loading
 const FallbackSection = () => (
@@ -13,12 +11,9 @@ const FallbackSection = () => (
 );
 
 export default function Home() {
-
   return (
-    <SmoothScroll>
-      <Suspense fallback={<FallbackSection />}>
-        <HeroSection />
-      </Suspense>
-    </SmoothScroll>
+    <Suspense fallback={<FallbackSection />}>
+      <HeroSection />
+    </Suspense>
   );
 }
