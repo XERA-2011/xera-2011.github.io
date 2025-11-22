@@ -1,60 +1,60 @@
 # Global Breaking News TOP10
 
-**Date**: 2025年11月21日
-**Update Time**: 22:19 UTC
+**Date**: 2025年11月22日
+**Update Time**: 10:18 UTC
 **AI Model**: Google Gemini / Google Gemini
 
 ---
 
-### 1. **Israeli attacks in Gaza kill at least 32 Palestinians in 24 hours** / **以色列袭击加沙，24小时内造成至少32名巴勒斯坦人死亡**
-- **Time**: 2025-11-21
-- **Content**: Israeli attacks in Gaza have reportedly killed at least 32 Palestinians and wounded 88 others in the last 24 hours, even as a "ceasefire" began, with at least 67 Palestinian children killed since the start of the ceasefire. / 据报道，即使在“停火”开始后，以色列在过去24小时内对加沙的袭击仍造成至少32名巴勒斯坦人死亡，88人受伤，停火开始以来至少有67名巴勒斯坦儿童丧生。
+### 1. **Reports of "Secret" Ukraine Peace Plan Surface** / **“秘密”乌克兰和平计划浮出水面**
+- **Time**: 2025-11-22
+- **Content**: Reports have emerged detailing a proposed US peace plan for Ukraine, allegedly suggesting Ukraine might need to cede some territory to Russia in exchange for peace. The Kremlin has declined to comment on the specifics, while Ukrainian President Zelenskyy faces difficult choices regarding the proposal. / 有报道详述了一项美国提出的乌克兰和平计划，据称该计划建议乌克兰可能需要向俄罗斯割让部分领土以换取和平。克里姆林宫拒绝对具体细节发表评论，而乌克兰总统泽连斯基则面临着关于该提议的艰难抉择。
+- **Source**: Associated Press
+
+### 2. **Israel Continues Attacks on Gaza as Recovery Efforts Planned** / **以色列继续袭击加沙，遗体回收工作正在计划中**
+- **Time**: 2025-11-22
+- **Content**: Israeli forces have continued their military operations in Gaza. Meanwhile, preparations are being made for a large-scale recovery of bodies in the region. In related news, Israeli forces detained dozens in Hebron. / 以色列军队继续在加沙地带进行军事行动。与此同时，该地区正准备进行大规模的遗体回收工作。相关消息显示，以色列军队在希伯伦拘留了数十人。
 - **Source**: Al Jazeera
 
-### 2. **Zelenskyy faces "difficult choice" as Trump pushes for end to Ukraine war** / **特朗普力促乌克兰战争结束，泽连斯基面临“艰难选择”**
-- **Time**: 2025-11-21
-- **Content**: Zelenskyy states Kyiv faces a "difficult choice" as Trump pushes for an end to the war, and Ukraine risks losing a key partner or its dignity. / 泽连斯基表示，随着特朗普推动结束战争，基辅面临“艰难的选择”，乌克兰冒着失去一个关键伙伴或其尊严的风险。
-- **Source**: The Guardian
+### 3. **Indian Fighter Jet Crashes at Dubai Air Show, Pilot Killed** / **印度战斗机在迪拜航展坠毁，飞行员遇难**
+- **Time**: 2025-11-22
+- **Content**: An Indian fighter jet crashed during a demonstration flight at the Dubai Air Show. The pilot was killed in the incident. Video footage from the scene shows a large fireball and smoke. / 一架印度战斗机在迪拜航展的飞行表演中坠毁。飞行员在此次事故中丧生。现场视频画面显示了巨大的火球和浓烟。
+- **Source**: Associated Press
 
-### 3. **Ex-leader of Reform UK in Wales jailed for 10 years over pro-Russia bribes** / **英国改革党前威尔士领导人因亲俄贿赂被判10年**
-- **Time**: 2025-11-21
-- **Content**: An ex-leader of Reform UK in Wales has been jailed for 10 years over pro-Russia bribes. / 英国改革党前威尔士领导人因亲俄贿赂被判处10年徒刑。
+### 4. **Over 200 Students Kidnapped in Nigeria** / **尼日利亚超过200名学生遭绑架**
+- **Time**: 2025-11-22
+- **Content**: Gunmen have carried out a mass kidnapping at a school in Nigeria, taking more than 200 students. This event highlights the ongoing security challenges in the country. / 武装分子在尼日利亚一所学校实施大规模绑架，劫持了200多名学生。这一事件凸显了该国持续存在的安全挑战。
+- **Source**: Sky News
+
+### 5. **Hurricane Melissa Devastates Jamaica** / **飓风“梅丽莎”重创牙买加**
+- **Time**: 2025-11-22
+- **Content**: The aftermath of Hurricane Melissa in Jamaica has been described as "like a 'world war'" by an Olympic medallist, indicating the scale of destruction. The hurricane has caused widespread damage across the island nation. / 牙买加奥运奖牌得主将飓风“梅丽莎”过后的景象形容为“像一场‘世界大战’”，显示了破坏的严重程度。这场飓风给这个岛国带来了大范围的破坏。
+- **Source**: Sky News
+
+### 6. **China-Japan Tensions Over Taiwan Escalate to UN** / **中日因台湾问题紧张关系升级至联合国**
+- **Time**: 2025-11-22
+- **Content**: A dispute between China and Japan over Taiwan has intensified, with the issue now being raised at the United Nations. This marks a significant escalation in diplomatic tensions between the two East Asian powers. / 中国和日本之间围绕台湾问题的争端加剧，现已将该问题提交至联合国。这标志着这两个东亚大国之间外交紧张关系的显著升级。
 - **Source**: Al Jazeera
 
-### 4. **Magnitude 5.5 earthquake hits Bangladesh, killing at least five** / **孟加拉国发生5.5级地震，造成至少5人死亡**
-- **Time**: 2025-11-21
-- **Content**: At least five people were killed as a magnitude 5.5 earthquake hit Bangladesh. / 孟加拉国发生5.5级地震，造成至少5人死亡。
+### 7. **G20 Summit in South Africa Amidst Diplomatic Talks** / **南非G20峰会在外交会谈中举行**
+- **Time**: 2025-11-22
+- **Content**: The G20 summit is taking place in South Africa. The United States is reportedly in talks to attend after initially considering a boycott, making the summit a focal point for international diplomacy. / G20峰会正在南非举行。据报道，美国在最初考虑抵制后，正在商谈出席事宜，使此次峰会成为国际外交的焦点。
+- **Source**: The Guardian
+
+### 8. **US Congresswoman Marjorie Taylor Greene Announces Resignation** / **美国国会女议员玛乔丽·泰勒·格林宣布辞职**
+- **Time**: 2025-11-22
+- **Content**: US Representative Marjorie Taylor Greene has announced she will resign from Congress in January. The decision comes amid reported fallout with former President Donald Trump. / 美国众议员玛乔丽·泰勒·格林宣布她将于一月份辞去国会职务。此决定据报导与前总统唐纳德·特朗普失和有关。
+- **Source**: The Guardian
+
+### 9. **Israeli Strike in Lebanon Kills Hezbollah Member** / **以色列在黎巴嫩的空袭中击毙一名真主党成员**
+- **Time**: 2025-11-22
+- **Content**: The Israeli military has claimed that one of its recent strikes in Lebanon resulted in the death of a Hezbollah member, further escalating tensions along the Israel-Lebanon border. / 以色列军方声称，其最近在黎巴嫩的一次空袭导致一名真主党成员死亡，这进一步加剧了以色列与黎巴嫩边境的紧张局势。
 - **Source**: Al Jazeera
 
-### 5. **Students taken from Catholic school in central Nigeria in latest abduction** / **尼日利亚中部天主教学校学生在最新绑架事件中被带走**
-- **Time**: 2025-11-21
-- **Content**: Students were taken from a Catholic school in central Nigeria in the latest abduction, days after armed men kidnapped 25 schoolgirls from another secondary school in northwestern Nigeria. / 在尼日利亚西北部另一所中学25名女学生被武装人员绑架几天后，尼日利亚中部一所天主教学校的学生在最新一起绑架事件中被带走。
-- **Source**: The Guardian
-
-### 6. **Grizzly bear attacks schoolchildren and teachers in western Canada, injuring 11** / **加拿大西部灰熊袭击师生，致11人受伤**
-- **Time**: 2025-11-21
-- **Content**: Eleven people were injured after a grizzly bear attacked schoolchildren and teachers in western Canada. / 加拿大西部一只灰熊袭击师生，造成11人受伤。
-- **Source**: CBS News
-
-### 7. **Pilot killed in fighter jet crash at Dubai Air Show** / **迪拜航展一架战斗机坠毁，一名飞行员丧生**
-- **Time**: 2025-11-21
-- **Content**: A pilot was killed in a fighter jet crash during a demo flight at the Dubai Air Show. / 迪拜航展期间，一架战斗机在演示飞行中坠毁，一名飞行员丧生。
-- **Source**: CBS News
-
-### 8. **Four charged in scheme to export Nvidia AI chips to China** / **四人因涉嫌向中国出口英伟达AI芯片被起诉**
-- **Time**: 2025-11-21
-- **Content**: Four individuals have been charged in a scheme to export Nvidia AI chips to China. / 四人因涉嫌向中国出口英伟达AI芯片而被起诉。
-- **Source**: CBS News
-
-### 9. **Fugees rapper Pras sentenced to 14 years for illegal Obama campaign donations** / **Fugees说唱歌手Pras因非法向奥巴马竞选活动捐款被判14年**
-- **Time**: 2025-11-21
-- **Content**: The Fugees rapper Pras was sentenced to 14 years in prison over illegal donations to the Obama campaign. / Fugees说唱歌手Pras因向奥巴马竞选活动提供非法捐款被判处14年徒刑。
-- **Source**: The Guardian
-
-### 10. **1,700-year-old Roman sarcophagus unearthed, revealing treasures** / **1700年历史的罗马石棺出土，揭示宝藏**
-- **Time**: 2025-11-21
-- **Content**: A 1,700-year-old Roman sarcophagus has been unearthed, revealing treasures. / 一具1700年历史的罗马石棺被发掘出土，揭示了其中的宝藏。
-- **Source**: CBS News
+### 10. **Poland Expels Last Remaining Russian Consulate** / **波兰驱逐最后一个俄罗斯领事馆**
+- **Time**: 2025-11-22
+- **Content**: Russia's Foreign Ministry confirmed that Poland has expelled its last remaining consulate from the country. This action signifies a new low in diplomatic relations between the two nations. / 俄罗斯外交部证实，波兰已将其在该国最后一个领事馆驱逐。此举标志着两国关系降至新低点。
+- **Source**: Sky News
 
 ---
 
