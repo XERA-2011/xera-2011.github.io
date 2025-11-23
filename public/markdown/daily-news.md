@@ -1,60 +1,60 @@
 # Global Breaking News TOP10
 
 **Date**: 2025年11月23日
-**Update Time**: 10:18 UTC
+**Update Time**: 22:18 UTC
 **AI Model**: Google Gemini / Google Gemini
 
 ---
 
-### 1. **US-Backed Ukraine Peace Plan Under Scrutiny at G20 Summit** / **美国支持的乌克兰和平计划在G20峰会受到审视**
+### 1. **Ukraine Peace Plan Under Discussion in Geneva** / **乌克兰和平计划在日内瓦进行讨论**
 - **Time**: 2025-11-23
-- **Content**: A US-backed peace plan for Ukraine is a major topic at the G20 summit, with allies expressing concerns it may favor Moscow. Former President Trump has indicated the proposal is not final, leaving Ukrainian President Zelenskyy to weigh the offer against continued US support. / 在G20峰会上，一项由美国支持的乌克兰和平计划成为主要议题，盟友们担心该计划可能偏向莫斯科。前总统特朗普表示该提议并非最终方案，使乌克兰总统泽连斯基需在接受提议与维持美国支持之间做出权衡。
+- **Content**: Ukrainian and Western officials are meeting in Geneva to discuss a US-proposed peace plan aimed at ending the war with Russia. The plan reportedly includes concessions to Moscow, sparking debate among allies. / 乌克兰与西方国家官员正在日内瓦就美国提出的一项旨在结束与俄罗斯战争的和平计划进行磋商。据报道，该计划包含对莫斯科的让步，引发了盟国间的激烈讨论。
 - **Source**: The Guardian
 
-### 2. **Israeli Airstrikes Kill 33 in Gaza Amid Post-Ceasefire Escalation** / **加沙停火后局势升级，以色列空袭致33人死亡**
+### 2. **Israel Kills Hezbollah Chief of Staff in Beirut Strike** / **以色列空袭贝鲁特，真主党总参谋长身亡**
 - **Time**: 2025-11-23
-- **Content**: Post-ceasefire attacks in Gaza have escalated, with recent Israeli airstrikes resulting in the deaths of 33 people. The Gaza Government Media Office reports nearly 500 alleged truce violations by Israel over the past 44 days. / 加沙地带停火后的袭击事件不断升级，最近的以色列空袭已导致33人死亡。加沙政府媒体办公室称，过去44天内，以色列被指控违反停火协议近500次。
-- **Source**: Al Jazeera
-
-### 3. **Vietnam Flooding and Landslides Death Toll Reaches 90** / **越南洪水和山体滑坡死亡人数升至90人**
-- **Time**: 2025-11-23
-- **Content**: The death toll from severe flooding and landslides in central Vietnam has tragically risen to 90. Rescue operations are ongoing as authorities search for dozens of people who remain missing. / 越南中部地区的严重洪水和山体滑坡已导致死亡人数不幸上升至90人。救援行动仍在进行中，当局正在搜寻数十名失踪人员。
-- **Source**: The Guardian
-
-### 4. **5.7 Magnitude Earthquake in Bangladesh Kills at Least 7** / **孟加拉国发生5.7级地震，至少7人死亡**
-- **Time**: 2025-11-23
-- **Content**: A 5.7 magnitude earthquake struck Bangladesh, killing at least 7 people and injuring many more. Seismological experts are warning of the potential for stronger aftershocks in the coming days. / 孟加拉国发生5.7级地震，已造成至少7人死亡，多人受伤。地震专家警告称，未来几天可能会有更强烈的余震。
-- **Source**: Global News
-
-### 5. **Indian Fighter Jet Crashes at Dubai Air Show, Killing Pilot** / **印度战斗机在迪拜航展坠毁，飞行员遇难**
-- **Time**: 2025-11-23
-- **Content**: An Indian Air Force fighter jet crashed during a demonstration at the Dubai Air Show, resulting in the death of the pilot. The cause of the crash is currently under investigation. / 一架印度空军战斗机在迪拜航展的表演中坠毁，导致飞行员死亡。事故原因正在调查中。
+- **Content**: An Israeli airstrike in Beirut has killed Haytham Ali Tabatabai, Hezbollah's chief of general staff. This is the first strike on the Lebanese capital in months and represents a major escalation in the conflict. / 以色列对贝鲁特发动空袭，导致真主党总参谋长海瑟姆·阿里·塔巴塔伊身亡。这是数月来对黎巴嫩首都的首次袭击，标志着冲突的重大升级。
 - **Source**: Associated Press
 
-### 6. **Over 300 Schoolchildren Abducted in Nigeria in Second Mass Kidnapping** / **尼日利亚再次发生大规模绑架事件，超过300名学童被劫持**
+### 3. **Mass Abduction of Schoolchildren in Nigeria Sparks Outrage** / **尼日利亚大规模绑架学童事件引发众怒**
 - **Time**: 2025-11-23
-- **Content**: Armed assailants have abducted over 300 schoolchildren in Nigeria, marking the second mass kidnapping incident in the country within a week. The event has sparked international outrage and calls for immediate action. / 武装分子在尼日利亚绑架了超过300名学童，这是一周内该国发生的第二起大规模绑架事件。此事件引发了国际社会的愤怒，并呼吁立即采取行动。
+- **Content**: Over 300 schoolchildren have been kidnapped in Nigeria in the second mass abduction in a week, leading to growing security concerns and international calls for their release. / 尼日利亚一周内发生第二起大规模绑架事件，超过300名学童被绑架，引发了日益严重的安全担忧和国际社会对其释放的呼吁。
+- **Source**: Reuters
+
+### 4. **Former Brazilian President Jair Bolsonaro Arrested** / **巴西前总统雅伊尔·博索纳罗被捕**
+- **Time**: 2025-11-23
+- **Content**: Former Brazilian President Jair Bolsonaro has been arrested after tampering with his ankle monitor, which he claimed was the result of a "psychotic attack." / 巴西前总统雅伊尔·博索纳罗因破坏其脚踝监视器而被捕，他声称此举是由“精神病发作”所致。
+- **Source**: BBC News
+
+### 5. **Bangladesh's Ousted PM Sheikh Hasina Sentenced to Death** / **孟加拉国被罢免总理谢赫·哈西娜被判处死刑**
+- **Time**: 2025-11-23
+- **Content**: Ousted Bangladesh Prime Minister Sheikh Hasina has been sentenced to death for crimes against humanity. The government is now seeking her extradition from India. / 孟加拉国被罢免总理谢赫·哈西娜因危害人类罪被判处死刑，政府正寻求从印度将其引渡回国。
+- **Source**: Al Jazeera
+
+### 6. **Fragile Climate Deal Reached at COP30** / **COP30达成脆弱的气候协议**
+- **Time**: 2025-11-23
+- **Content**: After intense negotiations, a fragile agreement has been reached at the COP30 climate summit, signaling a move towards the end of the fossil fuel era, though critics say it doesn't go far enough. / 经过紧张谈判，COP30气候峰会达成一项脆弱的协议，预示着化石燃料时代的终结，但批评人士称该协议力度不足。
+- **Source**: The Guardian
+
+### 7. **G20 Summit Closes Amidst US Boycott and Disputes** / **G20峰会在美国抵制和争议中闭幕**
+- **Time**: 2025-11-23
+- **Content**: The G20 summit in South Africa has concluded amidst a boycott by the United States and disputes over the handover of the presidency, highlighting geopolitical tensions. / 在南非举行的G20峰会在美国抵制和主席国交接争议中闭幕，凸显了地缘政治的紧张局势。
+- **Source**: The Guardian
+
+### 8. **Indian Fighter Jet Crashes at Dubai Air Show, Killing Pilot** / **印度战斗机在迪拜航展坠毁，飞行员丧生**
+- **Time**: 2025-11-23
+- **Content**: An Indian Air Force fighter jet crashed during a display at the Dubai Air Show, resulting in the death of the pilot. The cause of the crash is under investigation. / 一架印度空军战斗机在迪拜航展进行飞行表演时坠毁，飞行员不幸遇难。事故原因正在调查中。
 - **Source**: Global News
 
-### 7. **COP30 Climate Talks Conclude with "Weak Compromise" on Fossil Fuels** / **COP30气候谈判结束，就化石燃料问题达成“微弱妥协”**
+### 9. **5.7 Magnitude Earthquake Hits Bangladesh, Killing 7** / **孟加拉国发生5.7级地震，造成7人死亡**
 - **Time**: 2025-11-23
-- **Content**: The UN's COP30 climate talks have concluded with a deal on a loss and damage fund for climate-vulnerable nations. However, critics are calling the agreement a weak compromise as it lacks a clear roadmap for phasing out fossil fuels. / 联合国COP30气候谈判就为气候脆弱国家设立损失损害基金达成协议。然而，批评者称该协议是一个微弱的妥协，因为它缺乏逐步淘汰化石燃料的明确路线图。
-- **Source**: The Guardian
+- **Content**: A 5.7 magnitude earthquake has struck Bangladesh, resulting in the deaths of at least seven people and causing damage to buildings. / 孟加拉国发生5.7级地震，造成至少7人死亡，并导致部分建筑物受损。
+- **Source**: Global News
 
-### 8. **Former Brazilian President Jair Bolsonaro Arrested for Tampering with Ankle Tag** / **巴西前总统雅伊尔·博索纳罗因篡改脚踝追踪器被捕**
+### 10. **UK Navy Intercepts Russian Warships in Increased Naval Activity** / **英国海军拦截俄罗斯军舰，海军活动加剧**
 - **Time**: 2025-11-23
-- **Content**: Jair Bolsonaro, the former president of Brazil, has been arrested after allegedly tampering with his electronic monitoring ankle tag "out of curiosity." This adds to the legal challenges he has faced since leaving office. / 巴西前总统雅伊尔·博索纳罗因涉嫌“出于好奇”篡改其电子监控脚踝追踪器而被捕。这为他离任后面临的法律挑战增添了新的内容。
-- **Source**: The Guardian
-
-### 9. **US Retiree Jailed in Saudi Arabia Over Tweets is Released** / **因推文在沙特阿拉伯被监禁的美国退休人员获释**
-- **Time**: 2025-11-23
-- **Content**: A US retiree who was jailed in Saudi Arabia for posting critical tweets about the government has been released. The case had drawn significant attention from human rights organizations. / 一名因发布批评政府的推文而在沙特阿拉伯被监禁的美国退休人员已获释。该案件引起了人权组织的极大关注。
-- **Source**: The Guardian
-
-### 10. **Grizzly Bear Attack in Canada Injures 11, Including Schoolchildren** / **加拿大灰熊袭击事件致11人受伤，其中包括学童**
-- **Time**: 2025-11-23
-- **Content**: A grizzly bear attack in a Canadian national park has left 11 people injured, including a group of schoolchildren and their teachers. Park officials are searching for the bear involved in the incident. / 加拿大一个国家公园发生灰熊袭击事件，导致11人受伤，其中包括一群学童和他们的老师。公园管理人员正在搜寻涉事灰熊。
-- **Source**: The Guardian
+- **Content**: The UK's Royal Navy has intercepted a Russian corvette and tanker in a sign of increased naval activity from Moscow in waters near the UK. / 英国皇家海军拦截了一艘俄罗斯护卫舰和油轮，这表明莫斯科在英国附近水域的海军活动日益频繁。
+- **Source**: The Hindu
 
 ---
 
