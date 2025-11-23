@@ -1,59 +1,59 @@
 # Global Breaking News TOP10
 
-**Date**: 2025年11月22日
-**Update Time**: 22:17 UTC
+**Date**: 2025年11月23日
+**Update Time**: 10:18 UTC
 **AI Model**: Google Gemini / Google Gemini
 
 ---
 
-### 1. **Israel Launches New Strikes on Gaza, Testing Fragile Ceasefire** / **以色列对加沙发动新一轮袭击，脆弱的停火面临考验**
-- **Time**: 2025-11-22
-- **Content**: Israeli forces have conducted new airstrikes on the Gaza Strip, resulting in at least 24 Palestinian casualties. The escalation challenges the recently established fragile ceasefire, with Hamas accusing Israel of using "fabricated pretexts" to justify the attacks. International pressure is mounting for de-escalation. / 以色列军队对加沙地带发动了新的空袭，造成至少24名巴勒斯坦人伤亡。此次事态升级对近期达成的脆弱停火协议构成了挑战，哈马斯指责以色列以“捏造的借口”为袭击辩护。国际社会要求缓和局势的压力正在增加。
+### 1. **US-Backed Ukraine Peace Plan Under Scrutiny at G20 Summit** / **美国支持的乌克兰和平计划在G20峰会受到审视**
+- **Time**: 2025-11-23
+- **Content**: A US-backed peace plan for Ukraine is a major topic at the G20 summit, with allies expressing concerns it may favor Moscow. Former President Trump has indicated the proposal is not final, leaving Ukrainian President Zelenskyy to weigh the offer against continued US support. / 在G20峰会上，一项由美国支持的乌克兰和平计划成为主要议题，盟友们担心该计划可能偏向莫斯科。前总统特朗普表示该提议并非最终方案，使乌克兰总统泽连斯基需在接受提议与维持美国支持之间做出权衡。
+- **Source**: The Guardian
+
+### 2. **Israeli Airstrikes Kill 33 in Gaza Amid Post-Ceasefire Escalation** / **加沙停火后局势升级，以色列空袭致33人死亡**
+- **Time**: 2025-11-23
+- **Content**: Post-ceasefire attacks in Gaza have escalated, with recent Israeli airstrikes resulting in the deaths of 33 people. The Gaza Government Media Office reports nearly 500 alleged truce violations by Israel over the past 44 days. / 加沙地带停火后的袭击事件不断升级，最近的以色列空袭已导致33人死亡。加沙政府媒体办公室称，过去44天内，以色列被指控违反停火协议近500次。
 - **Source**: Al Jazeera
 
-### 2. **US-Russia Peace Plan for Ukraine Under Scrutiny** / **美俄就乌克兰问题提出的和平计划受到严格审视**
-- **Time**: 2025-11-22
-- **Content**: A peace plan for Ukraine, reportedly drafted by the US and Russia, is facing significant criticism from some Western leaders and US lawmakers. Critics argue the proposal appears to favor Moscow and requires substantial revisions before it can be considered a viable path to ending the conflict. / 一项据报由美国和俄罗斯共同起草的乌克兰和平计划，正面临一些西方领导人和美国国会议员的严厉批评。批评者认为，该提议似乎偏向莫斯科，需要进行重大修改才能被视为结束冲突的可行途径。
-- **Source**: Sky News
+### 3. **Vietnam Flooding and Landslides Death Toll Reaches 90** / **越南洪水和山体滑坡死亡人数升至90人**
+- **Time**: 2025-11-23
+- **Content**: The death toll from severe flooding and landslides in central Vietnam has tragically risen to 90. Rescue operations are ongoing as authorities search for dozens of people who remain missing. / 越南中部地区的严重洪水和山体滑坡已导致死亡人数不幸上升至90人。救援行动仍在进行中，当局正在搜寻数十名失踪人员。
+- **Source**: The Guardian
 
-### 3. **COP30 Climate Summit Ends with Controversial Deal** / **COP30气候峰会以一项有争议的协议告终**
-- **Time**: 2025-11-22
-- **Content**: The COP30 climate summit in Brazil has concluded with a deal that urges developed nations to provide more financial aid to poorer countries for climate adaptation, but fails to include a commitment to phase out fossil fuels. The outcome has drawn mixed reactions from world leaders and environmental groups. / 在巴西举行的COP30气候峰会已经闭幕，达成一项协议，敦促发达国家向较贫穷国家提供更多资金以适应气候变化，但协议未能包含逐步淘汰化石燃料的承诺。这一结果引起了世界各国领导人和环保组织的褒贬不一的反应。
-- **Source**: Reuters
+### 4. **5.7 Magnitude Earthquake in Bangladesh Kills at Least 7** / **孟加拉国发生5.7级地震，至少7人死亡**
+- **Time**: 2025-11-23
+- **Content**: A 5.7 magnitude earthquake struck Bangladesh, killing at least 7 people and injuring many more. Seismological experts are warning of the potential for stronger aftershocks in the coming days. / 孟加拉国发生5.7级地震，已造成至少7人死亡，多人受伤。地震专家警告称，未来几天可能会有更强烈的余震。
+- **Source**: Global News
 
-### 4. **Former Brazilian President Jair Bolsonaro Arrested** / **巴西前总统雅伊尔·博索纳罗被捕**
-- **Time**: 2025-11-22
-- **Content**: Jair Bolsonaro, the former President of Brazil, has been arrested. Authorities cited him as a flight risk just days before his prison term was set to begin for his role in anti-democratic acts and alleged corruption. / 巴西前总统雅伊尔·博索纳罗已被逮捕。当局称他有潜逃风险，而几天后他将因在反民主行为和腐败指控中扮演的角色而开始服刑。
+### 5. **Indian Fighter Jet Crashes at Dubai Air Show, Killing Pilot** / **印度战斗机在迪拜航展坠毁，飞行员遇难**
+- **Time**: 2025-11-23
+- **Content**: An Indian Air Force fighter jet crashed during a demonstration at the Dubai Air Show, resulting in the death of the pilot. The cause of the crash is currently under investigation. / 一架印度空军战斗机在迪拜航展的表演中坠毁，导致飞行员死亡。事故原因正在调查中。
 - **Source**: Associated Press
 
-### 5. **G20 Summit in South Africa Adopts Declaration Despite US Boycott** / **南非G20峰会通过宣言，尽管美国抵制**
-- **Time**: 2025-11-22
-- **Content**: Despite a boycott by the United States, the G20 summit hosted in South Africa has successfully adopted a joint declaration. The summit's discussions were heavily focused on the war in Ukraine and its global economic impact, highlighting geopolitical divisions. / 尽管美国进行了抵制，在南非主办的G20峰会仍成功通过了一项联合宣言。峰会的讨论主要集中在乌克兰战争及其全球经济影响上，凸显了地缘政治的分歧。
-- **Source**: The Hindu
+### 6. **Over 300 Schoolchildren Abducted in Nigeria in Second Mass Kidnapping** / **尼日利亚再次发生大规模绑架事件，超过300名学童被劫持**
+- **Time**: 2025-11-23
+- **Content**: Armed assailants have abducted over 300 schoolchildren in Nigeria, marking the second mass kidnapping incident in the country within a week. The event has sparked international outrage and calls for immediate action. / 武装分子在尼日利亚绑架了超过300名学童，这是一周内该国发生的第二起大规模绑架事件。此事件引发了国际社会的愤怒，并呼吁立即采取行动。
+- **Source**: Global News
 
-### 6. **Tensions Escalate Between China and Japan Over Taiwan** / **中国与日本因台湾问题紧张关系升级**
-- **Time**: 2025-11-22
-- **Content**: Diplomatic tensions between China and Japan have intensified, with the dispute over Taiwan reaching the United Nations. China asserted its right to "self-defense" against any armed intervention in what it considers a domestic matter, following strong statements from Japanese officials. / 中国与日本之间的外交紧张局势加剧，有关台湾的争端已提交至联合国。在日本官员发表强硬声明后，中国坚称有权对其视为内政的事务进行“自卫”，以对抗任何武装干预。
-- **Source**: Al Jazeera
+### 7. **COP30 Climate Talks Conclude with "Weak Compromise" on Fossil Fuels** / **COP30气候谈判结束，就化石燃料问题达成“微弱妥协”**
+- **Time**: 2025-11-23
+- **Content**: The UN's COP30 climate talks have concluded with a deal on a loss and damage fund for climate-vulnerable nations. However, critics are calling the agreement a weak compromise as it lacks a clear roadmap for phasing out fossil fuels. / 联合国COP30气候谈判就为气候脆弱国家设立损失损害基金达成协议。然而，批评者称该协议是一个微弱的妥协，因为它缺乏逐步淘汰化石燃料的明确路线图。
+- **Source**: The Guardian
 
-### 7. **Over 300 Students Abducted from Nigerian School** / **超过300名学生在尼日利亚学校被绑架**
-- **Time**: 2025-11-22
-- **Content**: Gunmen have abducted more than 300 students from a Catholic school in a raid in northern Nigeria. The mass kidnapping has sparked national outrage and a large-scale search and rescue operation is underway. / 武装分子在尼日利亚北部的一次袭击中，从一所天主教学校绑架了超过300名学生。这起大规模绑架事件引发了全国性的愤怒，大规模的搜救行动正在进行中。
-- **Source**: BBC News
+### 8. **Former Brazilian President Jair Bolsonaro Arrested for Tampering with Ankle Tag** / **巴西前总统雅伊尔·博索纳罗因篡改脚踝追踪器被捕**
+- **Time**: 2025-11-23
+- **Content**: Jair Bolsonaro, the former president of Brazil, has been arrested after allegedly tampering with his electronic monitoring ankle tag "out of curiosity." This adds to the legal challenges he has faced since leaving office. / 巴西前总统雅伊尔·博索纳罗因涉嫌“出于好奇”篡改其电子监控脚踝追踪器而被捕。这为他离任后面临的法律挑战增添了新的内容。
+- **Source**: The Guardian
 
-### 8. **Marjorie Taylor Greene Resigns After Clash with Donald Trump** / **马乔里·泰勒·格林在与唐纳德·特朗普冲突后辞职**
-- **Time**: 2025-11-22
-- **Content**: Prominent MAGA figure and U.S. Representative Marjorie Taylor Greene has announced her resignation from Congress. The decision follows a reported high-profile clash with former President Donald Trump over the future direction of the Republican party. / 著名的“让美国再次伟大”人物、美国众议员马乔里·泰勒·格林宣布辞去国会议员职务。据报道，这一决定是在她与前总统唐纳德·特朗普就共和党的未来方向发生激烈冲突之后做出的。
-- **Source**: Newsweek
+### 9. **US Retiree Jailed in Saudi Arabia Over Tweets is Released** / **因推文在沙特阿拉伯被监禁的美国退休人员获释**
+- **Time**: 2025-11-23
+- **Content**: A US retiree who was jailed in Saudi Arabia for posting critical tweets about the government has been released. The case had drawn significant attention from human rights organizations. / 一名因发布批评政府的推文而在沙特阿拉伯被监禁的美国退休人员已获释。该案件引起了人权组织的极大关注。
+- **Source**: The Guardian
 
-### 9. **Fugees Rapper Pras Michel Sentenced to 14 Years in Prison** / **Fugees说唱歌手普拉斯·米歇尔被判14年监禁**
-- **Time**: 2025-11-22
-- **Content**: Pras Michel, a member of the hip-hop group The Fugees, has been sentenced to 14 years in federal prison. He was convicted on charges related to illegal campaign contributions during the Obama administration and acting as an unregistered agent for foreign interests. / 嘻哈团体The Fugees的成员普拉斯·米歇尔被判处14年联邦监禁。他被定罪的罪名涉及在奥巴马政府期间的非法竞选捐款，以及作为外国利益的未注册代理人。
-- **Source**: CBS News
-
-### 10. **Colombian Authorities Seize 14 Tons of Cocaine in Major Bust** / **哥伦比亚当局在一次重大行动中缴获14吨可卡因**
-- **Time**: 2025-11-22
-- **Content**: In one of the largest drug seizures in a decade, Colombian authorities have discovered and seized 14 tons of cocaine. The operation, aided by sniffer dogs, dealt a significant blow to a major international drug trafficking ring. / 在十年来最大的一次毒品查抄行动中，哥伦比亚当局发现并缴获了14吨可卡因。这次在嗅探犬协助下的行动，对一个主要的国际贩毒集团造成了重大打击。
+### 10. **Grizzly Bear Attack in Canada Injures 11, Including Schoolchildren** / **加拿大灰熊袭击事件致11人受伤，其中包括学童**
+- **Time**: 2025-11-23
+- **Content**: A grizzly bear attack in a Canadian national park has left 11 people injured, including a group of schoolchildren and their teachers. Park officials are searching for the bear involved in the incident. / 加拿大一个国家公园发生灰熊袭击事件，导致11人受伤，其中包括一群学童和他们的老师。公园管理人员正在搜寻涉事灰熊。
 - **Source**: The Guardian
 
 ---
