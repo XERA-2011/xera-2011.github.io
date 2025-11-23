@@ -1,40 +1,43 @@
 # 应用文
 
-## A thank-you email to a host family after staying with them
-- 一封感谢信给寄宿家庭，感谢他们在你住宿期间的款待
+## A postcard from your exchange program abroad
+- 来自你的国外交换项目的明信片
 
 **正文**：
 
-Dear Smith Family,
+Hi Sam,
 
-I hope you are doing well. I wanted to send a huge thank you for your wonderful hospitality during my stay last week. I truly enjoyed my time with you all.
+Greetings from Barcelona! I'm having a fantastic time on my exchange program. The city is incredible, with so much amazing architecture to see. My host family is very kind and they cook the most delicious paella.
 
-I especially loved our evening walks in the park and the delicious homemade meals. Your kindness made me feel so welcome and comfortable. It was a fantastic experience, and I learned so much about your culture.
+I've been practicing my Spanish a lot, and I think it's improving. Last weekend, we visited the Sagrada Familia, which was absolutely breathtaking. I've met lots of other students from around the world at the language school.
 
-I already miss our conversations and your lovely home. I hope we can meet again someday, maybe you can visit me!
+Tomorrow, we're going to the beach. I'm so excited!
 
 Best wishes,
-[Your Name]
+Alex
 
-- 亲爱的史密斯一家，
-- 希望你们一切都好。我想对你们上周在我寄宿期间的热情款待表达衷心的感谢。我真的很享受和你们在一起的时光。
-- 我特别喜欢我们晚上在公园散步以及美味的家常饭菜。你们的善良让我感到非常受欢迎和自在。这是一次很棒的经历，我学到了很多关于你们文化的知识。
-- 我已经开始想念我们的谈话和你们可爱的家了。希望我们将来能再见面，也许你们可以来拜访我！
-- 此致，
-- [你的名字]
+- 嗨，萨姆，
+- 来自巴塞罗那的问候！我在这里的交换项目过得非常愉快。这座城市令人难以置信，有太多令人惊叹的建筑可看。我的寄宿家庭非常友善，他们做的海鲜饭最美味。
+- 我一直在大量练习我的西班牙语，我觉得它正在进步。上周末，我们参观了圣家堂，那里简直美得令人窒息。我在语言学校认识了很多来自世界各地的其他学生。
+- 明天，我们要去海滩。我太兴奋了！
+- 最好的祝愿，
+- 亚历克斯
 
 ---
 
 # 记叙文/短文
 
-## An article reviewing a movie that all teenagers should watch
-- 一篇评论一部所有青少年都应该看的电影的文章
+## An article giving advice on how to make new friends
+- 一篇关于如何结交新朋友的建议文章
 
 **正文**：
 
-"The Social Dilemma" is a documentary film that I believe every teenager should watch. It explores the dangerous impact of social media on our society and personal well-being. The movie features former executives from major tech companies who reveal how algorithms are designed to keep us addicted and influence our thoughts.
+Making new friends can feel challenging, but it's easier than you think. Here are a few simple tips to help you connect with new people.
 
-It's truly eye-opening to understand how our data is used and manipulated. The film raises important questions about privacy, mental health, and the spread of misinformation. Watching it made me rethink my own social media habits. It’s a crucial film for developing critical thinking skills in the digital age.
+Firstly, be open and approachable. A warm smile is always a great start. Don't be afraid to initiate a conversation; you can start by simply saying "hello" or asking a question about your shared environment, like a class or a club.
 
-- 《社交困境》是一部我认为所有青少年都应该看的纪录片。它探讨了社交媒体对我们社会和个人福祉的危险影响。电影中采访了主要科技公司的前高管，他们揭示了算法是如何被设计来让我们上瘾并影响我们的思想。
-- 了解我们的数据是如何被利用和操纵的，真是令人大开眼界。这部电影提出了关于隐私、心理健康和错误信息传播的重要问题。看完它让我重新思考了自己的社交媒体习惯。这是一部对于在数字时代培养批判性思维能力至关重要的电影。
+Secondly, find people with similar interests. Join a school club, a sports team, or a local group that focuses on a hobby you enjoy. This makes finding topics to talk about much easier. Finally, be a good listener. Show genuine interest in others, and they will be more interested in getting to know you.
+
+- 结交新朋友可能感觉很有挑战性，但这比你想象的要容易。这里有一些简单的技巧可以帮助你与新的人建立联系。
+- 首先，要开放和友善。一个温暖的微笑总是一个很好的开始。不要害怕主动发起对话；你可以简单地打个招呼，或者问一个关于你们共同环境的问题，比如课堂或俱乐部。
+- 其次，寻找有相似兴趣的人。参加一个学校俱乐部、运动队或专注于你喜欢的爱好的本地团体。这会让你更容易找到聊天的话题。最后，做一个好的倾听者。对他人表现出真诚的兴趣，他们也会更有兴趣了解你。
