@@ -1,7 +1,7 @@
 "use client";
 
 import { motion, Variants } from 'framer-motion';
-import { cn } from '@/utils/cn';
+import { cn } from '@/lib/utils';
 
 interface LogoProps {
   /** Custom CSS classes for styling */

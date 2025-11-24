@@ -5,7 +5,7 @@ import Link from "next/link";
 import styles from "./style.module.scss";
 import { background } from "./anim";
 import Nav from "./nav";
-import { cn } from "@/utils/cn";
+import { cn } from "@/lib/utils";
 import Breadcrumb from "./Breadcrumb";
 import { useApp } from "@/contexts/AppContext";
 import { ReactNode } from "react";

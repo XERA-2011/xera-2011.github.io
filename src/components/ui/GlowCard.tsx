@@ -1,7 +1,7 @@
 'use client';
 
 import React, { useRef, useEffect, HTMLAttributes } from 'react';
-import { cn } from '@/utils/cn';
+import { cn } from '@/lib/utils';
 
 interface GlowCardProps extends HTMLAttributes<HTMLDivElement> {
   children: React.ReactNode;

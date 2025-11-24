@@ -3,7 +3,7 @@
 import { useState, useCallback, useEffect } from 'react';
 import { motion } from 'framer-motion';
 import Image from 'next/image';
-import { cn } from '@/utils/cn';
+import { cn } from '@/lib/utils';
 
 interface JokeCardProps {
   theme?: string;

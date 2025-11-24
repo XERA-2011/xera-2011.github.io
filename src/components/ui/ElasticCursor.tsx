@@ -7,7 +7,7 @@ import React, {
   useState,
 } from "react";
 import { gsap } from "gsap";
-import { cn } from '@/utils/cn';
+import { cn } from '@/lib/utils';
 import { useMediaQuery } from "@/hooks/use-media-query";
 
 // 类型定义

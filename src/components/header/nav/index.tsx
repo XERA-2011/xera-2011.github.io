@@ -6,7 +6,7 @@ import styles from "./style.module.scss";
 import { height } from "../anim";
 import Body from "./body";
 import { links } from "../config";
-import { cn } from "@/utils/cn";
+import { cn } from "@/lib/utils";
 
 interface IndexProps {
   setIsActive: (isActive: boolean) => void;

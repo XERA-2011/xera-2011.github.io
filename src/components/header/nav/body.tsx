@@ -6,7 +6,7 @@ import Link from "next/link";
 import styles from "./body.module.scss";
 import { blur, translate } from "../anim";
 import { Link as LinkType } from "../config";
-import { cn } from "@/utils/cn";
+import { cn } from "@/lib/utils";
 import { usePathname } from "next/navigation";
 
 interface SelectedLink {
