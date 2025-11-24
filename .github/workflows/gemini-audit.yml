@@ -26,32 +26,15 @@ jobs:
         with:
           version: latest
 
-      - name: Check and Fix Lockfile
-        run: |
-          echo "=== 检查项目锁文件状态 ==="
-          
-          # 检查是否存在 overrides 配置不匹配问题
-          if pnpm install --frozen-lockfile 2>&1 | grep -q "ERR_PNPM_LOCKFILE_CONFIG_MISMATCH"; then
-            echo "🔧 发现锁文件配置不匹配，正在修复..."
-            echo "执行: pnpm install --no-frozen-lockfile"
-            pnpm install --no-frozen-lockfile
-            echo "✅ 锁文件已更新并同步"
-            echo "LOCKFILE_FIXED=true" >> $GITHUB_ENV
-          else
-            echo "✅ 锁文件状态正常，使用标准安装"
-            pnpm install
-            echo "LOCKFILE_FIXED=false" >> $GITHUB_ENV
-          fi
-
       - name: Install Dependencies
         run: |
           echo "=== 安装项目依赖 ==="
-          if [ "$LOCKFILE_FIXED" = "true" ]; then
-            echo "锁文件已在上一步修复，依赖安装完成"
-          else
-            echo "执行标准依赖安装..."
+          # 使用 frozen-lockfile 确保不会意外修改锁文件
+          pnpm install --frozen-lockfile || {
+            echo "⚠️ frozen-lockfile 安装失败，尝试标准安装..."
             pnpm install
-          fi
+            echo "LOCKFILE_CHANGED=true" >> $GITHUB_ENV
+          }
 
       - name: Install Gemini CLI
         run: |
@@ -109,9 +92,9 @@ jobs:
             pnpm audit --fix > .audit-reports/auto-fix-result.txt 2>&1
             FIX_EXIT_CODE=$?
             
-            # 更新锁文件确保一致性
-            echo "🔄 更新锁文件确保一致性..." >> .audit-reports/fix-log.txt
-            pnpm install --no-frozen-lockfile > .audit-reports/lockfile-sync.txt 2>&1 || echo "锁文件同步失败" >> .audit-reports/fix-log.txt
+            # 只在必要时更新锁文件
+            echo "🔄 验证依赖一致性..." >> .audit-reports/fix-log.txt
+            pnpm install > .audit-reports/lockfile-sync.txt 2>&1 || echo "依赖安装失败" >> .audit-reports/fix-log.txt
             
             # 检查是否还有漏洞
             pnpm audit > .audit-reports/post-fix-check1.txt 2>&1 || true
@@ -122,8 +105,8 @@ jobs:
               echo "策略2: 更新依赖到最新版本" >> .audit-reports/fix-log.txt
               pnpm update > .audit-reports/update-result.txt 2>&1 || true
               
-              # 更新锁文件
-              pnpm install --no-frozen-lockfile > .audit-reports/lockfile-sync2.txt 2>&1 || true
+              # 验证依赖
+              pnpm install > .audit-reports/lockfile-sync2.txt 2>&1 || true
               
               # 再次检查
               pnpm audit > .audit-reports/post-fix-check2.txt 2>&1 || true
@@ -134,8 +117,8 @@ jobs:
                 echo "策略3: 强制修复 pnpm audit --fix --force" >> .audit-reports/fix-log.txt
                 pnpm audit --fix --force > .audit-reports/force-fix-result.txt 2>&1 || true
                 
-                # 更新锁文件
-                pnpm install --no-frozen-lockfile > .audit-reports/lockfile-sync3.txt 2>&1 || true
+                # 验证依赖
+                pnpm install > .audit-reports/lockfile-sync3.txt 2>&1 || true
                 
                 # 最终检查
                 pnpm audit > .audit-reports/post-fix-check3.txt 2>&1 || true
@@ -205,9 +188,9 @@ jobs:
                     fi
                   done < .audit-reports/ai-fix-commands.txt
                   
-                  # 更新锁文件以避免部署时的配置不匹配错误
-                  echo "🔄 更新 pnpm 锁文件..." >> .audit-reports/fix-log.txt
-                  pnpm install --no-frozen-lockfile >> .audit-reports/lockfile-update.txt 2>&1 || echo "锁文件更新失败" >> .audit-reports/fix-log.txt
+                  # 验证依赖完整性
+                  echo "🔄 验证依赖完整性..." >> .audit-reports/fix-log.txt
+                  pnpm install >> .audit-reports/lockfile-update.txt 2>&1 || echo "依赖验证失败" >> .audit-reports/fix-log.txt
                   
                   # 最终验证
                   pnpm audit > .audit-reports/final-audit-check.txt 2>&1 || true
@@ -225,9 +208,9 @@ jobs:
                 echo "AUTO_FIX_STATUS=complete" >> $GITHUB_ENV
               fi
               
-              # 最终锁文件同步，确保部署兼容性
-              echo "🔄 最终锁文件同步..." >> .audit-reports/fix-log.txt
-              pnpm install --no-frozen-lockfile > .audit-reports/final-lockfile-sync.txt 2>&1 || echo "最终锁文件同步失败" >> .audit-reports/fix-log.txt
+              # 最终依赖验证
+              echo "🔄 最终依赖验证..." >> .audit-reports/fix-log.txt
+              pnpm install > .audit-reports/final-lockfile-sync.txt 2>&1 || echo "最终依赖验证失败" >> .audit-reports/fix-log.txt
               
               # 验证项目构建状态
               echo "🏗️ 验证项目构建状态..." >> .audit-reports/fix-log.txt
@@ -323,8 +306,8 @@ jobs:
           $BUILD_CHECK
           \`\`\`
 
-          ## 初始锁文件状态
-          初始锁文件修复状态: $INITIAL_LOCKFILE_STATUS
+          ## 依赖变更状态
+          依赖文件变更: ${LOCKFILE_CHANGED:-false}
 
           请生成一个包含以下部分的 Markdown 报告：
           1. 执行摘要（包含初始锁文件状态和多层 AI 自动修复状态）
@@ -374,7 +357,7 @@ jobs:
           **审计周期**: $(date -d '7 days ago' '+%Y-%m-%d') 至 $(date '+%Y-%m-%d')  
           **项目**: $(basename $(pwd))  
           **AI 修复状态**: ${AUTO_FIX_STATUS:-unknown}  
-          **初始锁文件状态**: ${INITIAL_LOCKFILE_STATUS}
+          **依赖变更**: ${LOCKFILE_CHANGED:-false}
 
           ---
 
@@ -404,7 +387,7 @@ jobs:
           **项目**: $(basename $(pwd))  
           **状态**: 基础报告 (AI 分析暂时不可用)
           **AI 修复状态**: ${AUTO_FIX_STATUS:-unknown}  
-          **初始锁文件状态**: ${INITIAL_LOCKFILE_STATUS}
+          **依赖变更**: ${LOCKFILE_CHANGED:-false}
 
           ## 执行摘要
 
@@ -546,25 +529,35 @@ jobs:
                           labels: labels
                         });
 
-      - name: Set commit message
+      - name: Check for changes
+        id: check_changes
         run: |
-          if [ "$SECURITY_FIXED" = "true" ] && [ "$LOCKFILE_FIXED" = "true" ]; then
-            echo "COMMIT_MESSAGE=Security Audit + Auto-fix + Lockfile Sync" >> $GITHUB_ENV
+          # 检查是否有实际的文件变更
+          git diff --quiet package.json pnpm-lock.yaml || echo "DEPS_CHANGED=true" >> $GITHUB_ENV
+          git diff --quiet public/markdown/security-audit-report.md || echo "REPORT_CHANGED=true" >> $GITHUB_ENV
+
+      - name: Set commit message
+        if: env.DEPS_CHANGED == 'true' || env.REPORT_CHANGED == 'true'
+        run: |
+          if [ "$SECURITY_FIXED" = "true" ] && [ "$DEPS_CHANGED" = "true" ]; then
+            echo "COMMIT_MESSAGE=chore(security): auto-fix vulnerabilities and update dependencies" >> $GITHUB_ENV
           elif [ "$SECURITY_FIXED" = "true" ]; then
-            echo "COMMIT_MESSAGE=Security Audit + Auto-fix" >> $GITHUB_ENV
-          elif [ "$LOCKFILE_FIXED" = "true" ]; then
-            echo "COMMIT_MESSAGE=Security Audit + Lockfile Sync" >> $GITHUB_ENV
+            echo "COMMIT_MESSAGE=chore(security): auto-fix vulnerabilities" >> $GITHUB_ENV
+          elif [ "$DEPS_CHANGED" = "true" ]; then
+            echo "COMMIT_MESSAGE=chore(deps): update lockfile from security audit" >> $GITHUB_ENV
           else
-            echo "COMMIT_MESSAGE=Security Audit Report" >> $GITHUB_ENV
+            echo "COMMIT_MESSAGE=docs: update security audit report" >> $GITHUB_ENV
           fi
 
       - name: Commit Security Reports and Fixes
+        if: env.DEPS_CHANGED == 'true' || env.REPORT_CHANGED == 'true'
         uses: stefanzweifel/git-auto-commit-action@v5
         with:
           commit_message: ${{ env.COMMIT_MESSAGE }}
           file_pattern: "public/markdown/security-audit-report.md package.json pnpm-lock.yaml"
           commit_user_name: "Security Audit Bot"
           commit_user_email: "security-audit-bot@users.noreply.github.com"
+          skip_dirty_check: false
 
       - name: Summary
         run: |
