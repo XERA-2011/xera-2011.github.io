@@ -1,9 +1,7 @@
 import { NextResponse } from 'next/server';
 import { auth } from '@/auth';
-import { PrismaClient } from '@prisma/client';
+import { prisma } from '@/lib/prisma';
 import { CELEBRITY_HOLDINGS } from '@/data/asset-allocation/celebrity-holdings';
-
-const prisma = new PrismaClient();
 
 // GET 请求：根据 type 参数返回不同数据
 export async function GET(request: Request) {
