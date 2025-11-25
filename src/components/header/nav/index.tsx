@@ -7,6 +7,7 @@ import { height } from "../anim";
 import Body from "./body";
 import { links } from "../config";
 import { cn } from "@/lib/utils";
+import { useSession } from "next-auth/react";
 
 interface IndexProps {
   setIsActive: (isActive: boolean) => void;
@@ -22,6 +23,7 @@ const Nav: React.FC<IndexProps> = ({ setIsActive }) => {
     isActive: false,
     index: 0,
   });
+  const { data: session } = useSession();
 
   useEffect(() => {
     const handleKeyDown = (e: KeyboardEvent) => {
@@ -33,6 +35,8 @@ const Nav: React.FC<IndexProps> = ({ setIsActive }) => {
     window.addEventListener("keydown", handleKeyDown);
     return () => window.removeEventListener("keydown", handleKeyDown);
   }, [setIsActive]);
+
+  const isAdmin = !!session?.user?.isAdmin;
 
   return (
     <div
@@ -49,7 +53,7 @@ const Nav: React.FC<IndexProps> = ({ setIsActive }) => {
         <div className={cn(styles.wrapper, 'flex justify-end sm:justify-start')}>
           <div className={styles.container} onClick={(e) => e.stopPropagation()}>
             <Body
-              links={links}
+              links={links.filter((link) => !link.adminOnly || isAdmin)}
               selectedLink={selectedLink}
               setSelectedLink={setSelectedLink}
               setIsActive={setIsActive}

@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useEffect, useRef } from 'react';
+import { useState, useEffect } from 'react';
 import { motion } from 'framer-motion';
 import { usePageTitle } from '@/hooks/use-page-title';
 import { useSession } from 'next-auth/react';
@@ -20,7 +20,6 @@ export default function LifeCountdownPage() {
   const [isSaving, setIsSaving] = useState(false);
   const [isLoading, setIsLoading] = useState(true);
   const [saveMessage, setSaveMessage] = useState('');
-  const loadedRef = useRef(false);
 
   // 加载用户保存的设置
   useEffect(() => {

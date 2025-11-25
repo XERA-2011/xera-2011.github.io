@@ -61,6 +61,15 @@ export const authConfig: NextAuthConfig = {
       // 将 token 中的用户 ID 添加到 session
       if (token && session.user) {
         session.user.id = token.id as string
+
+        const adminsEnv = process.env.ADMIN_EMAILS || process.env.ADMIN_EMAIL || ""
+        const adminList = adminsEnv
+          .split(",")
+          .map((e) => e.trim().toLowerCase())
+          .filter(Boolean)
+
+        const email = session.user.email?.toLowerCase()
+        session.user.isAdmin = !!email && adminList.includes(email)
       }
       return session
     },

@@ -4,6 +4,7 @@ export interface Link {
   target?: string;
   id?: string;       // 对应的 section id（用于首页锚点）
   offset?: number;   // 滚动触发位置（0-1 之间的百分比）
+  adminOnly?: boolean; // 仅管理员可见的导航项
 }
 
 /**
@@ -29,7 +30,12 @@ export const links: Link[] = [
     href: '/generate',
   },
   {
-    title: 'Privacy Policy',
+    title: 'Admin',
+    href: '/admin',
+    adminOnly: true,
+  },
+  {
+    title: 'Privacy',
     href: '/privacy',
   },
 ];
