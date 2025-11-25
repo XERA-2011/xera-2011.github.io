@@ -33,7 +33,7 @@ const Breadcrumb = () => {
   }
 
   return (
-    <nav className="flex items-center gap-2 text-sm" style={{ textTransform: 'none' }}>
+    <nav className="flex items-center gap-2 text-sm normal-case backdrop-blur-md">
       <Link href="/" className="flex items-center justify-center cursor-can-hover">
         <span className="text-base md:text-lg font-bold">
           XERA-2011

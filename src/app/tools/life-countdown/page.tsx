@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useRef } from 'react';
 import { motion } from 'framer-motion';
 import { usePageTitle } from '@/hooks/use-page-title';
 import { useSession } from 'next-auth/react';
@@ -20,6 +20,7 @@ export default function LifeCountdownPage() {
   const [isSaving, setIsSaving] = useState(false);
   const [isLoading, setIsLoading] = useState(true);
   const [saveMessage, setSaveMessage] = useState('');
+  const loadedRef = useRef(false);
 
   // 加载用户保存的设置
   useEffect(() => {
@@ -232,7 +233,7 @@ export default function LifeCountdownPage() {
               {/* Error Message */}
               {error && (
                 <div className="mb-6 p-4 bg-destructive/20 border border-destructive/30 rounded-lg flex items-start gap-2">
-                  <AlertCircle className="w-5 h-5 text-destructive flex-shrink-0 mt-0.5" />
+                  <AlertCircle className="w-5 h-5 text-destructive shrink-0 mt-0.5" />
                   <span className="text-destructive">{error}</span>
                 </div>
               )}

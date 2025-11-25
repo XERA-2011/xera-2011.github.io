@@ -66,6 +66,9 @@ export default function PieChart({ assets, totalAmount }: PieChartProps) {
 
       // 如果是完整的圆（100%），使用circle元素
       if (angle >= 359.99) {
+        const strokeColor = getStrokeByColor(color);
+        const strokeW = getLuminance(color) > 0.85 ? 1.5 : 2;
+
         return (
           <g key={asset.id}>
             <motion.circle
@@ -73,8 +76,10 @@ export default function PieChart({ assets, totalAmount }: PieChartProps) {
               cy={center}
               r={radius}
               fill={color}
-              stroke="rgba(255,255,255,0.2)"
-              strokeWidth="2"
+              stroke={strokeColor}
+              strokeWidth={strokeW}
+              strokeLinejoin="round"
+              filter="url(#pieShadow)"
               initial={{ opacity: 0, scale: 0 }}
               animate={{ opacity: 1, scale: 1 }}
               exit={{ opacity: 0, scale: 0 }}
@@ -106,13 +111,18 @@ export default function PieChart({ assets, totalAmount }: PieChartProps) {
         'Z'
       ].join(' ');
 
+      const strokeColor = getStrokeByColor(color);
+      const strokeW = getLuminance(color) > 0.85 ? 1.2 : 1.6;
+
       return (
         <g key={asset.id}>
           <motion.path
             d={pathData}
             fill={color}
-            stroke="rgba(255,255,255,0.2)"
-            strokeWidth="2"
+            stroke={strokeColor}
+            strokeWidth={strokeW}
+            strokeLinejoin="round"
+            filter="url(#pieShadow)"
             initial={{ opacity: 0, scale: 0 }}
             animate={{ opacity: 1, scale: 1 }}
             exit={{ opacity: 0, scale: 0 }}
@@ -154,6 +164,29 @@ export default function PieChart({ assets, totalAmount }: PieChartProps) {
     return `#${toHex(invertedR)}${toHex(invertedG)}${toHex(invertedB)}`;
   };
 
+  // 计算颜色亮度（sRGB 线性化后计算相对亮度）
+  const getLuminance = (hex: string) => {
+    const cleanHex = hex.replace('#', '');
+    const r = parseInt(cleanHex.substring(0, 2), 16) / 255;
+    const g = parseInt(cleanHex.substring(2, 4), 16) / 255;
+    const b = parseInt(cleanHex.substring(4, 6), 16) / 255;
+
+    const srgb = (c: number) => (c <= 0.03928 ? c / 12.92 : Math.pow((c + 0.055) / 1.055, 2.4));
+
+    const R = srgb(r);
+    const G = srgb(g);
+    const B = srgb(b);
+
+    return 0.2126 * R + 0.7152 * G + 0.0722 * B;
+  };
+
+  // 根据颜色返回合适的描边颜色（浅色使用暗描边，深色使用亮描边）
+  const getStrokeByColor = (hex: string) => {
+    const lum = getLuminance(hex);
+    if (lum > 0.85) return 'rgba(0,0,0,0.12)';
+    return 'rgba(255,255,255,0.16)';
+  };
+
   return (
     <div>
       <div className="flex justify-center items-center relative" style={{ isolation: 'isolate', zIndex: 0 }}>
@@ -168,6 +201,11 @@ export default function PieChart({ assets, totalAmount }: PieChartProps) {
               onMouseEnter={() => setIsHoveringChart(true)}
               onMouseLeave={() => setIsHoveringChart(false)}
             >
+              <defs>
+                <filter id="pieShadow" x="-50%" y="-50%" width="200%" height="200%">
+                  <feDropShadow dx="0" dy="2" stdDeviation="4" floodColor="#000" floodOpacity="0.12" />
+                </filter>
+              </defs>
               <AnimatePresence>
                 {generatePieChart()}
               </AnimatePresence>

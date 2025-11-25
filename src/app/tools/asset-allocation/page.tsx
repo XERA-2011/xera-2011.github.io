@@ -337,7 +337,7 @@ export default function AssetAllocationPage() {
           <Separator orientation="vertical" className="h-8" />
 
           {/* 名人持仓下拉选择器 */}
-          <div className="relative z-50">
+          <div className="relative">
             <Button
               onClick={() => setShowCelebrityDropdown(!showCelebrityDropdown)}
               variant="outline"
@@ -360,7 +360,7 @@ export default function AssetAllocationPage() {
                     initial={{ opacity: 0, y: -10 }}
                     animate={{ opacity: 1, y: 0 }}
                     exit={{ opacity: 0, y: -10 }}
-                    className="absolute top-full mt-2 left-0 min-w-[280px] bg-card border border-border rounded-lg shadow-2xl z-50 overflow-hidden"
+                    className="absolute top-full mt-2 left-0 min-w-[280px] bg-card border border-border rounded-lg shadow-2xl z-5 overflow-hidden"
                   >
                     {isLoadingCelebrity ? (
                       <div className="px-4 py-8 text-center text-muted-foreground text-sm">
