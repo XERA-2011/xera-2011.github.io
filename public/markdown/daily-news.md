@@ -1,60 +1,60 @@
 # Global Breaking News TOP10
 
 **Date**: 2025年11月25日
-**Update Time**: 10:24 UTC
+**Update Time**: 22:19 UTC
 **AI Model**: Google Gemini / Google Gemini
 
 ---
 
-### 1. **Russia Launches Deadly Strikes on Kyiv Amidst Peace Talks** / **和谈进行时，俄罗斯对基辅发动致命袭击**
+### 1. **Hezbollah Chief of Staff Reportedly Killed in Beirut Airstrike** / **黎巴嫩真主党参谋长在贝鲁特空袭中丧生**
 - **Time**: 2025-11-25
-- **Content**: Russia has launched deadly strikes on Kyiv while new US-brokered peace talks are in progress. In response, Ukraine has targeted two Russian oil plants and a reconnaissance aircraft. A US peace plan is being discussed, with Ukraine proposing significant alterations. / 在美国斡旋的新一轮和谈进行期间，俄罗斯对基辅发动了致命袭击。作为回应，乌克兰袭击了俄罗斯的两座炼油厂和一架侦察机。目前，一项美国和平计划正在讨论中，乌克兰方面提出了重大修改。
+- **Content**: A senior Hezbollah commander, believed to be the chief of staff, was killed in an airstrike in Beirut. The Israeli military has claimed responsibility for the attack, which is expected to significantly escalate tensions in the region. / 一名据信为真主党参谋长的高级指挥官在贝鲁特的一次空袭中丧生。以色列军方声称对此次袭击负责，预计这将导致地区紧张局势显著升级。
 - **Source**: The Guardian
 
-### 2. **Israeli Forces Kill Four Palestinians in Gaza, Captive's Body Recovered** / **以色列军队在加沙打死四名巴勒斯坦人，一名俘虏的尸体被发现**
+### 2. **Brazil's Supreme Court Orders Arrest of Jair Bolsonaro** / **巴西最高法院下令逮捕前总统博索纳罗**
 - **Time**: 2025-11-25
-- **Content**: Israeli forces have killed four Palestinians in Gaza, and the body of a captive has been recovered by fighters. Palestinians are experiencing renewed violence, including killings, raids, and settler attacks, as Israel reportedly moves beyond the agreed ceasefire lines. / 以色列军队在加沙地带打死了四名巴勒斯坦人，武装人员发现了一名被俘者的尸体。据报道，随着以色列越过商定的停火线，巴勒斯坦人正面临新一轮的杀戮、袭击和定居者攻击。
+- **Content**: Brazil's Supreme Court has ordered former President Jair Bolsonaro to begin a 27-year prison sentence for plotting a coup. This landmark decision follows a lengthy investigation into his attempts to overturn the 2022 election results. / 巴西最高法院已下令前总统雅伊尔·博索纳罗开始其27年的政变阴谋罪刑期。这项里程碑式的裁决是在对​​他推翻2022年选举结果的企图进行长期调查之后做出的。
 - **Source**: Al Jazeera
 
-### 3. **Over 300 Schoolchildren Kidnapped in Nigeria, Sparking Security Fears** / **尼日利亚三百多名学童遭绑架，引发安全担忧**
+### 3. **NATO Scrambles Jets After Russian Drones Enter Romanian Airspace** / **俄罗斯无人机进入罗马尼亚领空后，北约紧急出动战机**
 - **Time**: 2025-11-25
-- **Content**: Security concerns are escalating in Nigeria following the kidnapping of more than 300 schoolchildren. This incident follows a similar abduction of schoolchildren that occurred earlier in November. / 尼日利亚发生超过300名学童被绑架的事件，导致该国安全担忧加剧。此次事件是继11月初另一起学童绑架案之后发生的。
+- **Content**: NATO jets were scrambled after Russian drones made a deep incursion into Romania's airspace. This incident marks a serious breach of NATO territory and has prompted an urgent response from the alliance. / 在俄罗斯无人机深入罗马尼亚领空后，北约战机紧急升空。此事件标志着对北约领土的严重侵犯，并引发了联盟的紧急反应。
 - **Source**: The Guardian
 
-### 4. **Ethiopian Volcano Erupts for the First Time in 12,000 Years** / **埃塞俄比亚一火山一万两千年来首次喷发**
+### 4. **Ukraine and Allies Discuss US Peace Proposal** / **乌克兰与盟国讨论美国和平提议**
 - **Time**: 2025-11-25
-- **Content**: A volcano in Ethiopia has erupted for the first time in 12,000 years, marking a significant geological event. / 埃塞俄比亚一座火山在一万两千年后首次喷发，构成一次重要的地质事件。
+- **Content**: Ukrainian officials are meeting with Western allies to discuss a US-led peace proposal aimed at ending the war with Russia. President Zelenskyy has indicated a willingness to move forward, though some European leaders remain cautious. / 乌克兰官员正在与西方盟国会晤，讨论一项由美国主导的旨在结束与俄罗斯战争的和平提议。泽连斯基总统表示愿意推进该计划，但一些欧洲领导人仍持谨慎态度。
+- **Source**: The Guardian
+
+### 5. **Ethiopian Volcano Erupts for the First Time in 12,000 Years** / **埃塞俄比亚火山12000年来首次喷发**
+- **Time**: 2025-11-25
+- **Content**: A volcano in Ethiopia has erupted for the first time in 12,000 years, spewing a massive ash cloud into the atmosphere. The eruption has caused significant flight cancellations and poses a risk to local communities. / 埃塞俄比亚一座火山12000年来首次喷发，向大气中喷出大量火山灰云。此次喷发已导致大量航班取消，并对当地社区构成风险。
+- **Source**: Global News
+
+### 6. **24 Schoolgirls Rescued After Mass Abduction in Nigeria** / **尼日利亚大规模绑架事件后24名女学生获救**
+- **Time**: 2025-11-25
+- **Content**: Nigerian security forces have successfully rescued 24 schoolgirls who were abducted in a mass kidnapping in Kebbi state. The operation is ongoing to find the remaining captives. / 尼日利亚安全部队成功解救了在凯比州大规模绑架事件中被绑架的24名女学生。寻找其余被俘者的行动仍在进行中。
 - **Source**: Al Jazeera
 
-### 5. **Pakistani Airstrikes in Afghanistan Kill 10, Mostly Children, Reports Say** / **据报道，巴基斯坦空袭阿富汗，造成10人死亡，其中大部分为儿童**
+### 7. **Protests in China's Guizhou Province Over Cremation Mandate** / **中国贵州省因火葬强制令引发抗议**
 - **Time**: 2025-11-25
-- **Content**: Afghanistan has reported that Pakistani airstrikes in the eastern part of the country have resulted in the deaths of 10 people, the majority of whom were children. / 阿富汗方面报道，巴基斯坦在该国东部发动的空袭已导致10人死亡，其中大部分是儿童。
-- **Source**: The Hindu
-
-### 6. **Xi Jinping Discusses Taiwan's Future with Donald Trump, Reiterates Territorial Claim** / **习近平与唐纳德·特朗普讨论台湾未来，重申领土主张**
-- **Time**: 2025-11-25
-- **Content**: In a phone call with Donald Trump, Chinese President Xi Jinping discussed the future of Taiwan, reaffirming China's long-standing claim that the island is part of its territory. / 中国国家主席习近平在与唐纳德·特朗普的通话中，讨论了台湾的未来，并重申了中国长期以来关于该岛屿是其领土一部分的主张。
+- **Content**: Protests have erupted in China's Guizhou province following a government mandate requiring cremation, clashing with traditional burial practices. The protests highlight growing tensions between official policies and local customs. / 中国贵州省因政府强制推行火葬，与当地传统的土葬习俗发生冲突而爆发抗议活动。这些抗议凸显了官方政策与地方习俗之间日益紧张的关系。
 - **Source**: The Guardian
 
-### 7. **Australian Senator Pauline Hanson Barred from Parliament for Wearing Burqa in Protest** / **澳大利亚参议员宝琳·汉森因穿戴罩袍抗议被禁止进入议会**
+### 8. **Record Surge in Violence and Displacement in West Bank** / **约旦河西岸暴力和流离失所事件激增**
 - **Time**: 2025-11-25
-- **Content**: Australian Senator Pauline Hanson has been barred from the nation's Parliament after she wore a burqa as a form of protest. / 澳大利亚参议员宝琳·汉森因在议会中穿戴罩袍以示抗议，被禁止进入议会。
-- **Source**: The Hindu
+- **Content**: The occupied West Bank has seen a record surge in Israeli settler violence and Palestinian displacement. The UN has called for an investigation into the escalating human rights crisis. / 被占领的约旦河西岸的以色列定居者暴力和巴勒斯坦人流离失所事件创下历史新高。联合国呼吁对不断升级的人权危机进行调查。
+- **Source**: Al Jazeera
 
-### 8. **Thai Woman Discovered Alive in Coffin Moments Before Cremation** / **泰国女子火化前在棺材中被发现还活着**
+### 9. **UN Warns HIV Response Disrupted by Funding Cuts** / **联合国警告资金削减扰乱艾滋病应对工作**
 - **Time**: 2025-11-25
-- **Content**: A woman in Thailand was found to be alive inside her coffin just moments before she was scheduled to be cremated at a temple. / 泰国一名女子在即将在寺庙被火化前的片刻，被发现在她的棺材里还活着。
-- **Source**: The Guardian
+- **Content**: A new UN report states that international funding cuts have severely disrupted the global response to HIV. The report warns that progress in combating the epidemic could be reversed without urgent financial support. / 联合国一份新报告指出，国际资金削减严重扰乱了全球对艾滋病毒的应对工作。报告警告说，如果没有紧急的财政支持，抗击这一流行病的进展可能会出现逆转。
+- **Source**: Al Jazeera
 
-### 9. **Author Thomas King States He Is Not Indigenous After Genealogical Research** / **作家托马斯·金在宗谱研究后声明自己并非原住民**
+### 10. **Thai Woman Found Alive in Coffin Moments Before Cremation** / **泰国女子火化前瞬间在棺材中被发现还活着**
 - **Time**: 2025-11-25
-- **Content**: Thomas King, author of "The Inconvenient Indian," has publicly stated that he is not Indigenous. This announcement comes after a genealogist's research found no evidence of Cherokee ancestry in his family history. / 《不方便的印第安人》一书的作者托马斯·金公开声明他并非原住民。该声明是在一位宗谱学家研究发现其家族史中没有切诺基血统的证据之后发布的。
-- **Source**: The Guardian
-
-### 10. **South Africa's Ramaphosa Closes G20 Summit Amidst US Boycott and Handover Dispute** / **南非总统拉马福萨在美国抵制和交接争议中为G20峰会闭幕**
-- **Time**: 2025-11-25
-- **Content**: South African President Cyril Ramaphosa has officially closed the G20 summit, which was marked by a boycott from the United States and a dispute over the handover of the presidency. / 南非总统西里尔·拉马福萨正式宣布G20峰会闭幕，本届峰会因美国的抵制和主席国交接的争议而备受关注。
-- **Source**: The Guardian
+- **Content**: A Thai woman was discovered to be alive in her coffin just moments before she was due to be cremated. Family members heard her cries and were able to rescue her in a miraculous turn of events. / 一名泰国妇女在即将被火化前被发现还活在棺材里。家人听到了她的哭声，并在奇迹般的转折中将她救出。
+- **Source**: Sky News
 
 ---
 
