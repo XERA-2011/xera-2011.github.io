@@ -73,14 +73,16 @@ export default function DashboardPage() {
                 {session.user.image && (
                   <div className="relative">
                     <div className="absolute -inset-1 bg-gradient-to-r from-primary/30 to-primary/10 rounded-full blur opacity-50"></div>
-                    <Image
-                      src={session.user.image}
-                      alt="头像"
-                      width={96}
-                      height={96}
-                      priority
-                      className="relative rounded-full border-2 border-border"
-                    />
+                    <div className="relative rounded-full bg-white">
+                      <Image
+                        src={session.user.image}
+                        alt="头像"
+                        width={96}
+                        height={96}
+                        priority
+                        className="rounded-full"
+                      />
+                    </div>
                   </div>
                 )}
 
