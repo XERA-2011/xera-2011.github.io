@@ -1,60 +1,60 @@
 # Global Breaking News TOP10
 
-**Date**: 2025年11月25日
-**Update Time**: 22:19 UTC
+**Date**: 2025年11月26日
+**Update Time**: 10:22 UTC
 **AI Model**: Google Gemini / Google Gemini
 
 ---
 
-### 1. **Hezbollah Chief of Staff Reportedly Killed in Beirut Airstrike** / **黎巴嫩真主党参谋长在贝鲁特空袭中丧生**
-- **Time**: 2025-11-25
-- **Content**: A senior Hezbollah commander, believed to be the chief of staff, was killed in an airstrike in Beirut. The Israeli military has claimed responsibility for the attack, which is expected to significantly escalate tensions in the region. / 一名据信为真主党参谋长的高级指挥官在贝鲁特的一次空袭中丧生。以色列军方声称对此次袭击负责，预计这将导致地区紧张局势显著升级。
-- **Source**: The Guardian
+### 1. **Russia-Ukraine War: US Envoy Reportedly Coached Putin Aide on Peace Plan Pitch to Trump** / **俄乌战争：据报道，美国特使就如何向特朗普推销和平计划向普京助手提供指导**
+- **Time**: 2025-11-26
+- **Content**: The conflict in Ukraine continues with ongoing attacks on energy infrastructure. Reports have emerged that a US envoy has been coaching a Putin aide on how to present a Ukraine peace plan to Donald Trump, suggesting a new diplomatic angle in the long-running conflict. / 乌克兰冲突仍在继续，能源基础设施不断遭到袭击。有报道称，一名美国特使一直在指导普京的一名助手，如何向唐纳德·特朗普提出乌克兰和平计划，这为这场旷日持久的冲突提供了一个新的外交视角。
+- **Source**: AP News
 
-### 2. **Brazil's Supreme Court Orders Arrest of Jair Bolsonaro** / **巴西最高法院下令逮捕前总统博索纳罗**
-- **Time**: 2025-11-25
-- **Content**: Brazil's Supreme Court has ordered former President Jair Bolsonaro to begin a 27-year prison sentence for plotting a coup. This landmark decision follows a lengthy investigation into his attempts to overturn the 2022 election results. / 巴西最高法院已下令前总统雅伊尔·博索纳罗开始其27年的政变阴谋罪刑期。这项里程碑式的裁决是在对​​他推翻2022年选举结果的企图进行长期调查之后做出的。
+### 2. **Israel-Hamas Conflict: Israel Launches New Strikes in Gaza, Hospitals Report 24 Killed** / **以色列-哈马斯冲突：以色列在加沙发动新一轮袭击，医院报告24人死亡**
+- **Time**: 2025-11-26
+- **Content**: The situation in Gaza remains critical as Israel launches new strikes, with local hospitals reporting at least 24 fatalities. The humanitarian crisis is deepening, exacerbated by the onset of winter rains. / 加沙局势依然严峻，以色列发动了新的袭击，当地医院报告至少有24人死亡。冬季降雨的到来加剧了人道主义危机。
+- **Source**: Reuters
+
+### 3. **Taiwan Announces $40 Billion Special Budget for Arms Purchases to Counter China** / **台湾宣布400亿美元特别预算用于武器采购以对抗中国**
+- **Time**: 2025-11-26
+- **Content**: Taiwan's government has approved a special budget of $40 billion to purchase arms and bolster its defense capabilities in response to what it describes as "intensifying" threats from mainland China. / 台湾政府批准了一项400亿美元的特别预算，用于购买武器和加强国防能力，以应对其所称的来自中国大陆的“日益加剧”的威胁。
 - **Source**: Al Jazeera
 
-### 3. **NATO Scrambles Jets After Russian Drones Enter Romanian Airspace** / **俄罗斯无人机进入罗马尼亚领空后，北约紧急出动战机**
-- **Time**: 2025-11-25
-- **Content**: NATO jets were scrambled after Russian drones made a deep incursion into Romania's airspace. This incident marks a serious breach of NATO territory and has prompted an urgent response from the alliance. / 在俄罗斯无人机深入罗马尼亚领空后，北约战机紧急升空。此事件标志着对北约领土的严重侵犯，并引发了联盟的紧急反应。
+### 4. **Floods and Landslides in Indonesia's Sumatra Kill at Least 10** / **印尼苏门答腊岛洪水和山体滑坡造成至少10人死亡**
+- **Time**: 2025-11-26
+- **Content**: Heavy rains have triggered flash floods and landslides on the Indonesian island of Sumatra, resulting in at least 10 deaths and several people missing. Rescue efforts are underway. / 暴雨在印度尼西亚苏门答腊岛引发了山洪和山体滑坡，造成至少10人死亡，数人失踪。救援工作正在进行中。
 - **Source**: The Guardian
 
-### 4. **Ukraine and Allies Discuss US Peace Proposal** / **乌克兰与盟国讨论美国和平提议**
-- **Time**: 2025-11-25
-- **Content**: Ukrainian officials are meeting with Western allies to discuss a US-led peace proposal aimed at ending the war with Russia. President Zelenskyy has indicated a willingness to move forward, though some European leaders remain cautious. / 乌克兰官员正在与西方盟国会晤，讨论一项由美国主导的旨在结束与俄罗斯战争的和平提议。泽连斯基总统表示愿意推进该计划，但一些欧洲领导人仍持谨慎态度。
-- **Source**: The Guardian
+### 5. **Long-Dormant Ethiopian Volcano Erupts for the First Time in 12,000 Years** / **休眠12000年的埃塞俄比亚火山首次喷发**
+- **Time**: 2025-11-26
+- **Content**: A volcano in Ethiopia that has been dormant for 12,000 years has erupted, sending plumes of ash into the sky. While the initial eruption has subsided, scientists are closely monitoring the situation. / 埃塞俄比亚一座休眠了12000年的火山爆发，将火山灰喷向天空。虽然最初的喷发已经平息，但科学家们正在密切关注事态发展。
+- **Source**: BBC News
 
-### 5. **Ethiopian Volcano Erupts for the First Time in 12,000 Years** / **埃塞俄比亚火山12000年来首次喷发**
-- **Time**: 2025-11-25
-- **Content**: A volcano in Ethiopia has erupted for the first time in 12,000 years, spewing a massive ash cloud into the atmosphere. The eruption has caused significant flight cancellations and poses a risk to local communities. / 埃塞俄比亚一座火山12000年来首次喷发，向大气中喷出大量火山灰云。此次喷发已导致大量航班取消，并对当地社区构成风险。
-- **Source**: Global News
+### 6. **Former Brazilian President Jair Bolsonaro Begins 27-Year Prison Sentence for Coup Plot** / **巴西前总统雅伊尔·博索纳罗因策划政变开始27年刑期**
+- **Time**: 2025-11-26
+- **Content**: Jair Bolsonaro, the former president of Brazil, has started serving a 27-year prison sentence after being found guilty of plotting a coup to overthrow the government. / 巴西前总统雅伊尔·博索纳罗在被认定犯有策划政变推翻政府的罪行后，已开始服27年的有期徒刑。
+- **Source**: CNN
 
-### 6. **24 Schoolgirls Rescued After Mass Abduction in Nigeria** / **尼日利亚大规模绑架事件后24名女学生获救**
-- **Time**: 2025-11-25
-- **Content**: Nigerian security forces have successfully rescued 24 schoolgirls who were abducted in a mass kidnapping in Kebbi state. The operation is ongoing to find the remaining captives. / 尼日利亚安全部队成功解救了在凯比州大规模绑架事件中被绑架的24名女学生。寻找其余被俘者的行动仍在进行中。
-- **Source**: Al Jazeera
+### 7. **Protests Erupt in China's Guizhou Province Over Cremation Mandate** / **中国贵州省因火葬强制令引发抗议**
+- **Time**: 2025-11-26
+- **Content**: Protests have broken out in the Guizhou province of China following a government mandate requiring cremation, which clashes with local traditions of burial. / 在中国贵州省，政府强制要求火葬，这与当地的土葬传统发生冲突，引发了抗议活动。
+- **Source**: The Hindu
 
-### 7. **Protests in China's Guizhou Province Over Cremation Mandate** / **中国贵州省因火葬强制令引发抗议**
-- **Time**: 2025-11-25
-- **Content**: Protests have erupted in China's Guizhou province following a government mandate requiring cremation, clashing with traditional burial practices. The protests highlight growing tensions between official policies and local customs. / 中国贵州省因政府强制推行火葬，与当地传统的土葬习俗发生冲突而爆发抗议活动。这些抗议凸显了官方政策与地方习俗之间日益紧张的关系。
-- **Source**: The Guardian
+### 8. **France Detains Four in Suspected Russian Spy Network Inquiry** / **法国在俄罗斯间谍网络嫌疑调查中拘留四人**
+- **Time**: 2025-11-26
+- **Content**: French authorities have detained four individuals as part of an ongoing investigation into a suspected Russian spy network operating within the country. / 法国当局拘留了四名个人，这是一项针对在该国境内活动的俄罗斯间谍网络嫌疑的持续调查的一部分。
+- **Source**: France 24
 
-### 8. **Record Surge in Violence and Displacement in West Bank** / **约旦河西岸暴力和流离失所事件激增**
-- **Time**: 2025-11-25
-- **Content**: The occupied West Bank has seen a record surge in Israeli settler violence and Palestinian displacement. The UN has called for an investigation into the escalating human rights crisis. / 被占领的约旦河西岸的以色列定居者暴力和巴勒斯坦人流离失所事件创下历史新高。联合国呼吁对不断升级的人权危机进行调查。
-- **Source**: Al Jazeera
+### 9. **Italy Recognizes Femicide as a Specific Crime Punishable by Life in Prison** / **意大利承认杀害女性为特定罪行，可判处终身监禁**
+- **Time**: 2025-11-26
+- **Content**: Italy's parliament has passed a new law that officially recognizes femicide as a distinct crime, with perpetrators facing a mandatory sentence of life in prison. / 意大利议会通过了一项新法律，正式承认杀害女性为一种独特的犯罪，肇事者将面临终身监禁的强制性判决。
+- **Source**: The New York Times
 
-### 9. **UN Warns HIV Response Disrupted by Funding Cuts** / **联合国警告资金削减扰乱艾滋病应对工作**
-- **Time**: 2025-11-25
-- **Content**: A new UN report states that international funding cuts have severely disrupted the global response to HIV. The report warns that progress in combating the epidemic could be reversed without urgent financial support. / 联合国一份新报告指出，国际资金削减严重扰乱了全球对艾滋病毒的应对工作。报告警告说，如果没有紧急的财政支持，抗击这一流行病的进展可能会出现逆转。
-- **Source**: Al Jazeera
-
-### 10. **Thai Woman Found Alive in Coffin Moments Before Cremation** / **泰国女子火化前瞬间在棺材中被发现还活着**
-- **Time**: 2025-11-25
-- **Content**: A Thai woman was discovered to be alive in her coffin just moments before she was due to be cremated. Family members heard her cries and were able to rescue her in a miraculous turn of events. / 一名泰国妇女在即将被火化前被发现还活在棺材里。家人听到了她的哭声，并在奇迹般的转折中将她救出。
-- **Source**: Sky News
+### 10. **US Imposes Sanctions on High-Ranking Haitian Official for Alleged Gang Support** / **美国因涉嫌支持黑帮而对海地高级官员实施制裁**
+- **Time**: 2025-11-26
+- **Content**: The United States has sanctioned a high-ranking official in Haiti, accusing them of providing support to and collaborating with violent gangs in the country. / 美国已对海地一名高级官员实施制裁，指控其向该国暴力团伙提供支持并与之合作。
+- **Source**: Associated Press
 
 ---
 
