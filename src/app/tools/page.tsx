@@ -32,6 +32,21 @@ const toolsData: GlowCardItem[] = [
     href: "/tools/life-countdown",
   },
   {
+    id: "crypto-coin",
+    title: "加密货币价格",
+    href: "/tools/crypto-coin",
+  },
+  {
+    id: "github-stats",
+    title: "GitHub 统计卡片",
+    href: "/tools/github-stats",
+  },
+  {
+    id: "github-top-langs",
+    title: "GitHub 语言统计",
+    href: "/tools/github-top-langs",
+  },
+  {
     id: "coze",
     title: "Coze",
     href: "/tools/coze",
