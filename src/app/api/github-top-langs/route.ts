@@ -189,9 +189,9 @@ function renderLanguageCard(
   }).join('');
 
   return `
-<svg width="400" height="220" xmlns="http://www.w3.org/2000/svg">
+<svg width="400" height="170" xmlns="http://www.w3.org/2000/svg">
   <!-- 背景 -->
-  <rect width="400" height="220" fill="${currentTheme.bg}" rx="12" ${hideBorder ? '' : `stroke="${currentTheme.border}" stroke-width="1"`}/>
+  <rect width="400" height="170" fill="${currentTheme.bg}" rx="12" ${hideBorder ? '' : `stroke="${currentTheme.border}" stroke-width="1"`}/>
   
   <!-- 标题 -->
   <text x="20" y="35" font-family="Arial, sans-serif" font-size="16" font-weight="600" fill="${currentTheme.title}">Top Languages</text>
