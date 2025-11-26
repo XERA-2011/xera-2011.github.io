@@ -36,7 +36,7 @@ const COIN_MAPPINGS: Record<string, { id: string; symbol: string; name: string }
 };
 
 /**
- * GET /api/coin
+ * GET /api/crypto-coin
  * 生成币价 SVG 卡片
  *
  * 参数:
@@ -46,8 +46,8 @@ const COIN_MAPPINGS: Record<string, { id: string; symbol: string; name: string }
  * - hideBorder: 是否隐藏边框（可选）
  *
  * 示例:
- * - /api/coin?coin=btc
- * - /api/coin?coin=btc,eth,sol,bnb&mode=multi
+ * - /api/crypto-coin?coin=btc
+ * - /api/crypto-coin?coin=btc,eth,sol,bnb&mode=multi
  */
 export async function GET(request: NextRequest) {
   try {
@@ -154,7 +154,6 @@ export async function GET(request: NextRequest) {
           currency: 'USD',
           change24h: coinInfo?.usd_24h_change || null,
           color: COIN_COLORS[symbol] || '#ffffff',
-          bgColor,
         };
       });
 

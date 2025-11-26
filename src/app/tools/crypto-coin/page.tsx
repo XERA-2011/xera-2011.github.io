@@ -3,7 +3,7 @@
 import { useState } from 'react';
 import { motion } from 'framer-motion';
 import { usePageTitle } from '@/hooks/use-page-title';
-import CoinPrice from '@/components/ui/CoinPrice';
+import CryptoCoinPrice from '@/components/ui/CryptoCoinPrice';
 import GlowCard from '@/components/ui/GlowCard';
 import { Button } from '@/components/ui/button';
 
@@ -24,13 +24,13 @@ export default function CoinPage() {
   const examples = [
     {
       title: '单币种卡片',
-      code: '![BTC Price](https://xera-2011.vercel.app/api/coin?coin=btc)',
-      preview: '/api/coin?coin=btc',
+      code: '![BTC Price](https://xera-2011.vercel.app/api/crypto-coin?coin=btc)',
+      preview: '/api/crypto-coin?coin=btc',
     },
     {
       title: '多币种卡片',
-      code: '![Crypto Prices](https://xera-2011.vercel.app/api/coin?coin=btc,eth,sol,bnb&mode=multi)',
-      preview: '/api/coin?coin=btc,eth,sol,bnb&mode=multi',
+      code: '![Crypto Prices](https://xera-2011.vercel.app/api/crypto-coin?coin=btc,eth,sol,bnb&mode=multi)',
+      preview: '/api/crypto-coin?coin=btc,eth,sol,bnb&mode=multi',
     },
   ];
 
@@ -45,11 +45,8 @@ export default function CoinPage() {
           transition={{ duration: 0.8 }}
         >
           <h2 className="text-3xl sm:text-4xl font-bold text-white mb-2">
-            Cryptocurrency Prices
+            Crypto Coin Prices
           </h2>
-          <p className="text-white/70 text-base">
-            Real-time cryptocurrency price tracking
-          </p>
         </motion.div>
 
         {/* Coin Price Card */}
@@ -59,7 +56,7 @@ export default function CoinPage() {
           transition={{ duration: 0.8, delay: 0.2 }}
         >
           <GlowCard className="p-4 sm:p-6">
-            <CoinPrice
+            <CryptoCoinPrice
               coins={['btc', 'eth', 'sol', 'bnb']}
               showControls={true}
               autoRefresh={true}

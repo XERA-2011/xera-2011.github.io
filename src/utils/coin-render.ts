@@ -203,7 +203,7 @@ export function renderMultiCoinCard(coins: CoinCardOptions[]): string {
 
     return `
       <g transform="translate(${x}, ${y})">
-        <rect width="${cardWidth}" height="${cardHeight}" rx="12" fill="${coin.bgColor || '#0f172a'}" stroke="${coin.color}40" stroke-width="2"/>
+        <rect width="${cardWidth}" height="${cardHeight}" rx="12" fill="transparent" stroke="${coin.color}40" stroke-width="2"/>
         <text x="${cardWidth / 2}" y="35" font-size="24" font-weight="700" fill="${coin.color}" text-anchor="middle" font-family="Arial, sans-serif">${coin.symbol}</text>
         <text x="${cardWidth / 2}" y="55" font-size="10" fill="#94a3b8" text-anchor="middle" font-family="Arial, sans-serif">${coin.name}</text>
         <text x="${cardWidth / 2}" y="85" font-size="20" font-weight="700" fill="#ffffff" text-anchor="middle" font-family="Arial, sans-serif">$${priceText}</text>
@@ -215,7 +215,7 @@ export function renderMultiCoinCard(coins: CoinCardOptions[]): string {
 
   return `
 <svg width="${totalWidth}" height="${totalHeight}" xmlns="http://www.w3.org/2000/svg">
-  <rect width="100%" height="100%" fill="#0f172a"/>
+  <rect width="100%" height="100%" fill="transparent"/>
   ${coinCards}
 </svg>`;
 }

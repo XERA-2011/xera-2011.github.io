@@ -25,7 +25,7 @@ interface CoinPriceProps {
 
 /**
  * 币价展示组件
- * 从 /api/coin 获取并显示加密货币价格
+ * 从 /crypto-coin 获取并显示加密货币价格
  */
 export default function CoinPrice({
   coins = ['btc', 'eth', 'sol', 'bnb'],
@@ -71,7 +71,7 @@ export default function CoinPrice({
       coin: coin.toLowerCase(),
       mode: 'single',
     });
-    return `/api/coin?${params.toString()}&r=${refreshKey}`;
+    return `/api/crypto-coin?${params.toString()}&r=${refreshKey}`;
   }, [refreshKey, isMounted]);
 
   // 获取多币种 SVG 卡片 URL
@@ -81,7 +81,7 @@ export default function CoinPrice({
       coin: coins.join(','),
       mode: 'multi',
     });
-    return `/api/coin?${params.toString()}&r=${refreshKey}`;
+    return `/api/crypto-coin?${params.toString()}&r=${refreshKey}`;
   }, [coins, refreshKey, isMounted]);
 
   // 获取价格数据
@@ -108,7 +108,7 @@ export default function CoinPrice({
         vs: 'usd',
       });
 
-      const response = await fetch(`/api/coin?${params.toString()}`);
+      const response = await fetch(`/api/crypto-coin?${params.toString()}`);
 
       if (!response.ok) {
         throw new Error(`HTTP ${response.status}`);
