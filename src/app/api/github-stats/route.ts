@@ -20,6 +20,11 @@ interface CacheEntry {
 const cache = new Map<string, CacheEntry>();
 const CACHE_DURATION = CACHE_SECONDS * 1000;
 
+interface Repo {
+  stargazers_count?: number;
+  fork?: boolean;
+}
+
 /**
  * 获取 GitHub 用户统计数据
  */
@@ -62,10 +67,11 @@ async function fetchGitHubStats(username: string, token?: string): Promise<GitHu
     let contributedTo = 0;
 
     if (reposResponse.ok) {
-      const repos = await reposResponse.json();
+      const reposData = await reposResponse.json();
+      const repos: Repo[] = Array.isArray(reposData) ? (reposData as Repo[]) : [];
       // 计算总星标数
-      totalStars = repos.reduce((acc: number, repo: any) => acc + (repo.stargazers_count || 0), 0);
-      contributedTo = repos.filter((r: any) => r.fork).length;
+      totalStars = repos.reduce((acc: number, repo: Repo) => acc + (repo.stargazers_count || 0), 0);
+      contributedTo = repos.filter((r: Repo) => !!r.fork).length;
     }
 
     // 使用公开的用户数据

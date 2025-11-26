@@ -2,6 +2,7 @@
 
 import { useState } from 'react';
 import { motion } from 'framer-motion';
+import Image from 'next/image';
 import { usePageTitle } from '@/hooks/use-page-title';
 import GlowCard from '@/components/ui/GlowCard';
 import { Button } from '@/components/ui/button';
@@ -87,11 +88,14 @@ export default function GitHubStatsPage() {
               </div>
 
               <div className="flex justify-center bg-black/20 border border-white/10 rounded-lg p-8 mt-6" style={{ minHeight: '350px' }}>
-                <img
+                <Image
                   src={`/api/github-stats?username=${username}&theme=${theme}&v=2`}
                   alt="GitHub Stats Preview"
                   key={`${username}-${theme}`}
-                  style={{ maxWidth: '100%', width: 'auto', height: 'auto', display: 'block' }}
+                  width={450}
+                  height={350}
+                  style={{ maxWidth: '100%', height: 'auto', display: 'block' }}
+                  unoptimized
                 />
               </div>
             </div>

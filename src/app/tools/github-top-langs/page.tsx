@@ -2,6 +2,7 @@
 
 import { useState } from 'react';
 import { motion } from 'framer-motion';
+import Image from 'next/image';
 import { usePageTitle } from '@/hooks/use-page-title';
 import GlowCard from '@/components/ui/GlowCard';
 import { Button } from '@/components/ui/button';
@@ -87,11 +88,14 @@ export default function GitHubTopLangsPage() {
               </div>
 
               <div className="flex justify-center bg-black/20 border border-white/10 rounded-lg p-8 mt-6" style={{ minHeight: '170px' }}>
-                <img
+                <Image
                   src={`/api/github-top-langs?username=${username}&theme=${theme}&v=20`}
                   alt="Top Languages Preview"
                   key={`${username}-${theme}`}
-                  style={{ maxWidth: '100%', width: 'auto', height: 'auto', display: 'block' }}
+                  width={400}
+                  height={170}
+                  style={{ maxWidth: '100%', height: 'auto', display: 'block' }}
+                  unoptimized
                 />
               </div>
             </div>

@@ -108,7 +108,6 @@ function renderLanguageCard(
   };
 
   const currentTheme = themes[theme] || themes.dark;
-  const borderStyle = hideBorder ? 'none' : `1px solid ${currentTheme.border}`;
 
   // 语言颜色映射
   const languageColors: Record<string, string> = {
@@ -167,7 +166,7 @@ function renderLanguageCard(
   }).join('');
 
   // 语言列表（两列布局）
-  let yOffset = 80; // 标题 + 进度条 + 间距
+  const yOffset = 80; // 标题 + 进度条 + 间距
   const languageItems = sortedLanguages.map((lang, index) => {
     const col = index % 2; // 0 或 1
     const row = Math.floor(index / 2);
