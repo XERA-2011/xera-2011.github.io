@@ -34,10 +34,6 @@ export const links: Link[] = [
     href: '/admin',
     adminOnly: true,
   },
-  {
-    title: 'Privacy',
-    href: '/privacy',
-  },
 ];
 
 /**
