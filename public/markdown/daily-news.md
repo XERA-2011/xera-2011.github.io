@@ -1,60 +1,60 @@
 # Global Breaking News TOP10
 
 **Date**: 2025年11月26日
-**Update Time**: 10:22 UTC
+**Update Time**: 22:19 UTC
 **AI Model**: Google Gemini / Google Gemini
 
 ---
 
-### 1. **Russia-Ukraine War: US Envoy Reportedly Coached Putin Aide on Peace Plan Pitch to Trump** / **俄乌战争：据报道，美国特使就如何向特朗普推销和平计划向普京助手提供指导**
+### 1. **Massive Fire in Hong Kong High-Rise Kills at Least 36** / **香港高层建筑发生特大火灾，至少36人死亡**
 - **Time**: 2025-11-26
-- **Content**: The conflict in Ukraine continues with ongoing attacks on energy infrastructure. Reports have emerged that a US envoy has been coaching a Putin aide on how to present a Ukraine peace plan to Donald Trump, suggesting a new diplomatic angle in the long-running conflict. / 乌克兰冲突仍在继续，能源基础设施不断遭到袭击。有报道称，一名美国特使一直在指导普京的一名助手，如何向唐纳德·特朗普提出乌克兰和平计划，这为这场旷日持久的冲突提供了一个新的外交视角。
-- **Source**: AP News
-
-### 2. **Israel-Hamas Conflict: Israel Launches New Strikes in Gaza, Hospitals Report 24 Killed** / **以色列-哈马斯冲突：以色列在加沙发动新一轮袭击，医院报告24人死亡**
-- **Time**: 2025-11-26
-- **Content**: The situation in Gaza remains critical as Israel launches new strikes, with local hospitals reporting at least 24 fatalities. The humanitarian crisis is deepening, exacerbated by the onset of winter rains. / 加沙局势依然严峻，以色列发动了新的袭击，当地医院报告至少有24人死亡。冬季降雨的到来加剧了人道主义危机。
-- **Source**: Reuters
-
-### 3. **Taiwan Announces $40 Billion Special Budget for Arms Purchases to Counter China** / **台湾宣布400亿美元特别预算用于武器采购以对抗中国**
-- **Time**: 2025-11-26
-- **Content**: Taiwan's government has approved a special budget of $40 billion to purchase arms and bolster its defense capabilities in response to what it describes as "intensifying" threats from mainland China. / 台湾政府批准了一项400亿美元的特别预算，用于购买武器和加强国防能力，以应对其所称的来自中国大陆的“日益加剧”的威胁。
-- **Source**: Al Jazeera
-
-### 4. **Floods and Landslides in Indonesia's Sumatra Kill at Least 10** / **印尼苏门答腊岛洪水和山体滑坡造成至少10人死亡**
-- **Time**: 2025-11-26
-- **Content**: Heavy rains have triggered flash floods and landslides on the Indonesian island of Sumatra, resulting in at least 10 deaths and several people missing. Rescue efforts are underway. / 暴雨在印度尼西亚苏门答腊岛引发了山洪和山体滑坡，造成至少10人死亡，数人失踪。救援工作正在进行中。
+- **Content**: A deadly fire engulfed a high-rise building in Hong Kong, resulting in at least 36 fatalities and hundreds reported missing. The rapid spread of the blaze is being partially attributed to bamboo scaffolding surrounding the structure. / 香港一栋高层建筑发生致命火灾，导致至少36人死亡，数百人失踪。火势迅速蔓延的部分原因被认为是建筑物周围的竹制脚手架。
 - **Source**: The Guardian
 
-### 5. **Long-Dormant Ethiopian Volcano Erupts for the First Time in 12,000 Years** / **休眠12000年的埃塞俄比亚火山首次喷发**
+### 2. **Two National Guard Members Shot Near White House; Suspect in Custody** / **两名国民警卫队成员在白宫附近遭枪击，嫌疑人已被捕**
 - **Time**: 2025-11-26
-- **Content**: A volcano in Ethiopia that has been dormant for 12,000 years has erupted, sending plumes of ash into the sky. While the initial eruption has subsided, scientists are closely monitoring the situation. / 埃塞俄比亚一座休眠了12000年的火山爆发，将火山灰喷向天空。虽然最初的喷发已经平息，但科学家们正在密切关注事态发展。
-- **Source**: BBC News
+- **Content**: Two West Virginia National Guard members were shot near the White House in Washington, D.C. A suspect has been taken into custody, and the FBI is investigating the incident as a matter of national security. / 两名西弗吉尼亚州国民警卫队成员在华盛顿特区白宫附近遭到枪击。一名嫌疑人已被拘留，美国联邦调查局（FBI）正将此事件作为国家安全问题进行调查。
+- **Source**: Al Jazeera
 
-### 6. **Former Brazilian President Jair Bolsonaro Begins 27-Year Prison Sentence for Coup Plot** / **巴西前总统雅伊尔·博索纳罗因策划政变开始27年刑期**
+### 3. **Taiwan to Boost Defense Spending by $40 Billion Amid China Threats** / **应对中国威胁，台湾将增加400亿美元国防开支**
 - **Time**: 2025-11-26
-- **Content**: Jair Bolsonaro, the former president of Brazil, has started serving a 27-year prison sentence after being found guilty of plotting a coup to overthrow the government. / 巴西前总统雅伊尔·博索纳罗在被认定犯有策划政变推翻政府的罪行后，已开始服27年的有期徒刑。
-- **Source**: CNN
+- **Content**: Taiwan's government has announced a plan to increase its defense spending by $40 billion to counter what it describes as "intensifying" threats from mainland China. / 台湾政府宣布计划增加400亿美元的国防开支，以应对其所称的来自中国大陆“日益加剧”的威胁。
+- **Source**: The Guardian
 
-### 7. **Protests Erupt in China's Guizhou Province Over Cremation Mandate** / **中国贵州省因火葬强制令引发抗议**
+### 4. **Brazil's Former President Bolsonaro Begins 27-Year Prison Sentence for Coup Attempt** / **巴西前总统博索纳罗因政变未遂开始27年刑期**
 - **Time**: 2025-11-26
-- **Content**: Protests have broken out in the Guizhou province of China following a government mandate requiring cremation, which clashes with local traditions of burial. / 在中国贵州省，政府强制要求火葬，这与当地的土葬传统发生冲突，引发了抗议活动。
-- **Source**: The Hindu
+- **Content**: Jair Bolsonaro, the former president of Brazil, has started serving a 27-year prison sentence for his role in a coup attempt aimed at overturning the 2022 election results. / 巴西前总统雅伊尔·博索纳罗因在旨在推翻2022年选举结果的未遂政变中扮演的角色，已开始服其27年的刑期。
+- **Source**: AP News
 
-### 8. **France Detains Four in Suspected Russian Spy Network Inquiry** / **法国在俄罗斯间谍网络嫌疑调查中拘留四人**
+### 5. **Military Seizes Power in Guinea-Bissau, Deposes President** / **几内亚比绍军方夺取政权，废黜总统**
 - **Time**: 2025-11-26
-- **Content**: French authorities have detained four individuals as part of an ongoing investigation into a suspected Russian spy network operating within the country. / 法国当局拘留了四名个人，这是一项针对在该国境内活动的俄罗斯间谍网络嫌疑的持续调查的一部分。
-- **Source**: France 24
+- **Content**: The military in the West African nation of Guinea-Bissau has overthrown the government, deposing the president and seizing control of the country in an apparent coup. / 西非国家几内亚比绍的军方推翻了政府，废黜了总统，并通过一场明显的政变控制了国家。
+- **Source**: Al Jazeera
 
-### 9. **Italy Recognizes Femicide as a Specific Crime Punishable by Life in Prison** / **意大利承认杀害女性为特定罪行，可判处终身监禁**
+### 6. **Italy Passes Law Recognizing Femicide as a Crime Punishable by Life in Prison** / **意大利通过法律，承认“杀害女性罪”为可判处终身监禁的罪行**
 - **Time**: 2025-11-26
-- **Content**: Italy's parliament has passed a new law that officially recognizes femicide as a distinct crime, with perpetrators facing a mandatory sentence of life in prison. / 意大利议会通过了一项新法律，正式承认杀害女性为一种独特的犯罪，肇事者将面临终身监禁的强制性判决。
-- **Source**: The New York Times
+- **Content**: Italy's parliament has officially recognized femicide as a distinct crime. Under the new law, the intentional killing of a woman or girl because of her gender will be punishable with a mandatory sentence of life in prison. / 意大利议会已正式承认“杀害女性”（femicide）为一项独特的罪行。根据新法律，因性别原因蓄意杀害妇女或女孩的行为将被判处强制性终身监禁。
+- **Source**: AP News
 
-### 10. **US Imposes Sanctions on High-Ranking Haitian Official for Alleged Gang Support** / **美国因涉嫌支持黑帮而对海地高级官员实施制裁**
+### 7. **Ethiopian Volcano Erupts for the First Time in 12,000 Years** / **埃塞俄比亚一火山12000年来首次喷发**
 - **Time**: 2025-11-26
-- **Content**: The United States has sanctioned a high-ranking official in Haiti, accusing them of providing support to and collaborating with violent gangs in the country. / 美国已对海地一名高级官员实施制裁，指控其向该国暴力团伙提供支持并与之合作。
-- **Source**: Associated Press
+- **Content**: A volcano in Ethiopia has erupted for the first time in an estimated 12,000 years, sending plumes of ash and smoke into the atmosphere and forcing local evacuations. / 埃塞俄比亚的一座火山在一万两千年来的估计中首次喷发，将火山灰和烟雾喷入大气层，迫使当地居民疏散。
+- **Source**: The Guardian
+
+### 8. **Rebuilding Gaza Will Cost at Least $70 Billion, UN Estimates** / **联合国估计加沙重建成本至少达700亿美元**
+- **Time**: 2025-11-26
+- **Content**: The United Nations has released a preliminary estimate that the cost of rebuilding the Gaza Strip following the recent conflict will be at least $70 billion, highlighting the vast scale of destruction. / 联合国发布初步估计，近期冲突后加沙地带的重建成本将至少达到700亿美元，凸显了破坏规模之大。
+- **Source**: The Guardian
+
+### 9. **China Launches Rescue Craft for Stranded Astronauts on Space Station** / **中国发射飞船营救空间站受困宇航员**
+- **Time**: 2025-11-26
+- **Content**: China's space agency has launched a spacecraft to retrieve three astronauts who were left stranded on its Tiangong space station after their original return capsule malfunctioned. / 中国航天局发射了一艘飞船，以接回因原返回舱故障而被困在其天宫空间站的三名宇航员。
+- **Source**: CBS News
+
+### 10. **Russia Says Ukraine Peace Talks Are "Serious" But Rules Out Concessions** / **俄罗斯称乌克兰和平谈判是“严肃的”，但排除让步可能**
+- **Time**: 2025-11-26
+- **Content**: Russian officials have stated that ongoing talks to end the war in Ukraine are "serious" but have firmly ruled out making any territorial or political concessions as part of a potential peace deal. / 俄罗斯官员表示，正在进行的旨在结束乌克兰战争的谈判是“严肃的”，但坚决排除了作为潜在和平协议一部分作出任何领土或政治让步的可能性。
+- **Source**: Al Jazeera
 
 ---
 
