@@ -2,6 +2,7 @@
 
 import { useState } from 'react';
 import { motion } from 'framer-motion';
+import Image from 'next/image';
 import { usePageTitle } from '@/hooks/use-page-title';
 import CryptoCoinPrice from '@/components/ui/CryptoCoinPrice';
 import GlowCard from '@/components/ui/GlowCard';
@@ -112,7 +113,14 @@ export default function CoinPage() {
 
                   {/* Preview */}
                   <div className="flex justify-center bg-black/20 border border-white/10 rounded-lg p-4">
-                    <img src={example.preview} alt={example.title} className="max-w-full" />
+                    <Image
+                      src={example.preview}
+                      alt={example.title}
+                      className="max-w-full"
+                      width={900}
+                      height={600}
+                      unoptimized
+                    />
                   </div>
                 </div>
               ))}

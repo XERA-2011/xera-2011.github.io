@@ -68,9 +68,18 @@ export function MarkdownPage({
       <blockquote className="border-l-4 border-blue-400 pl-4 my-4 italic text-white/60" {...props} />
     ),
     // 图片样式 - 支持 SVG 等
-    img: ({ ...props }) => (
-      <img className="max-w-full h-auto rounded-lg my-4" {...props} />
-    ),
+    img: ({ src, alt, ...props }) => {
+      if (!src || typeof src !== 'string') return null;
+      return (
+        // eslint-disable-next-line @next/next/no-img-element
+        <img
+          src={src}
+          alt={alt || ''}
+          className="max-w-full h-auto rounded-lg my-4"
+          {...props}
+        />
+      );
+    },
   };
 
   // 合并自定义组件和默认组件

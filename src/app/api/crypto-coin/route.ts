@@ -83,7 +83,7 @@ export async function GET(request: NextRequest) {
     const cachedEntry = cache.get(cacheKey);
     const now = Date.now();
 
-    let data: Record<string, any>;
+    let data: Record<string, CoinApiResponse>;
 
     if (cachedEntry && (now - cachedEntry.timestamp) < CACHE_DURATION) {
       // 使用缓存数据

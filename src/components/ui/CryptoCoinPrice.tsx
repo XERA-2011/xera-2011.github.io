@@ -41,7 +41,6 @@ export default function CoinPrice({
   const [lastUpdate, setLastUpdate] = useState<Date | null>(null);
   const [isMounted, setIsMounted] = useState(false);
   const [refreshKey, setRefreshKey] = useState(0);
-  const [isRefreshing, setIsRefreshing] = useState(false);
   const [countdown, setCountdown] = useState<number>(0);
 
   // 确保只在客户端挂载后渲染
@@ -87,7 +86,6 @@ export default function CoinPrice({
   // 获取价格数据
   const fetchPrices = useCallback(async () => {
     setIsLoading(true);
-    setIsRefreshing(true);
     setError(null);
 
     // 对于 SVG 模式，直接更新 refreshKey 来刷新图片
@@ -97,7 +95,6 @@ export default function CoinPrice({
       // 模拟加载延迟
       setTimeout(() => {
         setIsLoading(false);
-        setIsRefreshing(false);
       }, 300);
       return;
     }
@@ -134,7 +131,6 @@ export default function CoinPrice({
       }
     } finally {
       setIsLoading(false);
-      setIsRefreshing(false);
     }
   }, [coins, displayMode]);
 
