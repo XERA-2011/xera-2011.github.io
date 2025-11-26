@@ -1,44 +1,35 @@
 # 应用文
 
-## An email inviting your cousin to visit you during the holidays
-- 一封邀请你表兄/妹假期来访的邮件
+## An email to a friend recommending a new restaurant you tried
+- 一封推荐新餐厅给朋友的电子邮件
 
 **正文**：
 
-Hi [Cousin's Name],
+Hi [Friend's Name],
 
-Hope you're doing well.
-
-The school holidays are coming up next month, and I was thinking it would be great if you could come and stay with me for a few days. We haven't seen each other for ages, and it would be so much fun to catch up!
-
-We could watch all the new movies we've missed, play some video games, and maybe even go hiking on the weekend if the weather is good. My parents said they would be happy to have you here.
-
-Let me know if you think you can make it.
+How are things going? I hope you're doing well. I wanted to tell you about this amazing new restaurant I tried last weekend called "The Green Plate." It's a vegetarian place downtown, and the food was absolutely delicious! I had their special falafel wrap, and it was fresh and full of flavour. The atmosphere was also very cozy and modern, perfect for a relaxed dinner. Prices are quite reasonable too. You know how much we love trying new spots, so I really think you should check it out. Let's go together soon!
 
 Best,
-
 [Your Name]
 
-- 嗨 [表兄/妹的名字]，
-- 希望你一切都好。
-- 学校下个月就要放假了，我在想你是否能过来和我住几天，那真是太棒了。我们很久没见了，能聚一聚肯定会很有趣！
-- 我们可以把所有错过的电影都看一遍，玩玩电子游戏，如果天气好的话，周末甚至可以去远足。我父母说他们很高兴你能来。
-- 如果你觉得能来的话，请告诉我。
-- 此致，
+- 你好，[朋友的名字]，
+- 最近怎么样？希望你一切都好。我想告诉你我上周末尝试的一家很棒的新餐厅，叫“绿盘子”。它是一家市中心的素食餐厅，食物绝对美味！我吃了他们的特色沙拉三明治卷，它很新鲜，味道十足。
+- 气氛也非常舒适和现代，非常适合轻松的晚餐。价格也相当合理。你知道我们多么喜欢尝试新地方，所以我真的认为你应该去看看。我们尽快一起去吧！
+- 祝好，
 - [你的名字]
 
 ---
 
 # 记叙文/短文
 
-## An article reviewing a movie that all teenagers should watch
-- 一篇评论所有青少年都该看的电影的文章
+## An article giving advice on how to make new friends
+- 一篇关于如何结交新朋友的建议文章
 
 **正文**：
 
-If you're looking for a movie that is both entertaining and meaningful, you must watch "Inside Out". This animated film is a brilliant story that takes you inside the mind of a young girl named Riley and introduces you to her five main emotions: Joy, Sadness, Anger, Fear, and Disgust.
+Making new friends can seem difficult, but it's a rewarding experience. Firstly, be open and approachable. Smile and make eye contact; these simple gestures can invite conversation. Secondly, join clubs or groups that match your interests. Whether it's a sports team, a book club, or a volunteer organization, shared hobbies are a great starting point for friendship. Thirdly, don't be afraid to initiate conversations. Ask open-ended questions and listen actively. People appreciate genuine interest. Remember, building connections takes time, so be patient and keep trying. Soon you’ll have a wonderful new circle of friends.
 
-The movie is fantastic because it helps you understand your own feelings better. It shows that it's okay to feel sad sometimes and that all our emotions are important. The story is funny, touching, and beautifully animated. It's a perfect film for teenagers because it deals with the challenges of growing up. Don't miss it!
-
-- 如果你正在寻找一部既有趣又有意义的电影，你一定要看《头脑特工队》。这部动画电影讲述了一个精彩的故事，它带你进入一个名叫莱莉的小女孩的内心世界，并向你介绍了她的五种主要情绪：乐乐、忧忧、怒怒、怕怕和厌厌。
-- 这部电影非常棒，因为它能帮助你更好地理解自己的感受。它告诉我们，有时候感到悲伤是完全正常的，而且我们所有的情绪都同等重要。故事情节风趣、感人，动画制作精美。对于青少年来说，这是一部完美的电影，因为它探讨了成长过程中的种种挑战。千万不要错过！
+- 结交新朋友可能看起来很难，但这是一次有益的经历。
+- 首先，要开放和 approachable。微笑并进行眼神交流；这些简单的姿态可以引发对话。
+- 其次，加入与你兴趣相符的俱乐部或团体。无论是运动队、读书俱乐部还是志愿组织，共同的爱好都是友谊的良好起点。
+- 第三，不要害怕主动发起对话。提出开放式问题并积极倾听。人们欣赏真诚的兴趣。请记住，建立联系需要时间，所以要耐心并不断尝试。很快你就会拥有一个美妙的新朋友圈。
