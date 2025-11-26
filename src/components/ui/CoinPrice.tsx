@@ -71,7 +71,7 @@ export default function CoinPrice({
       coin: coin.toLowerCase(),
       mode: 'single',
     });
-    return `/api/coin-card?${params.toString()}&r=${refreshKey}`;
+    return `/api/coin?${params.toString()}&r=${refreshKey}`;
   }, [refreshKey, isMounted]);
 
   // 获取多币种 SVG 卡片 URL
@@ -81,7 +81,7 @@ export default function CoinPrice({
       coin: coins.join(','),
       mode: 'multi',
     });
-    return `/api/coin-card?${params.toString()}&r=${refreshKey}`;
+    return `/api/coin?${params.toString()}&r=${refreshKey}`;
   }, [coins, refreshKey, isMounted]);
 
   // 获取价格数据
@@ -284,72 +284,72 @@ export default function CoinPrice({
       {/* HTML 模式 - 币价卡片网格 */}
       {displayMode === 'html' && (
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
-        {coins.map((coin, index) => {
-          const data = coinData[coin.toLowerCase()];
+          {coins.map((coin, index) => {
+            const data = coinData[coin.toLowerCase()];
 
-          return (
-            <motion.div
-              key={coin}
-              initial={{ opacity: 0, scale: 0.95 }}
-              animate={{ opacity: 1, scale: 1 }}
-              transition={{ duration: 0.3, delay: index * 0.1 }}
-              className={cn(
-                'relative overflow-hidden rounded-lg border border-theme-white/10 bg-theme-black/30 p-6 backdrop-blur-sm transition-all hover:border-theme-white/20',
-                isLoading && 'opacity-60'
-              )}
-            >
-              {/* 加载动画 */}
-              {isLoading && (
-                <div className="absolute inset-0 bg-linear-to-r from-transparent via-theme-white/5 to-transparent animate-pulse" />
-              )}
-
-              {/* 币种符号 */}
-              <div className="text-center">
-                <h3 className="text-lg font-bold text-white mb-1">
-                  {data?.symbol || coin.toUpperCase()}
-                </h3>
-                {data?.name && (
-                  <p className="text-xs text-white/50 mb-4">{data.name}</p>
+            return (
+              <motion.div
+                key={coin}
+                initial={{ opacity: 0, scale: 0.95 }}
+                animate={{ opacity: 1, scale: 1 }}
+                transition={{ duration: 0.3, delay: index * 0.1 }}
+                className={cn(
+                  'relative overflow-hidden rounded-lg border border-theme-white/10 bg-theme-black/30 p-6 backdrop-blur-sm transition-all hover:border-theme-white/20',
+                  isLoading && 'opacity-60'
                 )}
-              </div>
-
-              {/* 价格 */}
-              <div className="text-center mb-3">
-                {data ? (
-                  <p className="text-2xl font-bold text-white">
-                    ${formatPrice(data.price)}
-                  </p>
-                ) : (
-                  <p className="text-xl text-white/40">-</p>
+              >
+                {/* 加载动画 */}
+                {isLoading && (
+                  <div className="absolute inset-0 bg-linear-to-r from-transparent via-theme-white/5 to-transparent animate-pulse" />
                 )}
-              </div>
 
-              {/* 24小时变化 */}
-              {data?.change24h !== null && data?.change24h !== undefined && (
+                {/* 币种符号 */}
                 <div className="text-center">
-                  <span
-                    className={cn(
-                      'inline-block rounded-full px-3 py-1 text-xs font-medium',
-                      data.change24h >= 0
-                        ? 'bg-green-500/20 text-green-400'
-                        : 'bg-red-500/20 text-red-400'
-                    )}
-                  >
-                    {formatChange(data.change24h)}
-                  </span>
+                  <h3 className="text-lg font-bold text-white mb-1">
+                    {data?.symbol || coin.toUpperCase()}
+                  </h3>
+                  {data?.name && (
+                    <p className="text-xs text-white/50 mb-4">{data.name}</p>
+                  )}
                 </div>
-              )}
 
-              {/* 货币单位 */}
-              {data && (
-                <p className="text-center text-xs text-white/40 mt-2">
-                  {data.currency}
-                </p>
-              )}
-            </motion.div>
-          );
-        })}
-      </div>
+                {/* 价格 */}
+                <div className="text-center mb-3">
+                  {data ? (
+                    <p className="text-2xl font-bold text-white">
+                      ${formatPrice(data.price)}
+                    </p>
+                  ) : (
+                    <p className="text-xl text-white/40">-</p>
+                  )}
+                </div>
+
+                {/* 24小时变化 */}
+                {data?.change24h !== null && data?.change24h !== undefined && (
+                  <div className="text-center">
+                    <span
+                      className={cn(
+                        'inline-block rounded-full px-3 py-1 text-xs font-medium',
+                        data.change24h >= 0
+                          ? 'bg-green-500/20 text-green-400'
+                          : 'bg-red-500/20 text-red-400'
+                      )}
+                    >
+                      {formatChange(data.change24h)}
+                    </span>
+                  </div>
+                )}
+
+                {/* 货币单位 */}
+                {data && (
+                  <p className="text-center text-xs text-white/40 mt-2">
+                    {data.currency}
+                  </p>
+                )}
+              </motion.div>
+            );
+          })}
+        </div>
       )}
 
       {/* 说明文本 */}

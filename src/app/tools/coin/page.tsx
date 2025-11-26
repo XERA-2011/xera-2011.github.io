@@ -1,69 +1,38 @@
 "use client";
 
+import { useState } from 'react';
 import { motion } from 'framer-motion';
 import { usePageTitle } from '@/hooks/use-page-title';
 import CoinPrice from '@/components/ui/CoinPrice';
 import GlowCard from '@/components/ui/GlowCard';
-import { MarkdownPage } from '@/components/MarkdownPage';
+import { Button } from '@/components/ui/button';
 
 export default function CoinPage() {
   usePageTitle('Crypto Prices');
+  const [copiedIndex, setCopiedIndex] = useState<number | null>(null);
 
-  const apiDoc = `## API Usage
+  const handleCopy = async (text: string, index: number) => {
+    try {
+      await navigator.clipboard.writeText(text);
+      setCopiedIndex(index);
+      setTimeout(() => setCopiedIndex(null), 2000);
+    } catch (err) {
+      console.error('Failed to copy:', err);
+    }
+  };
 
-### 查询单个币种价格
-
-\`\`\`
-GET /api/coin?coin=btc
-\`\`\`
-
-### 查询多个币种价格
-
-\`\`\`
-GET /api/coin?coin=btc,eth,sol
-\`\`\`
-
-### 示例响应
-
-\`\`\`json
-{
-  "btc": {
-    "symbol": "BTC",
-    "name": "Bitcoin",
-    "price": 45000.00,
-    "currency": "USD",
-    "lastUpdated": 1700000000000,
-    "change24h": 2.5
-  }
-}
-\`\`\`
-
-### 支持的币种
-
-BTC、ETH、ETC、BNB、SOL、USDT、XRP、ADA、DOGE、TRX 等
-
----
-
-## 在 Markdown 中使用
-
-可以直接在 Markdown 文件中嵌入 SVG 卡片：
-
-### 单币种卡片
-
-\`\`\`markdown
-![BTC Price](https://yoursite.com/api/coin-card?coin=btc&mode=single)
-\`\`\`
-
-### 多币种卡片
-
-\`\`\`markdown
-![Crypto Prices](https://yoursite.com/api/coin-card?coin=btc,eth,sol,bnb&mode=multi)
-\`\`\`
-
-### 示例效果
-
-![BTC Price](/api/coin-card?coin=btc&mode=single)
-`;
+  const examples = [
+    {
+      title: '单币种卡片',
+      code: '![BTC Price](https://xera-2011.vercel.app/api/coin?coin=btc)',
+      preview: '/api/coin?coin=btc',
+    },
+    {
+      title: '多币种卡片',
+      code: '![Crypto Prices](https://xera-2011.vercel.app/api/coin?coin=btc,eth,sol,bnb&mode=multi)',
+      preview: '/api/coin?coin=btc,eth,sol,bnb&mode=multi',
+    },
+  ];
 
   return (
     <div className="relative w-full min-h-screen py-12">
@@ -108,7 +77,55 @@ BTC、ETH、ETC、BNB、SOL、USDT、XRP、ADA、DOGE、TRX 等
           className="mt-6"
         >
           <GlowCard className="p-4 sm:p-6">
-            <MarkdownPage content={apiDoc} withContainer={false} />
+            <h2 className="text-2xl font-bold text-white mb-6">使用方法</h2>
+
+            <div className="space-y-8">
+              {examples.map((example, index) => (
+                <div key={index} className="space-y-3">
+                  <h3 className="text-lg font-semibold text-white">{example.title}</h3>
+
+                  {/* Code Block with Copy Button */}
+                  <div className="relative">
+                    <pre className="bg-black/40 border border-white/10 rounded-lg p-4 overflow-x-auto">
+                      <code className="text-sm text-white/90">{example.code}</code>
+                    </pre>
+                    <Button
+                      size="sm"
+                      variant="outline"
+                      onClick={() => handleCopy(example.code, index)}
+                      className="absolute top-2 right-2"
+                    >
+                      {copiedIndex === index ? (
+                        <>
+                          <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
+                          </svg>
+                          已复制
+                        </>
+                      ) : (
+                        <>
+                          <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M8 16H6a2 2 0 01-2-2V6a2 2 0 012-2h8a2 2 0 012 2v2m-6 12h8a2 2 0 002-2v-8a2 2 0 00-2-2h-8a2 2 0 00-2 2v8a2 2 0 002 2z" />
+                          </svg>
+                          复制
+                        </>
+                      )}
+                    </Button>
+                  </div>
+
+                  {/* Preview */}
+                  <div className="flex justify-center bg-black/20 border border-white/10 rounded-lg p-4">
+                    <img src={example.preview} alt={example.title} className="max-w-full" />
+                  </div>
+                </div>
+              ))}
+            </div>
+
+            <div className="mt-6 pt-6 border-t border-white/10">
+              <p className="text-sm text-white/60">
+                <strong className="text-white/80">支持的币种:</strong> BTC、ETH、ETC、BNB、SOL、USDT、XRP、ADA、DOGE、TRX
+              </p>
+            </div>
           </GlowCard>
         </motion.div>
       </div>
