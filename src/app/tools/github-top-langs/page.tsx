@@ -23,7 +23,7 @@ export default function GitHubTopLangsPage() {
   };
 
   const baseUrl = 'https://xera-2011.vercel.app';
-  const exampleCode = `![Top Languages](${baseUrl}/api/github-top-langs?username=${username}&theme=${theme}&v=19)`;
+  const exampleCode = `![Top Languages](${baseUrl}/api/github-top-langs?username=${username}&theme=${theme}&v=20)`;
 
   return (
     <div className="relative w-full min-h-screen py-20 pt-24">
@@ -88,7 +88,7 @@ export default function GitHubTopLangsPage() {
 
               <div className="flex justify-center bg-black/20 border border-white/10 rounded-lg p-8 mt-6" style={{ minHeight: '170px' }}>
                 <img
-                  src={`/api/github-top-langs?username=${username}&theme=${theme}&v=19`}
+                  src={`/api/github-top-langs?username=${username}&theme=${theme}&v=20`}
                   alt="Top Languages Preview"
                   key={`${username}-${theme}`}
                   style={{ maxWidth: '100%', width: 'auto', height: 'auto', display: 'block' }}

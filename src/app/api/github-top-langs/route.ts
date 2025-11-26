@@ -1,4 +1,3 @@
-import layout from '@/app/layout';
 import { NextRequest, NextResponse } from 'next/server';
 
 // 缓存时间（秒）
@@ -69,7 +68,6 @@ async function fetchLanguageStats(username: string, token?: string): Promise<Lan
 
     return languageStats;
   } catch (error) {
-    console.error('Error fetching language stats:', error);
     throw error;
   }
 }
@@ -78,21 +76,16 @@ async function fetchLanguageStats(username: string, token?: string): Promise<Lan
  * 渲染语言统计卡片
  */
 function renderLanguageCard(
-  username: string,
   languageStats: LanguageStats,
   options: {
     theme?: string;
-    hideTitle?: boolean;
     hideBorder?: boolean;
-    layout?: 'compact' | 'normal';
     langs_count?: number;
   } = {}
 ): string {
   const { 
     theme = 'dark', 
-    hideTitle = false, 
     hideBorder = false,
-    layout = 'normal',
     langs_count = 5
   } = options;
 
@@ -191,7 +184,7 @@ function renderLanguageCard(
   return `
 <svg width="400" height="170" xmlns="http://www.w3.org/2000/svg">
   <!-- 背景 -->
-  <rect width="400" height="170" fill="${currentTheme.bg}" rx="12" ${hideBorder ? '' : `stroke="${currentTheme.border}" stroke-width="1"`}/>
+  <rect width="400" height="170" fill="${currentTheme.bg}" rx="12" ${hideBorder ? '' : `stroke="${currentTheme.border}" stroke-width="1"`} />
   
   <!-- 标题 -->
   <text x="20" y="35" font-family="Arial, sans-serif" font-size="16" font-weight="600" fill="${currentTheme.title}">Top Languages</text>
@@ -228,9 +221,7 @@ export async function GET(request: NextRequest) {
     const { searchParams } = request.nextUrl;
     const username = searchParams.get('username');
     const theme = searchParams.get('theme') || 'dark';
-    const layout = (searchParams.get('layout') || 'normal') as 'normal' | 'compact';
     const langs_count = parseInt(searchParams.get('langs_count') || '6');
-    const hideTitle = !searchParams.has('show_title'); // 默认隐藏标题
     const hideBorder = searchParams.has('hide_border');
 
     if (!username) {
@@ -245,7 +236,6 @@ export async function GET(request: NextRequest) {
     let languageStats: LanguageStats;
 
     if (cachedEntry && now - cachedEntry.timestamp < CACHE_DURATION) {
-      console.log(`Using cached data for: ${username}`);
       languageStats = cachedEntry.data;
     } else {
       // 获取 GitHub Token（如果有）
@@ -253,7 +243,6 @@ export async function GET(request: NextRequest) {
 
       // 获取语言统计
       languageStats = await fetchLanguageStats(username, token);
-      console.log('Language stats fetched:', languageStats);
 
       // 更新缓存
       cache.set(cacheKey, {
@@ -270,11 +259,9 @@ export async function GET(request: NextRequest) {
     }
 
     // 生成 SVG
-    const svgContent = renderLanguageCard(username, languageStats, {
+    const svgContent = renderLanguageCard(languageStats, {
       theme,
-      hideTitle,
       hideBorder,
-      layout,
       langs_count,
     });
 
@@ -287,7 +274,6 @@ export async function GET(request: NextRequest) {
       },
     });
   } catch (error) {
-    console.error('Error generating language card:', error);
     const message = error instanceof Error ? error.message : 'Error generating language card';
 
     // 返回错误 SVG
