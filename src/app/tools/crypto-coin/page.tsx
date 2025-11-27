@@ -4,13 +4,14 @@ import { useState } from 'react';
 import { motion } from 'framer-motion';
 import Image from 'next/image';
 import { usePageTitle } from '@/hooks/use-page-title';
-import CryptoCoinPrice from '@/components/ui/CryptoCoinPrice';
 import GlowCard from '@/components/ui/GlowCard';
 import { Button } from '@/components/ui/button';
 
 export default function CoinPage() {
   usePageTitle('Crypto Prices');
   const [copiedIndex, setCopiedIndex] = useState<number | null>(null);
+  const [layout, setLayout] = useState('grid');
+  const [theme, setTheme] = useState('dark');
 
   const handleCopy = async (text: string, index: number) => {
     try {
@@ -22,16 +23,30 @@ export default function CoinPage() {
     }
   };
 
+  const baseUrl = 'https://xera-2011.vercel.app';
+  const coins = 'btc,eth,sol,bnb';
+
+  // 布局选项
+  const layoutOptions = [
+    { value: 'grid', label: '常规网格布局' },
+    { value: 'horizontal', label: '紧凑水平布局' }
+  ];
+
   const examples = [
     {
       title: '单币种卡片',
-      code: '<img alt="BTC Price" src="https://xera-2011.vercel.app/api/crypto-coin?coin=btc" />',
-      preview: '/api/crypto-coin?coin=btc',
+      code: `<img alt="BTC Price" src="${baseUrl}/api/crypto-coin?coin=btc" />`,
+      preview: `/api/crypto-coin?coin=btc`,
     },
     {
-      title: '多币种卡片',
-      code: '<img alt="Crypto Prices" src="https://xera-2011.vercel.app/api/crypto-coin?coin=btc,eth,sol,bnb&mode=multi" />',
-      preview: '/api/crypto-coin?coin=btc,eth,sol,bnb&mode=multi',
+      title: '多币种卡片 (网格布局)',
+      code: `<img alt="Crypto Prices" src="${baseUrl}/api/crypto-coin?coin=${coins}&mode=multi" />`,
+      preview: `/api/crypto-coin?coin=${coins}&mode=multi`,
+    },
+    {
+      title: '多币种卡片 (紧凑水平布局)',
+      code: `<img alt="Crypto Prices" src="${baseUrl}/api/crypto-coin?coin=${coins}&mode=multi&layout=horizontal&theme=${theme}" />`,
+      preview: `/api/crypto-coin?coin=${coins}&mode=multi&layout=horizontal&theme=${theme}`,
     },
   ];
 
@@ -50,20 +65,72 @@ export default function CoinPage() {
           </h2>
         </motion.div>
 
-        {/* Coin Price Card */}
+        {/* Interactive Preview */}
         <motion.div
           initial={{ opacity: 0, y: 30 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8, delay: 0.2 }}
         >
-          <GlowCard className="p-4 sm:p-6">
-            <CryptoCoinPrice
-              coins={['btc', 'eth', 'sol', 'bnb']}
-              showControls={true}
-              autoRefresh={true}
-              refreshInterval={30}
-              displayMode="svg"
-            />
+          <GlowCard className="p-6 sm:p-8 mb-8">
+            <h3 className="text-2xl font-bold text-white mb-6">实时预览</h3>
+
+            <div className="space-y-6">
+              {/* 布局选择 */}
+              <div>
+                <label className="block text-sm font-medium text-white/80 mb-2">
+                  布局类型
+                </label>
+                <div className="grid grid-cols-2 gap-2">
+                  {layoutOptions.map((option) => (
+                    <button
+                      key={option.value}
+                      onClick={() => setLayout(option.value)}
+                      className={`px-4 py-2 rounded-lg border transition-all ${layout === option.value
+                        ? 'bg-white/20 border-white/40 text-white'
+                        : 'bg-black/20 border-white/10 text-white/60 hover:border-white/20'
+                        }`}
+                    >
+                      {option.label}
+                    </button>
+                  ))}
+                </div>
+              </div>
+
+              {/* 主题选择 */}
+              <div>
+                <label className="block text-sm font-medium text-white/80 mb-2">
+                  主题
+                </label>
+                <div className="flex gap-2">
+                  {['dark', 'light'].map((t) => (
+                    <button
+                      key={t}
+                      onClick={() => setTheme(t)}
+                      className={`px-4 py-2 rounded-lg border transition-all ${theme === t
+                        ? 'bg-white/20 border-white/40 text-white'
+                        : 'bg-black/20 border-white/10 text-white/60 hover:border-white/20'
+                        }`}
+                    >
+                      {t}
+                    </button>
+                  ))}
+                </div>
+              </div>
+
+              {/* 预览区域 */}
+              <div className="flex justify-center bg-black/20 border border-white/10 rounded-lg p-8 mt-6" style={{ minHeight: '250px' }}>
+                <Image
+                  src={`/api/crypto-coin?coin=${coins}&mode=multi&layout=${layout}&theme=${theme}`}
+                  alt="Crypto Prices Preview"
+                  key={`${layout}-${theme}`}
+                  width={layout === 'horizontal' ? 600 : 400}
+                  height={layout === 'horizontal' ? 150 : 300}
+                  style={{ width: "auto", height: "auto" }}
+                  priority
+                  unoptimized
+                />
+              </div>
+            </div>
           </GlowCard>
         </motion.div>
 

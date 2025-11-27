@@ -21,6 +21,8 @@ interface CoinPriceProps {
   autoRefresh?: boolean;
   refreshInterval?: number; // 秒
   displayMode?: 'svg' | 'html'; // SVG 卡片或 HTML 卡片
+  layout?: 'grid' | 'horizontal';
+  theme?: 'dark' | 'light';
 }
 
 /**
@@ -34,6 +36,8 @@ export default function CoinPrice({
   autoRefresh = true,
   refreshInterval = 30,
   displayMode = 'html',
+  layout = 'grid',
+  theme = 'dark',
 }: CoinPriceProps) {
   const [coinData, setCoinData] = useState<Record<string, CoinData>>({});
   const [isLoading, setIsLoading] = useState(false);
@@ -79,9 +83,11 @@ export default function CoinPrice({
     const params = new URLSearchParams({
       coin: coins.join(','),
       mode: 'multi',
+      layout: layout || 'grid',
+      theme: theme || 'dark',
     });
     return `/api/crypto-coin?${params.toString()}&r=${refreshKey}`;
-  }, [coins, refreshKey, isMounted]);
+  }, [coins, refreshKey, isMounted, layout, theme]);
 
   // 获取价格数据
   const fetchPrices = useCallback(async () => {
