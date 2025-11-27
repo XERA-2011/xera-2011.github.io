@@ -21,7 +21,7 @@ const LANGUAGE_COLORS: Record<string, string> = {
 };
 
 const THEME_CONFIG = {
-  dark: { bg: '#0d1117', border: '#30363d', title: '#58a6ff', text: '#c9d1d9', progressBg: '#21262d' },
+  dark: { bg: '#0d1117', border: '#30363d', title: '#c9d1d9', text: '#c9d1d9', progressBg: '#21262d' },
   light: { bg: '#ffffff', border: '#e1e4e8', title: '#24292e', text: '#586069', progressBg: '#eaecef' },
 };
 
