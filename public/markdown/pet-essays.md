@@ -1,35 +1,47 @@
 # 应用文
 
-## An email to a friend recommending a new restaurant you tried
-- 一封推荐新餐厅给朋友的电子邮件
+## An email booking tickets for a concert
+- 预订演唱会门票的邮件
 
 **正文**：
 
-Hi [Friend's Name],
+Subject: Ticket Booking Inquiry - The Rockers Concert on December 15th
 
-How are things going? I hope you're doing well. I wanted to tell you about this amazing new restaurant I tried last weekend called "The Green Plate." It's a vegetarian place downtown, and the food was absolutely delicious! I had their special falafel wrap, and it was fresh and full of flavour. The atmosphere was also very cozy and modern, perfect for a relaxed dinner. Prices are quite reasonable too. You know how much we love trying new spots, so I really think you should check it out. Let's go together soon!
+Dear Sir/Madam,
 
-Best,
+I am writing to inquire about booking tickets for The Rockers concert on December 15th, 2025, at 8:00 PM. I would like to reserve two tickets, if possible, for standard seating.
+
+Could you please confirm the availability and the total cost? I am flexible with the payment method and can pay by card online or at the venue. Please let me know the best way to proceed with the booking and receive confirmation.
+
+Thank you for your time and assistance.
+
+Sincerely,
+
 [Your Name]
 
-- 你好，[朋友的名字]，
-- 最近怎么样？希望你一切都好。我想告诉你我上周末尝试的一家很棒的新餐厅，叫“绿盘子”。它是一家市中心的素食餐厅，食物绝对美味！我吃了他们的特色沙拉三明治卷，它很新鲜，味道十足。
-- 气氛也非常舒适和现代，非常适合轻松的晚餐。价格也相当合理。你知道我们多么喜欢尝试新地方，所以我真的认为你应该去看看。我们尽快一起去吧！
-- 祝好，
-- [你的名字]
+- 主题：12月15日The Rockers演唱会门票预订咨询
+- 尊敬的先生/女士：
+- 我写此邮件是为了咨询预订The Rockers乐队于2025年12月15日晚上8:00举行的演唱会门票事宜。如果可能的话，我希望能预订两张普通座位票。
+- 请您确认是否有票以及总费用。我付款方式灵活，可以通过在线或现场刷卡支付。请告知最佳的预订方式以及如何获取确认。
+- 感谢您的时间和帮助。
+- 此致，
+- [您的姓名]
 
 ---
 
 # 记叙文/短文
 
-## An article giving advice on how to make new friends
-- 一篇关于如何结交新朋友的建议文章
+## An article explaining how students can help protect the environment
+- 一篇解释学生如何帮助保护环境的文章
 
 **正文**：
 
-Making new friends can seem difficult, but it's a rewarding experience. Firstly, be open and approachable. Smile and make eye contact; these simple gestures can invite conversation. Secondly, join clubs or groups that match your interests. Whether it's a sports team, a book club, or a volunteer organization, shared hobbies are a great starting point for friendship. Thirdly, don't be afraid to initiate conversations. Ask open-ended questions and listen actively. People appreciate genuine interest. Remember, building connections takes time, so be patient and keep trying. Soon you’ll have a wonderful new circle of friends.
+## Protecting Our Planet: A Student's Guide
 
-- 结交新朋友可能看起来很难，但这是一次有益的经历。
-- 首先，要开放和 approachable。微笑并进行眼神交流；这些简单的姿态可以引发对话。
-- 其次，加入与你兴趣相符的俱乐部或团体。无论是运动队、读书俱乐部还是志愿组织，共同的爱好都是友谊的良好起点。
-- 第三，不要害怕主动发起对话。提出开放式问题并积极倾听。人们欣赏真诚的兴趣。请记住，建立联系需要时间，所以要耐心并不断尝试。很快你就会拥有一个美妙的新朋友圈。
+As students, we have a vital role in protecting our environment. Small actions can make a big difference. Firstly, embrace the three Rs: reduce, reuse, and recycle. Use reusable water bottles and bags, and always separate your waste correctly at school and home.
+
+Secondly, save energy and water. Remember to turn off lights when leaving a room and take shorter showers. Additionally, consider walking or cycling instead of using cars for short distances, which reduces pollution. Finally, spread awareness among friends and family. Encourage others to adopt eco-friendly habits. Together, we can create a healthier planet for everyone.
+
+- ## 保护我们的地球：学生指南
+- 作为学生，我们在保护环境方面扮演着至关重要的角色。小小的行动可以产生巨大的影响。首先，践行“三R”原则：减少、再利用和回收。在学校和家里使用可重复利用的水瓶和袋子，并始终正确分类垃圾。
+- 其次，节约能源和水。记住离开房间时关灯，洗澡时间缩短。此外，短距离出行时，考虑步行或骑自行车，而不是开车，这能减少污染。最后，向亲朋好友传播环保意识。鼓励他人养成环保习惯。齐心协力，我们可以为每个人创造一个更健康的地球。
