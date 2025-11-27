@@ -12,6 +12,8 @@ export default function GitHubTopLangsPage() {
   const [copiedIndex, setCopiedIndex] = useState<number | null>(null);
   const [username, setUsername] = useState('XERA-2011');
   const [theme, setTheme] = useState('dark');
+  const [layout, setLayout] = useState('vertical');
+  const [hideBorder, setHideBorder] = useState(false);
 
   const handleCopy = async (text: string, index: number) => {
     try {
@@ -24,7 +26,15 @@ export default function GitHubTopLangsPage() {
   };
 
   const baseUrl = 'https://xera-2011.vercel.app';
-  const exampleCode = `![Top Languages](${baseUrl}/api/github-top-langs?username=${username}&theme=${theme}&v=20)`;
+  const exampleCode = `![Top Languages](${baseUrl}/api/github-top-langs?username=${username}&theme=${theme}&layout=${layout}${hideBorder ? '&hide_border' : ''})`;
+
+  // 布局选项
+  const layoutOptions = [
+    { value: 'vertical', label: '常规垂直布局' },
+    { value: 'horizontal', label: '紧凑水平布局' },
+    { value: 'donut', label: '甜甜圈图布局' },
+    { value: 'cloud', label: '标签云布局' }
+  ];
 
   return (
     <div className="relative w-full min-h-screen py-20 pt-24">
@@ -54,6 +64,7 @@ export default function GitHubTopLangsPage() {
             <h3 className="text-2xl font-bold text-white mb-6">实时预览</h3>
 
             <div className="space-y-6">
+              {/* GitHub 用户名 */}
               <div>
                 <label className="block text-sm font-medium text-white/80 mb-2">
                   GitHub 用户名
@@ -67,6 +78,28 @@ export default function GitHubTopLangsPage() {
                 />
               </div>
 
+              {/* 布局选择 */}
+              <div>
+                <label className="block text-sm font-medium text-white/80 mb-2">
+                  布局类型
+                </label>
+                <div className="grid grid-cols-2 sm:grid-cols-4 gap-2">
+                  {layoutOptions.map((option) => (
+                    <button
+                      key={option.value}
+                      onClick={() => setLayout(option.value)}
+                      className={`px-4 py-2 rounded-lg border transition-all ${layout === option.value
+                        ? 'bg-white/20 border-white/40 text-white'
+                        : 'bg-black/20 border-white/10 text-white/60 hover:border-white/20'
+                        }`}
+                    >
+                      {option.label}
+                    </button>
+                  ))}
+                </div>
+              </div>
+
+              {/* 主题选择 */}
               <div>
                 <label className="block text-sm font-medium text-white/80 mb-2">
                   主题
@@ -87,13 +120,30 @@ export default function GitHubTopLangsPage() {
                 </div>
               </div>
 
-              <div className="flex justify-center bg-black/20 border border-white/10 rounded-lg p-8 mt-6" style={{ minHeight: '170px' }}>
+              {/* （已移除）显示语言数量：该选项已移除，后端使用默认展示策略 */}
+
+              {/* 隐藏边框选项 */}
+              <div className="flex items-center gap-2">
+                <input
+                  type="checkbox"
+                  id="hideBorder"
+                  checked={hideBorder}
+                  onChange={(e) => setHideBorder(e.target.checked)}
+                  className="w-4 h-4 bg-black/40 border border-white/10 rounded text-white focus:outline-none focus:border-white/30"
+                />
+                <label htmlFor="hideBorder" className="text-sm font-medium text-white/80 cursor-pointer">
+                  隐藏边框
+                </label>
+              </div>
+
+              {/* 预览区域 */}
+              <div className="flex justify-center bg-black/20 border border-white/10 rounded-lg p-8 mt-6" style={{ minHeight: '250px' }}>
                 <Image
-                  src={`/api/github-top-langs?username=${username}&theme=${theme}&v=20`}
+                  src={`/api/github-top-langs?username=${username}&theme=${theme}&layout=${layout}${hideBorder ? '&hide_border' : ''}`}
                   alt="Top Languages Preview"
-                  key={`${username}-${theme}`}
+                  key={`${username}-${theme}-${layout}-${hideBorder}`}
                   width={400}
-                  height={170}
+                  height={300}
                   style={{ maxWidth: '100%', height: 'auto', display: 'block' }}
                   unoptimized
                 />
@@ -152,9 +202,8 @@ export default function GitHubTopLangsPage() {
                 <ul className="text-sm text-white/60 space-y-2 list-disc list-inside ml-2">
                   <li><code className="text-white/80 bg-white/5 px-2 py-0.5 rounded">username</code> - GitHub 用户名（必需）</li>
                   <li><code className="text-white/80 bg-white/5 px-2 py-0.5 rounded">theme</code> - 主题（dark, light）</li>
-
-                  <li><code className="text-white/80 bg-white/5 px-2 py-0.5 rounded">langs_count</code> - 显示语言数量（默认 6，最多 6）</li>
-                  <li><code className="text-white/80 bg-white/5 px-2 py-0.5 rounded">show_title</code> - 显示标题（默认隐藏）</li>
+                  <li><code className="text-white/80 bg-white/5 px-2 py-0.5 rounded">layout</code> - 布局类型（vertical, horizontal, donut, cloud）</li>
+                  {/* langs_count 参数已移除 */}
                   <li><code className="text-white/80 bg-white/5 px-2 py-0.5 rounded">hide_border</code> - 隐藏边框</li>
                 </ul>
               </div>
@@ -164,7 +213,7 @@ export default function GitHubTopLangsPage() {
                 <ul className="text-sm text-white/60 space-y-2 list-disc list-inside ml-2">
                   <li>自动统计所有非 fork 仓库的语言使用情况</li>
                   <li>按使用字节数排序，显示最常用的语言</li>
-                  <li>支持普通和紧凑两种布局</li>
+                  <li>支持四种布局类型：常规垂直、紧凑水平、甜甜圈图、标签云</li>
                   <li>数据缓存 1 小时，减少 API 调用</li>
                 </ul>
               </div>
