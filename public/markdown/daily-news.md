@@ -1,60 +1,62 @@
+(node:2454) MaxListenersExceededWarning: Possible EventTarget memory leak detected. 11 abort listeners added to [AbortSignal]. MaxListeners is 10. Use events.setMaxListeners() to increase limit
+(Use `node --trace-warnings ...` to show where the warning was created)
 # Global Breaking News TOP10
 
-**Date**: 2025年11月26日
-**Update Time**: 22:19 UTC
+**Date**: 2025年11月27日
+**Update Time**: 10:22 UTC
 **AI Model**: Google Gemini / Google Gemini
 
 ---
 
-### 1. **Massive Fire in Hong Kong High-Rise Kills at Least 36** / **香港高层建筑发生特大火灾，至少36人死亡**
-- **Time**: 2025-11-26
-- **Content**: A deadly fire engulfed a high-rise building in Hong Kong, resulting in at least 36 fatalities and hundreds reported missing. The rapid spread of the blaze is being partially attributed to bamboo scaffolding surrounding the structure. / 香港一栋高层建筑发生致命火灾，导致至少36人死亡，数百人失踪。火势迅速蔓延的部分原因被认为是建筑物周围的竹制脚手架。
+### 1. **Hong Kong High-Rise Fire Death Toll Rises** / **香港高楼火灾死亡人数上升**
+- **Time**: 2025-11-27
+- **Content**: A devastating fire in a high-rise building in Hong Kong has claimed at least 55 lives, with hundreds still missing. Authorities are investigating the construction firm for gross negligence. / 香港一栋高楼发生毁灭性火灾，已造成至少55人死亡，数百人失踪。当局正以重大过失罪对建筑公司展开调查。
 - **Source**: The Guardian
 
-### 2. **Two National Guard Members Shot Near White House; Suspect in Custody** / **两名国民警卫队成员在白宫附近遭枪击，嫌疑人已被捕**
-- **Time**: 2025-11-26
-- **Content**: Two West Virginia National Guard members were shot near the White House in Washington, D.C. A suspect has been taken into custody, and the FBI is investigating the incident as a matter of national security. / 两名西弗吉尼亚州国民警卫队成员在华盛顿特区白宫附近遭到枪击。一名嫌疑人已被拘留，美国联邦调查局（FBI）正将此事件作为国家安全问题进行调查。
+### 2. **Jakarta Surpasses Tokyo as World's Most Populous City** / **雅加达超越东京成为世界人口最多的城市**
+- **Time**: 2025-11-27
+- **Content**: The United Nations reports that Jakarta, the capital of Indonesia, has overtaken Tokyo to become the world's most populous city. / 联合国报告称，印度尼西亚首都雅加达已超过东京，成为世界上人口最多的城市。
+- **Source**: The Guardian
+
+### 3. **Military Takes Control in Guinea-Bissau Amid Election Chaos** / **几内亚比绍选举混乱，军方已控制国家**
+- **Time**: 2025-11-27
+- **Content**: The military in Guinea-Bissau has reportedly seized "total control" of the country, arresting the president in the midst of election-related turmoil. / 据报道，在选举相关的动荡中，几内亚比绍军方已“完全控制”了该国，并逮捕了总统。
 - **Source**: Al Jazeera
 
-### 3. **Taiwan to Boost Defense Spending by $40 Billion Amid China Threats** / **应对中国威胁，台湾将增加400亿美元国防开支**
-- **Time**: 2025-11-26
-- **Content**: Taiwan's government has announced a plan to increase its defense spending by $40 billion to counter what it describes as "intensifying" threats from mainland China. / 台湾政府宣布计划增加400亿美元的国防开支，以应对其所称的来自中国大陆“日益加剧”的威胁。
+### 4. **Two National Guard Members Critical After Washington D.C. Shooting** / **两名国民警卫队成员在华盛顿特区枪击案后情况危急**
+- **Time**: 2025-11-27
+- **Content**: A shooting in Washington D.C. has left two National Guard members in critical condition. The suspect has been identified as an Afghan national. / 华盛顿特区发生枪击事件，导致两名国民警卫队成员生命垂危。嫌疑人已被确认为阿富汗国民。
+- **Source**: The Washington Post
+
+### 5. **Ethiopian Volcano Erupts for First Time in 12,000 Years** / **埃塞俄比亚火山12000年来首次喷发**
+- **Time**: 2025-11-27
+- **Content**: An Ethiopian volcano has erupted for the first time in 12,000 years, causing concern and displacing local populations. / 埃塞俄比亚一座火山12000年来首次喷发，引发了人们的担忧，并导致当地居民流离失所。
+- **Source**: Associated Press
+
+### 6. **Deadly Landslides and Floods Hit Sri Lanka** / **斯里兰卡遭受致命的山体滑坡和洪水**
+- **Time**: 2025-11-27
+- **Content**: Heavy rains in Sri Lanka have triggered devastating landslides and floods, resulting in over 20 deaths and 14 people missing. / 斯里兰卡的暴雨引发了毁灭性的山体滑坡和洪水，造成20多人死亡，14人失踪。
+- **Source**: The Hindu
+
+### 7. **Train Accident in China's Yunnan Province Kills 11** / **中国云南省发生火车事故，造成11人死亡**
+- **Time**: 2025-11-27
+- **Content**: A train accident in China's Yunnan province has resulted in the death of 11 railway workers and injured two others. / 中国云南省发生一起火车事故，造成11名铁路工人死亡，另有两人受伤。
+- **Source**: Business Standard
+
+### 8. **6.6 Magnitude Earthquake Strikes Indonesia's Sumatra Island** / **印度尼西亚苏门答腊岛发生6.6级地震**
+- **Time**: 2025-11-27
+- **Content**: A powerful 6.6 magnitude earthquake has struck Indonesia's Sumatra island, compounding the ongoing crisis of floods and landslides in the region. / 印度尼西亚苏门答腊岛发生6.6级强烈地震，加剧了该地区持续的洪水和山体滑坡危机。
+- **Source**: The Hindu
+
+### 9. **European Parliament Proposes Social Media Ban for Under-16s** / **欧洲议会提议禁止16岁以下青少年使用社交媒体**
+- **Time**: 2025-11-27
+- **Content**: The European Parliament is calling for a ban on social media use for individuals under the age of 16, citing concerns about mental health and online safety. / 欧洲议会呼吁禁止16岁以下人士使用社交媒体，理由是对心理健康和网络安全的担忧。
 - **Source**: The Guardian
 
-### 4. **Brazil's Former President Bolsonaro Begins 27-Year Prison Sentence for Coup Attempt** / **巴西前总统博索纳罗因政变未遂开始27年刑期**
-- **Time**: 2025-11-26
-- **Content**: Jair Bolsonaro, the former president of Brazil, has started serving a 27-year prison sentence for his role in a coup attempt aimed at overturning the 2022 election results. / 巴西前总统雅伊尔·博索纳罗因在旨在推翻2022年选举结果的未遂政变中扮演的角色，已开始服其27年的刑期。
-- **Source**: AP News
-
-### 5. **Military Seizes Power in Guinea-Bissau, Deposes President** / **几内亚比绍军方夺取政权，废黜总统**
-- **Time**: 2025-11-26
-- **Content**: The military in the West African nation of Guinea-Bissau has overthrown the government, deposing the president and seizing control of the country in an apparent coup. / 西非国家几内亚比绍的军方推翻了政府，废黜了总统，并通过一场明显的政变控制了国家。
-- **Source**: Al Jazeera
-
-### 6. **Italy Passes Law Recognizing Femicide as a Crime Punishable by Life in Prison** / **意大利通过法律，承认“杀害女性罪”为可判处终身监禁的罪行**
-- **Time**: 2025-11-26
-- **Content**: Italy's parliament has officially recognized femicide as a distinct crime. Under the new law, the intentional killing of a woman or girl because of her gender will be punishable with a mandatory sentence of life in prison. / 意大利议会已正式承认“杀害女性”（femicide）为一项独特的罪行。根据新法律，因性别原因蓄意杀害妇女或女孩的行为将被判处强制性终身监禁。
-- **Source**: AP News
-
-### 7. **Ethiopian Volcano Erupts for the First Time in 12,000 Years** / **埃塞俄比亚一火山12000年来首次喷发**
-- **Time**: 2025-11-26
-- **Content**: A volcano in Ethiopia has erupted for the first time in an estimated 12,000 years, sending plumes of ash and smoke into the atmosphere and forcing local evacuations. / 埃塞俄比亚的一座火山在一万两千年来的估计中首次喷发，将火山灰和烟雾喷入大气层，迫使当地居民疏散。
+### 10. **Former French President Nicolas Sarkozy Convicted of Illegal Campaign Financing** / **法国前总统萨科齐因非法竞选资金被定罪**
+- **Time**: 2025-11-27
+- **Content**: Nicolas Sarkozy, the former president of France, has been convicted of illegal campaign financing related to his unsuccessful 2012 re-election campaign. / 法国前总统尼古拉·萨科齐因其2012年竞选连任失败的非法竞选资金而被定罪。
 - **Source**: The Guardian
-
-### 8. **Rebuilding Gaza Will Cost at Least $70 Billion, UN Estimates** / **联合国估计加沙重建成本至少达700亿美元**
-- **Time**: 2025-11-26
-- **Content**: The United Nations has released a preliminary estimate that the cost of rebuilding the Gaza Strip following the recent conflict will be at least $70 billion, highlighting the vast scale of destruction. / 联合国发布初步估计，近期冲突后加沙地带的重建成本将至少达到700亿美元，凸显了破坏规模之大。
-- **Source**: The Guardian
-
-### 9. **China Launches Rescue Craft for Stranded Astronauts on Space Station** / **中国发射飞船营救空间站受困宇航员**
-- **Time**: 2025-11-26
-- **Content**: China's space agency has launched a spacecraft to retrieve three astronauts who were left stranded on its Tiangong space station after their original return capsule malfunctioned. / 中国航天局发射了一艘飞船，以接回因原返回舱故障而被困在其天宫空间站的三名宇航员。
-- **Source**: CBS News
-
-### 10. **Russia Says Ukraine Peace Talks Are "Serious" But Rules Out Concessions** / **俄罗斯称乌克兰和平谈判是“严肃的”，但排除让步可能**
-- **Time**: 2025-11-26
-- **Content**: Russian officials have stated that ongoing talks to end the war in Ukraine are "serious" but have firmly ruled out making any territorial or political concessions as part of a potential peace deal. / 俄罗斯官员表示，正在进行的旨在结束乌克兰战争的谈判是“严肃的”，但坚决排除了作为潜在和平协议一部分作出任何领土或政治让步的可能性。
-- **Source**: Al Jazeera
 
 ---
 
