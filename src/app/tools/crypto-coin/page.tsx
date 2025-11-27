@@ -25,12 +25,12 @@ export default function CoinPage() {
   const examples = [
     {
       title: '单币种卡片',
-      code: '![BTC Price](https://xera-2011.vercel.app/api/crypto-coin?coin=btc)',
+      code: '<img alt="BTC Price" src="https://xera-2011.vercel.app/api/crypto-coin?coin=btc" />',
       preview: '/api/crypto-coin?coin=btc',
     },
     {
       title: '多币种卡片',
-      code: '![Crypto Prices](https://xera-2011.vercel.app/api/crypto-coin?coin=btc,eth,sol,bnb&mode=multi)',
+      code: '<img alt="Crypto Prices" src="https://xera-2011.vercel.app/api/crypto-coin?coin=btc,eth,sol,bnb&mode=multi" />',
       preview: '/api/crypto-coin?coin=btc,eth,sol,bnb&mode=multi',
     },
   ];

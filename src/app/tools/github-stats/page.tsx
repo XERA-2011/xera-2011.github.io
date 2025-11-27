@@ -24,7 +24,7 @@ export default function GitHubStatsPage() {
   };
 
   const baseUrl = 'https://xera-2011.vercel.app';
-  const exampleCode = `![GitHub Stats](${baseUrl}/api/github-stats?username=${username}&theme=${theme}&v=2)`;
+  const exampleCode = `<img alt="GitHub Stats" src="${baseUrl}/api/github-stats?username=${username}&theme=${theme}" />`;
 
   return (
     <div className="relative w-full min-h-screen py-20 pt-24">

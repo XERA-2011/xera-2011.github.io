@@ -26,7 +26,7 @@ export default function GitHubTopLangsPage() {
   };
 
   const baseUrl = 'https://xera-2011.vercel.app';
-  const exampleCode = `![Top Languages](${baseUrl}/api/github-top-langs?username=${username}&theme=${theme}&layout=${layout}${hideBorder ? '&hide_border' : ''})`;
+  const exampleCode = `<img alt="Top Langs" src="${baseUrl}/api/github-top-langs?username=${username}&theme=${theme}&layout=${layout}${hideBorder ? '&hide_border' : ''}" />`;
 
   // 布局选项
   const layoutOptions = [
