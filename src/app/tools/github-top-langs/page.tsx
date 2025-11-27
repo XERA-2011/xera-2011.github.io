@@ -144,7 +144,8 @@ export default function GitHubTopLangsPage() {
                   key={`${username}-${theme}-${layout}-${hideBorder}`}
                   width={400}
                   height={300}
-                  style={{ maxWidth: '100%', height: 'auto', display: 'block' }}
+                  style={{ width: "auto", height: "auto" }}
+                  priority
                   unoptimized
                 />
               </div>
