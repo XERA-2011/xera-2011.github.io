@@ -26,7 +26,7 @@ export default function GitHubTopLangsPage() {
   };
 
   const baseUrl = 'https://xera-2011.vercel.app';
-  const exampleCode = `<img alt="Top Langs" src="${baseUrl}/api/github-top-langs?username=${username}&theme=${theme}&layout=${layout}${hideBorder ? '&hide_border' : ''}" />`;
+  const exampleCode = `<img alt="Top Langs" src="${baseUrl}/api/github/top-langs?username=${username}&theme=${theme}&layout=${layout}${hideBorder ? '&hide_border' : ''}" />`;
 
   // 布局选项
   const layoutOptions = [
@@ -49,9 +49,6 @@ export default function GitHubTopLangsPage() {
           <h2 className="text-3xl sm:text-4xl font-bold text-white mb-3">
             GitHub Top Languages
           </h2>
-          <p className="text-white/60 text-base">
-            展示你最常使用的编程语言统计
-          </p>
         </motion.div>
 
         {/* Interactive Preview */}
@@ -139,7 +136,7 @@ export default function GitHubTopLangsPage() {
               {/* 预览区域 */}
               <div className="flex justify-center bg-black/20 border border-white/10 rounded-lg p-8 mt-6" style={{ minHeight: '250px' }}>
                 <Image
-                  src={`/api/github-top-langs?username=${username}&theme=${theme}&layout=${layout}${hideBorder ? '&hide_border' : ''}`}
+                  src={`/api/github/top-langs?username=${username}&theme=${theme}&layout=${layout}${hideBorder ? '&hide_border' : ''}`}
                   alt="Top Languages Preview"
                   key={`${username}-${theme}-${layout}-${hideBorder}`}
                   width={400}

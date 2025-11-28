@@ -35,18 +35,18 @@ export default function CoinPage() {
   const examples = [
     {
       title: '单币种卡片',
-      code: `<img alt="BTC Price" src="${baseUrl}/api/crypto-coin?coin=btc" />`,
-      preview: `/api/crypto-coin?coin=btc`,
+      code: `<img alt="BTC Price" src="${baseUrl}/api/github/crypto-coin?coin=btc" />`,
+      preview: `/api/github/crypto-coin?coin=btc`,
     },
     {
       title: '多币种卡片 (网格布局)',
-      code: `<img alt="Crypto Prices" src="${baseUrl}/api/crypto-coin?coin=${coins}&mode=multi" />`,
-      preview: `/api/crypto-coin?coin=${coins}&mode=multi`,
+      code: `<img alt="Crypto Prices" src="${baseUrl}/api/github/crypto-coin?coin=${coins}&mode=multi" />`,
+      preview: `/api/github/crypto-coin?coin=${coins}&mode=multi`,
     },
     {
       title: '多币种卡片 (紧凑水平布局)',
-      code: `<img alt="Crypto Prices" src="${baseUrl}/api/crypto-coin?coin=${coins}&mode=multi&layout=horizontal&theme=${theme}" />`,
-      preview: `/api/crypto-coin?coin=${coins}&mode=multi&layout=horizontal&theme=${theme}`,
+      code: `<img alt="Crypto Prices" src="${baseUrl}/api/github/crypto-coin?coin=${coins}&mode=multi&layout=horizontal&theme=${theme}" />`,
+      preview: `/api/github/crypto-coin?coin=${coins}&mode=multi&layout=horizontal&theme=${theme}`,
     },
   ];
 
@@ -120,7 +120,7 @@ export default function CoinPage() {
               {/* 预览区域 */}
               <div className="flex justify-center bg-black/20 border border-white/10 rounded-lg p-8 mt-6" style={{ minHeight: '250px' }}>
                 <Image
-                  src={`/api/crypto-coin?coin=${coins}&mode=multi&layout=${layout}&theme=${theme}`}
+                  src={`/api/github/crypto-coin?coin=${coins}&mode=multi&layout=${layout}&theme=${theme}`}
                   alt="Crypto Prices Preview"
                   key={`${layout}-${theme}`}
                   width={layout === 'horizontal' ? 600 : 400}

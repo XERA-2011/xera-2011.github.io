@@ -7,39 +7,29 @@ import { usePageTitle } from '@/hooks/use-page-title';
 
 const toolsData: GlowCardItem[] = [
   {
-    id: "base64",
-    title: "Base64 编码解码",
-    href: "/tools/base64",
+    id: "github-joke-card",
+    title: "编程笑话卡片",
+    href: "/github/joke-card",
   },
   {
-    id: "info-create",
-    title: "信息生成器",
-    href: "/tools/info-create",
+    id: "github-crypto-coin",
+    title: "加密货币价格",
+    href: "/github/crypto-coin",
   },
   {
-    id: "asset-allocation",
-    title: "资产配置占比",
-    href: "/tools/asset-allocation",
+    id: "github-stats",
+    title: "GitHub 统计卡片",
+    href: "/github/stats",
   },
   {
-    id: "life-countdown",
-    title: "人生倒计时",
-    href: "/tools/life-countdown",
-  },
-  {
-    id: "coze",
-    title: "Coze",
-    href: "/tools/coze",
-  },
-  {
-    id: "google",
-    title: "Google",
-    href: "/tools/google",
+    id: "github-top-langs",
+    title: "GitHub 语言统计",
+    href: "/github/top-langs",
   },
 ];
 
 export default function ToolsPage() {
-  usePageTitle('在线工具');
+  usePageTitle('GitHub 工具');
 
   return (
     <div className="relative w-full min-h-screen py-20">
@@ -53,7 +43,7 @@ export default function ToolsPage() {
           viewport={{ once: true }}
         >
           <h1 className="text-3xl sm:text-4xl lg:text-5xl font-bold mb-4">
-            在线工具
+            GitHub 工具
           </h1>
         </motion.div>
 

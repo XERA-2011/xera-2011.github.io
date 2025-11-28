@@ -51,7 +51,7 @@ export default function JokeCard({
       theme: currentTheme,
     });
     // 添加刷新 key 来强制刷新
-    return `/api/joke?${params.toString()}&r=${refreshKey}`;
+    return `/api/github/joke?${params.toString()}&r=${refreshKey}`;
   }, [currentTheme, refreshKey, isMounted]);
 
   return (
@@ -132,11 +132,6 @@ export default function JokeCard({
           </div>
         )}
       </motion.div>
-
-      {/* 说明文本 */}
-      <p className="text-center text-xs text-theme-white/50">
-        每次刷新或更改主题将显示新的编程笑话 😄
-      </p>
     </motion.div>
   );
 }

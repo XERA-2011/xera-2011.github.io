@@ -74,7 +74,7 @@ export default function CoinPrice({
       coin: coin.toLowerCase(),
       mode: 'single',
     });
-    return `/api/crypto-coin?${params.toString()}&r=${refreshKey}`;
+    return `/api/github/crypto-coin?${params.toString()}&r=${refreshKey}`;
   }, [refreshKey, isMounted]);
 
   // 获取多币种 SVG 卡片 URL
@@ -86,7 +86,7 @@ export default function CoinPrice({
       layout: layout || 'grid',
       theme: theme || 'dark',
     });
-    return `/api/crypto-coin?${params.toString()}&r=${refreshKey}`;
+    return `/api/github/crypto-coin?${params.toString()}&r=${refreshKey}`;
   }, [coins, refreshKey, isMounted, layout, theme]);
 
   // 获取价格数据
@@ -111,7 +111,7 @@ export default function CoinPrice({
         vs: 'usd',
       });
 
-      const response = await fetch(`/api/crypto-coin?${params.toString()}`);
+      const response = await fetch(`/api/github/crypto-coin?${params.toString()}`);
 
       if (!response.ok) {
         throw new Error(`HTTP ${response.status}`);

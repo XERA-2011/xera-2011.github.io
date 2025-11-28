@@ -6,7 +6,7 @@ import {
   renderDonutLayout, 
   renderCloudLayout, 
   renderErrorCard 
-} from '@/components/github-top-langs';
+} from '@/components/github/top-langs';
 
 // --- 配置常量 ---
 const CACHE_SECONDS = 3600;

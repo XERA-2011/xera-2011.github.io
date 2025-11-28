@@ -211,7 +211,7 @@ function renderStatsCard(
 }
 
 /**
- * GET /api/github-stats
+ * GET /api/github/stats
  * 生成 GitHub 统计 SVG 卡片
  *
  * 参数:
@@ -221,8 +221,8 @@ function renderStatsCard(
  * - hide_border: 是否隐藏边框
  *
  * 示例:
- * - /api/github-stats?username=torvalds
- * - /api/github-stats?username=torvalds&theme=radical
+ * - /api/github/stats?username=torvalds
+ * - /api/github/stats?username=torvalds&theme=radical
  */
 export async function GET(request: NextRequest) {
   try {

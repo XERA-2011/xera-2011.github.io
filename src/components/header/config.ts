@@ -30,6 +30,10 @@ export const links: Link[] = [
     href: '/generate',
   },
   {
+    title: 'Github',
+    href: '/github',
+  },
+  {
     title: 'Admin',
     href: '/admin',
     adminOnly: true,

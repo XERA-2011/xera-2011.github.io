@@ -2,7 +2,7 @@
 
 import { motion } from 'framer-motion';
 import { usePageTitle } from '@/hooks/use-page-title';
-import JokeCard from '@/components/ui/JokeCard';
+import JokeCard from '@/components/github/joke-card';
 import GlowCard from '@/components/ui/GlowCard';
 
 export default function JokeCardPage() {

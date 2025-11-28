@@ -24,7 +24,7 @@ export default function GitHubStatsPage() {
   };
 
   const baseUrl = 'https://xera-2011.vercel.app';
-  const exampleCode = `<img alt="GitHub Stats" src="${baseUrl}/api/github-stats?username=${username}&theme=${theme}" />`;
+  const exampleCode = `<img alt="GitHub Stats" src="${baseUrl}/api/github/stats?username=${username}&theme=${theme}" />`;
 
   return (
     <div className="relative w-full min-h-screen py-20 pt-24">
@@ -39,9 +39,6 @@ export default function GitHubStatsPage() {
           <h2 className="text-3xl sm:text-4xl font-bold text-white mb-3">
             GitHub Stats Card
           </h2>
-          <p className="text-white/60 text-base">
-            为你的 README 生成动态的 GitHub 统计卡片
-          </p>
         </motion.div>
 
         {/* Interactive Preview */}
@@ -89,7 +86,7 @@ export default function GitHubStatsPage() {
 
               <div className="flex justify-center bg-black/20 border border-white/10 rounded-lg p-8 mt-6" style={{ minHeight: '350px' }}>
                 <Image
-                  src={`/api/github-stats?username=${username}&theme=${theme}&v=2`}
+                  src={`/api/github/stats?username=${username}&theme=${theme}&v=2`}
                   alt="GitHub Stats Preview"
                   key={`${username}-${theme}`}
                   width={450}
