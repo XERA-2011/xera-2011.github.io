@@ -5,7 +5,7 @@ import styles from "./style.module.scss";
 import { background } from "./anim";
 import Nav from "./nav";
 import { cn } from "@/lib/utils";
-import Breadcrumb from "./Breadcrumb";
+import Breadcrumb from "./breadcrumb";
 import { useApp } from "@/contexts/AppContext";
 import { ReactNode } from "react";
 import { ThemeToggle } from "@/components/theme-toggle";

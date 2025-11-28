@@ -72,7 +72,7 @@ export default function DashboardPage() {
                 {/* Avatar */}
                 {session.user.image && (
                   <div className="relative">
-                    <div className="absolute -inset-1 bg-gradient-to-r from-primary/30 to-primary/10 rounded-full blur opacity-50"></div>
+                    <div className="absolute -inset-1 bg-linear-to-r from-primary/30 to-primary/10 rounded-full blur opacity-50"></div>
                     <div className="relative rounded-full bg-white">
                       <Image
                         src={session.user.image}

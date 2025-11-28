@@ -2,7 +2,7 @@
 import { useCallback, useEffect, useLayoutEffect, useRef, useState } from 'react';
 import { motion } from 'framer-motion';
 import { usePageTitle } from '@/hooks/use-page-title';
-import GlowCard from '@/components/ui/GlowCard';
+import GlowCard from '@/components/ui/glow-card';
 
 export default function Home() {
   usePageTitle('Gemini API');

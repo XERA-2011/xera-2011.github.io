@@ -3,7 +3,7 @@
 import { motion } from 'framer-motion';
 import { usePageTitle } from '@/hooks/use-page-title';
 import JokeCard from '@/components/github/joke-card';
-import GlowCard from '@/components/ui/GlowCard';
+import GlowCard from '@/components/ui/glow-card';
 
 export default function JokeCardPage() {
   usePageTitle('编程笑话卡片');

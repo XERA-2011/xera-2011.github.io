@@ -3,11 +3,11 @@ import '../styles/globals.css';
 import Background from "@/components/background/star";
 import Footer from "@/components/footer";
 import Header from "@/components/header";
-import UserAuth from "@/components/header/UserAuth";
-import SmoothScroll from "@/components/SmoothScroll";
-import ElasticCursor from "@/components/ui/ElasticCursor";
+import UserAuth from "@/components/header/user-auth";
+import SmoothScroll from "@/components/smooth-scroll";
+import ElasticCursor from "@/components/ui/elastic-cursor";
 import { AppProvider } from "@/contexts/AppContext";
-import SessionProvider from "@/components/SessionProvider";
+import SessionProvider from "@/components/session-provider";
 import { ThemeProvider } from "@/components/theme-provider";
 
 export const metadata: Metadata = {

@@ -4,7 +4,7 @@ import { useState } from 'react';
 import { motion } from 'framer-motion';
 import Image from 'next/image';
 import { usePageTitle } from '@/hooks/use-page-title';
-import GlowCard from '@/components/ui/GlowCard';
+import GlowCard from '@/components/ui/glow-card';
 import { Button } from '@/components/ui/button';
 
 export default function GitHubStatsPage() {

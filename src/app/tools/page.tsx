@@ -1,8 +1,8 @@
 'use client';
 
 import { motion } from 'framer-motion';
-import ScrollReveal from '@/components/ScrollReveal';
-import GlowCardList, { GlowCardItem } from '@/components/ui/GlowCardList';
+import ScrollReveal from '@/components/scroll-reveal';
+import GlowCardList, { GlowCardItem } from '@/components/ui/glow-cardList';
 import { usePageTitle } from '@/hooks/use-page-title';
 
 const toolsData: GlowCardItem[] = [

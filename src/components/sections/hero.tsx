@@ -4,7 +4,7 @@ import { useRef, useState, useEffect } from 'react';
 import { motion } from 'framer-motion';
 import Image from 'next/image';
 import { useTheme } from 'next-themes';
-import Time from '@/components/ui/Time';
+import Time from '@/components/ui/time';
 
 export default function HeroSection() {
   const containerRef = useRef<HTMLDivElement>(null);

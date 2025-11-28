@@ -2,7 +2,7 @@
 
 import React, { useEffect, useState } from 'react';
 import { motion } from 'framer-motion';
-import { MarkdownPage } from '@/components/MarkdownPage';
+import { MarkdownPage } from '@/components/markdown-page';
 import { usePageTitle } from '@/hooks/use-page-title';
 
 function MarkdownPreviewPage() {

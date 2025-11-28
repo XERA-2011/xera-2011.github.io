@@ -1,7 +1,7 @@
 'use client';
 
 import { motion } from 'framer-motion';
-import GlowCard from '@/components/ui/GlowCard';
+import GlowCard from '@/components/ui/glow-card';
 import Link from 'next/link';
 
 export default function TermsPage() {
