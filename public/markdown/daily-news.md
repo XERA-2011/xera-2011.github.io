@@ -1,60 +1,60 @@
 # Global Breaking News TOP10
 
 **Date**: 2025年11月29日
-**Update Time**: 10:19 UTC
+**Update Time**: 22:18 UTC
 **AI Model**: Google Gemini / Google Gemini
 
 ---
 
-### 1. **Hong Kong High-Rise Fire Tragedy** / **香港高楼火灾悲剧**
+### 1. **Israeli Drone Strike Kills Two Children in Southern Gaza** / **以色列无人机袭击导致加沙南部两名儿童死亡**
 - **Time**: 2025-11-29
-- **Content**: The death toll from a devastating high-rise fire in Hong Kong has risen to 128, with over 200 people still missing. Investigations into corruption and negligence are underway, and a mourning period has begun. / 香港一栋高层建筑发生毁灭性火灾，死亡人数已上升至128人，另有200多人失踪。有关腐败和疏忽的调查正在进行中，哀悼期已经开始。
-- **Source**: CTV News
-
-### 2. **Sri Lanka Devastated by Cyclone Ditwah** / **斯里兰卡遭受“迪特瓦”气旋重创**
-- **Time**: 2025-11-29
-- **Content**: Torrential rains and floods triggered by Cyclone Ditwah have killed at least 123 people across Sri Lanka, with 130 still missing. A state of emergency has been declared, and international aid efforts are intensifying. / 气旋“迪特瓦”引发的暴雨和洪水已导致斯里兰卡全国至少123人死亡，另有130人失踪。该国已宣布进入紧急状态，国际援助行动正在加强。
+- **Content**: An Israeli drone attack in southern Gaza has resulted in the deaths of two Palestinian children, exacerbating the humanitarian crisis in the region. / 以色列无人机在加沙南部的袭击导致两名巴勒斯坦儿童死亡，加剧了该地区的人道主义危机。
 - **Source**: Al Jazeera
 
-### 3. **Escalation in Russia-Ukraine War and Corruption Probe** / **俄乌战争升级与腐败调查**
+### 2. **UN Report Alleges "De Facto State Policy" of Torture by Israel** / **联合国报告指控以色列存在“事实上的国家酷刑政策”**
 - **Time**: 2025-11-29
-- **Content**: Kyiv has come under deadly Russian drone and missile attacks, killing two. Meanwhile, Ukrainian President Zelenskyy's chief of staff has resigned following anti-corruption searches of his home, amidst ongoing diplomatic efforts to end the war. / 基辅遭到致命的俄罗斯无人机和导弹袭击，造成两人死亡。与此同时，在为结束战争而进行的外交努力中，乌克兰总统泽连斯基的幕僚长在其住所遭到反腐败搜查后辞职。
+- **Content**: A United Nations report claims that Israel has a "de facto state policy" of organized torture, citing allegations of dog attacks and sexual violence against Palestinians. / 联合国一份报告称，以色列存在有组织的“事实上的国家酷刑政策”，报告援引了对巴勒斯坦人进行犬只攻击和性暴力的指控。
 - **Source**: The Guardian
 
-### 4. **Global Flight Disruptions Due to Airbus A320 Recall** / **空客A320召回导致全球航班中断**
+### 3. **Top Aide to Ukrainian President Zelenskyy Resigns Amid Corruption Probe** / **乌克兰总统泽连斯基高级助手因腐败调查辞职**
 - **Time**: 2025-11-29
-- **Content**: Thousands of Airbus A320 aircraft are undergoing a major software fix due to an issue linked to solar radiation, causing significant flight disruptions worldwide. / 由于与太阳辐射有关的问题，数千架空客A320飞机正在进行重大的软件修复，导致全球范围内的航班严重中断。
+- **Content**: Andriy Yermak, a top aide to Ukrainian President Volodymyr Zelenskyy, has resigned following an anti-corruption investigation and a raid on his home. / 乌克兰总统弗拉基米尔·泽连斯基的高级助手安德烈·耶尔马克在一起反腐败调查及住宅被突袭后辞职。
 - **Source**: Global News
 
-### 5. **Trump's Controversial Statements and Pardon Plan** / **特朗普的争议性言论及赦免计划**
+### 4. **Hong Kong High-Rise Fire Claims Over 100 Lives** / **香港高层建筑大火已致逾百人遇难**
 - **Time**: 2025-11-29
-- **Content**: Donald Trump has announced plans to pardon former Honduran President Hernandez, who is serving a drug trafficking sentence in the US. He also stated intentions to nullify executive orders signed by Joe Biden and to "permanently pause migration from all Third World Countries." / 唐纳德·特朗普宣布计划赦免前洪都拉斯总统埃尔南德斯，后者正在美国因贩毒罪名服刑。他还表示打算废除乔·拜登签署的行政命令，并“永久暂停所有第三世界国家的移民”。
-- **Source**: The Hindu
-
-### 6. **Continued Tensions in Israel-Hamas War** / **以色列与哈马斯战争紧张局势持续**
-- **Time**: 2025-11-29
-- **Content**: Developments in the Israel-Hamas conflict include the return of Palestinian bodies to Gaza, ongoing Israeli strikes, and UN condemnation of the "summary execution" of two West Bank Palestinians. Hezbollah has also left open the possibility of a new conflict with Israel. / 以色列与哈马斯冲突的最新发展包括巴勒斯坦人尸体返回加沙、以色列持续空袭以及联合国谴责对两名西岸巴勒斯坦人的“即决处决”。真主党也为与以色列发生新冲突留下了可能性。
-- **Source**: NDTV
-
-### 7. **Deadly Floods and Landslides in Indonesia** / **印度尼西亚发生致命洪水和山体滑坡**
-- **Time**: 2025-11-29
-- **Content**: The death toll from floods and landslides on Indonesia's Sumatra island has risen to 248, with rescue operations continuing amid widespread destruction. / 印度尼西亚苏门答腊岛的洪水和山体滑坡造成的死亡人数已上升至248人，救援行动在广泛的破坏中仍在继续。
-- **Source**: Business Standard
-
-### 8. **"El Chapo's" Son to Plead Guilty in US Drug Case** / **“矮子”之子将在美国毒品案中认罪**
-- **Time**: 2025-11-29
-- **Content**: The son of jailed Mexican crime lord "El Chapo" is expected to plead guilty in a US drug trafficking case. / 已被监禁的墨西哥犯罪头目“矮子”的儿子预计将在美国的贩毒案件中认罪。
-- **Source**: AP News
-
-### 9. **US National Guard Member Dies After D.C. Shooting** / **华盛顿枪击事件后一名国民警卫队成员死亡**
-- **Time**: 2025-11-29
-- **Content**: One National Guard member has died after a shooting incident in Washington, D.C., with a lone suspect now in custody. / 在华盛顿特区发生枪击事件后，一名国民警卫队成员死亡，一名单独的嫌疑人现已被拘留。
+- **Content**: A devastating fire in a Hong Kong high-rise building has led to more than 100 deaths, with over 150 people still missing as rescue operations continue. / 香港一栋高层建筑发生毁灭性火灾，已导致超过100人死亡，仍有150多人失踪，救援行动仍在继续。
 - **Source**: Global News
 
-### 10. **Pope Leo XIV's First Overseas Trip to Turkey** / **教皇利奥十四首次出访土耳其**
+### 5. **Cyclone Ditwah Triggers Deadly Floods and Landslides in Sri Lanka** / **气旋“迪特瓦”在斯里兰卡引发致命洪水和山体滑坡**
 - **Time**: 2025-11-29
-- **Content**: Pope Leo XIV has begun his first overseas trip, visiting Istanbul's Blue Mosque and meeting with Turkey's religious leaders to commemorate the 1,700th anniversary of the Council of Nicaea. / 教皇利奥十四开始了他的首次海外访问，参观了伊斯坦布尔的蓝色清真寺，并与土耳其的宗教领袖会面，以纪念尼西亚公会议1700周年。
-- **Source**: Sky News
+- **Content**: Cyclone Ditwah has caused severe flooding and landslides in Sri Lanka, resulting in the deaths of more than 50 people. / 气旋“迪特瓦”在斯里兰卡造成严重洪水和山体滑坡，已导致超过50人死亡。
+- **Source**: Al Jazeera
+
+### 6. **Trump Announces Closure of Venezuelan Airspace** / **特朗普宣布关闭委内瑞拉领空**
+- **Time**: 2025-11-29
+- **Content**: Donald Trump has declared that Venezuelan airspace is "closed in its entirety" to airlines and traffickers, with US anti-drug efforts to intensify "by land" very soon. / 唐纳德·特朗普宣布委内瑞拉领空对航空公司和贩毒者“完全关闭”，并表示美国将很快“从陆地”加强禁毒行动。
+- **Source**: Al Jazeera
+
+### 7. **Global Futures Trading Resumes After Major CME Outage** / **CME交易所重大故障后全球期货交易恢复**
+- **Time**: 2025-11-29
+- **Content**: Global futures trading has reopened after an 11-hour outage at the CME Group, which was attributed to a cooling system failure at a Chicago data center. / 在芝加哥商业交易所集团（CME）因数据中心冷却系统故障导致长达11小时的交易中断后，全球期货交易现已恢复。
+- **Source**: Al Jazeera
+
+### 8. **Airbus Issues Significant Recall for A320 Aircraft** / **空客公司发布针对A320机型的重要召回**
+- **Time**: 2025-11-29
+- **Content**: Airbus has announced a "significant" recall of its A320 aircraft following a flight-control incident, leading to widespread flight cancellations. / 在发生一起飞行控制事件后，空中客车公司宣布对其A320飞机进行“重大”召回，导致大量航班被取消。
+- **Source**: Global News
+
+### 9. **Military Seizes Power in Guinea-Bissau** / **几内亚比绍军方夺取政权**
+- **Time**: 2025-11-29
+- **Content**: The military in Guinea-Bissau has deposed the president and taken control of the country in a coup. / 几内亚比绍军方通过政变推翻了总统并控制了国家。
+- **Source**: Global News
+
+### 10. **Son of "El Chapo" Expected to Plead Guilty in US Court** / **“矮子”之子预计将在美国法庭认罪**
+- **Time**: 2025-11-29
+- **Content**: The son of the infamous jailed Mexican drug lord "El Chapo" is anticipated to plead guilty to drug trafficking charges in a US federal court. / 被监禁的臭名昭著的墨西哥毒枭“矮子”的儿子预计将在美国联邦法院对贩毒指控认罪。
+- **Source**: Al Jazeera
 
 ---
 
