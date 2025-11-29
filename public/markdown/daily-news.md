@@ -1,60 +1,60 @@
 # Global Breaking News TOP10
 
-**Date**: 2025年11月28日
-**Update Time**: 10:21 UTC
+**Date**: 2025年11月29日
+**Update Time**: 10:19 UTC
 **AI Model**: Google Gemini / Google Gemini
 
 ---
 
-### 1. **Deadly Fire in Hong Kong Claims at Least 94 Lives** / **香港致命大火已致至少94人死亡**
-- **Time**: 2025-11-28
-- **Content**: A catastrophic fire in a residential building in Hong Kong has resulted in at least 94 deaths, with many more still missing. Rescue operations are underway as authorities investigate the cause of the blaze, with three renovation executives arrested in connection with the incident. / 香港一栋居民楼发生特大火灾，已导致至少94人死亡，另有数十人失踪。救援行动正在进行中，当局正在调查火灾原因，三名装修公司高管因涉案被捕。
-- **Source**: The Guardian
+### 1. **Hong Kong High-Rise Fire Tragedy** / **香港高楼火灾悲剧**
+- **Time**: 2025-11-29
+- **Content**: The death toll from a devastating high-rise fire in Hong Kong has risen to 128, with over 200 people still missing. Investigations into corruption and negligence are underway, and a mourning period has begun. / 香港一栋高层建筑发生毁灭性火灾，死亡人数已上升至128人，另有200多人失踪。有关腐败和疏忽的调查正在进行中，哀悼期已经开始。
+- **Source**: CTV News
 
-### 2. **Flash Floods in Indonesia Kill 69, Rescue Efforts Continue** / **印尼洪水已致69人死亡，救援工作仍在继续**
-- **Time**: 2025-11-28
-- **Content**: Flash floods on the Indonesian island of Sumatra have claimed the lives of at least 69 people. Rescue crews are tirelessly searching for survivors in the flood-affected areas. / 印度尼西亚苏门答腊岛的洪水已导致至少69人死亡。救援人员正在洪水灾区不懈地搜寻幸存者。
-- **Source**: The Guardian
-
-### 3. **Guinea-Bissau Military Seizes Control Amid Election Turmoil** / **几内亚比绍军方在选举骚乱中夺取控制权**
-- **Time**: 2025-11-28
-- **Content**: The military in Guinea-Bissau has announced it has taken "total control" of the country following widespread chaos and disputes surrounding the recent election results. / 几内亚比绍军方宣布，在该国近期选举结果引发广泛混乱和争议后，军方已“完全控制”了国家。
-- **Source**: The Guardian
-
-### 4. **Israel Conducts Airstrikes in Syria and Gaza** / **以色列空袭叙利亚和加沙**
-- **Time**: 2025-11-28
-- **Content**: Following extrajudicial killings in the occupied West Bank, Israel has launched airstrikes on targets in Syria and the Gaza Strip. The Syrian government has condemned the attacks as a "war crime". / 在约旦河西岸发生法外处决事件后，以色列对叙利亚和加沙地带的目标发动了空袭。叙利亚政府谴责这些袭击是“战争罪”。
+### 2. **Sri Lanka Devastated by Cyclone Ditwah** / **斯里兰卡遭受“迪特瓦”气旋重创**
+- **Time**: 2025-11-29
+- **Content**: Torrential rains and floods triggered by Cyclone Ditwah have killed at least 123 people across Sri Lanka, with 130 still missing. A state of emergency has been declared, and international aid efforts are intensifying. / 气旋“迪特瓦”引发的暴雨和洪水已导致斯里兰卡全国至少123人死亡，另有130人失踪。该国已宣布进入紧急状态，国际援助行动正在加强。
 - **Source**: Al Jazeera
 
-### 5. **Ukraine Rejects Surrendering Territory for Peace** / **乌克兰拒绝为和平放弃领土**
-- **Time**: 2025-11-28
-- **Content**: The chief of staff for Ukrainian President Volodymyr Zelenskyy has firmly stated that Ukraine will not concede any of its territory in exchange for a peace agreement with Russia. This comes as Russian President Vladimir Putin insists that any deal would require Ukraine to surrender land. / 乌克兰总统泽连斯基的幕僚长坚称，乌克兰不会为与俄罗斯达成和平协议而放弃任何领土。而与此同时，俄罗斯总统普京坚称，任何协议都要求乌克兰放弃土地。
+### 3. **Escalation in Russia-Ukraine War and Corruption Probe** / **俄乌战争升级与腐败调查**
+- **Time**: 2025-11-29
+- **Content**: Kyiv has come under deadly Russian drone and missile attacks, killing two. Meanwhile, Ukrainian President Zelenskyy's chief of staff has resigned following anti-corruption searches of his home, amidst ongoing diplomatic efforts to end the war. / 基辅遭到致命的俄罗斯无人机和导弹袭击，造成两人死亡。与此同时，在为结束战争而进行的外交努力中，乌克兰总统泽连斯基的幕僚长在其住所遭到反腐败搜查后辞职。
 - **Source**: The Guardian
 
-### 6. **Trump Suspends Immigration from Developing Nations** / **特朗普暂停发展中国家移民**
-- **Time**: 2025-11-28
-- **Content**: Former US President Donald Trump has issued an order to suspend immigration from a number of developing countries, which he referred to as "Third World" nations. The move also includes a review of current green card holders. / 美国前总统唐纳德·特朗普发布命令，暂停来自一些发展中国家的移民，他将这些国家称为“第三世界”国家。该举措还包括对现有绿卡持有者进行审查。
-- **Source**: Al Jazeera
-
-### 7. **Abducted Nigerian Schoolgirls Rescued** / **被绑架的尼日利亚女学生获救**
-- **Time**: 2025-11-28
-- **Content**: A group of schoolgirls who were abducted in a mass kidnapping in Kebbi State, Nigeria, have been successfully rescued. / 在尼日利亚凯比州大规模绑架事件中被绑架的一群女学生已成功获救。
-- **Source**: The Guardian
-
-### 8. **DC National Guard Shooting Suspect Linked to CIA** / **华盛顿特区国民警卫队枪击案嫌疑人与中情局有关**
-- **Time**: 2025-11-28
-- **Content**: The Central Intelligence Agency (CIA) has confirmed that a suspect in the recent shooting involving the Washington D.C. National Guard had connections to the agency. One National Guard member died in the incident. / 美国中央情报局（CIA）证实，近期涉及华盛顿特区国民警卫队的枪击案的一名嫌疑人与该机构有关联。一名国民警卫队成员在该事件中丧生。
-- **Source**: The Guardian
-
-### 9. **France to Introduce Voluntary Military Service Amid Russian Threats** / **面对俄罗斯威胁，法国将推行自愿兵役制**
-- **Time**: 2025-11-28
-- **Content**: In response to increasing threats from Russia, France is set to introduce a voluntary military service program to bolster its national defense. / 为应对日益增长的俄罗斯威胁，法国将推行自愿兵役制度，以加强国防。
-- **Source**: The Guardian
-
-### 10. **Arrest Warrants Issued for Miss Universe Co-Owners** / **环球小姐共同所有人被签发逮捕令**
-- **Time**: 2025-11-28
-- **Content**: Arrest warrants have been issued for the co-owners of the Miss Universe pageant as part of an ongoing saga surrounding the beauty competition. / 环球小姐选美比赛的共同所有人已被签发逮捕令，这是围绕该选美比赛持续不断的风波的一部分。
+### 4. **Global Flight Disruptions Due to Airbus A320 Recall** / **空客A320召回导致全球航班中断**
+- **Time**: 2025-11-29
+- **Content**: Thousands of Airbus A320 aircraft are undergoing a major software fix due to an issue linked to solar radiation, causing significant flight disruptions worldwide. / 由于与太阳辐射有关的问题，数千架空客A320飞机正在进行重大的软件修复，导致全球范围内的航班严重中断。
 - **Source**: Global News
+
+### 5. **Trump's Controversial Statements and Pardon Plan** / **特朗普的争议性言论及赦免计划**
+- **Time**: 2025-11-29
+- **Content**: Donald Trump has announced plans to pardon former Honduran President Hernandez, who is serving a drug trafficking sentence in the US. He also stated intentions to nullify executive orders signed by Joe Biden and to "permanently pause migration from all Third World Countries." / 唐纳德·特朗普宣布计划赦免前洪都拉斯总统埃尔南德斯，后者正在美国因贩毒罪名服刑。他还表示打算废除乔·拜登签署的行政命令，并“永久暂停所有第三世界国家的移民”。
+- **Source**: The Hindu
+
+### 6. **Continued Tensions in Israel-Hamas War** / **以色列与哈马斯战争紧张局势持续**
+- **Time**: 2025-11-29
+- **Content**: Developments in the Israel-Hamas conflict include the return of Palestinian bodies to Gaza, ongoing Israeli strikes, and UN condemnation of the "summary execution" of two West Bank Palestinians. Hezbollah has also left open the possibility of a new conflict with Israel. / 以色列与哈马斯冲突的最新发展包括巴勒斯坦人尸体返回加沙、以色列持续空袭以及联合国谴责对两名西岸巴勒斯坦人的“即决处决”。真主党也为与以色列发生新冲突留下了可能性。
+- **Source**: NDTV
+
+### 7. **Deadly Floods and Landslides in Indonesia** / **印度尼西亚发生致命洪水和山体滑坡**
+- **Time**: 2025-11-29
+- **Content**: The death toll from floods and landslides on Indonesia's Sumatra island has risen to 248, with rescue operations continuing amid widespread destruction. / 印度尼西亚苏门答腊岛的洪水和山体滑坡造成的死亡人数已上升至248人，救援行动在广泛的破坏中仍在继续。
+- **Source**: Business Standard
+
+### 8. **"El Chapo's" Son to Plead Guilty in US Drug Case** / **“矮子”之子将在美国毒品案中认罪**
+- **Time**: 2025-11-29
+- **Content**: The son of jailed Mexican crime lord "El Chapo" is expected to plead guilty in a US drug trafficking case. / 已被监禁的墨西哥犯罪头目“矮子”的儿子预计将在美国的贩毒案件中认罪。
+- **Source**: AP News
+
+### 9. **US National Guard Member Dies After D.C. Shooting** / **华盛顿枪击事件后一名国民警卫队成员死亡**
+- **Time**: 2025-11-29
+- **Content**: One National Guard member has died after a shooting incident in Washington, D.C., with a lone suspect now in custody. / 在华盛顿特区发生枪击事件后，一名国民警卫队成员死亡，一名单独的嫌疑人现已被拘留。
+- **Source**: Global News
+
+### 10. **Pope Leo XIV's First Overseas Trip to Turkey** / **教皇利奥十四首次出访土耳其**
+- **Time**: 2025-11-29
+- **Content**: Pope Leo XIV has begun his first overseas trip, visiting Istanbul's Blue Mosque and meeting with Turkey's religious leaders to commemorate the 1,700th anniversary of the Council of Nicaea. / 教皇利奥十四开始了他的首次海外访问，参观了伊斯坦布尔的蓝色清真寺，并与土耳其的宗教领袖会面，以纪念尼西亚公会议1700周年。
+- **Source**: Sky News
 
 ---
 
