@@ -1,40 +1,37 @@
 # 应用文
 
-## An email giving directions to your new house
-- 一封指引到你新家的电子邮件
+## A postcard describing an interesting museum you visited
+- 一张描述你参观过的有趣博物馆的明信片
 
 **正文**：
 
-Hi Emily,
+Hi Sam,
 
-Great news! I’ve finally moved into my new house, and I’d love for you to come over next Saturday. It’s not too difficult to find.
+I'm having a great time in London! Yesterday, I visited the Natural History Museum, and it was absolutely amazing. The building itself is beautiful, but the best part was the dinosaur exhibition. I saw a huge Tyrannosaurus Rex skeleton that moved and roared! It was a bit scary but so cool.
 
-If you’re coming by bus, take the number 23 and get off at the stop called "Green Park". From there, walk straight for about five minutes until you see a large supermarket on your left. Turn right immediately after the supermarket onto Elm Street. My house is the third one on the right, number 15. It has a blue door.
+They also had a fascinating section about earthquakes, with a simulator that makes you feel like you're in one. I learned so much and took lots of photos to show you. You would love it here.
 
-See you then!
+See you soon,
+Alex
 
-Best,
-[Your Name]
-
-- 嗨，艾米丽，
-- 好消息！我终于搬进了新家，下周六我很想邀请你过来玩。我的家不难找。
-- 如果你坐公交车来，请乘坐23路，在“绿园”站下车。从那里直走大约五分钟，直到你左手边看到一家大型超市。超市过后立即右转，进入榆树街。我的房子是右手边的第三栋，门牌号是15。它有一扇蓝色的门。
-- 到时见！
-- 此致，
-- [你的名字]
+- 嗨，山姆，
+- 我在伦敦玩得很开心！昨天，我参观了自然历史博物馆，那里真是太棒了。建筑本身就很美，但最精彩的部分是恐龙展览。我看到了一个巨大且会动会吼的霸王龙骨架！有点吓人，但非常酷。
+- 他们还有一个关于地震的有趣展区，里面有一个模拟器，让你感觉身临其境。我学到了很多东西，也拍了很多照片给你看。你一定会喜欢这里的。
+- 回头见，
+- 亚历克斯
 
 ---
 
 # 记叙文/短文
 
-## An article for teenagers about the benefits of learning a second language
-- 一篇关于青少年学习第二语言益处的文章
+## A story about a wish that came true in an unexpected way
+- 一个关于愿望以意想不到的方式实现的故事
 
 **正文**：
 
-Hey teens! Ever thought about learning a new language? It's not just about textbooks and grammar; it's a superpower for your future!
+For my birthday, all I wished for was a puppy. I dreamed of a fluffy golden retriever to play with in the park. My parents said we should wait. One rainy afternoon, I heard a small noise from our garden. I went outside and found a tiny, shivering kitten hiding under a bush. It was all alone.
 
-Firstly, knowing another language makes your brain sharper. Studies show it improves problem-solving skills and memory. Secondly, it can open doors to amazing job opportunities globally. Imagine working in another country or for an international company! Plus, travelling becomes so much more exciting when you can chat with locals and truly understand their culture. No more getting lost in translation! So, why not give it a try? Pick a language and start your adventure today!
+I brought him inside, wrapped him in a warm blanket, and gave him some milk. My parents agreed we could keep him. I named him Shadow. It wasn't the puppy I wished for, but finding Shadow was even better.
 
-- 嘿，青少年们！有没有想过学习一门新语言？这不仅仅是关于课本和语法；它是你未来的超能力！
-- 首先，掌握另一种语言能让你的大脑更敏锐。研究表明，它能提高解决问题的能力和记忆力。其次，它能为你打开全球范围内绝佳的工作机会。想象一下在另一个国家或为一家国际公司工作！此外，当你能与当地人交流并真正理解他们的文化时，旅行会变得更加激动人心。再也不会在翻译中迷失了！所以，何不尝试一下呢？选择一门语言，今天就开始你的冒险吧！
+- 生日那天，我唯一的愿望就是想要一只小狗。我梦想着能有一只毛茸茸的金毛寻回犬，可以和它在公园里玩耍。但我的父母说我们应该再等等。一个下雨的午后，我听到花园里传来一阵微弱的声音。我走出去，发现一只浑身湿透、瑟瑟发抖的小猫躲在灌木丛下。它孤零零的。
+- 我把它抱进屋，用温暖的毯子裹住它，还喂了它一些牛奶。我的父母同意我们可以收养它。我给他取名叫“影子”。虽然它不是我许愿想要的小狗，但能找到“影子”，我觉得是件更棒的事。
