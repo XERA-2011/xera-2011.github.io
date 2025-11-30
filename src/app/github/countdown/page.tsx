@@ -49,10 +49,10 @@ export default function CountdownPage() {
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8 }}
         >
-          <h2 className="text-3xl sm:text-4xl font-bold text-white mb-2">
+          <h2 className="text-3xl sm:text-4xl font-bold text-foreground mb-2">
             倒计时卡片
           </h2>
-          <p className="text-white/60">生成精美的 SVG 倒计时卡片，展示到任何目标时间的剩余时间</p>
+          <p className="text-muted-foreground">生成精美的 SVG 倒计时卡片，展示到任何目标时间的剩余时间</p>
         </motion.div>
 
         {/* Interactive Preview */}
@@ -62,42 +62,41 @@ export default function CountdownPage() {
           transition={{ duration: 0.8, delay: 0.2 }}
         >
           <GlowCard className="p-6 sm:p-8 mb-8">
-            <h3 className="text-2xl font-bold text-white mb-6">实时预览</h3>
+            <h3 className="text-2xl font-bold text-foreground mb-6">实时预览</h3>
 
             <div className="space-y-6">
               {/* 自定义设置 */}
               <div>
-                <Label htmlFor="targetDate" className="text-white/80">目标日期</Label>
+                <Label htmlFor="targetDate" className="text-muted-foreground">目标日期</Label>
                 <Input
                   id="targetDate"
                   type="date"
                   value={targetDate}
                   onChange={(e) => setTargetDate(e.target.value)}
                   placeholder="例如：2038-01-19"
-                  className="bg-black/20 border-white/20 text-white"
                 />
               </div>
 
               {/* 字体颜色选择 */}
               <div>
-                <label className="block text-sm font-medium text-white/80 mb-2">
+                <label className="block text-sm font-medium text-muted-foreground mb-2">
                   字体颜色
                 </label>
                 <div className="flex gap-2">
                   <button
                     onClick={() => setTextColor('')}
-                    className={`px-4 py-2 rounded-lg border transition-all ${textColor === ''
-                      ? 'bg-white/20 border-white/40 text-white'
-                      : 'bg-black/20 border-white/10 text-white/60 hover:border-white/20'
+                    className={`px-4 py-2 rounded-lg border transition-all duration-300 ${textColor === ''
+                      ? 'bg-accent border-ring text-accent-foreground'
+                      : 'bg-secondary border-border text-muted-foreground hover:border-ring'
                       }`}
                   >
                     黑色
                   </button>
                   <button
                     onClick={() => setTextColor('white')}
-                    className={`px-4 py-2 rounded-lg border transition-all ${textColor === 'white'
-                      ? 'bg-white/20 border-white/40 text-white'
-                      : 'bg-black/20 border-white/10 text-white/60 hover:border-white/20'
+                    className={`px-4 py-2 rounded-lg border transition-all duration-300 ${textColor === 'white'
+                      ? 'bg-accent border-ring text-accent-foreground'
+                      : 'bg-secondary border-border text-muted-foreground hover:border-ring'
                       }`}
                   >
                     白色
@@ -107,7 +106,7 @@ export default function CountdownPage() {
 
               {/* 预览区域 */}
               <div
-                className="flex justify-center bg-black/20 border border-white/10 rounded-lg p-8 mt-6"
+                className="flex justify-center bg-secondary border border-border rounded-lg p-8 mt-6"
                 style={{
                   minHeight: '100px',
                   backgroundImage: textColor === 'white'
@@ -139,15 +138,15 @@ export default function CountdownPage() {
           className="mt-6"
         >
           <GlowCard className="p-4 sm:p-6">
-            <h2 className="text-2xl font-bold text-white mb-6">使用方法</h2>
+            <h2 className="text-2xl font-bold text-foreground mb-6">使用方法</h2>
 
             <div className="space-y-8">
               {examples.map((example, index) => (
                 <div key={index} className="space-y-3">
                   {/* Code Block with Copy Button */}
                   <div className="relative">
-                    <pre className="bg-black/40 border border-white/10 rounded-lg p-4 overflow-x-auto">
-                      <code className="text-sm text-white/90">{example.code}</code>
+                    <pre className="bg-secondary border border-border rounded-lg p-4 overflow-x-auto">
+                      <code className="text-sm text-foreground">{example.code}</code>
                     </pre>
                     <Button
                       size="sm"
@@ -176,29 +175,29 @@ export default function CountdownPage() {
               ))}
             </div>
 
-            <div className="mt-8 pt-6 border-t border-white/10 space-y-4">
-              <h3 className="text-lg font-semibold text-white">API 参数说明</h3>
+            <div className="mt-8 pt-6 border-t border-border space-y-4">
+              <h3 className="text-lg font-semibold text-foreground">API 参数说明</h3>
               <div className="grid grid-cols-1 md:grid-cols-2 gap-4 text-sm">
                 <div className="space-y-2">
                   <div>
-                    <span className="text-white/80 font-medium">target</span>
-                    <span className="text-white/60 ml-2">(必填) 目标日期</span>
+                    <span className="text-foreground font-medium">target</span>
+                    <span className="text-muted-foreground ml-2">(必填) 目标日期</span>
                   </div>
-                  <div className="text-white/50 text-xs pl-4">
+                  <div className="text-muted-foreground text-xs pl-4">
                     支持格式: YYYY-MM-DD, YYYY/MM/DD, 时间戳
                   </div>
                 </div>
                 <div className="space-y-2">
                   <div>
-                    <span className="text-white/80 font-medium">color</span>
-                    <span className="text-white/60 ml-2">(可选) 字体颜色</span>
+                    <span className="text-foreground font-medium">color</span>
+                    <span className="text-muted-foreground ml-2">(可选) 字体颜色</span>
                   </div>
-                  <div className="text-white/50 text-xs pl-4">
+                  <div className="text-muted-foreground text-xs pl-4">
                     black (默认) 或 white
                   </div>
                 </div>
               </div>
-              <div className="mt-4 text-sm text-white/60">
+              <div className="mt-4 text-sm text-muted-foreground">
                 <p>• 显示格式：Countdown: XXX days</p>
                 <p>• 背景：完全透明</p>
                 <p>• 尺寸：根据文字内容自动调整</p>

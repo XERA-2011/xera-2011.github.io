@@ -60,7 +60,7 @@ export default function CoinPage() {
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8 }}
         >
-          <h2 className="text-3xl sm:text-4xl font-bold text-white mb-2">
+          <h2 className="text-3xl sm:text-4xl font-bold text-foreground mb-2">
             Crypto Coin Prices
           </h2>
         </motion.div>
@@ -72,12 +72,12 @@ export default function CoinPage() {
           transition={{ duration: 0.8, delay: 0.2 }}
         >
           <GlowCard className="p-6 sm:p-8 mb-8">
-            <h3 className="text-2xl font-bold text-white mb-6">实时预览</h3>
+            <h3 className="text-2xl font-bold text-foreground mb-6">实时预览</h3>
 
             <div className="space-y-6">
               {/* 布局选择 */}
               <div>
-                <label className="block text-sm font-medium text-white/80 mb-2">
+                <label className="block text-sm font-medium text-muted-foreground mb-2">
                   布局类型
                 </label>
                 <div className="grid grid-cols-2 gap-2">
@@ -85,9 +85,9 @@ export default function CoinPage() {
                     <button
                       key={option.value}
                       onClick={() => setLayout(option.value)}
-                      className={`px-4 py-2 rounded-lg border transition-all ${layout === option.value
-                        ? 'bg-white/20 border-white/40 text-white'
-                        : 'bg-black/20 border-white/10 text-white/60 hover:border-white/20'
+                      className={`px-4 py-2 rounded-lg border transition-all duration-300 ${layout === option.value
+                        ? 'bg-accent border-ring text-accent-foreground'
+                        : 'bg-secondary border-border text-muted-foreground hover:border-ring'
                         }`}
                     >
                       {option.label}
@@ -98,7 +98,7 @@ export default function CoinPage() {
 
               {/* 主题选择 */}
               <div>
-                <label className="block text-sm font-medium text-white/80 mb-2">
+                <label className="block text-sm font-medium text-muted-foreground mb-2">
                   主题
                 </label>
                 <div className="flex gap-2">
@@ -106,9 +106,9 @@ export default function CoinPage() {
                     <button
                       key={t}
                       onClick={() => setTheme(t)}
-                      className={`px-4 py-2 rounded-lg border transition-all ${theme === t
-                        ? 'bg-white/20 border-white/40 text-white'
-                        : 'bg-black/20 border-white/10 text-white/60 hover:border-white/20'
+                      className={`px-4 py-2 rounded-lg border transition-all duration-300 ${theme === t
+                        ? 'bg-accent border-ring text-accent-foreground'
+                        : 'bg-secondary border-border text-muted-foreground hover:border-ring'
                         }`}
                     >
                       {t}
@@ -118,7 +118,7 @@ export default function CoinPage() {
               </div>
 
               {/* 预览区域 */}
-              <div className="flex justify-center bg-black/20 border border-white/10 rounded-lg p-8 mt-6" style={{ minHeight: '250px' }}>
+              <div className="flex justify-center bg-secondary border border-border rounded-lg p-8 mt-6" style={{ minHeight: '250px' }}>
                 <Image
                   src={`/api/github/crypto-coin?coin=${coins}&mode=multi&layout=${layout}&theme=${theme}`}
                   alt="Crypto Prices Preview"
@@ -142,17 +142,17 @@ export default function CoinPage() {
           className="mt-6"
         >
           <GlowCard className="p-4 sm:p-6">
-            <h2 className="text-2xl font-bold text-white mb-6">使用方法</h2>
+            <h2 className="text-2xl font-bold text-foreground mb-6">使用方法</h2>
 
             <div className="space-y-8">
               {examples.map((example, index) => (
                 <div key={index} className="space-y-3">
-                  <h3 className="text-lg font-semibold text-white">{example.title}</h3>
+                  <h3 className="text-lg font-semibold text-foreground">{example.title}</h3>
 
                   {/* Code Block with Copy Button */}
                   <div className="relative">
-                    <pre className="bg-black/40 border border-white/10 rounded-lg p-4 overflow-x-auto">
-                      <code className="text-sm text-white/90">{example.code}</code>
+                    <pre className="bg-secondary border border-border rounded-lg p-4 overflow-x-auto">
+                      <code className="text-sm text-foreground">{example.code}</code>
                     </pre>
                     <Button
                       size="sm"
@@ -179,13 +179,15 @@ export default function CoinPage() {
                   </div>
 
                   {/* Preview */}
-                  <div className="flex justify-center bg-black/20 border border-white/10 rounded-lg p-4">
+                  <div className="flex justify-center bg-secondary border border-border rounded-lg p-4">
                     <Image
                       src={example.preview}
                       alt={example.title}
                       className="max-w-full"
                       width={900}
                       height={600}
+                      style={{ width: "auto", height: "auto" }}
+                      priority
                       unoptimized
                     />
                   </div>
@@ -193,9 +195,9 @@ export default function CoinPage() {
               ))}
             </div>
 
-            <div className="mt-6 pt-6 border-t border-white/10">
-              <p className="text-sm text-white/60">
-                <strong className="text-white/80">支持的币种:</strong> BTC、ETH、ETC、BNB、SOL、USDT、XRP、ADA、DOGE、TRX
+            <div className="mt-6 pt-6 border-t border-border">
+              <p className="text-sm text-muted-foreground">
+                <strong className="text-foreground">支持的币种:</strong> BTC、ETH、ETC、BNB、SOL、USDT、XRP、ADA、DOGE、TRX
               </p>
             </div>
           </GlowCard>

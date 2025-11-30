@@ -36,7 +36,7 @@ export default function GitHubStatsPage() {
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8 }}
         >
-          <h2 className="text-3xl sm:text-4xl font-bold text-white mb-3">
+          <h2 className="text-3xl sm:text-4xl font-bold text-foreground mb-3">
             GitHub Stats Card
           </h2>
         </motion.div>
@@ -48,24 +48,24 @@ export default function GitHubStatsPage() {
           transition={{ duration: 0.8, delay: 0.2 }}
         >
           <GlowCard className="p-6 sm:p-8 mb-8">
-            <h3 className="text-2xl font-bold text-white mb-6">实时预览</h3>
+            <h3 className="text-2xl font-bold text-foreground mb-6">实时预览</h3>
 
             <div className="space-y-6">
               <div>
-                <label className="block text-sm font-medium text-white/80 mb-2">
+                <label className="block text-sm font-medium text-muted-foreground mb-2">
                   GitHub 用户名
                 </label>
                 <input
                   type="text"
                   value={username}
                   onChange={(e) => setUsername(e.target.value)}
-                  className="w-full px-4 py-2 bg-black/40 border border-white/10 rounded-lg text-white focus:outline-none focus:border-white/30"
+                  className="w-full px-4 py-2 bg-secondary border border-border rounded-lg text-foreground focus:outline-none focus:border-ring transition-colors duration-300"
                   placeholder="输入 GitHub 用户名"
                 />
               </div>
 
               <div>
-                <label className="block text-sm font-medium text-white/80 mb-2">
+                <label className="block text-sm font-medium text-muted-foreground mb-2">
                   主题
                 </label>
                 <div className="flex gap-2 flex-wrap">
@@ -73,9 +73,9 @@ export default function GitHubStatsPage() {
                     <button
                       key={t}
                       onClick={() => setTheme(t)}
-                      className={`px-4 py-2 rounded-lg border transition-all ${theme === t
-                        ? 'bg-white/20 border-white/40 text-white'
-                        : 'bg-black/20 border-white/10 text-white/60 hover:border-white/20'
+                      className={`px-4 py-2 rounded-lg border transition-all duration-300 ${theme === t
+                        ? 'bg-accent border-ring text-accent-foreground'
+                        : 'bg-secondary border-border text-muted-foreground hover:border-ring'
                         }`}
                     >
                       {t}
@@ -84,7 +84,7 @@ export default function GitHubStatsPage() {
                 </div>
               </div>
 
-              <div className="flex justify-center bg-black/20 border border-white/10 rounded-lg p-8 mt-6" style={{ minHeight: '350px' }}>
+              <div className="flex justify-center bg-secondary border border-border rounded-lg p-8 mt-6" style={{ minHeight: '350px' }}>
                 <Image
                   src={`/api/github/stats?username=${username}&theme=${theme}&v=2`}
                   alt="GitHub Stats Preview"
@@ -106,17 +106,17 @@ export default function GitHubStatsPage() {
           transition={{ duration: 0.8, delay: 0.4 }}
         >
           <GlowCard className="p-6 sm:p-8">
-            <h2 className="text-2xl font-bold text-white mb-6">使用方法</h2>
+            <h2 className="text-2xl font-bold text-foreground mb-6">使用方法</h2>
 
             <div className="space-y-4">
-              <p className="text-white/70 text-sm">
+              <p className="text-muted-foreground text-sm">
                 将以下代码复制到你的 GitHub README.md 文件中：
               </p>
 
               {/* Code Block with Copy Button */}
               <div className="relative">
-                <pre className="bg-black/40 border border-white/10 rounded-lg p-4 overflow-x-auto">
-                  <code className="text-sm text-white/90">{exampleCode}</code>
+                <pre className="bg-secondary border border-border rounded-lg p-4 overflow-x-auto">
+                  <code className="text-sm text-foreground">{exampleCode}</code>
                 </pre>
                 <Button
                   size="sm"
@@ -143,20 +143,20 @@ export default function GitHubStatsPage() {
               </div>
             </div>
 
-            <div className="mt-8 pt-6 border-t border-white/10 space-y-4">
+            <div className="mt-8 pt-6 border-t border-border space-y-4">
               <div>
-                <p className="text-base text-white/80 font-semibold mb-3">可用参数：</p>
-                <ul className="text-sm text-white/60 space-y-2 list-disc list-inside ml-2">
-                  <li><code className="text-white/80 bg-white/5 px-2 py-0.5 rounded">username</code> - GitHub 用户名（必需）</li>
-                  <li><code className="text-white/80 bg-white/5 px-2 py-0.5 rounded">theme</code> - 主题（dark, light, radical, merko）</li>
-                  <li><code className="text-white/80 bg-white/5 px-2 py-0.5 rounded">hide_title</code> - 隐藏标题</li>
-                  <li><code className="text-white/80 bg-white/5 px-2 py-0.5 rounded">hide_border</code> - 隐藏边框</li>
+                <p className="text-base text-foreground font-semibold mb-3">可用参数：</p>
+                <ul className="text-sm text-muted-foreground space-y-2 list-disc list-inside ml-2">
+                  <li><code className="text-foreground bg-accent px-2 py-0.5 rounded">username</code> - GitHub 用户名（必需）</li>
+                  <li><code className="text-foreground bg-accent px-2 py-0.5 rounded">theme</code> - 主题（dark, light, radical, merko）</li>
+                  <li><code className="text-foreground bg-accent px-2 py-0.5 rounded">hide_title</code> - 隐藏标题</li>
+                  <li><code className="text-foreground bg-accent px-2 py-0.5 rounded">hide_border</code> - 隐藏边框</li>
                 </ul>
               </div>
 
               <div>
-                <p className="text-base text-white/80 font-semibold mb-3">统计数据包括：</p>
-                <ul className="text-sm text-white/60 space-y-2 list-disc list-inside ml-2">
+                <p className="text-base text-foreground font-semibold mb-3">统计数据包括：</p>
+                <ul className="text-sm text-muted-foreground space-y-2 list-disc list-inside ml-2">
                   <li>Total Stars - 所有仓库获得的星标总数</li>
                   <li>Total Commits - 总提交次数（估算）</li>
                   <li>Total PRs - 总 Pull Request 数量（估算）</li>

@@ -46,7 +46,7 @@ export default function GitHubTopLangsPage() {
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8 }}
         >
-          <h2 className="text-3xl sm:text-4xl font-bold text-white mb-3">
+          <h2 className="text-3xl sm:text-4xl font-bold text-foreground mb-3">
             GitHub Top Languages
           </h2>
         </motion.div>
@@ -58,26 +58,26 @@ export default function GitHubTopLangsPage() {
           transition={{ duration: 0.8, delay: 0.2 }}
         >
           <GlowCard className="p-6 sm:p-8 mb-8">
-            <h3 className="text-2xl font-bold text-white mb-6">实时预览</h3>
+            <h3 className="text-2xl font-bold text-foreground mb-6">实时预览</h3>
 
             <div className="space-y-6">
               {/* GitHub 用户名 */}
               <div>
-                <label className="block text-sm font-medium text-white/80 mb-2">
+                <label className="block text-sm font-medium text-muted-foreground mb-2">
                   GitHub 用户名
                 </label>
                 <input
                   type="text"
                   value={username}
                   onChange={(e) => setUsername(e.target.value)}
-                  className="w-full px-4 py-2 bg-black/40 border border-white/10 rounded-lg text-white focus:outline-none focus:border-white/30"
+                  className="w-full px-4 py-2 bg-secondary border border-border rounded-lg text-foreground focus:outline-none focus:border-ring transition-colors duration-300"
                   placeholder="输入 GitHub 用户名"
                 />
               </div>
 
               {/* 布局选择 */}
               <div>
-                <label className="block text-sm font-medium text-white/80 mb-2">
+                <label className="block text-sm font-medium text-muted-foreground mb-2">
                   布局类型
                 </label>
                 <div className="grid grid-cols-2 sm:grid-cols-4 gap-2">
@@ -85,9 +85,9 @@ export default function GitHubTopLangsPage() {
                     <button
                       key={option.value}
                       onClick={() => setLayout(option.value)}
-                      className={`px-4 py-2 rounded-lg border transition-all ${layout === option.value
-                        ? 'bg-white/20 border-white/40 text-white'
-                        : 'bg-black/20 border-white/10 text-white/60 hover:border-white/20'
+                      className={`px-4 py-2 rounded-lg border transition-all duration-300 ${layout === option.value
+                        ? 'bg-accent border-ring text-accent-foreground'
+                        : 'bg-secondary border-border text-muted-foreground hover:border-ring'
                         }`}
                     >
                       {option.label}
@@ -98,7 +98,7 @@ export default function GitHubTopLangsPage() {
 
               {/* 主题选择 */}
               <div>
-                <label className="block text-sm font-medium text-white/80 mb-2">
+                <label className="block text-sm font-medium text-muted-foreground mb-2">
                   主题
                 </label>
                 <div className="flex gap-2">
@@ -106,9 +106,9 @@ export default function GitHubTopLangsPage() {
                     <button
                       key={t}
                       onClick={() => setTheme(t)}
-                      className={`px-4 py-2 rounded-lg border transition-all ${theme === t
-                        ? 'bg-white/20 border-white/40 text-white'
-                        : 'bg-black/20 border-white/10 text-white/60 hover:border-white/20'
+                      className={`px-4 py-2 rounded-lg border transition-all duration-300 ${theme === t
+                        ? 'bg-accent border-ring text-accent-foreground'
+                        : 'bg-secondary border-border text-muted-foreground hover:border-ring'
                         }`}
                     >
                       {t}
@@ -126,15 +126,15 @@ export default function GitHubTopLangsPage() {
                   id="hideBorder"
                   checked={hideBorder}
                   onChange={(e) => setHideBorder(e.target.checked)}
-                  className="w-4 h-4 bg-black/40 border border-white/10 rounded text-white focus:outline-none focus:border-white/30"
+                  className="w-4 h-4 bg-secondary border border-border rounded text-foreground focus:outline-none focus:border-ring transition-colors duration-300"
                 />
-                <label htmlFor="hideBorder" className="text-sm font-medium text-white/80 cursor-pointer">
+                <label htmlFor="hideBorder" className="text-sm font-medium text-muted-foreground cursor-pointer">
                   隐藏边框
                 </label>
               </div>
 
               {/* 预览区域 */}
-              <div className="flex justify-center bg-black/20 border border-white/10 rounded-lg p-8 mt-6" style={{ minHeight: '250px' }}>
+              <div className="flex justify-center bg-secondary border border-border rounded-lg p-8 mt-6" style={{ minHeight: '250px' }}>
                 <Image
                   src={`/api/github/top-langs?username=${username}&theme=${theme}&layout=${layout}${hideBorder ? '&hide_border' : ''}`}
                   alt="Top Languages Preview"
@@ -157,17 +157,17 @@ export default function GitHubTopLangsPage() {
           transition={{ duration: 0.8, delay: 0.4 }}
         >
           <GlowCard className="p-6 sm:p-8">
-            <h2 className="text-2xl font-bold text-white mb-6">使用方法</h2>
+            <h2 className="text-2xl font-bold text-foreground mb-6">使用方法</h2>
 
             <div className="space-y-4">
-              <p className="text-white/70 text-sm">
+              <p className="text-muted-foreground text-sm">
                 将以下代码复制到你的 GitHub README.md 文件中：
               </p>
 
               {/* Code Block with Copy Button */}
               <div className="relative">
-                <pre className="bg-black/40 border border-white/10 rounded-lg p-4 overflow-x-auto">
-                  <code className="text-sm text-white/90">{exampleCode}</code>
+                <pre className="bg-secondary border border-border rounded-lg p-4 overflow-x-auto">
+                  <code className="text-sm text-foreground">{exampleCode}</code>
                 </pre>
                 <Button
                   size="sm"
@@ -194,21 +194,21 @@ export default function GitHubTopLangsPage() {
               </div>
             </div>
 
-            <div className="mt-8 pt-6 border-t border-white/10 space-y-4">
+            <div className="mt-8 pt-6 border-t border-border space-y-4">
               <div>
-                <p className="text-base text-white/80 font-semibold mb-3">可用参数：</p>
-                <ul className="text-sm text-white/60 space-y-2 list-disc list-inside ml-2">
-                  <li><code className="text-white/80 bg-white/5 px-2 py-0.5 rounded">username</code> - GitHub 用户名（必需）</li>
-                  <li><code className="text-white/80 bg-white/5 px-2 py-0.5 rounded">theme</code> - 主题（dark, light）</li>
-                  <li><code className="text-white/80 bg-white/5 px-2 py-0.5 rounded">layout</code> - 布局类型（vertical, horizontal, donut, cloud）</li>
+                <p className="text-base text-foreground font-semibold mb-3">可用参数：</p>
+                <ul className="text-sm text-muted-foreground space-y-2 list-disc list-inside ml-2">
+                  <li><code className="text-foreground bg-accent px-2 py-0.5 rounded">username</code> - GitHub 用户名（必需）</li>
+                  <li><code className="text-foreground bg-accent px-2 py-0.5 rounded">theme</code> - 主题（dark, light）</li>
+                  <li><code className="text-foreground bg-accent px-2 py-0.5 rounded">layout</code> - 布局类型（vertical, horizontal, donut, cloud）</li>
                   {/* langs_count 参数已移除 */}
-                  <li><code className="text-white/80 bg-white/5 px-2 py-0.5 rounded">hide_border</code> - 隐藏边框</li>
+                  <li><code className="text-foreground bg-accent px-2 py-0.5 rounded">hide_border</code> - 隐藏边框</li>
                 </ul>
               </div>
 
               <div>
-                <p className="text-base text-white/80 font-semibold mb-3">功能说明：</p>
-                <ul className="text-sm text-white/60 space-y-2 list-disc list-inside ml-2">
+                <p className="text-base text-foreground font-semibold mb-3">功能说明：</p>
+                <ul className="text-sm text-muted-foreground space-y-2 list-disc list-inside ml-2">
                   <li>自动统计所有非 fork 仓库的语言使用情况</li>
                   <li>按使用字节数排序，显示最常用的语言</li>
                   <li>支持四种布局类型：常规垂直、紧凑水平、甜甜圈图、标签云</li>

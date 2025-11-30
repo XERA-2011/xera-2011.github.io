@@ -18,7 +18,7 @@ export default function JokeCardPage() {
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8 }}
         >
-          <h2 className="text-3xl sm:text-4xl lg:text-5xl font-bold text-white mb-4">
+          <h2 className="text-3xl sm:text-4xl lg:text-5xl font-bold text-foreground mb-4">
             编程笑话卡片
           </h2>
         </motion.div>
@@ -41,22 +41,22 @@ export default function JokeCardPage() {
           transition={{ duration: 0.8, delay: 0.4 }}
         >
           <GlowCard className="mt-8 p-6">
-            <h2 className="text-xl font-semibold text-white mb-4">功能说明</h2>
-            <ul className="space-y-2 text-white/70">
+            <h2 className="text-xl font-semibold text-foreground mb-4">功能说明</h2>
+            <ul className="space-y-2 text-muted-foreground">
               <li className="flex items-start gap-2">
-                <span className="text-white/50">•</span>
+                <span className="text-muted-foreground">•</span>
                 <span>支持 40+ 种主题风格，包括 Dracula、Tokyo Night、Monokai 等</span>
               </li>
               <li className="flex items-start gap-2">
-                <span className="text-white/50">•</span>
+                <span className="text-muted-foreground">•</span>
                 <span>400+ 条精选编程笑话，随机展示</span>
               </li>
               <li className="flex items-start gap-2">
-                <span className="text-white/50">•</span>
+                <span className="text-muted-foreground">•</span>
                 <span>一键刷新获取新笑话</span>
               </li>
               <li className="flex items-start gap-2">
-                <span className="text-white/50">•</span>
+                <span className="text-muted-foreground">•</span>
                 <span>响应式设计，完美适配桌面和移动端</span>
               </li>
             </ul>
