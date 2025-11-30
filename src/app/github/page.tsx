@@ -31,6 +31,11 @@ const toolsData: GlowCardItem[] = [
     title: "GitHub 语言统计",
     href: "/github/top-langs",
   },
+  {
+    id: "github-icons",
+    title: "图标卡片",
+    href: "/github/icons",
+  },
 ];
 
 export default function ToolsPage() {
