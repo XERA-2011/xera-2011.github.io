@@ -15,7 +15,7 @@ export default function Footer() {
         <div className="text-muted-foreground">
           {`© Copyright ${new Date().getFullYear()} `}
           <Link
-            href="https://github.com/XERA-2011/XERA-2011"
+            href="https://github.com/XERA-2011"
             target="_blank"
             rel="noopener noreferrer"
             className="cursor-can-hover text-muted-foreground hover:text-foreground transition-colors duration-300 relative group inline-block"
