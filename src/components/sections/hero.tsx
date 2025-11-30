@@ -18,7 +18,7 @@ export default function HeroSection() {
 
   // 根据主题获取对应的 SVG
   const currentTheme = mounted ? (resolvedTheme || theme || 'dark') : 'dark';
-  const snakeSvgSrc = `/api/github-snake?theme=${currentTheme}`;
+  const snakeSvgSrc = `/api/github/snake?theme=${currentTheme}`;
 
   return (
     <section
