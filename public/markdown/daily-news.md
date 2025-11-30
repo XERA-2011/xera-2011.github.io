@@ -1,60 +1,60 @@
 # Global Breaking News TOP10
 
-**Date**: 2025年11月29日
-**Update Time**: 22:18 UTC
+**Date**: 2025年11月30日
+**Update Time**: 10:19 UTC
 **AI Model**: Google Gemini / Google Gemini
 
 ---
 
-### 1. **Israeli Drone Strike Kills Two Children in Southern Gaza** / **以色列无人机袭击导致加沙南部两名儿童死亡**
-- **Time**: 2025-11-29
-- **Content**: An Israeli drone attack in southern Gaza has resulted in the deaths of two Palestinian children, exacerbating the humanitarian crisis in the region. / 以色列无人机在加沙南部的袭击导致两名巴勒斯坦儿童死亡，加剧了该地区的人道主义危机。
+### 1. **Gaza Death Toll Surpasses 70,000 Amid Continued Israeli Attacks** / **加沙死亡人数超过7万，以色列持续发动袭击**
+- **Time**: 2025-11-30
+- **Content**: The death toll in Gaza has exceeded 70,000 as Israeli attacks continue despite a truce. Reports indicate that an Israeli drone strike killed two Palestinian children in southern Gaza, and video footage has emerged showing Israeli forces shooting Palestinians moments after they surrendered. / 尽管有停火协议，加沙地区的死亡人数已超过7万人。据报道，以色列无人机在加沙南部发动袭击，导致两名巴勒斯坦儿童死亡。另有视频显示，以色列军队在巴勒斯坦人投降后随即开枪射杀。
 - **Source**: Al Jazeera
 
-### 2. **UN Report Alleges "De Facto State Policy" of Torture by Israel** / **联合国报告指控以色列存在“事实上的国家酷刑政策”**
-- **Time**: 2025-11-29
-- **Content**: A United Nations report claims that Israel has a "de facto state policy" of organized torture, citing allegations of dog attacks and sexual violence against Palestinians. / 联合国一份报告称，以色列存在有组织的“事实上的国家酷刑政策”，报告援引了对巴勒斯坦人进行犬只攻击和性暴力的指控。
+### 2. **Russian Attacks Kill Six in Ukraine as Diplomatic Talks Commence** / **俄军袭击导致乌克兰六人死亡，外交会谈即将展开**
+- **Time**: 2025-11-30
+- **Content**: Russian attacks have resulted in the deaths of six people in Ukraine. Meanwhile, Ukrainian envoys are traveling to the United States for talks. In a related development, the chief of staff to Ukrainian President Zelenskyy has resigned following an anti-corruption investigation. / 俄罗斯对乌克兰的袭击已造成六人死亡。与此同时，乌克兰特使正前往美国进行会谈。此外，乌克兰总统泽连斯基的幕僚长因反腐败调查而辞职。
+- **Source**: Reuters
+
+### 3. **Sri Lanka Floods and Mudslides Death Toll Nears 200** / **斯里兰卡洪水和泥石流造成的死亡人数接近200**
+- **Time**: 2025-11-30
+- **Content**: The death toll from devastating floods and mudslides in Sri Lanka is approaching 200, with entire neighborhoods buried under mud. In Southeast Asia, similar disasters have claimed at least 500 lives, and residents in Sumatra are resorting to looting for food and water. / 斯里兰卡毁灭性的洪水和泥石流已导致近200人死亡，整个社区被泥土掩埋。在东南亚，类似的灾难已造成至少500人丧生，苏门答腊岛的居民因缺乏食物和水而开始抢劫。
 - **Source**: The Guardian
 
-### 3. **Top Aide to Ukrainian President Zelenskyy Resigns Amid Corruption Probe** / **乌克兰总统泽连斯基高级助手因腐败调查辞职**
-- **Time**: 2025-11-29
-- **Content**: Andriy Yermak, a top aide to Ukrainian President Volodymyr Zelenskyy, has resigned following an anti-corruption investigation and a raid on his home. / 乌克兰总统弗拉基米尔·泽连斯基的高级助手安德烈·耶尔马克在一起反腐败调查及住宅被突袭后辞职。
-- **Source**: Global News
+### 4. **Hong Kong Mourns Victims of Deadly Apartment Fires** / **香港悼念致命公寓火灾遇难者**
+- **Time**: 2025-11-30
+- **Content**: Hong Kong is in a state of mourning for the victims of deadly apartment fires. Investigations into the cause of the fires are ongoing, and authorities have made more arrests in connection with the incident. / 香港正为在致命公寓火灾中丧生的人们致哀。火灾原因的调查仍在进行中，当局已就此事件逮捕了更多嫌疑人。
+- **Source**: Associated Press
 
-### 4. **Hong Kong High-Rise Fire Claims Over 100 Lives** / **香港高层建筑大火已致逾百人遇难**
-- **Time**: 2025-11-29
-- **Content**: A devastating fire in a Hong Kong high-rise building has led to more than 100 deaths, with over 150 people still missing as rescue operations continue. / 香港一栋高层建筑发生毁灭性火灾，已导致超过100人死亡，仍有150多人失踪，救援行动仍在继续。
-- **Source**: Global News
+### 5. **Philippine President Faces Corruption Allegations, Sparking Protests** / **菲律宾总统面临腐败指控，引发抗议**
+- **Time**: 2025-11-30
+- **Content**: Allegations that Philippine President Ferdinand Marcos Jr. accepted kickbacks from infrastructure projects have sparked outrage across the country. Thousands of protesters have taken to the streets, demanding his resignation over the fraud scandal. / 菲律宾总统费迪南德·马科斯（Ferdinand Marcos Jr.）被指控从基础设施项目中收受回扣，这在全国范围内引发了愤怒。数千名抗议者走上街头，要求他因这起欺诈丑闻辞职。
+- **Source**: Reuters
 
-### 5. **Cyclone Ditwah Triggers Deadly Floods and Landslides in Sri Lanka** / **气旋“迪特瓦”在斯里兰卡引发致命洪水和山体滑坡**
-- **Time**: 2025-11-29
-- **Content**: Cyclone Ditwah has caused severe flooding and landslides in Sri Lanka, resulting in the deaths of more than 50 people. / 气旋“迪特瓦”在斯里兰卡造成严重洪水和山体滑坡，已导致超过50人死亡。
+### 6. **Four Killed in Shooting at Child's Birthday Party in California** / **加州儿童生日派对发生枪击案，四人死亡**
+- **Time**: 2025-11-30
+- **Content**: A shooting at a child's birthday party in California has left four people dead and ten others wounded. The incident has once again brought the issue of gun violence in the United States to the forefront of public discussion. / 美国加利福尼亚州一个儿童生日派对上发生枪击事件，造成四人死亡，十人受伤。这起事件再次将美国的枪支暴力问题推向了公众讨论的风口浪尖。
+- **Source**: CBS News
+
+### 7. **Venezuela Denounces Trump's Airspace Remarks as "Colonialist Threat"** / **委内瑞拉谴责特朗普关于领空的言论为“殖民主义威胁”**
+- **Time**: 2025-11-30
+- **Content**: The Venezuelan government has strongly condemned former U.S. President Donald Trump's remarks about closing its airspace, calling it a "colonialist threat." The statement came after the United States ordered its airspace closed to Venezuelan aircraft. / 委内瑞拉政府强烈谴责美国前总统唐纳德·特朗普关于关闭其领空的言论，称之为“殖民主义威胁”。此前，美国下令禁止委内瑞拉飞机进入其领空。
 - **Source**: Al Jazeera
 
-### 6. **Trump Announces Closure of Venezuelan Airspace** / **特朗普宣布关闭委内瑞拉领空**
-- **Time**: 2025-11-29
-- **Content**: Donald Trump has declared that Venezuelan airspace is "closed in its entirety" to airlines and traffickers, with US anti-drug efforts to intensify "by land" very soon. / 唐纳德·特朗普宣布委内瑞拉领空对航空公司和贩毒者“完全关闭”，并表示美国将很快“从陆地”加强禁毒行动。
-- **Source**: Al Jazeera
+### 8. **Ukrainian Naval Drones Strike Russian Oil Tankers in Black Sea** / **乌克兰海军无人机在黑海袭击俄罗斯油轮**
+- **Time**: 2025-11-30
+- **Content**: Ukrainian naval drones have reportedly struck two Russian oil tankers in the Black Sea. This attack marks a significant escalation in the naval conflict between the two countries and could have major implications for global oil markets. / 据报道，乌克兰海军无人机在黑海袭击了两艘俄罗斯油轮。此次袭击标志着两国海上冲突的重大升级，并可能对全球石油市场产生重大影响。
+- **Source**: The Guardian
 
-### 7. **Global Futures Trading Resumes After Major CME Outage** / **CME交易所重大故障后全球期货交易恢复**
-- **Time**: 2025-11-29
-- **Content**: Global futures trading has reopened after an 11-hour outage at the CME Group, which was attributed to a cooling system failure at a Chicago data center. / 在芝加哥商业交易所集团（CME）因数据中心冷却系统故障导致长达11小时的交易中断后，全球期货交易现已恢复。
-- **Source**: Al Jazeera
+### 9. **British Playwright Tom Stoppard Dies at 88** / **英国剧作家汤姆·斯托帕德去世，享年88岁**
+- **Time**: 2025-11-30
+- **Content**: Tom Stoppard, the acclaimed British playwright known for works such as "Shakespeare in Love" and "Rosencrantz and Guildenstern Are Dead," has passed away at the age of 88. He was a major figure in contemporary theater. / 英国著名剧作家汤姆·斯托帕德（Tom Stoppard）去世，享年88岁。他的代表作包括《莎翁情史》和《罗森格兰兹与吉尔登斯吞已死》。他是当代戏剧界的领军人物。
+- **Source**: BBC News
 
-### 8. **Airbus Issues Significant Recall for A320 Aircraft** / **空客公司发布针对A320机型的重要召回**
-- **Time**: 2025-11-29
-- **Content**: Airbus has announced a "significant" recall of its A320 aircraft following a flight-control incident, leading to widespread flight cancellations. / 在发生一起飞行控制事件后，空中客车公司宣布对其A320飞机进行“重大”召回，导致大量航班被取消。
-- **Source**: Global News
-
-### 9. **Military Seizes Power in Guinea-Bissau** / **几内亚比绍军方夺取政权**
-- **Time**: 2025-11-29
-- **Content**: The military in Guinea-Bissau has deposed the president and taken control of the country in a coup. / 几内亚比绍军方通过政变推翻了总统并控制了国家。
-- **Source**: Global News
-
-### 10. **Son of "El Chapo" Expected to Plead Guilty in US Court** / **“矮子”之子预计将在美国法庭认罪**
-- **Time**: 2025-11-29
-- **Content**: The son of the infamous jailed Mexican drug lord "El Chapo" is anticipated to plead guilty to drug trafficking charges in a US federal court. / 被监禁的臭名昭著的墨西哥毒枭“矮子”的儿子预计将在美国联邦法院对贩毒指控认罪。
-- **Source**: Al Jazeera
+### 10. **Kyrgyzstan Holds Snap Parliamentary Election with No Opposition** / **吉尔吉斯斯坦在没有反对党的情况下举行临时议会选举**
+- **Time**: 2025-11-30
+- **Content**: Kyrgyzstan is holding a snap parliamentary election in which no opposition parties are participating. This has raised concerns about the state of democracy in the Central Asian nation. / 吉尔吉斯斯坦正在举行一场没有反对党参加的临时议会选举。这引发了外界对这个中亚国家民主状况的担忧。
+- **Source**: Associated Press
 
 ---
 
