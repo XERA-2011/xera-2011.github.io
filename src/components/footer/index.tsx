@@ -22,7 +22,7 @@ export default function Footer() {
           >
             <span>XERA-2011</span>
             <motion.span
-              className="absolute -bottom-1 left-0 w-0 h-[1px] bg-foreground group-hover:w-full"
+              className="absolute -bottom-1 left-0 w-0 h-px bg-foreground group-hover:w-full"
               transition={{ duration: 0.3 }}
             />
           </Link>
@@ -34,7 +34,7 @@ export default function Footer() {
         >
           <span>Privacy Policy</span>
           <motion.span
-            className="absolute -bottom-1 left-0 w-0 h-[1px] bg-foreground group-hover:w-full"
+            className="absolute -bottom-1 left-0 w-0 h-px bg-foreground group-hover:w-full"
             transition={{ duration: 0.3 }}
           />
         </Link>
@@ -45,7 +45,7 @@ export default function Footer() {
         >
           <span>Terms of Service</span>
           <motion.span
-            className="absolute -bottom-1 left-0 w-0 h-[1px] bg-foreground group-hover:w-full"
+            className="absolute -bottom-1 left-0 w-0 h-px bg-foreground group-hover:w-full"
             transition={{ duration: 0.3 }}
           />
         </Link>
