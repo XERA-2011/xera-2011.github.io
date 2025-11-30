@@ -7,6 +7,11 @@ import { usePageTitle } from '@/hooks/use-page-title';
 
 const toolsData: GlowCardItem[] = [
   {
+    id: "github-countdown",
+    title: "倒计时卡片",
+    href: "/github/countdown",
+  },
+  {
     id: "github-joke-card",
     title: "编程笑话卡片",
     href: "/github/joke-card",
