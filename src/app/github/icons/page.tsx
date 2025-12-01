@@ -6,7 +6,6 @@ import Image from 'next/image';
 import { usePageTitle } from '@/hooks/use-page-title';
 import GlowCard from '@/components/ui/glow-card';
 import { Button } from '@/components/ui/button';
-import { Label } from '@/components/ui/label';
 
 // 可用图标列表 - 按类别分组
 const ICON_CATEGORIES = {
@@ -125,8 +124,8 @@ export default function IconsPage() {
                                   key={icon}
                                   onClick={() => toggleIcon(icon)}
                                   className={`px-3 py-1 text-xs rounded-md border transition-colors ${isSelected
-                                      ? 'bg-primary text-primary-foreground border-primary'
-                                      : 'bg-secondary text-muted-foreground border-border hover:bg-accent hover:text-accent-foreground'
+                                    ? 'bg-primary text-primary-foreground border-primary'
+                                    : 'bg-secondary text-muted-foreground border-border hover:bg-accent hover:text-accent-foreground'
                                     }`}
                                 >
                                   {icon}
