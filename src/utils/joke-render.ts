@@ -5,6 +5,8 @@
 interface QnACardOptions {
   question: string;
   answer: string;
+  questionZh?: string; // 中文问题
+  answerZh?: string;   // 中文答案
   qColor: string;
   aColor: string;
   bgColor: string;
@@ -15,6 +17,7 @@ interface QnACardOptions {
 
 interface QuoteCardOptions {
   text: string;
+  textZh?: string; // 中文文本
   textColor: string;
   bgColor: string;
   borderColor: string;
@@ -84,6 +87,11 @@ export function renderQnACard(options: QnACardOptions): string {
         .answer {
           color: ${aColor};
         }
+        .zh {
+          margin-top: 0.3rem;
+          opacity: 0.85;
+          font-size: 0.9em;
+        }
         code {
           font-size: 1.2rem;
           color: ${codeColor};
@@ -91,8 +99,14 @@ export function renderQnACard(options: QnACardOptions): string {
       </style>
       <div class="container">
         <div class="text">
-          <p class="question"><b>Q.</b> ${question}</p>
-          <p class="answer"><b>A.</b> ${answer}</p>
+          <div class="question">
+            <p><b>Q.</b> ${question}</p>
+            ${options.questionZh ? `<p class="zh">问：${options.questionZh}</p>` : ''}
+          </div>
+          <div class="answer">
+            <p><b>A.</b> ${answer}</p>
+            ${options.answerZh ? `<p class="zh">答：${options.answerZh}</p>` : ''}
+          </div>
         </div>
       </div>
     </div>
@@ -157,6 +171,11 @@ export function renderQuoteCard(options: QuoteCardOptions): string {
         .quote {
           color: ${textColor};
         }
+        .zh {
+          margin-top: 0.3rem;
+          opacity: 0.85;
+          font-size: 0.9em;
+        }
         code {
           font-size: 1.2rem;
           color: ${codeColor};
@@ -164,7 +183,10 @@ export function renderQuoteCard(options: QuoteCardOptions): string {
       </style>
       <div class="container">
         <div class="text">
-          <p class="quote">${text}</p>
+          <div class="quote">
+            <p>${text}</p>
+            ${options.textZh ? `<p class="zh">${options.textZh}</p>` : ''}
+          </div>
         </div>
       </div>
     </div>

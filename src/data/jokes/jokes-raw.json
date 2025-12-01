@@ -1,806 +1,1228 @@
 {
-	"0": {
-		"q": "Relationship status?",
-		"a": "I'll leave the relations to the database.",
-		"form": "qa"
-	},
-	"1": {
-		"q": "How do you get the code for the bank vault?",
-		"a": "You checkout their branch.",
-		"form": "qa"
-	},
-	"2": {
-		"q": "How did the developer announce their engagement?",
-		"a": "They <code>return</code>ed <code>true</code>!",
-		"form": "qa"
-	},
-	"3": {
-		"q": "Why did the security conscious engineer refuse to pay their dinner bill?",
-		"a": "Because they could not verify the checksum.",
-		"form": "qa"
-	},
-	"4": {
-		"q": "What do you call a busy waiter?",
-		"a": "A server.",
-		"form": "qa"
-	},
-	"5": {
-		"q": "What do you call an idle server?",
-		"a": "A waiter.",
-		"form": "qa"
-	},
-	"6": "<code>[Please Enter New Password]</code><p>fortnight</p><code>[Error: Password is Two Week]</code>",
-	"7": {
-		"q": "How many Prolog programmers does it take to change a lightbulb?",
-		"a": "Yes.",
-		"form": "qa"
-	},
-	"8": "I’ve been hearing news about this big boolean. Huge if true.",
-	"9": {
-		"q": "What diet did the ghost developer go on?",
-		"a": "Boooooolean",
-		"form": "qa"
-	},
-	"10": {
-		"q": "Why was the developer unhappy at their job?",
-		"a": "They wanted arrays.",
-		"form": "qa"
-	},
-	"11": {
-		"q": "Why did 10 get paid less than \"10\"?",
-		"a": "There was workplace inequality.",
-		"form": "qa"
-	},
-	"12": {
-		"q": "Why was the function sad after a successful first call?",
-		"a": "It didn’t get a callback.",
-		"form": "qa"
-	},
-	"13": {
-		"q": "Why did the angry function exceed the callstack size?",
-		"a": "It got into an Argument with itself",
-		"form": "qa"
-	},
-	"14": {
-		"q": "Whats the object-oriented way to become wealthy?",
-		"a": "Inheritance",
-		"form": "qa"
-	},
-	"15": {
-		"q": "Why did the developer ground their kid?",
-		"a": "They weren't telling the truthy",
-		"form": "qa"
-	},
-	"16": {
-		"q": "What did the array say after it was extended?",
-		"a": "Stop objectifying me.",
-		"form": "qa"
-	},
-	"17": "**!false**It's funny 'cause it's true.",
-	"18": {
-		"q": "Where did the parallel function wash its hands?",
-		"a": "Async",
-		"form": "qa"
-	},
-	"19": {
-		"q": "I'm starting a band called HTML Encoder",
-		"a": "Looking to buy a guitar \\&",
-		"form": "qa"
-	},
-	"20": {
-		"q": "Why did the functions stop calling each other?",
-		"a": "Because they had constant arguments.",
-		"form": "qa"
-	},
-	"21": {
-		"q": "What's the second movie about a database engineer called?",
-		"a": "The SQL.",
-		"form": "qa"
-	},
-	"22": {
-		"q": "Why doesn't Hollywood make more Big Data movies?",
-		"a": "NoSQL.",
-		"form": "qa"
-	},
-	"23": "A programmer's significant other tells them, \"Run to the store and pick up a loaf of bread. If they have eggs, get a dozen.\"The programmer comes home with 12 loaves of bread.",
-	"24": {
-		"q": "What did the spider do on the computer?",
-		"a": "Made a website!",
-		"form": "qa"
-	},
-	"25": {
-		"q": "What did the computer do at lunchtime?",
-		"a": "Had a byte!",
-		"form": "qa"
-	},
-	"26": {
-		"q": "What does a baby computer call his father?",
-		"a": "Data!",
-		"form": "qa"
-	},
-	"27": {
-		"q": "Why did the computer keep sneezing?",
-		"a": "It had a virus!",
-		"form": "qa"
-	},
-	"28": {
-		"q": "What is a computer virus?",
-		"a": "A terminal illness!",
-		"form": "qa"
-	},
-	"29": "I never tell the same joke twice I have a DRY sense of humor.",
-	"30": {
-		"q": "Why was the computer freezing?",
-		"a": "It left its Windows open!",
-		"form": "qa"
-	},
-	"31": {
-		"q": "Why was there a bug in the computer?",
-		"a": "Because it was looking for a byte to eat?",
-		"form": "qa"
-	},
-	"32": {
-		"q": "Why did the computer squeak?",
-		"a": "Because someone stepped on its mouse!",
-		"form": "qa"
-	},
-	"33": {
-		"q": "What do you get when you cross a computer and a life guard?",
-		"a": "A screensaver!",
-		"form": "qa"
-	},
-	"34": {
-		"q": "Where do all the cool mice live?",
-		"a": "In their mousepads!",
-		"form": "qa"
-	},
-	"35": {
-		"q": "What do you get when you cross a computer with an elephant?",
-		"a": "Lots of memory!",
-		"form": "qa"
-	},
-	"36": "Java truly is an OOP language...\nAs in: OOPs I used Java!",
-	"37": {
-		"q": "How do programming pirates pass method parameters?",
-		"a": "Varrrrarrrgs.",
-		"form": "qa"
-	},
-	"38": {
-		"q": "How do programming shepherds count their flock?",
-		"a": "With lambda functions",
-		"form": "qa"
-	},
-	"39": {
-		"q": "What airline do developers prefer when they're in a rush?",
-		"a": "Delta.",
-		"form": "qa"
-	},
-	"40": {
-		"q": "How did pirates collaborate before computers?",
-		"a": "Pier to pier networking.",
-		"form": "qa"
-	},
-	"41": {
-		"q": "Why don't bachelors like Git?",
-		"a": "Because they are afraid to commit.",
-		"form": "qa"
-	},
-	"42": {
-		"q": "A SQL query goes into a bar, walks up to two tables and asks:",
-		"a": "Can I JOIN you?",
-		"form": "qa"
-	},
-	"43": {
-		"q": "How does a developer make a cheer?",
-		"a": "[\"hip\",\"hip\"] // (hip hip array!)",
-		"form": "qa"
-	},
-	"44": {
-		"q": "Why was the developer's family upset with them at dinner?",
-		"a": "They forgot to git squash before going home",
-		"form": "qa"
-	},
-	"45": {
-		"q": "What did JavaScript call his son?",
-		"a": "JSON!",
-		"form": "qa"
-	},
-	"46": {
-		"q": "What did the proud React component say to its child?",
-		"a": "I've got to give you props",
-		"form": "qa"
-	},
-	"47": {
-		"q": "What did the server say to his client who was having a bad day?",
-		"a": "Everything's going to be 200",
-		"form": "qa"
-	},
-	"48": {
-		"q": "Why did the developer go broke?",
-		"a": "Because they used up all their cache",
-		"form": "qa"
-	},
-	"49": {
-		"q": "Are computers dangerous?",
-		"a": "Nah, they don't byte. They just nibble a bit.",
-		"form": "qa"
-	},
-	"50": {
-		"q": "How did the mafioso kill the Node server?",
-		"a": "Tie await to it and let it async.",
-		"form": "qa"
-	},
-	"51": {
-		"q": "You know what the best thing about booleans is?",
-		"a": "Even if you are wrong, you are only off by a bit.",
-		"form": "qa"
-	},
-	"52": {
-		"q": "Why couldn’t the user update a file on a shared server?",
-		"a": "They didn’t have the write permissions",
-		"form": "qa"
-	},
-	"53": {
-		"q": "What do you do when you can't understand your husband's behavior?",
-		"a": "man man",
-		"form": "qa"
-	},
-	"54": {
-		"q": "What do you call a doctor who fixes websites?",
-		"a": "A URLogist",
-		"form": "qa"
-	},
-	"55": {
-		"q": "How many developers does it take to change a light bulb?",
-		"a": "None. It's a hardware issue",
-		"form": "qa"
-	},
-	"56": {
-		"q": "Why do programmers always mix up Halloween and Christmas?",
-		"a": "Because 31 OCT == 25 DEC",
-		"form": "qa"
-	},
-	"57": {
-		"q": "Why do kayakers make bad programmers?",
-		"a": "Because they're afraid of waterfall.",
-		"form": "qa"
-	},
-	"58": {
-		"q": "What are computers' favorite snacks?",
-		"a": "Microchips, phish sticks, and cookies. But just a few bytes of each.",
-		"form": "qa"
-	},
-	"59": {
-		"q": "What do computers love to do at the beach?",
-		"a": "Put on some spam block for protection so they can safely surf the net while catching some .WAVs!",
-		"form": "qa"
-	},
-	"60": {
-		"q": "What do you call a computer that sings?",
-		"a": "A-dell.",
-		"form": "qa"
-	},
-	"61": {
-		"q": "What's a compiler developer's favorite spice?",
-		"a": "Parsley.",
-		"form": "qa"
-	},
-	"62": {
-		"q": "When do front end developers go out to eat?",
-		"a": "On their lunch <code>&lt;&#98;&#114;&gt;</code>.",
-		"form": "qa"
-	},
-	"63": {
-		"q": "A SQL developer walked into a NoSQL bar.",
-		"a": "They left because they couldn't find a table.",
-		"form": "qa"
-	},
-	"64": {
-		"q": "How do you help JS errors?",
-		"a": "You <code>console</code> them!",
-		"form": "qa"
-	},
-	"65": {
-		"q": "Why don't parents teach their kids about regular expressions?",
-		"a": "Because they don't want them playing with matches",
-		"form": "qa"
-	},
-	"66": {
-		"q": "Why didn't the <code>div</code> get invited to the dinner party?",
-		"a": "Because it had no <code>class</code>!",
-		"form": "qa"
-	},
-	"67": {
-		"q": "Why aren't cryptocurrency engineers allowed to vote?",
-		"a": "Because they're miners!",
-		"form": "qa"
-	},
-	"68": {
-		"q": "Why did the constant break up with the variable?",
-		"a": "Because they changed.",
-		"form": "qa"
-	},
-	"69": {
-		"q": "Why did the database administrator leave his wife?",
-		"a": "She had one-to-many relationships.",
-		"form": "qa"
-	},
-	"70": "Asynchronous JavaScript is amazing.I Promise you, await and see.",
-	"71": {
-		"q": "What did the Class say in court when put on trial?",
-		"a": "I strongly object!",
-		"form": "qa"
-	},
-	"72": {
-		"q": "Why do Java developers wear glasses?",
-		"a": "Because they don't C#!",
-		"form": "qa"
-	},
-	"73": {
-		"q": "What are the three hardest problems in computer science?",
-		"a": "Naming things and off-by-one errors",
-		"form": "qa"
-	},
-	"74": {
-		"q": "What did the fruit basket say to the developer?",
-		"a": "I hope you're ready for some pear programming!",
-		"form": "qa"
-	},
-	"75": {
-		"q": "How does a sysadmin keep a fire going?",
-		"a": "They rotate the logs.",
-		"form": "qa"
-	},
-	"76": "I've got a great UDP joke but I'm afraid you wouldn't get it...",
-	"77": "A programmer was arrested for writing unreadable code. They refused to comment.",
-	"78": "There are 10 types of people in this world, those who understand binary and those who don't.",
-	"79": {
-		"q": "I love you and I only love you. Does that turn you on?",
-		"a": "ATE:** No.",
-		"form": "qa"
-	},
-	"80": {
-		"q": "Why do all HTML emails get blocked?",
-		"a": "Because they are all <code>span</code>",
-		"form": "qa"
-	},
-	"81": {
-		"q": "What did the process say after working in an infinite loop all day?",
-		"a": "I need a break.",
-		"form": "qa"
-	},
-	"82": {
-		"q": "An Agent died unexpectedly. How was the crime solved?",
-		"a": "By looking at the Stack Trace.",
-		"form": "qa"
-	},
-	"83": {
-		"q": "Why did the document store go out of business?",
-		"a": "It had NoSQL.",
-		"form": "qa"
-	},
-	"84": {
-		"q": "Why can't SQL and NoSQL Developers date one other?",
-		"a": "Because they don't agree on relationships.",
-		"form": "qa"
-	},
-	"85": {
-		"q": "Why is Python like the Soviet Union?",
-		"a": "Because it has no private fields",
-		"form": "qa"
-	},
-	"86": {
-		"q": "Where did the API go to eat?",
-		"a": "To the RESTaurant",
-		"form": "qa"
-	},
-	"87": {
-		"q": "Why shouldn't you trust Matlab developers?",
-		"a": "Because they're always plotting something.",
-		"form": "qa"
-	},
-	"88": {
-		"q": "Why did the developer have to quit smoking?",
-		"a": "Because they couldn't afford to pay the new syntax.",
-		"form": "qa"
-	},
-	"89": {
-		"q": "How does a programmer open a jar for their significant other?",
-		"a": "They install Java",
-		"form": "qa"
-	},
-	"90": {
-		"q": "What did the psychic say to the developers?",
-		"a": "I see dev people.",
-		"form": "qa"
-	},
-	"91": {
-		"q": "Where does the pirate stash all of their digital treasures?",
-		"a": "RAR",
-		"form": "qa"
-	},
-	"92": {
-		"q": "What is React's favorite movie genre?",
-		"a": "Suspense",
-		"form": "qa"
-	},
-	"93": {
-		"q": "Why couldn't the React component understand the joke?",
-		"a": "Because it didn't get the context.",
-		"form": "qa"
-	},
-	"94": {
-		"q": "What did XHR say to AJAX when it thought it was being a Mean Girl?",
-		"a": "Stop trying to make fetch happen!",
-		"form": "qa"
-	},
-	"95": {
-		"q": "What was Grace Hopper's favorite car?",
-		"a": "VW Bug",
-		"form": "qa"
-	},
-	"96": {
-		"q": "What sits on a pirate's shoulder and calls, \"Pieces of seven, Pieces of seven\"?",
-		"a": "Parroty error.",
-		"form": "qa"
-	},
-	"97": {
-		"q": "What is a pirate's favorite programming language?",
-		"a": "You'd think it was R, but a pirate's first love is Objectively C.",
-		"form": "qa"
-	},
-	"98": {
-		"q": "Why did the programmer come home crying?\"",
-		"a": "His friends were always boolean him.",
-		"form": "qa"
-	},
-	"99": "**-** Knock Knock!**-** An async function**-** Who's there?",
-	"100": {
-		"q": "What PostgreSQL library should Python developers use for adult-oriented code?",
-		"a": "psycoPG13",
-		"form": "qa"
-	},
-	"101": "The next time you're using Safari or Firefox and it's running slowly, you can say to yourself,<br/> \"I could've had a V8 (a browser 'engine')\".",
-	"102": {
-		"q": "What accommodations did the JavaScript developer request at the hotel?",
-		"a": "A room with a Vue.",
-		"form": "qa"
-	},
-	"103": {
-		"q": "Where do developers drink?",
-		"a": "The Foo bar",
-		"form": "qa"
-	},
-	"104": {
-		"q": "Why do assembly programmers need to know how to swim?",
-		"a": "Because they work below C level.",
-		"form": "qa"
-	},
-	"105": {
-		"q": "Who used the internet before it was cool?",
-		"a": "Httpsters",
-		"form": "qa"
-	},
-	"106": {
-		"q": "What kind of computer can hold a musical note?",
-		"a": "A Dell.",
-		"form": "qa"
-	},
-	"107": {
-		"q": "Why did the web developer always go to the wrong hotel room?",
-		"a": "They were in room 301.",
-		"form": "qa"
-	},
-	"108": {
-		"q": "How do you stop a web developer stealing your stuff?",
-		"a": "Write 403 on it.",
-		"form": "qa"
-	},
-	"109": {
-		"q": "Why are machine learning models so fit?",
-		"a": "Because they do weight training.",
-		"form": "qa"
-	},
-	"110": {
-		"q": "Why did Gargamel shut down the internet?",
-		"a": "Because he didn't want people **SMURFING** the web!",
-		"form": "qa"
-	},
-	"111": {
-		"q": "What did the command line die of?",
-		"a": "A Terminal illness.",
-		"form": "qa"
-	},
-	"112": {
-		"q": "Did you hear what the clumsy cryptographer did to their password?",
-		"a": "Made a hash of it.",
-		"form": "qa"
-	},
-	"113": {
-		"q": "Why are keyboards always working so hard?",
-		"a": "Cause they have two shifts!",
-		"form": "qa"
-	},
-	"114": {
-		"q": "What are clouds made of?",
-		"a": "Mostly linux servers.",
-		"form": "qa"
-	},
-	"115": {
-		"q": "How does Mr. Potato Head (dev edition 0.0.1) remove his mustache?",
-		"a": "git stache pop",
-		"form": "qa"
-	},
-	"116": {
-		"q": "Why can't you use 'Soup' as your password?",
-		"a": "Because it isn't <code>stroganoff</code>",
-		"form": "qa"
-	},
-	"117": {
-		"q": "Why do developers use mechanical keyboards?",
-		"a": "To strongly type their code.",
-		"form": "qa"
-	},
-	"118": "A new database query walks into a bar. The server says \"Sorry, cache only.\"",
-	"119": "What's the best tool for automatically ignoring long email threads about tech buzzwords?\"\"Block-chain\"",
-	"120": {
-		"q": "What is a developer's favorite country song?",
-		"a": "Hello World - by Lady Antebellum",
-		"form": "qa"
-	},
-	"121": {
-		"q": "Why was nobody given food at the developer conference?",
-		"a": "It was a serverless function!",
-		"form": "qa"
-	},
-	"122": {
-		"q": "Why did the developer cancel their dinner plans?",
-		"a": "They were unable to fulfil peer dependencies",
-		"form": "qa"
-	},
-	"123": {
-		"q": "Why did the functional programmer finally move out of their house?",
-		"a": "For(e) closure",
-		"form": "qa"
-	},
-	"124": {
-		"q": "How do JavaScript developers break up?",
-		"a": "They always promise to callback",
-		"form": "qa"
-	},
-	"125": {
-		"q": "Why do developers mixup Terminals and Polygraphs?",
-		"a": "Because they both can see a lie (CLI)",
-		"form": "qa"
-	},
-	"126": {
-		"q": "Did you hear about the programmer that was scared of IDEs?",
-		"a": "They retreated back into their shell",
-		"form": "qa"
-	},
-	"127": {
-		"q": "What do you call optimistic front-end developers?",
-		"a": "Stack half-full developers.",
-		"form": "qa"
-	},
-	"128": "Chuck Norris can take a screenshot of his blue screen.",
-	"129": {
-		"q": "Have you heard the one about the Corduroy pillow?",
-		"a": "It's making HEADLINES!",
-		"form": "qa"
-	},
-	"130": {
-		"q": "Hey officer! How did the hackers escape?",
-		"a": "No idea. They just ransomware.",
-		"form": "qa"
-	},
-	"131": {
-		"q": "Why can’t data engineers become hat makers?",
-		"a": "They can only guarantee two thirds of a CAP!",
-		"form": "qa"
-	},
-	"132": {
-		"q": "How did the hippie learn about database transactions?",
-		"a": "By taking ACID",
-		"form": "qa"
-	},
-	"133": {
-		"q": "Why is it called the Dark Ages?",
-		"a": "There were a lot of KNIGHTS!",
-		"form": "qa"
-	},
-	"134": {
-		"q": "What did the Network Administrator say when they caught a nasty virus?",
-		"a": "It hurts when IP",
-		"form": "qa"
-	},
-	"135": {
-		"q": "Which programming language is the shortest?",
-		"a": "HTML. Because it doesn't have a neck between its <code>head</code> and <code>body</code>.",
-		"form": "qa"
-	},
-	"136": {
-		"q": "What good can come of 2989 witches casting a hex?",
-		"a": "None, it is always 0xBAD",
-		"form": "qa"
-	},
-	"137": {
-		"q": "Did you hear about the witch who was off by two when casting a hex?",
-		"a": "They failed to make the target DEAD and made them DEAF instead!",
-		"form": "qa"
-	},
-	"138": "I went to a street where the houses were numbered 8k, 16k, 32k, 64k, 128k, 256k and 512k.It was a trip down Memory Lane.",
-	"139": "Lisp programmers don't make prank calls. They make <code>FUNCALL</code>s",
-	"140": {
-		"q": "Why do Front-End Developers eat lunch alone?",
-		"a": "Because, they don't know how to join tables.",
-		"form": "qa"
-	},
-	"141": {
-		"q": "What advice do you give to a JS developer who has never played baseball?",
-		"a": "Try catch.",
-		"form": "qa"
-	},
-	"142": {
-		"q": "Why are the arrays that Chuck Norris declare, of infinite size.",
-		"a": "Because Chuck Norris knows no bounds.",
-		"form": "qa"
-	},
-	"143": {
-		"q": "Why doesn't Chuck Norris need garbage collection.",
-		"a": "Because he doesn’t call <code>.Dispose()</code>, he calls <code>.DropKick()</code>.",
-		"form": "qa"
-	},
-	"144": {
-		"q": "How did the programmer die in the shower?",
-		"a": "He read the shampoo bottle instructions: Lather. Rinse. Repeat.",
-		"form": "qa"
-	},
-	"145": "When I wrote this code, only God and I understood what I was doing. Now, only God knows.",
-	"146": {
-		"q": "What did the Java code say to the C code?",
-		"a": "You've got no class.",
-		"form": "qa"
-	},
-	"147": {
-		"q": "What is the most used language in programming?",
-		"a": "Profanity.",
-		"form": "qa"
-	},
-	"148": {
-		"q": "Why did the geek add <code>body { padding-top: 1000px; }</code> to his Facebook profile?",
-		"a": "He wanted to keep a low profile.",
-		"form": "qa"
-	},
-	"149": "8 bytes walk into a bar, the bartenders asks \"What will it be?\" <br/>One of them says, \"Make us a double.\"",
-	"150": "An SEO couple had twins. For the first time, they were happy with duplicate content.",
-	"151": "LISP - Lots of Infuriating Superfluous Parentheses",
-	"152": "I'm starting a band called 1023MB. I don't think we'll ever get a gig.",
-	"153": {
-		"q": "Why did the developer quit his job?",
-		"a": "He did not get arrays.",
-		"form": "qa"
-	},
-	"154": "There are two ways to write error-free programs; only the third one works.",
-	"155": {
-		"q": "Why couldn't the developer pull the weeds from the garden?",
-		"a": "They didn't have root access.",
-		"form": "qa"
-	},
-	"156": "Dev 1 -  We have a problem. Dev 2 -  Let’s use RegEx! Dev 1 -  Now we have two problems",
-	"157": {
-		"q": "How do you tell HTML from HTML5?",
-		"a": "Try it out in Internet Explorer, if it does not work then it's HTML5.",
-		"form": "qa"
-	},
-	"158": {
-		"q": "What do computers and air conditioners have in common?",
-		"a": "They both become useless when you open windows.",
-		"form": "qa"
-	},
-	"159": "99 little bugs in the code, 99 bugs in the code, 1 bug fixed...compile again, 100 little bugs in the code.",
-	"160": "UNIX is very user friendly... It's just very particular about who its friends are.",
-	"161": "Debugging: Removing the needles from the haystack.",
-	"162": "You are the CSS to my HTML",
-	"163": "An optimist says: “the glass is half full.”<br/>A pessimist says: “the glass is half empty.”<br/>A programmer says: “the glass is twice as large as necessary.",
-	"164": "CSS developers have the biggest ego, they think they're so !important",
-	"165": {
-		"q": "Hamlet: To be - or not to be...",
-		"a": "Programmer: True !"
-	},
-	"166": "The Professor says \"Welcome to English 101\".The student panicks.\"What's wrong?\" asks the Professor.<br/><br/>\"I missed the first 4 English classes\".",
-	"167": {
-		"q": "What do cats and programmers have in common?",
-		"a": "When either one is unusually happy and excited, an appropriate question would be, \"did you find a bug\".",
-		"form": "qa"
-	},
-	"168": "Java and C were telling jokes. It was C's turn, so he writes something on the wall, points to it and says \"Do you get the reference?\" But Java didn't.",
-	"169": "To understand recursion. You must first understand recursion.",
-	"170": "Two bytes meet. The first byte asks, \"Are you ill?\"The second byte replies, \"No, just feeling a bit off.\" ",
-	"171": "I put so much more effort into naming my first Wi-Fi than my first child.",
-	"172": {
-		"q": "Why was the developer unable to find his room?",
-		"a": "His room card said 404",
-		"form": "qa"
-	},
-	"173": {
-		"q": "How do you tell an introverted computer scientist from an extroverted scientist?",
-		"a": "An extroverted computer scientist looks at your shoes when he talks to you.",
-		"form": "qa"
-	},
-	"174": {
-		"q": "How do you comfort a JS bug?",
-		"a": "You console it",
-		"form": "qa"
-	},
-	"175": "When an Apple employees dies, does their life HTML5 in front of their eyes?",
-	"176": {
-		"q": "What's 0.1+0.2?",
-		"a": "It's 0.30000000000000004",
-		"form": "qa"
-	},
-	"177": {
-		"q": "Why do programmers prefer dark mode?",
-		"a": "Because light attracts bugs.",
-		"form": "qa"
-	},
-	"178": {
-		"q": "Did you know?",
-		"a": "Spiders are the only web developers in the world that like finding bugs",
-		"form": "qa"
-	},
-	"179": {
-		"q": "Don't add a programming language to your skills list after watching a 15-minute video on it.",
-		"a": "Yes wait until you've written hello world",
-		"form": "qa"
-	},
-
-	"180": "A data Scientist goes to a bar and sees two tables. Then he says: Hey bro... Can I join you?",
-
-	"181": {
-		"q": "Why do python developers wear glasses?",
-		"a": "Because they can't C",
-		"form": "qa"
-	},
-	"182": {
-		"q": "Why does the Docker container fail?",
-		"a": "So that, Kubernetes can start it again",
-		"form": "qa"
-	},
-	"183": {
-		"q": "I.. CAN'T GET.. IT.. OFF!!",
-		"a": "DUDE, THAT'S BECAUSE YOUR CAPS LOCK IS ON",
-		"form": "qa"
-	},
-	"184": {
-		"q": "What do NASA programmers do on the weekends?",
-		"a": "They hit the space bar",
-		"form": "qa"
-	},
-	"185": {
-		"q": "What do you call a programmer from Finland?",
-		"a": "Nerdic",
-		"form": "qa"
-	},
-	"186": {
-		"q": "Want to know the biggest lie in the universe?",
-		"a": "I have read and agree to the Terms & Conditions",
-		"form": "qa"
-	},
-	"187": {
-		"q": "What is the biggest lie you have heard from a programmer?",
-		"a": "It should work now.",
-		"form": "qa"
-	},
-	"188": "If the box says: \"This software requires Windows XP or better\". Does that mean it will run on Linux?",
-	"189": {
-		"q": "Why did the functional programmer get thrown out of school?",
-		"a": "Because he refused to take classes"
-	},
-
-	"190": "If it weren't for C, we'd all be programming in BASI and OBOL",
-
-	"191": "Programming is like sex: One mistake and you have to support it for the rest of your life.",
-	
-	"192": "Chuck Norris writes code, that optimizes itself."
+  "0": {
+    "q": "Relationship status?",
+    "a": "I'll leave the relations to the database.",
+    "q_zh": "恋爱状态？",
+    "a_zh": "我会把关系（relations）留给数据库。",
+    "form": "qa"
+  },
+  "1": {
+    "q": "How do you get the code for the bank vault?",
+    "a": "You checkout their branch.",
+    "q_zh": "怎么获取银行金库的密码？",
+    "a_zh": "你去检出（checkout）他们的分支（branch）。",
+    "form": "qa"
+  },
+  "2": {
+    "q": "How did the developer announce their engagement?",
+    "a": "They <code>return</code>ed <code>true</code>!",
+    "q_zh": "开发者如何宣布订婚？",
+    "a_zh": "他们<code>return</code>了<code>true</code>！",
+    "form": "qa"
+  },
+  "3": {
+    "q": "Why did the security conscious engineer refuse to pay their dinner bill?",
+    "a": "Because they could not verify the checksum.",
+    "q_zh": "为什么注重安全的工程师拒绝付晚餐账单？",
+    "a_zh": "因为他们无法验证校验和（checksum/支票总和）。",
+    "form": "qa"
+  },
+  "4": {
+    "q": "What do you call a busy waiter?",
+    "a": "A server.",
+    "q_zh": "忙碌的服务员叫什么？",
+    "a_zh": "服务器（server）。",
+    "form": "qa"
+  },
+  "5": {
+    "q": "What do you call an idle server?",
+    "a": "A waiter.",
+    "q_zh": "空闲的服务器叫什么？",
+    "a_zh": "等待者（waiter/服务员）。",
+    "form": "qa"
+  },
+  "6": {
+    "text": "<code>[Please Enter New Password]</code><p>fortnight</p><code>[Error: Password is Two Week]</code>",
+    "text_zh": "<code>[请输入新密码]</code><p>fortnight</p><code>[错误：密码太弱（Two Week/两周）]</code>"
+  },
+  "7": {
+    "q": "How many Prolog programmers does it take to change a lightbulb?",
+    "a": "Yes.",
+    "q_zh": "需要多少个 Prolog 程序员才能换一个灯泡？",
+    "a_zh": "是的。（因为Prolog是逻辑编程语言，回答‘是/否’）",
+    "form": "qa"
+  },
+  "8": {
+    "text": "I've been hearing news about this big boolean. Huge if true.",
+    "text_zh": "我一直在听关于这个大布尔值的新闻。如果为真的话那可太大了（Huge if true，双关语，布尔值只有 true 或 false）。"
+  },
+  "9": {
+    "q": "What diet did the ghost developer go on?",
+    "a": "Boooooolean",
+    "q_zh": "幽灵开发者进行什么饮食？",
+    "a_zh": "布鬼值（Boooooolean/Boolean，'Boo'是幽灵的叫声）。",
+    "form": "qa"
+  },
+  "10": {
+    "q": "Why was the developer unhappy at their job?",
+    "a": "They wanted arrays.",
+    "q_zh": "为什么开发者对工作不满意？",
+    "a_zh": "他们想要加薪（arrays/a raise，音近）。",
+    "form": "qa"
+  },
+  "11": {
+    "q": "Why did 10 get paid less than \"10\"?",
+    "a": "There was workplace inequality.",
+    "q_zh": "为什么 10 比 \"10\" 拿的工资少？",
+    "a_zh": "职场上存在不平等（数字10和字符串\"10\"类型不同）。",
+    "form": "qa"
+  },
+  "12": {
+    "q": "Why was the function sad after a successful first call?",
+    "a": "It didn't get a callback.",
+    "q_zh": "为什么函数在成功的首次调用后很伤心？",
+    "a_zh": "它没有收到回调（callback/回电）。",
+    "form": "qa"
+  },
+  "13": {
+    "q": "Why did the angry function exceed the callstack size?",
+    "a": "It got into an Argument with itself",
+    "q_zh": "为什么愤怒的函数超出了调用栈大小？",
+    "a_zh": "它和自己发生了争论（Argument/参数）。",
+    "form": "qa"
+  },
+  "14": {
+    "q": "Whats the object-oriented way to become wealthy?",
+    "a": "Inheritance",
+    "q_zh": "面向对象的致富方式是什么？",
+    "a_zh": "继承（Inheritance）。",
+    "form": "qa"
+  },
+  "15": {
+    "q": "Why did the developer ground their kid?",
+    "a": "They weren't telling the truthy",
+    "q_zh": "为什么开发者禁足了他们的孩子？",
+    "a_zh": "他们没有说真话（truthy/真值）。",
+    "form": "qa"
+  },
+  "16": {
+    "q": "What did the array say after it was extended?",
+    "a": "Stop objectifying me.",
+    "q_zh": "数组在被扩展后说了什么？",
+    "a_zh": "别把我对象化（objectifying/Object）。",
+    "form": "qa"
+  },
+  "17": {
+    "text": "**!false**It's funny 'cause it's true.",
+    "text_zh": "**!false** 这很有趣，因为它是真的（true）。"
+  },
+  "18": {
+    "q": "Where did the parallel function wash its hands?",
+    "a": "Async",
+    "q_zh": "并行函数在哪里洗手？",
+    "a_zh": "在水槽（Async/A sink，音近）。",
+    "form": "qa"
+  },
+  "19": {
+    "q": "I'm starting a band called HTML Encoder",
+    "a": "Looking to buy a guitar \\&",
+    "q_zh": "我要成立一个叫 HTML 编码器的乐队",
+    "a_zh": "想买一把吉他 \\&（&amp;，HTML编码）。",
+    "form": "qa"
+  },
+  "20": {
+    "q": "Why did the functions stop calling each other?",
+    "a": "Because they had constant arguments.",
+    "q_zh": "为什么函数们不再互相调用了？",
+    "a_zh": "因为它们有持续的争吵（constant arguments/常量参数）。",
+    "form": "qa"
+  },
+  "21": {
+    "q": "What's the second movie about a database engineer called?",
+    "a": "The SQL.",
+    "q_zh": "关于数据库工程师的第二部电影叫什么？",
+    "a_zh": "The SQL（The sequel/续集，音近）。",
+    "form": "qa"
+  },
+  "22": {
+    "q": "Why doesn't Hollywood make more Big Data movies?",
+    "a": "NoSQL.",
+    "q_zh": "为什么好莱坞不拍更多大数据电影？",
+    "a_zh": "NoSQL（No sequel/没有续集，音近）。",
+    "form": "qa"
+  },
+  "23": {
+    "text": "A programmer's significant other tells them, \"Run to the store and pick up a loaf of bread. If they have eggs, get a dozen.\"The programmer comes home with 12 loaves of bread.",
+    "text_zh": "程序员的另一半对他们说：\"去商店买一条面包。如果有鸡蛋，买一打。\" 程序员带着12条面包回家了。（程序员严格按照条件语句执行：If (have eggs) return 12 loaves of bread.）"
+  },
+  "24": {
+    "q": "What did the spider do on the computer?",
+    "a": "Made a website!",
+    "q_zh": "蜘蛛在电脑上做什么？",
+    "a_zh": "做了一个网站（website/蜘蛛网）！",
+    "form": "qa"
+  },
+  "25": {
+    "q": "What did the computer do at lunchtime?",
+    "a": "Had a byte!",
+    "q_zh": "电脑午餐时间做什么？",
+    "a_zh": "吃了一字节（byte/bite，音近）！",
+    "form": "qa"
+  },
+  "26": {
+    "q": "What does a baby computer call his father?",
+    "a": "Data!",
+    "q_zh": "婴儿电脑叫他爸爸什么？",
+    "a_zh": "数据（Data/Dad-a，音近）！",
+    "form": "qa"
+  },
+  "27": {
+    "q": "Why did the computer keep sneezing?",
+    "a": "It had a virus!",
+    "q_zh": "为什么电脑一直打喷嚏？",
+    "a_zh": "它中了病毒（virus）！",
+    "form": "qa"
+  },
+  "28": {
+    "q": "What is a computer virus?",
+    "a": "A terminal illness!",
+    "q_zh": "什么是电脑病毒？",
+    "a_zh": "一种终端（Terminal）疾病！",
+    "form": "qa"
+  },
+  "29": {
+    "text": "I never tell the same joke twice I have a DRY sense of humor.",
+    "text_zh": "我从不说两次同样的笑话。我有一个 DRY（Don't Repeat Yourself，不要重复你自己）的幽默感。"
+  },
+  "30": {
+    "q": "Why was the computer freezing?",
+    "a": "It left its Windows open!",
+    "q_zh": "为什么电脑会卡住（冻住）？",
+    "a_zh": "因为它开着它的“窗户”（Windows，操作系统名）！",
+    "form": "qa"
+  },
+  "31": {
+    "q": "Why was there a bug in the computer?",
+    "a": "Because it was looking for a byte to eat?",
+    "q_zh": "为什么电脑里有虫子（bug）？",
+    "a_zh": "因为它在找一口（byte/bite）吃的？",
+    "form": "qa"
+  },
+  "32": {
+    "q": "Why did the computer squeak?",
+    "a": "Because someone stepped on its mouse!",
+    "q_zh": "为什么电脑会吱吱叫？",
+    "a_zh": "因为有人踩到了它的鼠标（mouse）！",
+    "form": "qa"
+  },
+  "33": {
+    "q": "What do you get when you cross a computer and a life guard?",
+    "a": "A screensaver!",
+    "q_zh": "当电脑和救生员杂交时，你会得到什么？",
+    "a_zh": "一个屏幕保护程序（screensaver/挽救）！",
+    "form": "qa"
+  },
+  "34": {
+    "q": "Where do all the cool mice live?",
+    "a": "In their mousepads!",
+    "q_zh": "所有很酷的鼠标（mouse）住在哪里？",
+    "a_zh": "在它们的鼠标垫（mousepads）里！",
+    "form": "qa"
+  },
+  "35": {
+    "q": "What do you get when you cross a computer with an elephant?",
+    "a": "Lots of memory!",
+    "q_zh": "当电脑和大象杂交时，你会得到什么？",
+    "a_zh": "很多内存（memory）！",
+    "form": "qa"
+  },
+  "36": {
+    "text": "Java truly is an OOP language...\nAs in: OOPs I used Java!",
+    "text_zh": "Java 真的是一种 OOP 语言...\n就像：OOPs（哎呀）我用了 Java！"
+  },
+  "37": {
+    "q": "How do programming pirates pass method parameters?",
+    "a": "Varrrrarrrgs.",
+    "q_zh": "编程海盗如何传递方法参数？",
+    "a_zh": "Varrrrarrrgs（Varargs/可变参数，海盗的叫声 'arrr'）。",
+    "form": "qa"
+  },
+  "38": {
+    "q": "How do programming shepherds count their flock?",
+    "a": "With lambda functions",
+    "q_zh": "编程牧羊人如何清点他们的羊群？",
+    "a_zh": "用 lambda 函数（lambda，希腊字母 λ，像牧羊人的手杖）。",
+    "form": "qa"
+  },
+  "39": {
+    "q": "What airline do developers prefer when they're in a rush?",
+    "a": "Delta.",
+    "q_zh": "开发者赶时间时喜欢哪家航空公司？",
+    "a_zh": "达美航空（Delta/三角洲，Δ，表示变化量）。",
+    "form": "qa"
+  },
+  "40": {
+    "q": "How did pirates collaborate before computers?",
+    "a": "Pier to pier networking.",
+    "q_zh": "海盗在电脑出现前如何协作？",
+    "a_zh": "码头对码头（Pier to pier）网络（Peer to peer/点对点）。",
+    "form": "qa"
+  },
+  "41": {
+    "q": "Why don't bachelors like Git?",
+    "a": "Because they are afraid to commit.",
+    "q_zh": "为什么单身汉不喜欢 Git？",
+    "a_zh": "因为他们害怕提交（commit/承诺）。",
+    "form": "qa"
+  },
+  "42": {
+    "q": "A SQL query goes into a bar, walks up to two tables and asks:",
+    "a": "Can I JOIN you?",
+    "q_zh": "一个 SQL 查询走进酒吧，走向两张桌子问：",
+    "a_zh": "我能加入你们吗（JOIN/连接）？",
+    "form": "qa"
+  },
+  "43": {
+    "q": "How does a developer make a cheer?",
+    "a": "[\"hip\",\"hip\"] // (hip hip array!)",
+    "q_zh": "开发者如何欢呼？",
+    "a_zh": "[\"hip\",\"hip\"] // (万岁数组！hip hip array/hooray，音近）",
+    "form": "qa"
+  },
+  "44": {
+    "q": "Why was the developer's family upset with them at dinner?",
+    "a": "They forgot to git squash before going home",
+    "q_zh": "为什么开发者的家人在晚餐时生他们的气？",
+    "a_zh": "他们忘了回家前要'git squash'（壁咚/挤压）。",
+    "form": "qa"
+  },
+  "45": {
+    "q": "What did JavaScript call his son?",
+    "a": "JSON!",
+    "q_zh": "JavaScript 给他的儿子取名叫什么？",
+    "a_zh": "JSON！（JavaScript Object Notation）",
+    "form": "qa"
+  },
+  "46": {
+    "q": "What did the proud React component say to its child?",
+    "a": "I've got to give you props",
+    "q_zh": "骄傲的 React 组件对它的子组件说了什么？",
+    "a_zh": "我得给你属性（props/赞许）！",
+    "form": "qa"
+  },
+  "47": {
+    "q": "What did the server say to his client who was having a bad day?",
+    "a": "Everything's going to be 200",
+    "q_zh": "服务器对心情不好的客户端说了什么？",
+    "a_zh": "一切都会是 200（HTTP 状态码 200 OK）。",
+    "form": "qa"
+  },
+  "48": {
+    "q": "Why did the developer go broke?",
+    "a": "Because they used up all their cache",
+    "q_zh": "为什么开发者破产了？",
+    "a_zh": "因为他们用完了所有的缓存（cache/现金）。",
+    "form": "qa"
+  },
+  "49": {
+    "q": "Are computers dangerous?",
+    "a": "Nah, they don't byte. They just nibble a bit.",
+    "q_zh": "电脑危险吗？",
+    "a_zh": "不，它们不会咬（byte/bite）。它们只是小口（nibble）咬一点（bit）。",
+    "form": "qa"
+  },
+  "50": {
+    "q": "How did the mafioso kill the Node server?",
+    "a": "Tie await to it and let it async.",
+    "q_zh": "黑手党如何杀死 Node 服务器？",
+    "a_zh": "把它绑在'await'上，让它异步（async/sink，沉没）。",
+    "form": "qa"
+  },
+  "51": {
+    "q": "You know what the best thing about booleans is?",
+    "a": "Even if you are wrong, you are only off by a bit.",
+    "q_zh": "你知道布尔值最好的地方是什么吗？",
+    "a_zh": "即使你错了，你也只差了一点（bit）。",
+    "form": "qa"
+  },
+  "52": {
+    "q": "Why couldn’t the user update a file on a shared server?",
+    "a": "They didn’t have the write permissions",
+    "q_zh": "为什么用户无法更新共享服务器上的文件？",
+    "a_zh": "他们没有写入（write）权限。",
+    "form": "qa"
+  },
+  "53": {
+    "q": "What do you do when you can't understand your husband's behavior?",
+    "a": "man man",
+    "q_zh": "当你无法理解你丈夫的行为时，你会怎么做？",
+    "a_zh": "man man（Unix/Linux 的 man 命令，查看手册页）。",
+    "form": "qa"
+  },
+  "54": {
+    "q": "What do you call a doctor who fixes websites?",
+    "a": "A URLogist",
+    "q_zh": "你怎么称呼修理网站的医生？",
+    "a_zh": "一位 URLogist（URL + urologist/泌尿科医生，音近）。",
+    "form": "qa"
+  },
+  "55": {
+    "q": "How many developers does it take to change a light bulb?",
+    "a": "None. It's a hardware issue",
+    "q_zh": "需要多少个开发者才能换一个灯泡？",
+    "a_zh": "零个。这是个硬件问题。",
+    "form": "qa"
+  },
+  "56": {
+    "q": "Why do programmers always mix up Halloween and Christmas?",
+    "a": "Because 31 OCT == 25 DEC",
+    "q_zh": "为什么程序员总是混淆万圣节和圣诞节？",
+    "a_zh": "因为 31 OCT == 25 DEC（31八进制=25十进制）。",
+    "form": "qa"
+  },
+  "57": {
+    "q": "Why do kayakers make bad programmers?",
+    "a": "Because they're afraid of waterfall.",
+    "q_zh": "为什么皮划艇运动员做不了好的程序员？",
+    "a_zh": "因为他们害怕瀑布（waterfall，软件开发模型）。",
+    "form": "qa"
+  },
+  "58": {
+    "q": "What are computers' favorite snacks?",
+    "a": "Microchips, phish sticks, and cookies. But just a few bytes of each.",
+    "q_zh": "电脑最喜欢的零食是什么？",
+    "a_zh": "微芯片（Microchips），钓鱼（phish）棒和 cookies（网络 Cookie）。但每样只吃几字节（byte）。",
+    "form": "qa"
+  },
+  "59": {
+    "q": "What do computers love to do at the beach?",
+    "a": "Put on some spam block for protection so they can safely surf the net while catching some .WAVs!",
+    "q_zh": "电脑在海滩上喜欢做什么？",
+    "a_zh": "涂上一些垃圾邮件阻隔（spam block）来保护自己，这样他们就可以安全地上网冲浪（surf the net），同时捕捉一些 .WAV（波浪/WAV 音频文件）！",
+    "form": "qa"
+  },
+  "60": {
+    "q": "What do you call a computer that sings?",
+    "a": "A-dell.",
+    "q_zh": "你会把一台会唱歌的电脑叫做什么？",
+    "a_zh": "A-dell（戴尔/Adele，歌手阿黛尔）。",
+    "form": "qa"
+  },
+  "61": {
+    "q": "What's a compiler developer's favorite spice?",
+    "a": "Parsley.",
+    "q_zh": "编译器开发者最喜欢的香料是什么？",
+    "a_zh": "欧芹（Parsley/Parse tree，解析树）。",
+    "form": "qa"
+  },
+  "62": {
+    "q": "When do front end developers go out to eat?",
+    "a": "On their lunch <code>&lt;&#98;&#114;&gt;</code>.",
+    "q_zh": "前端开发者什么时候出去吃饭？",
+    "a_zh": "在他们的午休 <code>&lt;br&gt;</code>（break/换行标签）时。",
+    "form": "qa"
+  },
+  "63": {
+    "q": "A SQL developer walked into a NoSQL bar.",
+    "a": "They left because they couldn't find a table.",
+    "q_zh": "一个 SQL 开发者走进一家 NoSQL 酒吧。",
+    "a_zh": "他们离开了，因为他们找不到表（table）。",
+    "form": "qa"
+  },
+  "64": {
+    "q": "How do you help JS errors?",
+    "a": "You <code>console</code> them!",
+    "q_zh": "你如何帮助 JS 错误？",
+    "a_zh": "你用 <code>console</code>（安慰/控制台）它们！",
+    "form": "qa"
+  },
+  "65": {
+    "q": "Why don't parents teach their kids about regular expressions?",
+    "a": "Because they don't want them playing with matches",
+    "q_zh": "为什么父母不教他们的孩子正则表达式？",
+    "a_zh": "因为他们不希望他们玩火柴（matches/匹配）。",
+    "form": "qa"
+  },
+  "66": {
+    "q": "Why didn't the <code>div</code> get invited to the dinner party?",
+    "a": "Because it had no <code>class</code>!",
+    "q_zh": "为什么 <code>div</code> 没有被邀请参加晚宴？",
+    "a_zh": "因为它没有 <code>class</code>（阶级/类）！",
+    "form": "qa"
+  },
+  "67": {
+    "q": "Why aren't cryptocurrency engineers allowed to vote?",
+    "a": "Because they're miners!",
+    "q_zh": "为什么加密货币工程师不被允许投票？",
+    "a_zh": "因为他们是矿工（miners）！",
+    "form": "qa"
+  },
+  "68": {
+    "q": "Why did the constant break up with the variable?",
+    "a": "Because they changed.",
+    "q_zh": "为什么常量和变量分手了？",
+    "a_zh": "因为它们变了（changed）。",
+    "form": "qa"
+  },
+  "69": {
+    "q": "Why did the database administrator leave his wife?",
+    "a": "She had one-to-many relationships.",
+    "q_zh": "为什么数据库管理员离开了他的妻子？",
+    "a_zh": "她有了一对多（one-to-many）的关系。",
+    "form": "qa"
+  },
+  "70": {
+    "text": "Asynchronous JavaScript is amazing.I Promise you, await and see.",
+    "text_zh": "异步 JavaScript 太棒了。我向你保证（Promise），等着瞧（await and see）。"
+  },
+  "71": {
+    "q": "What did the Class say in court when put on trial?",
+    "a": "I strongly object!",
+    "q_zh": "当 Class（类）被审判时，它在法庭上说了什么？",
+    "a_zh": "我强烈反对（object/对象）！",
+    "form": "qa"
+  },
+  "72": {
+    "q": "Why do Java developers wear glasses?",
+    "a": "Because they don't C#!",
+    "q_zh": "为什么 Java 开发者戴眼镜？",
+    "a_zh": "因为他们看不清（don't C#/don't see sharp，音近）！",
+    "form": "qa"
+  },
+  "73": {
+    "q": "What are the three hardest problems in computer science?",
+    "a": "Naming things and off-by-one errors",
+    "q_zh": "计算机科学中最难的三个问题是什么？",
+    "a_zh": "命名事物和差一错误（off-by-one errors）。（实际上只有两个）",
+    "form": "qa"
+  },
+  "74": {
+    "q": "What did the fruit basket say to the developer?",
+    "a": "I hope you're ready for some pear programming!",
+    "q_zh": "水果篮对开发者说了什么？",
+    "a_zh": "我希望你准备好进行一些梨（pear/pair，对）编程！",
+    "form": "qa"
+  },
+  "75": {
+    "q": "How does a sysadmin keep a fire going?",
+    "a": "They rotate the logs.",
+    "q_zh": "系统管理员如何让火一直燃烧？",
+    "a_zh": "他们轮换日志（rotate the logs/木头）。",
+    "form": "qa"
+  },
+  "76": {
+    "text": "I've got a great UDP joke but I'm afraid you wouldn't get it...",
+    "text_zh": "我有一个很棒的 UDP 笑话，但我怕你收不到（get it）..."
+  },
+  "77": {
+    "text": "A programmer was arrested for writing unreadable code. They refused to comment.",
+    "text_zh": "一位程序员因编写难以阅读的代码而被捕。他们拒绝评论（comment/注释）。"
+  },
+  "78": {
+    "text": "There are 10 types of people in this world, those who understand binary and those who don't.",
+    "text_zh": "世界上有10种人，一种是懂二进制的，一种是不懂的。（10=2）"
+  },
+  "79": {
+    "q": "I love you and I only love you. Does that turn you on?",
+    "a": "ATE:** No.",
+    "q_zh": "我爱你，我只爱你。这会让你兴奋吗？",
+    "a_zh": "ATE:** 不会。（谐音 'I love you and I only love you. Does that turn you on?' 转化为二进制或逻辑运算的结果）",
+    "form": "qa"
+  },
+  "80": {
+    "q": "Why do all HTML emails get blocked?",
+    "a": "Because they are all <code>span</code>",
+    "q_zh": "为什么所有的 HTML 邮件都被阻止了？",
+    "a_zh": "因为它们都是 <code>span</code>（垃圾邮件/HTML 标签）。",
+    "form": "qa"
+  },
+  "81": {
+    "q": "What did the process say after working in an infinite loop all day?",
+    "a": "I need a break.",
+    "q_zh": "在无限循环中工作了一整天后，进程说了什么？",
+    "a_zh": "我需要一个 break（休息/跳出循环）。",
+    "form": "qa"
+  },
+  "82": {
+    "q": "An Agent died unexpectedly. How was the crime solved?",
+    "a": "By looking at the Stack Trace.",
+    "q_zh": "一个 Agent（代理）意外死亡。案件是如何解决的？",
+    "a_zh": "通过查看堆栈跟踪（Stack Trace）。",
+    "form": "qa"
+  },
+  "83": {
+    "q": "Why did the document store go out of business?",
+    "a": "It had NoSQL.",
+    "q_zh": "为什么这家文档商店倒闭了？",
+    "a_zh": "因为它没有 SQL（NoSQL/没有销售）。",
+    "form": "qa"
+  },
+  "84": {
+    "q": "Why can't SQL and NoSQL Developers date one other?",
+    "a": "Because they don't agree on relationships.",
+    "q_zh": "为什么 SQL 和 NoSQL 开发者不能约会？",
+    "a_zh": "因为他们在关系（relationships）上意见不合。",
+    "form": "qa"
+  },
+  "85": {
+    "q": "Why is Python like the Soviet Union?",
+    "a": "Because it has no private fields",
+    "q_zh": "为什么 Python 像苏联？",
+    "a_zh": "因为它没有私有字段（private fields）。",
+    "form": "qa"
+  },
+  "86": {
+    "q": "Where did the API go to eat?",
+    "a": "To the RESTaurant",
+    "q_zh": "API 去哪里吃饭了？",
+    "a_zh": "去了 RESTaurant（RESTful 架构 + 餐厅）。",
+    "form": "qa"
+  },
+  "87": {
+    "q": "Why shouldn't you trust Matlab developers?",
+    "a": "Because they're always plotting something.",
+    "q_zh": "为什么你不应该信任 Matlab 开发者？",
+    "a_zh": "因为他们总是在密谋（plotting/绘图）。",
+    "form": "qa"
+  },
+  "88": {
+    "q": "Why did the developer have to quit smoking?",
+    "a": "Because they couldn't afford to pay the new syntax.",
+    "q_zh": "为什么这位开发者不得不戒烟？",
+    "a_zh": "因为他们付不起新的语法（syntax/税）。",
+    "form": "qa"
+  },
+  "89": {
+    "q": "How does a programmer open a jar for their significant other?",
+    "a": "They install Java",
+    "q_zh": "程序员如何为他们的另一半打开一个罐子（jar）？",
+    "a_zh": "他们安装了 Java（Java archive/罐子）。",
+    "form": "qa"
+  },
+  "90": {
+    "q": "What did the psychic say to the developers?",
+    "a": "I see dev people.",
+    "q_zh": "灵媒对开发者说了什么？",
+    "a_zh": "我看见开发人员（dev people/死人 'dead people'，音近）。",
+    "form": "qa"
+  },
+  "91": {
+    "q": "Where does the pirate stash all of their digital treasures?",
+    "a": "RAR",
+    "q_zh": "海盗把他们所有的数字宝藏藏在哪里？",
+    "a_zh": "RAR（一种压缩文件格式）。",
+    "form": "qa"
+  },
+  "92": {
+    "q": "What is React's favorite movie genre?",
+    "a": "Suspense",
+    "q_zh": "React 最喜欢的电影类型是什么？",
+    "a_zh": "悬念（Suspense/Suspense 是 React 的一个功能）。",
+    "form": "qa"
+  },
+  "93": {
+    "q": "Why couldn't the React component understand the joke?",
+    "a": "Because it didn't get the context.",
+    "q_zh": "为什么 React 组件听不懂这个笑话？",
+    "a_zh": "因为它没有得到上下文（context）。",
+    "form": "qa"
+  },
+  "94": {
+    "q": "What did XHR say to AJAX when it thought it was being a Mean Girl?",
+    "a": "Stop trying to make fetch happen!",
+    "q_zh": "XHR 觉得 AJAX 像个刻薄的女孩时对它说了什么？",
+    "a_zh": "别再想让 fetch（获取）发生了！（“fetch”是用于网络请求的 API，借鉴自电影《贱女孩》台词）",
+    "form": "qa"
+  },
+  "95": {
+    "q": "What was Grace Hopper's favorite car?",
+    "a": "VW Bug",
+    "q_zh": "格雷斯·霍珀最喜欢的汽车是什么？",
+    "a_zh": "大众 Bug（Bug/甲壳虫，也是第一个计算机 Bug 的发现者）。",
+    "form": "qa"
+  },
+  "96": {
+    "q": "What sits on a pirate's shoulder and calls, \"Pieces of seven, Pieces of seven\"?",
+    "a": "Parroty error.",
+    "q_zh": "什么东西坐在海盗的肩膀上，叫着“七块，七块”？",
+    "a_zh": "奇偶校验错误（Parroty error/Parity error）。",
+    "form": "qa"
+  },
+  "97": {
+    "q": "What is a pirate's favorite programming language?",
+    "a": "You'd think it was R, but a pirate's first love is Objectively C.",
+    "q_zh": "海盗最喜欢的编程语言是什么？",
+    "a_zh": "你可能以为是 R，但海盗的初恋是客观地 C（Objectively C/Objective-C）。",
+    "form": "qa"
+  },
+  "98": {
+    "q": "Why did the programmer come home crying?\"",
+    "a": "His friends were always boolean him.",
+    "q_zh": "为什么程序员哭着回家？",
+    "a_zh": "他的朋友们总是欺负（boolean/bully，音近）他。",
+    "form": "qa"
+  },
+  "99": {
+    "text": "**-** Knock Knock!**-** An async function**-** Who's there?",
+    "text_zh": "**-** 敲门！**-** 一个异步函数（async function）**-** 是谁呀？（没有回应，因为异步函数会等待）"
+  },
+  "100": {
+    "q": "What PostgreSQL library should Python developers use for adult-oriented code?",
+    "a": "psycoPG13",
+    "q_zh": "Python 开发者应该使用哪个 PostgreSQL 库来编写面向成人的代码？",
+    "a_zh": "psycoPG13（psycopg/PG-13，电影分级）。",
+    "form": "qa"
+  },
+  "101": {
+    "text": "The next time you're using Safari or Firefox and it's running slowly, you can say to yourself,<br/> \"I could've had a V8 (a browser 'engine')\".",
+    "text_zh": "下次你使用 Safari 或 Firefox 运行缓慢时，你可以对自己说：<br/> “我本可以拥有一个 V8（一个浏览器‘引擎’）。”（V8 是 Chrome/Node.js 的 JavaScript 引擎，也是一种番茄汁品牌）"
+  },
+  "102": {
+    "q": "What accommodations did the JavaScript developer request at the hotel?",
+    "a": "A room with a Vue.",
+    "q_zh": "JavaScript 开发者在酒店要求什么住宿？",
+    "a_zh": "一间有 Vue（Vue.js/view，风景）的房间。",
+    "form": "qa"
+  },
+  "103": {
+    "q": "Where do developers drink?",
+    "a": "The Foo bar",
+    "q_zh": "开发者在哪里喝酒？",
+    "a_zh": "在 Foo bar（编程中的占位符）。",
+    "form": "qa"
+  },
+  "104": {
+    "q": "Why do assembly programmers need to know how to swim?",
+    "a": "Because they work below C level.",
+    "q_zh": "为什么汇编程序员需要知道如何游泳？",
+    "a_zh": "因为他们在 C 级别（C level/海平面）以下工作。",
+    "form": "qa"
+  },
+  "105": {
+    "q": "Who used the internet before it was cool?",
+    "a": "Httpsters",
+    "q_zh": "谁在互联网还没流行之前就使用了它？",
+    "a_zh": "Httpsters（Hipsters/时髦者，音近，HTTP）。",
+    "form": "qa"
+  },
+  "106": {
+    "q": "What kind of computer can hold a musical note?",
+    "a": "A Dell.",
+    "q_zh": "哪种电脑可以保持一个音符？",
+    "a_zh": "一台 Dell（戴尔/D-E-L-L，像一个音符）。",
+    "form": "qa"
+  },
+  "107": {
+    "q": "Why did the web developer always go to the wrong hotel room?",
+    "a": "They were in room 301.",
+    "q_zh": "为什么这位 Web 开发者总是走到错误的酒店房间？",
+    "a_zh": "他们在 301 房间。（HTTP 状态码 301 Moved Permanently）",
+    "form": "qa"
+  },
+  "108": {
+    "q": "How do you stop a web developer stealing your stuff?",
+    "a": "Write 403 on it.",
+    "q_zh": "你如何阻止一个 Web 开发者偷你的东西？",
+    "a_zh": "在上面写上 403。（HTTP 状态码 403 Forbidden）",
+    "form": "qa"
+  },
+  "109": {
+    "q": "Why are machine learning models so fit?",
+    "a": "Because they do weight training.",
+    "q_zh": "为什么机器学习模型如此健康？",
+    "a_zh": "因为它们进行权重训练（weight training/举重）。",
+    "form": "qa"
+  },
+  "110": {
+    "q": "Why did Gargamel shut down the internet?",
+    "a": "Because he didn't want people **SMURFING** the web!",
+    "q_zh": "为什么格格巫关闭了互联网？",
+    "a_zh": "因为他不想让人们在网络上“冲浪”（SMURFING/蓝精灵）。",
+    "form": "qa"
+  },
+  "111": {
+    "q": "What did the command line die of?",
+    "a": "A Terminal illness.",
+    "q_zh": "命令行死于什么？",
+    "a_zh": "一种终端（Terminal）疾病。",
+    "form": "qa"
+  },
+  "112": {
+    "q": "Did you hear what the clumsy cryptographer did to their password?",
+    "a": "Made a hash of it.",
+    "q_zh": "你听说那个笨拙的密码学家对他们的密码做了什么吗？",
+    "a_zh": "把它做成一个哈希值（hash/搞砸）。",
+    "form": "qa"
+  },
+  "113": {
+    "q": "Why are keyboards always working so hard?",
+    "a": "Cause they have two shifts!",
+    "q_zh": "为什么键盘总是工作得这么辛苦？",
+    "a_zh": "因为它们有两个 Shift（换挡键/班次）！",
+    "form": "qa"
+  },
+  "114": {
+    "q": "What are clouds made of?",
+    "a": "Mostly linux servers.",
+    "q_zh": "云是由什么组成的？",
+    "a_zh": "主要由 Linux 服务器组成。",
+    "form": "qa"
+  },
+  "115": {
+    "q": "How does Mr. Potato Head (dev edition 0.0.1) remove his mustache?",
+    "a": "git stache pop",
+    "q_zh": "土豆头先生（开发者版 0.0.1）如何移除他的胡子？",
+    "a_zh": "git stache pop（Git 命令，与 'mustache' 谐音）。",
+    "form": "qa"
+  },
+  "116": {
+    "q": "Why can't you use 'Soup' as your password?",
+    "a": "Because it isn't <code>stroganoff</code>",
+    "q_zh": "为什么不能用 'Soup' 作为密码？",
+    "a_zh": "因为它不够 <code>stroganoff</code>（俄式牛肉/足够强壮 'strong enough'，音近）。",
+    "form": "qa"
+  },
+  "117": {
+    "q": "Why do developers use mechanical keyboards?",
+    "a": "To strongly type their code.",
+    "q_zh": "为什么开发者使用机械键盘？",
+    "a_zh": "为了强力输入（strongly type/强类型）他们的代码。",
+    "form": "qa"
+  },
+  "118": {
+    "text": "A new database query walks into a bar. The server says \"Sorry, cache only.\"",
+    "text_zh": "一个新数据库查询走进一家酒吧。服务员说：“抱歉，只收缓存（cache/现金）。”"
+  },
+  "119": {
+    "text": "What's the best tool for automatically ignoring long email threads about tech buzzwords?\"\"Block-chain\"",
+    "text_zh": "自动忽略关于技术流行语的长邮件线程的最佳工具是什么？“Block-chain”（区块链/阻止链）"
+  },
+  "120": {
+    "q": "What is a developer's favorite country song?",
+    "a": "Hello World - by Lady Antebellum",
+    "q_zh": "开发者最喜欢的乡村歌曲是什么？",
+    "a_zh": "Hello World - 由 Lady Antebellum 演唱。",
+    "form": "qa"
+  },
+  "121": {
+    "q": "Why was nobody given food at the developer conference?",
+    "a": "It was a serverless function!",
+    "q_zh": "为什么开发者大会上没有人得到食物？",
+    "a_zh": "因为它是一个无服务器（serverless）函数！",
+    "form": "qa"
+  },
+  "122": {
+    "q": "Why did the developer cancel their dinner plans?",
+    "a": "They were unable to fulfil peer dependencies",
+    "q_zh": "为什么开发者取消了他们的晚餐计划？",
+    "a_zh": "他们无法满足对等依赖（peer dependencies/同伴要求）。",
+    "form": "qa"
+  },
+  "123": {
+    "q": "Why did the functional programmer finally move out of their house?",
+    "a": "For(e) closure",
+    "q_zh": "为什么函数式程序员最终搬出了他们的家？",
+    "a_zh": "为了闭包（For(e) closure/止赎）。",
+    "form": "qa"
+  },
+  "124": {
+    "q": "How do JavaScript developers break up?",
+    "a": "They always promise to callback",
+    "q_zh": "JavaScript 开发者如何分手？",
+    "a_zh": "他们总是承诺会回电（callback）。",
+    "form": "qa"
+  },
+  "125": {
+    "q": "Why do developers mixup Terminals and Polygraphs?",
+    "a": "Because they both can see a lie (CLI)",
+    "q_zh": "为什么开发者会混淆终端（Terminal）和测谎仪（Polygraphs）？",
+    "a_zh": "因为它们都能看到谎言（CLI/See a lie，音近）。",
+    "form": "qa"
+  },
+  "126": {
+    "q": "Did you hear about the programmer that was scared of IDEs?",
+    "a": "They retreated back into their shell",
+    "q_zh": "你听说那个害怕 IDE（集成开发环境）的程序员吗？",
+    "a_zh": "他们退缩回了他们的 Shell（命令行界面/外壳）。",
+    "form": "qa"
+  },
+  "127": {
+    "q": "What do you call optimistic front-end developers?",
+    "a": "Stack half-full developers.",
+    "q_zh": "你如何称呼乐观的前端开发者？",
+    "a_zh": "半满栈（Stack）的开发者。",
+    "form": "qa"
+  },
+  "128": {
+    "text": "Chuck Norris can take a screenshot of his blue screen.",
+    "text_zh": "查克·诺里斯可以截下他蓝屏（blue screen of death）的截图。"
+  },
+  "129": {
+    "q": "Have you heard the one about the Corduroy pillow?",
+    "a": "It's making HEADLINES!",
+    "q_zh": "你听说那个灯芯绒枕头的故事吗？",
+    "a_zh": "它正在登上头条（HEADLINES/HTML 标题）！",
+    "form": "qa"
+  },
+  "130": {
+    "q": "Hey officer! How did the hackers escape?",
+    "a": "No idea. They just ransomware.",
+    "q_zh": "警官！黑客是怎么逃脱的？",
+    "a_zh": "不知道。他们只是勒索跑（ransomware/ran somewhere，跑了）了。",
+    "form": "qa"
+  },
+  "131": {
+    "q": "Why can’t data engineers become hat makers?",
+    "a": "They can only guarantee two thirds of a CAP!",
+    "q_zh": "为什么数据工程师不能成为帽子制造商？",
+    "a_zh": "他们只能保证 CAP（CAP 理论）的三分之二！",
+    "form": "qa"
+  },
+  "132": {
+    "q": "How did the hippie learn about database transactions?",
+    "a": "By taking ACID",
+    "q_zh": "嬉皮士是如何了解数据库事务的？",
+    "a_zh": "通过服用 ACID（事务特性/迷幻药）。",
+    "form": "qa"
+  },
+  "133": {
+    "q": "Why is it called the Dark Ages?",
+    "a": "There were a lot of KNIGHTS!",
+    "q_zh": "为什么被称为黑暗时代？",
+    "a_zh": "因为有很多骑士（KNIGHTS/夜晚 'Nights'，音近）。",
+    "form": "qa"
+  },
+  "134": {
+    "q": "What did the Network Administrator say when they caught a nasty virus?",
+    "a": "It hurts when IP",
+    "q_zh": "网络管理员感染了一个讨厌的病毒时说了什么？",
+    "a_zh": "当我 IP（排尿 'pee'，音近）时很痛。",
+    "form": "qa"
+  },
+  "135": {
+    "q": "Which programming language is the shortest?",
+    "a": "HTML. Because it doesn't have a neck between its <code>head</code> and <code>body</code>.",
+    "q_zh": "哪种编程语言最短？",
+    "a_zh": "HTML。因为它在 <code>head</code> 和 <code>body</code> 之间没有脖子（neck）。",
+    "form": "qa"
+  },
+  "136": {
+    "q": "What good can come of 2989 witches casting a hex?",
+    "a": "None, it is always 0xBAD",
+    "q_zh": "2989 个女巫施放一个 hex（十六进制/诅咒）能带来什么好处？",
+    "a_zh": "没有，它总是 0xBAD（一个负面情绪的十六进制）。",
+    "form": "qa"
+  },
+  "137": {
+    "q": "Did you hear about the witch who was off by two when casting a hex?",
+    "a": "They failed to make the target DEAD and made them DEAF instead!",
+    "q_zh": "你听说那个施放 hex 时差二（off by two）的女巫吗？",
+    "a_zh": "他们没能让目标 DEAD（死亡/十六进制 0xDEAD）而是让他们 DEAF（耳聋/十六进制 0xDEAF）了！",
+    "form": "qa"
+  },
+  "138": {
+    "text": "I went to a street where the houses were numbered 8k, 16k, 32k, 64k, 128k, 256k and 512k.It was a trip down Memory Lane.",
+    "text_zh": "我来到一条街道，房子编号是 8k, 16k, 32k, 64k, 128k, 256k 和 512k。这是一次“记忆小巷”（Memory Lane/内存地址）之旅。"
+  },
+  "139": {
+    "text": "Lisp programmers don't make prank calls. They make <code>FUNCALL</code>s",
+    "text_zh": "Lisp 程序员不做恶作剧电话。他们做 <code>FUNCALL</code>s（Lisp 函数调用）。"
+  },
+  "140": {
+    "q": "Why do Front-End Developers eat lunch alone?",
+    "a": "Because, they don't know how to join tables.",
+    "q_zh": "为什么前端开发者一个人吃午饭？",
+    "a_zh": "因为他们不知道如何连接表格（join tables/数据库连接）。",
+    "form": "qa"
+  },
+  "141": {
+    "q": "What advice do you give to a JS developer who has never played baseball?",
+    "a": "Try catch.",
+    "q_zh": "你会给从未打过棒球的 JS 开发者什么建议？",
+    "a_zh": "Try catch（尝试接住/异常处理）。",
+    "form": "qa"
+  },
+  "142": {
+    "q": "Why are the arrays that Chuck Norris declare, of infinite size.",
+    "a": "Because Chuck Norris knows no bounds.",
+    "q_zh": "为什么查克·诺里斯声明的数组大小是无限的？",
+    "a_zh": "因为查克·诺里斯不知道界限（bounds）。",
+    "form": "qa"
+  },
+  "143": {
+    "q": "Why doesn't Chuck Norris need garbage collection.",
+    "a": "Because he doesn’t call <code>.Dispose()</code>, he calls <code>.DropKick()</code>.",
+    "q_zh": "为什么查克·诺里斯不需要垃圾回收？",
+    "a_zh": "因为他不调用 <code>.Dispose()</code>，他调用 <code>.DropKick()</code>（摔踢，强力清除）。",
+    "form": "qa"
+  },
+  "144": {
+    "q": "How did the programmer die in the shower?",
+    "a": "He read the shampoo bottle instructions: Lather. Rinse. Repeat.",
+    "q_zh": "这位程序员是如何死在淋浴间的？",
+    "a_zh": "他读了洗发水瓶上的说明：起泡。冲洗。重复（Repeat/无限循环）。",
+    "form": "qa"
+  },
+  "145": {
+    "text": "When I wrote this code, only God and I understood what I was doing. Now, only God knows.",
+    "text_zh": "当我写这段代码时，只有上帝和我明白我在做什么。现在，只有上帝知道了。"
+  },
+  "146": {
+    "q": "What did the Java code say to the C code?",
+    "a": "You've got no class.",
+    "q_zh": "Java 代码对 C 代码说了什么？",
+    "a_zh": "你没有类（class/格调）。",
+    "form": "qa"
+  },
+  "147": {
+    "q": "What is the most used language in programming?",
+    "a": "Profanity.",
+    "q_zh": "编程中最常用的语言是什么？",
+    "a_zh": "脏话（Profanity）。",
+    "form": "qa"
+  },
+  "148": {
+    "q": "Why did the geek add <code>body { padding-top: 1000px; }</code> to his Facebook profile?",
+    "a": "He wanted to keep a low profile.",
+    "q_zh": "为什么这个极客在他的 Facebook 个人资料中添加了 <code>body { padding-top: 1000px; }</code>？",
+    "a_zh": "他想保持低调（low profile/低矮的轮廓）。",
+    "form": "qa"
+  },
+  "149": {
+    "text": "8 bytes walk into a bar, the bartenders asks \"What will it be?\" <br/>One of them says, \"Make us a double.\"",
+    "text_zh": "8 个字节（bytes）走进一家酒吧，酒保问：“喝点什么？” <br/>其中一个说：“给我们来个双倍（double/双精度浮点数）。”"
+  },
+  "150": {
+    "text": "An SEO couple had twins. For the first time, they were happy with duplicate content.",
+    "text_zh": "一对 SEO 夫妇生了双胞胎。这是他们第一次对重复内容（duplicate content）感到高兴。"
+  },
+  "151": {
+    "text": "LISP - Lots of Infuriating Superfluous Parentheses",
+    "text_zh": "LISP - 很多令人恼火的多余括号（Lots of Infuriating Superfluous Parentheses）。"
+  },
+  "152": {
+    "text": "I'm starting a band called 1023MB. I don't think we'll ever get a gig.",
+    "text_zh": "我正在组建一个名为 1023MB 的乐队。我不认为我们会得到演出（gig/G，1024MB=1G）。"
+  },
+  "153": {
+    "q": "Why did the developer quit his job?",
+    "a": "He did not get arrays.",
+    "q_zh": "为什么开发者辞职了？",
+    "a_zh": "他没有得到加薪（arrays/a raise，音近）。",
+    "form": "qa"
+  },
+  "154": {
+    "text": "There are two ways to write error-free programs; only the third one works.",
+    "text_zh": "编写无错误程序的方法有两种；只有第三种奏效。"
+  },
+  "155": {
+    "q": "Why couldn't the developer pull the weeds from the garden?",
+    "a": "They didn't have root access.",
+    "q_zh": "为什么开发者无法从花园里拔除杂草？",
+    "a_zh": "他们没有 root 权限（root access/根权限）。",
+    "form": "qa"
+  },
+  "156": {
+    "text": "Dev 1 -  We have a problem. Dev 2 -  Let’s use RegEx! Dev 1 -  Now we have two problems",
+    "text_zh": "开发者 1 - 我们有个问题。开发者 2 - 我们用正则表达式（RegEx）吧！开发者 1 - 现在我们有两个问题了。"
+  },
+  "157": {
+    "q": "How do you tell HTML from HTML5?",
+    "a": "Try it out in Internet Explorer, if it does not work then it's HTML5.",
+    "q_zh": "你如何区分 HTML 和 HTML5？",
+    "a_zh": "在 Internet Explorer 中试试看，如果它不起作用，那么就是 HTML5。",
+    "form": "qa"
+  },
+  "158": {
+    "q": "What do computers and air conditioners have in common?",
+    "a": "They both become useless when you open windows.",
+    "q_zh": "电脑和空调有什么共同点？",
+    "a_zh": "当你打开“窗户”（windows，系统/窗户）时，它们都会变得毫无用处。",
+    "form": "qa"
+  },
+  "159": {
+    "text": "99 little bugs in the code, 99 bugs in the code, 1 bug fixed...compile again, 100 little bugs in the code.",
+    "text_zh": "代码中有 99 个小 bug，代码中有 99 个 bug，修复了 1 个 bug... 再次编译，代码中有 100 个小 bug。"
+  },
+  "160": {
+    "text": "UNIX is very user friendly... It's just very particular about who its friends are.",
+    "text_zh": "UNIX 非常用户友好... 它只是非常挑剔它的朋友是谁。"
+  },
+  "161": {
+    "text": "Debugging: Removing the needles from the haystack.",
+    "text_zh": "调试（Debugging）：从干草堆中取出针。"
+  },
+  "162": {
+    "text": "You are the CSS to my HTML",
+    "text_zh": "你是我的 HTML 的 CSS（样式）"
+  },
+  "163": {
+    "text": "An optimist says: “the glass is half full.”<br/>A pessimist says: “the glass is half empty.”<br/>A programmer says: “the glass is twice as large as necessary.",
+    "text_zh": "乐观主义者说：“杯子半满。”<br/>悲观主义者说：“杯子半空。”<br/>程序员说：“这个杯子比必要的尺寸大了两倍。”"
+  },
+  "164": {
+    "text": "CSS developers have the biggest ego, they think they're so !important",
+    "text_zh": "CSS 开发者有最大的自我，他们认为自己是如此的 !important（CSS 规则/重要）。"
+  },
+  "165": {
+    "q": "Hamlet: To be - or not to be...",
+    "a": "Programmer: True !",
+    "q_zh": "哈姆雷特：生存还是毁灭（To be - or not to be...）",
+    "a_zh": "程序员：True（真）！"
+  },
+  "166": {
+    "text": "The Professor says \"Welcome to English 101\".The student panicks.\"What's wrong?\" asks the Professor.<br/><br/>\"I missed the first 4 English classes\".",
+    "text_zh": "教授说：“欢迎来到英语 101。”学生感到恐慌。“怎么了？”教授问。<br/><br/>“我错过了前 4 节英语课。”（101 在二进制中是 5）"
+  },
+  "167": {
+    "q": "What do cats and programmers have in common?",
+    "a": "When either one is unusually happy and excited, an appropriate question would be, \"did you find a bug\".",
+    "form": "qa",
+    "q_zh": "猫和程序员有什么共同点？",
+    "a_zh": "当其中任何一个异常高兴和兴奋时，一个恰当的问题是：“你找到一个 bug（虫子）了吗？”"
+  },
+  "168": {
+    "text": "Java and C were telling jokes. It was C's turn, so he writes something on the wall, points to it and says \"Do you get the reference?\" But Java didn't.",
+    "text_zh": "Java 和 C 正在讲笑话。轮到 C 了，于是他写了一些东西在墙上，指着它说：“你明白这个引用（reference）吗？” 但 Java 不明白。"
+  },
+  "169": {
+    "text": "To understand recursion. You must first understand recursion.",
+    "text_zh": "要理解递归，你必须先理解递归。"
+  },
+  "170": {
+    "text": "Two bytes meet. The first byte asks, \"Are you ill?\"The second byte replies, \"No, just feeling a bit off.\" ",
+    "text_zh": "两个字节（bytes）相遇。第一个字节问：“你生病了吗？”第二个字节回答：“没有，只是感觉有点'关闭'（off/偏移了一位，bit off）。”"
+  },
+  "171": {
+    "text": "I put so much more effort into naming my first Wi-Fi than my first child.",
+    "text_zh": "我为我的第一个 Wi-Fi 命名所付出的努力，比我为我的第一个孩子命名付出的努力多得多。"
+  },
+  "172": {
+    "q": "Why was the developer unable to find his room?",
+    "a": "His room card said 404",
+    "form": "qa",
+    "q_zh": "为什么这位开发者找不到他的房间？",
+    "a_zh": "他的房卡上写着 404（HTTP 状态码 404 Not Found）。"
+  },
+  "173": {
+    "q": "How do you tell an introverted computer scientist from an extroverted scientist?",
+    "a": "An extroverted computer scientist looks at your shoes when he talks to you.",
+    "form": "qa",
+    "q_zh": "你如何区分内向的计算机科学家和外向的科学家？",
+    "a_zh": "外向的计算机科学家在你说话时会看着你的鞋子。（暗示他们也不看你的眼睛）"
+  },
+  "174": {
+    "q": "How do you comfort a JS bug?",
+    "a": "You console it",
+    "form": "qa",
+    "q_zh": "你如何安慰一个 JS bug？",
+    "a_zh": "你用 console（安慰/控制台）它。"
+  },
+  "175": {
+    "text": "When an Apple employees dies, does their life HTML5 in front of their eyes?",
+    "text_zh": "当一位 Apple 员工去世时，他们的生命（life）会在他们眼前像 HTML5（影片 'film'，音近）一样播放吗？"
+  },
+  "176": {
+    "q": "What's 0.1+0.2?",
+    "a": "It's 0.30000000000000004",
+    "form": "qa",
+    "q_zh": "0.1 + 0.2 是多少？",
+    "a_zh": "是 0.30000000000000004。（浮点数精度问题）"
+  },
+  "177": {
+    "q": "Why do programmers prefer dark mode?",
+    "a": "Because light attracts bugs.",
+    "q_zh": "为什么程序员喜欢暗黑模式？",
+    "a_zh": "因为光会吸引虫子（bugs）。",
+    "form": "qa"
+  },
+  "178": {
+    "q": "Did you know?",
+    "a": "Spiders are the only web developers in the world that like finding bugs",
+    "form": "qa",
+    "q_zh": "你知道吗？",
+    "a_zh": "蜘蛛是世界上唯一喜欢寻找虫子（bugs）的 Web 开发者。"
+  },
+  "179": {
+    "q": "Don't add a programming language to your skills list after watching a 15-minute video on it.",
+    "a": "Yes wait until you've written hello world",
+    "form": "qa",
+    "q_zh": "不要在看了 15 分钟的视频后，就把一门编程语言添加到你的技能列表中。",
+    "a_zh": "是的，等到你写了 'Hello World' 之后再说。"
+  },
+  "180": {
+    "text": "A data Scientist goes to a bar and sees two tables. Then he says: Hey bro... Can I join you?",
+    "text_zh": "一个数据科学家走进一家酒吧，看到两张桌子。然后他说：嘿，兄弟...我能加入（join）你们吗？"
+  },
+  "181": {
+    "q": "Why do python developers wear glasses?",
+    "a": "Because they can't C",
+    "form": "qa",
+    "q_zh": "为什么 Python 开发者戴眼镜？",
+    "a_zh": "因为他们看不见 C（can't C/can't see）。"
+  },
+  "182": {
+    "q": "Why does the Docker container fail?",
+    "a": "So that, Kubernetes can start it again",
+    "form": "qa",
+    "q_zh": "为什么 Docker 容器会失败？",
+    "a_zh": "这样，Kubernetes 就可以再次启动它。"
+  },
+  "183": {
+    "q": "I.. CAN'T GET.. IT.. OFF!!",
+    "a": "DUDE, THAT'S BECAUSE YOUR CAPS LOCK IS ON",
+    "form": "qa",
+    "q_zh": "我...弄不..下来..啊！！",
+    "a_zh": "老兄，那是因为你的大写锁定（CAPS LOCK）开着呢。"
+  },
+  "184": {
+    "q": "What do NASA programmers do on the weekends?",
+    "a": "They hit the space bar",
+    "form": "qa",
+    "q_zh": "NASA 程序员周末做什么？",
+    "a_zh": "他们去敲击空格键（space bar/太空酒吧）。"
+  },
+  "185": {
+    "q": "What do you call a programmer from Finland?",
+    "a": "Nerdic",
+    "form": "qa",
+    "q_zh": "你怎么称呼一位来自芬兰的程序员？",
+    "a_zh": "Nerdic（Nerd/书呆子 + Nordic/北欧）。"
+  },
+  "186": {
+    "q": "Want to know the biggest lie in the universe?",
+    "a": "I have read and agree to the Terms & Conditions",
+    "form": "qa",
+    "q_zh": "想知道宇宙中最大的谎言吗？",
+    "a_zh": "我已阅读并同意条款与条件（Terms & Conditions）。"
+  },
+  "187": {
+    "q": "What is the biggest lie you have heard from a programmer?",
+    "a": "It should work now.",
+    "form": "qa",
+    "q_zh": "你听过程序员说的最大的谎言是什么？",
+    "a_zh": "现在应该可以工作了。"
+  },
+  "188": {
+    "text": "If the box says: \"This software requires Windows XP or better\". Does that mean it will run on Linux?",
+    "text_zh": "如果盒子上写着：“该软件需要 Windows XP 或更好”。那是不是意味着它可以在 Linux 上运行？"
+  },
+  "189": {
+    "q": "Why did the functional programmer get thrown out of school?",
+    "a": "Because he refused to take classes",
+    "q_zh": "为什么函数式程序员被学校开除了？",
+    "a_zh": "因为他拒绝上课（take classes/使用类）。"
+  },
+  "190": {
+    "text": "If it weren't for C, we'd all be programming in BASI and OBOL",
+    "text_zh": "如果不是 C 语言，我们都会用 BASI（BASIC）和 OBOL（COBOL）编程。"
+  },
+  "191": {
+    "text": "Programming is like sex: One mistake and you have to support it for the rest of your life.",
+    "text_zh": "编程就像性爱：一个错误，你就得支持（support/承担）它一辈子。"
+  },
+  "192": {
+    "text": "Chuck Norris writes code, that optimizes itself.",
+    "text_zh": "查克·诺里斯编写的代码，它会自我优化。"
+  }
 }

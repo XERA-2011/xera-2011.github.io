@@ -55,6 +55,8 @@ export async function GET(request: NextRequest) {
       svgContent = renderQnACard({
         question: joke.q,
         answer: joke.a,
+        questionZh: 'q_zh' in joke ? joke.q_zh : undefined,
+        answerZh: 'a_zh' in joke ? joke.a_zh : undefined,
         qColor,
         aColor,
         bgColor,
@@ -62,8 +64,19 @@ export async function GET(request: NextRequest) {
         codeColor,
         hideBorder,
       });
+    } else if (typeof joke === 'object' && joke !== null && 'text' in joke) {
+      // Quote 类型的笑话（对象形式）
+      svgContent = renderQuoteCard({
+        text: joke.text,
+        textZh: 'text_zh' in joke ? joke.text_zh : undefined,
+        textColor,
+        bgColor,
+        borderColor,
+        codeColor,
+        hideBorder,
+      });
     } else {
-      // Quote 类型的笑话
+      // Quote 类型的笑话（字符串形式）
       const text = typeof joke === 'string' ? joke : JSON.stringify(joke);
       svgContent = renderQuoteCard({
         text,

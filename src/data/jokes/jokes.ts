@@ -6,14 +6,19 @@
 export interface QnAJoke {
   q: string;
   a: string;
+  q_zh?: string; // 中文问题
+  a_zh?: string; // 中文答案
   form?: 'qa';
 }
 
 // 引用类型的笑话（纯文本）
-export type QuoteJoke = string;
+export interface QuoteJoke {
+  text: string;
+  text_zh?: string; // 中文文本
+}
 
 // 笑话联合类型
-export type Joke = QnAJoke | QuoteJoke;
+export type Joke = QnAJoke | QuoteJoke | string;
 
 // 笑话数据库
 export type JokesDatabase = Record<string, Joke>;

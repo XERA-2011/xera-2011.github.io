@@ -44,12 +44,16 @@ export default function JokeCardPage() {
             <h2 className="text-xl font-semibold text-foreground mb-4">功能说明</h2>
             <ul className="space-y-2 text-muted-foreground">
               <li className="flex items-start gap-2">
+                <span className="text-primary">✨</span>
+                <span><strong>双语支持：</strong>上英文下中文，保留技术梗的原汁原味</span>
+              </li>
+              <li className="flex items-start gap-2">
                 <span className="text-muted-foreground">•</span>
                 <span>支持 40+ 种主题风格，包括 Dracula、Tokyo Night、Monokai 等</span>
               </li>
               <li className="flex items-start gap-2">
                 <span className="text-muted-foreground">•</span>
-                <span>400+ 条精选编程笑话，随机展示</span>
+                <span>190+ 条精选编程笑话，随机展示</span>
               </li>
               <li className="flex items-start gap-2">
                 <span className="text-muted-foreground">•</span>
