@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useEffect } from 'react';
+import { useState } from 'react';
 import { motion } from 'framer-motion';
 import Image from 'next/image';
 import { usePageTitle } from '@/hooks/use-page-title';
@@ -27,8 +27,7 @@ const AVAILABLE_ICONS = Object.values(ICON_CATEGORIES).flat();
 export default function IconsPage() {
   usePageTitle('图标卡片');
   const [copiedIndex, setCopiedIndex] = useState<number | null>(null);
-  const [selectedIcons, setSelectedIcons] = useState<string>('react,vue,vite,vscode,idea,git,python,discord');
-  const [previewIcons, setPreviewIcons] = useState<string[]>(['ps', 'react', 'vue', 'vite', 'vscode', 'idea', 'git', 'discord']);
+  const [selectedIcons, setSelectedIcons] = useState<string[]>(['react', 'vue', 'next', 'nuxt', 'vite', 'vscode', 'idea', 'git', 'python', 'docker']);
   const [showAllIcons, setShowAllIcons] = useState<boolean>(true);
 
   const handleCopy = async (text: string, index: number) => {
@@ -42,29 +41,23 @@ export default function IconsPage() {
   };
 
   const toggleIcon = (icon: string) => {
-    const currentIcons = selectedIcons.split(',').map(i => i.trim()).filter(Boolean);
-    if (currentIcons.includes(icon)) {
-      const newIcons = currentIcons.filter(i => i !== icon);
-      setSelectedIcons(newIcons.join(','));
+    if (selectedIcons.includes(icon)) {
+      setSelectedIcons(selectedIcons.filter(i => i !== icon));
     } else {
-      setSelectedIcons([...currentIcons, icon].join(','));
+      setSelectedIcons([...selectedIcons, icon]);
     }
   };
 
   const baseUrl = 'https://xera-2011.vercel.app';
 
-  // 当选中图标变化时更新预览
-  useEffect(() => {
-    const icons = selectedIcons.split(',').map(icon => icon.trim()).filter(Boolean);
-    setPreviewIcons(icons);
-  }, [selectedIcons]);
-
-  const currentPreview = `/api/github/icons?i=${selectedIcons}`;
+  // 将数组转换为字符串用于 API 调用
+  const iconsParam = selectedIcons.join(',');
+  const currentPreview = `/api/github/icons?i=${iconsParam}`;
 
   const examples = [
     {
       title: '技术栈图标',
-      code: `<img alt="Icons" src="${baseUrl}/api/github/icons?i=${selectedIcons}" />`,
+      code: `<img alt="Icons" src="${baseUrl}/api/github/icons?i=${iconsParam}" />`,
       preview: currentPreview
     }
   ];
@@ -100,7 +93,7 @@ export default function IconsPage() {
                 <div className="space-y-3">
                   <div className="flex items-center justify-between">
                     <p className="text-sm text-muted-foreground">
-                      共 {AVAILABLE_ICONS.length} 个可用图标，已选择 {previewIcons.length} 个
+                      共 {AVAILABLE_ICONS.length} 个可用图标，已选择 {selectedIcons.length} 个
                     </p>
                     <Button
                       variant="ghost"
@@ -118,7 +111,7 @@ export default function IconsPage() {
                           <h4 className="text-sm font-semibold text-foreground mb-2">{category}</h4>
                           <div className="flex flex-wrap gap-2">
                             {icons.map((icon) => {
-                              const isSelected = previewIcons.includes(icon);
+                              const isSelected = selectedIcons.includes(icon);
                               return (
                                 <button
                                   key={icon}
@@ -142,13 +135,13 @@ export default function IconsPage() {
 
               {/* 预览区域 */}
               <div className="flex justify-center bg-secondary border border-border rounded-lg p-8">
-                {previewIcons.length > 0 ? (
+                {selectedIcons.length > 0 ? (
                   <Image
                     src={currentPreview}
                     alt="Icons Preview"
-                    key={selectedIcons}
+                    key={iconsParam}
                     className="w-full max-w-full"
-                    width={previewIcons.length * 48}
+                    width={selectedIcons.length * 48}
                     height={48}
                     priority
                     unoptimized
