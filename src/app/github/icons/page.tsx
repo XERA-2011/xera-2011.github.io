@@ -77,7 +77,6 @@ export default function IconsPage() {
           <h2 className="text-3xl sm:text-4xl font-bold text-foreground mb-2">
             图标卡片
           </h2>
-          <p className="text-muted-foreground">生成精美的 SVG 图标卡片，展示各种技术栈和品牌图标</p>
         </motion.div>
 
         {/* Interactive Preview */}
@@ -156,10 +155,10 @@ export default function IconsPage() {
                               setDraggingIndex(null);
                             }}
                             className={`group relative px-3 py-1.5 text-xs rounded-md border cursor-move transition-all ${draggingIndex === index
-                                ? 'opacity-50 scale-95 border-dashed'
-                                : dragOverIndex === index
-                                  ? 'border-primary bg-primary/30 text-primary scale-105 shadow-lg'
-                                  : 'border-primary bg-primary/10 text-primary hover:bg-primary/20'
+                              ? 'opacity-50 scale-95 border-dashed'
+                              : dragOverIndex === index
+                                ? 'border-primary bg-primary/30 text-primary scale-105 shadow-lg'
+                                : 'border-primary bg-primary/10 text-primary hover:bg-primary/20'
                               }`}
                           >
                             <span className="select-none">{icon}</span>
