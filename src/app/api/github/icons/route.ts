@@ -94,7 +94,7 @@ initializeIconFileMap();
  * @param svgString - 完整的 SVG 字符串。
  * @returns 包含 viewBox 和 innerContent 的对象，如果解析失败则返回 null。
  */
-function parseSvgWithRegex(svgString: string): { viewBox: string; innerContent: string } | null {
+function parseSvgWithRegex(svgString: string): { viewBox: string; innerContent: string; fill?: string } | null {
   // 1. 提取 <svg> 标签内的所有内容（非贪婪模式）
   const contentMatch = svgString.match(/<svg[^>]*>([\s\S]*?)<\/svg>/i);
   if (!contentMatch || typeof contentMatch[1] !== 'string') {
@@ -104,10 +104,27 @@ function parseSvgWithRegex(svgString: string): { viewBox: string; innerContent: 
 
   // 2. 从开头的 <svg> 标签中提取 viewBox 属性
   const viewBoxMatch = svgString.match(/<svg[^>]*viewBox="([^"]*)"/i);
-  // 如果找不到 viewBox，则创建一个默认值，以确保图标可以显示
-  const viewBox = viewBoxMatch && viewBoxMatch[1] ? viewBoxMatch[1] : `0 0 ${DEFAULT_ICON_SIZE} ${DEFAULT_ICON_SIZE}`;
+  // 如果找不到 viewBox，尝试从 width 和 height 创建
+  let viewBox = viewBoxMatch && viewBoxMatch[1] ? viewBoxMatch[1] : '';
+  
+  // 3. 提取 width 和 height 属性（如果存在）
+  const widthMatch = svgString.match(/<svg[^>]*width="([^"]*)"/i);
+  const heightMatch = svgString.match(/<svg[^>]*height="([^"]*)"/i);
+  const width = widthMatch && widthMatch[1] ? widthMatch[1] : undefined;
+  const height = heightMatch && heightMatch[1] ? heightMatch[1] : undefined;
+  
+  // 如果没有 viewBox 但有 width 和 height，创建默认 viewBox
+  if (!viewBox && width && height) {
+    viewBox = `0 0 ${width} ${height}`;
+  } else if (!viewBox) {
+    viewBox = `0 0 ${DEFAULT_ICON_SIZE} ${DEFAULT_ICON_SIZE}`;
+  }
 
-  return { viewBox, innerContent };
+  // 4. 提取 fill 属性 - 这对于某些图标的透明度很重要
+  const fillMatch = svgString.match(/<svg[^>]*fill="([^"]*)"/i);
+  const fill = fillMatch && fillMatch[1] ? fillMatch[1] : undefined;
+
+  return { viewBox, innerContent, fill };
 }
 
 
@@ -138,7 +155,7 @@ function combineSvgs(svgs: { name: string; svg: string }[], iconSize: number): s
       return '';
     }
 
-    const { viewBox, innerContent } = parsed;
+    const { viewBox, innerContent, fill } = parsed;
     
     // 计算当前图标在网格中的位置
     const row = Math.floor(index / iconsPerRow);
@@ -146,8 +163,11 @@ function combineSvgs(svgs: { name: string; svg: string }[], iconSize: number): s
     const x = col * (iconSize + ICON_SPACING);
     const y = row * (iconSize + ICON_SPACING);
 
-    // 使用 <svg> 嵌套，以利用其独立的 viewBox 和 preserveAspectRatio 属性，实现更好的缩放
-    return `<svg x="${x}" y="${y}" width="${iconSize}" height="${iconSize}" viewBox="${viewBox}" preserveAspectRatio="xMidYMid meet">${innerContent}</svg>`;
+    // 使用嵌套 <svg> 标签，通过 viewBox 自动缩放内容
+    // 嵌套的 svg 会创建一个新的视口，确保内容正确缩放并保留所有细节
+    // 保留 fill 属性（特别是 fill="none"）以确保透明度正确
+    const fillAttr = fill ? ` fill="${fill}"` : '';
+    return `<svg x="${x}" y="${y}" width="${iconSize}" height="${iconSize}" viewBox="${viewBox}"${fillAttr}>${innerContent}</svg>`;
   }).join('');
 
   return `<svg width="${totalWidth}" height="${totalHeight}" viewBox="0 0 ${totalWidth} ${totalHeight}" xmlns="http://www.w3.org/2000/svg">${svgElements}</svg>`;

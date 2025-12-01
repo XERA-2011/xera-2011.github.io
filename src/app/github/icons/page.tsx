@@ -27,9 +27,9 @@ const AVAILABLE_ICONS = Object.values(ICON_CATEGORIES).flat();
 export default function IconsPage() {
   usePageTitle('图标卡片');
   const [copiedIndex, setCopiedIndex] = useState<number | null>(null);
-  const [selectedIcons, setSelectedIcons] = useState<string>('ps,react,vue,vite,vscode,idea,git,discord');
+  const [selectedIcons, setSelectedIcons] = useState<string>('react,vue,vite,vscode,idea,git,python,discord');
   const [previewIcons, setPreviewIcons] = useState<string[]>(['ps', 'react', 'vue', 'vite', 'vscode', 'idea', 'git', 'discord']);
-  const [showAllIcons, setShowAllIcons] = useState<boolean>(false);
+  const [showAllIcons, setShowAllIcons] = useState<boolean>(true);
 
   const handleCopy = async (text: string, index: number) => {
     try {
@@ -234,19 +234,6 @@ export default function IconsPage() {
                 <p>• 背景：完全透明</p>
                 <p>• 尺寸：根据图标数量自动调整</p>
                 <p>• 支持别名：ps(Photoshop), ai(Illustrator), vue(VueJS), js(JavaScript), ts(TypeScript) 等</p>
-                <details className="mt-2">
-                  <summary className="cursor-pointer hover:text-foreground">
-                    查看所有 {AVAILABLE_ICONS.length} 个可用图标
-                  </summary>
-                  <div className="mt-2 pl-4 grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-2">
-                    {Object.entries(ICON_CATEGORIES).map(([category, icons]) => (
-                      <div key={category}>
-                        <p className="font-semibold text-foreground mb-1">{category}</p>
-                        <p className="text-xs">{icons.join(', ')}</p>
-                      </div>
-                    ))}
-                  </div>
-                </details>
               </div>
             </div>
           </GlowCard>
