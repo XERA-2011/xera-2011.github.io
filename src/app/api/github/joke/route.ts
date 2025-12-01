@@ -47,6 +47,10 @@ export async function GET(request: NextRequest) {
     const textColor = searchParams.get('textColor') || themeConfig.quoteColor;
     const codeColor = searchParams.get('codeColor') || themeConfig.codeColor;
 
+    // 从 URL 参数获取宽高配置
+    const width = searchParams.get('width') ? parseInt(searchParams.get('width')!) : undefined;
+    const height = searchParams.get('height') ? parseInt(searchParams.get('height')!) : undefined;
+
     // 根据笑话类型渲染 SVG
     let svgContent: string;
 
@@ -63,6 +67,8 @@ export async function GET(request: NextRequest) {
         borderColor,
         codeColor,
         hideBorder,
+        width,
+        height,
       });
     } else if (typeof joke === 'object' && joke !== null && 'text' in joke) {
       // Quote 类型的笑话（对象形式）
@@ -74,6 +80,8 @@ export async function GET(request: NextRequest) {
         borderColor,
         codeColor,
         hideBorder,
+        width,
+        height,
       });
     } else {
       // Quote 类型的笑话（字符串形式）
@@ -85,6 +93,8 @@ export async function GET(request: NextRequest) {
         borderColor,
         codeColor,
         hideBorder,
+        width,
+        height,
       });
     }
 

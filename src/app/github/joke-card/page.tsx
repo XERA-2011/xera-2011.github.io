@@ -33,8 +33,8 @@ export default function JokeCardPage() {
       code: `<img alt="Joke Card" src="${baseUrl}/api/github/joke?theme=dracula" />`,
     },
     {
-      title: '随机主题',
-      code: `<img alt="Joke Card" src="${baseUrl}/api/github/joke?theme=random" />`,
+      title: '自定义尺寸',
+      code: `<img alt="Joke Card" src="${baseUrl}/api/github/joke?width=600&height=250" />`,
     },
   ];
 
@@ -118,6 +118,14 @@ export default function JokeCardPage() {
                   <div className="text-muted-foreground text-xs pl-4 mt-1">
                     支持 40+ 种主题：default, dracula, tokyonight, monokai, gruvbox, radical, vue, react 等<br />
                     使用 <code className="bg-secondary px-1 rounded">theme=random</code> 随机选择主题
+                  </div>
+                </div>
+                <div>
+                  <span className="text-foreground font-medium">width / height</span>
+                  <span className="text-muted-foreground ml-2">(可选) 卡片尺寸</span>
+                  <div className="text-muted-foreground text-xs pl-4 mt-1">
+                    自定义卡片宽度和高度（像素），例如：<code className="bg-secondary px-1 rounded">?width=600&height=250</code><br />
+                    默认值：QnA 卡片 500×200，Quote 卡片 500×150
                   </div>
                 </div>
                 <div>

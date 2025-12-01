@@ -13,6 +13,8 @@ interface QnACardOptions {
   borderColor: string;
   codeColor: string;
   hideBorder?: boolean;
+  width?: number;  // 卡片宽度
+  height?: number; // 卡片高度
 }
 
 interface QuoteCardOptions {
@@ -23,6 +25,8 @@ interface QuoteCardOptions {
   borderColor: string;
   codeColor: string;
   hideBorder?: boolean;
+  width?: number;  // 卡片宽度
+  height?: number; // 卡片高度
 }
 
 /**
@@ -38,18 +42,20 @@ export function renderQnACard(options: QnACardOptions): string {
     borderColor,
     codeColor,
     hideBorder = false,
+    width = 500,
+    height = 200,
   } = options;
 
   const border = hideBorder ? '2px solid transparent' : `2px solid ${borderColor}`;
 
   return `
-<svg width="500" height="200" viewBox="0 0 500 200" fill="none" xmlns="http://www.w3.org/2000/svg">
-  <foreignObject width="500" height="200">
+<svg width="${width}" height="${height}" viewBox="0 0 ${width} ${height}" fill="none" xmlns="http://www.w3.org/2000/svg">/www.w3.org/2000/svg">
+  <foreignObject width="${width}" height="${height}">
     <div xmlns="http://www.w3.org/1999/xhtml">
       <style>
         .container {
-          width: 500px;
-          height: 200px;
+          width: ${width}px;
+          height: ${height}px;
           border: ${border};
           border-radius: 10px;
           background: ${bgColor};
@@ -112,18 +118,20 @@ export function renderQuoteCard(options: QuoteCardOptions): string {
     borderColor,
     codeColor,
     hideBorder = false,
+    width = 500,
+    height = 150,
   } = options;
 
   const border = hideBorder ? '2px solid transparent' : `2px solid ${borderColor}`;
 
   return `
-<svg width="500" height="150" viewBox="0 0 500 150" fill="none" xmlns="http://www.w3.org/2000/svg">
-  <foreignObject width="500" height="150">
+<svg width="${width}" height="${height}" viewBox="0 0 ${width} ${height}" fill="none" xmlns="http://www.w3.org/2000/svg">/www.w3.org/2000/svg">
+  <foreignObject width="${width}" height="${height}">
     <div xmlns="http://www.w3.org/1999/xhtml">
       <style>
         .container {
-          width: 500px;
-          height: 150px;
+          width: ${width}px;
+          height: ${height}px;
           border: ${border};
           border-radius: 10px;
           background: ${bgColor};
