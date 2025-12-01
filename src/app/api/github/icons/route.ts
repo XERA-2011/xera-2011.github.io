@@ -7,7 +7,7 @@ const ICONS_DIR = path.join(process.cwd(), 'src', 'assets', 'icons');
 const CACHE_SECONDS = 3600; // 1小时
 const DEFAULT_ICON_SIZE = 48;
 const ICON_SPACING = 8;
-// const ICONS_PER_ROW = 10; // 每行显示的图标数量
+const ICONS_PER_ROW = 10; // 每行显示的图标数量
 
 // --- 缓存模块 ---
 interface CacheEntry {
@@ -26,39 +26,46 @@ const ICON_ALIASES: Record<string, string> = {
   'ai': 'illustrator',
   'pr': 'premiere',
   'ae': 'aftereffects',
-  'xd': 'xd',
-  // 前端框架
-  'vue': 'vuejs',
-  'next': 'nextjs',
-  'nuxt': 'nuxtjs',
-  'solid': 'solidjs',
   // 编程语言
   'js': 'javascript',
   'ts': 'typescript',
   'py': 'python',
   'go': 'golang',
+  'c++': 'cpp',
+  'c#': 'cs',
+  'rs': 'rust',
+  // 前端框架 & 库
+  'vue': 'vuejs',
+  'reactjs': 'react',
+  'next': 'nextjs',
+  'nuxt': 'nuxtjs',
+  'solid': 'solidjs',
+  'angularjs': 'angular',
+  'three': 'threejs',
+  'mui': 'materialui',
+  'styled': 'styledcomponents',
+  'tailwind': 'tailwindcss',
   // Node.js 生态
   'node': 'nodejs',
   'express': 'expressjs',
   'nest': 'nestjs',
   'discord.js': 'discordjs',
-  // 样式工具
-  'tailwind': 'tailwindcss',
-  'sass': 'sass',
   // 数据库
   'postgres': 'postgresql',
   'mongo': 'mongodb',
   // 开发工具
-  'vscode': 'vscode',
-  'idea': 'idea',
-  'webstorm': 'webstorm',
-  'pycharm': 'pycharm',
-  'vim': 'vim',
+  'vs': 'visualstudio',
+  'as': 'androidstudio',
   'nvim': 'neovim',
-  // 云服务
+  // 云服务 & 运维
   'k8s': 'kubernetes',
-  'gcp': 'gcp',
-  'aws': 'aws',
+  'kube': 'kubernetes',
+  // 其他
+  'tf': 'tensorflow',
+  'sklearn': 'scikitlearn',
+  'gh': 'github',
+  'fb': 'firebase',
+  'so': 'stackoverflow',
 };
 
 async function initializeIconFileMap() {
@@ -105,7 +112,7 @@ function parseSvgWithRegex(svgString: string): { viewBox: string; innerContent: 
 
 
 /**
- * 将多个 SVG 图标组合成一个水平排列的 SVG 雪碧图。
+ * 将多个 SVG 图标组合成一个多行排列的 SVG 雪碧图。
  * @param svgs - 包含名称和 SVG 内容的对象数组。
  * @param iconSize - 每个图标的尺寸。
  * @returns 组合后的 SVG 字符串。
@@ -114,7 +121,13 @@ function combineSvgs(svgs: { name: string; svg: string }[], iconSize: number): s
   const totalIcons = svgs.length;
   if (totalIcons === 0) return '';
 
-  const totalWidth = totalIcons * iconSize + (totalIcons - 1) * ICON_SPACING;
+  // 计算行数和列数
+  const iconsPerRow = Math.min(ICONS_PER_ROW, totalIcons);
+  const rows = Math.ceil(totalIcons / iconsPerRow);
+
+  // 计算总宽度和总高度
+  const totalWidth = iconsPerRow * iconSize + (iconsPerRow - 1) * ICON_SPACING;
+  const totalHeight = rows * iconSize + (rows - 1) * ICON_SPACING;
 
   const svgElements = svgs.map((item, index) => {
     if (!item.svg) return '';
@@ -126,47 +139,43 @@ function combineSvgs(svgs: { name: string; svg: string }[], iconSize: number): s
     }
 
     const { viewBox, innerContent } = parsed;
-    const x = index * (iconSize + ICON_SPACING);
+    
+    // 计算当前图标在网格中的位置
+    const row = Math.floor(index / iconsPerRow);
+    const col = index % iconsPerRow;
+    const x = col * (iconSize + ICON_SPACING);
+    const y = row * (iconSize + ICON_SPACING);
 
     // 使用 <svg> 嵌套，以利用其独立的 viewBox 和 preserveAspectRatio 属性，实现更好的缩放
-    return `<svg x="${x}" y="0" width="${iconSize}" height="${iconSize}" viewBox="${viewBox}" preserveAspectRatio="xMidYMid meet">${innerContent}</svg>`;
+    return `<svg x="${x}" y="${y}" width="${iconSize}" height="${iconSize}" viewBox="${viewBox}" preserveAspectRatio="xMidYMid meet">${innerContent}</svg>`;
   }).join('');
 
-  return `<svg width="${totalWidth}" height="${iconSize}" viewBox="0 0 ${totalWidth} ${iconSize}" xmlns="http://www.w3.org/2000/svg">${svgElements}</svg>`;
+  return `<svg width="${totalWidth}" height="${totalHeight}" viewBox="0 0 ${totalWidth} ${totalHeight}" xmlns="http://www.w3.org/2000/svg">${svgElements}</svg>`;
 }
 
 /**
  * 智能查找图标文件
- * 支持别名、自动匹配 -Dark/-Light 后缀
+ * 支持别名、自动忽略 -Dark/-Light 后缀
  */
 function findIconFile(iconName: string): string | null {
   if (!iconFileMap) return null;
 
   let searchName = iconName.toLowerCase();
 
-  // 1. 检查别名
+  // 1. 尝试移除 -dark/-light 后缀 (兼容旧 API 调用)
+  searchName = searchName.replace(/-dark$/i, '').replace(/-light$/i, '');
+
+  // 2. 检查别名
   if (ICON_ALIASES[searchName]) {
     searchName = ICON_ALIASES[searchName];
   }
 
-  // 2. 精确匹配
+  // 3. 精确匹配
   if (iconFileMap.has(searchName)) {
     return iconFileMap.get(searchName)!;
   }
 
-  // 3. 尝试添加 -dark 后缀
-  const darkName = `${searchName}-dark`;
-  if (iconFileMap.has(darkName)) {
-    return iconFileMap.get(darkName)!;
-  }
-
-  // 4. 尝试添加 -light 后缀
-  const lightName = `${searchName}-light`;
-  if (iconFileMap.has(lightName)) {
-    return iconFileMap.get(lightName)!;
-  }
-
-  // 5. 模糊匹配：查找包含该名称的图标
+  // 4. 模糊匹配：查找包含该名称的图标
   for (const [key, fileName] of iconFileMap.entries()) {
     if (key.startsWith(searchName)) {
       return fileName;

@@ -31,7 +31,6 @@ export default function IconsPage() {
   const [selectedIcons, setSelectedIcons] = useState<string>('ps,react,vue,vite,vscode,idea,git,discord');
   const [previewIcons, setPreviewIcons] = useState<string[]>(['ps', 'react', 'vue', 'vite', 'vscode', 'idea', 'git', 'discord']);
   const [showAllIcons, setShowAllIcons] = useState<boolean>(false);
-  const [iconTheme, setIconTheme] = useState<'auto' | 'dark' | 'light'>('auto');
 
   const handleCopy = async (text: string, index: number) => {
     try {
@@ -53,19 +52,6 @@ export default function IconsPage() {
     }
   };
 
-  // 根据主题设置应用图标主题后缀
-  const applyIconTheme = (icons: string, theme: 'auto' | 'dark' | 'light'): string => {
-    if (theme === 'auto') return icons;
-
-    return icons.split(',').map(icon => {
-      const trimmedIcon = icon.trim();
-      // 如果已经有主题后缀，先移除
-      const cleanIcon = trimmedIcon.replace(/-dark$/i, '').replace(/-light$/i, '');
-      // 添加新的主题后缀
-      return `${cleanIcon}-${theme}`;
-    }).join(',');
-  };
-
   const baseUrl = 'https://xera-2011.vercel.app';
 
   // 当选中图标变化时更新预览
@@ -74,13 +60,12 @@ export default function IconsPage() {
     setPreviewIcons(icons);
   }, [selectedIcons]);
 
-  const themedIcons = applyIconTheme(selectedIcons, iconTheme);
-  const currentPreview = `/api/github/icons?i=${themedIcons}`;
+  const currentPreview = `/api/github/icons?i=${selectedIcons}`;
 
   const examples = [
     {
       title: '技术栈图标',
-      code: `<img alt="Icons" src="${baseUrl}/api/github/icons?i=${themedIcons}" />`,
+      code: `<img alt="Icons" src="${baseUrl}/api/github/icons?i=${selectedIcons}" />`,
       preview: currentPreview
     }
   ];
@@ -111,49 +96,6 @@ export default function IconsPage() {
             <h3 className="text-2xl font-bold text-foreground mb-6">实时预览</h3>
 
             <div className="space-y-6">
-              {/* 主题选择 */}
-              <div>
-                <Label className="text-muted-foreground">图标主题</Label>
-                <div className="flex gap-2 mt-2">
-                  <Button
-                    variant={iconTheme === 'auto' ? 'default' : 'outline'}
-                    size="sm"
-                    onClick={() => setIconTheme('auto')}
-                    className="flex-1"
-                  >
-                    <svg className="w-4 h-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364 6.364l-.707-.707M6.343 6.343l-.707-.707m12.728 0l-.707.707M6.343 17.657l-.707.707M16 12a4 4 0 11-8 0 4 4 0 018 0z" />
-                    </svg>
-                    自动
-                  </Button>
-                  <Button
-                    variant={iconTheme === 'dark' ? 'default' : 'outline'}
-                    size="sm"
-                    onClick={() => setIconTheme('dark')}
-                    className="flex-1"
-                  >
-                    <svg className="w-4 h-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z" />
-                    </svg>
-                    深色
-                  </Button>
-                  <Button
-                    variant={iconTheme === 'light' ? 'default' : 'outline'}
-                    size="sm"
-                    onClick={() => setIconTheme('light')}
-                    className="flex-1"
-                  >
-                    <svg className="w-4 h-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364 6.364l-.707-.707M6.343 6.343l-.707-.707m12.728 0l-.707.707M6.343 17.657l-.707.707M16 12a4 4 0 11-8 0 4 4 0 018 0z" />
-                    </svg>
-                    浅色
-                  </Button>
-                </div>
-                <p className="text-xs text-muted-foreground mt-2">
-                  {iconTheme === 'auto' ? '根据图标自动选择主题（推荐）' : `强制使用 ${iconTheme === 'dark' ? '深色' : '浅色'} 主题图标`}
-                </p>
-              </div>
-
               <div>
                 {/* 图标分类选择器 */}
                 <div className="space-y-3">
@@ -182,11 +124,10 @@ export default function IconsPage() {
                                 <button
                                   key={icon}
                                   onClick={() => toggleIcon(icon)}
-                                  className={`px-3 py-1 text-xs rounded-md border transition-colors ${
-                                    isSelected
+                                  className={`px-3 py-1 text-xs rounded-md border transition-colors ${isSelected
                                       ? 'bg-primary text-primary-foreground border-primary'
                                       : 'bg-secondary text-muted-foreground border-border hover:bg-accent hover:text-accent-foreground'
-                                  }`}
+                                    }`}
                                 >
                                   {icon}
                                 </button>
@@ -206,7 +147,7 @@ export default function IconsPage() {
                   <Image
                     src={currentPreview}
                     alt="Icons Preview"
-                    key={themedIcons}
+                    key={selectedIcons}
                     className="w-full max-w-full"
                     width={previewIcons.length * 48}
                     height={48}
@@ -276,7 +217,7 @@ export default function IconsPage() {
                   </div>
                   <div className="text-muted-foreground text-xs pl-4">
                     多个图标用逗号分隔，例如：ps,react,vue<br />
-                    支持主题后缀：react-dark,vue-light
+                    支持别名：ps, js, ts 等
                   </div>
                 </div>
                 <div className="space-y-2">
@@ -293,7 +234,6 @@ export default function IconsPage() {
                 <p>• 显示格式：水平排列的图标组合</p>
                 <p>• 背景：完全透明</p>
                 <p>• 尺寸：根据图标数量自动调整</p>
-                <p>• 主题支持：可指定 -dark/-light 后缀（如 react-dark）或让 API 自动匹配</p>
                 <p>• 支持别名：ps(Photoshop), ai(Illustrator), vue(VueJS), js(JavaScript), ts(TypeScript) 等</p>
                 <details className="mt-2">
                   <summary className="cursor-pointer hover:text-foreground">
