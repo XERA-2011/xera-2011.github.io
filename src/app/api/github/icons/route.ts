@@ -7,6 +7,7 @@ const ICONS_DIR = path.join(process.cwd(), 'src', 'assets', 'icons');
 const CACHE_SECONDS = 3600; // 1小时
 const DEFAULT_ICON_SIZE = 48;
 const ICON_SPACING = 8;
+// const ICONS_PER_ROW = 10; // 每行显示的图标数量
 
 // --- 缓存模块 ---
 interface CacheEntry {
@@ -17,6 +18,48 @@ const cache = new Map<string, CacheEntry>();
 
 // --- 文件系统模块 ---
 let iconFileMap: Map<string, string> | null = null;
+
+// 图标别名映射 - 支持简短名称
+const ICON_ALIASES: Record<string, string> = {
+  // Adobe 系列
+  'ps': 'photoshop',
+  'ai': 'illustrator',
+  'pr': 'premiere',
+  'ae': 'aftereffects',
+  'xd': 'xd',
+  // 前端框架
+  'vue': 'vuejs',
+  'next': 'nextjs',
+  'nuxt': 'nuxtjs',
+  'solid': 'solidjs',
+  // 编程语言
+  'js': 'javascript',
+  'ts': 'typescript',
+  'py': 'python',
+  'go': 'golang',
+  // Node.js 生态
+  'node': 'nodejs',
+  'express': 'expressjs',
+  'nest': 'nestjs',
+  'discord.js': 'discordjs',
+  // 样式工具
+  'tailwind': 'tailwindcss',
+  'sass': 'sass',
+  // 数据库
+  'postgres': 'postgresql',
+  'mongo': 'mongodb',
+  // 开发工具
+  'vscode': 'vscode',
+  'idea': 'idea',
+  'webstorm': 'webstorm',
+  'pycharm': 'pycharm',
+  'vim': 'vim',
+  'nvim': 'neovim',
+  // 云服务
+  'k8s': 'kubernetes',
+  'gcp': 'gcp',
+  'aws': 'aws',
+};
 
 async function initializeIconFileMap() {
   if (iconFileMap) return;
@@ -92,31 +135,72 @@ function combineSvgs(svgs: { name: string; svg: string }[], iconSize: number): s
   return `<svg width="${totalWidth}" height="${iconSize}" viewBox="0 0 ${totalWidth} ${iconSize}" xmlns="http://www.w3.org/2000/svg">${svgElements}</svg>`;
 }
 
+/**
+ * 智能查找图标文件
+ * 支持别名、自动匹配 -Dark/-Light 后缀
+ */
+function findIconFile(iconName: string): string | null {
+  if (!iconFileMap) return null;
+
+  let searchName = iconName.toLowerCase();
+
+  // 1. 检查别名
+  if (ICON_ALIASES[searchName]) {
+    searchName = ICON_ALIASES[searchName];
+  }
+
+  // 2. 精确匹配
+  if (iconFileMap.has(searchName)) {
+    return iconFileMap.get(searchName)!;
+  }
+
+  // 3. 尝试添加 -dark 后缀
+  const darkName = `${searchName}-dark`;
+  if (iconFileMap.has(darkName)) {
+    return iconFileMap.get(darkName)!;
+  }
+
+  // 4. 尝试添加 -light 后缀
+  const lightName = `${searchName}-light`;
+  if (iconFileMap.has(lightName)) {
+    return iconFileMap.get(lightName)!;
+  }
+
+  // 5. 模糊匹配：查找包含该名称的图标
+  for (const [key, fileName] of iconFileMap.entries()) {
+    if (key.startsWith(searchName)) {
+      return fileName;
+    }
+  }
+
+  return null;
+}
+
 async function readIcon(iconName: string): Promise<string | null> {
     const lowerCaseName = iconName.toLowerCase();
     const now = Date.now();
-  
+
     const cached = cache.get(lowerCaseName);
     if (cached && now - cached.timestamp < CACHE_SECONDS * 1000) {
       return cached.svg;
     }
-  
+
     if (!iconFileMap) {
       await initializeIconFileMap();
     }
-    
-    const actualFileName = iconFileMap!.get(lowerCaseName);
+
+    const actualFileName = findIconFile(iconName);
     if (!actualFileName) {
       console.warn(`Icon not found: ${iconName}`);
       return null;
     }
-  
+
     try {
       const svgPath = path.join(ICONS_DIR, actualFileName);
       const svgContent = await fs.readFile(svgPath, 'utf-8');
-  
+
       cache.set(lowerCaseName, { svg: svgContent, timestamp: now });
-  
+
       return svgContent;
     } catch (error) {
       console.error(`Error reading icon file ${actualFileName}:`, error);
@@ -131,7 +215,7 @@ export async function GET(request: NextRequest) {
     const iconsParam = searchParams.get('i') || '';
     const iconSize = parseInt(searchParams.get('s') || `${DEFAULT_ICON_SIZE}`, 10);
 
-    const iconNames = decodeURIComponent(iconsParam).split(',').map(name => name.trim()).filter(Boolean);
+    const iconNames = iconsParam.split(',').map(name => name.trim()).filter(Boolean);
 
     if (iconNames.length === 0) {
       return new NextResponse('No icons specified. Use the "i" query parameter (e.g., ?i=react,vue).', { status: 400 });
