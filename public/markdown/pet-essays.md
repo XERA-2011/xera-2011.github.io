@@ -1,37 +1,41 @@
 # 应用文
 
-## A postcard describing an interesting museum you visited
-- 一张描述你参观过的有趣博物馆的明信片
+## An email to your headteacher suggesting a new school club
+- 一封给校长的邮件，建议成立一个新的学校社团
 
 **正文**：
 
-Hi Sam,
+Dear Mr. Smith,
 
-I'm having a great time in London! Yesterday, I visited the Natural History Museum, and it was absolutely amazing. The building itself is beautiful, but the best part was the dinosaur exhibition. I saw a huge Tyrannosaurus Rex skeleton that moved and roared! It was a bit scary but so cool.
+I am writing to suggest a new club for our school: a Coding Club. Many students are interested in technology and learning how to code, but there is currently no club for this.
 
-They also had a fascinating section about earthquakes, with a simulator that makes you feel like you're in one. I learned so much and took lots of photos to show you. You would love it here.
+A Coding Club would be a great way for us to develop useful skills for the future. We could learn programming languages like Python and create our own websites and games. It would also help us with problem-solving and teamwork. We could meet once a week after school in the computer room.
 
-See you soon,
-Alex
+I would be very grateful if you would consider my suggestion.
 
-- 嗨，山姆，
-- 我在伦敦玩得很开心！昨天，我参观了自然历史博物馆，那里真是太棒了。建筑本身就很美，但最精彩的部分是恐龙展览。我看到了一个巨大且会动会吼的霸王龙骨架！有点吓人，但非常酷。
-- 他们还有一个关于地震的有趣展区，里面有一个模拟器，让你感觉身临其境。我学到了很多东西，也拍了很多照片给你看。你一定会喜欢这里的。
-- 回头见，
-- 亚历克斯
+Yours sincerely,
+
+Alex Chen
+
+- 尊敬的史密斯先生，
+- 我写信是想为我们学校建议一个新的社团：编程社团。许多学生对技术和学习如何编程很感兴趣，但目前还没有相关的社团。
+- 编程社团将是我们为未来发展实用技能的好方法。我们可以学习像Python这样的编程语言，并创建自己的网站和游戏。这也会帮助我们提升解决问题和团队协作的能力。我们可以每周放学后在电脑室集会一次。
+- 如果您能考虑我的建议，我将不胜感激。
+- 诚挚的，
+- 陈亚历克斯
 
 ---
 
 # 记叙文/短文
 
-## A story about a wish that came true in an unexpected way
-- 一个关于愿望以意想不到的方式实现的故事
+## An article explaining how students can help protect the environment
+- 一篇文章，解释学生如何帮助保护环境
 
 **正文**：
 
-For my birthday, all I wished for was a puppy. I dreamed of a fluffy golden retriever to play with in the park. My parents said we should wait. One rainy afternoon, I heard a small noise from our garden. I went outside and found a tiny, shivering kitten hiding under a bush. It was all alone.
+Our planet needs our help, and students can make a big difference! Protecting the environment doesn't have to be difficult. There are many small things we can do every day that add up to a big impact.
 
-I brought him inside, wrapped him in a warm blanket, and gave him some milk. My parents agreed we could keep him. I named him Shadow. It wasn't the puppy I wished for, but finding Shadow was even better.
+Firstly, we can reduce waste by using reusable water bottles and lunch boxes instead of disposable ones. Secondly, saving energy is important. We should always remember to turn off lights and computers when we leave a room. Finally, we can participate in recycling programs at school and at home. By sorting paper, plastic, and glass, we can help save resources.
 
-- 生日那天，我唯一的愿望就是想要一只小狗。我梦想着能有一只毛茸茸的金毛寻回犬，可以和它在公园里玩耍。但我的父母说我们应该再等等。一个下雨的午后，我听到花园里传来一阵微弱的声音。我走出去，发现一只浑身湿透、瑟瑟发抖的小猫躲在灌木丛下。它孤零零的。
-- 我把它抱进屋，用温暖的毯子裹住它，还喂了它一些牛奶。我的父母同意我们可以收养它。我给他取名叫“影子”。虽然它不是我许愿想要的小狗，但能找到“影子”，我觉得是件更棒的事。
+- 我们的地球需要我们的帮助，而学生们可以发挥重要作用！保护环境不必很困难。我们每天可以做的许多小事，累积起来就会产生巨大的影响。
+- 首先，我们可以通过使用可重复使用的水瓶和午餐盒来代替一次性用品，从而减少浪费。其次，节约能源很重要。我们应该时刻记得在离开房间时关掉电灯和电脑。最后，我们可以参与学校和家里的回收计划。通过将纸张、塑料和玻璃分类，我们可以帮助节约资源。
