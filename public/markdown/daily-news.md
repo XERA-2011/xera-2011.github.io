@@ -1,60 +1,60 @@
 # Global Breaking News TOP10
 
 **Date**: 2025年12月01日
-**Update Time**: 10:23 UTC
+**Update Time**: 22:17 UTC
 **AI Model**: Google Gemini / Google Gemini
 
 ---
 
-### 1. **Massive Flooding in Southeast Asia Claims Over 900 Lives** / **东南亚特大洪水导致超过900人丧生**
+### 1. **Devastating Floods in Asia** / **亚洲毁灭性洪水**
 - **Time**: 2025-12-01
-- **Content**: Severe flooding and landslides have devastated parts of Indonesia, Sri Lanka, and Thailand. The combined death toll has exceeded 900, with Indonesia reporting at least 469 fatalities, Thailand 162, and Sri Lanka 334, as recovery efforts continue. / 印度尼西亚、斯里兰卡和泰国部分地区遭受严重洪水和山体滑坡的重创。随着救援工作的继续，三国死亡总人数已超过900人，其中印度尼西亚报告至少469人死亡，泰国162人，斯里兰卡334人。
-- **Source**: The Hindu
+- **Content**: A series of severe floods in Indonesia, Thailand, and Sri Lanka has led to a death toll exceeding 900, with some reports indicating over 1,000 fatalities and hundreds still missing. / 印度尼西亚、泰国和斯里兰卡发生的一系列严重洪水已导致超过900人死亡，一些报告表明死亡人数超过1000人，另有数百人失踪。
+- **Source**: The Guardian
 
-### 2. **Hong Kong Apartment Fire Death Toll Rises to 146** / **香港公寓火灾死亡人数升至146人**
+### 2. **Deadly Hong Kong Apartment Fire** / **香港公寓致命火灾**
 - **Time**: 2025-12-01
-- **Content**: The number of fatalities from a devastating fire in a Hong Kong apartment complex has tragically climbed to 146. Investigations into the cause of the blaze are ongoing. / 香港一栋公寓大楼发生的毁灭性火灾造成的死亡人数不幸攀升至146人。火灾原因的调查仍在进行中。
-- **Source**: Associated Press
-
-### 3. **Former Bangladesh PM Sheikh Hasina Convicted of Corruption** / **孟加拉国前总理谢赫·哈西娜因腐败被定罪**
-- **Time**: 2025-12-01
-- **Content**: A court in Bangladesh has found former Prime Minister Sheikh Hasina and her niece, British MP Tulip Siddiq, guilty in a land scam case. Hasina was sentenced to five years in prison, while Siddiq received a two-year sentence. / 孟加拉国一家法院裁定，前总理谢赫·哈西娜及其侄女、英国议员图利普·西迪克在一宗土地诈骗案中罪名成立。哈西娜被判处五年监禁，西迪克被判两年。
-- **Source**: Business Standard
-
-### 4. **Gaza Tensions High as Israeli Fire Kills Two Children** / **以色列炮火导致两名儿童死亡，加沙紧张局势加剧**
-- **Time**: 2025-12-01
-- **Content**: The fragile ceasefire in Gaza is being tested after Israeli fire reportedly killed two Palestinian children. Meanwhile, demonstrators continue to demand the return of the last two hostage bodies held by Hamas. / 据报道，以色列炮火导致两名巴勒斯坦儿童死亡，加沙地带脆弱的停火协议正面临考验。与此同时，示威者继续要求哈马斯归还最后两名被扣押人质的遗体。
-- **Source**: CTV News
-
-### 5. **Russian Attacks Kill Three in Ukraine Amid Peace Efforts** / **在和平努力中，俄罗斯袭击导致乌克兰三人死亡**
-- **Time**: 2025-12-01
-- **Content**: As diplomatic efforts to resolve the conflict intensify, fresh Russian drone and missile attacks have killed three people and injured six in Kyiv, causing significant damage. / 随着解决冲突的外交努力加强，俄罗斯新一轮的无人机和导弹袭击已在基辅造成三人死亡，六人受伤，并造成重大损失。
-- **Source**: Al Jazeera
-
-### 6. **Cross-Border Attacks from Afghanistan Kill Five in Tajikistan** / **来自阿富汗的越境袭击在塔吉克斯坦造成五人死亡**
-- **Time**: 2025-12-01
-- **Content**: Tajikistan's government has reported that five people have been killed over the past week in a series of cross-border attacks launched from Afghanistan, heightening regional security concerns. / 塔吉克斯坦政府报告称，过去一周，来自阿富汗的一系列越境袭击已导致五人死亡，加剧了地区安全担忧。
-- **Source**: The Hindu
-
-### 7. **Global Arms Sales Hit Record High, Report Finds** / **报告发现全球武器销售额创历史新高**
-- **Time**: 2025-12-01
-- **Content**: A new report reveals that the revenue of the world's largest arms producers surged by 5.9% last year, reaching a new record level amid escalating global conflicts. / 一份新报告显示，在全球冲突不断升级的背景下，世界最大武器生产商的收入去年飙升5.9%，创下历史新高。
+- **Content**: A major apartment fire in Hong Kong has seen the death toll rise significantly, with reports indicating over 140 to 150 casualties. / 香港一栋主要公寓发生火灾，死亡人数大幅上升，据报伤亡人数超过140至150人。
 - **Source**: AP News
 
-### 8. **Pope Leo XIV Advocates for Two-State Solution on First Papal Trip** / **教皇利奥十四首次出访倡导“两国方案”**
+### 3. **Russia-Ukraine War Continues** / **俄乌战争仍在继续**
 - **Time**: 2025-12-01
-- **Content**: During his inaugural papal visit to Turkey and Lebanon, Pope Leo XIV emphasized the urgent need for a two-state solution to resolve the long-standing Israel-Palestine conflict. / 在其首次对土耳其和黎巴嫩的教皇访问期间，教皇利奥十四强调，迫切需要通过“两国方案”来解决长期的以色列-巴勒斯坦冲突。
-- **Source**: Al Jazeera
+- **Content**: Diplomatic efforts to end the conflict are gaining momentum, alongside ongoing Russian attacks that have resulted in more deaths. Discussions around various peace proposals, including one from Donald Trump, are ongoing. / 结束冲突的外交努力正在获得动力，而俄罗斯的持续袭击导致更多人死亡。有关各种和平提议的讨论正在进行中，其中包括唐纳德·特朗普提出的和平提议。
+- **Source**: Sky News
 
-### 9. **Four Killed, Including Three Children, in California Mass Shooting** / **加州大规模枪击事件导致四人死亡，包括三名儿童**
+### 4. **Zelenskyy Seeks European Support** / **泽连斯基寻求欧洲支持**
 - **Time**: 2025-12-01
-- **Content**: Authorities in California are conducting a manhunt for a suspect after a mass shooting left four people dead, three of whom were children. The motive for the attack is currently unknown. / 加州发生大规模枪击事件，导致四人死亡，其中三名为儿童。当局正在追捕一名嫌疑人，袭击动机目前尚不清楚。
-- **Source**: CBC
-
-### 10. **Israeli PM Netanyahu Seeks Pardon in Corruption Trial** / **以色列总理内塔尼亚胡在腐败审判中寻求赦免**
-- **Time**: 2025-12-01
-- **Content**: Israeli Prime Minister Benjamin Netanyahu is officially seeking a pardon in his long-running corruption trial, a move that has drawn significant controversy and political debate. / 以色列总理本雅明·内塔尼亚胡在其旷日持久的腐败审判中正式寻求赦免，此举引发了巨大争议和政治辩论。
+- **Content**: Ukrainian President Volodymyr Zelenskyy has been in Paris, engaging in productive discussions with leaders like Emmanuel Macron to garner further support and advance peace talks. / 乌克兰总统弗拉基米尔·泽连斯基一直在巴黎，与埃马纽埃尔·马克龙等领导人进行富有成效的讨论，以获得进一步支持并推进和平谈判。
 - **Source**: The Guardian
+
+### 5. **Corruption Convictions in Bangladesh** / **孟加拉国腐败定罪**
+- **Time**: 2025-12-01
+- **Content**: Bangladesh's former leader Sheikh Hasina and British lawmaker Tulip Siddiq have faced legal repercussions, with reports of convictions and sentencing in corruption cases. / 孟加拉国前领导人谢赫·哈西娜和英国议员图利普·西迪克面临法律制裁，有报道称他们在腐败案件中被定罪和判刑。
+- **Source**: AP News
+
+### 6. **Swiss Banks Charged in 'Tuna Bonds' Scandal** / **瑞士银行在“金枪鱼债券”丑闻中被起诉**
+- **Time**: 2025-12-01
+- **Content**: Swiss prosecutors have filed charges against major banks, Credit Suisse and UBS, in connection with the "tuna bonds" scandal. / 瑞士检察官已就“金枪鱼债券”丑闻对瑞士信贷和瑞银等主要银行提起诉讼。
+- **Source**: The Guardian
+
+### 7. **Airbus Addresses Aircraft Issues** / **空客解决飞机问题**
+- **Time**: 2025-12-01
+- **Content**: Airbus has identified and resolved a problem with fuselage panels and a software glitch affecting its A320 family aircraft, with fleets returning to service. / 空客已经确定并解决了一个影响其A320系列飞机的机身面板问题和一个软件故障，机队正在恢复服务。
+- **Source**: Sky News
+
+### 8. **Israeli Settlers Attack Volunteers in West Bank** / **以色列定居者在西岸袭击志愿者**
+- **Time**: 2025-12-01
+- **Content**: Reports indicate that Israeli settlers attacked Italian and Canadian volunteers in a West Bank village. / 报道称，以色列定居者在约旦河西岸一个村庄袭击了意大利和加拿大志愿者。
+- **Source**: The Guardian
+
+### 9. **Mexican Fentanyl Trafficker Killed** / **墨西哥芬太尼贩运者被杀**
+- **Time**: 2025-12-01
+- **Content**: Mexican authorities have killed one of the country's top fentanyl traffickers. / 墨西哥当局击毙了该国最大的芬太尼贩运者之一。
+- **Source**: CBS News
+
+### 10. **"El Chapo's" Son Pleads Guilty** / **“矮子”的儿子认罪**
+- **Time**: 2025-12-01
+- **Content**: The son of notorious drug lord "El Chapo" has pleaded guilty to drug trafficking charges in the United States. / 臭名昭著的大毒枭“矮子”的儿子在美国承认了贩毒指控。
+- **Source**: CTV News
 
 ---
 
