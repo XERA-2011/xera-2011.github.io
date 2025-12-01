@@ -2,7 +2,7 @@ name: Weekly Security Audit
 
 on:
   schedule:
-    - cron: '0 16 * * 0' # 每周日 16:00 UTC (北京时间周一凌晨 00:00)
+    - cron: "0 16 * * 0" # 每周日 16:00 UTC (北京时间周一凌晨 00:00)
   workflow_dispatch: # 允许手动触发
 
 permissions:
@@ -19,7 +19,7 @@ jobs:
       - name: Setup Node.js
         uses: actions/setup-node@v4
         with:
-          node-version: '20'
+          node-version: "20"
 
       - name: Setup pnpm
         uses: pnpm/action-setup@v4
@@ -53,11 +53,11 @@ jobs:
           echo "=== 运行安全审计 ==="
           pnpm audit --json > .audit-reports/pnpm-audit.json 2>&1 || true
           pnpm audit > .audit-reports/pnpm-audit.txt 2>&1 || true
-          
+
           # 获取可修复的漏洞信息
           echo "=== 检查可自动修复的漏洞 ==="
           pnpm audit --fix --dry-run > .audit-reports/pnpm-audit-fix-preview.txt 2>&1 || true
-          
+
           # 生成漏洞摘要
           echo "=== 生成漏洞摘要 ==="
           if [ -f ".audit-reports/pnpm-audit.json" ]; then
@@ -71,7 +71,7 @@ jobs:
       - name: AI Auto-Fix Security Issues
         run: |
           echo "=== AI 自动修复安全问题 ==="
-          
+
           # 检查是否有安全漏洞
           if [ -f ".audit-reports/pnpm-audit.txt" ] && grep -q "vulnerabilities" .audit-reports/pnpm-audit.txt; then
             echo "发现安全漏洞，开始 AI 自动修复流程..."
@@ -247,10 +247,10 @@ jobs:
       - name: Generate AI Security Report
         run: |
           echo "=== 使用 AI 生成安全审计报告 ==="
-          
+
           TIMESTAMP=$(date +%s)
           CURRENT_DATE=$(date '+%Y-%m-%d')
-          
+
           # 准备审计数据
           SECURITY_ISSUES=$(cat .audit-reports/pnpm-audit.txt 2>/dev/null || echo "无安全问题")
           SECURITY_SUMMARY=$(cat .audit-reports/security-summary.txt 2>/dev/null || echo "无安全摘要")
@@ -261,7 +261,7 @@ jobs:
           LOCKFILE_SYNC=$(cat .audit-reports/final-lockfile-sync.txt 2>/dev/null || echo "无锁文件同步日志")
           BUILD_CHECK=$(cat .audit-reports/build-check.txt 2>/dev/null || echo "无构建检查日志")
           INITIAL_LOCKFILE_STATUS=${LOCKFILE_FIXED:-false}
-          
+
           PROMPT="请为我生成一个详细的安全审计报告，格式为 Markdown。报告日期：$CURRENT_DATE
 
           请基于以下信息进行分析：
@@ -334,7 +334,7 @@ jobs:
           MAX_RETRIES=3
           RETRY_COUNT=0
           SUCCESS=false
-          
+
           while [ $RETRY_COUNT -lt $MAX_RETRIES ] && [ "$SUCCESS" = "false" ]; do
             echo "尝试第 $((RETRY_COUNT + 1)) 次生成安全审计报告..."
             
@@ -375,7 +375,7 @@ jobs:
               fi
             fi
           done
-          
+
           # 如果 AI 生成失败，创建基础报告
           if [ "$SUCCESS" = "false" ]; then
             echo "⚠️ AI 生成失败，创建基础安全审计报告..."
@@ -445,7 +445,7 @@ jobs:
           *报告由自动化安全审计系统生成*
           EOF
           fi
-          
+
           rm -f /tmp/audit_output.txt
         env:
           GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
@@ -453,15 +453,15 @@ jobs:
       - name: Check for Critical Issues
         run: |
           echo "=== 检查是否需要创建 GitHub Issue ==="
-          
+
           CRITICAL_ISSUES=false
-          
+
           # 检查高危安全漏洞
           if grep -q "high\|critical" .audit-reports/pnpm-audit.txt 2>/dev/null; then
             CRITICAL_ISSUES=true
             echo "发现高危安全漏洞"
           fi
-          
+
           # 如果自动修复成功，降低 Issue 创建的紧急程度
           if [ "$CRITICAL_ISSUES" = "true" ] && [ "$AUTO_FIX_STATUS" != "complete" ]; then
             echo "NEED_ISSUE=true" >> $GITHUB_ENV
@@ -483,11 +483,15 @@ jobs:
             const auditReport = fs.readFileSync('public/markdown/security-audit-report.md', 'utf8');
             const autoFixStatus = process.env.AUTO_FIX_STATUS || 'unknown';
             const securityFixed = process.env.SECURITY_FIXED === 'true';
-            
+            const buildFailed = process.env.BUILD_FAILED === 'true';
+
             let title = `🚨 安全审计发现问题 - ${new Date().toISOString().split('T')[0]}`;
             let labels = ['security', 'audit', 'automated'];
-            
-            if (autoFixStatus === 'failed') {
+
+            if (buildFailed) {
+              title = `🔴 构建验证失败 - ${new Date().toISOString().split('T')[0]}`;
+              labels.push('build-failed', 'critical');
+            } else if (autoFixStatus === 'failed') {
               title = `❌ 安全问题自动修复失败 - ${new Date().toISOString().split('T')[0]}`;
               labels.push('fix-failed', 'critical');
             } else if (autoFixStatus === 'partial') {
@@ -497,11 +501,18 @@ jobs:
               labels.push('critical');
             }
 
-            await github.rest.issues.create({
-              owner: context.repo.owner,
-              repo: context.repo.repo,
-              title: title,
-              body: `## 自动安全审计${securityFixed ? '和修复' : ''}报告
+            let bodyPrefix = buildFailed ?
+              `## 🔴 构建验证失败
+
+            安全修复后的项目构建失败，依赖更新已回滚。请手动检查并修复构建问题。
+
+            ### 构建状态
+            - **构建结果**: ❌ 失败
+            - **依赖已回滚**: 是
+            - **需要人工介入**: 是
+
+            ` :
+              `## 自动安全审计${securityFixed ? '和修复' : ''}报告
 
             本次安全审计${securityFixed ? '已尝试自动修复安全问题，但' : ''}发现了需要关注的安全漏洞。
 
@@ -509,7 +520,21 @@ jobs:
             - **修复状态**: ${autoFixStatus}
             - **安全问题**: ${securityFixed ? '已尝试修复' : '未修复'}
 
-            ### 审计报告摘要
+            `;
+
+            let suggestedActions = buildFailed ?
+              '1. 本地执行 `pnpm install && pnpm build` 复现问题\n2. 检查构建日志中的错误信息\n3. 根据错误调整依赖版本或修复代码\n4. 确认修复后重新运行工作流' :
+              autoFixStatus === 'failed' ?
+              '1. 检查自动修复失败的原因\n2. 手动执行 `pnpm audit --fix`\n3. 更新依赖版本' :
+              autoFixStatus === 'partial' ?
+              '1. 检查剩余的安全漏洞\n2. 手动更新无法自动修复的依赖\n3. 验证修复效果' :
+              '1. 立即检查安全漏洞\n2. 手动执行 `pnpm audit --fix`\n3. 更新依赖版本';
+
+            await github.rest.issues.create({
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              title: title,
+              body: `${bodyPrefix}### 审计报告摘要
 
             ${auditReport.substring(0, 2000)}...
 
@@ -517,17 +542,12 @@ jobs:
 
             ### 建议行动
 
-            ${autoFixStatus === 'failed' ? 
-              '1. 检查自动修复失败的原因\\n2. 手动执行 \`pnpm audit --fix\`\\n3. 更新依赖版本' :
-              autoFixStatus === 'partial' ?
-              '1. 检查剩余的安全漏洞\\n2. 手动更新无法自动修复的依赖\\n3. 验证修复效果' :
-              '1. 立即检查安全漏洞\\n2. 手动执行 \`pnpm audit --fix\`\\n3. 更新依赖版本'
-            }
+            ${suggestedActions}
 
             ---
             *此 Issue 由自动化安全审计和修复系统创建*`,
-                          labels: labels
-                        });
+              labels: labels
+            });
 
       - name: Check for changes
         id: check_changes
@@ -549,6 +569,77 @@ jobs:
             echo "COMMIT_MESSAGE=docs: update security audit report" >> $GITHUB_ENV
           fi
 
+      - name: Verify Build Before Commit
+        if: env.DEPS_CHANGED == 'true' || env.REPORT_CHANGED == 'true'
+        run: |
+          echo "=== 验证项目构建 ==="
+          echo "在提交代码前确保项目能正常构建..."
+
+          # 创建构建日志目录
+          mkdir -p .audit-reports
+
+          # 执行构建检查
+          if pnpm run build > .audit-reports/pre-commit-build.log 2>&1; then
+            echo "✅ 项目构建成功"
+            echo "BUILD_SUCCESS=true" >> $GITHUB_ENV
+
+            # 显示构建日志摘要
+            echo "构建日志摘要:"
+            tail -n 20 .audit-reports/pre-commit-build.log
+          else
+            echo "❌ 项目构建失败"
+            echo "BUILD_SUCCESS=false" >> $GITHUB_ENV
+
+            # 显示构建错误
+            echo "构建错误详情:"
+            cat .audit-reports/pre-commit-build.log
+
+            # 创建构建失败的报告
+            cat >> public/markdown/security-audit-report.md << EOF
+
+            ---
+
+            ## ⚠️ 构建验证失败
+
+            在提交修复之前的构建验证失败,本次修复不会被提交。
+
+            ### 构建错误日志
+
+            \`\`\`
+            $(cat .audit-reports/pre-commit-build.log)
+            \`\`\`
+
+            ### 建议操作
+
+            1. 检查依赖更新是否引入了不兼容的变更
+            2. 本地执行 \`pnpm install && pnpm build\` 进行调试
+            3. 根据错误信息调整依赖版本或代码
+            4. 考虑回滚部分依赖更新
+
+            EOF
+
+            # 如果构建失败，恢复依赖文件到修复前的状态
+            if [ -f "package.json.backup" ]; then
+              echo "恢复 package.json..."
+              cp package.json.backup package.json
+            fi
+            if [ -f "pnpm-lock.yaml.backup" ]; then
+              echo "恢复 pnpm-lock.yaml..."
+              cp pnpm-lock.yaml.backup pnpm-lock.yaml
+            fi
+
+            # 更新环境变量，防止提交失败的修复，但允许提交更新后的报告
+            echo "DEPS_CHANGED=false" >> $GITHUB_ENV
+            echo "NEED_ISSUE=true" >> $GITHUB_ENV
+
+            # 标记构建失败，但不立即退出，让报告能被提交和 Issue 能被创建
+            echo "BUILD_FAILED=true" >> $GITHUB_ENV
+          fi
+
+          # 清理构建产物,避免提交到 git
+          echo "清��构建产物..."
+          rm -rf dist/ build/ .next/ out/ 2>/dev/null || true
+
       - name: Commit Security Reports and Fixes
         if: env.DEPS_CHANGED == 'true' || env.REPORT_CHANGED == 'true'
         uses: stefanzweifel/git-auto-commit-action@v5
@@ -568,5 +659,13 @@ jobs:
           echo ""
           echo "📊 修复状态: ${AUTO_FIX_STATUS:-unknown}"
           echo "🔒 安全修复: ${SECURITY_FIXED:-false}"
+          echo "🏗️ 构建状态: ${BUILD_SUCCESS:-unknown}"
           echo ""
           echo "🔍 查看详细报告: public/markdown/security-audit-report.md"
+
+      - name: Fail Workflow if Build Failed
+        if: env.BUILD_FAILED == 'true'
+        run: |
+          echo "❌ 工作流失败: 构建验证未通过"
+          echo "依赖更新已回滚，请查看 Issue 了解详情"
+          exit 1
