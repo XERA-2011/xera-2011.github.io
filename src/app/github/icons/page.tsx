@@ -29,6 +29,8 @@ export default function IconsPage() {
   const [copiedIndex, setCopiedIndex] = useState<number | null>(null);
   const [selectedIcons, setSelectedIcons] = useState<string[]>(['react', 'vue', 'next', 'nuxt', 'vite', 'vscode', 'idea', 'git', 'python', 'docker']);
   const [showAllIcons, setShowAllIcons] = useState<boolean>(true);
+  const [dragOverIndex, setDragOverIndex] = useState<number | null>(null);
+  const [draggingIndex, setDraggingIndex] = useState<number | null>(null);
 
   const handleCopy = async (text: string, index: number) => {
     try {
@@ -95,6 +97,7 @@ export default function IconsPage() {
                     <p className="text-sm text-muted-foreground">
                       共 {AVAILABLE_ICONS.length} 个可用图标，已选择 {selectedIcons.length} 个
                     </p>
+
                     <Button
                       variant="ghost"
                       size="sm"
@@ -103,6 +106,78 @@ export default function IconsPage() {
                       {showAllIcons ? '收起' : '展开全部图标'}
                     </Button>
                   </div>
+
+                  {/* 已选择的图标 */}
+                  {selectedIcons.length > 0 && (
+                    <div className="border border-border rounded-lg p-4 bg-accent/30">
+                      <div className="flex items-center justify-between mb-3">
+                        <h4 className="text-sm font-semibold text-foreground">已选择的图标（可拖动排序）</h4>
+                        <Button
+                          variant="outline"
+                          size="sm"
+                          onClick={() => setSelectedIcons([])}
+                        >
+                          清空全部
+                        </Button>
+                      </div>
+                      <div className="flex flex-wrap gap-2">
+                        {selectedIcons.map((icon, index) => (
+                          <div
+                            key={icon}
+                            draggable
+                            onDragStart={(e) => {
+                              e.dataTransfer.effectAllowed = 'move';
+                              e.dataTransfer.setData('text/plain', index.toString());
+                              setDraggingIndex(index);
+                            }}
+                            onDragEnd={() => {
+                              setDraggingIndex(null);
+                              setDragOverIndex(null);
+                            }}
+                            onDragOver={(e) => {
+                              e.preventDefault();
+                              e.dataTransfer.dropEffect = 'move';
+                              setDragOverIndex(index);
+                            }}
+                            onDragLeave={() => {
+                              setDragOverIndex(null);
+                            }}
+                            onDrop={(e) => {
+                              e.preventDefault();
+                              const fromIndex = parseInt(e.dataTransfer.getData('text/plain'));
+                              const toIndex = index;
+                              if (fromIndex !== toIndex) {
+                                const newIcons = [...selectedIcons];
+                                const [movedIcon] = newIcons.splice(fromIndex, 1);
+                                newIcons.splice(toIndex, 0, movedIcon);
+                                setSelectedIcons(newIcons);
+                              }
+                              setDragOverIndex(null);
+                              setDraggingIndex(null);
+                            }}
+                            className={`group relative px-3 py-1.5 text-xs rounded-md border cursor-move transition-all ${draggingIndex === index
+                                ? 'opacity-50 scale-95 border-dashed'
+                                : dragOverIndex === index
+                                  ? 'border-primary bg-primary/30 text-primary scale-105 shadow-lg'
+                                  : 'border-primary bg-primary/10 text-primary hover:bg-primary/20'
+                              }`}
+                          >
+                            <span className="select-none">{icon}</span>
+                            <button
+                              onClick={(e) => {
+                                e.stopPropagation();
+                                toggleIcon(icon);
+                              }}
+                              className="ml-2 opacity-60 hover:opacity-100 transition-opacity"
+                              aria-label={`删除 ${icon}`}
+                            >
+                              ×
+                            </button>
+                          </div>
+                        ))}
+                      </div>
+                    </div>
+                  )}
 
                   {showAllIcons && (
                     <div className="border border-border rounded-lg p-4 max-h-96 overflow-y-auto">
@@ -147,7 +222,7 @@ export default function IconsPage() {
                     unoptimized
                   />
                 ) : (
-                  <div className="text-muted-foreground">请点击下方按钮选择图标</div>
+                  <div className="text-muted-foreground">请选择图标</div>
                 )}
               </div>
             </div>
