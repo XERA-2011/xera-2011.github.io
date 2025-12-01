@@ -36,12 +36,12 @@ export default function IconsPage() {
     setPreviewIcons(icons);
   }, [selectedIcons]);
 
-  const currentPreview = `/api/icons?i=${encodeURIComponent(selectedIcons)}`;
+  const currentPreview = `/api/github/icons?i=${encodeURIComponent(selectedIcons)}`;
 
   const examples = [
     {
       title: '技术栈图标',
-      code: `<img alt="Icons" src="${baseUrl}/api/icons?i=${encodeURIComponent(selectedIcons)}" />`,
+      code: `<img alt="Icons" src="${baseUrl}/api/github/icons?i=${encodeURIComponent(selectedIcons)}" />`,
       preview: currentPreview
     }
   ];
@@ -99,6 +99,7 @@ export default function IconsPage() {
                     className="w-full max-w-full"
                     width={previewIcons.length * 32}
                     height={32}
+                    priority
                     unoptimized
                   />
                 ) : (

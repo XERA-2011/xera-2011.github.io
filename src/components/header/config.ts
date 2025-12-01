@@ -17,6 +17,10 @@ export const links: Link[] = [
     id: 'hero',
     offset: 0.3,
   },
+    {
+    title: 'Github',
+    href: '/github',
+  },
   {
     title: 'Games',
     href: '/games',
@@ -28,10 +32,6 @@ export const links: Link[] = [
   {
     title: 'Generate',
     href: '/generate',
-  },
-  {
-    title: 'Github',
-    href: '/github',
   },
   {
     title: 'Admin',
