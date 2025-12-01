@@ -1,60 +1,60 @@
 # Global Breaking News TOP10
 
-**Date**: 2025年11月30日
-**Update Time**: 10:19 UTC
+**Date**: 2025年12月01日
+**Update Time**: 10:23 UTC
 **AI Model**: Google Gemini / Google Gemini
 
 ---
 
-### 1. **Gaza Death Toll Surpasses 70,000 Amid Continued Israeli Attacks** / **加沙死亡人数超过7万，以色列持续发动袭击**
-- **Time**: 2025-11-30
-- **Content**: The death toll in Gaza has exceeded 70,000 as Israeli attacks continue despite a truce. Reports indicate that an Israeli drone strike killed two Palestinian children in southern Gaza, and video footage has emerged showing Israeli forces shooting Palestinians moments after they surrendered. / 尽管有停火协议，加沙地区的死亡人数已超过7万人。据报道，以色列无人机在加沙南部发动袭击，导致两名巴勒斯坦儿童死亡。另有视频显示，以色列军队在巴勒斯坦人投降后随即开枪射杀。
-- **Source**: Al Jazeera
+### 1. **Massive Flooding in Southeast Asia Claims Over 900 Lives** / **东南亚特大洪水导致超过900人丧生**
+- **Time**: 2025-12-01
+- **Content**: Severe flooding and landslides have devastated parts of Indonesia, Sri Lanka, and Thailand. The combined death toll has exceeded 900, with Indonesia reporting at least 469 fatalities, Thailand 162, and Sri Lanka 334, as recovery efforts continue. / 印度尼西亚、斯里兰卡和泰国部分地区遭受严重洪水和山体滑坡的重创。随着救援工作的继续，三国死亡总人数已超过900人，其中印度尼西亚报告至少469人死亡，泰国162人，斯里兰卡334人。
+- **Source**: The Hindu
 
-### 2. **Russian Attacks Kill Six in Ukraine as Diplomatic Talks Commence** / **俄军袭击导致乌克兰六人死亡，外交会谈即将展开**
-- **Time**: 2025-11-30
-- **Content**: Russian attacks have resulted in the deaths of six people in Ukraine. Meanwhile, Ukrainian envoys are traveling to the United States for talks. In a related development, the chief of staff to Ukrainian President Zelenskyy has resigned following an anti-corruption investigation. / 俄罗斯对乌克兰的袭击已造成六人死亡。与此同时，乌克兰特使正前往美国进行会谈。此外，乌克兰总统泽连斯基的幕僚长因反腐败调查而辞职。
-- **Source**: Reuters
-
-### 3. **Sri Lanka Floods and Mudslides Death Toll Nears 200** / **斯里兰卡洪水和泥石流造成的死亡人数接近200**
-- **Time**: 2025-11-30
-- **Content**: The death toll from devastating floods and mudslides in Sri Lanka is approaching 200, with entire neighborhoods buried under mud. In Southeast Asia, similar disasters have claimed at least 500 lives, and residents in Sumatra are resorting to looting for food and water. / 斯里兰卡毁灭性的洪水和泥石流已导致近200人死亡，整个社区被泥土掩埋。在东南亚，类似的灾难已造成至少500人丧生，苏门答腊岛的居民因缺乏食物和水而开始抢劫。
-- **Source**: The Guardian
-
-### 4. **Hong Kong Mourns Victims of Deadly Apartment Fires** / **香港悼念致命公寓火灾遇难者**
-- **Time**: 2025-11-30
-- **Content**: Hong Kong is in a state of mourning for the victims of deadly apartment fires. Investigations into the cause of the fires are ongoing, and authorities have made more arrests in connection with the incident. / 香港正为在致命公寓火灾中丧生的人们致哀。火灾原因的调查仍在进行中，当局已就此事件逮捕了更多嫌疑人。
+### 2. **Hong Kong Apartment Fire Death Toll Rises to 146** / **香港公寓火灾死亡人数升至146人**
+- **Time**: 2025-12-01
+- **Content**: The number of fatalities from a devastating fire in a Hong Kong apartment complex has tragically climbed to 146. Investigations into the cause of the blaze are ongoing. / 香港一栋公寓大楼发生的毁灭性火灾造成的死亡人数不幸攀升至146人。火灾原因的调查仍在进行中。
 - **Source**: Associated Press
 
-### 5. **Philippine President Faces Corruption Allegations, Sparking Protests** / **菲律宾总统面临腐败指控，引发抗议**
-- **Time**: 2025-11-30
-- **Content**: Allegations that Philippine President Ferdinand Marcos Jr. accepted kickbacks from infrastructure projects have sparked outrage across the country. Thousands of protesters have taken to the streets, demanding his resignation over the fraud scandal. / 菲律宾总统费迪南德·马科斯（Ferdinand Marcos Jr.）被指控从基础设施项目中收受回扣，这在全国范围内引发了愤怒。数千名抗议者走上街头，要求他因这起欺诈丑闻辞职。
-- **Source**: Reuters
+### 3. **Former Bangladesh PM Sheikh Hasina Convicted of Corruption** / **孟加拉国前总理谢赫·哈西娜因腐败被定罪**
+- **Time**: 2025-12-01
+- **Content**: A court in Bangladesh has found former Prime Minister Sheikh Hasina and her niece, British MP Tulip Siddiq, guilty in a land scam case. Hasina was sentenced to five years in prison, while Siddiq received a two-year sentence. / 孟加拉国一家法院裁定，前总理谢赫·哈西娜及其侄女、英国议员图利普·西迪克在一宗土地诈骗案中罪名成立。哈西娜被判处五年监禁，西迪克被判两年。
+- **Source**: Business Standard
 
-### 6. **Four Killed in Shooting at Child's Birthday Party in California** / **加州儿童生日派对发生枪击案，四人死亡**
-- **Time**: 2025-11-30
-- **Content**: A shooting at a child's birthday party in California has left four people dead and ten others wounded. The incident has once again brought the issue of gun violence in the United States to the forefront of public discussion. / 美国加利福尼亚州一个儿童生日派对上发生枪击事件，造成四人死亡，十人受伤。这起事件再次将美国的枪支暴力问题推向了公众讨论的风口浪尖。
-- **Source**: CBS News
+### 4. **Gaza Tensions High as Israeli Fire Kills Two Children** / **以色列炮火导致两名儿童死亡，加沙紧张局势加剧**
+- **Time**: 2025-12-01
+- **Content**: The fragile ceasefire in Gaza is being tested after Israeli fire reportedly killed two Palestinian children. Meanwhile, demonstrators continue to demand the return of the last two hostage bodies held by Hamas. / 据报道，以色列炮火导致两名巴勒斯坦儿童死亡，加沙地带脆弱的停火协议正面临考验。与此同时，示威者继续要求哈马斯归还最后两名被扣押人质的遗体。
+- **Source**: CTV News
 
-### 7. **Venezuela Denounces Trump's Airspace Remarks as "Colonialist Threat"** / **委内瑞拉谴责特朗普关于领空的言论为“殖民主义威胁”**
-- **Time**: 2025-11-30
-- **Content**: The Venezuelan government has strongly condemned former U.S. President Donald Trump's remarks about closing its airspace, calling it a "colonialist threat." The statement came after the United States ordered its airspace closed to Venezuelan aircraft. / 委内瑞拉政府强烈谴责美国前总统唐纳德·特朗普关于关闭其领空的言论，称之为“殖民主义威胁”。此前，美国下令禁止委内瑞拉飞机进入其领空。
+### 5. **Russian Attacks Kill Three in Ukraine Amid Peace Efforts** / **在和平努力中，俄罗斯袭击导致乌克兰三人死亡**
+- **Time**: 2025-12-01
+- **Content**: As diplomatic efforts to resolve the conflict intensify, fresh Russian drone and missile attacks have killed three people and injured six in Kyiv, causing significant damage. / 随着解决冲突的外交努力加强，俄罗斯新一轮的无人机和导弹袭击已在基辅造成三人死亡，六人受伤，并造成重大损失。
 - **Source**: Al Jazeera
 
-### 8. **Ukrainian Naval Drones Strike Russian Oil Tankers in Black Sea** / **乌克兰海军无人机在黑海袭击俄罗斯油轮**
-- **Time**: 2025-11-30
-- **Content**: Ukrainian naval drones have reportedly struck two Russian oil tankers in the Black Sea. This attack marks a significant escalation in the naval conflict between the two countries and could have major implications for global oil markets. / 据报道，乌克兰海军无人机在黑海袭击了两艘俄罗斯油轮。此次袭击标志着两国海上冲突的重大升级，并可能对全球石油市场产生重大影响。
+### 6. **Cross-Border Attacks from Afghanistan Kill Five in Tajikistan** / **来自阿富汗的越境袭击在塔吉克斯坦造成五人死亡**
+- **Time**: 2025-12-01
+- **Content**: Tajikistan's government has reported that five people have been killed over the past week in a series of cross-border attacks launched from Afghanistan, heightening regional security concerns. / 塔吉克斯坦政府报告称，过去一周，来自阿富汗的一系列越境袭击已导致五人死亡，加剧了地区安全担忧。
+- **Source**: The Hindu
+
+### 7. **Global Arms Sales Hit Record High, Report Finds** / **报告发现全球武器销售额创历史新高**
+- **Time**: 2025-12-01
+- **Content**: A new report reveals that the revenue of the world's largest arms producers surged by 5.9% last year, reaching a new record level amid escalating global conflicts. / 一份新报告显示，在全球冲突不断升级的背景下，世界最大武器生产商的收入去年飙升5.9%，创下历史新高。
+- **Source**: AP News
+
+### 8. **Pope Leo XIV Advocates for Two-State Solution on First Papal Trip** / **教皇利奥十四首次出访倡导“两国方案”**
+- **Time**: 2025-12-01
+- **Content**: During his inaugural papal visit to Turkey and Lebanon, Pope Leo XIV emphasized the urgent need for a two-state solution to resolve the long-standing Israel-Palestine conflict. / 在其首次对土耳其和黎巴嫩的教皇访问期间，教皇利奥十四强调，迫切需要通过“两国方案”来解决长期的以色列-巴勒斯坦冲突。
+- **Source**: Al Jazeera
+
+### 9. **Four Killed, Including Three Children, in California Mass Shooting** / **加州大规模枪击事件导致四人死亡，包括三名儿童**
+- **Time**: 2025-12-01
+- **Content**: Authorities in California are conducting a manhunt for a suspect after a mass shooting left four people dead, three of whom were children. The motive for the attack is currently unknown. / 加州发生大规模枪击事件，导致四人死亡，其中三名为儿童。当局正在追捕一名嫌疑人，袭击动机目前尚不清楚。
+- **Source**: CBC
+
+### 10. **Israeli PM Netanyahu Seeks Pardon in Corruption Trial** / **以色列总理内塔尼亚胡在腐败审判中寻求赦免**
+- **Time**: 2025-12-01
+- **Content**: Israeli Prime Minister Benjamin Netanyahu is officially seeking a pardon in his long-running corruption trial, a move that has drawn significant controversy and political debate. / 以色列总理本雅明·内塔尼亚胡在其旷日持久的腐败审判中正式寻求赦免，此举引发了巨大争议和政治辩论。
 - **Source**: The Guardian
-
-### 9. **British Playwright Tom Stoppard Dies at 88** / **英国剧作家汤姆·斯托帕德去世，享年88岁**
-- **Time**: 2025-11-30
-- **Content**: Tom Stoppard, the acclaimed British playwright known for works such as "Shakespeare in Love" and "Rosencrantz and Guildenstern Are Dead," has passed away at the age of 88. He was a major figure in contemporary theater. / 英国著名剧作家汤姆·斯托帕德（Tom Stoppard）去世，享年88岁。他的代表作包括《莎翁情史》和《罗森格兰兹与吉尔登斯吞已死》。他是当代戏剧界的领军人物。
-- **Source**: BBC News
-
-### 10. **Kyrgyzstan Holds Snap Parliamentary Election with No Opposition** / **吉尔吉斯斯坦在没有反对党的情况下举行临时议会选举**
-- **Time**: 2025-11-30
-- **Content**: Kyrgyzstan is holding a snap parliamentary election in which no opposition parties are participating. This has raised concerns about the state of democracy in the Central Asian nation. / 吉尔吉斯斯坦正在举行一场没有反对党参加的临时议会选举。这引发了外界对这个中亚国家民主状况的担忧。
-- **Source**: Associated Press
 
 ---
 
