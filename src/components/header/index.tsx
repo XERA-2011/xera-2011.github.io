@@ -9,7 +9,6 @@ import Breadcrumb from "./breadcrumb";
 import { useApp } from "@/contexts/AppContext";
 import { ReactNode } from "react";
 import { ThemeToggle } from "@/components/theme-toggle";
-import { Button } from '@/components/ui/button';
 
 interface HeaderProps {
   loader?: boolean;
@@ -50,7 +49,7 @@ const Header = ({ loader, userAuth }: HeaderProps) => {
             <ThemeToggle />
           </div>
 
-          <Button
+          <div
             onClick={(e) => {
               e.stopPropagation();
               setIsActive(!isActive);
@@ -66,7 +65,7 @@ const Header = ({ loader, userAuth }: HeaderProps) => {
               className={`${styles.burger} ${isActive ? styles.burgerActive : ""
                 }`}
             ></div>
-          </Button>
+          </div>
         </div>
       </div>
 
