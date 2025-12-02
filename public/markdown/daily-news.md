@@ -1,60 +1,62 @@
+(node:2382) MaxListenersExceededWarning: Possible EventTarget memory leak detected. 11 abort listeners added to [AbortSignal]. MaxListeners is 10. Use events.setMaxListeners() to increase limit
+(Use `node --trace-warnings ...` to show where the warning was created)
 # Global Breaking News TOP10
 
-**Date**: 2025年12月01日
-**Update Time**: 22:17 UTC
+**Date**: 2025年12月02日
+**Update Time**: 10:22 UTC
 **AI Model**: Google Gemini / Google Gemini
 
 ---
 
-### 1. **Devastating Floods in Asia** / **亚洲毁灭性洪水**
-- **Time**: 2025-12-01
-- **Content**: A series of severe floods in Indonesia, Thailand, and Sri Lanka has led to a death toll exceeding 900, with some reports indicating over 1,000 fatalities and hundreds still missing. / 印度尼西亚、泰国和斯里兰卡发生的一系列严重洪水已导致超过900人死亡，一些报告表明死亡人数超过1000人，另有数百人失踪。
+### 1. **Asia Floods Death Toll Surpasses 1,100** / **亚洲洪水死亡人数超过1100人**
+- **Time**: 2025-12-02
+- **Content**: The death toll from devastating floods across Indonesia, Sri Lanka, Thailand, and Malaysia has surpassed 1,100, with hundreds still missing. Rescue efforts are intensifying as these nations deploy their militaries to assist. / 印度尼西亚、斯里兰卡、泰国和马来西亚等国的特大洪水已导致超过1100人死亡，另有数百人失踪。随着各国军队的部署，救援工作正在加紧进行。
+- **Source**: Al Jazeera
+
+### 2. **Hong Kong Apartment Fire Death Toll Rises to 146** / **香港公寓火灾死亡人数升至146人**
+- **Time**: 2025-12-02
+- **Content**: A fire in a Hong Kong apartment complex has resulted in a death toll of 146, with over 100 people still unaccounted for. Unsafe netting is believed to have contributed to the deadly blaze. / 香港一栋公寓大楼发生火灾，已造成146人死亡，仍有100多人下落不明。据信，不安全的网状结构导致了这场致命火灾。
+- **Source**: Associated Press
+
+### 3. **Tensions Escalate Between Venezuela and US** / **委内瑞拉与美国紧张关系升级**
+- **Time**: 2025-12-02
+- **Content**: Tensions are escalating between Venezuela and the United States after President Trump reportedly issued an ultimatum to Venezuelan leader Maduro to relinquish power. The US has also discussed Venezuela with advisors amid concerns over a military build-up. / 据报道，美国总统特朗普向委内瑞拉领导人马杜罗发出放弃权力的最后通牒后，两国紧张局势不断升级。与此同时，美国也因担心委内瑞拉的军事集结而与顾问进行了讨论。
 - **Source**: The Guardian
 
-### 2. **Deadly Hong Kong Apartment Fire** / **香港公寓致命火灾**
-- **Time**: 2025-12-01
-- **Content**: A major apartment fire in Hong Kong has seen the death toll rise significantly, with reports indicating over 140 to 150 casualties. / 香港一栋主要公寓发生火灾，死亡人数大幅上升，据报伤亡人数超过140至150人。
-- **Source**: AP News
+### 4. **Russia Claims to Have Captured Pokrovsk in Eastern Ukraine** / **俄罗斯声称占领乌克兰东部城市波克罗夫斯克**
+- **Time**: 2025-12-02
+- **Content**: Russia claims to have captured Pokrovsk, a key logistics hub in eastern Ukraine. The city is a strategic prize and its capture would be a significant blow to Ukraine's war effort. / 俄罗斯声称已占领乌克兰东部的重要后勤枢纽波克罗夫斯克。这座城市是一个战略要地，其陷落将对乌克兰的战局造成重大打击。
+- **Source**: Reuters
 
-### 3. **Russia-Ukraine War Continues** / **俄乌战争仍在继续**
-- **Time**: 2025-12-01
-- **Content**: Diplomatic efforts to end the conflict are gaining momentum, alongside ongoing Russian attacks that have resulted in more deaths. Discussions around various peace proposals, including one from Donald Trump, are ongoing. / 结束冲突的外交努力正在获得动力，而俄罗斯的持续袭击导致更多人死亡。有关各种和平提议的讨论正在进行中，其中包括唐纳德·特朗普提出的和平提议。
+### 5. **Canada Joins EU Defense Initiative** / **加拿大加入欧盟防务倡议**
+- **Time**: 2025-12-02
+- **Content**: Canada has joined the Security Action for Europe (SAFE) initiative, granting Canadian defense companies expanded access to the European market. The move is seen as a response to growing concerns about security in Europe. / 加拿大已加入“欧洲安全行动”（SAFE）倡议，此举将使加拿大国防公司扩大进入欧洲市场的渠道。此举被视为对欧洲日益增长的安全担忧的回应。
+- **Source**: Global News
+
+### 6. **Mexican Authorities Kill Top Fentanyl Trafficker** / **墨西哥当局击毙头号芬太尼毒贩**
+- **Time**: 2025-12-02
+- **Content**: Mexican authorities have killed one of the country's top fentanyl traffickers in a shootout. The death is a major victory for Mexican and U.S. law enforcement in the fight against the deadly opioid. / 墨西哥当局在一次枪战中击毙了该国一名顶级的芬太尼贩运者。此次行动是墨西哥和美国执法部门打击致命阿片类药物斗争中的一次重大胜利。
+- **Source**: The Guardian
+
+### 7. **New Zealand Man Charged with Theft of Fabergé Pendant** / **新西兰男子被控盗窃法贝热彩蛋**
+- **Time**: 2025-12-02
+- **Content**: A man in New Zealand has been charged with theft after allegedly swallowing a Fabergé pendant in a jewelry store. The rare pendant is valued at over $100,000. / 新西兰一名男子在一家珠宝店吞下一枚法贝热彩蛋后，被控盗窃。这枚罕见的彩蛋价值超过10万美元。
+- **Source**: The Guardian
+
+### 8. **India Mandates Government Cyber Safety App on All Smartphones** / **印度强制所有智能手机安装政府网络安全应用程序**
+- **Time**: 2025-12-02
+- **Content**: India has mandated the pre-installation of a government cyber safety app on all smartphones. The move is aimed at curbing cybercrime and protecting citizens from online fraud. / 印度已强制要求所有智能手机预装一款政府网络安全应用程序。此举旨在遏制网络犯罪，保护公民免受网络欺诈。
+- **Source**: The Times of India
+
+### 9. **Iranian Director Jafar Panahi Sentenced to a Year in Prison** / **伊朗导演贾法·帕纳西被判处一年监禁**
+- **Time**: 2025-12-02
+- **Content**: Award-winning Iranian director Jafar Panahi has been sentenced to a year in prison for "propaganda activities." The sentence has been widely condemned by international human rights organizations. / 屡获殊荣的伊朗导演贾法·帕纳西因“宣传活动”被判处一年监禁。该判决受到国际人权组织的广泛谴责。
+- **Source**: The Guardian
+
+### 10. **El Chapo's Son Pleads Guilty in US Drug Case** / **“矮子”古兹曼之子在美国毒品案中认罪**
+- **Time**: 2025-12-02
+- **Content**: The son of notorious drug lord "El Chapo" has pleaded guilty in a US drug case, reaching a deal with prosecutors. He is expected to face a lengthy prison sentence. / 臭名昭著的大毒枭“矮子”古兹曼的儿子在美国的一起毒品案件中认罪，并与检察官达成了协议。他预计将面临长期监禁。
 - **Source**: Sky News
-
-### 4. **Zelenskyy Seeks European Support** / **泽连斯基寻求欧洲支持**
-- **Time**: 2025-12-01
-- **Content**: Ukrainian President Volodymyr Zelenskyy has been in Paris, engaging in productive discussions with leaders like Emmanuel Macron to garner further support and advance peace talks. / 乌克兰总统弗拉基米尔·泽连斯基一直在巴黎，与埃马纽埃尔·马克龙等领导人进行富有成效的讨论，以获得进一步支持并推进和平谈判。
-- **Source**: The Guardian
-
-### 5. **Corruption Convictions in Bangladesh** / **孟加拉国腐败定罪**
-- **Time**: 2025-12-01
-- **Content**: Bangladesh's former leader Sheikh Hasina and British lawmaker Tulip Siddiq have faced legal repercussions, with reports of convictions and sentencing in corruption cases. / 孟加拉国前领导人谢赫·哈西娜和英国议员图利普·西迪克面临法律制裁，有报道称他们在腐败案件中被定罪和判刑。
-- **Source**: AP News
-
-### 6. **Swiss Banks Charged in 'Tuna Bonds' Scandal** / **瑞士银行在“金枪鱼债券”丑闻中被起诉**
-- **Time**: 2025-12-01
-- **Content**: Swiss prosecutors have filed charges against major banks, Credit Suisse and UBS, in connection with the "tuna bonds" scandal. / 瑞士检察官已就“金枪鱼债券”丑闻对瑞士信贷和瑞银等主要银行提起诉讼。
-- **Source**: The Guardian
-
-### 7. **Airbus Addresses Aircraft Issues** / **空客解决飞机问题**
-- **Time**: 2025-12-01
-- **Content**: Airbus has identified and resolved a problem with fuselage panels and a software glitch affecting its A320 family aircraft, with fleets returning to service. / 空客已经确定并解决了一个影响其A320系列飞机的机身面板问题和一个软件故障，机队正在恢复服务。
-- **Source**: Sky News
-
-### 8. **Israeli Settlers Attack Volunteers in West Bank** / **以色列定居者在西岸袭击志愿者**
-- **Time**: 2025-12-01
-- **Content**: Reports indicate that Israeli settlers attacked Italian and Canadian volunteers in a West Bank village. / 报道称，以色列定居者在约旦河西岸一个村庄袭击了意大利和加拿大志愿者。
-- **Source**: The Guardian
-
-### 9. **Mexican Fentanyl Trafficker Killed** / **墨西哥芬太尼贩运者被杀**
-- **Time**: 2025-12-01
-- **Content**: Mexican authorities have killed one of the country's top fentanyl traffickers. / 墨西哥当局击毙了该国最大的芬太尼贩运者之一。
-- **Source**: CBS News
-
-### 10. **"El Chapo's" Son Pleads Guilty** / **“矮子”的儿子认罪**
-- **Time**: 2025-12-01
-- **Content**: The son of notorious drug lord "El Chapo" has pleaded guilty to drug trafficking charges in the United States. / 臭名昭著的大毒枭“矮子”的儿子在美国承认了贩毒指控。
-- **Source**: CTV News
 
 ---
 
