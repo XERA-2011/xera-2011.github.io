@@ -1,0 +1,26 @@
+{
+  "name": "XERA-2011 - Pocket Universe",
+  "short_name": "XERA-2011",
+  "description": "Pocket Universe - 探索工具、游戏和创意项目的个人空间",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#0a0a0a",
+  "theme_color": "#0a0a0a",
+  "orientation": "portrait-primary",
+  "icons": [
+    {
+      "src": "/favicon.ico",
+      "sizes": "48x48",
+      "type": "image/x-icon"
+    }
+  ],
+  "categories": [
+    "utilities",
+    "entertainment",
+    "productivity"
+  ],
+  "lang": "zh-CN",
+  "dir": "ltr",
+  "scope": "/",
+  "prefer_related_applications": false
+}

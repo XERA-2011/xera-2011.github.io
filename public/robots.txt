@@ -1,0 +1,11 @@
+# 允许所有搜索引擎爬虫访问
+User-agent: *
+Allow: /
+
+# 禁止访问敏感或私有路径
+Disallow: /api/
+Disallow: /admin/
+Disallow: /_next/
+
+# 站点地图位置
+Sitemap: https://xera-2011.vercel.app/sitemap.xml
