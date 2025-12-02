@@ -1,41 +1,46 @@
 # 应用文
 
-## An email to your headteacher suggesting a new school club
-- 一封给校长的邮件，建议成立一个新的学校社团
+## A postcard from your exchange program abroad
+- 一张来自你国外交换项目的明信片
 
 **正文**：
 
-Dear Mr. Smith,
+Hi Alex,
 
-I am writing to suggest a new club for our school: a Coding Club. Many students are interested in technology and learning how to code, but there is currently no club for this.
+I'm having an amazing time here in London! The city is fantastic, and my host family is incredibly kind. I've already visited the British Museum and saw the Tower Bridge, which was absolutely breathtaking. My English is improving a lot because I have to speak it all the time.
 
-A Coding Club would be a great way for us to develop useful skills for the future. We could learn programming languages like Python and create our own websites and games. It would also help us with problem-solving and teamwork. We could meet once a week after school in the computer room.
+Last weekend, my host family took me to a traditional market, and I tried some delicious fish and chips. School is interesting too, and I've made a few new friends from different countries.
 
-I would be very grateful if you would consider my suggestion.
+Hope you're doing well. See you in a month!
 
-Yours sincerely,
+Best wishes,
+Chris
 
-Alex Chen
-
-- 尊敬的史密斯先生，
-- 我写信是想为我们学校建议一个新的社团：编程社团。许多学生对技术和学习如何编程很感兴趣，但目前还没有相关的社团。
-- 编程社团将是我们为未来发展实用技能的好方法。我们可以学习像Python这样的编程语言，并创建自己的网站和游戏。这也会帮助我们提升解决问题和团队协作的能力。我们可以每周放学后在电脑室集会一次。
-- 如果您能考虑我的建议，我将不胜感激。
-- 诚挚的，
-- 陈亚历克斯
+- 嗨，亚历克斯，
+- 我在伦敦这里过得非常愉快！这座城市太棒了，我的寄宿家庭也极其友善。我已经参观了大英博物馆，还看到了伦敦塔桥，那景色真是令人叹为观止。我的英语进步了很多，因为我必须一直说英语。
+- 上周末，我的寄宿家庭带我去了一个传统市场，我品尝了美味的炸鱼薯条。学校也很有趣，我交了几个来自不同国家的新朋友。
+- 希望你一切都好。一个月后见！
+- 最好的祝愿，
+- 克里斯
 
 ---
 
 # 记叙文/短文
 
 ## An article explaining how students can help protect the environment
-- 一篇文章，解释学生如何帮助保护环境
+- 一篇解释学生如何帮助保护环境的文章
 
 **正文**：
 
-Our planet needs our help, and students can make a big difference! Protecting the environment doesn't have to be difficult. There are many small things we can do every day that add up to a big impact.
+**Our Planet, Our Future**
 
-Firstly, we can reduce waste by using reusable water bottles and lunch boxes instead of disposable ones. Secondly, saving energy is important. We should always remember to turn off lights and computers when we leave a room. Finally, we can participate in recycling programs at school and at home. By sorting paper, plastic, and glass, we can help save resources.
+Protecting the environment is everyone's responsibility, and students can make a big difference. There are many simple things we can do every day at school and at home to help our planet.
 
-- 我们的地球需要我们的帮助，而学生们可以发挥重要作用！保护环境不必很困难。我们每天可以做的许多小事，累积起来就会产生巨大的影响。
-- 首先，我们可以通过使用可重复使用的水瓶和午餐盒来代替一次性用品，从而减少浪费。其次，节约能源很重要。我们应该时刻记得在离开房间时关掉电灯和电脑。最后，我们可以参与学校和家里的回收计划。通过将纸张、塑料和玻璃分类，我们可以帮助节约资源。
+Firstly, we should reduce, reuse, and recycle. At school, we can use both sides of our paper and bring reusable water bottles. We should also put plastic, paper, and glass in the correct recycling bins. Secondly, saving energy is very important. Remember to turn off the lights and computers when you leave a room. Small actions like these can save a lot of energy.
+
+By working together, we can create a cleaner and healthier world for the future.
+
+- **我们的地球，我们的未来**
+- 保护环境是每个人的责任，而学生们可以发挥重要作用。我们每天在学校和家里都可以做很多简单的事情来帮助我们的地球。
+- 首先，我们应该减少使用、重复利用和回收。在学校，我们可以双面使用纸张，并携带可重复使用的水瓶。我们也应该将塑料、纸张和玻璃放入正确的回收箱。其次，节约能源非常重要。记住在离开房间时关掉电灯和电脑。像这样的小行动可以节省大量能源。
+- 通过共同努力，我们可以为未来创造一个更清洁、更健康的世界。
