@@ -72,7 +72,7 @@ export default function TermsPage() {
   ];
 
   return (
-    <div className="relative w-full min-h-screen py-20">
+    <div className="relative w-full min-h-screen pt-32 pb-20">
       <div className="container mx-auto px-4 sm:px-6 lg:px-8 max-w-4xl">
         {/* Page Title */}
         <motion.div

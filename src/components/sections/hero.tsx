@@ -29,7 +29,7 @@ export default function HeroSection() {
     <section
       id="hero"
       ref={containerRef}
-      className="relative flex-1 w-full flex flex-col items-center justify-center text-center px-4 sm:px-6 lg:px-8"
+      className="relative flex-1 w-full flex flex-col items-center justify-center text-center px-4 sm:px-6 lg:px-8 pb-8"
     >
       {/* 时间显示（包含时钟） */}
       <Time />

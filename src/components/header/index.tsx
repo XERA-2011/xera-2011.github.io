@@ -9,6 +9,7 @@ import Breadcrumb from "./breadcrumb";
 import { useApp } from "@/contexts/AppContext";
 import { ReactNode } from "react";
 import { ThemeToggle } from "@/components/theme-toggle";
+import { Button } from '@/components/ui/button';
 
 interface HeaderProps {
   loader?: boolean;
@@ -42,29 +43,30 @@ const Header = ({ loader, userAuth }: HeaderProps) => {
       >
         <Breadcrumb />
 
-        <div className="flex items-center gap-4">
+        <div className="flex items-center gap-4 shrink-0">
           {userAuth}
 
           <div onClick={(e) => e.stopPropagation()} className="flex items-center justify-center cursor-can-hover">
             <ThemeToggle />
           </div>
 
-          <button
+          <Button
             onClick={(e) => {
               e.stopPropagation();
               setIsActive(!isActive);
             }}
             className={cn(
               styles.el,
-              "m-0 p-0 h-6 bg-transparent flex items-center justify-center border-none",
+              "m-0 p-2 w-12 h-12 bg-transparent flex items-center justify-center border-none",
               !isActive && "cursor-can-hover"
             )}
+            aria-label="Toggle menu"
           >
             <div
               className={`${styles.burger} ${isActive ? styles.burgerActive : ""
                 }`}
             ></div>
-          </button>
+          </Button>
         </div>
       </div>
 

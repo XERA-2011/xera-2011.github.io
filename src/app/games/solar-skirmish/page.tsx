@@ -467,7 +467,7 @@ export default function Page() {
   }, [muted, gameOver, lives, paused, score]);
 
   return (
-    <div className="relative w-full min-h-screen py-20">
+    <div className="relative w-full min-h-screen pt-32 pb-20">
       <div className="container mx-auto px-4 sm:px-6 lg:px-8">
         {/* Page Title */}
         <motion.div
@@ -483,7 +483,7 @@ export default function Page() {
 
         <div className="bg-[#070a12] text-[#cfe] font-mono rounded-lg overflow-hidden shadow-2xl">
           <div className="grid grid-rows-[auto_1fr]">
-            <header className="flex items-center justify-between px-3.5 py-2.5 border-b border-[#111] bg-gradient-to-b from-[#0c1222] to-[#0a0f1c]">
+            <header className="flex items-center justify-between px-3.5 py-2.5 border-b border-[#111] bg-linear-to-b from-[#0c1222] to-[#0a0f1c]">
               <div className="flex items-center gap-2">
                 <span className="font-bold">🚀 Solar Skirmish</span>
                 <span className="opacity-70 text-xs">Asteroids + Dogfights</span>

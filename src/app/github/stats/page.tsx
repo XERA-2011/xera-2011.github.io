@@ -27,7 +27,7 @@ export default function GitHubStatsPage() {
   const exampleCode = `<img alt="GitHub Stats" src="${baseUrl}/api/github/stats?username=${username}&theme=${theme}" />`;
 
   return (
-    <div className="relative w-full min-h-screen py-20 pt-24">
+    <div className="relative w-full min-h-screen pt-32 pb-20">
       <div className="container mx-auto px-4 sm:px-6 lg:px-8 max-w-6xl">
         {/* Page Title */}
         <motion.div

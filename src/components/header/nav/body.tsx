@@ -57,7 +57,7 @@ export default function Body({
   };
 
   return (
-    <div className={cn(styles.body, "flex flex-col items-end md:flex-row")}>
+    <div className={cn(styles.body, "flex flex-col items-end md:flex-row gap-6 md:gap-12")}>
       {links.map((link, index) => {
         const { title, href, target } = link;
         const isActive = currentHref === href || (href !== '/' && currentHref.startsWith(href));

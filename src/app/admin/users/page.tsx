@@ -27,7 +27,7 @@ export default async function AdminUsersPage() {
   type UserWithRelations = (typeof users)[number]
 
   return (
-    <div className="relative w-full min-h-screen py-20">
+    <div className="relative w-full min-h-screen pt-32 pb-20">
       <div className="container mx-auto px-4 sm:px-6 lg:px-8 max-w-5xl">
         <div className="text-center mb-10">
           <div className="flex items-center justify-center gap-3 mb-4">

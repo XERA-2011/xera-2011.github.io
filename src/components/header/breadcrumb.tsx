@@ -3,6 +3,18 @@
 import { usePathname } from "next/navigation";
 import Link from "next/link";
 import { useMemo, useEffect, useState } from "react";
+import {
+  Breadcrumb as BreadcrumbRoot,
+  BreadcrumbItem,
+  BreadcrumbLink,
+  BreadcrumbList,
+  BreadcrumbPage,
+  BreadcrumbSeparator,
+  BreadcrumbEllipsis,
+} from "@/components/ui/breadcrumb";
+import { cn } from "@/lib/utils";
+import React from "react";
+import { Home } from "lucide-react";
 
 const Breadcrumb = () => {
   const pathname = usePathname();
@@ -32,36 +44,69 @@ const Breadcrumb = () => {
     return null;
   }
 
+  const isHome = breadcrumbs.length === 0;
+
   return (
-    <nav className="flex items-center gap-2 text-sm normal-case backdrop-blur-md">
-      <Link href="/" className="flex items-center justify-center cursor-can-hover">
-        <span className="text-base md:text-lg font-bold">
-          XERA-2011
-        </span>
-      </Link>
-      {breadcrumbs.length > 0 && (
-        <>
-          <span className="text-muted-foreground">/</span>
-          {breadcrumbs.map((crumb, index) => (
-            <div key={crumb.href} className="flex items-center gap-2">
-              {index > 0 && (
-                <span className="text-muted-foreground">/</span>
+    <BreadcrumbRoot className="backdrop-blur-md uppercase px-4 py-2 rounded-full bg-background/40 border border-border/10 min-w-0 shrink overflow-hidden">
+      <BreadcrumbList className="flex-nowrap">
+        <BreadcrumbItem className="shrink-0">
+          <BreadcrumbLink asChild>
+            <Link href="/" className="flex items-center justify-center cursor-can-hover">
+              {/* Desktop: Always show text */}
+              <span className="hidden md:inline text-lg font-bold">
+                XERA-2011
+              </span>
+              {/* Mobile: Show text if home, else show icon */}
+              <span className={cn("md:hidden font-bold text-base", isHome ? "inline" : "hidden")}>
+                XERA-2011
+              </span>
+              <Home className={cn("md:hidden w-4 h-4", isHome ? "hidden" : "block")} />
+            </Link>
+          </BreadcrumbLink>
+        </BreadcrumbItem>
+
+        {breadcrumbs.length > 0 && <BreadcrumbSeparator className="shrink-0" />}
+
+        {/* Mobile View: Ellipsis if more than 1 item */}
+        {breadcrumbs.length > 1 && (
+          <>
+            <BreadcrumbItem className="md:hidden shrink-0">
+              <BreadcrumbEllipsis />
+            </BreadcrumbItem>
+            <BreadcrumbSeparator className="md:hidden shrink-0" />
+          </>
+        )}
+
+        {breadcrumbs.map((crumb, index) => {
+          const isLast = index === breadcrumbs.length - 1;
+          // On mobile, only show the last item
+          const isVisibleOnMobile = isLast;
+
+          return (
+            <React.Fragment key={crumb.href}>
+              <BreadcrumbItem className={cn("shrink-0", isVisibleOnMobile ? "" : "hidden md:inline-flex")}>
+                {isLast ? (
+                  <BreadcrumbPage className="font-medium truncate max-w-[120px] sm:max-w-none">{crumb.label}</BreadcrumbPage>
+                ) : (
+                  <BreadcrumbLink asChild>
+                    <Link
+                      href={crumb.href}
+                      className="font-bold hover:text-muted-foreground transition-colors cursor-can-hover"
+                    >
+                      {crumb.label}
+                    </Link>
+                  </BreadcrumbLink>
+                )}
+              </BreadcrumbItem>
+
+              {!isLast && (
+                <BreadcrumbSeparator className={cn("shrink-0", isVisibleOnMobile ? "" : "hidden md:list-item")} />
               )}
-              {index === breadcrumbs.length - 1 ? (
-                <span className="text-muted-foreground font-medium">{crumb.label}</span>
-              ) : (
-                <Link
-                  href={crumb.href}
-                  className="font-bold hover:text-muted-foreground transition-colors cursor-can-hover"
-                >
-                  {crumb.label}
-                </Link>
-              )}
-            </div>
-          ))}
-        </>
-      )}
-    </nav>
+            </React.Fragment>
+          );
+        })}
+      </BreadcrumbList>
+    </BreadcrumbRoot>
   );
 };
 
