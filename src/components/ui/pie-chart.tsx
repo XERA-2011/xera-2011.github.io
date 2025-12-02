@@ -6,15 +6,17 @@ import { motion, AnimatePresence } from 'framer-motion';
 interface Asset {
   id: string;
   name: string;
-  amount: number;
+  amount?: number; // 用户资产：金额
+  percentage?: number; // 名人持仓：百分比
 }
 
 interface PieChartProps {
   assets: Asset[];
-  totalAmount: number;
+  totalAmount?: number; // 用户资产需要传入总金额
+  usePercentage?: boolean; // 是否使用百分比模式
 }
 
-export default function PieChart({ assets, totalAmount }: PieChartProps) {
+export default function PieChart({ assets, totalAmount, usePercentage = false }: PieChartProps) {
   const [hoveredAsset, setHoveredAsset] = useState<string | null>(null);
   const [isHoveringChart, setIsHoveringChart] = useState(false);
   // 固定的白灰黑渐变色（15个颜色）
@@ -41,9 +43,16 @@ export default function PieChart({ assets, totalAmount }: PieChartProps) {
     return FIXED_COLORS[index % FIXED_COLORS.length];
   };
 
-  const getPercentage = (amount: number) => {
-    if (totalAmount === 0) return 0;
-    return (amount / totalAmount) * 100;
+  const getPercentage = (asset: Asset) => {
+    // 如果是百分比模式，直接返回百分比
+    if (usePercentage && asset.percentage !== undefined) {
+      return asset.percentage;
+    }
+    // 否则根据金额计算百分比
+    if (asset.amount !== undefined && totalAmount && totalAmount > 0) {
+      return (asset.amount / totalAmount) * 100;
+    }
+    return 0;
   };
 
   // 生成饼图的SVG路径
@@ -56,7 +65,7 @@ export default function PieChart({ assets, totalAmount }: PieChartProps) {
     let currentAngle = -90; // 从顶部开始
 
     return assets.map((asset, index) => {
-      const percentage = getPercentage(asset.amount);
+      const percentage = getPercentage(asset);
       const angle = (percentage / 100) * 360;
       const startAngle = currentAngle;
       const endAngle = currentAngle + angle;
@@ -235,11 +244,13 @@ export default function PieChart({ assets, totalAmount }: PieChartProps) {
                             />
                             <div className="font-semibold text-base truncate">{asset.name}</div>
                           </div>
-                          <div className="text-muted-foreground text-xs mb-1">
-                            ¥{asset.amount.toLocaleString('zh-CN', { minimumFractionDigits: 2, maximumFractionDigits: 2 })}
-                          </div>
+                          {!usePercentage && asset.amount !== undefined && (
+                            <div className="text-muted-foreground text-xs mb-1">
+                              ¥{asset.amount.toLocaleString('zh-CN', { minimumFractionDigits: 2, maximumFractionDigits: 2 })}
+                            </div>
+                          )}
                           <div className="text-xl font-bold">
-                            {getPercentage(asset.amount).toFixed(2)}%
+                            {getPercentage(asset).toFixed(2)}%
                           </div>
                         </div>
                       );
@@ -295,7 +306,7 @@ export default function PieChart({ assets, totalAmount }: PieChartProps) {
                 </div>
                 <span className={`text-muted-foreground transition-all duration-200 ${isHovered ? 'text-foreground font-semibold' : ''
                   }`}>
-                  {formatPercentage(getPercentage(asset.amount))}
+                  {formatPercentage(getPercentage(asset))}
                 </span>
               </div>
             );

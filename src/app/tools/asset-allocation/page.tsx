@@ -18,7 +18,8 @@ import { TrendingUp, Copy, Check, Edit, X, ChevronDown, Lock, User, Calendar } f
 interface Asset {
   id: string;
   name: string;
-  amount: number;
+  amount?: number; // 用户资产：金额
+  percentage?: number; // 名人持仓：百分比
 }
 
 interface Portfolio {
@@ -66,7 +67,7 @@ export default function AssetAllocationPage() {
   const isViewingMy = currentViewId === 'my';
   const currentCelebrity = celebrityPortfolios.find(p => p.id === currentViewId);
   const assets = isViewingMy ? myAssets : (currentCelebrity?.assets || []);
-  const totalAmount = assets.reduce((sum, asset) => sum + asset.amount, 0);
+  const totalAmount = myAssets.reduce((sum, asset) => sum + (asset.amount || 0), 0);
   const isReadOnly = !isViewingMy;
 
   // 初始化：从数据库或 localStorage 加载用户数据
@@ -208,7 +209,7 @@ export default function AssetAllocationPage() {
   const handleEditAsset = (asset: Asset) => {
     setEditingAsset(asset);
     setAssetName(asset.name);
-    setAssetAmount(asset.amount.toString());
+    setAssetAmount((asset.amount || 0).toString());
   };
 
   const handleUpdateAsset = async () => {
@@ -254,23 +255,39 @@ export default function AssetAllocationPage() {
 
 
 
-  const getPercentage = (amount: number) => {
-    if (totalAmount === 0) return 0;
-    return (amount / totalAmount) * 100;
+  const getPercentage = (asset: Asset) => {
+    // 如果是名人持仓，直接返回百分比
+    if (asset.percentage !== undefined) {
+      return asset.percentage;
+    }
+    // 否则根据金额计算百分比
+    if (asset.amount !== undefined && totalAmount > 0) {
+      return (asset.amount / totalAmount) * 100;
+    }
+    return 0;
   };
 
   const handleCopyData = async () => {
     if (assets.length === 0) return;
 
-    const copyText = [
-      `总资产：${formatCurrency(totalAmount)}`,
-      '',
-      ...assets.map((asset) => {
-        const percentage = formatPercentage(getPercentage(asset.amount));
-        const amount = formatCurrency(asset.amount, { showSymbol: false });
-        return `${asset.name}：¥${amount} (${percentage})`;
-      }),
-    ].join('\n');
+    const copyText = isReadOnly
+      ? [
+        `${currentCelebrity?.name}`,
+        '',
+        ...assets.map((asset) => {
+          const percentage = formatPercentage(asset.percentage || 0);
+          return `${asset.name}：${percentage}`;
+        }),
+      ].join('\n')
+      : [
+        `总资产：${formatCurrency(totalAmount)}`,
+        '',
+        ...assets.map((asset) => {
+          const percentage = formatPercentage(getPercentage(asset));
+          const amount = formatCurrency(asset.amount || 0, { showSymbol: false });
+          return `${asset.name}：¥${amount} (${percentage})`;
+        }),
+      ].join('\n');
 
     try {
       await navigator.clipboard.writeText(copyText);
@@ -360,7 +377,7 @@ export default function AssetAllocationPage() {
                     initial={{ opacity: 0, y: -10 }}
                     animate={{ opacity: 1, y: 0 }}
                     exit={{ opacity: 0, y: -10 }}
-                    className="absolute top-full mt-2 left-0 min-w-[280px] bg-card border border-border rounded-lg shadow-2xl z-5 overflow-hidden"
+                    className="absolute top-full mt-2 left-0 min-w-[280px] bg-card border border-border rounded-lg shadow-2xl z-50 overflow-hidden"
                   >
                     {isLoadingCelebrity ? (
                       <div className="px-4 py-8 text-center text-muted-foreground text-sm">
@@ -433,7 +450,7 @@ export default function AssetAllocationPage() {
                   {/* 名人饼图 */}
                   <PieChart
                     assets={assets}
-                    totalAmount={totalAmount}
+                    usePercentage={true}
                   />
                 </CardContent>
               </>
@@ -545,12 +562,12 @@ export default function AssetAllocationPage() {
                                 {asset.name}
                               </div>
                               <div className="text-muted-foreground text-sm">
-                                {formatCurrency(asset.amount)}
+                                {formatCurrency(asset.amount || 0)}
                               </div>
                             </div>
                             <div className="text-right">
                               <div className="font-semibold">
-                                {formatPercentage(getPercentage(asset.amount))}
+                                {formatPercentage(getPercentage(asset))}
                               </div>
                             </div>
                           </div>
@@ -610,7 +627,7 @@ export default function AssetAllocationPage() {
                       {/* 我的饼图 */}
                       <PieChart
                         assets={myAssets}
-                        totalAmount={myAssets.reduce((sum, asset) => sum + asset.amount, 0)}
+                        totalAmount={myAssets.reduce((sum, asset) => sum + (asset.amount || 0), 0)}
                       />
                     </>
                   ) : (
