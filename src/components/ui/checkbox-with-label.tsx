@@ -19,7 +19,8 @@ export function CheckboxWithLabel({
   label,
   className,
 }: CheckboxWithLabelProps) {
-  const checkboxId = id || React.useId()
+  const generatedId = React.useId()
+  const checkboxId = id || generatedId
 
   return (
     <div className={className}>

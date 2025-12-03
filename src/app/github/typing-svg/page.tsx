@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useCallback } from 'react';
 import { motion } from 'framer-motion';
 import { useTheme } from 'next-themes';
 import { usePageTitle } from '@/hooks/use-page-title';
@@ -17,9 +17,9 @@ export default function TypingSVGPage() {
   const [baseUrl, setBaseUrl] = useState<string>('');
 
   // 根据主题获取默认文字颜色
-  const getDefaultTextColor = () => {
+  const getDefaultTextColor = useCallback(() => {
     return theme === 'dark' ? 'FFFFFF' : '000000';
-  };
+  }, [theme]);
 
   // 配置状态
   const [config, setConfig] = useState({
@@ -51,7 +51,7 @@ export default function TypingSVGPage() {
       ...prev,
       color: getDefaultTextColor(),
     }));
-  }, [theme]);
+  }, [getDefaultTextColor]);
 
   // 生成预览 URL
   useEffect(() => {
