@@ -6,6 +6,7 @@ import { useTheme } from 'next-themes';
 import { usePageTitle } from '@/hooks/use-page-title';
 import GlowCard from '@/components/ui/glow-card';
 import { Button } from '@/components/ui/button';
+import { CheckboxWithLabel } from '@/components/ui/checkbox-with-label';
 
 export default function TypingSVGPage() {
   usePageTitle('打字机效果 SVG');
@@ -267,51 +268,31 @@ export default function TypingSVGPage() {
                 </div>
 
                 <div className="space-y-2">
-                  <label className="flex items-center space-x-2 cursor-pointer">
-                    <input
-                      type="checkbox"
-                      checked={config.bold}
-                      onChange={(e) => setConfig({ ...config, bold: e.target.checked })}
-                      className="w-4 h-4"
-                    />
-                    <span className="text-sm text-foreground">加粗文字</span>
-                  </label>
-                  <label className="flex items-center space-x-2 cursor-pointer">
-                    <input
-                      type="checkbox"
-                      checked={config.center}
-                      onChange={(e) => setConfig({ ...config, center: e.target.checked })}
-                      className="w-4 h-4"
-                    />
-                    <span className="text-sm text-foreground">水平居中</span>
-                  </label>
-                  <label className="flex items-center space-x-2 cursor-pointer">
-                    <input
-                      type="checkbox"
-                      checked={config.vCenter}
-                      onChange={(e) => setConfig({ ...config, vCenter: e.target.checked })}
-                      className="w-4 h-4"
-                    />
-                    <span className="text-sm text-foreground">垂直居中</span>
-                  </label>
-                  <label className="flex items-center space-x-2 cursor-pointer">
-                    <input
-                      type="checkbox"
-                      checked={config.multiline}
-                      onChange={(e) => setConfig({ ...config, multiline: e.target.checked })}
-                      className="w-4 h-4"
-                    />
-                    <span className="text-sm text-foreground">多行模式</span>
-                  </label>
-                  <label className="flex items-center space-x-2 cursor-pointer">
-                    <input
-                      type="checkbox"
-                      checked={config.repeat}
-                      onChange={(e) => setConfig({ ...config, repeat: e.target.checked })}
-                      className="w-4 h-4"
-                    />
-                    <span className="text-sm text-foreground">循环播放</span>
-                  </label>
+                  <CheckboxWithLabel
+                    checked={config.bold}
+                    onCheckedChange={(checked) => setConfig({ ...config, bold: checked })}
+                    label="加粗文字"
+                  />
+                  <CheckboxWithLabel
+                    checked={config.center}
+                    onCheckedChange={(checked) => setConfig({ ...config, center: checked })}
+                    label="水平居中"
+                  />
+                  <CheckboxWithLabel
+                    checked={config.vCenter}
+                    onCheckedChange={(checked) => setConfig({ ...config, vCenter: checked })}
+                    label="垂直居中"
+                  />
+                  <CheckboxWithLabel
+                    checked={config.multiline}
+                    onCheckedChange={(checked) => setConfig({ ...config, multiline: checked })}
+                    label="多行模式"
+                  />
+                  <CheckboxWithLabel
+                    checked={config.repeat}
+                    onCheckedChange={(checked) => setConfig({ ...config, repeat: checked })}
+                    label="循环播放"
+                  />
                 </div>
               </div>
             </GlowCard>
