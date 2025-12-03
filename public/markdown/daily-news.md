@@ -1,60 +1,60 @@
 # Global Breaking News TOP10
 
 **Date**: 2025年12月03日
-**Update Time**: 10:23 UTC
+**Update Time**: 22:20 UTC
 **AI Model**: Google Gemini / Google Gemini
 
 ---
 
-### 1. **Putin Warns Europe Against Escalation** / **普京警告欧洲不要让局势升级**
+### 1. **MH370 Search to Resume After 11 Years** / **MH370搜寻工作时隔11年将重启**
 - **Time**: 2025-12-03
-- **Content**: Russian President Vladimir Putin has issued a stark warning to European nations, stating that Russia is prepared for war if Europe chooses to escalate the conflict in Ukraine. This statement comes after talks with the U.S. which were described as productive but inconclusive. / 俄罗斯总统弗拉基米尔·普京向欧洲国家发出严厉警告，称如果欧洲选择升级乌克兰冲突，俄罗斯已做好战争准备。此番言论发表之前，俄罗斯与美国举行了会谈，会谈被形容为富有成效但尚无定论。
-- **Source**: Global News
-
-### 2. **Trump Makes Controversial Remarks on Somali Migrants** / **特朗普就索马里移民发表争议性言论**
-- **Time**: 2025-12-03
-- **Content**: Former US President Donald Trump has sparked controversy by referring to Somali migrants as "garbage" and stating he does not want them in the country. He also threatened a permanent pause on migration from "third-world" countries. / 美国前总统唐纳德·特朗普称索马里移民为“垃圾”，并表示不希望他们进入美国，此番言论引发争议。他还威胁将永久暂停来自“第三世界”国家的移民。
+- **Content**: The Malaysian government has announced its intention to resume the search for Malaysia Airlines Flight MH370, which disappeared in 2014. A new "no find, no fee" proposal from U.S. seabed exploration company Ocean Infinity is being considered. / 马来西亚政府宣布，打算重新启动对2014年失踪的马来西亚航空公司MH370航班的搜寻工作。美国海底勘探公司“海洋无限”提出了一项新的“找不到，不收费”的建议，目前正在审议中。
 - **Source**: The Guardian
 
-### 3. **Search for Missing Malaysia Airlines Flight MH370 to Resume** / **马航失联航班MH370搜寻工作将重启**
+### 2. **EU to Ban Russian Gas Imports by 2027** / **欧盟将在2027年前禁止俄罗斯天然气进口**
 - **Time**: 2025-12-03
-- **Content**: The search for Malaysia Airlines flight MH370, which vanished in 2014, is set to resume on December 30th, over 11 years after its mysterious disappearance. The new search will be conducted by Ocean Infinity. / 2014年失踪的马来西亚航空公司MH370航班的搜寻工作定于12月30日重启，距离其神秘失踪已超过11年。新的搜寻工作将由“海洋无限”公司负责。
+- **Content**: European Union lawmakers have reached a deal to ban the import of Russian gas by autumn 2027. This move is part of the EU's broader strategy to reduce its energy dependence on Russia. / 欧盟立法者已达成协议，将在2027年秋季前禁止进口俄罗斯天然气。此举是欧盟旨在减少对俄能源依赖的更广泛战略的一部分。
+- **Source**: NDTV
+
+### 3. **Whistleblower Accuses UK Foreign Office of Censoring Sudan Genocide Warnings** / **举报人指控英国外交部审查苏丹种族灭绝警告**
+- **Time**: 2025-12-03
+- **Content**: A whistleblower has alleged that the UK's Foreign, Commonwealth and Development Office (FCDO) has been "censoring" internal warnings of genocide in Sudan. The claim suggests that crucial information about the escalating crisis has been suppressed. / 一名举报人称，英国外交、联邦和发展办公室（FCDO）一直在“审查”有关苏丹种族灭绝的内部警告。该指控表明，有关不断升级的危机的关键信息遭到了压制。
+- **Source**: The Guardian
+
+### 4. **New Epstein Island Videos and Images Released by House Democrats** / **众议院民主党人公布爱泼斯坦岛屿新视频和图像**
+- **Time**: 2025-12-03
+- **Content**: House Democrats have released new videos and images of Jeffrey Epstein's private Caribbean island, taken in 2020, a year after his death. The footage provides a closer look at the controversial estate. / 众议院民主党人公布了杰弗里·爱泼斯坦在加勒比海的私人岛屿的新视频和图像，拍摄于2020年，即他去世一年后。这些画面让人们更近距离地看到了这座备受争议的庄园。
+- **Source**: Sky News
+
+### 5. **Colombian President Warns Trump Against Military Threats** / **哥伦比亚总统警告特朗普不要进行军事威胁**
+- **Time**: 2025-12-03
+- **Content**: Colombia's president has issued a stern warning to Donald Trump, advising him against making threats of military strikes. The Colombian leader's message was clear: "Do not wake the jaguar." / 哥伦比亚总统向唐纳德·特朗普发出严厉警告，建议他不要发出军事打击的威胁。这位哥伦比亚领导人的信息很明确：“不要唤醒美洲豹。”
+- **Source**: The Guardian
+
+### 6. **Former Honduran President Freed After Trump Pardon** / **洪都拉斯前总统在特朗普赦免后获释**
+- **Time**: 2025-12-03
+- **Content**: Juan Orlando Hernández, the former president of Honduras, has been released from prison following a pardon from Donald Trump. Hernández had been convicted on drug trafficking charges. / 洪都拉斯前总统胡安·奥兰多·埃尔南德斯在获得唐纳德·特朗普的赦免后已从监狱获释。埃尔南德斯此前因贩毒罪被定罪。
+- **Source**: Associated Press
+
+### 7. **EU Considers Forcing Industry to Cut China Reliance on Rare Earths** / **欧盟考虑强制工业界减少对中国稀土的依赖**
+- **Time**: 2025-12-03
+- **Content**: The European Union is reportedly considering legally compelling industries to reduce their purchases of critical rare earth metals from China. This is part of a €3 billion strategy to diversify supply chains. / 据报道，欧盟正在考虑通过法律手段强制工业界减少从中国购买关键稀土金属。这是一项价值30亿欧元的供应链多元化战略的一部分。
+- **Source**: The Guardian
+
+### 8. **Three Policemen Killed in IED Blast in Northwest Pakistan** / **巴基斯坦西北部简易爆炸装置爆炸致三名警察死亡**
+- **Time**: 2025-12-03
+- **Content**: An improvised explosive device (IED) targeted a police vehicle in northwest Pakistan, killing three policemen. The attack highlights the ongoing security challenges in the region. / 巴基斯坦西北部发生一起简易爆炸装置袭击警车的事件，造成三名警察死亡。此次袭击凸显了该地区持续存在的安全挑战。
 - **Source**: The Hindu
 
-### 4. **Historic Fabergé Egg Sells for Record $30.2 Million at Auction** / **历史性的法贝热彩蛋在拍卖会上以3020万美元创纪录成交**
+### 9. **Iran's Currency Hits New Low Against Dollar Amid Sanctions** / **制裁之下伊朗货币对美元汇率创历史新低**
 - **Time**: 2025-12-03
-- **Content**: A rare Fabergé egg, originally created for Russian royalty, has been sold for a record-breaking $30.2 million at a London auction. The identity of the buyer has not been disclosed. / 一枚最初为俄罗斯皇室制作的罕见法贝热彩蛋在伦敦拍卖会上以创纪录的3020万美元成交。买家身份尚未透露。
-- **Source**: Global News
+- **Content**: The Iranian rial has fallen to a new record low against the US dollar. The currency's depreciation is largely attributed to the ongoing international sanctions related to Iran's nuclear program. / 伊朗里亚尔对美元的汇率跌至历史新低。货币贬值主要归因于与伊朗核计划有关的持续国际制裁。
+- **Source**: NDTV
 
-### 5. **British Military Instructor Arrested in Ukraine on Spying Allegations** / **英国军事教官因间谍指控在乌克兰被捕**
+### 10. **NATO 'Ready to Do What It Takes' to Protect Europe, Russia Denies Rejecting Peace Plan** / **北约“准备好采取一切必要措施”保护欧洲，俄罗斯否认拒绝和平计划**
 - **Time**: 2025-12-03
-- **Content**: A British military instructor has been arrested in Ukraine on suspicion of spying for Russia. The instructor was reportedly providing training to Ukrainian forces. / 一名英国军事教官因涉嫌为俄罗斯从事间谍活动而在乌克兰被捕。据报道，该教官当时正在为乌克兰军队提供培训。
+- **Content**: NATO has affirmed its readiness to take all necessary measures to protect Europe, while Russia has denied claims that it rejected a peace plan for Ukraine. Tensions remain high as diplomatic efforts continue. / 北约重申准备采取一切必要措施保护欧洲，而俄罗斯则否认有关其拒绝乌克兰和平计划的说法。在外交努力持续的同时，紧张局势依然高度紧张。
 - **Source**: The Guardian
-
-### 6. **WHO Recommends GLP-1 Drugs for Obesity Treatment** / **世卫组织推荐使用GLP-1类药物治疗肥胖症**
-- **Time**: 2025-12-03
-- **Content**: The World Health Organization (WHO) has officially recommended the use of GLP-1 receptor agonists, a class of drugs originally developed for diabetes, for the treatment of obesity, marking a significant shift in global health policy. / 世界卫生组织（WHO）已正式推荐使用GLP-1受体激动剂类药物治疗肥胖症，这类药物最初是为糖尿病开发的，这标志着全球卫生政策的重大转变。
-- **Source**: Global News
-
-### 7. **Prada Acquires Rival Fashion House Versace in $1.4 Billion Deal** / **普拉达以14亿美元收购竞争对手范思哲**
-- **Time**: 2025-12-03
-- **Content**: In a major luxury fashion merger, Prada has announced its acquisition of rival Italian brand Versace for approximately $1.4 billion. The deal is expected to create a new fashion powerhouse. / 在一次重大的奢侈品时尚界合并中，普拉达宣布以约14亿美元的价格收购其意大利竞争对手范思哲。该交易预计将缔造一个新的时尚巨头。
-- **Source**: Global News
-
-### 8. **AI Boom Sparks Global Semiconductor Shortage** / **人工智能热潮引发全球半导体短缺**
-- **Time**: 2025-12-03
-- **Content**: The rapid growth of artificial intelligence technologies is causing a worldwide shortage of high-performance semiconductor chips. This supply crisis is driving up prices and impacting various industries, from consumer electronics to automotive manufacturing. / 人工智能技术的飞速发展正导致全球高性能半导体芯片短缺。这场供应危机正在推高价格，并对从消费电子到汽车制造等多个行业产生影响。
-- **Source**: Business Standard
-
-### 9. **Former Honduran President Freed After Trump Pardon** / **洪都拉斯前总统在特朗普赦免后获释**
-- **Time**: 2025-12-03
-- **Content**: Juan Orlando Hernández, the former president of Honduras, has been released from prison after receiving a pardon from former U.S. President Donald Trump for a drug trafficking conviction. / 洪都拉斯前总统胡安·奥兰多·埃尔南德斯因贩毒罪名被定罪，在获得美国前总统唐纳德·特朗普的赦免后，已从监狱获释。
-- **Source**: The Guardian
-
-### 10. **"Rage Bait" Named Oxford's 2025 Word of the Year** / **“愤怒诱饵”被评为牛津词典2025年度词汇**
-- **Time**: 2025-12-03
-- **Content**: Oxford University Press has declared "rage bait" as its word of the year for 2025, defining it as content deliberately designed to provoke anger in order to increase engagement. / 牛津大学出版社宣布“愤怒诱饵”为其2025年的年度词汇，其定义为旨在故意激起愤怒以增加参与度的内容。
-- **Source**: Global News
 
 ---
 
