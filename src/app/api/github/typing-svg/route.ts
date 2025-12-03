@@ -20,6 +20,7 @@ const DEFAULTS = {
   repeat: 'true',
   separator: ';',
   letterSpacing: 'normal',
+  bold: 'true',
 };
 
 /**
@@ -236,7 +237,8 @@ export async function GET(request: NextRequest) {
 
     // 解析其他参数
     const font = parseFont(searchParams.get('font') || DEFAULTS.font);
-    const weight = searchParams.get('weight') || DEFAULTS.weight;
+    const bold = parseBoolean(searchParams.get('bold') || DEFAULTS.bold);
+    const weight = bold ? '700' : (searchParams.get('weight') || DEFAULTS.weight);
     const color = parseColor(
       searchParams.get('color') || DEFAULTS.color,
       DEFAULTS.color

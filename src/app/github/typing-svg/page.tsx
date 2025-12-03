@@ -2,23 +2,30 @@
 
 import { useState, useEffect } from 'react';
 import { motion } from 'framer-motion';
+import { useTheme } from 'next-themes';
 import { usePageTitle } from '@/hooks/use-page-title';
 import GlowCard from '@/components/ui/glow-card';
 import { Button } from '@/components/ui/button';
 
 export default function TypingSVGPage() {
   usePageTitle('打字机效果 SVG');
+  const { theme } = useTheme();
   const [copiedIndex, setCopiedIndex] = useState<number | null>(null);
   const [previewUrl, setPreviewUrl] = useState<string>('');
   const [refreshKey, setRefreshKey] = useState<number>(0);
   const [baseUrl, setBaseUrl] = useState<string>('');
+
+  // 根据主题获取默认文字颜色
+  const getDefaultTextColor = () => {
+    return theme === 'dark' ? 'FFFFFF' : '000000';
+  };
 
   // 配置状态
   const [config, setConfig] = useState({
     lines: 'Hello World!;Welcome to XERA-2011;Typing SVG Generator',
     font: 'monospace',
     size: '24',
-    color: '36BCF7',
+    color: getDefaultTextColor(),
     background: '00000000',
     width: '600',
     height: '100',
@@ -29,12 +36,21 @@ export default function TypingSVGPage() {
     pause: '1000',
     repeat: true,
     letterSpacing: 'normal',
+    bold: true,
   });
 
   // 设置 baseUrl（仅在客户端运行）
   useEffect(() => {
     setBaseUrl(window.location.origin);
   }, []);
+
+  // 当主题变化时更新文字颜色
+  useEffect(() => {
+    setConfig((prev) => ({
+      ...prev,
+      color: getDefaultTextColor(),
+    }));
+  }, [theme]);
 
   // 生成预览 URL
   useEffect(() => {
@@ -55,6 +71,7 @@ export default function TypingSVGPage() {
       pause: config.pause,
       repeat: config.repeat.toString(),
       letterSpacing: config.letterSpacing,
+      bold: config.bold.toString(),
     });
     setPreviewUrl(`${baseUrl}/api/github/typing-svg?${params.toString()}`);
     setRefreshKey(Date.now());
@@ -163,6 +180,13 @@ export default function TypingSVGPage() {
                   <div>
                     <label className="block text-sm font-medium text-foreground mb-2">
                       文字颜色
+                      <button
+                        onClick={() => setConfig({ ...config, color: getDefaultTextColor() })}
+                        className="ml-2 text-xs text-muted-foreground hover:text-foreground transition-colors"
+                        title="使用主题默认颜色"
+                      >
+                        (跟随主题)
+                      </button>
                     </label>
                     <div className="flex gap-2">
                       <span className="bg-secondary border border-border rounded-lg px-3 py-2 text-foreground">#</span>
@@ -243,6 +267,15 @@ export default function TypingSVGPage() {
                 </div>
 
                 <div className="space-y-2">
+                  <label className="flex items-center space-x-2 cursor-pointer">
+                    <input
+                      type="checkbox"
+                      checked={config.bold}
+                      onChange={(e) => setConfig({ ...config, bold: e.target.checked })}
+                      className="w-4 h-4"
+                    />
+                    <span className="text-sm text-foreground">加粗文字</span>
+                  </label>
                   <label className="flex items-center space-x-2 cursor-pointer">
                     <input
                       type="checkbox"
@@ -363,6 +396,7 @@ export default function TypingSVGPage() {
                     <div><code className="bg-secondary px-1 rounded">color</code> - 文字颜色（十六进制，不含 #）</div>
                     <div><code className="bg-secondary px-1 rounded">background</code> - 背景颜色（十六进制，不含 #）</div>
                     <div><code className="bg-secondary px-1 rounded">width / height</code> - SVG 尺寸（像素）</div>
+                    <div><code className="bg-secondary px-1 rounded">bold</code> - 加粗文字（true/false）</div>
                     <div><code className="bg-secondary px-1 rounded">center</code> - 水平居中（true/false）</div>
                     <div><code className="bg-secondary px-1 rounded">vCenter</code> - 垂直居中（true/false）</div>
                     <div><code className="bg-secondary px-1 rounded">multiline</code> - 多行模式（true/false）</div>
@@ -394,13 +428,13 @@ export default function TypingSVGPage() {
                     <div className="bg-secondary border border-border rounded-lg p-4 mb-2">
                       {/* eslint-disable-next-line @next/next/no-img-element */}
                       <img
-                        src={`${baseUrl}/api/github/typing-svg?lines=Hello+World!;Welcome+to+XERA-2011`}
+                        src={`${baseUrl}/api/github/typing-svg?lines=Hello+World!;Welcome+to+XERA-2011&color=${getDefaultTextColor()}`}
                         alt="Example 1"
                         className="max-w-full"
                       />
                     </div>
                     <pre className="bg-secondary border border-border rounded-lg p-2 overflow-x-auto">
-                      <code className="text-xs text-foreground">{`${baseUrl}/api/github/typing-svg?lines=Hello+World!;Welcome+to+XERA-2011`}</code>
+                      <code className="text-xs text-foreground">{`${baseUrl}/api/github/typing-svg?lines=Hello+World!;Welcome+to+XERA-2011&color=${getDefaultTextColor()}`}</code>
                     </pre>
                   </div>
 
@@ -409,13 +443,13 @@ export default function TypingSVGPage() {
                     <div className="bg-secondary border border-border rounded-lg p-4 mb-2">
                       {/* eslint-disable-next-line @next/next/no-img-element */}
                       <img
-                        src={`${baseUrl}/api/github/typing-svg?lines=Type+messages+everywhere!;Add+a+bio+to+your+profile!&center=true&vCenter=true&width=500&height=60`}
+                        src={`${baseUrl}/api/github/typing-svg?lines=Type+messages+everywhere!;Add+a+bio+to+your+profile!&center=true&vCenter=true&width=500&height=60&color=${getDefaultTextColor()}`}
                         alt="Example 2"
                         className="max-w-full"
                       />
                     </div>
                     <pre className="bg-secondary border border-border rounded-lg p-2 overflow-x-auto">
-                      <code className="text-xs text-foreground">{`${baseUrl}/api/github/typing-svg?lines=Type+messages+everywhere!;Add+a+bio+to+your+profile!&center=true&vCenter=true&width=500&height=60`}</code>
+                      <code className="text-xs text-foreground">{`${baseUrl}/api/github/typing-svg?lines=Type+messages+everywhere!;Add+a+bio+to+your+profile!&center=true&vCenter=true&width=500&height=60&color=${getDefaultTextColor()}`}</code>
                     </pre>
                   </div>
 
@@ -424,13 +458,13 @@ export default function TypingSVGPage() {
                     <div className="bg-secondary border border-border rounded-lg p-4 mb-2">
                       {/* eslint-disable-next-line @next/next/no-img-element */}
                       <img
-                        src={`${baseUrl}/api/github/typing-svg?lines=Line+1;Line+2;Line+3&multiline=true&width=400&height=100`}
+                        src={`${baseUrl}/api/github/typing-svg?lines=Line+1;Line+2;Line+3&multiline=true&width=400&height=100&color=${getDefaultTextColor()}`}
                         alt="Example 3"
                         className="max-w-full"
                       />
                     </div>
                     <pre className="bg-secondary border border-border rounded-lg p-2 overflow-x-auto">
-                      <code className="text-xs text-foreground">{`${baseUrl}/api/github/typing-svg?lines=Line+1;Line+2;Line+3&multiline=true&width=400&height=100`}</code>
+                      <code className="text-xs text-foreground">{`${baseUrl}/api/github/typing-svg?lines=Line+1;Line+2;Line+3&multiline=true&width=400&height=100&color=${getDefaultTextColor()}`}</code>
                     </pre>
                   </div>
                 </>
