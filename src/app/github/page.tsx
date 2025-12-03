@@ -7,6 +7,11 @@ import { usePageTitle } from '@/hooks/use-page-title';
 
 const toolsData: GlowCardItem[] = [
   {
+    id: "github-typing-svg",
+    title: "打字机效果 SVG",
+    href: "/github/typing-svg",
+  },
+  {
     id: "github-countdown",
     title: "倒计时卡片",
     href: "/github/countdown",
