@@ -9,18 +9,19 @@ import { Button } from '@/components/ui/button';
 const DEFAULT_CONFIG = {
   font: 'monospace',
   size: '24',
-  color: '36BCF7',
+  color: '',
   background: '00000000',
   width: '600',
   height: '100',
-  center: true,
+  center: false,
   vCenter: true,
   multiline: false,
   duration: '5000',
   pause: '1000',
   repeat: true,
   letterSpacing: 'normal',
-  weight: '400',
+  weight: 'bold',
+  speed: '100',
 };
 
 export default function TypingSVGPage() {
@@ -35,7 +36,7 @@ export default function TypingSVGPage() {
     lines: 'Hello World!;Welcome to XERA-2011;Typing SVG Generator',
     font: 'monospace',
     size: '24',
-    color: '36BCF7',
+    color: '',
     background: '00000000',
     width: '600',
     height: '100',
@@ -46,7 +47,8 @@ export default function TypingSVGPage() {
     pause: '1000',
     repeat: true,
     letterSpacing: 'normal',
-    weight: '400',
+    weight: 'bold',
+    speed: '100',
   });
 
   // 设置 baseUrl（仅在客户端运行）
@@ -73,7 +75,13 @@ export default function TypingSVGPage() {
     if (config.center !== DEFAULT_CONFIG.center) params.append('center', config.center.toString());
     if (config.vCenter !== DEFAULT_CONFIG.vCenter) params.append('vCenter', config.vCenter.toString());
     if (config.multiline !== DEFAULT_CONFIG.multiline) params.append('multiline', config.multiline.toString());
-    if (config.duration !== DEFAULT_CONFIG.duration) params.append('duration', config.duration);
+    // 如果有 speed，优先使用 speed，不再传递 duration
+    if (config.speed && config.speed !== DEFAULT_CONFIG.speed) {
+      params.append('speed', config.speed);
+    } else if (!config.speed && config.duration !== DEFAULT_CONFIG.duration) {
+      params.append('duration', config.duration);
+    }
+
     if (config.pause !== DEFAULT_CONFIG.pause) params.append('pause', config.pause);
     if (config.repeat !== DEFAULT_CONFIG.repeat) params.append('repeat', config.repeat.toString());
     if (config.letterSpacing !== DEFAULT_CONFIG.letterSpacing) params.append('letterSpacing', config.letterSpacing);
@@ -197,7 +205,7 @@ export default function TypingSVGPage() {
                         value={config.color}
                         onChange={(e) => setConfig({ ...config, color: e.target.value })}
                         className="flex-1 bg-secondary border border-border rounded-lg p-2 text-foreground"
-                        placeholder="36BCF7"
+                        placeholder="Auto / Adaptive"
                       />
                     </div>
                   </div>
@@ -246,12 +254,12 @@ export default function TypingSVGPage() {
                 <div className="grid grid-cols-2 gap-4">
                   <div>
                     <label className="block text-sm font-medium text-foreground mb-2">
-                      打字时长 (ms)
+                      打字速度 (ms/字符)
                     </label>
                     <input
                       type="number"
-                      value={config.duration}
-                      onChange={(e) => setConfig({ ...config, duration: e.target.value })}
+                      value={config.speed}
+                      onChange={(e) => setConfig({ ...config, speed: e.target.value })}
                       className="w-full bg-secondary border border-border rounded-lg p-2 text-foreground"
                     />
                   </div>
@@ -401,7 +409,7 @@ export default function TypingSVGPage() {
                     <div><code className="bg-secondary px-1 rounded">center</code> - 水平居中（true/false）</div>
                     <div><code className="bg-secondary px-1 rounded">vCenter</code> - 垂直居中（true/false）</div>
                     <div><code className="bg-secondary px-1 rounded">multiline</code> - 多行模式（true/false）</div>
-                    <div><code className="bg-secondary px-1 rounded">duration</code> - 打字时长（毫秒）</div>
+                    <div><code className="bg-secondary px-1 rounded">speed</code> - 打字速度（毫秒/字符）</div>
                     <div><code className="bg-secondary px-1 rounded">pause</code> - 暂停时长（毫秒）</div>
                     <div><code className="bg-secondary px-1 rounded">repeat</code> - 循环播放（true/false）</div>
                     <div><code className="bg-secondary px-1 rounded">weight</code> - 字体粗细（400/bold）</div>
@@ -426,11 +434,11 @@ export default function TypingSVGPage() {
               {baseUrl && (
                 <>
                   <div>
-                    <p className="text-sm font-medium text-muted-foreground mb-2">基础用法</p>
+                    <p className="text-sm font-medium text-muted-foreground mb-2">基础用法（颜色自适应）</p>
                     <div className="bg-secondary border border-border rounded-lg p-4 mb-2">
                       {/* eslint-disable-next-line @next/next/no-img-element */}
                       <img
-                        src={`${baseUrl}/api/github/typing-svg?lines=Hello+World!;Welcome+to+XERA-2011`}
+                        src={`${baseUrl}/api/github/typing-svg?lines=Hello+World!;Welcome+to+XERA-2011&v=1`}
                         alt="Example 1"
                         className="max-w-full"
                       />
@@ -445,7 +453,7 @@ export default function TypingSVGPage() {
                     <div className="bg-secondary border border-border rounded-lg p-4 mb-2">
                       {/* eslint-disable-next-line @next/next/no-img-element */}
                       <img
-                        src={`${baseUrl}/api/github/typing-svg?lines=Type+messages+everywhere!;Add+a+bio+to+your+profile!&center=true&vCenter=true&width=500&height=60`}
+                        src={`${baseUrl}/api/github/typing-svg?lines=Type+messages+everywhere!;Add+a+bio+to+your+profile!&center=true&vCenter=true&width=500&height=60&v=1`}
                         alt="Example 2"
                         className="max-w-full"
                       />
@@ -460,7 +468,7 @@ export default function TypingSVGPage() {
                     <div className="bg-secondary border border-border rounded-lg p-4 mb-2">
                       {/* eslint-disable-next-line @next/next/no-img-element */}
                       <img
-                        src={`${baseUrl}/api/github/typing-svg?lines=Line+1;Line+2;Line+3&multiline=true&width=400&height=100`}
+                        src={`${baseUrl}/api/github/typing-svg?lines=Line+1;Line+2;Line+3&multiline=true&width=400&height=100&v=1`}
                         alt="Example 3"
                         className="max-w-full"
                       />

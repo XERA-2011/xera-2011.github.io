@@ -6,11 +6,11 @@ const CACHE_SECONDS = 3600;
 // 默认配置
 const DEFAULTS = {
   font: 'monospace',
-  weight: '400',
-  color: '#36BCF7',
+  weight: 'bold',
+  color: '',
   background: '#00000000',
   size: '24',
-  center: 'true',
+  center: 'false',
   vCenter: 'true',
   width: '600',
   height: '100',
@@ -90,7 +90,7 @@ function generateTypingSVG(params: {
   lines: string[];
   font: string;
   weight: string;
-  color: string;
+  color?: string;
   background: string;
   size: number;
   center: boolean;
@@ -102,6 +102,7 @@ function generateTypingSVG(params: {
   pause: number;
   repeat: boolean;
   letterSpacing: string;
+  speed?: number;
 }): string {
   const {
     lines,
@@ -119,9 +120,19 @@ function generateTypingSVG(params: {
     pause,
     repeat,
     letterSpacing,
+    speed,
   } = params;
 
   const lastLineIndex = lines.length - 1;
+
+  // 如果没有提供颜色，使用 CSS 变量实现自适应颜色
+  const cssStyle = !color ? `
+    <style>
+      .text-content { fill: #000000; }
+      @media (prefers-color-scheme: dark) {
+        .text-content { fill: #ffffff; }
+      }
+    </style>` : '';
 
   // 生成每一行的动画和文本
   const linesContent = lines
@@ -137,35 +148,62 @@ function generateTypingSVG(params: {
               : '0s'
             : `d${i - 1}.end`;
 
-        const freeze = !repeat && i === lastLineIndex;
-        const yOffset = height / 2;
-        const emptyLine = `m0,${yOffset} h0`;
-        const fullLine = `m0,${yOffset} h${width}`;
+  // 估算文字宽度 (Monospace 字体约为 0.6em 宽，这里给稍微宽裕一点 0.7)
+  // 如果是多行模式，width 可能是容器宽度，我们需要让 path 适应文字宽度
+  const charWidth = size * 0.7; 
+  const estimatedTextWidth = line.length * charWidth;
+  // 限制最大宽度不超过容器宽度，且至少保留 1 个字符宽度
+  const textWidth = Math.max(size, Math.min(estimatedTextWidth, width));
+  
+  // 计算 path 的起始 X 坐标
+  // 如果居中，path 起点 = (容器宽度 - 文字宽度) / 2
+  // 如果不居中，path 起点 = 0
+  const pathX = center ? (width - textWidth) / 2 : 0;
 
-        const values = [
-          emptyLine,
-          fullLine,
-          fullLine,
-          freeze ? fullLine : emptyLine,
-        ].join(' ; ');
+  const freeze = !repeat && i === lastLineIndex;
+  const yOffset = height / 2;
+  const emptyLine = `m${pathX},${yOffset} h0`;
+  const fullLine = `m${pathX},${yOffset} h${textWidth}`;
 
-        const totalDuration = duration + pause;
-        const keyTimes = [
-          '0',
-          (0.8 * duration) / totalDuration,
-          (0.8 * duration + pause) / totalDuration,
-          '1',
-        ].join(';');
+  const values = [
+    emptyLine,
+    fullLine,
+    fullLine,
+    freeze ? fullLine : emptyLine,
+  ].join(' ; ');
 
-        animationContent = `
-        <path id='path${i}'>
-          <animate id='d${i}' attributeName='d' begin='${begin}'
-            dur='${totalDuration}ms' fill='${freeze ? 'freeze' : 'remove'}'
-            values='${values}' keyTimes='${keyTimes}' />
-        </path>
-        <text font-family='"${font}", monospace' fill='${color}' font-size='${size}'
+  // 计算当前行的打字时长
+  // 如果有 speed 参数，则根据字符数计算时长
+  // 否则使用固定的 duration
+  const currentTypingDuration = speed 
+    ? line.length * speed 
+    : duration * 0.8; // 旧逻辑：duration 包含打字和删除，打字占 80%
+
+  // 计算删除时长
+  // 如果有 speed 参数，删除速度设为打字速度的一半（即快一倍），且不超过 1000ms
+  // 否则使用旧逻辑：duration * 0.2
+  const currentDeleteDuration = speed
+    ? Math.min(currentTypingDuration * 0.5, 1000)
+    : duration * 0.2;
+
+  const totalDuration = currentTypingDuration + pause + currentDeleteDuration;
+  
+  const keyTimes = [
+    '0',
+    (currentTypingDuration / totalDuration).toFixed(4),
+    ((currentTypingDuration + pause) / totalDuration).toFixed(4),
+    '1',
+  ].join(';');
+
+  animationContent = `
+  <path id='path${i}'>
+    <animate id='d${i}' attributeName='d' begin='${begin}'
+      dur='${totalDuration}ms' fill='${freeze ? 'freeze' : 'remove'}'
+      values='${values}' keyTimes='${keyTimes}' />
+  </path>
+        <text font-family='"${font}", monospace' ${color ? `fill='${color}'` : 'class="text-content"'} font-size='${size}'
           dominant-baseline='${vCenter ? 'middle' : 'auto'}'
-          x='${center ? '50%' : '0%'}' text-anchor='${center ? 'middle' : 'start'}'
+          x='0' text-anchor='start'
           letter-spacing='${letterSpacing}' font-weight='${weight}'>
           <textPath xlink:href='#path${i}'>
             ${escapeHtml(line)}
@@ -177,8 +215,15 @@ function generateTypingSVG(params: {
         const lineHeight = size + 5;
         const lineDuration = (duration + pause) * nextIndex;
         const yOffset = nextIndex * lineHeight;
-        const emptyLine = `m0,${yOffset} h0`;
-        const fullLine = `m0,${yOffset} h${width}`;
+        
+        // 同样应用宽度估算逻辑
+        const charWidth = size * 0.7; 
+        const estimatedTextWidth = line.length * charWidth;
+        const textWidth = Math.max(size, Math.min(estimatedTextWidth, width));
+        const pathX = center ? (width - textWidth) / 2 : 0;
+
+        const emptyLine = `m${pathX},${yOffset} h0`;
+        const fullLine = `m${pathX},${yOffset} h${textWidth}`;
 
         const values = [emptyLine, emptyLine, fullLine, fullLine].join(' ; ');
         const keyTimes = [
@@ -194,9 +239,9 @@ function generateTypingSVG(params: {
             dur='${lineDuration}ms' fill="freeze"
             values='${values}' keyTimes='${keyTimes}' />
         </path>
-        <text font-family='"${font}", monospace' fill='${color}' font-size='${size}'
+        <text font-family='"${font}", monospace' ${color ? `fill='${color}'` : 'class="text-content"'} font-size='${size}'
           dominant-baseline='${vCenter ? 'middle' : 'auto'}'
-          x='${center ? '50%' : '0%'}' text-anchor='${center ? 'middle' : 'start'}'
+          x='0' text-anchor='start'
           letter-spacing='${letterSpacing}' font-weight='${weight}'>
           <textPath xlink:href='#path${i}'>
             ${escapeHtml(line)}
@@ -214,6 +259,7 @@ function generateTypingSVG(params: {
     viewBox='0 0 ${width} ${height}'
     style='background-color: ${background};'
     width='${width}px' height='${height}px'>
+    ${cssStyle}
     ${linesContent}
 </svg>`;
 }
@@ -238,9 +284,9 @@ export async function GET(request: NextRequest) {
     const font = parseFont(searchParams.get('font') || DEFAULTS.font);
     const weight = searchParams.get('weight') || DEFAULTS.weight;
     const color = parseColor(
-      searchParams.get('color') || DEFAULTS.color,
-      DEFAULTS.color
-    );
+      searchParams.get('color') || '',
+      ''
+    ) || undefined;
     const background = parseColor(
       searchParams.get('background') || DEFAULTS.background,
       DEFAULTS.background
@@ -278,6 +324,10 @@ export async function GET(request: NextRequest) {
       searchParams.get('repeat') || DEFAULTS.repeat
     );
     const letterSpacing = searchParams.get('letterSpacing') || DEFAULTS.letterSpacing;
+    
+    // 解析 speed 参数 (可选)
+    const speedParam = searchParams.get('speed');
+    const speed = speedParam ? parsePositiveInt(speedParam, 'Speed') : undefined;
 
     // 生成 SVG
     const svg = generateTypingSVG({
@@ -296,6 +346,7 @@ export async function GET(request: NextRequest) {
       pause,
       repeat,
       letterSpacing,
+      speed,
     });
 
     // 返回 SVG 响应
