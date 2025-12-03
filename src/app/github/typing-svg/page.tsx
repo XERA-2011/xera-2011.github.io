@@ -70,8 +70,11 @@ export default function TypingSVGPage() {
     }
   };
 
-  const markdownCode = baseUrl ? `[![Typing SVG](${previewUrl})](${baseUrl}/github/typing-svg)` : '';
-  const htmlCode = baseUrl ? `<img alt="Typing SVG" src="${previewUrl}" />` : '';
+  const paramsString = previewUrl.split('?')[1] || '';
+  const shareUrl = baseUrl ? `${baseUrl}/github/typing-svg?${paramsString}` : '';
+
+  const markdownCode = baseUrl ? `[![Typing SVG](${previewUrl})](${shareUrl})` : '';
+  const htmlCode = baseUrl ? `<a href="${shareUrl}"><img alt="Typing SVG" src="${previewUrl}" /></a>` : '';
 
   return (
     <div className="relative w-full min-h-screen pt-32 pb-20">
@@ -243,42 +246,42 @@ export default function TypingSVGPage() {
                 </div>
 
                 <div className="space-y-2">
-                  <label className="flex items-center space-x-2 cursor-pointer">
+                  <div className="flex items-center space-x-2">
                     <input
                       type="checkbox"
                       checked={config.center}
                       onChange={(e) => setConfig({ ...config, center: e.target.checked })}
-                      className="w-4 h-4"
+                      className="w-4 h-4 cursor-pointer"
                     />
                     <span className="text-sm text-foreground">水平居中</span>
-                  </label>
-                  <label className="flex items-center space-x-2 cursor-pointer">
+                  </div>
+                  <div className="flex items-center space-x-2">
                     <input
                       type="checkbox"
                       checked={config.vCenter}
                       onChange={(e) => setConfig({ ...config, vCenter: e.target.checked })}
-                      className="w-4 h-4"
+                      className="w-4 h-4 cursor-pointer"
                     />
                     <span className="text-sm text-foreground">垂直居中</span>
-                  </label>
-                  <label className="flex items-center space-x-2 cursor-pointer">
+                  </div>
+                  <div className="flex items-center space-x-2">
                     <input
                       type="checkbox"
                       checked={config.multiline}
                       onChange={(e) => setConfig({ ...config, multiline: e.target.checked })}
-                      className="w-4 h-4"
+                      className="w-4 h-4 cursor-pointer"
                     />
                     <span className="text-sm text-foreground">多行模式</span>
-                  </label>
-                  <label className="flex items-center space-x-2 cursor-pointer">
+                  </div>
+                  <div className="flex items-center space-x-2">
                     <input
                       type="checkbox"
                       checked={config.repeat}
                       onChange={(e) => setConfig({ ...config, repeat: e.target.checked })}
-                      className="w-4 h-4"
+                      className="w-4 h-4 cursor-pointer"
                     />
                     <span className="text-sm text-foreground">循环播放</span>
-                  </label>
+                  </div>
                 </div>
               </div>
             </GlowCard>
