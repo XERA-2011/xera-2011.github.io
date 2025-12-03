@@ -6,6 +6,23 @@ import { usePageTitle } from '@/hooks/use-page-title';
 import GlowCard from '@/components/ui/glow-card';
 import { Button } from '@/components/ui/button';
 
+const DEFAULT_CONFIG = {
+  font: 'monospace',
+  size: '24',
+  color: '36BCF7',
+  background: '00000000',
+  width: '600',
+  height: '100',
+  center: true,
+  vCenter: true,
+  multiline: false,
+  duration: '5000',
+  pause: '1000',
+  repeat: true,
+  letterSpacing: 'normal',
+  weight: '400',
+};
+
 export default function TypingSVGPage() {
   usePageTitle('打字机效果 SVG');
   const [copiedIndex, setCopiedIndex] = useState<number | null>(null);
@@ -29,6 +46,7 @@ export default function TypingSVGPage() {
     pause: '1000',
     repeat: true,
     letterSpacing: 'normal',
+    weight: '400',
   });
 
   // 设置 baseUrl（仅在客户端运行）
@@ -40,22 +58,27 @@ export default function TypingSVGPage() {
   useEffect(() => {
     if (!baseUrl) return;
 
-    const params = new URLSearchParams({
-      lines: config.lines,
-      font: config.font,
-      size: config.size,
-      color: config.color,
-      background: config.background,
-      width: config.width,
-      height: config.height,
-      center: config.center.toString(),
-      vCenter: config.vCenter.toString(),
-      multiline: config.multiline.toString(),
-      duration: config.duration,
-      pause: config.pause,
-      repeat: config.repeat.toString(),
-      letterSpacing: config.letterSpacing,
-    });
+    const params = new URLSearchParams();
+
+    // 必填项
+    params.append('lines', config.lines);
+
+    // 可选项：只有当值不等于默认值时才添加
+    if (config.font !== DEFAULT_CONFIG.font) params.append('font', config.font);
+    if (config.size !== DEFAULT_CONFIG.size) params.append('size', config.size);
+    if (config.color !== DEFAULT_CONFIG.color) params.append('color', config.color);
+    if (config.background !== DEFAULT_CONFIG.background) params.append('background', config.background);
+    if (config.width !== DEFAULT_CONFIG.width) params.append('width', config.width);
+    if (config.height !== DEFAULT_CONFIG.height) params.append('height', config.height);
+    if (config.center !== DEFAULT_CONFIG.center) params.append('center', config.center.toString());
+    if (config.vCenter !== DEFAULT_CONFIG.vCenter) params.append('vCenter', config.vCenter.toString());
+    if (config.multiline !== DEFAULT_CONFIG.multiline) params.append('multiline', config.multiline.toString());
+    if (config.duration !== DEFAULT_CONFIG.duration) params.append('duration', config.duration);
+    if (config.pause !== DEFAULT_CONFIG.pause) params.append('pause', config.pause);
+    if (config.repeat !== DEFAULT_CONFIG.repeat) params.append('repeat', config.repeat.toString());
+    if (config.letterSpacing !== DEFAULT_CONFIG.letterSpacing) params.append('letterSpacing', config.letterSpacing);
+    if (config.weight !== DEFAULT_CONFIG.weight) params.append('weight', config.weight);
+
     setPreviewUrl(`${baseUrl}/api/github/typing-svg?${params.toString()}`);
     setRefreshKey(Date.now());
   }, [config, baseUrl]);
@@ -282,6 +305,15 @@ export default function TypingSVGPage() {
                     />
                     <span className="text-sm text-foreground">循环播放</span>
                   </div>
+                  <div className="flex items-center space-x-2">
+                    <input
+                      type="checkbox"
+                      checked={config.weight === 'bold'}
+                      onChange={(e) => setConfig({ ...config, weight: e.target.checked ? 'bold' : '400' })}
+                      className="w-4 h-4 cursor-pointer"
+                    />
+                    <span className="text-sm text-foreground">是否加粗</span>
+                  </div>
                 </div>
               </div>
             </GlowCard>
@@ -372,6 +404,7 @@ export default function TypingSVGPage() {
                     <div><code className="bg-secondary px-1 rounded">duration</code> - 打字时长（毫秒）</div>
                     <div><code className="bg-secondary px-1 rounded">pause</code> - 暂停时长（毫秒）</div>
                     <div><code className="bg-secondary px-1 rounded">repeat</code> - 循环播放（true/false）</div>
+                    <div><code className="bg-secondary px-1 rounded">weight</code> - 字体粗细（400/bold）</div>
                   </div>
                 </div>
               </div>
