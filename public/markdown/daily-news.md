@@ -1,62 +1,60 @@
-(node:2382) MaxListenersExceededWarning: Possible EventTarget memory leak detected. 11 abort listeners added to [AbortSignal]. MaxListeners is 10. Use events.setMaxListeners() to increase limit
-(Use `node --trace-warnings ...` to show where the warning was created)
 # Global Breaking News TOP10
 
-**Date**: 2025年12月02日
-**Update Time**: 10:22 UTC
+**Date**: 2025年12月03日
+**Update Time**: 10:23 UTC
 **AI Model**: Google Gemini / Google Gemini
 
 ---
 
-### 1. **Asia Floods Death Toll Surpasses 1,100** / **亚洲洪水死亡人数超过1100人**
-- **Time**: 2025-12-02
-- **Content**: The death toll from devastating floods across Indonesia, Sri Lanka, Thailand, and Malaysia has surpassed 1,100, with hundreds still missing. Rescue efforts are intensifying as these nations deploy their militaries to assist. / 印度尼西亚、斯里兰卡、泰国和马来西亚等国的特大洪水已导致超过1100人死亡，另有数百人失踪。随着各国军队的部署，救援工作正在加紧进行。
-- **Source**: Al Jazeera
-
-### 2. **Hong Kong Apartment Fire Death Toll Rises to 146** / **香港公寓火灾死亡人数升至146人**
-- **Time**: 2025-12-02
-- **Content**: A fire in a Hong Kong apartment complex has resulted in a death toll of 146, with over 100 people still unaccounted for. Unsafe netting is believed to have contributed to the deadly blaze. / 香港一栋公寓大楼发生火灾，已造成146人死亡，仍有100多人下落不明。据信，不安全的网状结构导致了这场致命火灾。
-- **Source**: Associated Press
-
-### 3. **Tensions Escalate Between Venezuela and US** / **委内瑞拉与美国紧张关系升级**
-- **Time**: 2025-12-02
-- **Content**: Tensions are escalating between Venezuela and the United States after President Trump reportedly issued an ultimatum to Venezuelan leader Maduro to relinquish power. The US has also discussed Venezuela with advisors amid concerns over a military build-up. / 据报道，美国总统特朗普向委内瑞拉领导人马杜罗发出放弃权力的最后通牒后，两国紧张局势不断升级。与此同时，美国也因担心委内瑞拉的军事集结而与顾问进行了讨论。
-- **Source**: The Guardian
-
-### 4. **Russia Claims to Have Captured Pokrovsk in Eastern Ukraine** / **俄罗斯声称占领乌克兰东部城市波克罗夫斯克**
-- **Time**: 2025-12-02
-- **Content**: Russia claims to have captured Pokrovsk, a key logistics hub in eastern Ukraine. The city is a strategic prize and its capture would be a significant blow to Ukraine's war effort. / 俄罗斯声称已占领乌克兰东部的重要后勤枢纽波克罗夫斯克。这座城市是一个战略要地，其陷落将对乌克兰的战局造成重大打击。
-- **Source**: Reuters
-
-### 5. **Canada Joins EU Defense Initiative** / **加拿大加入欧盟防务倡议**
-- **Time**: 2025-12-02
-- **Content**: Canada has joined the Security Action for Europe (SAFE) initiative, granting Canadian defense companies expanded access to the European market. The move is seen as a response to growing concerns about security in Europe. / 加拿大已加入“欧洲安全行动”（SAFE）倡议，此举将使加拿大国防公司扩大进入欧洲市场的渠道。此举被视为对欧洲日益增长的安全担忧的回应。
+### 1. **Putin Warns Europe Against Escalation** / **普京警告欧洲不要让局势升级**
+- **Time**: 2025-12-03
+- **Content**: Russian President Vladimir Putin has issued a stark warning to European nations, stating that Russia is prepared for war if Europe chooses to escalate the conflict in Ukraine. This statement comes after talks with the U.S. which were described as productive but inconclusive. / 俄罗斯总统弗拉基米尔·普京向欧洲国家发出严厉警告，称如果欧洲选择升级乌克兰冲突，俄罗斯已做好战争准备。此番言论发表之前，俄罗斯与美国举行了会谈，会谈被形容为富有成效但尚无定论。
 - **Source**: Global News
 
-### 6. **Mexican Authorities Kill Top Fentanyl Trafficker** / **墨西哥当局击毙头号芬太尼毒贩**
-- **Time**: 2025-12-02
-- **Content**: Mexican authorities have killed one of the country's top fentanyl traffickers in a shootout. The death is a major victory for Mexican and U.S. law enforcement in the fight against the deadly opioid. / 墨西哥当局在一次枪战中击毙了该国一名顶级的芬太尼贩运者。此次行动是墨西哥和美国执法部门打击致命阿片类药物斗争中的一次重大胜利。
+### 2. **Trump Makes Controversial Remarks on Somali Migrants** / **特朗普就索马里移民发表争议性言论**
+- **Time**: 2025-12-03
+- **Content**: Former US President Donald Trump has sparked controversy by referring to Somali migrants as "garbage" and stating he does not want them in the country. He also threatened a permanent pause on migration from "third-world" countries. / 美国前总统唐纳德·特朗普称索马里移民为“垃圾”，并表示不希望他们进入美国，此番言论引发争议。他还威胁将永久暂停来自“第三世界”国家的移民。
 - **Source**: The Guardian
 
-### 7. **New Zealand Man Charged with Theft of Fabergé Pendant** / **新西兰男子被控盗窃法贝热彩蛋**
-- **Time**: 2025-12-02
-- **Content**: A man in New Zealand has been charged with theft after allegedly swallowing a Fabergé pendant in a jewelry store. The rare pendant is valued at over $100,000. / 新西兰一名男子在一家珠宝店吞下一枚法贝热彩蛋后，被控盗窃。这枚罕见的彩蛋价值超过10万美元。
+### 3. **Search for Missing Malaysia Airlines Flight MH370 to Resume** / **马航失联航班MH370搜寻工作将重启**
+- **Time**: 2025-12-03
+- **Content**: The search for Malaysia Airlines flight MH370, which vanished in 2014, is set to resume on December 30th, over 11 years after its mysterious disappearance. The new search will be conducted by Ocean Infinity. / 2014年失踪的马来西亚航空公司MH370航班的搜寻工作定于12月30日重启，距离其神秘失踪已超过11年。新的搜寻工作将由“海洋无限”公司负责。
+- **Source**: The Hindu
+
+### 4. **Historic Fabergé Egg Sells for Record $30.2 Million at Auction** / **历史性的法贝热彩蛋在拍卖会上以3020万美元创纪录成交**
+- **Time**: 2025-12-03
+- **Content**: A rare Fabergé egg, originally created for Russian royalty, has been sold for a record-breaking $30.2 million at a London auction. The identity of the buyer has not been disclosed. / 一枚最初为俄罗斯皇室制作的罕见法贝热彩蛋在伦敦拍卖会上以创纪录的3020万美元成交。买家身份尚未透露。
+- **Source**: Global News
+
+### 5. **British Military Instructor Arrested in Ukraine on Spying Allegations** / **英国军事教官因间谍指控在乌克兰被捕**
+- **Time**: 2025-12-03
+- **Content**: A British military instructor has been arrested in Ukraine on suspicion of spying for Russia. The instructor was reportedly providing training to Ukrainian forces. / 一名英国军事教官因涉嫌为俄罗斯从事间谍活动而在乌克兰被捕。据报道，该教官当时正在为乌克兰军队提供培训。
 - **Source**: The Guardian
 
-### 8. **India Mandates Government Cyber Safety App on All Smartphones** / **印度强制所有智能手机安装政府网络安全应用程序**
-- **Time**: 2025-12-02
-- **Content**: India has mandated the pre-installation of a government cyber safety app on all smartphones. The move is aimed at curbing cybercrime and protecting citizens from online fraud. / 印度已强制要求所有智能手机预装一款政府网络安全应用程序。此举旨在遏制网络犯罪，保护公民免受网络欺诈。
-- **Source**: The Times of India
+### 6. **WHO Recommends GLP-1 Drugs for Obesity Treatment** / **世卫组织推荐使用GLP-1类药物治疗肥胖症**
+- **Time**: 2025-12-03
+- **Content**: The World Health Organization (WHO) has officially recommended the use of GLP-1 receptor agonists, a class of drugs originally developed for diabetes, for the treatment of obesity, marking a significant shift in global health policy. / 世界卫生组织（WHO）已正式推荐使用GLP-1受体激动剂类药物治疗肥胖症，这类药物最初是为糖尿病开发的，这标志着全球卫生政策的重大转变。
+- **Source**: Global News
 
-### 9. **Iranian Director Jafar Panahi Sentenced to a Year in Prison** / **伊朗导演贾法·帕纳西被判处一年监禁**
-- **Time**: 2025-12-02
-- **Content**: Award-winning Iranian director Jafar Panahi has been sentenced to a year in prison for "propaganda activities." The sentence has been widely condemned by international human rights organizations. / 屡获殊荣的伊朗导演贾法·帕纳西因“宣传活动”被判处一年监禁。该判决受到国际人权组织的广泛谴责。
+### 7. **Prada Acquires Rival Fashion House Versace in $1.4 Billion Deal** / **普拉达以14亿美元收购竞争对手范思哲**
+- **Time**: 2025-12-03
+- **Content**: In a major luxury fashion merger, Prada has announced its acquisition of rival Italian brand Versace for approximately $1.4 billion. The deal is expected to create a new fashion powerhouse. / 在一次重大的奢侈品时尚界合并中，普拉达宣布以约14亿美元的价格收购其意大利竞争对手范思哲。该交易预计将缔造一个新的时尚巨头。
+- **Source**: Global News
+
+### 8. **AI Boom Sparks Global Semiconductor Shortage** / **人工智能热潮引发全球半导体短缺**
+- **Time**: 2025-12-03
+- **Content**: The rapid growth of artificial intelligence technologies is causing a worldwide shortage of high-performance semiconductor chips. This supply crisis is driving up prices and impacting various industries, from consumer electronics to automotive manufacturing. / 人工智能技术的飞速发展正导致全球高性能半导体芯片短缺。这场供应危机正在推高价格，并对从消费电子到汽车制造等多个行业产生影响。
+- **Source**: Business Standard
+
+### 9. **Former Honduran President Freed After Trump Pardon** / **洪都拉斯前总统在特朗普赦免后获释**
+- **Time**: 2025-12-03
+- **Content**: Juan Orlando Hernández, the former president of Honduras, has been released from prison after receiving a pardon from former U.S. President Donald Trump for a drug trafficking conviction. / 洪都拉斯前总统胡安·奥兰多·埃尔南德斯因贩毒罪名被定罪，在获得美国前总统唐纳德·特朗普的赦免后，已从监狱获释。
 - **Source**: The Guardian
 
-### 10. **El Chapo's Son Pleads Guilty in US Drug Case** / **“矮子”古兹曼之子在美国毒品案中认罪**
-- **Time**: 2025-12-02
-- **Content**: The son of notorious drug lord "El Chapo" has pleaded guilty in a US drug case, reaching a deal with prosecutors. He is expected to face a lengthy prison sentence. / 臭名昭著的大毒枭“矮子”古兹曼的儿子在美国的一起毒品案件中认罪，并与检察官达成了协议。他预计将面临长期监禁。
-- **Source**: Sky News
+### 10. **"Rage Bait" Named Oxford's 2025 Word of the Year** / **“愤怒诱饵”被评为牛津词典2025年度词汇**
+- **Time**: 2025-12-03
+- **Content**: Oxford University Press has declared "rage bait" as its word of the year for 2025, defining it as content deliberately designed to provoke anger in order to increase engagement. / 牛津大学出版社宣布“愤怒诱饵”为其2025年的年度词汇，其定义为旨在故意激起愤怒以增加参与度的内容。
+- **Source**: Global News
 
 ---
 
