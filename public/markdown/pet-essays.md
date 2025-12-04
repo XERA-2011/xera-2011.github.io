@@ -1,41 +1,43 @@
 # 应用文
 
-## An email to a gym asking about membership fees and facilities
-- 给健身房写一封邮件，咨询会员费用和设施情况
+## An email to a penfriend describing your typical school day
+- 一封向笔友描述你典型学校一天的邮件
 
 **正文**：
 
-Dear Sir or Madam,
+Hi Alex,
 
-I am writing to inquire about membership options at your gym. I live near your facility and am interested in joining.
+Thanks for your email. You asked about my school days. Well, they're usually quite busy! I get up around 7:00 AM, have a quick breakfast, and then walk to school with my friends. Classes begin at 8:30 AM.
 
-Could you please provide details about your monthly and annual membership fees? I would also like to know if there are any special discounts for students. Furthermore, I am curious about the facilities you offer. Do you have a swimming pool and offer group classes, such as yoga or spinning? If so, are these included in the standard membership fee?
+My favourite subjects are History and Art. We have a long lunch break at noon, so I often play basketball in the school playground. School finishes at 4:00 PM. In the evening, after doing my homework, I usually relax by watching a film or reading a book. I go to bed at about 10:00 PM.
 
-I look forward to hearing from you soon.
+Write back soon!
 
-Best regards,
+Best wishes,
+Sam
 
-Chris Wang
-
-- 尊敬的先生或女士：
-- 我写信是为了咨询贵健身房的会员选项。我住在健身房附近，有兴趣加入。
-- 您能否提供关于月度和年度会员费用的详细信息？我还想知道是否有针对学生的特殊折扣。此外，我对你们提供的设施很好奇。请问你们有游泳池吗？是否提供瑜伽或动感单车等团体课程？如果有，这些项目是否包含在标准会员费中？
-- 期待您的尽快回复。
-- 此致，
-- Chris Wang
+- 嗨，亚历克斯，
+- 谢谢你的邮件。你问起我平日上学的情况。嗯，通常都挺忙的！我大约早上7点起床，快速吃完早餐，然后和朋友们一起走路去学校。课程从早上8点30分开始。
+- 我最喜欢的科目是历史和艺术。我们在中午有很长的午休时间，所以我经常在学校操场上打篮球。下午4点放学。晚上，做完作业后，我通常会看一部电影或读一本书来放松。我大概在晚上10点睡觉。
+- 记得快点回信哦！
+- 最好的祝愿，
+- 山姆
 
 ---
 
 # 记叙文/短文
 
-## Write a story about an unexpected message you received
-- 写一个关于你收到的意外消息的故事
+## An article explaining how students can help protect the environment
+- 一篇解释学生如何帮助保护环境的文章
 
 **正文**：
 
-Last Saturday, I was relaxing at home when my phone buzzed. It was a message from an unknown number. "Hi, is this Alex? I found your old sketchbook from high school in a box of used books I bought." I was shocked. I had lost that sketchbook years ago and thought it was gone forever. It contained all my favourite drawings.
+Our planet needs our help, and students can play a big part in protecting it. There are many simple ways to be more environmentally friendly in our daily lives.
 
-I quickly replied, and we arranged to meet at a local café. The person, a friendly student named Leo, returned my sketchbook. I was so grateful that I bought him a coffee and we chatted for an hour about art and school. It felt amazing to have a piece of my past returned to me so unexpectedly.
+Firstly, we can reduce waste by using reusable bags and water bottles. Instead of throwing things away, think about whether they can be reused or recycled. Secondly, we should all try to save energy. This can be as simple as turning off lights and electronics when they are not in use. Finally, participating in local green projects, like planting trees or cleaning up parks, is a great way to contribute.
 
-- 上周六，我正在家休息，手机突然响了一声。是一条来自未知号码的消息：“你好，请问是Alex吗？我在我买的一箱旧书里，找到了你高中的素描本。”我当时惊呆了。那本素描本我多年前就丢了，以为再也找不回来了。里面全是我最喜欢的画。
-- 我赶紧回复，我们约在一家本地咖啡馆见面。对方是一位友好的学生，名叫Leo，他把素描本还给了我。我非常感激，请他喝了杯咖啡，我们聊了一个小时关于艺术和学校的事情。能如此意外地找回一段属于我过去的回忆，感觉真是太棒了。
+If we all make these small changes, we can create a big difference.
+
+- 我们的地球需要我们的帮助，而学生可以在保护地球方面发挥重要作用。在我们的日常生活中，有很多简单的方法可以让我们变得更加环保。
+- 首先，我们可以通过使用可重复使用的袋子和水瓶来减少浪费。与其把东西扔掉，不如想一想它们是否可以被重复利用或回收。其次，我们都应该努力节约能源。这可以像在不使用电灯和电子设备时将它们关闭一样简单。最后，参加当地的绿色项目，比如植树或清理公园，是做出贡献的好方法。
+- 如果我们都能做出这些小小的改变，我们就能创造出巨大的不同。
