@@ -1,60 +1,60 @@
 # Global Breaking News TOP10
 
-**Date**: 2025年12月03日
-**Update Time**: 22:20 UTC
+**Date**: 2025年12月04日
+**Update Time**: 10:24 UTC
 **AI Model**: Google Gemini / Google Gemini
 
 ---
 
-### 1. **MH370 Search to Resume After 11 Years** / **MH370搜寻工作时隔11年将重启**
-- **Time**: 2025-12-03
-- **Content**: The Malaysian government has announced its intention to resume the search for Malaysia Airlines Flight MH370, which disappeared in 2014. A new "no find, no fee" proposal from U.S. seabed exploration company Ocean Infinity is being considered. / 马来西亚政府宣布，打算重新启动对2014年失踪的马来西亚航空公司MH370航班的搜寻工作。美国海底勘探公司“海洋无限”提出了一项新的“找不到，不收费”的建议，目前正在审议中。
-- **Source**: The Guardian
-
-### 2. **EU to Ban Russian Gas Imports by 2027** / **欧盟将在2027年前禁止俄罗斯天然气进口**
-- **Time**: 2025-12-03
-- **Content**: European Union lawmakers have reached a deal to ban the import of Russian gas by autumn 2027. This move is part of the EU's broader strategy to reduce its energy dependence on Russia. / 欧盟立法者已达成协议，将在2027年秋季前禁止进口俄罗斯天然气。此举是欧盟旨在减少对俄能源依赖的更广泛战略的一部分。
-- **Source**: NDTV
-
-### 3. **Whistleblower Accuses UK Foreign Office of Censoring Sudan Genocide Warnings** / **举报人指控英国外交部审查苏丹种族灭绝警告**
-- **Time**: 2025-12-03
-- **Content**: A whistleblower has alleged that the UK's Foreign, Commonwealth and Development Office (FCDO) has been "censoring" internal warnings of genocide in Sudan. The claim suggests that crucial information about the escalating crisis has been suppressed. / 一名举报人称，英国外交、联邦和发展办公室（FCDO）一直在“审查”有关苏丹种族灭绝的内部警告。该指控表明，有关不断升级的危机的关键信息遭到了压制。
-- **Source**: The Guardian
-
-### 4. **New Epstein Island Videos and Images Released by House Democrats** / **众议院民主党人公布爱泼斯坦岛屿新视频和图像**
-- **Time**: 2025-12-03
-- **Content**: House Democrats have released new videos and images of Jeffrey Epstein's private Caribbean island, taken in 2020, a year after his death. The footage provides a closer look at the controversial estate. / 众议院民主党人公布了杰弗里·爱泼斯坦在加勒比海的私人岛屿的新视频和图像，拍摄于2020年，即他去世一年后。这些画面让人们更近距离地看到了这座备受争议的庄园。
-- **Source**: Sky News
-
-### 5. **Colombian President Warns Trump Against Military Threats** / **哥伦比亚总统警告特朗普不要进行军事威胁**
-- **Time**: 2025-12-03
-- **Content**: Colombia's president has issued a stern warning to Donald Trump, advising him against making threats of military strikes. The Colombian leader's message was clear: "Do not wake the jaguar." / 哥伦比亚总统向唐纳德·特朗普发出严厉警告，建议他不要发出军事打击的威胁。这位哥伦比亚领导人的信息很明确：“不要唤醒美洲豹。”
-- **Source**: The Guardian
-
-### 6. **Former Honduran President Freed After Trump Pardon** / **洪都拉斯前总统在特朗普赦免后获释**
-- **Time**: 2025-12-03
-- **Content**: Juan Orlando Hernández, the former president of Honduras, has been released from prison following a pardon from Donald Trump. Hernández had been convicted on drug trafficking charges. / 洪都拉斯前总统胡安·奥兰多·埃尔南德斯在获得唐纳德·特朗普的赦免后已从监狱获释。埃尔南德斯此前因贩毒罪被定罪。
-- **Source**: Associated Press
-
-### 7. **EU Considers Forcing Industry to Cut China Reliance on Rare Earths** / **欧盟考虑强制工业界减少对中国稀土的依赖**
-- **Time**: 2025-12-03
-- **Content**: The European Union is reportedly considering legally compelling industries to reduce their purchases of critical rare earth metals from China. This is part of a €3 billion strategy to diversify supply chains. / 据报道，欧盟正在考虑通过法律手段强制工业界减少从中国购买关键稀土金属。这是一项价值30亿欧元的供应链多元化战略的一部分。
-- **Source**: The Guardian
-
-### 8. **Three Policemen Killed in IED Blast in Northwest Pakistan** / **巴基斯坦西北部简易爆炸装置爆炸致三名警察死亡**
-- **Time**: 2025-12-03
-- **Content**: An improvised explosive device (IED) targeted a police vehicle in northwest Pakistan, killing three policemen. The attack highlights the ongoing security challenges in the region. / 巴基斯坦西北部发生一起简易爆炸装置袭击警车的事件，造成三名警察死亡。此次袭击凸显了该地区持续存在的安全挑战。
+### 1. **Putin Visits India for High-Stakes Talks on Trade and Defense** / **普京访问印度，就贸易和国防问题举行高风险会谈**
+- **Time**: 2025-12-04
+- **Content**: Russian President Vladimir Putin is in India for a high-profile summit with Prime Minister Narendra Modi, focusing on strengthening bilateral trade and defense ties. The visit comes amid complex geopolitical dynamics, with both nations navigating their relationships with the West. / 俄罗斯总统弗拉基米尔·普京正在印度与纳伦德拉·莫迪总理举行备受瞩目的峰会，重点是加强双边贸易和国防关系。此次访问正值地缘政治动态复杂之际，两国都在处理与西方的关系。
 - **Source**: The Hindu
 
-### 9. **Iran's Currency Hits New Low Against Dollar Amid Sanctions** / **制裁之下伊朗货币对美元汇率创历史新低**
-- **Time**: 2025-12-03
-- **Content**: The Iranian rial has fallen to a new record low against the US dollar. The currency's depreciation is largely attributed to the ongoing international sanctions related to Iran's nuclear program. / 伊朗里亚尔对美元的汇率跌至历史新低。货币贬值主要归因于与伊朗核计划有关的持续国际制裁。
-- **Source**: NDTV
-
-### 10. **NATO 'Ready to Do What It Takes' to Protect Europe, Russia Denies Rejecting Peace Plan** / **北约“准备好采取一切必要措施”保护欧洲，俄罗斯否认拒绝和平计划**
-- **Time**: 2025-12-03
-- **Content**: NATO has affirmed its readiness to take all necessary measures to protect Europe, while Russia has denied claims that it rejected a peace plan for Ukraine. Tensions remain high as diplomatic efforts continue. / 北约重申准备采取一切必要措施保护欧洲，而俄罗斯则否认有关其拒绝乌克兰和平计划的说法。在外交努力持续的同时，紧张局势依然高度紧张。
+### 2. **Trump's Vague Ukraine Peace Plan Draws Skepticism** / **特朗普含糊不清的乌克兰和平计划引人质疑**
+- **Time**: 2025-12-04
+- **Content**: Former U.S. President Donald Trump has hinted at a plan to end the war in Ukraine, but the lack of clear details has been met with skepticism from international observers and Ukrainian officials. The path to a peaceful resolution remains uncertain. / 美国前总统唐纳德·特朗普暗示有计划结束乌克兰战争，但由于缺乏明确细节，遭到国际观察员和乌克兰官员的质疑。和平解决的道路仍然不确定。
 - **Source**: The Guardian
+
+### 3. **EU Explores Using Frozen Russian Assets to Fund Ukraine** / **欧盟探索利用冻结的俄罗斯资产资助乌克兰**
+- **Time**: 2025-12-04
+- **Content**: The European Union is actively considering a plan to utilize profits from frozen Russian assets to provide financial aid to Ukraine. However, some member states, like Belgium, have raised concerns about the potential legal and financial risks involved. / 欧盟正在积极考虑一项计划，利用冻结的俄罗斯资产的利润向乌克兰提供财政援助。然而，比利时等一些成员国对其中涉及的潜在法律和金融风险表示担忧。
+- **Source**: AP News
+
+### 4. **Xi and Macron Vow Cooperation on Global Crises** / **习近平和马克龙誓言就全球危机进行合作**
+- **Time**: 2025-12-04
+- **Content**: Chinese President Xi Jinping and French President Emmanuel Macron have pledged to enhance cooperation in addressing global crises and trade issues. The leaders emphasized the importance of a strong Sino-French partnership in a joint statement. / 中国国家主席习近平和法国总统埃马纽埃尔·马克龙承诺在应对全球危机和贸易问题方面加强合作。两国领导人在一份联合声明中强调了牢固的中法伙伴关系的重要性。
+- **Source**: AP News
+
+### 5. **Minor Earthquake Shakes Northern England** / **轻微地震撼动英格兰北部**
+- **Time**: 2025-12-04
+- **Content**: A 3.3 magnitude earthquake was recorded in Lancashire and the Lake District in England, causing minor tremors but no significant damage. The British Geological Survey confirmed the event, which was felt by some local residents. / 英国兰开夏郡和湖区记录到3.3级地震，造成轻微震感，但没有造成重大损失。英国地质调查局证实了此次事件，一些当地居民有震感。
+- **Source**: The Guardian
+
+### 6. **Search for Missing Malaysia Airlines Flight MH370 to Resume** / **失踪的马来西亚航空公司MH370航班的搜寻工作将恢复**
+- **Time**: 2025-12-04
+- **Content**: The Malaysian government has announced its commitment to resuming the search for Malaysia Airlines Flight MH370, which disappeared in 2014. The new search effort will be based on a "no find, no fee" proposal from a U.S. seabed exploration firm. / 马来西亚政府宣布将致力于恢复对2014年失踪的马来西亚航空公司MH370航班的搜寻工作。新的搜寻工作将基于一家美国海底勘探公司提出的“找不到不收费”的建议。
+- **Source**: Global News
+
+### 7. **Thailand Cracks Down on Cyberscams, Seizing Over $300 Million** / **泰国打击网络诈骗，缴获超过3亿美元**
+- **Time**: 2025-12-04
+- **Content**: Thai authorities have seized over $300 million in assets and issued 42 arrest warrants in a major crackdown on cyberscam operations. The move is part of a broader effort to combat online fraud in the region. / 泰国当局在一次针对网络诈骗行动的重大打击中，缴获了超过3亿美元的资产，并签发了42份逮捕令。此举是该地区打击网络欺诈的更广泛努力的一部分。
+- **Source**: The Guardian
+
+### 8. **Taliban Carries Out Public Execution in Afghanistan** / **塔利班在阿富汗进行公开处决**
+- **Time**: 2025-12-04
+- **Content**: Afghanistan's Taliban rulers carried out a public execution in a sports stadium, the latest indication of their return to the hardline policies of their previous rule. The event has drawn condemnation from international human rights organizations. / 阿富汗塔利班统治者在一座体育场进行了公开处决，这是他们恢复其先前统治时期强硬政策的最新迹象。此事件受到国际人权组织的谴责。
+- **Source**: AP News
+
+### 9. **Doctor Sentenced for Supplying Ketamine to Matthew Perry** / **向马修·佩里提供氯胺酮的医生被判刑**
+- **Time**: 2025-12-04
+- **Content**: A doctor who sold ketamine to "Friends" star Matthew Perry has been sentenced to 2.5 years in prison. The case has highlighted the dangers of illicit drug use and the responsibilities of medical professionals. / 向《老友记》主演马修·佩里出售氯胺酮的医生被判处2.5年监禁。此案凸显了非法吸毒的危险以及医务人员的责任。
+- **Source**: The Hindu
+
+### 10. **New Epstein Island Files Released by House Democrats** / **众议院民主党人公布新的爱泼斯坦岛屿文件**
+- **Time**: 2025-12-04
+- **Content**: Never-before-seen photos and videos of Jeffrey Epstein's private island have been released by House Democrats. The materials are part of the ongoing investigation into Epstein's trafficking network and have renewed calls for accountability. / 众议院民主党人公布了前所未见的杰弗里·爱泼斯坦私人岛屿的照片和视频。这些材料是正在进行的对爱泼斯坦贩卖网络的调查的一部分，并再次引发了追究责任的呼声。
+- **Source**: Global News
 
 ---
 
