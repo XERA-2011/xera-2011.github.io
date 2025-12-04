@@ -25,42 +25,53 @@ export default function RegisterPage() {
   const [error, setError] = useState('')
 
   // 加载验证码
-  const loadCaptcha = useCallback(async () => {
+  const loadCaptcha = useCallback(async (signal?: AbortSignal) => {
     try {
-      // 如果已有 URL，先释放
-      if (captchaUrl) {
-        URL.revokeObjectURL(captchaUrl)
-      }
-
       const response = await fetch('/api/captcha', {
         headers: {
           'Cache-Control': 'no-cache'
-        }
+        },
+        signal
       })
       const id = response.headers.get('X-Captcha-Id')
       const svg = await response.text()
 
       if (id && svg) {
+        // 先释放旧的 URL（在更新前）
+        setCaptchaUrl((prevUrl) => {
+          if (prevUrl) {
+            URL.revokeObjectURL(prevUrl)
+          }
+          const blob = new Blob([svg], { type: 'image/svg+xml' })
+          return URL.createObjectURL(blob)
+        })
         setCaptchaId(id)
-        const blob = new Blob([svg], { type: 'image/svg+xml' })
-        const url = URL.createObjectURL(blob)
-        setCaptchaUrl(url)
       }
-    } catch (err) {
+    } catch (err: any) {
+      if (err.name === 'AbortError') {
+        return
+      }
       console.error('加载验证码失败:', err)
       setError('加载验证码失败，请刷新重试')
     }
-  }, [captchaUrl])
+  }, [])
 
   // 组件挂载时加载验证码
   useEffect(() => {
-    loadCaptcha()
+    const controller = new AbortController()
+    loadCaptcha(controller.signal)
+
+    // 组件卸载时清理
     return () => {
-      if (captchaUrl) {
-        URL.revokeObjectURL(captchaUrl)
-      }
+      controller.abort()
+      setCaptchaUrl((prevUrl) => {
+        if (prevUrl) {
+          URL.revokeObjectURL(prevUrl)
+        }
+        return ''
+      })
     }
-  }, [loadCaptcha, captchaUrl])
+  }, [loadCaptcha])
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault()
@@ -184,7 +195,7 @@ export default function RegisterPage() {
                     type="button"
                     variant="outline"
                     size="icon"
-                    onClick={loadCaptcha}
+                    onClick={() => loadCaptcha()}
                     disabled={loading}
                     title="刷新验证码"
                   >
