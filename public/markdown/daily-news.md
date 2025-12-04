@@ -1,60 +1,60 @@
 # Global Breaking News TOP10
 
 **Date**: 2025年12月04日
-**Update Time**: 10:24 UTC
+**Update Time**: 22:17 UTC
 **AI Model**: Google Gemini / Google Gemini
 
 ---
 
-### 1. **Putin Visits India for High-Stakes Talks on Trade and Defense** / **普京访问印度，就贸易和国防问题举行高风险会谈**
+### 1. **Macron Reportedly Warns Zelenskyy of Potential US "Betrayal" on Territory** / **据报马克龙警告泽连斯基美国可能在领土问题上“背叛”乌克兰**
 - **Time**: 2025-12-04
-- **Content**: Russian President Vladimir Putin is in India for a high-profile summit with Prime Minister Narendra Modi, focusing on strengthening bilateral trade and defense ties. The visit comes amid complex geopolitical dynamics, with both nations navigating their relationships with the West. / 俄罗斯总统弗拉基米尔·普京正在印度与纳伦德拉·莫迪总理举行备受瞩目的峰会，重点是加强双边贸易和国防关系。此次访问正值地缘政治动态复杂之际，两国都在处理与西方的关系。
-- **Source**: The Hindu
-
-### 2. **Trump's Vague Ukraine Peace Plan Draws Skepticism** / **特朗普含糊不清的乌克兰和平计划引人质疑**
-- **Time**: 2025-12-04
-- **Content**: Former U.S. President Donald Trump has hinted at a plan to end the war in Ukraine, but the lack of clear details has been met with skepticism from international observers and Ukrainian officials. The path to a peaceful resolution remains uncertain. / 美国前总统唐纳德·特朗普暗示有计划结束乌克兰战争，但由于缺乏明确细节，遭到国际观察员和乌克兰官员的质疑。和平解决的道路仍然不确定。
+- **Content**: French President Emmanuel Macron has reportedly warned his Ukrainian counterpart, Volodymyr Zelenskyy, that the United States might "betray Ukraine on territory," suggesting a potential shift in support. / 据报道，法国总统埃马纽埃尔·马克龙警告乌克兰总统弗拉基米尔·泽连斯基，美国可能“在领土问题上背叛乌克兰”，这暗示了支持立场的潜在转变。
 - **Source**: The Guardian
 
-### 3. **EU Explores Using Frozen Russian Assets to Fund Ukraine** / **欧盟探索利用冻结的俄罗斯资产资助乌克兰**
+### 2. **Putin and Modi Meet in New Delhi to Strengthen Russia-India Ties** / **普京与莫迪在新德里会晤以加强俄印关系**
 - **Time**: 2025-12-04
-- **Content**: The European Union is actively considering a plan to utilize profits from frozen Russian assets to provide financial aid to Ukraine. However, some member states, like Belgium, have raised concerns about the potential legal and financial risks involved. / 欧盟正在积极考虑一项计划，利用冻结的俄罗斯资产的利润向乌克兰提供财政援助。然而，比利时等一些成员国对其中涉及的潜在法律和金融风险表示担忧。
-- **Source**: AP News
+- **Content**: Russian President Vladimir Putin and Indian Prime Minister Narendra Modi held a summit in New Delhi, focusing on bolstering strategic and defense cooperation between the two nations amidst a changing global geopolitical landscape. / 俄罗斯总统弗拉基米尔·普京与印度总理纳伦德拉·莫迪在新德里举行峰会，重点是在不断变化的全球地缘政治格局中加强两国间的战略与防务合作。
+- **Source**: Associated Press
 
-### 4. **Xi and Macron Vow Cooperation on Global Crises** / **习近平和马克龙誓言就全球危机进行合作**
+### 3. **Putin Accused of "Wasting the World's Time" After Rejecting Proposed Peace Deal** / **普京在拒绝和平协议提议后被指责“浪费世界时间”**
 - **Time**: 2025-12-04
-- **Content**: Chinese President Xi Jinping and French President Emmanuel Macron have pledged to enhance cooperation in addressing global crises and trade issues. The leaders emphasized the importance of a strong Sino-French partnership in a joint statement. / 中国国家主席习近平和法国总统埃马纽埃尔·马克龙承诺在应对全球危机和贸易问题方面加强合作。两国领导人在一份联合声明中强调了牢固的中法伙伴关系的重要性。
-- **Source**: AP News
+- **Content**: Vladimir Putin has been accused of "wasting the world's time" after he reportedly rejected a peace deal for Ukraine proposed by Donald Trump's envoys, prolonging the conflict. / 据报道，在弗拉基米尔·普京拒绝了唐纳德·特朗普的特使提出的乌克兰和平协议后，他被指责为“浪费世界的时间”，延长了冲突。
+- **Source**: Sky News
 
-### 5. **Minor Earthquake Shakes Northern England** / **轻微地震撼动英格兰北部**
+### 4. **UK Inquiry Formally Blames Putin and Russian Agents for 2018 Poisoning** / **英国调查正式指控普京及俄罗斯特工对2018年投毒案负责**
 - **Time**: 2025-12-04
-- **Content**: A 3.3 magnitude earthquake was recorded in Lancashire and the Lake District in England, causing minor tremors but no significant damage. The British Geological Survey confirmed the event, which was felt by some local residents. / 英国兰开夏郡和湖区记录到3.3级地震，造成轻微震感，但没有造成重大损失。英国地质调查局证实了此次事件，一些当地居民有震感。
-- **Source**: The Guardian
-
-### 6. **Search for Missing Malaysia Airlines Flight MH370 to Resume** / **失踪的马来西亚航空公司MH370航班的搜寻工作将恢复**
-- **Time**: 2025-12-04
-- **Content**: The Malaysian government has announced its commitment to resuming the search for Malaysia Airlines Flight MH370, which disappeared in 2014. The new search effort will be based on a "no find, no fee" proposal from a U.S. seabed exploration firm. / 马来西亚政府宣布将致力于恢复对2014年失踪的马来西亚航空公司MH370航班的搜寻工作。新的搜寻工作将基于一家美国海底勘探公司提出的“找不到不收费”的建议。
+- **Content**: A public inquiry in the United Kingdom has formally concluded that Russian agents, with the likely approval of President Putin, were responsible for the 2018 Novichok poisoning death in Amesbury. / 英国的一项公开调查正式得出结论，俄罗斯特工在普京总统的可能批准下，对2018年埃姆斯伯里的诺维乔克投毒死亡事件负责。
 - **Source**: Global News
 
-### 7. **Thailand Cracks Down on Cyberscams, Seizing Over $300 Million** / **泰国打击网络诈骗，缴获超过3亿美元**
+### 5. **Canada Joins EU Defense Fund, Pivoting from US Alliance** / **加拿大加入欧盟国防基金，战略重心从美国转移**
 - **Time**: 2025-12-04
-- **Content**: Thai authorities have seized over $300 million in assets and issued 42 arrest warrants in a major crackdown on cyberscam operations. The move is part of a broader effort to combat online fraud in the region. / 泰国当局在一次针对网络诈骗行动的重大打击中，缴获了超过3亿美元的资产，并签发了42份逮捕令。此举是该地区打击网络欺诈的更广泛努力的一部分。
+- **Content**: In a significant foreign policy shift, Canada has announced it will join the European Union's defense fund, signaling a strategic pivot away from its traditional reliance on the United States. / 加拿大宣布将加入欧盟国防基金，这是一个重大的外交政策转变，标志着其战略重心从传统上对美国的依赖转移。
+- **Source**: Associated Press
+
+### 6. **Leader of Israel-Backed Militia Killed in Gaza** / **以色列支持的民兵组织领导人在加沙被杀**
+- **Time**: 2025-12-04
+- **Content**: Yasser Abu Shabab, a prominent leader of an Israel-backed militia, was killed in an airstrike in the Gaza Strip, marking a significant event in the ongoing conflict. / 以色列支持的民兵组织著名领导人亚西尔·阿布·沙巴布在加沙地带的一次空袭中丧生，这是持续冲突中的一个重要事件。
 - **Source**: The Guardian
 
-### 8. **Taliban Carries Out Public Execution in Afghanistan** / **塔利班在阿富汗进行公开处决**
+### 7. **Israel Launches Fresh Strikes on Lebanon After Warnings** / **以色列在警告后对黎巴嫩发动新一轮打击**
 - **Time**: 2025-12-04
-- **Content**: Afghanistan's Taliban rulers carried out a public execution in a sports stadium, the latest indication of their return to the hardline policies of their previous rule. The event has drawn condemnation from international human rights organizations. / 阿富汗塔利班统治者在一座体育场进行了公开处决，这是他们恢复其先前统治时期强硬政策的最新迹象。此事件受到国际人权组织的谴责。
-- **Source**: AP News
+- **Content**: Following warnings of retaliation, the Israeli military has launched new airstrikes on targets in southern Lebanon, escalating cross-border tensions. / 在发出报复警告后，以色列军方对黎巴嫩南部的目标发动了新一轮空袭，导致跨境紧张局势升级。
+- **Source**: NDTV
 
-### 9. **Doctor Sentenced for Supplying Ketamine to Matthew Perry** / **向马修·佩里提供氯胺酮的医生被判刑**
+### 8. **UN Security Council Delegation Visits Syria for First Time Since 1945** / **联合国安理会代表团自1945年来首次访问叙利亚**
 - **Time**: 2025-12-04
-- **Content**: A doctor who sold ketamine to "Friends" star Matthew Perry has been sentenced to 2.5 years in prison. The case has highlighted the dangers of illicit drug use and the responsibilities of medical professionals. / 向《老友记》主演马修·佩里出售氯胺酮的医生被判处2.5年监禁。此案凸显了非法吸毒的危险以及医务人员的责任。
-- **Source**: The Hindu
+- **Content**: A delegation from the United Nations Security Council has visited Syria, the first such visit since 1945, to assess the humanitarian situation and discuss political solutions to the long-running conflict. / 联合国安理会代表团访问了叙利亚，这是自1945年以来的首次此类访问，旨在评估人道主义局势并讨论长期冲突的政治解决方案。
+- **Source**: Associated Press
 
-### 10. **New Epstein Island Files Released by House Democrats** / **众议院民主党人公布新的爱泼斯坦岛屿文件**
+### 9. **Four Countries to Boycott Eurovision 2026 Over Israel's Participation** / **四国因以色列参赛将抵制2026年欧洲歌唱大赛**
 - **Time**: 2025-12-04
-- **Content**: Never-before-seen photos and videos of Jeffrey Epstein's private island have been released by House Democrats. The materials are part of the ongoing investigation into Epstein's trafficking network and have renewed calls for accountability. / 众议院民主党人公布了前所未见的杰弗里·爱泼斯坦私人岛屿的照片和视频。这些材料是正在进行的对爱泼斯坦贩卖网络的调查的一部分，并再次引发了追究责任的呼声。
-- **Source**: Global News
+- **Content**: A coalition of four countries has announced they will boycott the Eurovision Song Contest in 2026 in protest of Israel's continued participation in the event. / 四国联盟宣布，为抗议以色列继续参加比赛，他们将抵制2026年的欧洲歌唱大赛。
+- **Source**: The Guardian
+
+### 10. **Zuckerberg Reportedly Planning 30% Budget Cuts for Metaverse Division** / **据报扎克伯格计划为元宇宙部门削减30%预算**
+- **Time**: 2025-12-04
+- **Content**: Mark Zuckerberg is reportedly planning to implement budget cuts of up to 30% for Meta's Metaverse division, with significant layoffs expected as the company recalibrates its investment in virtual reality. / 据报道，马克·扎克伯格正计划为Meta的元宇宙部门实施高达30%的预算削减，随着公司重新调整其在虚拟现实领域的投资，预计将进行大规模裁员。
+- **Source**: NDTV
 
 ---
 
