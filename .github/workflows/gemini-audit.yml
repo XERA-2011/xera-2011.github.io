@@ -350,18 +350,18 @@ jobs:
               echo "$OUTPUT" | sed '/^```markdown/d' | sed '/^```$/d' | sed '/^```/d' > .audit-reports/ai-audit-report.md
               
               # 添加报告头部信息
-              cat > public/markdown/security-audit-report.md << EOF
-          # 安全审计报告
-
-          **生成时间**: $(date '+%Y-%m-%d %H:%M:%S UTC')  
-          **审计周期**: $(date -d '7 days ago' '+%Y-%m-%d') 至 $(date '+%Y-%m-%d')  
-          **项目**: $(basename $(pwd))  
-          **AI 修复状态**: ${AUTO_FIX_STATUS:-unknown}  
-          **依赖变更**: ${LOCKFILE_CHANGED:-false}
-
-          ---
-
-          EOF
+              {
+                echo "# 安全审计报告"
+                echo ""
+                echo "**生成时间**: $(date '+%Y-%m-%d %H:%M:%S UTC')  "
+                echo "**审计周期**: $(date -d '7 days ago' '+%Y-%m-%d') 至 $(date '+%Y-%m-%d')  "
+                echo "**项目**: $(basename $(pwd))  "
+                echo "**AI 修复状态**: ${AUTO_FIX_STATUS:-unknown}  "
+                echo "**依赖变更**: ${LOCKFILE_CHANGED:-false}"
+                echo ""
+                echo "---"
+                echo ""
+              } > public/markdown/security-audit-report.md
               cat .audit-reports/ai-audit-report.md >> public/markdown/security-audit-report.md
               
               SUCCESS=true
@@ -379,71 +379,71 @@ jobs:
           # 如果 AI 生成失败，创建基础报告
           if [ "$SUCCESS" = "false" ]; then
             echo "⚠️ AI 生成失败，创建基础安全审计报告..."
-            cat > public/markdown/security-audit-report.md << EOF
-          # 安全审计报告
-
-          **生成时间**: $(date '+%Y-%m-%d %H:%M:%S UTC')  
-          **审计周期**: $(date -d '7 days ago' '+%Y-%m-%d') 至 $(date '+%Y-%m-%d')  
-          **项目**: $(basename $(pwd))  
-          **状态**: 基础报告 (AI 分析暂时不可用)
-          **AI 修复状态**: ${AUTO_FIX_STATUS:-unknown}  
-          **依赖变更**: ${LOCKFILE_CHANGED:-false}
-
-          ## 执行摘要
-
-          本周安全审计已完成，详细分析请查看各项检查结果。
-
-          ## pnpm audit 结果
-
-          \`\`\`
-          $SECURITY_ISSUES
-          \`\`\`
-
-          ## 安全漏洞摘要
-
-          \`\`\`
-          $SECURITY_SUMMARY
-          \`\`\`
-
-          ## 自动修复预览
-
-          \`\`\`
-          $FIX_PREVIEW
-          \`\`\`
-
-          ## AI 自动修复日志
-
-          \`\`\`
-          $FIX_LOG
-          \`\`\`
-
-          ## AI 智能修复命令
-
-          \`\`\`
-          $AI_COMMANDS
-          \`\`\`
-
-          ## AI 修复执行结果
-
-          \`\`\`
-          $AI_EXECUTION
-          \`\`\`
-
-          ## 锁文件同步日志
-
-          \`\`\`
-          $LOCKFILE_SYNC
-          \`\`\`
-
-          ## 构建兼容性检查
-
-          \`\`\`
-          $BUILD_CHECK
-          \`\`\`
-
-          ---
-          *报告由自动化安全审计系统生成*
-          EOF
+            {
+              echo "# 安全审计报告"
+              echo ""
+              echo "**生成时间**: $(date '+%Y-%m-%d %H:%M:%S UTC')  "
+              echo "**审计周期**: $(date -d '7 days ago' '+%Y-%m-%d') 至 $(date '+%Y-%m-%d')  "
+              echo "**项目**: $(basename $(pwd))  "
+              echo "**状态**: 基础报告 (AI 分析暂时不可用)"
+              echo "**AI 修复状态**: ${AUTO_FIX_STATUS:-unknown}  "
+              echo "**依赖变更**: ${LOCKFILE_CHANGED:-false}"
+              echo ""
+              echo "## 执行摘要"
+              echo ""
+              echo "本周安全审计已完成，详细分析请查看各项检查结果。"
+              echo ""
+              echo "## pnpm audit 结果"
+              echo ""
+              echo "\`\`\`"
+              echo "$SECURITY_ISSUES"
+              echo "\`\`\`"
+              echo ""
+              echo "## 安全漏洞摘要"
+              echo ""
+              echo "\`\`\`"
+              echo "$SECURITY_SUMMARY"
+              echo "\`\`\`"
+              echo ""
+              echo "## 自动修复预览"
+              echo ""
+              echo "\`\`\`"
+              echo "$FIX_PREVIEW"
+              echo "\`\`\`"
+              echo ""
+              echo "## AI 自动修复日志"
+              echo ""
+              echo "\`\`\`"
+              echo "$FIX_LOG"
+              echo "\`\`\`"
+              echo ""
+              echo "## AI 智能修复命令"
+              echo ""
+              echo "\`\`\`"
+              echo "$AI_COMMANDS"
+              echo "\`\`\`"
+              echo ""
+              echo "## AI 修复执行结果"
+              echo ""
+              echo "\`\`\`"
+              echo "$AI_EXECUTION"
+              echo "\`\`\`"
+              echo ""
+              echo "## 锁文件同步日志"
+              echo ""
+              echo "\`\`\`"
+              echo "$LOCKFILE_SYNC"
+              echo "\`\`\`"
+              echo ""
+              echo "## 构建兼容性检查"
+              echo ""
+              echo "\`\`\`"
+              echo "$BUILD_CHECK"
+              echo "\`\`\`"
+              echo ""
+              echo "---"
+              echo "*报告由自动化安全审计系统生成*"
+            } > public/markdown/security-audit-report.md
           fi
 
           rm -f /tmp/audit_output.txt
@@ -595,28 +595,28 @@ jobs:
             cat .audit-reports/pre-commit-build.log
 
             # 创建构建失败的报告
-            cat >> public/markdown/security-audit-report.md << EOF
-
-            ---
-
-            ## ⚠️ 构建验证失败
-
-            在提交修复之前的构建验证失败,本次修复不会被提交。
-
-            ### 构建错误日志
-
-            \`\`\`
-            $(cat .audit-reports/pre-commit-build.log)
-            \`\`\`
-
-            ### 建议操作
-
-            1. 检查依赖更新是否引入了不兼容的变更
-            2. 本地执行 \`pnpm install && pnpm build\` 进行调试
-            3. 根据错误信息调整依赖版本或代码
-            4. 考虑回滚部分依赖更新
-
-            EOF
+            {
+              echo ""
+              echo "---"
+              echo ""
+              echo "## ⚠️ 构建验证失败"
+              echo ""
+              echo "在提交修复之前的构建验证失败,本次修复不会被提交。"
+              echo ""
+              echo "### 构建错误日志"
+              echo ""
+              echo "\`\`\`"
+              cat .audit-reports/pre-commit-build.log
+              echo "\`\`\`"
+              echo ""
+              echo "### 建议操作"
+              echo ""
+              echo "1. 检查依赖更新是否引入了不兼容的变更"
+              echo "2. 本地执行 \`pnpm install && pnpm build\` 进行调试"
+              echo "3. 根据错误信息调整依赖版本或代码"
+              echo "4. 考虑回滚部分依赖更新"
+              echo ""
+            } >> public/markdown/security-audit-report.md
 
             # 如果构建失败，恢复依赖文件到修复前的状态
             if [ -f "package.json.backup" ]; then
