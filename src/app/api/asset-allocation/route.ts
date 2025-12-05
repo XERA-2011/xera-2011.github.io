@@ -100,6 +100,14 @@ export async function POST(request: Request) {
       );
     }
 
+    // 限制最多保存 15 条数据
+    if (assets.length > 15) {
+      return NextResponse.json(
+        { error: '最多只能保存15条资产数据', code: 'LIMIT_EXCEEDED' },
+        { status: 400 }
+      );
+    }
+
     // 使用事务：先删除旧数据，再插入新数据
     await prisma.$transaction(async (tx) => {
       // 删除用户的所有旧资产配置
