@@ -27,8 +27,8 @@ export const metadata: Metadata = {
     default: "XERA-2011 - Pocket Universe",
     template: "%s | XERA-2011",
   },
-  description: "Pocket Universe - 探索工具、游戏和创意项目的个人空间",
-  keywords: ["XERA-2011", "开发工具", "在线工具", "游戏", "Web开发", "个人网站"],
+  description: "Pocket Universe - 探索工具、实验项目和创意项目的个人空间",
+  keywords: ["XERA-2011", "开发工具", "在线工具", "实验项目", "Web开发", "个人网站"],
   authors: [{ name: "XERA" }],
   creator: "XERA",
   publisher: "XERA",
@@ -50,7 +50,7 @@ export const metadata: Metadata = {
     url: 'https://xera-2011.vercel.app',
     siteName: 'XERA-2011',
     title: 'XERA-2011 - Pocket Universe',
-    description: 'Pocket Universe - 探索工具、游戏和创意项目的个人空间',
+    description: 'Pocket Universe - 探索工具、实验项目和创意项目的个人空间',
     images: [
       {
         url: '/favicon.ico',
@@ -63,7 +63,7 @@ export const metadata: Metadata = {
   twitter: {
     card: 'summary_large_image',
     title: 'XERA-2011 - Pocket Universe',
-    description: 'Pocket Universe - 探索工具、游戏和创意项目的个人空间',
+    description: 'Pocket Universe - 探索工具、实验项目和创意项目的个人空间',
     creator: '@XERA',
     images: ['/favicon.ico'],
   },

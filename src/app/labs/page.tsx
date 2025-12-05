@@ -19,7 +19,7 @@ const labsData: GlowCardItem[] = [
 ];
 
 export default function LabsPage() {
-  usePageTitle('游戏');
+  usePageTitle('实验项目');
 
   return (
     <div className="relative w-full min-h-screen pt-32 pb-20">
@@ -33,7 +33,7 @@ export default function LabsPage() {
           viewport={{ once: true }}
         >
           <h1 className="text-3xl sm:text-4xl lg:text-5xl font-bold mb-4">
-            游戏
+            实验项目
           </h1>
         </motion.div>
 

@@ -17,7 +17,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
     { url: '/tools/life-countdown', priority: 0.7, changeFrequency: 'monthly' as const },
     { url: '/tools/asset-allocation', priority: 0.7, changeFrequency: 'monthly' as const },
 
-    // 游戏页面
+    // 实验项目页面
     { url: '/labs', priority: 0.9, changeFrequency: 'weekly' as const },
     { url: '/labs/solar-skirmish', priority: 0.7, changeFrequency: 'monthly' as const },
     { url: '/labs/endless', priority: 0.7, changeFrequency: 'monthly' as const },

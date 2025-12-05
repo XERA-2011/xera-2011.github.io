@@ -11,7 +11,7 @@ interface MetadataOptions {
 }
 
 const baseUrl = 'https://xera-2011.vercel.app'
-const defaultDescription = 'Pocket Universe - 探索工具、游戏和创意项目的个人空间'
+const defaultDescription = 'Pocket Universe - 探索工具、实验项目和创意项目的个人空间'
 
 /**
  * 生成页面 metadata 的工具函数（服务端组件使用）

@@ -1,7 +1,7 @@
 {
   "name": "XERA-2011 - Pocket Universe",
   "short_name": "XERA-2011",
-  "description": "Pocket Universe - 探索工具、游戏和创意项目的个人空间",
+  "description": "Pocket Universe - 探索工具、实验项目和创意项目的个人空间",
   "start_url": "/",
   "display": "standalone",
   "background_color": "#0a0a0a",
