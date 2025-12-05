@@ -187,7 +187,6 @@ export default function CoinPage() {
                       width={900}
                       height={600}
                       style={{ width: "auto", height: "auto" }}
-                      priority
                       unoptimized
                     />
                   </div>

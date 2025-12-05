@@ -142,7 +142,6 @@ export default function GitHubTopLangsPage() {
                   width={400}
                   height={300}
                   style={{ width: "auto", height: "auto" }}
-                  priority
                   unoptimized
                 />
               </div>

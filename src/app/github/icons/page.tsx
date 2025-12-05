@@ -217,7 +217,6 @@ export default function IconsPage() {
                     className="w-full max-w-full"
                     width={selectedIcons.length * 48}
                     height={48}
-                    priority
                     unoptimized
                   />
                 ) : (
