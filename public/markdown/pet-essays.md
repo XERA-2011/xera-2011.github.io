@@ -1,43 +1,40 @@
 # 应用文
 
-## An email to a penfriend describing your typical school day
-- 一封向笔友描述你典型学校一天的邮件
+## An email to a local newspaper giving your opinion on recycling
+- 给当地报纸写一封关于你对回收利用看法的邮件
 
 **正文**：
 
-Hi Alex,
+Dear Editor,
 
-Thanks for your email. You asked about my school days. Well, they're usually quite busy! I get up around 7:00 AM, have a quick breakfast, and then walk to school with my friends. Classes begin at 8:30 AM.
+I am writing to express my strong support for increasing recycling efforts in our town. I believe that recycling is not just a personal choice but a crucial responsibility for protecting our environment.
 
-My favourite subjects are History and Art. We have a long lunch break at noon, so I often play basketball in the school playground. School finishes at 4:00 PM. In the evening, after doing my homework, I usually relax by watching a film or reading a book. I go to bed at about 10:00 PM.
+Recently, I’ve noticed that public recycling bins are often overflowing, which might discourage people from participating. Could the council possibly arrange for more frequent collections? Furthermore, I think we need more education on what can and cannot be recycled. Many people are still confused about this.
 
-Write back soon!
+Making recycling easier and more accessible for everyone would significantly benefit our community and help create a greener future.
 
-Best wishes,
-Sam
+Sincerely,
+Alex Chen
 
-- 嗨，亚历克斯，
-- 谢谢你的邮件。你问起我平日上学的情况。嗯，通常都挺忙的！我大约早上7点起床，快速吃完早餐，然后和朋友们一起走路去学校。课程从早上8点30分开始。
-- 我最喜欢的科目是历史和艺术。我们在中午有很长的午休时间，所以我经常在学校操场上打篮球。下午4点放学。晚上，做完作业后，我通常会看一部电影或读一本书来放松。我大概在晚上10点睡觉。
-- 记得快点回信哦！
-- 最好的祝愿，
-- 山姆
+- 尊敬的编辑：
+- 我写信是为了表达我对我们镇加强回收工作的坚定支持。我认为，回收不仅是个人的选择，更是保护我们环境的关键责任。
+- 最近，我注意到公共回收箱常常满溢，这可能会打击人们参与的积极性。市政会是否可以安排更频繁的回收清运？此外，我认为我们需要更多关于哪些物品可以回收、哪些不能回收的宣传教育。许多人对此仍然感到困惑。
+- 让回收对每个人来说都变得更简单、更容易，将极大地造福我们的社区，并有助于创造一个更绿色的未来。
+- 诚挚地，
+- Alex Chen
 
 ---
 
 # 记叙文/短文
 
-## An article explaining how students can help protect the environment
-- 一篇解释学生如何帮助保护环境的文章
+## Write a story about a day when everything went wrong
+- 讲述诸事不顺的一天
 
 **正文**：
 
-Our planet needs our help, and students can play a big part in protecting it. There are many simple ways to be more environmentally friendly in our daily lives.
+It all started when my alarm clock didn’t go off. I woke up late and rushed to get ready, only to spill coffee all over my white shirt. I quickly changed, grabbed my bag, and ran to the bus stop, but I watched the bus pull away just as I arrived.
 
-Firstly, we can reduce waste by using reusable bags and water bottles. Instead of throwing things away, think about whether they can be reused or recycled. Secondly, we should all try to save energy. This can be as simple as turning off lights and electronics when they are not in use. Finally, participating in local green projects, like planting trees or cleaning up parks, is a great way to contribute.
+I decided to take a taxi, but it got stuck in terrible traffic. By the time I finally reached school, I had missed my most important exam. Feeling defeated, I walked home in the rain, which started unexpectedly. When I got to my door, I realised my keys were still inside my house. It was truly a disastrous day.
 
-If we all make these small changes, we can create a big difference.
-
-- 我们的地球需要我们的帮助，而学生可以在保护地球方面发挥重要作用。在我们的日常生活中，有很多简单的方法可以让我们变得更加环保。
-- 首先，我们可以通过使用可重复使用的袋子和水瓶来减少浪费。与其把东西扔掉，不如想一想它们是否可以被重复利用或回收。其次，我们都应该努力节约能源。这可以像在不使用电灯和电子设备时将它们关闭一样简单。最后，参加当地的绿色项目，比如植树或清理公园，是做出贡献的好方法。
-- 如果我们都能做出这些小小的改变，我们就能创造出巨大的不同。
+- 一切都始于我的闹钟没响。我醒得很晚，匆忙准备出门，结果却把咖啡洒在了我的白衬衫上。我赶紧换了件衣服，抓起包冲向公交车站，但眼睁睁地看着公交车在我到达时开走了。
+- 我决定打车，但出租车却遇上了严重的堵车。当我终于到达学校时，我已经错过了最重要的考试。我垂头丧气地在雨中走回家，雨是毫无征兆下起来的。当我走到家门口时，我才发现钥匙还锁在屋里。这真是灾难性的一天。
