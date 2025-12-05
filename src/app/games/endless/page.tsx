@@ -3,6 +3,7 @@
 import { useState, useRef } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { usePageTitle } from '@/hooks/use-page-title';
+import { battleScenes } from '@/data/endless/endless';
 import { Button } from '@/components/ui/button';
 
 interface BattleLog {
@@ -31,9 +32,10 @@ export default function EndlessPage() {
     setIsBattling(true);
 
     try {
-      // Get battle scene from server
-      const response = await fetch('/api/endless');
-      const result = await response.json();
+      // Get battle scene from data
+      const sceneKeys = Object.keys(battleScenes);
+      const randomKey = sceneKeys[Math.floor(Math.random() * sceneKeys.length)];
+      const result = battleScenes[randomKey];
 
       // Calculate win rate based on current level
       const winRate = getWinRate(level);
