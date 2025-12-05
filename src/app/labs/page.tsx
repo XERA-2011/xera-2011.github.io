@@ -5,20 +5,20 @@ import ScrollReveal from '@/components/scroll-reveal';
 import GlowCardList, { GlowCardItem } from '@/components/ui/glow-cardList';
 import { usePageTitle } from '@/hooks/use-page-title';
 
-const gamesData: GlowCardItem[] = [
+const labsData: GlowCardItem[] = [
   {
     id: 'endless',
     title: 'Endless',
-    href: '/games/endless'
+    href: '/labs/endless'
   },
   {
     id: 'solar-skirmish',
     title: 'Solar Skirmish',
-    href: '/games/solar-skirmish'
+    href: '/labs/solar-skirmish'
   },
 ];
 
-export default function GamesPage() {
+export default function LabsPage() {
   usePageTitle('游戏');
 
   return (
@@ -37,10 +37,10 @@ export default function GamesPage() {
           </h1>
         </motion.div>
 
-        {/* Games Grid */}
+        {/* Labs Grid */}
         <ScrollReveal delay={0.3}>
           <GlowCardList
-            items={gamesData}
+            items={labsData}
             columns={3}
             gap="lg"
             className="lg:gap-8 max-w-6xl mx-auto"
