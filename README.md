@@ -109,11 +109,16 @@ claude --version
 # 有时候遇到问题了，就得强制删除，然后重新安装
 rm -rf /Users/xera/.nvm/versions/node/v24.5.0/lib/node_modules/@anthropic-ai/claude-code
 
+# win 设置临时代理
+set HTTP_PROXY=http://127.0.0.1:7890
+set HTTPS_PROXY=http://127.0.0.1:7890
+# win 设置永久代理：电脑 - 高级系统设置 - 环境变量 - 系统变量
+HTTP_PROXY = http://127.0.0.1:7890
+HTTPS_PROXY = http://127.0.0.1:7890
+
 # win
 $env:ANTHROPIC_AUTH_TOKEN = ""
 $env:ANTHROPIC_BASE_URL = ""
-echo $env:ANTHROPIC_AUTH_TOKEN
-echo $env:ANTHROPIC_BASE_URL
 
 # mac
 export ANTHROPIC_AUTH_TOKEN=
