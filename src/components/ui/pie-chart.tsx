@@ -14,14 +14,15 @@ interface PieChartProps {
   assets: Asset[];
   totalAmount?: number; // 用户资产需要传入总金额
   usePercentage?: boolean; // 是否使用百分比模式
+  theme?: 'light' | 'dark'; // 主题：浅色或深色
 }
 
-export default function PieChart({ assets, totalAmount, usePercentage = false }: PieChartProps) {
+export default function PieChart({ assets, totalAmount, usePercentage = false, theme = 'light' }: PieChartProps) {
   const [hoveredAsset, setHoveredAsset] = useState<string | null>(null);
   const [isHoveringChart, setIsHoveringChart] = useState(false);
-  // 固定的白灰黑渐变色（15个颜色）
+  // 固定的白灰黑渐变色（15个颜色），已优化以避免纯白和纯黑
   const FIXED_COLORS = [
-    '#FFFFFF', // 白色
+    '#F0F0F0', // 浅灰白
     '#E8E8E8', // 浅灰1
     '#D0D0D0', // 浅灰2
     '#B8B8B8', // 浅灰3
@@ -35,7 +36,7 @@ export default function PieChart({ assets, totalAmount, usePercentage = false }:
     '#202020', // 深灰4
     '#181818', // 深灰5
     '#101010', // 深灰6
-    '#000000', // 纯黑色
+    '#080808', // 深灰黑
   ];
 
   // 根据索引获取颜色
@@ -75,9 +76,6 @@ export default function PieChart({ assets, totalAmount, usePercentage = false }:
 
       // 如果是完整的圆（100%），使用circle元素
       if (angle >= 359.99) {
-        const strokeColor = getStrokeByColor(color);
-        const strokeW = getLuminance(color) > 0.85 ? 1.5 : 2;
-
         return (
           <g key={asset.id}>
             <motion.circle
@@ -85,15 +83,19 @@ export default function PieChart({ assets, totalAmount, usePercentage = false }:
               cy={center}
               r={radius}
               fill={color}
-              stroke={strokeColor}
-              strokeWidth={strokeW}
-              strokeLinejoin="round"
-              filter="url(#pieShadow)"
               initial={{ opacity: 0, scale: 0 }}
-              animate={{ opacity: 1, scale: 1 }}
+              animate={{
+                opacity: 1,
+                scale: hoveredAsset === asset.id ? 1.03 : 1
+              }}
               exit={{ opacity: 0, scale: 0 }}
-              transition={{ duration: 0.5, delay: index * 0.1 }}
-              className="hover:opacity-80 transition-opacity cursor-pointer"
+              transition={{
+                duration: hoveredAsset === asset.id ? 0.25 : 0.5,
+                delay: hoveredAsset === asset.id ? undefined : index * 0.1,
+                ease: hoveredAsset === asset.id ? "easeInOut" : undefined
+              }}
+              className="cursor-pointer"
+              filter={hoveredAsset === asset.id ? theme === 'dark' ? 'url(#pieShadowBlackTheme)' : 'url(#pieShadowWhiteTheme)' : undefined}
               onMouseEnter={() => setHoveredAsset(asset.id)}
               onMouseLeave={() => setHoveredAsset(null)}
             />
@@ -120,23 +122,25 @@ export default function PieChart({ assets, totalAmount, usePercentage = false }:
         'Z'
       ].join(' ');
 
-      const strokeColor = getStrokeByColor(color);
-      const strokeW = getLuminance(color) > 0.85 ? 1.2 : 1.6;
 
       return (
         <g key={asset.id}>
           <motion.path
             d={pathData}
             fill={color}
-            stroke={strokeColor}
-            strokeWidth={strokeW}
-            strokeLinejoin="round"
-            filter="url(#pieShadow)"
             initial={{ opacity: 0, scale: 0 }}
-            animate={{ opacity: 1, scale: 1 }}
+            animate={{
+              opacity: 1,
+              scale: hoveredAsset === asset.id ? 1.03 : 1
+            }}
             exit={{ opacity: 0, scale: 0 }}
-            transition={{ duration: 0.5, delay: index * 0.1 }}
-            className="hover:opacity-80 transition-opacity cursor-pointer"
+            transition={{
+              duration: hoveredAsset === asset.id ? 0.25 : 0.5,
+              delay: hoveredAsset === asset.id ? undefined : index * 0.1,
+              ease: hoveredAsset === asset.id ? "easeInOut" : undefined
+            }}
+            className="cursor-pointer"
+            filter={hoveredAsset === asset.id ? theme === 'dark' ? 'url(#pieShadowBlackTheme)' : 'url(#pieShadowWhiteTheme)' : undefined}
             onMouseEnter={() => setHoveredAsset(asset.id)}
             onMouseLeave={() => setHoveredAsset(null)}
           />
@@ -187,8 +191,11 @@ export default function PieChart({ assets, totalAmount, usePercentage = false }:
               onMouseLeave={() => setIsHoveringChart(false)}
             >
               <defs>
-                <filter id="pieShadow" x="-50%" y="-50%" width="200%" height="200%">
-                  <feDropShadow dx="0" dy="2" stdDeviation="4" floodColor="#000" floodOpacity="0.12" />
+                <filter id="pieShadowWhiteTheme" x="-50%" y="-50%" width="200%" height="200%">
+                  <feDropShadow dx="0" dy="3" stdDeviation="8" floodColor="#000" floodOpacity="0.4" />
+                </filter>
+                <filter id="pieShadowBlackTheme" x="-50%" y="-50%" width="200%" height="200%">
+                  <feDropShadow dx="0" dy="3" stdDeviation="8" floodColor="#FFF" floodOpacity="0.7" />
                 </filter>
               </defs>
               <AnimatePresence>

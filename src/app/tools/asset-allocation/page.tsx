@@ -4,6 +4,7 @@ import { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { useSession } from 'next-auth/react';
 import { usePageTitle } from '@/hooks/use-page-title';
+import { useTheme } from 'next-themes';
 import PieChart from '@/components/ui/pie-chart';
 import { Card, CardContent, CardHeader, CardTitle, CardDescription } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
@@ -36,6 +37,10 @@ const STORAGE_KEY = 'asset-portfolios';
 
 export default function AssetAllocationPage() {
   usePageTitle('资产配置占比');
+
+  // 获取主题
+  const { theme, systemTheme } = useTheme();
+  const currentTheme = theme === 'system' ? systemTheme : theme;
 
   // 获取用户登录状态
   const { status } = useSession();
@@ -70,6 +75,10 @@ export default function AssetAllocationPage() {
   const totalAmount = myAssets.reduce((sum, asset) => sum + (asset.amount || 0), 0);
   const isReadOnly = !isViewingMy;
 
+  // 添加加载状态
+  const [isLoadingUserAssets, setIsLoadingUserAssets] = useState(true);
+  const [isLoadingPage, setIsLoadingPage] = useState(true);
+
   // 初始化：从数据库或 localStorage 加载用户数据
   useEffect(() => {
     const loadUserAssets = async () => {
@@ -96,6 +105,7 @@ export default function AssetAllocationPage() {
         setMyAssets(data.myAssets);
         setMyAssetsUpdatedAt(data.myAssetsUpdatedAt);
       }
+      setIsLoadingUserAssets(false);
     };
 
     if (status !== 'loading') {
@@ -123,6 +133,13 @@ export default function AssetAllocationPage() {
 
     fetchCelebrityPortfolios();
   }, []);
+
+  // 当用户数据和名人数据都加载完成后，设置页面加载完成
+  useEffect(() => {
+    if (status !== 'loading' && !isLoadingUserAssets && !isLoadingCelebrity) {
+      setIsLoadingPage(false);
+    }
+  }, [status, isLoadingUserAssets, isLoadingCelebrity]);
 
   // 手动保存到 localStorage 和数据库
   const saveAssets = async (assets: Asset[], updatedAt: string) => {
@@ -298,6 +315,18 @@ export default function AssetAllocationPage() {
     }
   };
 
+  // 如果页面仍在加载，显示加载动画
+  if (isLoadingPage) {
+    return (
+      <div className="relative w-full min-h-screen flex items-center justify-center">
+        <div className="flex flex-col items-center gap-4">
+          <div className="w-12 h-12 border-4 border-border border-t-primary rounded-full animate-spin"></div>
+          <p className="text-muted-foreground text-lg">加载中...</p>
+        </div>
+      </div>
+    );
+  }
+
   return (
     <div className="relative w-full min-h-screen pt-32 pb-20">
       <div className="container mx-auto px-4 sm:px-6 lg:px-8 max-w-6xl">
@@ -380,7 +409,8 @@ export default function AssetAllocationPage() {
                     className="absolute top-full mt-2 left-0 min-w-[280px] bg-card border border-border rounded-lg shadow-2xl z-50 overflow-hidden"
                   >
                     {isLoadingCelebrity ? (
-                      <div className="px-4 py-8 text-center text-muted-foreground text-sm">
+                      <div className="px-4 py-3 text-center text-muted-foreground text-sm flex items-center justify-center gap-2">
+                        <div className="w-4 h-4 border-2 border-border border-t-primary rounded-full animate-spin"></div>
                         加载中...
                       </div>
                     ) : celebrityPortfolios.length === 0 ? (
@@ -451,6 +481,7 @@ export default function AssetAllocationPage() {
                   <PieChart
                     assets={assets}
                     usePercentage={true}
+                    theme={currentTheme as 'dark' | 'light'}
                   />
                 </CardContent>
               </>
@@ -620,7 +651,6 @@ export default function AssetAllocationPage() {
                   )}
                 </CardHeader>
                 <CardContent>
-
                   {/* 我的总资产 */}
                   {myAssets.length > 0 ? (
                     <>
@@ -628,6 +658,7 @@ export default function AssetAllocationPage() {
                       <PieChart
                         assets={myAssets}
                         totalAmount={myAssets.reduce((sum, asset) => sum + (asset.amount || 0), 0)}
+                        theme={currentTheme as 'dark' | 'light'}
                       />
                     </>
                   ) : (
@@ -651,6 +682,7 @@ export default function AssetAllocationPage() {
                 <PieChart
                   assets={assets}
                   totalAmount={totalAmount}
+                  theme={currentTheme as 'dark' | 'light'}
                 />
               </CardContent>
             )}
