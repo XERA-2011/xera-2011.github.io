@@ -149,29 +149,6 @@ export default function PieChart({ assets, totalAmount, usePercentage = false }:
     return `${percentage.toFixed(2)}%`;
   };
 
-  // 反转颜色函数
-  const invertColor = (hex: string) => {
-    // 移除 # 号
-    const cleanHex = hex.replace('#', '');
-
-    // 转换为 RGB
-    const r = parseInt(cleanHex.substring(0, 2), 16);
-    const g = parseInt(cleanHex.substring(2, 4), 16);
-    const b = parseInt(cleanHex.substring(4, 6), 16);
-
-    // 反转 RGB 值
-    const invertedR = 255 - r;
-    const invertedG = 255 - g;
-    const invertedB = 255 - b;
-
-    // 转换回十六进制
-    const toHex = (n: number) => {
-      const hex = n.toString(16);
-      return hex.length === 1 ? '0' + hex : hex;
-    };
-
-    return `#${toHex(invertedR)}${toHex(invertedG)}${toHex(invertedB)}`;
-  };
 
   // 计算颜色亮度（sRGB 线性化后计算相对亮度）
   const getLuminance = (hex: string) => {
@@ -206,7 +183,6 @@ export default function PieChart({ assets, totalAmount, usePercentage = false }:
               height="300"
               viewBox="0 0 300 300"
               style={{ position: 'relative', zIndex: 1 }}
-              className="cursor-can-hover"
               onMouseEnter={() => setIsHoveringChart(true)}
               onMouseLeave={() => setIsHoveringChart(false)}
             >
@@ -281,8 +257,6 @@ export default function PieChart({ assets, totalAmount, usePercentage = false }:
         >
           {assets.map((asset, index) => {
             const color = getColorByIndex(index);
-            // 当鼠标在饼图上时，反转图例颜色
-            const invertedColor = isHoveringChart ? invertColor(color) : color;
             const isHovered = hoveredAsset === asset.id;
 
             return (
@@ -297,7 +271,7 @@ export default function PieChart({ assets, totalAmount, usePercentage = false }:
                       ? 'border-2 border-primary shadow-[0_0_12px_rgba(128,128,128,0.5)]'
                       : 'border border-border'
                       }`}
-                    style={{ backgroundColor: invertedColor }}
+                    style={{ backgroundColor: color }}
                   />
                   <span className={`transition-all duration-200 ${isHovered ? 'font-semibold' : ''
                     }`}>
