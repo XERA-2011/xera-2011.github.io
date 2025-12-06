@@ -391,68 +391,6 @@ export default function TypingSVGPage() {
           </motion.div>
         </div>
 
-        {/* Examples */}
-        <motion.div
-          initial={{ opacity: 0, y: 30 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.8, delay: 0.5 }}
-          className="mt-8"
-        >
-          <GlowCard className="p-6">
-            <h3 className="text-xl font-semibold text-foreground mb-4">示例</h3>
-
-            <div className="space-y-6">
-              {baseUrl && (
-                <>
-                  <div>
-                    <p className="text-sm font-medium text-muted-foreground mb-2">基础用法</p>
-                    <div className="bg-secondary border border-border rounded-lg p-4 mb-2">
-                      {/* eslint-disable-next-line @next/next/no-img-element */}
-                      <img
-                        src={`${baseUrl}/api/github/typing-svg?lines=Hello+World!;Welcome+to+XERA-2011&color=${getDefaultTextColor()}`}
-                        alt="Example 1"
-                        className="max-w-full"
-                      />
-                    </div>
-                    <pre className="bg-secondary border border-border rounded-lg p-2 overflow-x-auto">
-                      <code className="text-xs text-foreground">{`${baseUrl}/api/github/typing-svg?lines=Hello+World!;Welcome+to+XERA-2011&color=${getDefaultTextColor()}`}</code>
-                    </pre>
-                  </div>
-
-                  <div>
-                    <p className="text-sm font-medium text-muted-foreground mb-2">居中显示</p>
-                    <div className="bg-secondary border border-border rounded-lg p-4 mb-2">
-                      {/* eslint-disable-next-line @next/next/no-img-element */}
-                      <img
-                        src={`${baseUrl}/api/github/typing-svg?lines=Type+messages+everywhere!;Add+a+bio+to+your+profile!&center=true&vCenter=true&width=500&height=60&color=${getDefaultTextColor()}`}
-                        alt="Example 2"
-                        className="max-w-full"
-                      />
-                    </div>
-                    <pre className="bg-secondary border border-border rounded-lg p-2 overflow-x-auto">
-                      <code className="text-xs text-foreground">{`${baseUrl}/api/github/typing-svg?lines=Type+messages+everywhere!;Add+a+bio+to+your+profile!&center=true&vCenter=true&width=500&height=60&color=${getDefaultTextColor()}`}</code>
-                    </pre>
-                  </div>
-
-                  <div>
-                    <p className="text-sm font-medium text-muted-foreground mb-2">多行模式</p>
-                    <div className="bg-secondary border border-border rounded-lg p-4 mb-2">
-                      {/* eslint-disable-next-line @next/next/no-img-element */}
-                      <img
-                        src={`${baseUrl}/api/github/typing-svg?lines=Line+1;Line+2;Line+3&multiline=true&width=400&height=100&color=${getDefaultTextColor()}`}
-                        alt="Example 3"
-                        className="max-w-full"
-                      />
-                    </div>
-                    <pre className="bg-secondary border border-border rounded-lg p-2 overflow-x-auto">
-                      <code className="text-xs text-foreground">{`${baseUrl}/api/github/typing-svg?lines=Line+1;Line+2;Line+3&multiline=true&width=400&height=100&color=${getDefaultTextColor()}`}</code>
-                    </pre>
-                  </div>
-                </>
-              )}
-            </div>
-          </GlowCard>
-        </motion.div>
       </div>
     </div>
   );
