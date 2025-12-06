@@ -27,6 +27,11 @@ const toolsData: GlowCardItem[] = [
     href: "/tools/life-countdown",
   },
   {
+    id: "loan-calculator",
+    title: "贷款计算器",
+    href: "/tools/loan-calculator",
+  },
+  {
     id: "coze",
     title: "Coze",
     href: "/tools/coze",
