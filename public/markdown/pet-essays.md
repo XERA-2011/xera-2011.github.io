@@ -1,40 +1,35 @@
 # 应用文
 
-## An email to a local newspaper giving your opinion on recycling
-- 给当地报纸写一封关于你对回收利用看法的邮件
+## A postcard describing an interesting museum you visited
+- 描述你参观的一个有趣博物馆的明信片
 
 **正文**：
 
-Dear Editor,
+Hi Sarah,
 
-I am writing to express my strong support for increasing recycling efforts in our town. I believe that recycling is not just a personal choice but a crucial responsibility for protecting our environment.
+Greetings from London! I'm having a fantastic time here. Yesterday, I visited the British Museum, and it was absolutely incredible. It's so huge, and there are countless amazing things to see. My favourite part was the Egyptian mummies – they were fascinating and a little bit spooky! I spent hours just looking at all the ancient artifacts. The Rosetta Stone was also very impressive. I wish you were here to see it with me. We should plan a trip together soon!
 
-Recently, I’ve noticed that public recycling bins are often overflowing, which might discourage people from participating. Could the council possibly arrange for more frequent collections? Furthermore, I think we need more education on what can and cannot be recycled. Many people are still confused about this.
+Best,
+Xiao Ming
 
-Making recycling easier and more accessible for everyone would significantly benefit our community and help create a greener future.
-
-Sincerely,
-Alex Chen
-
-- 尊敬的编辑：
-- 我写信是为了表达我对我们镇加强回收工作的坚定支持。我认为，回收不仅是个人的选择，更是保护我们环境的关键责任。
-- 最近，我注意到公共回收箱常常满溢，这可能会打击人们参与的积极性。市政会是否可以安排更频繁的回收清运？此外，我认为我们需要更多关于哪些物品可以回收、哪些不能回收的宣传教育。许多人对此仍然感到困惑。
-- 让回收对每个人来说都变得更简单、更容易，将极大地造福我们的社区，并有助于创造一个更绿色的未来。
-- 诚挚地，
-- Alex Chen
+- 嗨，莎拉，
+- 伦敦问候！我在这里玩得很开心。昨天，我参观了大英博物馆，它简直令人难以置信。它太大了，有无数令人惊叹的东西可看。
+- 我最喜欢的部分是埃及木乃伊——它们既迷人又有点吓人！我花了几个小时只是看所有古代文物。罗塞塔石碑也给我留下了深刻的印象。
+- 我希望你在这里和我一起看。我们应该尽快一起计划一次旅行！
+- 最好的，
+- 小明
 
 ---
 
 # 记叙文/短文
 
-## Write a story about a day when everything went wrong
-- 讲述诸事不顺的一天
+## A story about helping a stranger
+- 一个关于帮助陌生人的故事
 
 **正文**：
 
-It all started when my alarm clock didn’t go off. I woke up late and rushed to get ready, only to spill coffee all over my white shirt. I quickly changed, grabbed my bag, and ran to the bus stop, but I watched the bus pull away just as I arrived.
+It was a rainy afternoon, and I was hurrying home when I saw an elderly woman struggling with her groceries. Her bag had broken, and apples were rolling onto the wet pavement. Without thinking, I stopped to help. I quickly gathered the scattered items and offered to carry her remaining bags to her flat, which was just around the corner. She thanked me warmly, and her smile brightened the gloomy day. It felt good to know I had made her day a little easier. Sometimes, a small act of kindness can make a big difference.
 
-I decided to take a taxi, but it got stuck in terrible traffic. By the time I finally reached school, I had missed my most important exam. Feeling defeated, I walked home in the rain, which started unexpectedly. When I got to my door, I realised my keys were still inside my house. It was truly a disastrous day.
-
-- 一切都始于我的闹钟没响。我醒得很晚，匆忙准备出门，结果却把咖啡洒在了我的白衬衫上。我赶紧换了件衣服，抓起包冲向公交车站，但眼睁睁地看着公交车在我到达时开走了。
-- 我决定打车，但出租车却遇上了严重的堵车。当我终于到达学校时，我已经错过了最重要的考试。我垂头丧气地在雨中走回家，雨是毫无征兆下起来的。当我走到家门口时，我才发现钥匙还锁在屋里。这真是灾难性的一天。
+- 那是一个下雨的下午，我正匆匆赶回家，看到一位老妇人正费力地提着她的杂货。她的袋子破了，苹果滚到了湿漉漉的人行道上。
+- 我没多想，就停下来帮忙。我迅速捡起了散落的物品，并提出帮她把剩下的袋子提回家，她家就在拐角处。
+- 她热情地感谢了我，她的笑容点亮了阴沉的一天。知道我让她的日子轻松了一点，感觉很好。有时，一个小小的善举就能带来很大的不同。
