@@ -106,7 +106,7 @@ npm install -g @anthropic-ai/claude-code
 
 claude --version
 
-# 有时候遇到问题了，就得强制删除，然后重新安装
+# 有时候遇到问题了，就得强制删除，然后重新安装，下面是 mac的例子
 rm -rf /Users/xera/.nvm/versions/node/v24.5.0/lib/node_modules/@anthropic-ai/claude-code
 
 # win 设置临时代理
