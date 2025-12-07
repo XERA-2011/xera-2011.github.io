@@ -82,7 +82,8 @@ vercel env pull .env.local
 
 ```bash
 npm install -g @qwen-code/qwen-code@latest
-qwen --version
+
+qwen
 ```
 
 ## Gemini cli
