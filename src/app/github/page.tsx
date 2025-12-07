@@ -37,6 +37,11 @@ const toolsData: GlowCardItem[] = [
     href: "/github/top-langs",
   },
   {
+    id: "github-snake",
+    title: "GitHub 贪吃蛇",
+    href: "/github/snake",
+  },
+  {
     id: "github-icons",
     title: "图标卡片",
     href: "/github/icons",
