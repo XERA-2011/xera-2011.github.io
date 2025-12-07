@@ -11,7 +11,7 @@ const isRedisConfigured = !!process.env.UPSTASH_REDIS_REST_URL && !!process.env.
 const OVERVIEW_CACHE_KEY = 'finance:overview';
 const QUOTE_CACHE_KEY = 'finance:quote';
 const OVERVIEW_CACHE_SECONDS = 60 * 60 * 24; // 24 hours
-const QUOTE_CACHE_SECONDS = 60 * 15; // 15 minutes
+const QUOTE_CACHE_SECONDS = 60 * 60 * 12; // 12 hours (Increased to avoid rate limits)
 
 // Type definitions
 type OverviewData = Record<string, { Symbol: string; Name: string; PERatio: string; ForwardPE: string; '52WeekHigh': string; '52WeekLow': string; }>;
