@@ -17,19 +17,9 @@ const toolsData: GlowCardItem[] = [
     href: "/tools/info-create",
   },
   {
-    id: "asset-allocation",
-    title: "资产配置占比",
-    href: "/tools/asset-allocation",
-  },
-  {
     id: "life-countdown",
     title: "人生倒计时",
     href: "/tools/life-countdown",
-  },
-  {
-    id: "loan-calculator",
-    title: "贷款计算器",
-    href: "/tools/loan-calculator",
   },
   {
     id: "coze",

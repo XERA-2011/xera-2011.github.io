@@ -8,7 +8,7 @@ import { motion } from 'framer-motion'
 import { Card, CardContent } from "@/components/ui/card"
 import { Button } from "@/components/ui/button"
 import { Separator } from "@/components/ui/separator"
-import { LogOut, Clock, TrendingUp } from "lucide-react"
+import { LogOut } from "lucide-react"
 
 export default function DashboardPage() {
   const { data: session, status } = useSession()
@@ -123,72 +123,6 @@ export default function DashboardPage() {
               </div>
             </CardContent>
           </Card>
-        </motion.div>
-
-        {/* Tools Section */}
-        <motion.div
-          className="max-w-4xl mx-auto"
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.8, delay: 0.4 }}
-        >
-          <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-            {/* Life Countdown Tool */}
-            <Card
-              className="cursor-pointer hover:bg-accent transition-all duration-300 group"
-              onClick={() => router.push('/tools/life-countdown')}
-            >
-              <CardContent className="p-6">
-                <div className="flex flex-col items-center text-center gap-4">
-                  <div className="w-14 h-14 rounded-xl bg-primary/10 flex items-center justify-center group-hover:scale-110 transition-transform duration-300">
-                    <Clock className="w-7 h-7 text-primary" />
-                  </div>
-                  <h3 className="text-base font-semibold">人生倒计时</h3>
-                </div>
-              </CardContent>
-            </Card>
-
-            {/* Asset Allocation Tool */}
-            <Card
-              className="cursor-pointer hover:bg-accent transition-all duration-300 group"
-              onClick={() => router.push('/tools/asset-allocation')}
-            >
-              <CardContent className="p-6">
-                <div className="flex flex-col items-center text-center gap-4">
-                  <div className="w-14 h-14 rounded-xl bg-primary/10 flex items-center justify-center group-hover:scale-110 transition-transform duration-300">
-                    <TrendingUp className="w-7 h-7 text-primary" />
-                  </div>
-                  <h3 className="text-base font-semibold">资产配置</h3>
-                </div>
-              </CardContent>
-            </Card>
-          </div>
-        </motion.div>
-
-        {/* Footer Links */}
-        <motion.div
-          className="max-w-4xl mx-auto mt-16 text-center"
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          transition={{ duration: 0.8, delay: 0.6 }}
-        >
-          <div className="flex items-center justify-center gap-6 text-sm">
-            <Button
-              variant="link"
-              onClick={() => router.push('/privacy')}
-              className="text-muted-foreground hover:text-foreground"
-            >
-              隐私政策
-            </Button>
-            <span className="text-muted-foreground">•</span>
-            <Button
-              variant="link"
-              onClick={() => router.push('/terms')}
-              className="text-muted-foreground hover:text-foreground"
-            >
-              服务条款
-            </Button>
-          </div>
         </motion.div>
       </div>
     </div>

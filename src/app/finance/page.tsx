@@ -11,6 +11,16 @@ const financeToolsData: GlowCardItem[] = [
     title: "市场看板",
     href: "/finance/alphavantage",
   },
+  {
+    id: "asset-allocation",
+    title: "资产配置占比",
+    href: "/finance/asset-allocation",
+  },
+  {
+    id: "loan-calculator",
+    title: "贷款计算器",
+    href: "/finance/loan-calculator",
+  },
 ];
 
 export default function FinancePage() {

@@ -30,6 +30,10 @@ export const links: Link[] = [
     href: '/tools',
   },
   {
+    title: 'Finance',
+    href: '/finance',
+  },
+  {
     title: 'Generate',
     href: '/generate',
   },
