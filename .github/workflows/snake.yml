@@ -43,5 +43,6 @@ jobs:
           target_branch: output
           build_dir: dist
           keep_history: true
+          commit_message: "Update snake svg [skip ci]"
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
