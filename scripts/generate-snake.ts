@@ -10,7 +10,7 @@ import { createSnakeFromCells } from '@/lib/snake/types/snake';
 import { Color } from '@/lib/snake/types/grid';
 
 // --- Configuration ---
-const OUTPUT_DIR = path.join(process.cwd(), 'dist', 'snake');
+const OUTPUT_DIR = path.join(process.cwd(), 'public', 'snake');
 
 // --- Types ---
 type ThemeName = 'dark' | 'light';

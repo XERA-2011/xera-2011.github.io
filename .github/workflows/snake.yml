@@ -37,12 +37,9 @@ jobs:
           GITHUB_REPOSITORY_OWNER: ${{ github.repository_owner }}
         run: npx tsx scripts/generate-snake.ts
 
-      - name: Push to output branch
-        uses: crazy-max/ghaction-github-pages@v3.1.0
+      - name: Commit and Push to Main
+        uses: stefanzweifel/git-auto-commit-action@v5
         with:
-          target_branch: output
-          build_dir: dist
-          keep_history: false
-          commit_message: "Update snake svg [skip ci]"
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          commit_message: "chore: update snake svg"
+          file_pattern: "public/snake/*.svg"
+          branch: main
