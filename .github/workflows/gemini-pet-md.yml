@@ -2,7 +2,7 @@ name: Generate Essay Markdown
 
 on:
   schedule:
-    - cron: '0 18 * * *' # Runs at 18:00 UTC, which is 2:00 AM Beijing time
+    - cron: "0 18 * * *" # Runs at 18:00 UTC, which is 2:00 AM Beijing time
   workflow_dispatch:
 
 permissions:
@@ -17,18 +17,18 @@ jobs:
       - name: Setup Node.js
         uses: actions/setup-node@v4
         with:
-          node-version: '20'
+          node-version: "20"
       - name: Install Gemini CLI
         run: |
           echo "安装 Gemini CLI..."
           npm install -g @google/gemini-cli
           echo "验证安装..."
           gemini --version || echo "Gemini CLI 版本检查失败"
-          
+
           echo "配置 Gemini API 认证..."
           # 创建配置目录
           mkdir -p ~/.gemini
-          
+
           # 创建配置文件
           cat > ~/.gemini/settings.json << EOF
           {
@@ -38,7 +38,7 @@ jobs:
             }
           }
           EOF
-          
+
           echo "测试 API 连接..."
           echo "Hello" | timeout 30s gemini || echo "API 连接测试失败"
       - name: Create output directory
@@ -47,7 +47,7 @@ jobs:
       - name: Check API availability
         run: |
           echo "=== 检查 Gemini API 可用性 ==="
-          
+
           # 验证配置文件
           echo "检查认证配置..."
           if [ -f ~/.gemini/settings.json ]; then
@@ -57,7 +57,7 @@ jobs:
           else
             echo "❌ 配置文件不存在"
           fi
-          
+
           # 简单的 API 健康检查
           echo "测试基本 API 连接..."
           if timeout 30s bash -c "echo 'test' | gemini" > /tmp/api_test.txt 2>&1; then
@@ -67,42 +67,42 @@ jobs:
             echo "⚠️  API 连接测试失败，但继续尝试生成"
             cat /tmp/api_test.txt | head -10
           fi
-          
+
           rm -f /tmp/api_test.txt
 
       - name: Generate and save essay examples
         run: |
           echo "=== 开始生成 PET 作文 ==="
-          
+
           # 添加时间戳和随机元素来避免缓存
           TIMESTAMP=$(date +%s)
           RANDOM_ID=$(echo $RANDOM)
-          
+
           # 为两种作文类型创建不同的主题列表
           TOPICS_EMAIL=("An email to a friend asking for advice about choosing a university course" "A postcard to your family from your first week at a new school" "An email to a language school asking about English courses and prices" "A thank-you email to a host family after staying with them" "An email inviting a friend to your birthday celebration" "An email to your teacher explaining why you couldn't complete your homework" "A postcard describing an interesting museum you visited" "An email to an online shop complaining about a delayed delivery" "An email to a friend recommending a new restaurant you tried" "An email to a penfriend describing your typical school day" "An email to a gym asking about membership fees and facilities" "An email inviting your cousin to visit you during the holidays" "An email apologizing to a friend for missing their party" "An email to a local newspaper giving your opinion on recycling" "An email applying for a weekend job at a bookshop" "A postcard from your exchange program abroad" "An email giving directions to your new house" "A thank-you email to someone who helped you learn English" "An email booking tickets for a concert" "An email to your headteacher suggesting a new school club")
           TOPICS_STORY=("Write a story about an unexpected message you received" "An article for teenagers about the benefits of learning a second language" "Write a story that begins: 'When I opened the old box, I found something incredible inside.'" "An article about why young people should volunteer in their community" "A story about the most important decision you ever made" "Write a story about a day when everything went wrong" "An article explaining how students can help protect the environment" "Write a story that ends: 'I realized that sometimes the best adventures happen close to home.'" "An article about a traditional celebration in your country" "A story about overcoming a fear" "Write a story about a misunderstanding that had a happy ending" "An article giving advice on how to make new friends" "A story about an animal that changed someone's life" "Write a story beginning: 'The phone rang at midnight and changed everything.'" "An article reviewing a movie that all teenagers should watch" "A story about helping a stranger" "Write a story about finding something valuable that wasn't yours" "An article about a young person who inspires you" "A story about a wish that came true in an unexpected way" "Write a story ending: 'That experience taught me never to judge people too quickly.'")
-          
+
           SELECTED_TOPIC_EMAIL=${TOPICS_EMAIL[$((RANDOM % ${#TOPICS_EMAIL[@]}))]}
           SELECTED_TOPIC_STORY=${TOPICS_STORY[$((RANDOM % ${#TOPICS_STORY[@]}))]}
-          
+
           echo "时间戳: $TIMESTAMP"
           echo "随机ID: $RANDOM_ID"
           echo "选定邮件/明信片主题: $SELECTED_TOPIC_EMAIL"
           echo "选定故事/文章主题: $SELECTED_TOPIC_STORY"
-          
+
           PROMPT="请为我生成一个Markdown格式的文件内容，该文件应包含两篇符合 PET (B1 Preliminary) 考试写作要求的英语作文（每篇约100词）及其翻译。\n\n第一篇是应用文，主题是：'$SELECTED_TOPIC_EMAIL'。\n第二篇是记叙文或短文，主题是：'$SELECTED_TOPIC_STORY'。\n\n请严格遵循以下格式，不要包含任何额外的解释或代码块标记。请直接输出 Markdown 内容。\n\n# 应用文\n\n## $SELECTED_TOPIC_EMAIL\n- [此处为主题 '$SELECTED_TOPIC_EMAIL' 的中文翻译]\n\n**正文**：\n\n[作文一的英文正文]\n\n- [作文一的中文翻译，翻译的每个段落都另起一行并以'- '开头]\n\n---\n\n# 记叙文/短文\n\n## $SELECTED_TOPIC_STORY\n- [此处为主题 '$SELECTED_TOPIC_STORY' 的中文翻译]\n\n**正文**：\n\n[作文二的英文正文]\n\n- [作文二的中文翻译，翻译的每个段落都另起一行并以'- '开头]\n\n请确保只输出纯净的Markdown内容。当前时间戳：$TIMESTAMP，随机ID：$RANDOM_ID。请确保生成的内容是独特的。"
-          
+
           # 改进的重试机制
           MAX_RETRIES=2
           RETRY_COUNT=0
           SUCCESS=false
-          
+
           while [ $RETRY_COUNT -lt $MAX_RETRIES ] && [ "$SUCCESS" = "false" ]; do
             echo "尝试第 $((RETRY_COUNT + 1)) 次生成..."
             
             # 使用timeout命令限制执行时间，避免长时间挂起
-            timeout 120s bash -c "echo '$PROMPT' | gemini" > /tmp/gemini_output.txt 2>&1
-            EXIT_CODE=$?
+            EXIT_CODE=0
+            timeout 120s bash -c "echo '$PROMPT' | gemini" > /tmp/gemini_output.txt 2>&1 || EXIT_CODE=$?
             
             # 读取输出内容
             OUTPUT=$(cat /tmp/gemini_output.txt 2>/dev/null || echo "")
@@ -165,10 +165,10 @@ jobs:
               fi
             fi
           done
-          
+
           # 清理临时文件
           rm -f /tmp/gemini_output.txt
-          
+
           # 最终检查
           if [ "$SUCCESS" = "false" ]; then
             echo "❌ 达到最大重试次数 ($MAX_RETRIES)，API 持续失败"
@@ -216,7 +216,7 @@ jobs:
       - name: Check if content has changed
         run: |
           echo "=== Content Change Detection ==="
-          
+
           # 检查是否有现有文件
           if [ -f "public/markdown/pet-essays.md" ]; then
             # 保存新生成的文件到临时位置
@@ -290,7 +290,7 @@ jobs:
           fi
 
       - name: Commit and push the generated file
-        if: env.CONTENT_CHANGED == 'true'  # 移除 success() 条件，允许提交服务状态报告
+        if: env.CONTENT_CHANGED == 'true' # 移除 success() 条件，允许提交服务状态报告
         uses: stefanzweifel/git-auto-commit-action@v5
         with:
           commit_message: "AI Generate"

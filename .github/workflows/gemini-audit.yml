@@ -133,7 +133,19 @@ jobs:
           "
 
           # 生成报告
-          REPORT_CONTENT=$(echo "$PROMPT" | gemini)
+          echo "$PROMPT" > /tmp/audit_prompt.txt
+          EXIT_CODE=0
+          timeout 120s bash -c "cat /tmp/audit_prompt.txt | gemini" > /tmp/audit_report.txt 2>&1 || EXIT_CODE=$?
+
+          if [ $EXIT_CODE -eq 0 ]; then
+             REPORT_CONTENT=$(cat /tmp/audit_report.txt)
+          else
+             echo "❌ Gemini API call failed with exit code $EXIT_CODE"
+             cat /tmp/audit_report.txt
+             REPORT_CONTENT="**Error**: Failed to generate security report via Gemini API. (Exit Code: $EXIT_CODE)"
+          fi
+
+          rm -f /tmp/audit_prompt.txt /tmp/audit_report.txt
 
           # 格式化并保存报告
           {
