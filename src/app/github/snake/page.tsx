@@ -19,6 +19,16 @@ export default function GitHubSnakePage() {
   const [previewTheme, setPreviewTheme] = useState<'dark' | 'light'>('dark');
   const [copiedIndex, setCopiedIndex] = useState<number | null>(null);
 
+  const handleCopy = async (text: string, index: number) => {
+    try {
+      await navigator.clipboard.writeText(text);
+      setCopiedIndex(index);
+      setTimeout(() => setCopiedIndex(null), 2000);
+    } catch (err) {
+      console.error('Failed to copy:', err);
+    }
+  };
+
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     if (!username.trim()) return;
@@ -51,15 +61,7 @@ export default function GitHubSnakePage() {
     }
   };
 
-  const handleCopy = async (text: string, index: number) => {
-    try {
-      await navigator.clipboard.writeText(text);
-      setCopiedIndex(index);
-      setTimeout(() => setCopiedIndex(null), 2000);
-    } catch (err) {
-      console.error('Failed to copy:', err);
-    }
-  };
+
 
   return (
     <div className="relative w-full min-h-screen pt-32 pb-20">
@@ -182,27 +184,28 @@ export default function GitHubSnakePage() {
                         将以下代码复制到你的 GitHub README.md 文件中：
                       </p>
                       <div className="relative">
-                        <pre className="bg-secondary border border-border rounded-lg p-4 overflow-x-auto">
+                        <pre className="bg-secondary border border-border rounded-lg p-4 overflow-x-auto pr-24">
                           <code className="text-sm text-foreground">
                             {`<img alt="GitHub Snake" src="https://xera-2011.vercel.app/api/github/snake?username=${username}&theme=${previewTheme}" />`}
                           </code>
                         </pre>
                         <Button
+                          type="button"
                           size="sm"
                           variant="outline"
                           onClick={() => handleCopy(`<img alt="GitHub Snake" src="https://xera-2011.vercel.app/api/github/snake?username=${username}&theme=${previewTheme}" />`, 0)}
-                          className="absolute top-2 right-2"
+                          className="absolute top-2 right-2 h-8"
                         >
                           {copiedIndex === 0 ? (
                             <>
-                              <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                              <svg className="w-3.5 h-3.5 mr-1.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
                               </svg>
                               已复制
                             </>
                           ) : (
                             <>
-                              <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                              <svg className="w-3.5 h-3.5 mr-1.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M8 16H6a2 2 0 01-2-2V6a2 2 0 012-2h8a2 2 0 012 2v2m-6 12h8a2 2 0 002-2v-8a2 2 0 00-2-2h-8a2 2 0 00-2 2v8a2 2 0 002 2z" />
                               </svg>
                               复制
