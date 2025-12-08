@@ -19,10 +19,10 @@ export default function HeroSection() {
   // 根据主题获取对应的 SVG
   const currentTheme = mounted ? (resolvedTheme || theme || 'dark') : 'dark';
   const svgFile = currentTheme === 'light'
-    ? 'github-contribution-grid-snake.svg'
-    : 'github-contribution-grid-snake-dark.svg';
+    ? 'snake-light.svg'
+    : 'snake-dark.svg';
   const snakeSvgSrc = `/api/redirect?url=${encodeURIComponent(
-    `https://cdn.jsdelivr.net/gh/XERA-2011/XERA-2011/profile-snake-contrib/${svgFile}`
+    `https://cdn.jsdelivr.net/gh/XERA-2011/x-actions@output/${svgFile}`
   )}`;
 
   return (
