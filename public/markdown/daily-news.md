@@ -1,61 +1,29 @@
-# Global Breaking News TOP10
+# 新闻服务状态报告
 
-**Date**: 2025年12月05日
-**Update Time**: 10:21 UTC
+**生成时间**: 2025-12-08 01:17:17 UTC
 **AI Model**: Google Gemini / Google Gemini
+**状态**: API 服务暂时不可用
+
+## 服务信息
+
+Gemini API 当前遇到连接问题，可能原因：
+- API 服务器临时过载
+- 网络连接超时
+- API 配额限制
+
+## 技术详情
+
+```
+重试次数: 2
+超时设置: 120秒
+模型: 默认模型
+```
+
+## 解决方案
+
+1. 系统将在下次定时任务自动重试
+2. 如持续失败，请检查 API 密钥配置
+3. 考虑调整生成时间或模型参数
 
 ---
-
-### 1. **EU Leaders Race to Finalize Ukraine Funding Deal Amid Dire Warnings** / **欧盟领导人紧急敲定对乌克兰的资金援助协议**
-- **Time**: 2025-12-05
-- **Content**: EU leaders are intensifying efforts to finalize a critical funding package for Ukraine as officials in Kyiv warn that the country's financial resources are perilously low. The discussions are focused on overcoming internal divisions to ensure Ukraine can maintain its defense and economic stability. / 欧盟领导人正在加紧敲定对乌克兰的关键资金援助方案，基辅官员警告称，该国的财政资源已极度短缺。讨论的焦点是克服内部分歧，以确保乌克兰能够维持其国防和经济稳定。
-- **Source**: The Guardian
-
-### 2. **Drone Sightings Near Zelenskyy's Flight Path Spark Security Alert** / **泽连斯基航线附近惊现无人机，引发安全警报**
-- **Time**: 2025-12-05
-- **Content**: Security was heightened after drones were reportedly spotted near Ukrainian President Volodymyr Zelenskyy's flight path during a recent trip to Dublin. The incident has raised concerns about the president's safety during international travel. / 乌克兰总统弗拉基米尔·泽连斯基最近访问都柏林期间，其航线附近据报发现无人机，安保随之升级。该事件引发了外界对总统国际旅行安全的担忧。
-- **Source**: The Guardian
-
-### 3. **Putin Visits India for High-Stakes Defense and Trade Talks** / **普京访问印度，举行高风险国防与贸易会谈**
-- **Time**: 2025-12-05
-- **Content**: Russian President Vladimir Putin is in India for discussions on defense and trade, a visit that carries significant weight amidst the ongoing war in Ukraine. The talks are expected to deepen the strategic partnership between the two nations. / 俄罗斯总统弗拉基米尔·普京正在印度就国防和贸易问题进行讨论，在乌克兰战争持续的背景下，这次访问意义重大。会谈预计将深化两国间的战略伙伴关系。
-- **Source**: The Guardian
-
-### 4. **US Admiral Denies "Kill Them All" Order in Boat Strike Controversy** / **美国海军上将否认在船只袭击争议中下达“全部杀死”命令**
-- **Time**: 2025-12-05
-- **Content**: A US admiral has denied issuing a "kill them all" order in relation to recent boat strikes, as lawmakers review video evidence of the incident. The Pentagon has separately announced the killing of four men in another boat strike in the Pacific. / 一名美国海军上将否认就最近的船只袭击事件下达了“全部杀死”的命令，与此同时，议员们正在审查该事件的视频证据。五角大楼另外宣布，在太平洋的另一起船只袭击中击毙了四人。
-- **Source**: CBS News
-
-### 5. **UK Sanctions Russia After Inquiry Blames Putin for 2018 Poison Attack** / **英国因2018年投毒案调查直指普京而制裁俄罗斯**
-- **Time**: 2025-12-05
-- **Content**: The United Kingdom has imposed new sanctions on Russia following an inquiry that held President Putin responsible for the deadly 2018 nerve agent attack in Salisbury. The move signals a hardening stance against Moscow. / 在一项调查认定普京总统对2018年索尔兹伯里发生的致命神经毒剂袭击事件负责后，英国对俄罗斯实施了新的制裁。此举标志着对莫斯科的立场日益强硬。
-- **Source**: Global News
-
-### 6. **Four Countries to Boycott Eurovision 2026 Over Israel's Participation** / **四国因以色列参赛而抵制2026年欧洲歌唱大赛**
-- **Time**: 2025-12-05
-- **Content**: A coalition of four countries has announced they will boycott the Eurovision Song Contest in 2026 due to the participation of Israel. The decision reflects growing political tensions surrounding the competition. / 四国联盟宣布，由于以色列的参与，他们将抵制2026年的欧洲歌唱大赛。这一决定反映了围绕该赛事的日益加剧的政治紧张局势。
-- **Source**: Global News
-
-### 7. **Outcry in Italy Over Controversial Sex Education Bill** / **意大利因备受争议的性教育法案引发强烈抗议**
-- **Time**: 2025-12-05
-- **Content**: A proposed sex education bill in Italy, aimed at cracking down on "gender ideology," has sparked a significant public outcry. Critics argue the bill is discriminatory and a step backward for civil rights. / 意大利一项旨在打击“性别意识形态”的性教育法案草案引发了公众的强烈抗议。批评者认为，该法案具有歧视性，是公民权利的倒退。
-- **Source**: The Guardian
-
-### 8. **Hong Kong Warns Against "External Forces" After Deadly Apartment Fire** / **香港在致命公寓火灾后警告警惕“外部势力”**
-- **Time**: 2025-12-05
-- **Content**: Following a tragic apartment fire that has claimed 159 lives, the Hong Kong government has issued a warning against "external forces" allegedly trying to exploit the situation. The statement has drawn mixed reactions from the public. / 在一场造成159人死亡的悲剧性公寓火灾之后，香港政府发布警告，警惕据称试图利用局势的“外部势力”。该声明引起了公众的不同反应。
-- **Source**: The Guardian
-
-### 9. **Tunisia Arrests Top Opposition Leader in Widening Crackdown** / **突尼斯在不断扩大的镇压行动中逮捕主要反对派领袖**
-- **Time**: 2025-12-05
-- **Content**: Tunisian authorities have arrested Nejib Chebbi, a prominent opposition leader, as part of what critics are calling a widening crackdown on dissent. The arrest has been condemned by international human rights organizations. / 突尼斯当局逮捕了著名反对派领袖Nejib Chebbi，批评人士称这是对异见人士日益扩大的镇压行动的一部分。这次逮捕行动受到了国际人权组织的谴责。
-- **Source**: Al Jazeera
-
-### 10. **NASA Reveals "Space Gum" Discovered in Asteroid Bennu Samples** / **美国宇航局揭示在小行星贝努样本中发现“太空口香糖”**
-- **Time**: 2025-12-05
-- **Content**: NASA scientists have revealed the discovery of an unusual, gum-like substance in the samples collected from the asteroid Bennu. The finding is currently under analysis and could offer new insights into the composition of asteroids. / 美国宇航局的科学家透露，在从小行星贝努采集的样本中发现了一种不寻常的、类似口香糖的物质。这一发现目前正在分析中，可能为小行星的构成提供新的见解。
-- **Source**: CBS News
-
----
-
-*This news summary is generated by Google Gemini AI for reference only. / 本新闻摘要由Google Gemini AI自动生成，仅供参考。*
+*此报告由Google Gemini自动化系统生成 / Generated by Google Gemini automated system*
