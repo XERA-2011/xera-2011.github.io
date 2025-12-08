@@ -2,7 +2,7 @@ name: Generate Daily News
 
 on:
   schedule:
-    - cron: '0 22,10 * * *' # Runs at 22:00 and 10:00 UTC, which is 06:00 and 18:00 Beijing time
+    - cron: "0 22,10 * * *" # Runs at 22:00 and 10:00 UTC, which is 06:00 and 18:00 Beijing time
   workflow_dispatch:
 
 permissions:
@@ -11,14 +11,14 @@ permissions:
 jobs:
   generate-news:
     runs-on: ubuntu-latest
-    timeout-minutes: 15  # 增加超时时间到 15 分钟
+    timeout-minutes: 15 # 增加超时时间到 15 分钟
     steps:
       - name: Checkout Repository
         uses: actions/checkout@v4
       - name: Setup Node.js
         uses: actions/setup-node@v4
         with:
-          node-version: '20'
+          node-version: "20"
       - name: Install Gemini CLI
         run: |
           echo "安装 Gemini CLI..."
@@ -161,8 +161,8 @@ jobs:
             echo "步骤 1: 准备 API 调用..."
 
             # 使用文件输入方式调用 Gemini CLI
-            timeout 120s bash -c "cat /tmp/prompt.txt | gemini" > /tmp/gemini_output.txt 2>&1
-            EXIT_CODE=$?
+            EXIT_CODE=0
+            timeout 120s bash -c "cat /tmp/prompt.txt | gemini" > /tmp/gemini_output.txt 2>&1 || EXIT_CODE=$?
 
             # 读取输出内容
             OUTPUT=$(cat /tmp/gemini_output.txt 2>/dev/null || echo "")
