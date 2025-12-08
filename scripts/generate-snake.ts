@@ -10,7 +10,7 @@ import { createSnakeFromCells } from '@/lib/snake/types/snake';
 import { Color } from '@/lib/snake/types/grid';
 
 // --- Configuration ---
-const OUTPUT_DIR = path.join(process.cwd(), 'dist', 'profile-snake-contrib');
+const OUTPUT_DIR = path.join(process.cwd(), 'dist', 'snake');
 
 // --- Types ---
 type ThemeName = 'dark' | 'light';
@@ -88,8 +88,8 @@ async function generateSnake(username: string) {
 
       const svg = createSvg(grid, contributions, chain, options, { stepDurationMs: 100 });
       const filename = theme === 'light' 
-        ? 'github-contribution-grid-snake.svg' 
-        : 'github-contribution-grid-snake-dark.svg';
+        ? 'light.svg' 
+        : 'dark.svg';
       
       const filePath = path.join(OUTPUT_DIR, filename);
       fs.writeFileSync(filePath, svg);
