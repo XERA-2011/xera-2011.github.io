@@ -1,285 +1,106 @@
-"use client";
+'use client';
 
-import { useState, useEffect } from 'react';
 import { motion } from 'framer-motion';
 import { usePageTitle } from '@/hooks/use-page-title';
-import { useSession } from 'next-auth/react';
-import { Card, CardContent } from '@/components/ui/card';
-import { Button } from '@/components/ui/button';
-import { Input } from '@/components/ui/input';
-import { Label } from '@/components/ui/label';
-import { Clock, AlertCircle } from 'lucide-react';
+import TimeCard from "@/components/tools/time-dashboard/time-card";
+import RetirementCard from "@/components/tools/time-dashboard/retirement-card";
+import HolidayCard from "@/components/tools/time-dashboard/holiday-card";
 
-export default function LifeCountdownPage() {
-  usePageTitle('人生倒计时');
-  const { status } = useSession();
-  const [currentAge, setCurrentAge] = useState('');
-  const [targetAge, setTargetAge] = useState('');
-  const [remainingDays, setRemainingDays] = useState<number | null>(null);
-  const [error, setError] = useState('');
-  const [isSaving, setIsSaving] = useState(false);
-  const [isLoading, setIsLoading] = useState(true);
-  const [saveMessage, setSaveMessage] = useState('');
-
-  // 加载用户保存的设置
-  useEffect(() => {
-    const loadSettings = async () => {
-      // 等待认证状态确定
-      if (status === 'loading') {
-        return;
-      }
-
-      if (status === 'authenticated') {
-        try {
-          const response = await fetch('/api/life-countdown');
-          if (response.ok) {
-            const data = await response.json();
-            if (data.settings) {
-              setCurrentAge(data.settings.currentAge.toString());
-              setTargetAge(data.settings.targetAge.toString());
-              // 自动计算剩余天数
-              const yearsDiff = data.settings.targetAge - data.settings.currentAge;
-              const days = Math.floor(yearsDiff * 365.25);
-              setRemainingDays(days);
-            }
-          }
-        } catch (error) {
-          console.error('加载设置失败:', error);
-        }
-      }
-
-      setIsLoading(false);
-    };
-
-    loadSettings();
-  }, [status]);
-
-
-
-  const handleCalculateAndSave = async () => {
-    setError('');
-    setSaveMessage('');
-
-    const current = parseFloat(currentAge);
-    const target = parseFloat(targetAge);
-
-    // 验证输入
-    if (!currentAge || !targetAge) {
-      setError('请输入当前年龄和目标年龄');
-      return;
+const containerVariants = {
+  hidden: { opacity: 0 },
+  show: {
+    opacity: 1,
+    transition: {
+      staggerChildren: 0.1
     }
-
-    if (isNaN(current) || isNaN(target)) {
-      setError('请输入有效的数字');
-      return;
-    }
-
-    if (current < 0 || target < 0) {
-      setError('年龄不能为负数');
-      return;
-    }
-
-    if (current >= target) {
-      setError('目标年龄必须大于当前年龄');
-      return;
-    }
-
-    if (target > 150) {
-      setError('目标年龄似乎不太现实');
-      return;
-    }
-
-    // 先计算剩余天数
-    const yearsDiff = target - current;
-    const days = Math.floor(yearsDiff * 365.25);
-    setRemainingDays(days);
-
-    // 如果已登录，保存设置
-    if (status === 'authenticated') {
-      setIsSaving(true);
-      try {
-        const response = await fetch('/api/life-countdown', {
-          method: 'POST',
-          headers: {
-            'Content-Type': 'application/json',
-          },
-          body: JSON.stringify({
-            currentAge: current,
-            targetAge: target,
-          }),
-        });
-
-        if (response.ok) {
-          setSaveMessage('已保存设置！');
-          setTimeout(() => setSaveMessage(''), 3000);
-        } else {
-          const data = await response.json();
-          setError(data.error || '保存失败');
-        }
-      } catch (error) {
-        console.error('保存失败:', error);
-        // 保存失败不影响计算结果的显示
-      } finally {
-        setIsSaving(false);
-      }
-    }
-  };
-
-  const handleClear = () => {
-    setCurrentAge('');
-    setTargetAge('');
-    setRemainingDays(null);
-    setError('');
-    setSaveMessage('');
-  };
-
-  const formatNumber = (num: number) => {
-    return num.toLocaleString('zh-CN');
-  };
-
-  if (isLoading) {
-    return (
-      <div className="relative w-full min-h-screen flex items-center justify-center">
-        <div className="flex flex-col items-center gap-4">
-          <div className="w-12 h-12 border-4 border-border border-t-primary rounded-full animate-spin"></div>
-          <p className="text-muted-foreground text-lg">加载中...</p>
-        </div>
-      </div>
-    );
   }
+};
+
+const itemVariants = {
+  hidden: { opacity: 0, y: 20 },
+  show: { opacity: 1, y: 0 }
+};
+
+export default function TimeDashboardPage() {
+  usePageTitle('人生倒计时');
 
   return (
-    <div className="relative w-full min-h-screen pt-32 pb-20">
-      <div className="container mx-auto px-4 sm:px-6 lg:px-8 max-w-4xl">
-        {/* Page Title */}
+    <div className="relative min-h-screen w-full pt-32 pb-20 px-4 md:px-8 bg-background">
+      <div className="max-w-7xl mx-auto">
         <motion.div
-          className="text-center mb-16"
-          initial={{ opacity: 0, y: 20 }}
+          className="mb-12 text-center"
+          initial={{ opacity: 0, y: -20 }}
           animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.8 }}
+          transition={{ duration: 0.8, ease: "easeOut" }}
         >
-          <div className="flex items-center justify-center gap-3 mb-4">
-            <Clock className="w-8 h-8 text-primary" />
-            <h2 className="text-3xl sm:text-4xl lg:text-5xl font-bold">
-              人生倒计时
-            </h2>
-          </div>
-          {status === 'authenticated' && (
-            <p className="text-muted-foreground text-sm">已登录，设置将自动保存</p>
-          )}
+          <h1 className="text-4xl md:text-5xl font-bold text-foreground mb-4">
+            时间仪表盘
+          </h1>
         </motion.div>
 
         <motion.div
-          initial={{ opacity: 0, y: 30 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.8, delay: 0.2 }}
+          variants={containerVariants}
+          initial="hidden"
+          animate="show"
+          className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mb-12"
         >
-          <Card>
-            <CardContent className="p-8">
-              {/* Input Fields */}
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-6">
-                <div className="space-y-2">
-                  <Label htmlFor="currentAge">当前年龄</Label>
-                  <Input
-                    id="currentAge"
-                    type="number"
-                    value={currentAge}
-                    onChange={(e) => setCurrentAge(e.target.value)}
-                    placeholder="例如：25"
-                    step="0.1"
-                    min="0"
-                  />
-                </div>
+          {/* Row 1: Time & Retirement */}
+          <motion.div variants={itemVariants} className="h-full">
+            <TimeCard />
+          </motion.div>
+          <motion.div variants={itemVariants} className="h-full md:col-span-2 lg:col-span-2">
+            <RetirementCard />
+          </motion.div>
+        </motion.div>
 
-                <div className="space-y-2">
-                  <Label htmlFor="targetAge">目标年龄</Label>
-                  <Input
-                    id="targetAge"
-                    type="number"
-                    value={targetAge}
-                    onChange={(e) => setTargetAge(e.target.value)}
-                    placeholder="例如：80"
-                    step="0.1"
-                    min="0"
-                  />
-                </div>
-              </div>
+        <motion.div
+          initial={{ opacity: 0, x: -20 }}
+          animate={{ opacity: 1, x: 0 }}
+          transition={{ delay: 0.4 }}
+          className="mb-6 flex items-center gap-4"
+        >
+          <h2 className="text-2xl font-bold text-foreground">节日倒计时</h2>
+          <div className="h-px flex-1 bg-border" />
+        </motion.div>
 
-              {/* Action Buttons */}
-              <div className="flex gap-4 mb-6">
-                <Button
-                  onClick={handleCalculateAndSave}
-                  disabled={isSaving}
-                  className="flex-1"
-                >
-                  {isSaving ? '处理中...' : status === 'authenticated' ? '计算并保存' : '计算剩余天数'}
-                </Button>
-                <Button
-                  variant="secondary"
-                  onClick={handleClear}
-                >
-                  清空
-                </Button>
-              </div>
+        <motion.div
+          variants={containerVariants}
+          initial="hidden"
+          animate="show"
+          className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4"
+        >
+          <motion.div variants={itemVariants}>
+            <HolidayCard
+              title="元旦"
+              targetDateStr="01-01"
+              subtitle="新年伊始"
+            />
+          </motion.div>
+          <motion.div variants={itemVariants}>
+            <HolidayCard
+              title="春节"
+              lunarMonth={1}
+              lunarDay={1}
+              subtitle="农历新年"
+            />
+          </motion.div>
 
-              {/* Success Message */}
-              {saveMessage && (
-                <div className="mb-6 p-4 bg-primary/10 border border-primary/30 rounded-lg">
-                  {saveMessage}
-                </div>
-              )}
+          <motion.div variants={itemVariants}>
+            <HolidayCard
+              title="中秋"
+              lunarMonth={8}
+              lunarDay={15}
+              subtitle="团圆"
+            />
+          </motion.div>
 
-              {/* Error Message */}
-              {error && (
-                <div className="mb-6 p-4 bg-destructive/20 border border-destructive/30 rounded-lg flex items-start gap-2">
-                  <AlertCircle className="w-5 h-5 text-destructive shrink-0 mt-0.5" />
-                  <span className="text-destructive">{error}</span>
-                </div>
-              )}
-
-              {/* Result Display */}
-              {remainingDays !== null && !error && (
-                <motion.div
-                  initial={{ opacity: 0, scale: 0.95 }}
-                  animate={{ opacity: 1, scale: 1 }}
-                  transition={{ duration: 0.5 }}
-                  className="bg-secondary border border-border rounded-xl p-8 text-center"
-                >
-                  <div className="mb-4">
-                    <p className="text-muted-foreground text-lg mb-2">剩余天数</p>
-                    <p className="text-5xl md:text-6xl font-bold mb-2">
-                      {formatNumber(remainingDays)}
-                    </p>
-                    <p className="text-muted-foreground text-lg">天</p>
-                  </div>
-
-                  <div className="grid grid-cols-3 gap-4 mt-6 pt-6 border-t border-border">
-                    <div>
-                      <p className="text-muted-foreground text-sm mb-1">约</p>
-                      <p className="text-2xl font-semibold">
-                        {formatNumber(Math.floor(remainingDays / 365.25))}
-                      </p>
-                      <p className="text-muted-foreground text-sm mt-1">年</p>
-                    </div>
-                    <div>
-                      <p className="text-muted-foreground text-sm mb-1">约</p>
-                      <p className="text-2xl font-semibold">
-                        {formatNumber(Math.floor(remainingDays / 30.44))}
-                      </p>
-                      <p className="text-muted-foreground text-sm mt-1">月</p>
-                    </div>
-                    <div>
-                      <p className="text-muted-foreground text-sm mb-1">约</p>
-                      <p className="text-2xl font-semibold">
-                        {formatNumber(Math.floor(remainingDays / 7))}
-                      </p>
-                      <p className="text-muted-foreground text-sm mt-1">周</p>
-                    </div>
-                  </div>
-                </motion.div>
-              )}
-            </CardContent>
-          </Card>
+          <motion.div variants={itemVariants}>
+            <HolidayCard
+              title="国庆"
+              targetDateStr="10-01"
+              subtitle="国庆节"
+            />
+          </motion.div>
         </motion.div>
       </div>
     </div>
