@@ -19,6 +19,7 @@ import {
 } from '@/components/ui/table';
 import {
   AlertCircle,
+  Info,
 } from 'lucide-react';
 import { usePageTitle } from '@/hooks/use-page-title';
 import ScrollReveal from '@/components/scroll-reveal';
@@ -112,11 +113,21 @@ export default function FinancePage() {
           </h1>
 
         </motion.div>
-        
+
         <ScrollReveal delay={0.3}>
+          {isLoading && (
+            <div className="bg-blue-50 border border-blue-200 text-blue-700 px-4 py-3 rounded-lg relative flex items-center gap-3 max-w-4xl mx-auto mb-8">
+              <Info className="h-5 w-5 flex-shrink-0" />
+              <div className="text-sm">
+                <strong className="font-bold block sm:inline">正在获取最新市场数据。</strong>
+                <span className="block sm:inline ml-1">由于 API 限制，初次加载可能需要 1-2 分钟，请耐心等待。后续加载将瞬间完成。</span>
+              </div>
+            </div>
+          )}
+
           {error && (
             <div className="bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded-lg relative flex items-center gap-3 max-w-4xl mx-auto mb-8">
-              <AlertCircle className="h-5 w-5" />
+              <AlertCircle className="h-5 w-5 flex-shrink-0" />
               <div>
                 <strong className="font-bold">数据获取失败:</strong>
                 <span className="block sm:inline ml-2">{error}</span>
@@ -181,7 +192,7 @@ export default function FinancePage() {
         <div className="text-center mt-8 text-sm text-gray-500 dark:text-gray-400">
           <p>数据由 Alpha Vantage 提供。保留所有权利。</p>
         </div>
-        
+
       </div>
     </div>
   );
