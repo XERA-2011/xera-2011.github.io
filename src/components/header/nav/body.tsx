@@ -68,6 +68,7 @@ export default function Body({
             href={href}
             target={target}
             className="rounded-lg"
+            onClick={() => setIsActive(false)}
           >
             <motion.p
               className={cn(
@@ -75,7 +76,6 @@ export default function Body({
                 "cursor-can-hover",
                 isActive ? "underline" : "opacity-60"
               )}
-              onClick={() => setIsActive(false)}
               onMouseOver={() => setSelectedLink({ isActive: true, index })}
               onMouseLeave={() => setSelectedLink({ isActive: false, index })}
               variants={blur}
