@@ -13,8 +13,18 @@
     margin: 0px;
     display: flex;
     overflow: hidden;
-    font-size: 32px;
+    font-size: clamp(32px, 5vw, 64px); 
     font-weight: 350;
+  }
+}
+
+@media only screen and (min-width: 768px) {
+  .body {
+    margin-top: 60px;
+    
+    p {
+      font-size: clamp(40px, 4.5vw, 80px);
+    }
   }
 }
 
@@ -23,7 +33,7 @@
     margin-top: 80px;
 
     p {
-      font-size: 5vw;
+      font-size: 5vw; 
     }
   }
 }

@@ -6,7 +6,6 @@ import styles from "./style.module.scss";
 import { height } from "../anim";
 import Body from "./body";
 import { links } from "../config";
-import { cn } from "@/lib/utils";
 import { useSession } from "next-auth/react";
 
 interface IndexProps {
@@ -50,7 +49,7 @@ const Nav: React.FC<IndexProps> = ({ setIsActive }) => {
         exit="exit"
         className={styles.navInner}
       >
-        <div className={cn(styles.wrapper, 'flex justify-end sm:justify-start')}>
+        <div className={styles.wrapper}>
           <div className={styles.container} onClick={(e) => e.stopPropagation()}>
             <Body
               links={links.filter((link) => !link.adminOnly || isAdmin)}
