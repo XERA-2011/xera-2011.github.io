@@ -47,6 +47,49 @@ pnpm audit
 pnpm up eslint
 ```
 
+## Docker
+
+### Start
+
+**Option 1: Build and Start (Recommended for first run or after code changes)**
+```bash
+docker-compose up -d --build
+```
+> Rebuilds the image to include latest code changes, then starts the containers in background.
+
+**Option 2: Start Only (Quick start)**
+```bash
+docker-compose up -d
+```
+> Starts the containers using the existing image. Faster, but won't reflect recent code changes.
+
+Access the application at http://localhost:2011.
+
+> **Note**: The application connects to the local PostgreSQL container.
+
+### Common Commands
+
+Check running containers:
+```bash
+docker ps
+```
+> Shows active containers, their IDs, status, and ports.
+
+View logs:
+```bash
+docker-compose logs -f
+```
+
+Stop services:
+```bash
+docker-compose down
+```
+
+Stop services and remove data (reset database):
+```bash
+docker-compose down -v
+```
+
 ## [shadcn/ui](https://ui.shadcn.com/)
 
 **Adding new components:**

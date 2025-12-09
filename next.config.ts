@@ -30,6 +30,7 @@ const nextConfig: NextConfig = {
   experimental: {
     optimizePackageImports: ['next/font/google'],
   },
+  output: "standalone",
 };
 
 export default nextConfig;
