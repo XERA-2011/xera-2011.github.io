@@ -22,11 +22,6 @@ const toolsData: GlowCardItem[] = [
     href: "/tools/life-countdown",
   },
   {
-    id: "coze",
-    title: "Coze",
-    href: "/tools/coze",
-  },
-  {
     id: "google",
     title: "Google",
     href: "/tools/google",
