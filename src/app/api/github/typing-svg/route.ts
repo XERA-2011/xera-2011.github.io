@@ -1,5 +1,13 @@
 import { NextRequest, NextResponse } from 'next/server';
 import { BASE_URL } from '@/lib/constants';
+import {
+  parseBoolean,
+  parsePositiveInt,
+  parseNonNegativeInt,
+  parseColor,
+  parseFont,
+  escapeHtml,
+} from '@/utils/validators';
 
 // 缓存时间（秒）
 const CACHE_SECONDS = 3600;
@@ -24,66 +32,7 @@ const DEFAULTS = {
   bold: 'true',
 };
 
-/**
- * 验证并返回布尔值
- */
-function parseBoolean(value: string): boolean {
-  return value.toLowerCase() === 'true';
-}
 
-/**
- * 验证并返回正整数
- */
-function parsePositiveInt(value: string, fieldName: string): number {
-  const num = parseInt(value.replace(/[^0-9-]/g, ''), 10);
-  if (num <= 0 || isNaN(num)) {
-    throw new Error(`${fieldName} must be a positive number`);
-  }
-  return num;
-}
-
-/**
- * 验证并返回非负整数
- */
-function parseNonNegativeInt(value: string, fieldName: string): number {
-  const num = parseInt(value.replace(/[^0-9-]/g, ''), 10);
-  if (num < 0 || isNaN(num)) {
-    throw new Error(`${fieldName} must be a non-negative number`);
-  }
-  return num;
-}
-
-/**
- * 验证并返回颜色值
- */
-function parseColor(value: string, defaultValue: string): string {
-  const sanitized = value.replace(/[^0-9A-Fa-f]/g, '');
-  if (![3, 4, 6, 8].includes(sanitized.length)) {
-    return defaultValue;
-  }
-  return `#${sanitized}`;
-}
-
-/**
- * 验证并返回字体名称
- */
-function parseFont(value: string): string {
-  return value.replace(/[^0-9A-Za-z\- ]/g, '');
-}
-
-/**
- * 转义 HTML 特殊字符
- */
-function escapeHtml(text: string): string {
-  const map: Record<string, string> = {
-    '&': '&amp;',
-    '<': '&lt;',
-    '>': '&gt;',
-    '"': '&quot;',
-    "'": '&#039;',
-  };
-  return text.replace(/[&<>"']/g, (m) => map[m]);
-}
 
 /**
  * 生成打字机效果的 SVG
