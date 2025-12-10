@@ -22,7 +22,7 @@ const itemVariants = {
 };
 
 export default function TimeDashboardPage() {
-  usePageTitle('人生倒计时');
+  usePageTitle('生命日历');
 
   return (
     <div className="relative min-h-screen w-full pt-32 pb-20 px-4 md:px-8 bg-background">
@@ -34,7 +34,7 @@ export default function TimeDashboardPage() {
           transition={{ duration: 0.8, ease: "easeOut" }}
         >
           <h1 className="text-4xl md:text-5xl font-bold text-foreground mb-4">
-            时间仪表盘
+            生命日历
           </h1>
         </motion.div>
 

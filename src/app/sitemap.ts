@@ -15,7 +15,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
     { url: '/tools/coze', priority: 0.7, changeFrequency: 'monthly' as const },
     { url: '/tools/google', priority: 0.7, changeFrequency: 'monthly' as const },
     { url: '/tools/info-create', priority: 0.7, changeFrequency: 'monthly' as const },
-    { url: '/tools/life-countdown', priority: 0.7, changeFrequency: 'monthly' as const },
+    { url: '/tools/life-calendar', priority: 0.7, changeFrequency: 'monthly' as const },
     { url: '/tools/asset-allocation', priority: 0.7, changeFrequency: 'monthly' as const },
 
     // 实验项目页面

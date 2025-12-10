@@ -17,9 +17,9 @@ const toolsData: GlowCardItem[] = [
     href: "/tools/info-create",
   },
   {
-    id: "life-countdown",
-    title: "人生倒计时",
-    href: "/tools/life-countdown",
+    id: "life-calendar",
+    title: "生命日历",
+    href: "/tools/life-calendar",
   },
   {
     id: "google",

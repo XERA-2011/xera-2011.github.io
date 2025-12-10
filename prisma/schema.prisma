@@ -18,7 +18,7 @@ model User {
   updatedAt              DateTime?               @default(now()) @db.Timestamp(6)
   accounts               Account[]
   sessions               Session[]
-  lifeCountdownSettings  LifeCountdownSettings?
+  lifeCalendarSettings  LifeCalendarSettings?
   assetAllocations       AssetAllocation[]
 }
 
@@ -60,7 +60,7 @@ model VerificationToken {
   @@id([identifier, token])
 }
 
-model LifeCountdownSettings {
+model LifeCalendarSettings {
   id         String   @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
   userId     String   @unique @db.Uuid
   currentAge Float

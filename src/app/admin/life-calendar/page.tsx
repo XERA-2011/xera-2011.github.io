@@ -5,7 +5,7 @@ import { Clock } from 'lucide-react'
 import { revalidatePath } from 'next/cache'
 import { requireAdmin } from '@/lib/admin'
 
-async function deleteLifeCountdown(formData: FormData) {
+async function deleteLifeCalendar(formData: FormData) {
   'use server'
 
   const result = await requireAdmin()
@@ -20,14 +20,14 @@ async function deleteLifeCountdown(formData: FormData) {
     return
   }
 
-  await prisma.lifeCountdownSettings.delete({
+  await prisma.lifeCalendarSettings.delete({
     where: { id },
   })
 
-  revalidatePath('/admin/life-countdown')
+  revalidatePath('/admin/life-calendar')
 }
 
-export default async function AdminLifeCountdownPage() {
+export default async function AdminLifeCalendarPage() {
   const session = await auth()
 
   if (!session?.user?.email) {
@@ -38,7 +38,7 @@ export default async function AdminLifeCountdownPage() {
     redirect('/dashboard')
   }
 
-  const lifeItems = await prisma.lifeCountdownSettings.findMany({
+  const lifeItems = await prisma.lifeCalendarSettings.findMany({
     orderBy: { createdAt: 'desc' },
     include: {
       user: {
@@ -60,11 +60,11 @@ export default async function AdminLifeCountdownPage() {
           <div className="flex items-center justify-center gap-3 mb-4">
             <Clock className="w-8 h-8 text-primary" />
             <h2 className="text-3xl sm:text-4xl lg:text-5xl font-bold">
-              人生倒计时设置
+              生命日历设置
             </h2>
           </div>
           <p className="text-sm text-muted-foreground">
-            查看所有用户保存的人生倒计时参数
+            查看所有用户保存的生命日历参数
           </p>
         </div>
 
@@ -91,7 +91,7 @@ export default async function AdminLifeCountdownPage() {
                       : String(item.updatedAt)}
                   </td>
                   <td className="px-3 py-2 align-top">
-                    <form action={deleteLifeCountdown}>
+                    <form action={deleteLifeCalendar}>
                       <input type="hidden" name="id" value={item.id} />
                       <button
                         type="submit"
@@ -109,7 +109,7 @@ export default async function AdminLifeCountdownPage() {
                     colSpan={5}
                     className="px-3 py-4 text-center text-muted-foreground"
                   >
-                    暂无人生倒计时设置
+                    暂无生命日历设置
                   </td>
                 </tr>
               )}

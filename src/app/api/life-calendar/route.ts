@@ -2,7 +2,7 @@ import { NextRequest, NextResponse } from 'next/server';
 import { auth } from '@/auth';
 import { prisma } from '@/lib/prisma';
 
-// GET - 获取用户的人生倒计时设置
+// GET - 获取用户的生命日历设置
 export async function GET() {
   try {
     const session = await auth();
@@ -25,7 +25,7 @@ export async function GET() {
       );
     }
 
-    const settings = await prisma.lifeCountdownSettings.findUnique({
+    const settings = await prisma.lifeCalendarSettings.findUnique({
       where: { userId: user.id },
     });
 
@@ -33,7 +33,7 @@ export async function GET() {
       settings,
     });
   } catch (error) {
-    console.error('获取人生倒计时设置失败:', error);
+    console.error('获取生命日历设置失败:', error);
     return NextResponse.json(
       { error: '服务器错误' },
       { status: 500 }
@@ -41,7 +41,7 @@ export async function GET() {
   }
 }
 
-// POST - 保存或更新用户的人生倒计时设置
+// POST - 保存或更新用户的生命日历设置
 export async function POST(request: NextRequest) {
   try {
     const session = await auth();
@@ -89,7 +89,7 @@ export async function POST(request: NextRequest) {
       );
     }
 
-    const settings = await prisma.lifeCountdownSettings.upsert({
+    const settings = await prisma.lifeCalendarSettings.upsert({
       where: { userId: user.id },
       update: {
         currentAge,
@@ -107,7 +107,7 @@ export async function POST(request: NextRequest) {
       settings,
     });
   } catch (error) {
-    console.error('保存人生倒计时设置失败:', error);
+    console.error('保存生命日历设置失败:', error);
     return NextResponse.json(
       { error: '服务器错误' },
       { status: 500 }

@@ -13,7 +13,7 @@ export async function GET() {
     return NextResponse.json({ error: '无权限' }, { status: 403 })
   }
 
-  const items = await prisma.lifeCountdownSettings.findMany({
+  const items = await prisma.lifeCalendarSettings.findMany({
     orderBy: { createdAt: 'desc' },
     include: {
       user: {

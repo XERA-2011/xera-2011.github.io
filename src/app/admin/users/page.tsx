@@ -17,7 +17,7 @@ export default async function AdminUsersPage() {
   const users = await prisma.user.findMany({
     orderBy: { createdAt: 'desc' },
     include: {
-      lifeCountdownSettings: true,
+      lifeCalendarSettings: true,
       assetAllocations: true,
       accounts: true,
       sessions: true,
