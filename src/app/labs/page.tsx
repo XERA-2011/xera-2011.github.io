@@ -16,6 +16,21 @@ const labsData: GlowCardItem[] = [
     title: 'Solar Skirmish',
     href: '/labs/solar-skirmish'
   },
+  {
+    id: 'x-logo',
+    title: 'X Logo',
+    href: '/demo/x-logo.html'
+  },
+  {
+    id: 'solar',
+    title: 'Solar',
+    href: '/demo/solar.html'
+  },
+  {
+    id: 'tetris',
+    title: 'Tetris',
+    href: '/demo/tetris.html'
+  },
 ];
 
 export default function LabsPage() {
