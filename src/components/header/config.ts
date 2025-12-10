@@ -34,10 +34,6 @@ export const links: Link[] = [
     href: '/finance',
   },
   {
-    title: 'Generate',
-    href: '/generate',
-  },
-  {
     title: 'Admin',
     href: '/admin',
     adminOnly: true,
