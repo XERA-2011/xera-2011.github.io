@@ -1,7 +1,7 @@
 import { NextRequest, NextResponse } from 'next/server';
 import { jokes } from '@/data/jokes/jokes';
 import { themes } from '@/data/jokes/themes';
-import { renderQnACard, renderQuoteCard } from '@/utils/joke-render';
+import { renderQnACard, renderQuoteCard } from '@/components/github/joke-render';
 
 // 缓存时间（秒）
 const CACHE_SECONDS = 10;

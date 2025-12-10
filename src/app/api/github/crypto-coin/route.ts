@@ -1,7 +1,7 @@
 import { NextRequest, NextResponse } from 'next/server';
 
 // 假设 renderCoinCard 和 COIN_COLORS 存在于你的工具文件中
-import { renderCoinCard, COIN_COLORS } from '@/utils/coin-render';
+import { renderCoinCard, COIN_COLORS } from '@/components/github/coin-render';
 
 // 主题配置
 const THEME_CONFIG = {
