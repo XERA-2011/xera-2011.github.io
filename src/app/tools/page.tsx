@@ -22,9 +22,9 @@ const toolsData: GlowCardItem[] = [
     href: "/tools/life-calendar",
   },
   {
-    id: "google",
-    title: "Google",
-    href: "/tools/google",
+    id: "gemini",
+    title: "Gemini",
+    href: "/tools/gemini",
   },
 ];
 

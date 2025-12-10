@@ -3,10 +3,11 @@
 import { useState } from 'react';
 import { motion } from 'framer-motion';
 import { usePageTitle } from '@/hooks/use-page-title';
+import GlowCard from '@/components/ui/glow-card';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import { Badge } from '@/components/ui/badge';
-import { Copy, Check, AlertTriangle } from 'lucide-react';
+import { Copy, Check, AlertTriangle, Shuffle, Phone, CreditCard, Building, IdCard } from 'lucide-react';
 
 const generatePhoneNumber = () => {
   const prefixes = ['130', '131', '132', '133', '134', '135', '136', '137', '138', '139'];
@@ -116,9 +117,9 @@ export default function InfoCreatePage() {
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8 }}
         >
-          <h2 className="text-3xl sm:text-4xl lg:text-5xl font-bold mb-4">
+          <h1 className="text-3xl sm:text-4xl lg:text-5xl font-bold mb-4">
             信息生成器
-          </h2>
+          </h1>
         </motion.div>
 
         <motion.div
@@ -130,7 +131,9 @@ export default function InfoCreatePage() {
           <Button
             size="lg"
             onClick={generateAllInfo}
+            className="gap-2"
           >
+            <Shuffle className="w-5 h-5" />
             生成随机信息
           </Button>
         </motion.div>
@@ -139,36 +142,44 @@ export default function InfoCreatePage() {
           <motion.div
             initial={{ opacity: 0, y: 30 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8, delay: 0.6 }}
+            transition={{ duration: 0.8, delay: 0.4 }}
           >
-            <Card>
-              <CardHeader>
-                <div className="flex flex-col sm:flex-row sm:justify-between sm:items-center gap-4">
-                  <CardTitle>生成的信息</CardTitle>
-                  <Button
-                    size="sm"
-                    onClick={copyAllInfo}
-                    variant={copySuccess === '全部信息' ? 'default' : 'outline'}
-                  >
-                    {copySuccess === '全部信息' ? (
-                      <>
-                        <Check className="w-4 h-4 mr-2" />
-                        已复制
-                      </>
-                    ) : (
-                      <>
-                        <Copy className="w-4 h-4 mr-2" />
-                        复制全部
-                      </>
-                    )}
-                  </Button>
+            <GlowCard className="p-8">
+              <div className="flex flex-col sm:flex-row sm:justify-between sm:items-center gap-4 mb-8">
+                <div>
+                  <h2 className="text-xl font-semibold mb-2">生成的信息</h2>
+                  <p className="text-muted-foreground text-sm">
+                    以下为随机生成的测试数据，仅供开发测试使用
+                  </p>
                 </div>
-              </CardHeader>
-              <CardContent className="space-y-4">
-                <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between p-4 bg-secondary rounded-lg gap-3">
+                <Button
+                  size="sm"
+                  onClick={copyAllInfo}
+                  variant={copySuccess === '全部信息' ? 'default' : 'outline'}
+                  className="gap-2"
+                >
+                  {copySuccess === '全部信息' ? (
+                    <>
+                      <Check className="w-4 h-4" />
+                      已复制
+                    </>
+                  ) : (
+                    <>
+                      <Copy className="w-4 h-4" />
+                      复制全部
+                    </>
+                  )}
+                </Button>
+              </div>
+              <div className="grid gap-4">
+                {/* Phone Number */}
+                <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between p-6 bg-muted/30 rounded-lg gap-4 border">
                   <div className="flex-1">
-                    <Badge variant="outline" className="mb-2">手机号码</Badge>
-                    <div className="font-medium text-lg break-all">{generatedInfo.phone}</div>
+                    <div className="flex items-center gap-2 mb-3">
+                      <Phone className="w-4 h-4 text-muted-foreground" />
+                      <Badge variant="outline">手机号码</Badge>
+                    </div>
+                    <div className="font-mono text-lg font-medium break-all">{generatedInfo.phone}</div>
                   </div>
                   <Button
                     size="sm"
@@ -179,10 +190,14 @@ export default function InfoCreatePage() {
                   </Button>
                 </div>
 
-                <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between p-4 bg-secondary rounded-lg gap-3">
+                {/* ID Card */}
+                <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between p-6 bg-muted/30 rounded-lg gap-4 border">
                   <div className="flex-1">
-                    <Badge variant="outline" className="mb-2">身份证号</Badge>
-                    <div className="font-medium text-lg break-all">{generatedInfo.idCard}</div>
+                    <div className="flex items-center gap-2 mb-3">
+                      <IdCard className="w-4 h-4 text-muted-foreground" />
+                      <Badge variant="outline">身份证号</Badge>
+                    </div>
+                    <div className="font-mono text-lg font-medium break-all">{generatedInfo.idCard}</div>
                   </div>
                   <Button
                     size="sm"
@@ -193,10 +208,14 @@ export default function InfoCreatePage() {
                   </Button>
                 </div>
 
-                <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between p-4 bg-secondary rounded-lg gap-3">
+                {/* Bank Card */}
+                <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between p-6 bg-muted/30 rounded-lg gap-4 border">
                   <div className="flex-1">
-                    <Badge variant="outline" className="mb-2">银行卡号</Badge>
-                    <div className="font-medium text-lg break-all">{generatedInfo.bankCard}</div>
+                    <div className="flex items-center gap-2 mb-3">
+                      <CreditCard className="w-4 h-4 text-muted-foreground" />
+                      <Badge variant="outline">银行卡号</Badge>
+                    </div>
+                    <div className="font-mono text-lg font-medium break-all">{generatedInfo.bankCard}</div>
                   </div>
                   <Button
                     size="sm"
@@ -207,10 +226,14 @@ export default function InfoCreatePage() {
                   </Button>
                 </div>
 
-                <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between p-4 bg-secondary rounded-lg gap-3">
+                {/* Credit Code */}
+                <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between p-6 bg-muted/30 rounded-lg gap-4 border">
                   <div className="flex-1">
-                    <Badge variant="outline" className="mb-2">统一信用代码</Badge>
-                    <div className="font-medium text-lg break-all">{generatedInfo.creditCode}</div>
+                    <div className="flex items-center gap-2 mb-3">
+                      <Building className="w-4 h-4 text-muted-foreground" />
+                      <Badge variant="outline">统一信用代码</Badge>
+                    </div>
+                    <div className="font-mono text-lg font-medium break-all">{generatedInfo.creditCode}</div>
                   </div>
                   <Button
                     size="sm"
@@ -220,32 +243,41 @@ export default function InfoCreatePage() {
                     {copySuccess === '信用代码' ? <Check className="w-4 h-4" /> : <Copy className="w-4 h-4" />}
                   </Button>
                 </div>
-              </CardContent>
-            </Card>
+              </div>
+            </GlowCard>
           </motion.div>
         )}
 
+        {/* Warning Section */}
         <motion.div
           initial={{ opacity: 0, y: 30 }}
           animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.8, delay: 0.8 }}
+          transition={{ duration: 0.8, delay: 0.6 }}
         >
-          <Card className="mt-12 border-destructive/50">
-            <CardHeader>
-              <CardTitle className="flex items-center gap-2">
-                <AlertTriangle className="w-5 h-5 text-destructive" />
-                重要提示
-              </CardTitle>
-            </CardHeader>
-            <CardContent>
-              <ul className="text-muted-foreground space-y-2 text-sm leading-relaxed">
-                <li>• 本工具生成的所有信息均为随机虚拟数据，仅供测试使用</li>
-                <li>• 请勿将生成的信息用于任何违法违规活动</li>
-                <li>• 生成的身份证号码符合格式规范但并非真实有效证件</li>
-                <li>• 银行卡号和统一信用代码同样为测试数据，不具备实际效力</li>
-              </ul>
-            </CardContent>
-          </Card>
+          <GlowCard className="mt-12 p-6 border-destructive/20">
+            <div className="flex items-center gap-2 mb-4">
+              <AlertTriangle className="w-5 h-5 text-destructive" />
+              <h3 className="font-semibold text-destructive">重要提示</h3>
+            </div>
+            <ul className="space-y-3 text-muted-foreground text-sm">
+              <li className="flex items-start gap-2">
+                <div className="w-1.5 h-1.5 bg-destructive rounded-full mt-2 shrink-0" />
+                本工具生成的所有信息均为随机虚拟数据，仅供测试使用
+              </li>
+              <li className="flex items-start gap-2">
+                <div className="w-1.5 h-1.5 bg-destructive rounded-full mt-2 shrink-0" />
+                请勿将生成的信息用于任何违法违规活动
+              </li>
+              <li className="flex items-start gap-2">
+                <div className="w-1.5 h-1.5 bg-destructive rounded-full mt-2 shrink-0" />
+                生成的身份证号码符合格式规范但并非真实有效证件
+              </li>
+              <li className="flex items-start gap-2">
+                <div className="w-1.5 h-1.5 bg-destructive rounded-full mt-2 shrink-0" />
+                银行卡号和统一信用代码同样为测试数据，不具备实际效力
+              </li>
+            </ul>
+          </GlowCard>
         </motion.div>
       </div>
     </div>

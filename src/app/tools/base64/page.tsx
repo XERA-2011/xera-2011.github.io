@@ -3,11 +3,12 @@
 import { useState } from 'react';
 import { motion } from 'framer-motion';
 import { usePageTitle } from '@/hooks/use-page-title';
-import { Card, CardContent } from '@/components/ui/card';
+import GlowCard from '@/components/ui/glow-card';
 import { Button } from '@/components/ui/button';
 import { Label } from '@/components/ui/label';
 import { Textarea } from '@/components/ui/textarea';
-import { Copy, Check } from 'lucide-react';
+import { Badge } from '@/components/ui/badge';
+import { Copy, Check, RotateCcw, ArrowUpDown } from 'lucide-react';
 
 export default function Base64Page() {
   usePageTitle('Base64 编码解码');
@@ -81,9 +82,9 @@ export default function Base64Page() {
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8 }}
         >
-          <h2 className="text-3xl sm:text-4xl lg:text-5xl font-bold mb-4">
+          <h1 className="text-3xl sm:text-4xl lg:text-5xl font-bold mb-4">
             Base64 编码解码
-          </h2>
+          </h1>
         </motion.div>
 
         {/* Tool Interface */}
@@ -92,101 +93,118 @@ export default function Base64Page() {
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8, delay: 0.2 }}
         >
-          <Card>
-            <CardContent className="p-8">
-              {/* Mode Toggle */}
-              <div className="flex justify-center mb-8">
-                <div className="bg-secondary rounded-full p-1 flex gap-1">
-                  <Button
-                    variant={mode === 'encode' ? 'default' : 'ghost'}
-                    size="sm"
-                    onClick={() => setMode('encode')}
-                  >
-                    编码
-                  </Button>
-                  <Button
-                    variant={mode === 'decode' ? 'default' : 'ghost'}
-                    size="sm"
-                    onClick={() => setMode('decode')}
-                  >
-                    解码
-                  </Button>
-                </div>
-              </div>
-
-              {/* Input Area */}
-              <div className="mb-6 space-y-2">
-                <Label>
-                  {mode === 'encode' ? '输入文本' : '输入Base64'}
-                </Label>
-                <Textarea
-                  value={input}
-                  onChange={(e) => setInput(e.target.value)}
-                  placeholder={mode === 'encode' ? '请输入要编码的文本...' : '请输入要解码的Base64字符串...'}
-                  className="h-32 resize-none"
-                />
-              </div>
-
-              {/* Action Buttons */}
-              <div className="flex gap-4 mb-6">
+          <GlowCard className="p-8">
+            {/* Mode Toggle */}
+            <div className="flex justify-center mb-8">
+              <div className="bg-secondary rounded-full p-1 flex gap-1">
                 <Button
-                  size="default"
-                  onClick={handleProcess}
-                  className="flex-1"
+                  variant={mode === 'encode' ? 'default' : 'ghost'}
+                  size="sm"
+                  onClick={() => setMode('encode')}
+                  className="gap-2"
                 >
-                  {mode === 'encode' ? '编码' : '解码'}
+                  <ArrowUpDown className="w-4 h-4" />
+                  编码
                 </Button>
                 <Button
-                  variant="secondary"
-                  size="default"
-                  onClick={handleClear}
+                  variant={mode === 'decode' ? 'default' : 'ghost'}
+                  size="sm"
+                  onClick={() => setMode('decode')}
+                  className="gap-2"
                 >
-                  清空
+                  <ArrowUpDown className="w-4 h-4 rotate-180" />
+                  解码
                 </Button>
               </div>
+            </div>
 
-              {/* Error Message */}
-              {error && (
-                <div className="mb-6 p-4 bg-destructive/20 border border-destructive/30 rounded-lg text-destructive">
+            {/* Input Area */}
+            <div className="mb-6 space-y-2">
+              <Label>
+                {mode === 'encode' ? '输入文本' : '输入Base64'}
+              </Label>
+              <Textarea
+                value={input}
+                onChange={(e) => setInput(e.target.value)}
+                placeholder={mode === 'encode' ? '请输入要编码的文本...' : '请输入要解码的Base64字符串...'}
+                className="h-32 resize-none"
+              />
+            </div>
+
+            {/* Action Buttons */}
+            <div className="flex gap-4 mb-6">
+              <Button
+                size="default"
+                onClick={handleProcess}
+                className="flex-1 gap-2"
+                disabled={!input.trim()}
+              >
+                <ArrowUpDown className={`w-4 h-4 ${mode === 'decode' ? 'rotate-180' : ''}`} />
+                {mode === 'encode' ? '开始编码' : '开始解码'}
+              </Button>
+              <Button
+                variant="outline"
+                size="default"
+                onClick={handleClear}
+                className="gap-2"
+              >
+                <RotateCcw className="w-4 h-4" />
+                清空
+              </Button>
+            </div>
+
+            {/* Error Message */}
+            {error && (
+              <motion.div
+                initial={{ opacity: 0, scale: 0.95 }}
+                animate={{ opacity: 1, scale: 1 }}
+                className="mb-6 p-4 bg-destructive/10 border border-destructive/20 rounded-lg text-destructive"
+              >
+                <div className="flex items-center gap-2">
+                  <div className="w-2 h-2 bg-destructive rounded-full" />
                   {error}
                 </div>
-              )}
+              </motion.div>
+            )}
 
-              {/* Output Area */}
-              <div className="space-y-2">
-                <div className="flex justify-between items-center">
-                  <Label>
-                    {mode === 'encode' ? 'Base64结果' : '解码结果'}
-                  </Label>
-                  {output && (
-                    <Button
-                      variant={copied ? 'default' : 'ghost'}
-                      size="sm"
-                      onClick={handleCopy}
-                    >
-                      {copied ? (
-                        <>
-                          <Check className="w-4 h-4 mr-2" />
-                          已复制
-                        </>
-                      ) : (
-                        <>
-                          <Copy className="w-4 h-4 mr-2" />
-                          复制结果
-                        </>
-                      )}
-                    </Button>
-                  )}
-                </div>
-                <Textarea
-                  value={output}
-                  readOnly
-                  placeholder="结果将显示在这里..."
-                  className="h-32 resize-none"
-                />
+            {/* Output Area */}
+            <div className="space-y-2">
+              <div className="flex justify-between items-center">
+                <Label className="flex items-center gap-2">
+                  <Badge variant="secondary" className="text-xs">
+                    {mode === 'encode' ? 'Base64' : '文本'}
+                  </Badge>
+                  {mode === 'encode' ? 'Base64结果' : '解码结果'}
+                </Label>
+                {output && (
+                  <Button
+                    variant={copied ? 'default' : 'ghost'}
+                    size="sm"
+                    onClick={handleCopy}
+                    className="gap-2"
+                  >
+                    {copied ? (
+                      <>
+                        <Check className="w-4 h-4" />
+                        已复制
+                      </>
+                    ) : (
+                      <>
+                        <Copy className="w-4 h-4" />
+                        复制结果
+                      </>
+                    )}
+                  </Button>
+                )}
               </div>
-            </CardContent>
-          </Card>
+              <Textarea
+                value={output}
+                readOnly
+                placeholder="结果将显示在这里..."
+                className="h-32 resize-none bg-muted/30"
+              />
+            </div>
+          </GlowCard>
         </motion.div>
       </div>
     </div>

@@ -13,7 +13,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
     { url: '/tools', priority: 0.9, changeFrequency: 'weekly' as const },
     { url: '/tools/base64', priority: 0.7, changeFrequency: 'monthly' as const },
     { url: '/tools/coze', priority: 0.7, changeFrequency: 'monthly' as const },
-    { url: '/tools/google', priority: 0.7, changeFrequency: 'monthly' as const },
+    { url: '/tools/gemini', priority: 0.7, changeFrequency: 'monthly' as const },
     { url: '/tools/info-create', priority: 0.7, changeFrequency: 'monthly' as const },
     { url: '/tools/life-calendar', priority: 0.7, changeFrequency: 'monthly' as const },
     { url: '/tools/asset-allocation', priority: 0.7, changeFrequency: 'monthly' as const },
