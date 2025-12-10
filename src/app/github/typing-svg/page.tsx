@@ -23,6 +23,7 @@ export default function TypingSVGPage() {
 
   // 配置状态
   const [config, setConfig] = useState({
+    type: 'custom',
     lines: 'Hello World!;Welcome to XERA-2011;Typing SVG Generator',
     font: 'monospace',
     size: '24',
@@ -58,7 +59,6 @@ export default function TypingSVGPage() {
     if (!baseUrl) return;
 
     const params = new URLSearchParams({
-      lines: config.lines,
       font: config.font,
       size: config.size,
       color: config.color,
@@ -74,6 +74,13 @@ export default function TypingSVGPage() {
       letterSpacing: config.letterSpacing,
       bold: config.bold.toString(),
     });
+
+    if (config.type === 'movie-quotes') {
+      params.set('type', 'movie-quotes');
+    } else {
+      params.set('lines', config.lines);
+    }
+
     setPreviewUrl(`${baseUrl}/api/github/typing-svg?${params.toString()}`);
     setRefreshKey(Date.now());
   }, [config, baseUrl]);
@@ -141,15 +148,43 @@ export default function TypingSVGPage() {
               <div className="space-y-4">
                 <div>
                   <label className="block text-sm font-medium text-foreground mb-2">
-                    文本内容（用分号分隔多行）
+                    模式
                   </label>
-                  <textarea
-                    value={config.lines}
-                    onChange={(e) => setConfig({ ...config, lines: e.target.value })}
-                    className="w-full bg-secondary border border-border rounded-lg p-3 text-foreground min-h-20"
-                    placeholder="第一行;第二行;第三行"
-                  />
+                  <div className="flex gap-4 mb-4">
+                    <label className="flex items-center gap-2 cursor-pointer">
+                      <input
+                        type="radio"
+                        checked={config.type === 'custom'}
+                        onChange={() => setConfig({ ...config, type: 'custom' })}
+                        className="accent-primary"
+                      />
+                      <span className="text-foreground">自定义文本</span>
+                    </label>
+                    <label className="flex items-center gap-2 cursor-pointer">
+                      <input
+                        type="radio"
+                        checked={config.type === 'movie-quotes'}
+                        onChange={() => setConfig({ ...config, type: 'movie-quotes' })}
+                        className="accent-primary"
+                      />
+                      <span className="text-foreground">随机电影台词</span>
+                    </label>
+                  </div>
                 </div>
+
+                {config.type === 'custom' && (
+                  <div>
+                    <label className="block text-sm font-medium text-foreground mb-2">
+                      文本内容（用分号分隔多行）
+                    </label>
+                    <textarea
+                      value={config.lines}
+                      onChange={(e) => setConfig({ ...config, lines: e.target.value })}
+                      className="w-full bg-secondary border border-border rounded-lg p-3 text-foreground min-h-20"
+                      placeholder="第一行;第二行;第三行"
+                    />
+                  </div>
+                )}
 
                 <div className="grid grid-cols-2 gap-4">
                   <div>

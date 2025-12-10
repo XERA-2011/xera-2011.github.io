@@ -1,5 +1,6 @@
 import { NextRequest, NextResponse } from 'next/server';
 import { BASE_URL } from '@/lib/constants';
+import { MOVIE_QUOTES } from '@/data/typing-svg/movie-quotes';
 import {
   parseBoolean,
   parsePositiveInt,
@@ -174,8 +175,19 @@ export async function GET(request: NextRequest) {
     const { searchParams } = request.nextUrl;
 
     // 解析参数
-    const linesParam = searchParams.get('lines') || '';
+    let linesParam = searchParams.get('lines') || '';
     const separator = searchParams.get('separator') || DEFAULTS.separator;
+    const type = searchParams.get('type');
+
+    // 如果指定了 type=movie-quotes，则随机获取一条电影台词
+    if (type === 'movie-quotes') {
+      const quote = MOVIE_QUOTES[Math.floor(Math.random() * MOVIE_QUOTES.length)];
+      linesParam = [
+        quote.english,
+        quote.chinese,
+        `—— ${quote.source_en} ${quote.source_cn}`
+      ].join(separator);
+    }
 
     // 验证 lines 参数
     if (!linesParam) {
