@@ -27,25 +27,15 @@ const toolsData: GlowCardItem[] = [
     href: "/github/crypto-coin",
   },
   {
-    id: "github-stats",
-    title: "GitHub 统计卡片",
-    href: "/github/stats",
-  },
-  {
-    id: "github-top-langs",
-    title: "GitHub 语言统计",
-    href: "/github/top-langs",
-  },
-  {
-    id: "github-snake",
-    title: "GitHub 贪吃蛇",
-    href: "/github/snake",
-  },
-  {
     id: "github-icons",
     title: "图标卡片",
     href: "/github/icons",
   },
+  {
+    id: "x-actions-profile",
+    title: "X Actions Profile",
+    href: "/github/x-actions-profile",
+  }
 ];
 
 export default function ToolsPage() {

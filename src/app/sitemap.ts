@@ -33,8 +33,6 @@ export default function sitemap(): MetadataRoute.Sitemap {
     { url: '/github', priority: 0.8, changeFrequency: 'weekly' as const },
     { url: '/github/countdown', priority: 0.6, changeFrequency: 'monthly' as const },
     { url: '/github/crypto-coin', priority: 0.6, changeFrequency: 'monthly' as const },
-    { url: '/github/stats', priority: 0.6, changeFrequency: 'monthly' as const },
-    { url: '/github/top-langs', priority: 0.6, changeFrequency: 'monthly' as const },
     { url: '/github/icons', priority: 0.6, changeFrequency: 'monthly' as const },
     { url: '/github/joke-card', priority: 0.6, changeFrequency: 'monthly' as const },
 
