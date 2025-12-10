@@ -1,4 +1,6 @@
 // 用户相关常量
+export const BASE_URL = 'https://xera-2011.vercel.app';
+
 
 // 默认头像 - 使用 DiceBear API 生成头像
 // 头像会基于用户邮箱生成唯一的图案

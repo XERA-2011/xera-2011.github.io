@@ -1,4 +1,5 @@
 import { NextRequest, NextResponse } from 'next/server';
+import { BASE_URL } from '@/lib/constants';
 
 // 缓存时间（秒）
 const CACHE_SECONDS = 3600;
@@ -209,7 +210,7 @@ function generateTypingSVG(params: {
     })
     .join('\n');
 
-  return `<!-- https://xera-2011.vercel.app/github/typing-svg -->
+  return `<!-- ${BASE_URL}/github/typing-svg -->
 <svg xmlns='http://www.w3.org/2000/svg'
     xmlns:xlink='http://www.w3.org/1999/xlink'
     viewBox='0 0 ${width} ${height}'

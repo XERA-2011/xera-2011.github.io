@@ -1,4 +1,5 @@
 import { Metadata } from 'next'
+import { BASE_URL } from '@/lib/constants'
 
 interface MetadataOptions {
   title: string
@@ -10,7 +11,7 @@ interface MetadataOptions {
   noIndex?: boolean
 }
 
-const baseUrl = 'https://xera-2011.vercel.app'
+
 const defaultDescription = 'Pocket Universe - 探索工具、实验项目和创意项目的个人空间'
 
 /**
@@ -35,8 +36,8 @@ export function createMetadata(options: MetadataOptions | string): Metadata {
   } = options
 
   const fullTitle = `${title} | XERA-2011`
-  const fullUrl = `${baseUrl}${url}`
-  const imageUrl = image.startsWith('http') ? image : `${baseUrl}${image}`
+  const fullUrl = `${BASE_URL}${url}`
+  const imageUrl = image.startsWith('http') ? image : `${BASE_URL}${image}`
 
   return {
     title: fullTitle,

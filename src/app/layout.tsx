@@ -1,4 +1,5 @@
 import type { Metadata, Viewport } from "next/types";
+import { BASE_URL } from "@/lib/constants";
 import '../styles/globals.css';
 import Background from "@/components/background/star";
 import Footer from "@/components/footer";
@@ -22,7 +23,7 @@ export const viewport: Viewport = {
 };
 
 export const metadata: Metadata = {
-  metadataBase: new URL('https://xera-2011.vercel.app'),
+  metadataBase: new URL(BASE_URL),
   title: {
     default: "XERA-2011 - Pocket Universe",
     template: "%s | XERA-2011",
@@ -47,7 +48,7 @@ export const metadata: Metadata = {
     type: 'website',
     locale: 'zh_CN',
     alternateLocale: ['en_US'],
-    url: 'https://xera-2011.vercel.app',
+    url: BASE_URL,
     siteName: 'XERA-2011',
     title: 'XERA-2011 - Pocket Universe',
     description: 'Pocket Universe - 探索工具、实验项目和创意项目的个人空间',
@@ -71,7 +72,7 @@ export const metadata: Metadata = {
     google: '7fda4c6923f8758a',
   },
   alternates: {
-    canonical: 'https://xera-2011.vercel.app',
+    canonical: BASE_URL,
   },
   icons: {
     icon: '/favicon.ico',

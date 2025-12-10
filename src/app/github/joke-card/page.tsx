@@ -6,6 +6,7 @@ import { usePageTitle } from '@/hooks/use-page-title';
 import JokeCard from '@/components/github/joke-card';
 import GlowCard from '@/components/ui/glow-card';
 import { Button } from '@/components/ui/button';
+import { BASE_URL } from '@/lib/constants';
 
 export default function JokeCardPage() {
   usePageTitle('编程笑话卡片');
@@ -21,20 +22,20 @@ export default function JokeCardPage() {
     }
   };
 
-  const baseUrl = 'https://xera-2011.vercel.app';
+
 
   const examples = [
     {
       title: '基础用法',
-      code: `<img alt="Joke Card" src="${baseUrl}/api/github/joke" />`,
+      code: `<img alt="Joke Card" src="${BASE_URL}/api/github/joke" />`,
     },
     {
       title: '指定主题',
-      code: `<img alt="Joke Card" src="${baseUrl}/api/github/joke?theme=dracula" />`,
+      code: `<img alt="Joke Card" src="${BASE_URL}/api/github/joke?theme=dracula" />`,
     },
     {
       title: '自定义尺寸',
-      code: `<img alt="Joke Card" src="${baseUrl}/api/github/joke?width=600&height=250" />`,
+      code: `<img alt="Joke Card" src="${BASE_URL}/api/github/joke?width=600&height=250" />`,
     },
   ];
 

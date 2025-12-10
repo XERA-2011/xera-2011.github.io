@@ -6,6 +6,7 @@ import Image from 'next/image';
 import { usePageTitle } from '@/hooks/use-page-title';
 import GlowCard from '@/components/ui/glow-card';
 import { Button } from '@/components/ui/button';
+import { BASE_URL } from '@/lib/constants';
 
 export default function CoinPage() {
   usePageTitle('Crypto Prices');
@@ -23,7 +24,7 @@ export default function CoinPage() {
     }
   };
 
-  const baseUrl = 'https://xera-2011.vercel.app';
+
   const coins = 'btc,eth,sol,bnb';
 
   // 布局选项
@@ -35,17 +36,17 @@ export default function CoinPage() {
   const examples = [
     {
       title: '单币种卡片',
-      code: `<img alt="BTC Price" src="${baseUrl}/api/github/crypto-coin?coin=btc" />`,
+      code: `<img alt="BTC Price" src="${BASE_URL}/api/github/crypto-coin?coin=btc" />`,
       preview: `/api/github/crypto-coin?coin=btc`,
     },
     {
       title: '多币种卡片 (网格布局)',
-      code: `<img alt="Crypto Prices" src="${baseUrl}/api/github/crypto-coin?coin=${coins}&mode=multi" />`,
+      code: `<img alt="Crypto Prices" src="${BASE_URL}/api/github/crypto-coin?coin=${coins}&mode=multi" />`,
       preview: `/api/github/crypto-coin?coin=${coins}&mode=multi`,
     },
     {
       title: '多币种卡片 (紧凑水平布局)',
-      code: `<img alt="Crypto Prices" src="${baseUrl}/api/github/crypto-coin?coin=${coins}&mode=multi&layout=horizontal&theme=${theme}" />`,
+      code: `<img alt="Crypto Prices" src="${BASE_URL}/api/github/crypto-coin?coin=${coins}&mode=multi&layout=horizontal&theme=${theme}" />`,
       preview: `/api/github/crypto-coin?coin=${coins}&mode=multi&layout=horizontal&theme=${theme}`,
     },
   ];

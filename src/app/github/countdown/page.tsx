@@ -8,6 +8,7 @@ import GlowCard from '@/components/ui/glow-card';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
+import { BASE_URL } from '@/lib/constants';
 
 export default function CountdownPage() {
   usePageTitle('倒计时卡片');
@@ -25,14 +26,14 @@ export default function CountdownPage() {
     }
   };
 
-  const baseUrl = 'https://xera-2011.vercel.app';
+
 
   const colorParam = textColor === 'white' ? `&color=${textColor}` : '';
 
   const examples = [
     {
       title: '世界末日倒计时',
-      code: `<img alt="Countdown" src="${baseUrl}/api/github/countdown?target=${encodeURIComponent(targetDate)}${colorParam}" />`,
+      code: `<img alt="Countdown" src="${BASE_URL}/api/github/countdown?target=${encodeURIComponent(targetDate)}${colorParam}" />`,
       preview: `/api/github/countdown?target=${encodeURIComponent(targetDate)}${colorParam}`
     }
   ];

@@ -6,6 +6,7 @@ import Image from 'next/image';
 import { usePageTitle } from '@/hooks/use-page-title';
 import GlowCard from '@/components/ui/glow-card';
 import { Button } from '@/components/ui/button';
+import { BASE_URL } from '@/lib/constants';
 
 // 可用图标列表 - 按类别分组
 const ICON_CATEGORIES = {
@@ -50,7 +51,7 @@ export default function IconsPage() {
     }
   };
 
-  const baseUrl = 'https://xera-2011.vercel.app';
+
 
   // 将数组转换为字符串用于 API 调用
   const iconsParam = selectedIcons.join(',');
@@ -59,7 +60,7 @@ export default function IconsPage() {
   const examples = [
     {
       title: '技术栈图标',
-      code: `<img alt="Icons" src="${baseUrl}/api/github/icons?i=${iconsParam}" />`,
+      code: `<img alt="Icons" src="${BASE_URL}/api/github/icons?i=${iconsParam}" />`,
       preview: currentPreview
     }
   ];

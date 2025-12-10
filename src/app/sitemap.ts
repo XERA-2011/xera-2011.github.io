@@ -1,7 +1,8 @@
 import { MetadataRoute } from 'next'
+import { BASE_URL } from '@/lib/constants'
 
 export default function sitemap(): MetadataRoute.Sitemap {
-  const baseUrl = 'https://xera-2011.vercel.app'
+
 
   // 定义所有公开页面
   const routes = [
@@ -43,7 +44,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
   ]
 
   return routes.map((route) => ({
-    url: `${baseUrl}${route.url}`,
+    url: `${BASE_URL}${route.url}`,
     lastModified: new Date(),
     changeFrequency: route.changeFrequency,
     priority: route.priority,
