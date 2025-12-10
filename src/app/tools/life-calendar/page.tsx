@@ -2,9 +2,9 @@
 
 import { motion } from 'framer-motion';
 import { usePageTitle } from '@/hooks/use-page-title';
-import TimeCard from "@/components/tools/time-dashboard/time-card";
-import RetirementCard from "@/components/tools/time-dashboard/retirement-card";
-import HolidayCard from "@/components/tools/time-dashboard/holiday-card";
+import TimeCard from "@/components/tools/life-calendar/time-card";
+import RetirementCard from "@/components/tools/life-calendar/retirement-card";
+import HolidayCard from "@/components/tools/life-calendar/holiday-card";
 
 const containerVariants = {
   hidden: { opacity: 0 },
@@ -45,10 +45,10 @@ export default function TimeDashboardPage() {
           className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mb-12"
         >
           {/* Row 1: Time & Retirement */}
-          <motion.div variants={itemVariants} className="h-full">
+          <motion.div variants={itemVariants} className="h-full md:col-span-1 lg:col-span-1">
             <TimeCard />
           </motion.div>
-          <motion.div variants={itemVariants} className="h-full md:col-span-2 lg:col-span-2">
+          <motion.div variants={itemVariants} className="h-full md:col-span-1 lg:col-span-2">
             <RetirementCard />
           </motion.div>
         </motion.div>
