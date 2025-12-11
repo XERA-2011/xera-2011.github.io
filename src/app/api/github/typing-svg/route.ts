@@ -184,8 +184,7 @@ export async function GET(request: NextRequest) {
       const quote = MOVIE_QUOTES[Math.floor(Math.random() * MOVIE_QUOTES.length)];
       linesParam = [
         quote.english,
-        quote.chinese,
-        `—— ${quote.source_en} ${quote.source_cn}`
+        quote.chinese
       ].join(separator);
     }
 
@@ -228,7 +227,7 @@ export async function GET(request: NextRequest) {
       'Height'
     );
     const multiline = parseBoolean(
-      searchParams.get('multiline') || DEFAULTS.multiline
+      searchParams.get('multiline') || (type === 'movie-quotes' ? 'true' : DEFAULTS.multiline)
     );
     const duration = parsePositiveInt(
       searchParams.get('duration') || DEFAULTS.duration,
