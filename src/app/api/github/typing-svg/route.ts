@@ -33,7 +33,50 @@ const DEFAULTS = {
   bold: 'true',
 };
 
+/**
+ * 估算文本宽度
+ */
+function estimateTextWidth(text: string, fontSize: number, letterSpacing: string): number {
+  // 粗略估算：每个字符宽度约为 fontSize * 0.6
+  // 加上 letterSpacing
+  const spacing = parseFloat(letterSpacing) || 0;
+  const charWidth = fontSize * 0.6 + spacing;
+  
+  // 考虑中文字符宽度较大
+  let width = 0;
+  for (const char of text) {
+    // 判断是否为中文字符（简单判断）
+    if (char.charCodeAt(0) > 255) {
+      width += fontSize + spacing;
+    } else {
+      width += charWidth;
+    }
+  }
+  return width;
+}
 
+/**
+ * 自动换行
+ */
+function wordWrap(text: string, maxWidth: number, fontSize: number, letterSpacing: string): string[] {
+  const words = text.split(' ');
+  const lines: string[] = [];
+  let currentLine = words[0];
+
+  for (let i = 1; i < words.length; i++) {
+    const word = words[i];
+    const width = estimateTextWidth(currentLine + ' ' + word, fontSize, letterSpacing);
+    
+    if (width < maxWidth) {
+      currentLine += ' ' + word;
+    } else {
+      lines.push(currentLine);
+      currentLine = word;
+    }
+  }
+  lines.push(currentLine);
+  return lines;
+}
 
 /**
  * 生成打字机效果的 SVG
@@ -193,9 +236,6 @@ export async function GET(request: NextRequest) {
       return new NextResponse('Lines parameter is required', { status: 400 });
     }
 
-    // 分割并清理行
-    const lines = linesParam.split(separator).map((line) => line.trim());
-
     // 解析其他参数
     const font = parseFont(searchParams.get('font') || DEFAULTS.font);
     const bold = parseBoolean(searchParams.get('bold') || DEFAULTS.bold);
@@ -222,7 +262,7 @@ export async function GET(request: NextRequest) {
       searchParams.get('width') || DEFAULTS.width,
       'Width'
     );
-    const height = parsePositiveInt(
+    let height = parsePositiveInt(
       searchParams.get('height') || DEFAULTS.height,
       'Height'
     );
@@ -241,6 +281,26 @@ export async function GET(request: NextRequest) {
       searchParams.get('repeat') || DEFAULTS.repeat
     );
     const letterSpacing = searchParams.get('letterSpacing') || DEFAULTS.letterSpacing;
+
+    // 分割并清理行，并进行自动换行处理
+    let lines = linesParam.split(separator).map((line) => line.trim());
+    
+    if (multiline) {
+      const wrappedLines: string[] = [];
+      lines.forEach(line => {
+        // 预留一些边距，比如左右各 10px
+        const maxWidth = width - 20;
+        const wrapped = wordWrap(line, maxWidth, size, letterSpacing);
+        wrappedLines.push(...wrapped);
+      });
+      lines = wrappedLines;
+
+      // 动态调整高度：如果计算出的高度大于当前高度，则更新高度
+      const requiredHeight = lines.length * (size + 5) + 10;
+      if (requiredHeight > height) {
+        height = requiredHeight;
+      }
+    }
 
     // 生成 SVG
     const svg = generateTypingSVG({
