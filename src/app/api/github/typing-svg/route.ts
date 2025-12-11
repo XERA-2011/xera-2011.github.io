@@ -261,12 +261,18 @@ export async function GET(request: NextRequest) {
       letterSpacing,
     });
 
+    // 计算缓存时间：如果是随机台词，则不缓存；否则使用默认缓存时间
+    const currentCacheSeconds = type === 'movie-quotes' ? 0 : CACHE_SECONDS;
+    const cacheControl = currentCacheSeconds === 0
+      ? 'no-store'
+      : `public, max-age=${currentCacheSeconds}`;
+
     // 返回 SVG 响应
     return new NextResponse(svg, {
       status: 200,
       headers: {
         'Content-Type': 'image/svg+xml',
-        'Cache-Control': `public, max-age=${CACHE_SECONDS}`,
+        'Cache-Control': cacheControl,
       },
     });
   } catch (error) {
