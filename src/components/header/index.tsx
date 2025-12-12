@@ -38,7 +38,6 @@ const Header = ({ loader, userAuth }: HeaderProps) => {
     >
       <div
         className={cn(styles.bar, "flex items-center justify-between")}
-        onClick={() => isActive && setIsActive(false)}
       >
         <Breadcrumb />
 

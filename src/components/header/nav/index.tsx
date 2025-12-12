@@ -38,10 +38,7 @@ const Nav: React.FC<IndexProps> = ({ setIsActive }) => {
   const isAdmin = !!session?.user?.isAdmin;
 
   return (
-    <div
-      className={styles.nav}
-      onClick={() => setIsActive(false)}
-    >
+    <div className={styles.nav}>
       <motion.div
         variants={height}
         initial="initial"
@@ -50,7 +47,7 @@ const Nav: React.FC<IndexProps> = ({ setIsActive }) => {
         className={styles.navInner}
       >
         <div className={styles.wrapper}>
-          <div className={styles.container} onClick={(e) => e.stopPropagation()}>
+          <div className={styles.container}>
             <Body
               links={links.filter((link) => !link.adminOnly || isAdmin)}
               selectedLink={selectedLink}
