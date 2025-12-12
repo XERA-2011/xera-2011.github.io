@@ -58,7 +58,15 @@ export default function Footer() {
         </div>
 
         <div className="text-muted-foreground text-xs">
-          {`© Copyright ${new Date().getFullYear()} XERA-2011`}
+          {`© Copyright ${new Date().getFullYear()} `}
+          <Link
+            href="https://github.com/XERA-2011"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="cursor-can-hover text-muted-foreground hover:text-foreground transition-colors duration-300"
+          >
+            XERA-2011
+          </Link>
         </div>
       </div>
     </motion.footer>
