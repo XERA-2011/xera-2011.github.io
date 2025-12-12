@@ -120,6 +120,11 @@ export default function RegisterPage() {
             {error && (
               <div className="p-3 text-sm text-red-500 bg-red-50 dark:bg-red-950/20 rounded-md">
                 {error}
+                {error.includes('该邮箱已被注册') && (
+                  <div className="mt-2 text-foreground">
+                    建议直接 <Link href="/login" className="text-primary hover:underline font-medium">登录</Link> 并选择 Google 或 GitHub 方式
+                  </div>
+                )}
               </div>
             )}
 
