@@ -1,0 +1,45 @@
+name: CI
+
+on:
+  push:
+    branches: ["main"]
+  pull_request:
+    branches: ["main"]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    env:
+      # 设置假的环境变量以满足构建过程中的验证要求
+      # Prisma 需要 DATABASE_URL 存在（即使不连接）
+      DATABASE_URL: "postgresql://postgres:password@localhost:5432/xera"
+      # NextAuth 通常需要 SECRET
+      NEXTAUTH_SECRET: "dummy-secret-for-ci-build"
+      NEXTAUTH_URL: "http://localhost:3000"
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Install pnpm
+        uses: pnpm/action-setup@v4
+        with:
+          version: 9
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          cache: "pnpm"
+
+      - name: Install dependencies
+        run: pnpm install
+
+      - name: Create dummy .env.local
+        # 因为 package.json 中的 build 脚本使用了 dotenv -e .env.local
+        # 我们需要创建一个空文件来防止报错
+        run: touch .env.local
+
+      - name: Build
+        run: pnpm build

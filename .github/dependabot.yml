@@ -1,0 +1,45 @@
+# Dependabot 配置文件的版本，必须为 2
+version: 2
+updates:
+  # ---------------------------------------------------------------
+  # 1. npm (及 pnpm/yarn) 依赖更新配置
+  # ---------------------------------------------------------------
+  - package-ecosystem: "npm"          # 对应 npm/pnpm/yarn。因 package.json 中指定了 packageManager，会自动使用 pnpm
+    directory: "/"                    # 配置文件所在的目录，"/" 代表根目录
+    schedule:
+      interval: "daily"               # 检查更新的频率：每天
+      time: "00:00"                   # 检查的具体时间：00:00
+      timezone: "Asia/Shanghai"       # 检查的时间标准：北京时间 (Asia/Shanghai)
+    groups:                           # 分组配置，用于减少 PR 数量
+      dependencies:                   # 组名：dependencies
+        patterns:
+          - "*"                       # 匹配模式："*" 表示将所有 npm 依赖更新合并到一个 PR 中
+
+  # ---------------------------------------------------------------
+  # 2. GitHub Actions 工作流更新配置
+  # ---------------------------------------------------------------
+  - package-ecosystem: "github-actions" # 指定包管理生态系统，对应 .github/workflows
+    directory: "/"                      # 目录设置，通常设为根目录即可
+    schedule:
+      interval: "daily"                 # 检查更新的频率：每天
+      time: "00:00"                     # 检查的具体时间：00:00
+      timezone: "Asia/Shanghai"         # 检查的时间标准：北京时间 (Asia/Shanghai)
+    groups:
+      actions:                          # 组名：actions
+        patterns:
+          - "*"                         # 匹配模式："*" 表示将所有 Action 更新合并到一个 PR 中
+
+  # ---------------------------------------------------------------
+  # 3. Docker 基础镜像更新配置
+  # ---------------------------------------------------------------
+  - package-ecosystem: "docker"       # 指定包管理生态系统，对应 Dockerfile
+    directory: "/"                    # Dockerfile 所在的目录
+    schedule:
+      interval: "daily"               # 检查更新的频率：每天
+      time: "00:00"                   # 检查的具体时间：00:00
+      timezone: "Asia/Shanghai"       # 检查的时间标准：北京时间 (Asia/Shanghai)
+    # 【建议】为 Docker 更新也添加分组
+    groups:
+      docker-images:                  # 组名：docker-images
+        patterns:
+          - "*"                       # 将所有 Docker 基础镜像的更新合并到一个 PR 中
