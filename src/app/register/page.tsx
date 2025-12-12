@@ -13,6 +13,7 @@ import { Eye, EyeOff, RefreshCw } from 'lucide-react'
 export default function RegisterPage() {
   const router = useRouter()
   const [loading, setLoading] = useState(false)
+  const [captchaLoading, setCaptchaLoading] = useState(false)
   const [showPassword, setShowPassword] = useState(false)
   const [captchaId, setCaptchaId] = useState('')
   const [captchaUrl, setCaptchaUrl] = useState('')
@@ -26,6 +27,7 @@ export default function RegisterPage() {
 
   // 加载验证码
   const loadCaptcha = useCallback(async (signal?: AbortSignal) => {
+    setCaptchaLoading(true)
     try {
       const response = await fetch('/api/captcha', {
         headers: {
@@ -47,12 +49,14 @@ export default function RegisterPage() {
         })
         setCaptchaId(id)
       }
-    } catch (err: any) {
-      if (err.name === 'AbortError') {
+    } catch (err) {
+      if (err instanceof Error && err.name === 'AbortError') {
         return
       }
       console.error('加载验证码失败:', err)
       setError('加载验证码失败，请刷新重试')
+    } finally {
+      setCaptchaLoading(false)
     }
   }, [])
 
@@ -181,25 +185,28 @@ export default function RegisterPage() {
                   className="flex-1"
                 />
                 <div className="relative flex items-center gap-2">
-                  {captchaUrl && (
-                    <Image
-                      src={captchaUrl}
-                      alt="验证码"
-                      width={120}
-                      height={40}
-                      unoptimized
-                      className="h-10 rounded border border-gray-300 dark:border-gray-700"
-                    />
-                  )}
+                  <div className="relative h-10 w-[120px] rounded border border-gray-300 dark:border-gray-700 overflow-hidden bg-gray-50 dark:bg-gray-900 flex items-center justify-center">
+                    {captchaLoading ? (
+                      <div className="animate-spin rounded-full h-5 w-5 border-b-2 border-primary"></div>
+                    ) : captchaUrl ? (
+                      <Image
+                        src={captchaUrl}
+                        alt="验证码"
+                        fill
+                        unoptimized
+                        className="object-cover"
+                      />
+                    ) : null}
+                  </div>
                   <Button
                     type="button"
                     variant="outline"
                     size="icon"
                     onClick={() => loadCaptcha()}
-                    disabled={loading}
+                    disabled={loading || captchaLoading}
                     title="刷新验证码"
                   >
-                    <RefreshCw size={16} />
+                    <RefreshCw size={16} className={captchaLoading ? 'animate-spin' : ''} />
                   </Button>
                 </div>
               </div>

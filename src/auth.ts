@@ -12,10 +12,12 @@ export const authConfig: NextAuthConfig = {
     Google({
       clientId: process.env.GOOGLE_CLIENT_ID!,
       clientSecret: process.env.GOOGLE_CLIENT_SECRET!,
+      allowDangerousEmailAccountLinking: true,
     }),
     GitHub({
       clientId: process.env.GITHUB_CLIENT_ID!,
       clientSecret: process.env.GITHUB_CLIENT_SECRET!,
+      allowDangerousEmailAccountLinking: true,
     }),
     Credentials({
       name: "credentials",
@@ -88,11 +90,18 @@ export const authConfig: NextAuthConfig = {
       // 否则返回 baseUrl
       return baseUrl
     },
-    async jwt({ token, user }) {
+    async jwt({ token, user, trigger, session }) {
       // 首次登录时，将用户信息保存到 token
       if (user) {
         token.id = user.id
       }
+
+      // 处理客户端更新 session
+      if (trigger === "update" && session) {
+        if (session.image) token.picture = session.image
+        if (session.name) token.name = session.name
+      }
+      
       return token
     },
     async session({ session, token }) {

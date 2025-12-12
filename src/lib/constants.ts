@@ -4,7 +4,8 @@ export const BASE_URL = 'https://xera-2011.vercel.app';
 
 // 默认头像 - 使用 DiceBear API 生成头像
 // 头像会基于用户邮箱生成唯一的图案
-export const DEFAULT_AVATAR_BASE_URL = 'https://api.dicebear.com/7.x/avataaars/svg?seed=';
+// 使用 identicon 风格生成几何图形头像，更加抽象艺术
+export const DEFAULT_AVATAR_BASE_URL = 'https://api.dicebear.com/7.x/identicon/svg?seed=';
 
 // 生成默认头像URL
 export function getDefaultAvatar(seed: string): string {
