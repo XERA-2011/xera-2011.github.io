@@ -5,6 +5,7 @@ import { usePageTitle } from '@/hooks/use-page-title';
 import TimeCard from "@/components/tools/life-calendar/time-card";
 import RetirementCard from "@/components/tools/life-calendar/retirement-card";
 import HolidayCard from "@/components/tools/life-calendar/holiday-card";
+import { holidays } from "@/components/tools/life-calendar/holiday-data";
 
 const containerVariants = {
   hidden: { opacity: 0 },
@@ -69,38 +70,17 @@ export default function TimeDashboardPage() {
           animate="show"
           className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4"
         >
-          <motion.div variants={itemVariants}>
-            <HolidayCard
-              title="元旦"
-              targetDateStr="01-01"
-              subtitle="新年伊始"
-            />
-          </motion.div>
-          <motion.div variants={itemVariants}>
-            <HolidayCard
-              title="春节"
-              lunarMonth={1}
-              lunarDay={1}
-              subtitle="农历新年"
-            />
-          </motion.div>
-
-          <motion.div variants={itemVariants}>
-            <HolidayCard
-              title="中秋"
-              lunarMonth={8}
-              lunarDay={15}
-              subtitle="团圆"
-            />
-          </motion.div>
-
-          <motion.div variants={itemVariants}>
-            <HolidayCard
-              title="国庆"
-              targetDateStr="10-01"
-              subtitle="国庆节"
-            />
-          </motion.div>
+          {holidays.map((holiday, index) => (
+            <motion.div key={index} variants={itemVariants}>
+              <HolidayCard
+                title={holiday.title}
+                targetDateStr={holiday.targetDateStr}
+                lunarMonth={holiday.lunarMonth}
+                lunarDay={holiday.lunarDay}
+                subtitle={holiday.subtitle}
+              />
+            </motion.div>
+          ))}
         </motion.div>
       </div>
     </div>

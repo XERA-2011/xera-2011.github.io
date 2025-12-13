@@ -5,18 +5,20 @@ import { Card } from "@/components/ui/card";
 import { differenceInSeconds } from "date-fns";
 import { Lunar, Solar } from "lunar-javascript";
 import { cn } from "@/lib/utils";
+import { getQingmingDate } from "./holiday-data"; // 导入清明节日期计算函数
 
 interface HolidayCardProps {
   title: string;
-  targetDateStr?: string; // Solar YYYY-MM-DD
+  targetDateStr?: string; // Solar MM-DD
   lunarMonth?: number;
   lunarDay?: number;
+  isDynamicDate?: boolean; // 是否是动态日期(如清明节)
   subtitle?: string;
   className?: string; // Allow external styling
 }
 
 
-export default function HolidayCard({ title, targetDateStr, lunarMonth, lunarDay, subtitle, className }: HolidayCardProps) {
+export default function HolidayCard({ title, targetDateStr, lunarMonth, lunarDay, isDynamicDate, subtitle, className }: HolidayCardProps) {
   const [timeLeft, setTimeLeft] = useState<{ days: number, hours: number, minutes: number, seconds: number } | null>(null);
   const [targetDisplayDate, setTargetDisplayDate] = useState<string>("");
   const [lunarDateStr, setLunarDateStr] = useState<string>("");
@@ -26,7 +28,21 @@ export default function HolidayCard({ title, targetDateStr, lunarMonth, lunarDay
       const now = new Date();
       let target: Date;
 
-      if (lunarMonth && lunarDay) {
+      if (title === "清明") {
+        // 特殊处理清明节的动态日期
+        const currentYear = now.getFullYear();
+        let qingmingDate = getQingmingDate(currentYear);
+
+        // 如果今年的清明已过，则设置为明年
+        if (qingmingDate < now) {
+          qingmingDate = getQingmingDate(currentYear + 1);
+        }
+
+        target = qingmingDate;
+        // 获取该日期的农历
+        const l = Lunar.fromDate(target);
+        setLunarDateStr(`${l.getMonthInChinese()}月 ${l.getDayInChinese()}`);
+      } else if (lunarMonth && lunarDay) {
         // Lunar Calculation
         const currentLunar = Lunar.fromDate(now);
         let targetLunar = Lunar.fromYmd(currentLunar.getYear(), lunarMonth, lunarDay);
@@ -62,6 +78,7 @@ export default function HolidayCard({ title, targetDateStr, lunarMonth, lunarDay
         setLunarDateStr(`${l.getMonthInChinese()}月 ${l.getDayInChinese()}`);
 
       } else {
+        console.error(`HolidayCard: No valid date configuration for holiday "${title}"`);
         return;
       }
 
@@ -83,35 +100,52 @@ export default function HolidayCard({ title, targetDateStr, lunarMonth, lunarDay
     calculateTime();
     const timer = setInterval(calculateTime, 1000);
     return () => clearInterval(timer);
-  }, [targetDateStr, lunarMonth, lunarDay]);
+  }, [targetDateStr, lunarMonth, lunarDay, isDynamicDate, title]);
 
-  if (!timeLeft) return null;
+  // 如果 still null after calculation, render an error card for debugging
+  if (!timeLeft) {
+    return (
+      <Card className={cn(
+        "flex flex-col items-center justify-between p-6 h-full min-h-50",
+        "bg-red-100 text-card-foreground shadow-sm transition-all hover:shadow-md",
+        className
+      )}>
+        <div className="w-full flex justify-between items-start mb-4">
+          <div>
+            <h3 className="text-2xl font-bold text-foreground">
+              {title} (Error)
+            </h3>
+            <p className="text-muted-foreground text-sm mt-1">Failed to calculate time</p>
+          </div>
+        </div>
+      </Card>
+    );
+  }
 
   return (
     <Card className={cn(
-      "flex flex-col items-center justify-between p-6 h-full min-h-[200px]",
+      "flex flex-col items-center justify-between p-6 h-full min-h-50",
       "bg-card text-card-foreground shadow-sm transition-all hover:shadow-md",
       className
     )}>
-      <div className="w-full flex justify-between items-start mb-4">
-        <div>
-          <h3 className="text-2xl font-bold text-foreground">
-            {title}
-          </h3>
-          <p className="text-muted-foreground text-sm mt-1">{targetDisplayDate}</p>
+      <div className="w-full">
+        <div className="flex justify-between items-start mb-4">
+          <div>
+            <h3 className="text-2xl font-bold text-foreground">
+              {title}
+            </h3>
+            <p className="text-muted-foreground text-sm mt-1">{targetDisplayDate}</p>
+          </div>
+          <div className="text-right">
+            <span className="block text-sm font-medium text-muted-foreground bg-muted px-2 py-1 rounded-md">
+              {lunarDateStr} {subtitle && `· ${subtitle}`}
+            </span>
+          </div>
         </div>
-        <div className="text-right">
-          <span className="block text-sm font-medium text-muted-foreground bg-muted px-2 py-1 rounded-md">
-            {lunarDateStr} {subtitle && `· ${subtitle}`}
-          </span>
-        </div>
-      </div>
 
-      <div className="w-full grid grid-cols-4 gap-2">
-        <TimeUnit value={timeLeft.days} label="天" />
-        <TimeUnit value={timeLeft.hours} label="时" />
-        <TimeUnit value={timeLeft.minutes} label="分" />
-        <TimeUnit value={timeLeft.seconds} label="秒" />
+        <div className="flex justify-center items-center h-24">
+          <TimeUnit value={timeLeft.days} label="天" />
+        </div>
       </div>
     </Card>
   );
@@ -119,11 +153,11 @@ export default function HolidayCard({ title, targetDateStr, lunarMonth, lunarDay
 
 function TimeUnit({ value, label }: { value: number; label: string }) {
   return (
-    <div className="flex flex-col items-center p-2 rounded-lg bg-muted border border-border">
-      <span className="text-xl md:text-2xl font-mono font-bold text-primary">
-        {value.toString().padStart(2, '0')}
+    <div className="flex items-center justify-center gap-1">
+      <span className="text-6xl md:text-7xl font-bold text-primary">
+        {value}
       </span>
-      <span className="text-xs text-muted-foreground uppercase scale-90">{label}</span>
+      <span className="text-xl text-muted-foreground self-end pb-2">{label}</span>
     </div>
   );
 }
