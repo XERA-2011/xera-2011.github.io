@@ -37,7 +37,7 @@ const nextConfig: NextConfig = {
   experimental: {
     optimizePackageImports: ['next/font/google'],
   },
-  output: "standalone",
+  // output: "standalone", // Commented out due to Windows symlink issues
 };
 
 export default nextConfig;
