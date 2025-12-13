@@ -1,6 +1,3 @@
-// 中国法定节假日数据
-import { Solar } from "lunar-javascript";
-
 export interface HolidayData {
   title: string;
   targetDateStr?: string; // 太阳历格式 "MM-DD"
@@ -20,7 +17,7 @@ export function getQingmingDate(year: number): Date {
   // 使用 solar 对象来找到当年的清明节
   // 清明节通常是每年的4月4日、5日或6日
   // 这里采用一种更精确的计算方法，利用天文算法近似的公式
-  
+
   // 传统计算公式：Y * 0.2422 + C，其中C值：
   // 1900-1923年：C=5.59
   // 1924-1947年：C=5.63
@@ -29,7 +26,7 @@ export function getQingmingDate(year: number): Date {
   // 1996-2020年：C=5.79
   // 2021-2044年：C=5.88
   // 2045-2068年：C=5.92
-  
+
   let cValue: number;
   if (year >= 2021 && year <= 2044) {
     cValue = 5.88;
@@ -44,24 +41,24 @@ export function getQingmingDate(year: number): Date {
   } else {
     cValue = 5.59;
   }
-  
+
   let day = Math.floor(year * 0.2422 + cValue);
-  
+
   // 考虑到世纪闰年的修正
   if ((year % 4 === 0 && year % 100 !== 0) || year % 400 === 0) {
     if (year > 2000) {
       day -= 1;
     }
   }
-  
+
   // 清明节通常在4月4日-6日之间
   day = Math.max(4, Math.min(6, day));
-  
+
   return new Date(year, 3, day); // 三月是索引3 (0-based)
 }
 
-// 定义所有法定节假日
-export const holidays: HolidayData[] = [
+// 中国法定节假日
+export const chineseHolidays: HolidayData[] = [
   {
     title: "元旦",
     targetDateStr: "01-01",
@@ -101,3 +98,45 @@ export const holidays: HolidayData[] = [
     subtitle: "国庆节"
   }
 ];
+
+// 国际节日（非农历节日）
+export const internationalHolidays: HolidayData[] = [
+  {
+    title: "情人节",
+    targetDateStr: "02-14",
+    subtitle: "爱的表达"
+  },
+  {
+    title: "愚人节",
+    targetDateStr: "04-01",
+    subtitle: "轻松一笑"
+  },
+  {
+    title: "母亲节",
+    targetDateStr: "05-12", // 通常是五月的第二个星期日，这里简化为5月12日
+    subtitle: "母爱伟大"
+  },
+  {
+    title: "父亲节",
+    targetDateStr: "06-16", // 通常是六月的第三个星期日，这里简化为6月16日
+    subtitle: "父爱如山"
+  },
+  {
+    title: "万圣节",
+    targetDateStr: "10-31",
+    subtitle: "不给糖就捣蛋"
+  },
+  {
+    title: "感恩节",
+    targetDateStr: "11-28", // 通常是十一月的第四个星期四，这里简化为11月28日
+    subtitle: "心怀感恩"
+  },
+  {
+    title: "圣诞节",
+    targetDateStr: "12-25",
+    subtitle: "圣诞快乐"
+  }
+];
+
+// 合并所有节日
+export const allHolidays: HolidayData[] = [...chineseHolidays, ...internationalHolidays];

@@ -6,6 +6,7 @@ import { differenceInSeconds } from "date-fns";
 import { Lunar, Solar } from "lunar-javascript";
 import { cn } from "@/lib/utils";
 import { getQingmingDate } from "./holiday-data"; // 导入清明节日期计算函数
+import { useTheme } from "next-themes";
 
 interface HolidayCardProps {
   title: string;
@@ -22,6 +23,7 @@ export default function HolidayCard({ title, targetDateStr, lunarMonth, lunarDay
   const [timeLeft, setTimeLeft] = useState<{ days: number, hours: number, minutes: number, seconds: number } | null>(null);
   const [targetDisplayDate, setTargetDisplayDate] = useState<string>("");
   const [lunarDateStr, setLunarDateStr] = useState<string>("");
+  const { theme } = useTheme();
 
   useEffect(() => {
     const calculateTime = () => {
@@ -107,7 +109,8 @@ export default function HolidayCard({ title, targetDateStr, lunarMonth, lunarDay
     return (
       <Card className={cn(
         "flex flex-col items-center justify-between p-6 h-full min-h-50",
-        "bg-red-100 text-card-foreground shadow-sm transition-all hover:shadow-md",
+        "bg-red-100 text-card-foreground shadow-sm transition-all hover:shadow-xl",
+        theme === 'dark' ? "hover:shadow-white/20" : "hover:shadow-black/20",
         className
       )}>
         <div className="w-full flex justify-between items-start mb-4">
@@ -125,7 +128,8 @@ export default function HolidayCard({ title, targetDateStr, lunarMonth, lunarDay
   return (
     <Card className={cn(
       "flex flex-col items-center justify-between p-6 h-full min-h-50",
-      "bg-card text-card-foreground shadow-sm transition-all hover:shadow-md",
+      "bg-card text-card-foreground shadow-sm transition-all hover:shadow-xl",
+      theme === 'dark' ? "hover:shadow-white/20" : "hover:shadow-black/20",
       className
     )}>
       <div className="w-full">
