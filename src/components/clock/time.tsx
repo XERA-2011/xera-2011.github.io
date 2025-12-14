@@ -139,7 +139,7 @@ export default function Time() {
               {/* 时针 */}
               <div
                 ref={hourHandRef}
-                className="absolute bottom-1/2 left-1/2 w-[3px] h-[23%] bg-foreground z-10"
+                className="absolute bottom-1/2 left-1/2 w-0.75 h-[23%] bg-foreground z-10"
                 style={{
                   transformOrigin: 'bottom center',
                   marginLeft: '-1.5px'
