@@ -14,7 +14,7 @@ interface CurrentTime {
   milliseconds: number;
 }
 
-export default function Time() {
+export default function ClockTime() {
   const clockRef = useRef<HTMLDivElement>(null);
   const hourHandRef = useRef<HTMLDivElement>(null);
   const minHandRef = useRef<HTMLDivElement>(null);
