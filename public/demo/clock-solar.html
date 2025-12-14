@@ -1,0 +1,200 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>太阳系时钟 - 全信息显示版</title>
+    <style>
+        /* ================= 全局变量与响应式核心 ================= */
+        :root {
+            /* 核心尺寸：保持之前的紧凑比例 */
+            --clock-size: min(90vw, 90vh, 500px);
+            
+            /* 行星与太阳尺寸 */
+            --sun-size: calc(var(--clock-size) * 0.24); /* 稍微加大一点太阳(22%->24%)，以便容纳更多文字 */
+            --mercury-size: calc(var(--clock-size) * 0.032);
+            --earth-size: calc(var(--clock-size) * 0.055);
+            --mars-size: calc(var(--clock-size) * 0.045);
+        }
+
+        body {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+            background-color: #000000;
+            font-family: 'Arial', sans-serif;
+            overflow: hidden;
+        }
+
+        .solar-system {
+            position: relative;
+            width: var(--clock-size);
+            height: var(--clock-size);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        /* ================= 中心：太阳 (容器) ================= */
+        .sun {
+            position: absolute;
+            width: var(--sun-size);
+            height: var(--sun-size);
+            border-radius: 50%;
+            background-color: #ff9800; 
+            box-shadow: 0 0 10px rgba(255, 152, 0, 0.2);
+            z-index: 10;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            color: #fff;
+            /* 增加一点行高控制 */
+            line-height: 1.2;
+        }
+
+        /* 时间文字 (HH:MM:SS) */
+        .time-text { 
+            /* 字体大小适配：因为有秒数，稍微缩小一点以防溢出 */
+            font-size: clamp(10px, 3.2vmin, 18px); 
+            font-weight: bold; 
+            /* 等宽数字，防止秒数跳动时文字左右抖动 */
+            font-variant-numeric: tabular-nums; 
+            margin-bottom: 2px;
+        }
+
+        /* 日期文字 (YYYY/MM/DD) */
+        .date-text { 
+            font-size: clamp(8px, 2.2vmin, 12px); 
+            opacity: 0.9; 
+            font-variant-numeric: tabular-nums; 
+        }
+
+        /* ================= 轨道线 ================= */
+        .orbit {
+            position: absolute;
+            top: 50%; left: 50%;
+            border-radius: 50%;
+            border: 1px solid #ffffff;
+            opacity: 0.25; 
+            transform: translate(-50%, -50%);
+        }
+
+        .orbit-sec { width: 42%; height: 42%; }
+        .orbit-min { width: 66%; height: 66%; }
+        .orbit-hour { width: 90%; height: 90%; }
+
+        /* ================= 行星 ================= */
+        .planet {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            border-radius: 50%;
+            transform: 
+                translate(-50%, -50%) 
+                rotate(var(--deg)) 
+                translateY(calc(var(--clock-size) * var(--radius-factor)))
+                rotate(calc(var(--deg) * -1)); 
+            box-shadow: none; 
+        }
+
+        .planet-sec {
+            width: var(--mercury-size);
+            height: var(--mercury-size);
+            --radius-factor: -0.21;
+            background-color: #bdbdbd;
+            z-index: 32;
+        }
+
+        .planet-min {
+            width: var(--earth-size);
+            height: var(--earth-size);
+            --radius-factor: -0.33;
+            background-color: #2196f3;
+            z-index: 31;
+        }
+
+        .planet-hour {
+            width: var(--mars-size);
+            height: var(--mars-size);
+            --radius-factor: -0.45;
+            background-color: #ff5722;
+            z-index: 30;
+        }
+    </style>
+</head>
+<body>
+
+<div class="solar-system">
+    <div class="sun">
+        <div class="time-text" id="time-text">--:--:--</div>
+        <div class="date-text" id="date-text">----/--/--</div>
+    </div>
+
+    <div class="orbit orbit-sec"></div>
+    <div class="orbit orbit-min"></div>
+    <div class="orbit orbit-hour"></div>
+
+    <div id="hour-hand" class="planet planet-hour" style="--deg: 0deg;"></div>
+    <div id="min-hand" class="planet planet-min" style="--deg: 0deg;"></div>
+    <div id="sec-hand" class="planet planet-sec" style="--deg: 0deg;"></div>
+</div>
+
+<script>
+    const hourHand = document.getElementById('hour-hand');
+    const minHand = document.getElementById('min-hand');
+    const secHand = document.getElementById('sec-hand');
+    const timeText = document.getElementById('time-text');
+    const dateText = document.getElementById('date-text');
+
+    function pad(num) { return num.toString().padStart(2, '0'); }
+
+    let secLoop = 0, minLoop = 0, hourLoop = 0;
+    let lastSecDeg = -1, lastMinDeg = -1, lastHourDeg = -1;
+
+    function updateClock() {
+        const now = new Date();
+        const ms = now.getMilliseconds();
+        const seconds = now.getSeconds();
+        const minutes = now.getMinutes();
+        const hours = now.getHours();
+        const year = now.getFullYear(); // 获取年份
+
+        // 动画角度计算
+        const currentSecDeg = (seconds + ms / 1000) * 6;
+        const currentMinDeg = (minutes + seconds / 60 + ms / 60000) * 6;
+        const currentHourDeg = ((hours % 12) + minutes / 60 + seconds / 3600) * 30;
+
+        if (lastSecDeg !== -1 && currentSecDeg < lastSecDeg - 180) secLoop++;
+        lastSecDeg = currentSecDeg;
+        
+        if (lastMinDeg !== -1 && currentMinDeg < lastMinDeg - 180) minLoop++;
+        lastMinDeg = currentMinDeg;
+
+        if (lastHourDeg !== -1 && currentHourDeg < lastHourDeg - 180) hourLoop++;
+        lastHourDeg = currentHourDeg;
+
+        const finalSecDeg = currentSecDeg + (secLoop * 360);
+        const finalMinDeg = currentMinDeg + (minLoop * 360);
+        const finalHourDeg = currentHourDeg + (hourLoop * 360);
+
+        secHand.style.setProperty('--deg', `${finalSecDeg}deg`);
+        minHand.style.setProperty('--deg', `${finalMinDeg}deg`);
+        hourHand.style.setProperty('--deg', `${finalHourDeg}deg`);
+
+        // 更新文字显示 (时:分:秒 和 年/月/日)
+        timeText.textContent = `${pad(hours)}:${pad(minutes)}:${pad(seconds)}`;
+        dateText.textContent = `${year}/${pad(now.getMonth() + 1)}/${pad(now.getDate())}`;
+    }
+
+    function animate() {
+        updateClock();
+        requestAnimationFrame(animate);
+    }
+    animate();
+</script>
+
+</body>
+</html>
