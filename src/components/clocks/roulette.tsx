@@ -1,0 +1,153 @@
+"use client";
+
+import * as React from "react";
+import { cn } from "@/lib/utils";
+
+/**
+ * 格式化数字，补零
+ */
+function pad(num: number) {
+  return num.toString().padStart(2, "0");
+}
+
+export default function ClockRoulette({ className }: { className?: string }) {
+  // 用于解决 Next.js 服务端渲染与客户端渲染的时间不一致问题 (Hydration Mismatch)
+  const [mounted, setMounted] = React.useState(false);
+
+  // 时间文字状态
+  const [displayTime, setDisplayTime] = React.useState({
+    time: "--:--:--",
+    date: "---- 年 -- 月 -- 日",
+  });
+
+  // 使用 ref 直接操作 DOM 样式，避免每秒 60 帧的 React 重渲染，保证性能
+  const hourHandRef = React.useRef<HTMLDivElement>(null);
+  const minHandRef = React.useRef<HTMLDivElement>(null);
+  const secHandRef = React.useRef<HTMLDivElement>(null);
+
+  // 动画状态引用，用于在闭包中保持状态
+  const stateRef = React.useRef({
+    secOffset: 0,
+    lastSeconds: -1,
+  });
+
+  React.useEffect(() => {
+    setMounted(true);
+
+    // 初始化 lastSeconds
+    stateRef.current.lastSeconds = new Date().getSeconds();
+
+    let frameId: number;
+
+    const updateClock = () => {
+      const now = new Date();
+      const seconds = now.getSeconds();
+      const minutes = now.getMinutes();
+      const hours = now.getHours();
+
+      // 处理秒针跨越 0 点时的平滑过渡逻辑 (防止反向旋转)
+      if (stateRef.current.lastSeconds > seconds) {
+        stateRef.current.secOffset += 360;
+      }
+      stateRef.current.lastSeconds = seconds;
+
+      // 计算角度
+      const secDeg = seconds * 6 + stateRef.current.secOffset;
+      const minDeg = (minutes + seconds / 60) * 6;
+      const hourDeg = ((hours % 12) + minutes / 60) * 30;
+
+      // 直接更新 CSS 变量或 transform，性能最优
+      if (secHandRef.current) {
+        secHandRef.current.style.transform = `translate(-50%, -50%) rotate(${secDeg}deg) translateY(-150px)`;
+      }
+      if (minHandRef.current) {
+        minHandRef.current.style.transform = `translate(-50%, -50%) rotate(${minDeg}deg) translateY(-150px)`;
+      }
+      if (hourHandRef.current) {
+        hourHandRef.current.style.transform = `translate(-50%, -50%) rotate(${hourDeg}deg) translateY(-150px)`;
+      }
+
+      // 更新文字显示
+      setDisplayTime({
+        time: `${pad(hours)}:${pad(minutes)}:${pad(seconds)}`,
+        date: `${now.getFullYear()} 年 ${pad(now.getMonth() + 1)} 月 ${pad(now.getDate())} 日`,
+      });
+
+      frameId = requestAnimationFrame(updateClock);
+    };
+
+    // 启动动画循环
+    frameId = requestAnimationFrame(updateClock);
+
+    // 清理函数
+    return () => {
+      cancelAnimationFrame(frameId);
+    };
+  }, []);
+
+  // 生成12个刻度
+  const ticks = React.useMemo(() => {
+    return Array.from({ length: 12 }).map((_, i) => {
+      const deg = i * 30;
+      return (
+        <div
+          key={i}
+          className="absolute top-1/2 left-1/2 h-[20px] w-[3px] bg-black z-[5]"
+          style={{
+            transform: `translate(-50%, -50%) rotate(${deg}deg) translateY(-150px)`,
+          }}
+        />
+      );
+    });
+  }, []);
+
+  // 防止服务端渲染不一致
+  if (!mounted) {
+    return (
+      <div className={cn("flex h-screen w-full items-center justify-center bg-[#111]", className)}>
+        <div className="h-[320px] w-[320px] rounded-full border-[20px] border-white/20" />
+      </div>
+    );
+  }
+
+  return (
+    <div className={cn("flex h-screen w-full items-center justify-center font-sans overflow-hidden", className)}>
+      {/* 光环容器 */}
+      <div className="relative box-border flex h-[320px] w-[320px] items-center justify-center rounded-full border-[20px] border-white bg-transparent shadow-[0_0_25px_rgba(255,255,255,0.3)]">
+
+        {/* 中心文字显示 */}
+        <div className="z-[1] text-center pointer-events-none select-none">
+          <div className="mb-[5px] text-[3em] font-bold tracking-[2px] text-white tabular-nums leading-none">
+            {displayTime.time}
+          </div>
+          <div className="text-[1.1em] font-normal text-[#bbbbbb]">
+            {displayTime.date}
+          </div>
+        </div>
+
+        {/* 刻度 */}
+        {ticks}
+
+        {/* 指针区域 */}
+
+        {/* 时针球 */}
+        <div
+          ref={hourHandRef}
+          className="absolute top-1/2 left-1/2 z-[20] h-[20px] w-[20px] rounded-full bg-[#333] shadow-[0_0_4px_rgba(0,0,0,0.6)] transition-transform duration-300 ease-[cubic-bezier(0.25,0.1,0.25,1)]"
+        />
+
+        {/* 分针球 */}
+        <div
+          ref={minHandRef}
+          className="absolute top-1/2 left-1/2 z-[21] h-[14px] w-[14px] rounded-full bg-[#999] shadow-[0_0_4px_rgba(0,0,0,0.6)] transition-transform duration-300 ease-[cubic-bezier(0.25,0.1,0.25,1)]"
+        />
+
+        {/* 秒针球 */}
+        <div
+          ref={secHandRef}
+          className="absolute top-1/2 left-1/2 z-[22] h-[8px] w-[8px] rounded-full bg-[#c00] shadow-[0_0_4px_rgba(0,0,0,0.6)]"
+        />
+      </div>
+    </div>
+  );
+}

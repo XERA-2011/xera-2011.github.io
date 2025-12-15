@@ -108,7 +108,7 @@ export default function ClockJump({ className, size = "60vmin" }: ClockJumpProps
       {/* 小时圈 (12个) - 含分钟合并逻辑 */}
       {Array.from({ length: 12 }).map((_, i) => {
         // 计算显示的数字
-        let baseNum = isPm ? (i === 0 ? 12 : 12 + i) : i === 0 ? 12 : i
+        const baseNum = isPm ? (i === 0 ? 12 : 12 + i) : i === 0 ? 12 : i
 
         // 核心逻辑：如果是当前小时，拼接分钟
         const isCurrentHour = i === hIndex
