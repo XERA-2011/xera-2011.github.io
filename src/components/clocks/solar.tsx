@@ -1,7 +1,9 @@
 "use client";
 
 import * as React from "react";
+import { motion } from "framer-motion";
 import { cn } from "@/lib/utils";
+import { useApp } from "@/contexts/AppContext";
 
 /**
  * 扩展 React 的 CSSProperties 以支持自定义 CSS 变量
@@ -23,7 +25,14 @@ function pad(num: number): string {
   return num.toString().padStart(2, "0");
 }
 
-export default function ClockSolar({ className }: { className?: string }) {
+export interface ClockSolarProps {
+  className?: string;
+  /** 自定义容器大小 */
+  size?: string | number;
+}
+
+export default function ClockSolar({ className, size = "60vmin" }: ClockSolarProps) {
+  const { setIsMenuActive } = useApp();
   const [mounted, setMounted] = React.useState(false);
 
   // 使用 Ref 获取 DOM 元素
@@ -101,7 +110,7 @@ export default function ClockSolar({ className }: { className?: string }) {
 
   if (!mounted) {
     return (
-      <div className={cn("flex h-screen w-full items-center justify-center bg-black overflow-hidden", className)}>
+      <div className={cn("flex h-screen w-full items-center justify-center overflow-hidden", className)}>
         <div className="h-[200px] w-[200px] rounded-full border border-white/20" />
       </div>
     );
@@ -109,11 +118,7 @@ export default function ClockSolar({ className }: { className?: string }) {
 
   // 定义核心尺寸变量
   const cssVariables: SolarSystemCSSProperties = {
-    "--clock-size": "min(90vw, 90vh, 500px)",
-    "--sun-size": "calc(var(--clock-size) * 0.24)",
-    "--mercury-size": "calc(var(--clock-size) * 0.032)",
-    "--earth-size": "calc(var(--clock-size) * 0.055)",
-    "--mars-size": "calc(var(--clock-size) * 0.045)",
+    "--clock-size": size,
   };
 
   // 生成行星样式的辅助函数
@@ -123,11 +128,21 @@ export default function ClockSolar({ className }: { className?: string }) {
   });
 
   return (
-    <div
+    <motion.div
+      initial={{ opacity: 0, scale: 0.8 }}
+      animate={{ opacity: 1, scale: 1 }}
+      transition={{ delay: 0.5, duration: 0.6 }}
       className={cn(
-        "flex h-screen w-full items-center justify-center bg-black font-sans overflow-hidden",
+        "relative flex items-center justify-center rounded-full select-none overflow-hidden transition-colors duration-300 cursor-pointer",
         className
       )}
+      style={{
+        width: size,
+        height: size,
+        maxWidth: "500px",
+        maxHeight: "500px",
+      }}
+      onClick={() => setIsMenuActive(true)}
     >
       {/* 太阳系容器 */}
       <div
@@ -140,16 +155,16 @@ export default function ClockSolar({ className }: { className?: string }) {
       >
         {/* ================= 中心：太阳 (容器) ================= */}
         <div
-          className="absolute z-10 flex flex-col items-center justify-center rounded-full bg-[#ff9800] text-white shadow-[0_0_10px_rgba(255,152,0,0.2)] leading-[1.2]"
+          className="absolute z-10 flex flex-col items-center justify-center rounded-full bg-[#ff9800] text-white shadow-[0_0_20px_rgba(255,152,0,0.5)] dark:shadow-[0_0_20px_rgba(255,152,0,0.9)] leading-[1.2]"
           style={{
-            width: "var(--sun-size)",
-            height: "var(--sun-size)"
+            width: "calc(var(--clock-size) * 0.24)",
+            height: "calc(var(--clock-size) * 0.24)"
           } as SolarSystemCSSProperties}
         >
           {/* 时间文字 */}
           <div
             ref={timeTextRef}
-            className="mb-0.5 font-bold tabular-nums"
+            className="mb-0.5 font-bold tabular-nums text-[10px] sm:text-[16px] md:text-[20px] font-mono drop-shadow-[0_0_10px_rgba(0,0,0,0.5)] dark:drop-shadow-[0_0_10px_rgba(255,255,255,0.9)]"
             style={{ fontSize: "clamp(10px, 3.2vmin, 18px)" }}
           >
             --:--:--
@@ -157,7 +172,7 @@ export default function ClockSolar({ className }: { className?: string }) {
           {/* 日期文字 */}
           <div
             ref={dateTextRef}
-            className="opacity-90 tabular-nums"
+            className="opacity-90 tabular-nums text-[6px] sm:text-[10px] md:text-[14px] font-mono drop-shadow-[0_0_5px_rgba(0,0,0,0.3)] dark:drop-shadow-[0_0_5px_rgba(255,255,255,0.5)]"
             style={{ fontSize: "clamp(8px, 2.2vmin, 12px)" }}
           >
             ----/--/--
@@ -165,45 +180,45 @@ export default function ClockSolar({ className }: { className?: string }) {
         </div>
 
         {/* ================= 轨道线 ================= */}
-        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 rounded-full border border-white opacity-25 w-[42%] h-[42%]" />
-        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 rounded-full border border-white opacity-25 w-[66%] h-[66%]" />
-        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 rounded-full border border-white opacity-25 w-[90%] h-[90%]" />
+        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 rounded-full border-2 border-black dark:border-white opacity-70 w-[42%] h-[42%]" />
+        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 rounded-full border-2 border-black dark:border-white opacity-70 w-[66%] h-[66%]" />
+        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 rounded-full border-2 border-black dark:border-white opacity-70 w-[90%] h-[90%]" />
 
         {/* ================= 行星 (指针) ================= */}
 
         {/* 时针 (火星) */}
         <div
           ref={hourHandRef}
-          className="absolute top-1/2 left-1/2 z-30 rounded-full bg-[#ff5722]"
+          className="absolute top-1/2 left-1/2 z-30 rounded-full bg-[#ff5722] drop-shadow-[0_0_8px_rgba(255,87,34,0.7)] dark:drop-shadow-[0_0_8px_rgba(255,87,34,0.9)]"
           style={{
             ...getPlanetStyle(-0.45),
-            width: "var(--mars-size)",
-            height: "var(--mars-size)",
+            width: "calc(var(--clock-size) * 0.045)",
+            height: "calc(var(--clock-size) * 0.045)",
           }}
         />
 
         {/* 分针 (地球) */}
         <div
           ref={minHandRef}
-          className="absolute top-1/2 left-1/2 z-31 rounded-full bg-[#2196f3]"
+          className="absolute top-1/2 left-1/2 z-31 rounded-full bg-[#2196f3] drop-shadow-[0_0_8px_rgba(33,150,243,0.7)] dark:drop-shadow-[0_0_8px_rgba(33,150,243,0.9)]"
           style={{
             ...getPlanetStyle(-0.33),
-            width: "var(--earth-size)",
-            height: "var(--earth-size)",
+            width: "calc(var(--clock-size) * 0.055)",
+            height: "calc(var(--clock-size) * 0.055)",
           }}
         />
 
         {/* 秒针 (水星) */}
         <div
           ref={secHandRef}
-          className="absolute top-1/2 left-1/2 z-32 rounded-full bg-[#bdbdbd]"
+          className="absolute top-1/2 left-1/2 z-32 rounded-full bg-[#bdbdbd] drop-shadow-[0_0_8px_rgba(189,189,189,0.7)] dark:drop-shadow-[0_0_8px_rgba(189,189,189,0.9)]"
           style={{
             ...getPlanetStyle(-0.21),
-            width: "var(--mercury-size)",
-            height: "var(--mercury-size)",
+            width: "calc(var(--clock-size) * 0.032)",
+            height: "calc(var(--clock-size) * 0.032)",
           }}
         />
       </div>
-    </div>
+    </motion.div>
   );
 }
