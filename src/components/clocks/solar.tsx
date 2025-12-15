@@ -149,7 +149,7 @@ export default function ClockSolar({ className }: { className?: string }) {
           {/* 时间文字 */}
           <div
             ref={timeTextRef}
-            className="mb-[2px] font-bold tabular-nums"
+            className="mb-0.5 font-bold tabular-nums"
             style={{ fontSize: "clamp(10px, 3.2vmin, 18px)" }}
           >
             --:--:--

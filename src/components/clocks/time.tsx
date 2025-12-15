@@ -43,7 +43,7 @@ export default function ClockTime() {
         marker.style.textAlign = 'center';
 
         const span = document.createElement('span');
-        span.className = `block mx-auto ${i % 5 === 0 ? 'w-[1.5px] h-[4%] bg-foreground' : 'w-[1px] h-[3%] bg-border'}`;
+        span.className = `block mx-auto ${i % 5 === 0 ? 'w-0.5 h-[4%] bg-foreground' : 'w-px h-[3%] bg-border'}`;
 
         marker.appendChild(span);
         clock.appendChild(marker);

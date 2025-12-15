@@ -92,7 +92,7 @@ export default function ClockRoulette({ className }: { className?: string }) {
       return (
         <div
           key={i}
-          className="absolute top-1/2 left-1/2 h-[20px] w-[3px] bg-black z-[5]"
+          className="absolute top-1/2 left-1/2 h-5 w-0.5 bg-black z-5"
           style={{
             transform: `translate(-50%, -50%) rotate(${deg}deg) translateY(-150px)`,
           }}
@@ -105,7 +105,7 @@ export default function ClockRoulette({ className }: { className?: string }) {
   if (!mounted) {
     return (
       <div className={cn("flex h-screen w-full items-center justify-center bg-[#111]", className)}>
-        <div className="h-[320px] w-[320px] rounded-full border-[20px] border-white/20" />
+        <div className="h-80 w-[320px] rounded-full border-20 border-white/20" />
       </div>
     );
   }
@@ -113,10 +113,10 @@ export default function ClockRoulette({ className }: { className?: string }) {
   return (
     <div className={cn("flex h-screen w-full items-center justify-center font-sans overflow-hidden", className)}>
       {/* 光环容器 */}
-      <div className="relative box-border flex h-[320px] w-[320px] items-center justify-center rounded-full border-[20px] border-white bg-transparent shadow-[0_0_25px_rgba(255,255,255,0.3)]">
+      <div className="relative box-border flex h-80 w-[320px] items-center justify-center rounded-full border-20 border-white bg-transparent shadow-[0_0_25px_rgba(255,255,255,0.3)]">
 
         {/* 中心文字显示 */}
-        <div className="z-[1] text-center pointer-events-none select-none">
+        <div className="z-1 text-center pointer-events-none select-none">
           <div className="mb-[5px] text-[3em] font-bold tracking-[2px] text-white tabular-nums leading-none">
             {displayTime.time}
           </div>
@@ -133,19 +133,19 @@ export default function ClockRoulette({ className }: { className?: string }) {
         {/* 时针球 */}
         <div
           ref={hourHandRef}
-          className="absolute top-1/2 left-1/2 z-[20] h-[20px] w-[20px] rounded-full bg-[#333] shadow-[0_0_4px_rgba(0,0,0,0.6)] transition-transform duration-300 ease-[cubic-bezier(0.25,0.1,0.25,1)]"
+          className="absolute top-1/2 left-1/2 z-20 h-5 w-5 rounded-full bg-[#333] shadow-[0_0_4px_rgba(0,0,0,0.6)] transition-transform duration-300 ease-[cubic-bezier(0.25,0.1,0.25,1)]"
         />
 
         {/* 分针球 */}
         <div
           ref={minHandRef}
-          className="absolute top-1/2 left-1/2 z-[21] h-[14px] w-[14px] rounded-full bg-[#999] shadow-[0_0_4px_rgba(0,0,0,0.6)] transition-transform duration-300 ease-[cubic-bezier(0.25,0.1,0.25,1)]"
+          className="absolute top-1/2 left-1/2 z-21 h-3.5 w-3.5 rounded-full bg-[#999] shadow-[0_0_4px_rgba(0,0,0,0.6)] transition-transform duration-300 ease-[cubic-bezier(0.25,0.1,0.25,1)]"
         />
 
         {/* 秒针球 */}
         <div
           ref={secHandRef}
-          className="absolute top-1/2 left-1/2 z-[22] h-[8px] w-[8px] rounded-full bg-[#c00] shadow-[0_0_4px_rgba(0,0,0,0.6)]"
+          className="absolute top-1/2 left-1/2 z-22 h-2 w-2 rounded-full bg-[#c00] shadow-[0_0_4px_rgba(0,0,0,0.6)]"
         />
       </div>
     </div>

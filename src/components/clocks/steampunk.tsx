@@ -26,16 +26,14 @@ function createGearPath(cx: number, cy: number, rOuter: number, rInner: number, 
     const a2 = a - step * width / 2;
     const a3 = a + step * width / 2;
     const a4 = a + step * (1 - width) / 2;
-
     const cos = Math.cos, sin = Math.sin;
+
     if (i === 0) d += `M ${cx + rInner * cos(a1)} ${cy + rInner * sin(a1)}`;
     else d += ` L ${cx + rInner * cos(a1)} ${cy + rInner * sin(a1)}`;
-
     d += ` L ${cx + rOuter * cos(a2)} ${cy + rOuter * sin(a2)}`;
     d += ` L ${cx + rOuter * cos(a3)} ${cy + rOuter * sin(a3)}`;
     d += ` L ${cx + rInner * cos(a4)} ${cy + rInner * sin(a4)}`;
   }
-
   d += " Z";
 
   if (holeR > 0) {
@@ -54,7 +52,6 @@ export default function ClockSteampunk({ className }: { className?: string }) {
   const handHourRef = React.useRef<HTMLDivElement>(null);
   const handMinuteRef = React.useRef<HTMLDivElement>(null);
   const handSecondRef = React.useRef<HTMLDivElement>(null);
-
   const gear1Ref = React.useRef<SVGPathElement>(null);
   const gear2Ref = React.useRef<SVGPathElement>(null);
   const gear3Ref = React.useRef<SVGPathElement>(null);
@@ -78,10 +75,8 @@ export default function ClockSteampunk({ className }: { className?: string }) {
       // 齿轮联动
       const rot1 = s * 6;
       if (gear1Ref.current) gear1Ref.current.style.transform = `rotate(${rot1}deg)`;
-
       const rot2 = -(rot1 * 2) + 9;
       if (gear2Ref.current) gear2Ref.current.style.transform = `rotate(${rot2}deg)`;
-
       const rot3 = -(rot1 * (40 / 30)) + 6;
       if (gear3Ref.current) gear3Ref.current.style.transform = `rotate(${rot3}deg)`;
 
@@ -100,14 +95,17 @@ export default function ClockSteampunk({ className }: { className?: string }) {
         key={i}
         className={cn(
           "absolute bg-[#cba864] shadow-[0_1px_1px_rgba(0,0,0,0.8)] origin-bottom",
-          isLarge ? "w-[4px] h-[12px] top-[10px] left-1/2 -ml-[2px]" : "w-[2px] h-[6px] top-[14px] left-1/2 -ml-[1px] opacity-50"
+          isLarge
+            ? "w-1 h-3 top-2.5 left-1/2 -ml-0.5"
+            : "w-0.5 h-1.5 top-3.5 left-1/2 -ml-px opacity-50"
         )}
         style={{
           transform: `rotate(${i * 6}deg)`,
           transformOrigin: isLarge ? '50% 195px' : '50% 191px'
         }}
       >
-        {isLarge && <div className="absolute inset-0 bg-gradient-to-b from-white to-[#cba864]" />}
+        {/* v4 update: bg-gradient-to-b -> bg-linear-to-b */}
+        {isLarge && <div className="absolute inset-0 bg-linear-to-b from-white to-[#cba864]" />}
       </div>
     );
   }), []);
@@ -119,11 +117,10 @@ export default function ClockSteampunk({ className }: { className?: string }) {
     const cy = 205;
     const x = cx + r * Math.cos(angle);
     const y = cy + r * Math.sin(angle);
-
     return (
       <div
         key={num}
-        className="absolute text-[28px] text-[#e5d3b3] w-[40px] h-[40px] leading-[40px] text-center -translate-x-1/2 -translate-y-1/2"
+        className="absolute text-[28px] text-[#e5d3b3] w-10 h-10 leading-10 text-center -translate-x-1/2 -translate-y-1/2"
         style={{
           left: x,
           top: y,
@@ -139,40 +136,31 @@ export default function ClockSteampunk({ className }: { className?: string }) {
     const m = 1.8;
     const t1 = 40; const r1 = t1 * m / 2;
     const p1 = createGearPath(130, 130, r1 + m, r1 - 1.25 * m, t1, 15);
-
     const t2 = 20; const r2 = t2 * m / 2;
     const dist2 = r1 + r2;
     const ang2 = 210 * Math.PI / 180;
     const cx2 = 130 + dist2 * Math.cos(ang2);
     const cy2 = 130 + dist2 * Math.sin(ang2);
     const p2 = createGearPath(cx2, cy2, r2 + m, r2 - 1.25 * m, t2, 5);
-
     const t3 = 30; const r3 = t3 * m / 2;
     const dist3 = r1 + r3;
     const ang3 = -30 * Math.PI / 180;
     const cx3 = 130 + dist3 * Math.cos(ang3);
     const cy3 = 130 + dist3 * Math.sin(ang3);
     const p3 = createGearPath(cx3, cy3, r3 + m, r3 - 1.25 * m, t3, 8);
-
     return { p1, p2, cx2, cy2, p3, cx3, cy3 };
   }, []);
 
   if (!mounted) return <div className="w-[460px] h-[460px]" />;
 
   return (
-    // 移除了 min-h-screen, bg-black, 以及背景图片
-    // 现在它是一个相对定位的容器，方便在父级中布局
     <div className={cn("relative flex items-center justify-center font-serif", cinzel.className, className)}>
-
-      {/* 
-        时钟主体容器
-        固定尺寸 460x460，保留了自身的投影 (drop-shadow) 以维持立体感 
-      */}
       <div className="relative w-[460px] h-[460px] rounded-full shadow-[0_30px_60px_rgba(0,0,0,0.8),0_10px_20px_rgba(0,0,0,0.6)]">
 
         {/* --- 金属外壳 --- */}
+        {/* v4 update: z-[1] -> z-1 */}
         <div
-          className="absolute inset-0 rounded-full z-[1] shadow-[inset_0_0_10px_rgba(0,0,0,0.8),0_0_0_2px_#221,0_0_0_12px_#150f08]"
+          className="absolute inset-0 rounded-full z-1 shadow-[inset_0_0_10px_rgba(0,0,0,0.8),0_0_0_2px_#221,0_0_0_12px_#150f08]"
           style={{
             background: `conic-gradient(from 145deg, #5e4b35, #8c7048 10%, #ffd700 18%, #8c7048 25%, #5e4b35 40%, #3a2a1a 50%, #5e4b35 60%, #8c7048 75%, #ffd700 85%, #8c7048 90%, #5e4b35)`
           }}
@@ -181,8 +169,9 @@ export default function ClockSteampunk({ className }: { className?: string }) {
         </div>
 
         {/* --- 表盘 --- */}
+        {/* v4 update: z-[2] -> z-2 */}
         <div
-          className="absolute inset-[25px] rounded-full z-[2] border-[2px] border-[#5c4305] shadow-[inset_0_0_50px_rgba(0,0,0,1)]"
+          className="absolute inset-[25px] rounded-full z-2 border-2 border-[#5c4305] shadow-[inset_0_0_50px_rgba(0,0,0,1)]"
           style={{
             background: `
               radial-gradient(circle, #2b2015 0%, #1a120b 100%),
@@ -193,13 +182,15 @@ export default function ClockSteampunk({ className }: { className?: string }) {
           }}
         >
           {/* 刻度与数字 */}
-          <div className="absolute inset-0 pointer-events-none z-[4]">
+          {/* v4 update: z-[4] -> z-4 */}
+          <div className="absolute inset-0 pointer-events-none z-4">
             {ticks}
             {numerals}
           </div>
 
           {/* 机械镂空区 */}
-          <div className="absolute top-1/2 left-1/2 w-[260px] h-[260px] -translate-x-1/2 -translate-y-1/2 rounded-full bg-[#050301] z-[3] overflow-hidden shadow-[inset_0_0_30px_#000,0_0_0_1px_#745618,0_0_0_6px_#1a120b,0_1px_2px_rgba(255,255,255,0.1)]">
+          {/* v4 update: z-[3] -> z-3 */}
+          <div className="absolute top-1/2 left-1/2 w-[260px] h-[260px] -translate-x-1/2 -translate-y-1/2 rounded-full bg-[#050301] z-3 overflow-hidden shadow-[inset_0_0_30px_#000,0_0_0_1px_#745618,0_0_0_6px_#1a120b,0_1px_2px_rgba(255,255,255,0.1)]">
             <svg viewBox="0 0 260 260" className="w-full h-full overflow-visible">
               <defs>
                 <linearGradient id="brass" x1="0%" y1="0%" x2="100%" y2="100%">
@@ -221,7 +212,6 @@ export default function ClockSteampunk({ className }: { className?: string }) {
                   <feDropShadow dx="1" dy="2" stdDeviation="2" floodColor="rgba(0,0,0,0.7)" />
                 </filter>
               </defs>
-
               <g id="gear-assembly">
                 <path ref={gear1Ref} d={gears.p1} fill="url(#brass)" filter="url(#innerGlow)" stroke="#5c4305" style={{ transformOrigin: '130px 130px' }} fillRule="evenodd" />
                 <path ref={gear2Ref} d={gears.p2} fill="url(#steel)" filter="url(#innerGlow)" stroke="#333" style={{ transformOrigin: `${gears.cx2}px ${gears.cy2}px` }} fillRule="evenodd" />
@@ -230,36 +220,40 @@ export default function ClockSteampunk({ className }: { className?: string }) {
             </svg>
 
             {/* 指针系统 */}
-            <div className="absolute inset-0 z-[10] pointer-events-none drop-shadow-[4px_8px_6px_rgba(0,0,0,0.6)]">
+            {/* v4 update: z-[10] -> z-10 */}
+            <div className="absolute inset-0 z-10 pointer-events-none drop-shadow-[4px_8px_6px_rgba(0,0,0,0.6)]">
               {/* 时针 */}
-              <div ref={handHourRef} className="absolute bottom-1/2 left-1/2 w-[16px] h-[100px] -ml-[8px] bg-[#1a1a1a] border-[2px] border-[#bba060] rounded-[4px] origin-bottom">
+              <div ref={handHourRef} className="absolute bottom-1/2 left-1/2 w-4 h-[100px] -ml-2 bg-[#1a1a1a] border-2 border-[#bba060] rounded origin-bottom">
                 <div className="absolute top-[15px] left-[3px] right-[3px] h-[70px] bg-black border border-[#555]" />
               </div>
+
               {/* 分针 */}
-              <div ref={handMinuteRef} className="absolute bottom-1/2 left-1/2 w-[6px] h-[155px] -ml-[3px] rounded-tl-[2px] rounded-tr-[2px] rounded-b-[50%] origin-bottom shadow-[inset_0_0_2px_rgba(0,0,0,0.5)]" style={{ background: 'linear-gradient(to right, #6d4c26, #a0733f, #6d4c26)' }} />
+              <div ref={handMinuteRef} className="absolute bottom-1/2 left-1/2 w-1.5 h-[155px] -ml-[3px] rounded-tl-sm rounded-tr-sm rounded-b-[50%] origin-bottom shadow-[inset_0_0_2px_rgba(0,0,0,0.5)]" style={{ background: 'linear-gradient(to right, #6d4c26, #a0733f, #6d4c26)' }} />
+
               {/* 秒针 */}
-              <div ref={handSecondRef} className="absolute bottom-1/2 left-1/2 w-[1px] h-[180px] -ml-[0.5px] bg-[#ff5252] z-[12] shadow-[0_0_4px_rgba(255,82,82,0.6)] origin-bottom">
-                <div className="absolute -bottom-[50px] -left-[3px] w-[6px] h-[40px] bg-[#ff5252]" style={{ clipPath: 'polygon(50% 0, 100% 20%, 50% 100%, 0% 20%)' }} />
+              {/* v4 update: z-[12] -> z-12 */}
+              <div ref={handSecondRef} className="absolute bottom-1/2 left-1/2 w-px h-[180px] -ml-[0.5px] bg-[#ff5252] z-12 shadow-[0_0_4px_rgba(255,82,82,0.6)] origin-bottom">
+                <div className="absolute -bottom-[50px] -left-[3px] w-1.5 h-10 bg-[#ff5252]" style={{ clipPath: 'polygon(50% 0, 100% 20%, 50% 100%, 0% 20%)' }} />
               </div>
             </div>
 
             {/* 中心轴 */}
-            <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[20px] h-[20px] rounded-full z-[20] border border-[#5c4305] shadow-[0_2px_5px_rgba(0,0,0,0.8)]" style={{ background: 'radial-gradient(circle at 30% 30%, #fff, #daa520)' }} />
+            {/* v4 update: z-[20] -> z-20 */}
+            <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-5 h-5 rounded-full z-20 border border-[#5c4305] shadow-[0_2px_5px_rgba(0,0,0,0.8)]" style={{ background: 'radial-gradient(circle at 30% 30%, #fff, #daa520)' }} />
           </div>
-
         </div>
 
         {/* --- 玻璃罩 --- */}
+        {/* v4 update: z-[100] -> z-100 */}
         <div
-          className="absolute inset-0 rounded-full z-[100] pointer-events-none shadow-[inset_0_0_50px_rgba(0,0,0,0.6),inset_0_0_10px_rgba(255,255,255,0.1)]"
+          className="absolute inset-0 rounded-full z-100 pointer-events-none shadow-[inset_0_0_50px_rgba(0,0,0,0.6),inset_0_0_10px_rgba(255,255,255,0.1)]"
           style={{
             background: `radial-gradient(circle at 50% 50%, rgba(255,255,255,0) 50%, rgba(255,255,255,0.02) 70%, rgba(255,255,255,0.1) 90%, rgba(255,255,255,0.3) 100%)`
           }}
         >
           <div className="absolute top-[30px] left-[30px] w-[200px] h-[120px] rounded-full bg-[radial-gradient(ellipse_at_center,rgba(255,255,255,0.6)_0%,rgba(255,255,255,0)_60%)] -rotate-45 blur-[5px] opacity-70" />
-          <div className="absolute bottom-[40px] right-[40px] w-[150px] h-[80px] rounded-full bg-[radial-gradient(ellipse_at_center,rgba(255,255,255,0.15)_0%,rgba(255,255,255,0)_60%)] -rotate-45 blur-[10px]" />
+          <div className="absolute bottom-10 right-10 w-[150px] h-20 rounded-full bg-[radial-gradient(ellipse_at_center,rgba(255,255,255,0.15)_0%,rgba(255,255,255,0)_60%)] -rotate-45 blur-[10px]" />
         </div>
-
       </div>
     </div>
   );
