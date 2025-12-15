@@ -71,11 +71,7 @@ export default function ClockJump({ className, size = "60vmin" }: ClockJumpProps
       animate={{ opacity: 1, scale: 1 }}
       transition={{ delay: 0.5, duration: 0.6 }}
       className={cn(
-        "relative mx-auto rounded-full font-mono shadow-xl select-none overflow-hidden transition-colors duration-300 cursor-pointer",
-        // 背景适配主题：亮色使用 card，暗色强制纯黑
-        "bg-card dark:bg-black",
-        // 边框适配：亮色普通边框，暗色白色微光边框 + 白色外发光
-        "border border-border dark:border-white/20 dark:shadow-[0_0_1.5rem_rgba(255,255,255,0.15)]",
+        "relative mx-auto rounded-full font-mono select-none transition-colors duration-300 cursor-pointer",
         // 响应式字体大小计算
         "text-[clamp(12px,2.25vmin,16px)]",
         className
@@ -97,7 +93,7 @@ export default function ClockJump({ className, size = "60vmin" }: ClockJumpProps
             // 默认颜色：使用 muted-foreground 的低透明度
             "text-[0.6em] text-muted-foreground/30",
             // 激活颜色：使用 primary 或 foreground，添加发光效果
-            s === i && "z-10 scale-140 text-[1em] font-bold text-primary drop-shadow-[0_0_0.5em_currentColor]"
+            s === i && "z-10 scale-140 text-[1em] font-bold text-primary"
           )}
           style={getPositionStyle(i, 60, R_SEC_PCT)}
         >
@@ -124,7 +120,7 @@ export default function ClockJump({ className, size = "60vmin" }: ClockJumpProps
               // 默认颜色
               "text-[1em] text-muted-foreground/40",
               // 激活颜色
-              isCurrentHour && "z-10 scale-130 text-[1.5em] font-bold text-primary drop-shadow-[0_0_0.5em_currentColor]"
+              isCurrentHour && "z-10 scale-130 text-[1.5em] font-bold text-primary"
             )}
             style={getPositionStyle(i, 12, R_HOUR_PCT)}
           >

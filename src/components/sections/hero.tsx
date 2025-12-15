@@ -4,7 +4,7 @@ import { useRef, useState, useEffect } from 'react';
 import { motion } from 'framer-motion';
 import Image from 'next/image';
 import { useTheme } from 'next-themes';
-import ClockCircle from '@/components/clocks/circle';
+import Clock from '@/components/clocks/jump';
 
 export default function HeroSection() {
   const containerRef = useRef<HTMLDivElement>(null);
@@ -31,7 +31,7 @@ export default function HeroSection() {
       ref={containerRef}
       className="relative flex-1 w-full flex flex-col items-center justify-center text-center px-4 sm:px-6 lg:px-8 pb-6"
     >
-      <ClockCircle />
+      <Clock />
 
       {snakeSvgSrc && (
         <motion.div
