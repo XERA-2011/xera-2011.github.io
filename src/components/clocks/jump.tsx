@@ -14,11 +14,11 @@ const R_HOUR_PCT = 32
 
 interface ClockJumpProps {
   className?: string
-  /** 自定义容器大小，默认 90vmin */
+  /** 自定义容器大小，默认 300px */
   size?: string | number
 }
 
-export default function ClockJump({ className, size = "60vmin" }: ClockJumpProps) {
+export default function ClockJump({ className, size = "300px" }: ClockJumpProps) {
   const { setIsMenuActive } = useApp()
   const [mounted, setMounted] = useState(false)
   const [time, setTime] = useState<Date | null>(null)
@@ -26,14 +26,13 @@ export default function ClockJump({ className, size = "60vmin" }: ClockJumpProps
   useEffect(() => {
     setMounted(true)
     setTime(new Date())
-
     let frameId: number
+
     const update = () => {
       setTime(new Date())
       frameId = requestAnimationFrame(update)
     }
     update()
-
     return () => cancelAnimationFrame(frameId)
   }, [])
 
@@ -72,15 +71,14 @@ export default function ClockJump({ className, size = "60vmin" }: ClockJumpProps
       transition={{ delay: 0.5, duration: 0.6 }}
       className={cn(
         "relative mx-auto rounded-full font-mono select-none transition-colors duration-300 cursor-pointer",
-        // 响应式字体大小计算
-        "text-[clamp(12px,2.25vmin,16px)]",
+        // 固定基础字体大小为 12px，配合 300px 容器，内部 em 单位会自动计算合适比例
+        "text-[12px]",
         className
       )}
       style={{
         width: size,
         height: size,
-        maxWidth: "400px",
-        maxHeight: "400px",
+        // 移除 maxWidth/maxHeight 限制
       }}
       onClick={() => setIsMenuActive(true)}
     >
@@ -134,7 +132,6 @@ export default function ClockJump({ className, size = "60vmin" }: ClockJumpProps
         <div className="mb-[0.3em] text-[0.9em] tracking-[0.2em] text-muted-foreground">
           {time.getFullYear()}
         </div>
-
         <div className="flex items-baseline gap-[0.5em]">
           <div className="text-[4.5em] font-bold leading-none text-foreground drop-shadow-sm">
             {String(time.getDate()).padStart(2, "0")}
@@ -143,7 +140,6 @@ export default function ClockJump({ className, size = "60vmin" }: ClockJumpProps
             {MONTHS[time.getMonth()]}
           </div>
         </div>
-
         <div className="mt-[0.6em] w-[60%] border-t border-border pt-[0.5em] text-[0.75em] tracking-[0.2em] text-muted-foreground">
           {DAYS[time.getDay()]}
         </div>
