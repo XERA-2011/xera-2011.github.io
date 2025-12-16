@@ -27,44 +27,57 @@ export default function ClockRoulette({ className }: { className?: string }) {
 
   // 动画状态引用，用于在闭包中保持状态
   const stateRef = React.useRef({
-    secOffset: 0,
-    lastSeconds: -1,
+    secLoop: 0,
+    minLoop: 0,
+    hourLoop: 0,
+    lastSecDeg: -1,
+    lastMinDeg: -1,
+    lastHourDeg: -1,
   });
 
   React.useEffect(() => {
     setMounted(true);
 
-    // 初始化 lastSeconds
-    stateRef.current.lastSeconds = new Date().getSeconds();
-
     let frameId: number;
 
     const updateClock = () => {
       const now = new Date();
+      const ms = now.getMilliseconds();
       const seconds = now.getSeconds();
       const minutes = now.getMinutes();
       const hours = now.getHours();
 
-      // 处理秒针跨越 0 点时的平滑过渡逻辑 (防止反向旋转)
-      if (stateRef.current.lastSeconds > seconds) {
-        stateRef.current.secOffset += 360;
-      }
-      stateRef.current.lastSeconds = seconds;
+      // 计算带毫秒精度的角度
+      const currentSecDeg = (seconds + ms / 1000) * 6;
+      const currentMinDeg = (minutes + seconds / 60 + ms / 60000) * 6;
+      const currentHourDeg = ((hours % 12) + minutes / 60 + seconds / 3600) * 30;
 
-      // 计算角度
-      const secDeg = seconds * 6 + stateRef.current.secOffset;
-      const minDeg = (minutes + seconds / 60) * 6;
-      const hourDeg = ((hours % 12) + minutes / 60) * 30;
+      const state = stateRef.current;
+
+      // 检测并处理跨越 0 度时的循环计数
+      if (state.lastSecDeg !== -1 && currentSecDeg < state.lastSecDeg - 180) state.secLoop++;
+      state.lastSecDeg = currentSecDeg;
+
+      if (state.lastMinDeg !== -1 && currentMinDeg < state.lastMinDeg - 180) state.minLoop++;
+      state.lastMinDeg = currentMinDeg;
+
+      if (state.lastHourDeg !== -1 && currentHourDeg < state.lastHourDeg - 180) state.hourLoop++;
+      state.lastHourDeg = currentHourDeg;
+
+      // 计算最终累计角度
+      const finalSecDeg = currentSecDeg + state.secLoop * 360;
+      const finalMinDeg = currentMinDeg + state.minLoop * 360;
+      const finalHourDeg = currentHourDeg + state.hourLoop * 360;
 
       // 直接更新 CSS 变量或 transform，性能最优
       if (secHandRef.current) {
-        secHandRef.current.style.transform = `translate(-50%, -50%) rotate(${secDeg}deg) translateY(-150px)`;
+        secHandRef.current.style.transform = `translate(-50%, -50%) rotate(${finalSecDeg}deg) translateY(-150px)`;
       }
       if (minHandRef.current) {
-        minHandRef.current.style.transform = `translate(-50%, -50%) rotate(${minDeg}deg) translateY(-150px)`;
+        minHandRef.current.style.transform = `translate(-50%, -50%) rotate(${finalMinDeg}deg) translateY(-150px)`;
       }
       if (hourHandRef.current) {
-        hourHandRef.current.style.transform = `translate(-50%, -50%) rotate(${hourDeg}deg) translateY(-150px)`;
+        hourHandRef.current.style.transform = `translate(-50%, -50%) rotate(${finalHourDeg}deg) translateY(-150px)`;
       }
 
       // 更新文字显示
@@ -92,7 +105,7 @@ export default function ClockRoulette({ className }: { className?: string }) {
       return (
         <div
           key={i}
-          className="absolute top-1/2 left-1/2 h-5 w-0.5 bg-black z-5"
+          className="absolute top-1/2 left-1/2 h-5 w-0.5 bg-foreground z-5"
           style={{
             transform: `translate(-50%, -50%) rotate(${deg}deg) translateY(-150px)`,
           }}
@@ -104,8 +117,8 @@ export default function ClockRoulette({ className }: { className?: string }) {
   // 防止服务端渲染不一致
   if (!mounted) {
     return (
-      <div className={cn("flex h-screen w-full items-center justify-center bg-[#111]", className)}>
-        <div className="h-80 w-[320px] rounded-full border-20 border-white/20" />
+      <div className={cn("flex h-screen w-full items-center justify-center", className)}>
+        <div className="h-80 w-[320px] rounded-full border-20" />
       </div>
     );
   }
@@ -113,14 +126,14 @@ export default function ClockRoulette({ className }: { className?: string }) {
   return (
     <div className={cn("flex h-screen w-full items-center justify-center font-sans overflow-hidden", className)}>
       {/* 光环容器 */}
-      <div className="relative box-border flex h-80 w-[320px] items-center justify-center rounded-full border-20 border-white bg-transparent shadow-[0_0_25px_rgba(255,255,255,0.3)]">
+      <div className="relative box-border flex h-80 w-[320px] items-center justify-center rounded-full border-20 border-foreground/20 bg-transparent">
 
         {/* 中心文字显示 */}
         <div className="z-1 text-center pointer-events-none select-none">
-          <div className="mb-[5px] text-[3em] font-bold tracking-[2px] text-white tabular-nums leading-none">
+          <div className="mb-[5px] text-[3em] font-bold tracking-[2px] text-foreground tabular-nums leading-none bg-background/60 px-3 py-1 rounded-md">
             {displayTime.time}
           </div>
-          <div className="text-[1.1em] font-normal text-[#bbbbbb]">
+          <div className="text-[1.1em] font-normal text-muted-foreground bg-background/40 px-3 py-0.5 rounded-md">
             {displayTime.date}
           </div>
         </div>
@@ -133,19 +146,19 @@ export default function ClockRoulette({ className }: { className?: string }) {
         {/* 时针球 */}
         <div
           ref={hourHandRef}
-          className="absolute top-1/2 left-1/2 z-20 h-5 w-5 rounded-full bg-[#333] shadow-[0_0_4px_rgba(0,0,0,0.6)] transition-transform duration-300 ease-[cubic-bezier(0.25,0.1,0.25,1)]"
+          className="absolute top-1/2 left-1/2 z-20 h-5 w-5 rounded-full bg-foreground shadow-[0_0_4px_rgba(0,0,0,0.6)] transition-transform duration-300 ease-[cubic-bezier(0.25,0.1,0.25,1)]"
         />
 
         {/* 分针球 */}
         <div
           ref={minHandRef}
-          className="absolute top-1/2 left-1/2 z-21 h-3.5 w-3.5 rounded-full bg-[#999] shadow-[0_0_4px_rgba(0,0,0,0.6)] transition-transform duration-300 ease-[cubic-bezier(0.25,0.1,0.25,1)]"
+          className="absolute top-1/2 left-1/2 z-21 h-3.5 w-3.5 rounded-full bg-muted-foreground shadow-[0_0_4px_rgba(0,0,0,0.6)] transition-transform duration-300 ease-[cubic-bezier(0.25,0.1,0.25,1)]"
         />
 
         {/* 秒针球 */}
         <div
           ref={secHandRef}
-          className="absolute top-1/2 left-1/2 z-22 h-2 w-2 rounded-full bg-[#c00] shadow-[0_0_4px_rgba(0,0,0,0.6)]"
+          className="absolute top-1/2 left-1/2 z-22 h-2 w-2 rounded-full bg-primary shadow-[0_0_4px_rgba(0,0,0,0.6)]"
         />
       </div>
     </div>
