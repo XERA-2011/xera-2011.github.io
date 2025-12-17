@@ -31,12 +31,12 @@ export function MarkdownPage({
   }, []);
   // Markdown 组件样式
   const components: Components = {
-    h1: ({ ...props }) => <h1 className="text-3xl font-bold mb-4 text-white" {...props} />,
-    h2: ({ ...props }) => <h2 className="text-xl font-semibold mt-6 mb-3 text-white" {...props} />,
-    h3: ({ ...props }) => <h3 className="text-lg font-medium mt-4 mb-2 text-white/90" {...props} />,
-    ul: ({ ...props }) => <ul className="mb-4 list-none p-0 text-white/70" {...props} />,
+    h1: ({ ...props }) => <h1 className="text-3xl font-bold mb-4 text-foreground" {...props} />,
+    h2: ({ ...props }) => <h2 className="text-xl font-semibold mt-6 mb-3 text-foreground" {...props} />,
+    h3: ({ ...props }) => <h3 className="text-lg font-medium mt-4 mb-2 text-foreground/90" {...props} />,
+    ul: ({ ...props }) => <ul className="mb-4 list-none p-0 text-muted-foreground" {...props} />,
     li: ({ ...props }) => <li className="mb-1 pl-0" {...props} />,
-    hr: ({ ...props }) => <hr className="my-6 border-white/20" {...props} />,
+    hr: ({ ...props }) => <hr className="my-6 border-border" {...props} />,
     a: ({ ...props }) => (
       <a
         className="text-blue-400 hover:text-blue-300 underline transition-colors"
@@ -45,21 +45,21 @@ export function MarkdownPage({
         {...props}
       />
     ),
-    strong: ({ ...props }) => <strong className="font-semibold text-white" {...props} />,
+    strong: ({ ...props }) => <strong className="font-semibold text-foreground" {...props} />,
     // 表格样式 - 移动端优化
     table: ({ ...props }) => (
       <div className="overflow-x-auto -mx-2 sm:mx-0 my-4">
-        <table className="min-w-full border-collapse border border-white/20" {...props} />
+        <table className="min-w-full border-collapse border border-border" {...props} />
       </div>
     ),
-    thead: ({ ...props }) => <thead className="bg-white/5" {...props} />,
+    thead: ({ ...props }) => <thead className="bg-muted/50" {...props} />,
     tbody: ({ ...props }) => <tbody {...props} />,
-    tr: ({ ...props }) => <tr className="border-b border-white/10" {...props} />,
+    tr: ({ ...props }) => <tr className="border-b border-border/50" {...props} />,
     th: ({ ...props }) => (
-      <th className="px-3 py-2 text-left text-sm font-semibold border border-white/20 text-white" {...props} />
+      <th className="px-3 py-2 text-left text-sm font-semibold border border-border text-foreground" {...props} />
     ),
     td: ({ ...props }) => (
-      <td className="px-3 py-2 text-sm border border-white/20 text-white/70" {...props} />
+      <td className="px-3 py-2 text-sm border border-border text-muted-foreground" {...props} />
     ),
     // 代码块样式 - 使用 rehype-highlight 进行语法高亮
     code: (props) => {
@@ -71,7 +71,7 @@ export function MarkdownPage({
 
       if (inline) {
         return (
-          <code className="bg-gray-800 px-1.5 py-0.5 rounded text-sm text-gray-200 font-mono" {...rest} />
+          <code className="bg-muted px-1.5 py-0.5 rounded text-sm text-foreground font-mono" {...rest} />
         );
       }
 
@@ -79,11 +79,11 @@ export function MarkdownPage({
       return <code className={className} {...rest} />;
     },
     pre: ({ ...props }) => (
-      <pre className="rounded-lg overflow-x-auto my-4 -mx-2 sm:mx-0 bg-gray-900 p-4" {...props} />
+      <pre className="rounded-lg overflow-x-auto my-4 -mx-2 sm:mx-0 bg-muted p-4" {...props} />
     ),
     // 块引用样式
     blockquote: ({ ...props }) => (
-      <blockquote className="border-l-4 border-blue-400 pl-4 my-4 italic text-white/60" {...props} />
+      <blockquote className="border-l-4 border-blue-400 pl-4 my-4 italic text-muted-foreground" {...props} />
     ),
     // 图片样式 - 支持 SVG 等，自动代理 GitHub CDN 图片
     img: ({ src, alt, ...props }) => {
@@ -108,14 +108,14 @@ export function MarkdownPage({
     // HTML 元素支持 - 覆盖默认样式
     p: ({ ...props }) => {
       // 检查是否有 align 属性
-      const align = (props as any).align;
+      const align = (props as { align?: string }).align;
 
       // 如果是居中对齐，使用 div 而不是 p 来避免嵌套块级元素的问题
       if (align === 'center') {
-        return <div className="text-base leading-7 mb-2 text-white/70 text-center" {...props} />;
+        return <div className="text-base leading-7 mb-2 text-muted-foreground text-center" {...props} />;
       }
 
-      return <p className="text-base leading-7 mb-2 text-white/70" {...props} />;
+      return <p className="text-base leading-7 mb-2 text-muted-foreground" {...props} />;
     },
     div: ({ ...props }) => <div {...props} />,
     // 处理 HTML picture 元素 - 根据网站主题选择正确的图片
@@ -179,7 +179,7 @@ export function MarkdownPage({
   };
 
   const markdownContent = (
-    <div className="prose prose-invert max-w-none">
+    <div className="prose dark:prose-invert max-w-none">
       <ReactMarkdown
         components={components}
         remarkPlugins={[remarkGfm]}
