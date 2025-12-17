@@ -12,6 +12,8 @@ import ClockClassic from '@/components/clocks/classic';
 export default function ClocksPage() {
   usePageTitle('时钟集合');
 
+  const staticTime = new Date('2011-11-11T11:11:11');
+
   return (
     <div className="relative w-full min-h-screen pt-32 pb-20">
       <div className="container mx-auto px-4 sm:px-6 lg:px-8">
@@ -31,32 +33,32 @@ export default function ClocksPage() {
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 justify-items-center">
           <div className="flex flex-col items-center">
             <h2 className="text-xl font-semibold mb-4">圆形时钟</h2>
-            <ClockCircle staticTime="10:10:30" />
+            <ClockCircle staticTime={staticTime} />
           </div>
 
           <div className="flex flex-col items-center">
             <h2 className="text-xl font-semibold mb-4">跳跳时钟</h2>
-            <ClockJump staticTime="10:10:30" />
+            <ClockJump staticTime={staticTime} />
           </div>
 
           <div className="flex flex-col items-center">
             <h2 className="text-xl font-semibold mb-4">轮盘时钟</h2>
-            <ClockRoulette staticTime="10:10:30" />
+            <ClockRoulette staticTime={staticTime} />
           </div>
 
           <div className="flex flex-col items-center">
             <h2 className="text-xl font-semibold mb-4">太阳系时钟</h2>
-            <ClockSolar staticTime="10:10:30" />
+            <ClockSolar staticTime={staticTime} />
           </div>
 
           <div className="flex flex-col items-center">
             <h2 className="text-xl font-semibold mb-4">蒸汽朋克时钟</h2>
-            <ClockSteampunk staticTime="10:10:30" />
+            <ClockSteampunk staticTime={staticTime} />
           </div>
 
           <div className="flex flex-col items-center">
             <h2 className="text-xl font-semibold mb-4">经典时钟</h2>
-            <ClockClassic staticTime="10:10:30" />
+            <ClockClassic staticTime={staticTime} />
           </div>
         </div>
       </div>

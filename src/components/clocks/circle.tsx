@@ -40,9 +40,13 @@ export default function ClockCircle({ className, size = "300px", staticTime, onC
     const m = date.getMinutes();
     const h = date.getHours();
 
+    const year = date.getFullYear();
+    const month = date.getMonth() + 1;
+    const day = date.getDate();
+
     // 文字
     const timeStr = `${String(h).padStart(2, "0")}:${String(m).padStart(2, "0")}:${String(s).padStart(2, "0")}`;
-    const dateStr = "STATIC"; // 静态模式下日期显示什么可以自定义
+    const dateStr = `${year}-${String(month).padStart(2, "0")}-${String(day).padStart(2, "0")}`;
 
     // 进度
     return {

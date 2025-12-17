@@ -55,8 +55,7 @@ export default function ClockRoulette({ className, staticTime }: ClockRoulettePr
     const h = date.getHours();
 
     const timeStr = `${pad(h)}:${pad(m)}:${pad(s)}`;
-    // 静态模式日期如果不重要，可以固定显示或自定义，这里简单处理
-    const dateStr = "STATIC MODE";
+    const dateStr = `${date.getFullYear()} 年 ${pad(date.getMonth() + 1)} 月 ${pad(date.getDate())} 日`;
 
     // 计算角度 (静态不需要考虑 ms 和 平滑过渡圈数)
     const secDeg = s * 6;
