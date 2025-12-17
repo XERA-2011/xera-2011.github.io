@@ -3,7 +3,7 @@
 import { useState } from 'react';
 import { motion } from 'framer-motion';
 import { usePageTitle } from '@/hooks/use-page-title';
-import JokeCard from '@/components/github/joke-card';
+import JokeCard from './_components/joke-card';
 import GlowCard from '@/components/ui/glow-card';
 import { Button } from '@/components/ui/button';
 import { BASE_URL } from '@/lib/constants';
