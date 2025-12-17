@@ -3,8 +3,8 @@
 import { useEffect } from "react"
 import { useRouter } from "next/navigation"
 import { useSession } from "next-auth/react"
-import { GreetingHeader } from "@/components/dashboard/greeting-header"
-import { UserInfoCard } from "@/components/dashboard/user-info-card"
+import { GreetingHeader } from "./_components/greeting-header"
+import { UserInfoCard } from "./_components/user-info-card"
 
 export default function DashboardPage() {
   const { data: session, status } = useSession()
