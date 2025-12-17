@@ -3,10 +3,10 @@
 import { motion } from 'framer-motion';
 import { usePageTitle } from '@/hooks/use-page-title';
 import { differenceInDays } from 'date-fns';
-import TimeCard from "@/components/tools/life-calendar/time-card";
-import RetirementCard from "@/components/tools/life-calendar/retirement-card";
-import HolidayCard from "@/components/tools/life-calendar/holiday-card";
-import { chineseHolidays, internationalHolidays, getQingmingDate } from "@/components/tools/life-calendar/holiday-data";
+import TimeCard from "./_components/time-card";
+import RetirementCard from "./_components/retirement-card";
+import HolidayCard from "./_components/holiday-card";
+import { chineseHolidays, internationalHolidays, getQingmingDate } from "./_components/holiday-data";
 import { Lunar, Solar } from "lunar-javascript";
 
 const containerVariants = {
