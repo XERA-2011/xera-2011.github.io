@@ -17,6 +17,11 @@ const labsData: GlowCardItem[] = [
     href: '/labs/solar-skirmish'
   },
   {
+    id: 'texas-holdem',
+    title: 'Texas Hold\'em',
+    href: '/labs/texas-holdem'
+  },
+  {
     id: 'x-logo',
     title: 'X Logo',
     href: '/demo/x-logo.html'

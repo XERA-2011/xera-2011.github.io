@@ -1,0 +1,772 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>单机德州扑克 (7人局)</title>
+    <style>
+        :root {
+            --felt-color: #35654d;
+            --card-width: 50px;
+            --card-height: 70px;
+        }
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: #222;
+            color: white;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+            overflow: hidden;
+        }
+        
+        /* 牌桌区域 */
+        #game-table {
+            position: relative;
+            width: 800px;
+            height: 500px;
+            background-color: var(--felt-color);
+            border: 15px solid #5d4037;
+            border-radius: 250px;
+            margin-top: 20px;
+            box-shadow: inset 0 0 50px rgba(0,0,0,0.5);
+        }
+
+        /* 公共牌 */
+        #community-cards {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            display: flex;
+            gap: 10px;
+        }
+
+        /* 底池显示 */
+        #pot-display {
+            position: absolute;
+            top: 35%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            font-size: 1.2em;
+            background: rgba(0,0,0,0.3);
+            padding: 5px 15px;
+            border-radius: 15px;
+        }
+
+        /* 玩家位置 */
+        .player {
+            position: absolute;
+            width: 100px;
+            height: 120px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.3s;
+        }
+
+        .player-info {
+            background: rgba(0,0,0,0.6);
+            padding: 5px;
+            border-radius: 5px;
+            text-align: center;
+            font-size: 12px;
+            width: 100%;
+        }
+
+        .player-cards {
+            display: flex;
+            margin-top: 5px;
+            gap: 2px;
+        }
+
+        /* 玩家位置坐标 (圆形分布) */
+        /* P0 (Human) Bottom */
+        #p0 { bottom: -20px; left: 350px; }
+        /* P1 */
+        #p1 { bottom: 50px; left: 80px; }
+        /* P2 */
+        #p2 { top: 120px; left: 20px; }
+        /* P3 */
+        #p3 { top: 20px; left: 350px; } /* Top Center */
+        /* P4 */
+        #p4 { top: 120px; right: 20px; }
+        /* P5 */
+        #p5 { bottom: 50px; right: 80px; }
+        /* P6 - Extra */
+        #p6 { top: 20px; right: 200px; } 
+
+        /* 覆盖原来的P3位置稍微调整，因为是7人 */
+        /* 重新计算大致位置 */
+        #p0 { bottom: 10px; left: 50%; transform: translateX(-50%); }
+        #p1 { bottom: 100px; left: 20px; }
+        #p2 { top: 150px; left: 20px; }
+        #p3 { top: 20px; left: 250px; }
+        #p4 { top: 20px; right: 250px; }
+        #p5 { top: 150px; right: 20px; }
+        #p6 { bottom: 100px; right: 20px; }
+
+        /* 卡牌样式 */
+        .card {
+            width: var(--card-width);
+            height: var(--card-height);
+            background: white;
+            border-radius: 4px;
+            color: black;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-weight: bold;
+            font-size: 18px;
+            box-shadow: 1px 1px 3px rgba(0,0,0,0.3);
+            position: relative;
+        }
+        .card.red { color: #d00; }
+        .card.back {
+            background: repeating-linear-gradient(45deg, #606dbc, #606dbc 10px, #465298 10px, #465298 20px);
+            border: 2px solid white;
+        }
+        .dealer-btn {
+            background: white;
+            color: black;
+            border-radius: 50%;
+            width: 20px;
+            height: 20px;
+            font-size: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: absolute;
+            top: -10px;
+            right: -10px;
+            font-weight: bold;
+            display: none;
+        }
+
+        .active-turn {
+            box-shadow: 0 0 15px 5px yellow;
+            border-radius: 10px;
+        }
+
+        .folded {
+            opacity: 0.5;
+            filter: grayscale(100%);
+        }
+
+        .winner-highlight {
+            border: 3px solid gold;
+        }
+
+        /* 控制区 */
+        #controls {
+            margin-top: 20px;
+            display: flex;
+            gap: 15px;
+        }
+        button {
+            padding: 10px 20px;
+            font-size: 16px;
+            cursor: pointer;
+            border: none;
+            border-radius: 5px;
+            font-weight: bold;
+        }
+        .btn-fold { background: #d32f2f; color: white; }
+        .btn-check { background: #1976d2; color: white; }
+        .btn-raise { background: #388e3c; color: white; }
+        .btn-next { background: #f57c00; color: white; display: none; }
+        
+        button:disabled {
+            background: #555;
+            cursor: not-allowed;
+            opacity: 0.7;
+        }
+
+        #log-area {
+            width: 800px;
+            height: 100px;
+            background: #111;
+            margin-top: 10px;
+            overflow-y: auto;
+            padding: 10px;
+            font-family: monospace;
+            font-size: 14px;
+            border: 1px solid #444;
+        }
+    </style>
+</head>
+<body>
+
+    <div id="game-table">
+        <div id="pot-display">Pot: 0</div>
+        <div id="community-cards"></div>
+        
+        <div id="p0" class="player">
+            <div class="player-info">
+                <div>你 (P0)</div>
+                <div>$<span class="chips">100</span></div>
+                <div class="status"></div>
+            </div>
+            <div class="player-cards"></div>
+            <div class="dealer-btn">D</div>
+        </div>
+        <div id="p1" class="player"><div class="player-info"><div>电脑 1</div><div>$<span class="chips">100</span></div><div class="status"></div></div><div class="player-cards"></div><div class="dealer-btn">D</div></div>
+        <div id="p2" class="player"><div class="player-info"><div>电脑 2</div><div>$<span class="chips">100</span></div><div class="status"></div></div><div class="player-cards"></div><div class="dealer-btn">D</div></div>
+        <div id="p3" class="player"><div class="player-info"><div>电脑 3</div><div>$<span class="chips">100</span></div><div class="status"></div></div><div class="player-cards"></div><div class="dealer-btn">D</div></div>
+        <div id="p4" class="player"><div class="player-info"><div>电脑 4</div><div>$<span class="chips">100</span></div><div class="status"></div></div><div class="player-cards"></div><div class="dealer-btn">D</div></div>
+        <div id="p5" class="player"><div class="player-info"><div>电脑 5</div><div>$<span class="chips">100</span></div><div class="status"></div></div><div class="player-cards"></div><div class="dealer-btn">D</div></div>
+        <div id="p6" class="player"><div class="player-info"><div>电脑 6</div><div>$<span class="chips">100</span></div><div class="status"></div></div><div class="player-cards"></div><div class="dealer-btn">D</div></div>
+    </div>
+
+    <div id="controls">
+        <button id="btn-fold" class="btn-fold" onclick="game.humanAction('fold')">弃牌 (Fold)</button>
+        <button id="btn-call" class="btn-check" onclick="game.humanAction('call')">跟注/过牌 (Call/Check)</button>
+        <button id="btn-raise" class="btn-raise" onclick="game.humanAction('raise')">加注 (Raise 10)</button>
+        <button id="btn-next" class="btn-next" onclick="game.startNextRound()">下一局</button>
+    </div>
+
+    <div id="log-area"></div>
+
+<script>
+/**
+ * 德州扑克核心逻辑
+ */
+
+// 1. 基础数据结构
+const SUITS = ['♠', '♥', '♣', '♦'];
+const RANKS = ['2', '3', '4', '5', '6', '7', '8', '9', 'T', 'J', 'Q', 'K', 'A'];
+const RANK_VALUE = {'2':2, '3':3, '4':4, '5':5, '6':6, '7':7, '8':8, '9':9, 'T':10, 'J':11, 'Q':12, 'K':13, 'A':14};
+
+class Card {
+    constructor(rank, suit) {
+        this.rank = rank;
+        this.suit = suit;
+        this.value = RANK_VALUE[rank];
+    }
+    toString() { return `${this.suit}${this.rank}`; }
+    get color() { return (this.suit === '♥' || this.suit === '♦') ? 'red' : 'black'; }
+}
+
+class Deck {
+    constructor() {
+        this.cards = [];
+        this.reset();
+    }
+    reset() {
+        this.cards = [];
+        for (let s of SUITS) {
+            for (let r of RANKS) {
+                this.cards.push(new Card(r, s));
+            }
+        }
+        this.shuffle();
+    }
+    shuffle() {
+        for (let i = this.cards.length - 1; i > 0; i--) {
+            const j = Math.floor(Math.random() * (i + 1));
+            [this.cards[i], this.cards[j]] = [this.cards[j], this.cards[i]];
+        }
+    }
+    deal() { return this.cards.pop(); }
+}
+
+// 2. 牌型评估 (简化版但足够有效)
+// 返回值: [RankClass(0-9), TieBreakerScore]
+const HandRank = {
+    HIGH_CARD: 0, PAIR: 1, TWO_PAIR: 2, TRIPS: 3, STRAIGHT: 4, 
+    FLUSH: 5, FULL_HOUSE: 6, QUADS: 7, STRAIGHT_FLUSH: 8
+};
+
+function evaluateHand(cards) {
+    // 排序 cards by value desc
+    cards.sort((a,b) => b.value - a.value);
+    
+    // 统计 Suit 和 Rank 频次
+    let suitCounts = {};
+    let rankCounts = {};
+    cards.forEach(c => {
+        suitCounts[c.suit] = (suitCounts[c.suit] || 0) + 1;
+        rankCounts[c.value] = (rankCounts[c.value] || 0) + 1;
+    });
+
+    // 检查同花
+    let flushSuit = Object.keys(suitCounts).find(s => suitCounts[s] >= 5);
+    let flushCards = flushSuit ? cards.filter(c => c.suit === flushSuit) : [];
+
+    // 检查顺子
+    const getStraightHigh = (cardList) => {
+        let uniqueValues = [...new Set(cardList.map(c => c.value))].sort((a,b)=>b-a);
+        // 特殊处理 A-5 顺子 (A=14, 5,4,3,2)
+        if (uniqueValues.includes(14)) uniqueValues.push(1);
+        
+        for(let i=0; i<=uniqueValues.length-5; i++) {
+            if(uniqueValues[i] - uniqueValues[i+4] === 4) return uniqueValues[i];
+        }
+        return null;
+    };
+
+    let straightHigh = getStraightHigh(cards);
+    let straightFlushHigh = flushSuit ? getStraightHigh(flushCards) : null;
+
+    if (straightFlushHigh) return [HandRank.STRAIGHT_FLUSH, straightFlushHigh];
+    
+    // 四条
+    let quads = Object.keys(rankCounts).find(r => rankCounts[r] === 4);
+    if (quads) return [HandRank.QUADS, parseInt(quads)];
+
+    // 葫芦
+    let trips = Object.keys(rankCounts).filter(r => rankCounts[r] === 3).sort((a,b)=>b-a);
+    let pairs = Object.keys(rankCounts).filter(r => rankCounts[r] === 2).sort((a,b)=>b-a);
+    
+    if (trips.length > 0 && (trips.length > 1 || pairs.length > 0)) {
+        let t = parseInt(trips[0]);
+        let p = (trips.length > 1) ? parseInt(trips[1]) : parseInt(pairs[0]);
+        return [HandRank.FULL_HOUSE, t * 100 + p];
+    }
+
+    if (flushSuit) return [HandRank.FLUSH, flushCards[0].value];
+    if (straightHigh) return [HandRank.STRAIGHT, straightHigh];
+    if (trips.length > 0) return [HandRank.TRIPS, parseInt(trips[0])];
+    
+    if (pairs.length >= 2) return [HandRank.TWO_PAIR, parseInt(pairs[0])*100 + parseInt(pairs[1])];
+    if (pairs.length === 1) return [HandRank.PAIR, parseInt(pairs[0])];
+
+    return [HandRank.HIGH_CARD, cards[0].value];
+}
+
+// 3. 游戏逻辑类
+class PokerGame {
+    constructor() {
+        this.players = [];
+        for(let i=0; i<7; i++) {
+            this.players.push({
+                id: i,
+                isHuman: i === 0,
+                chips: 100,
+                hand: [],
+                status: 'active', // active, folded, allin
+                currentBet: 0,
+                isEliminated: false
+            });
+        }
+        this.deck = new Deck();
+        this.communityCards = [];
+        this.pot = 0;
+        this.dealerIdx = 0;
+        this.currentTurnIdx = 0;
+        this.highestBet = 0;
+        this.stage = 'preflop'; // preflop, flop, turn, river, showdown
+        this.logElem = document.getElementById('log-area');
+        
+        this.updateUI();
+        this.disableControls(true);
+        // Start game logic manually via "Next Round" usually, but first time auto
+        this.startNextRound();
+    }
+
+    log(msg) {
+        let div = document.createElement('div');
+        div.textContent = msg;
+        this.logElem.prepend(div);
+    }
+
+    startNextRound() {
+        // 检查是否有赢家
+        let activePlayers = this.players.filter(p => !p.isEliminated);
+        if (activePlayers.length <= 1) {
+            alert(`游戏结束! 获胜者是 P${activePlayers[0].id}`);
+            return;
+        }
+
+        // 重置状态
+        this.deck.reset();
+        this.communityCards = [];
+        this.pot = 0;
+        this.stage = 'preflop';
+        this.players.forEach(p => {
+            if(!p.isEliminated) {
+                p.hand = [this.deck.deal(), this.deck.deal()];
+                p.status = 'active';
+                p.currentBet = 0;
+            } else {
+                p.status = 'eliminated';
+                p.hand = [];
+            }
+        });
+
+        // 移动 Dealer
+        do {
+            this.dealerIdx = (this.dealerIdx + 1) % 7;
+        } while (this.players[this.dealerIdx].isEliminated);
+
+        // 盲注逻辑
+        let sbIdx = this.getNextActive(this.dealerIdx);
+        let bbIdx = this.getNextActive(sbIdx);
+        
+        this.bet(sbIdx, 5); // 小盲
+        this.bet(bbIdx, 10); // 大盲
+        this.highestBet = 10;
+        
+        this.currentTurnIdx = this.getNextActive(bbIdx); // 枪口位先动
+
+        // UI Reset
+        document.getElementById('btn-next').style.display = 'none';
+        document.getElementById('community-cards').innerHTML = '';
+        this.players.forEach(p => {
+            document.getElementById(`p${p.id}`).querySelector('.player-cards').innerHTML = '';
+            document.getElementById(`p${p.id}`).classList.remove('winner-highlight');
+        });
+
+        this.log(`--- 新回合开始 --- Dealer: P${this.dealerIdx}`);
+        this.updateUI();
+        this.processTurn();
+    }
+
+    getNextActive(idx) {
+        let next = (idx + 1) % 7;
+        while(this.players[next].isEliminated || this.players[next].status === 'folded') {
+            next = (next + 1) % 7;
+            if(next === idx) return null; // 应该不会发生
+        }
+        return next;
+    }
+
+    bet(playerIdx, amount) {
+        let p = this.players[playerIdx];
+        if (amount > p.chips) amount = p.chips; // All in
+        p.chips -= amount;
+        p.currentBet += amount;
+        this.pot += amount;
+        if (p.currentBet > this.highestBet) this.highestBet = p.currentBet;
+        if (p.chips === 0 && p.status !== 'folded') p.status = 'allin';
+    }
+
+    async processTurn() {
+        // 检查是否这轮下注结束
+        if (this.isRoundComplete()) {
+            this.nextStage();
+            return;
+        }
+
+        let p = this.players[this.currentTurnIdx];
+        
+        // 更新高亮
+        document.querySelectorAll('.player').forEach(el => el.classList.remove('active-turn'));
+        document.getElementById(`p${p.id}`).classList.add('active-turn');
+
+        if (p.isHuman) {
+            this.log("轮到你了...");
+            this.updateControls(); // 启用按钮
+        } else {
+            this.disableControls(true);
+            setTimeout(() => this.aiAction(p), 800); // 模拟思考时间
+        }
+    }
+
+    isRoundComplete() {
+        // 所有人 currentBet 必须等于 highestBet (或者 allin/folded)
+        // 并且所有人都已经行动过至少一次 (这里简化：如果当前玩家 currentBet == highestBet 且不是发起加注的人... 比较复杂)
+        // 简化逻辑：我们检查是否所有 active 玩家的注都平了，或者只剩一个人
+        
+        let active = this.players.filter(p => p.status !== 'folded' && p.status !== 'eliminated');
+        if (active.length === 1) return true; // 赢了
+
+        let activeNotAllIn = active.filter(p => p.status !== 'allin');
+        if (activeNotAllIn.length === 0) return true; // 都在all in
+
+        // 检查注码是否齐平
+        let bets = active.map(p => p.currentBet);
+        let max = Math.max(...bets);
+        let allMatched = active.every(p => p.currentBet === max || p.status === 'allin');
+        
+        // 如果注码齐平，还需要确保每个人在这个阶段都有机会表态 (这里通过逻辑控制，简化处理：只要齐平且没人加注就进下一轮)
+        // 为了避免刚发牌就结束，我们在 nextStage 重置 highestBet，如果 highestBet > 0 且平了，就结束
+        // 但大盲位 preflop 是特例。
+        // 这里做一个简单的 hack: 我们记录一个 "lastRaiser"，如果轮到 lastRaiser 且没人加注，则结束。
+        // 简单实现：如果是 currentTurnIdx 且 currentBet == highestBet，且不是刚刚加注导致的...
+        
+        // 更简单的逻辑：在 state machine 中，每次加注重置 "已行动人数"。如果已行动人数 == active人数，且注平，则结束。
+        return false; 
+    }
+    
+    // 专门用于判断何时结束下注轮的辅助变量
+    betsSettled() {
+        let active = this.players.filter(p => p.status !== 'folded' && p.status !== 'eliminated' && p.status !== 'allin');
+        if (active.length === 0) return true;
+        let allMatched = active.every(p => p.currentBet === this.highestBet);
+        return allMatched;
+    }
+
+    // 真正的轮次流转控制在 action 里
+    advanceTurn() {
+        // 简单的轮询：找到下一个 active 玩家
+        let original = this.currentTurnIdx;
+        let next = this.getNextActive(this.currentTurnIdx);
+        
+        // 这是一个非常简化的判定：如果绕了一圈回到发起加注的人(或者大家都check了)，就结束
+        // 为了简化代码，我们采用：如果 currentTurnIdx 之后的玩家都已经平注，则进下一阶段
+        // 实际做法：每次有人 Raise，重置“终结者”为加注者。
+        // 如果轮到“终结者”，且注平，则结束。
+        
+        this.currentTurnIdx = next;
+        
+        if (this.betsSettled() && this.currentTurnIdx === this.roundEnder) {
+            this.nextStage();
+        } else {
+            this.processTurn();
+        }
+    }
+
+    nextStage() {
+        this.players.forEach(p => p.currentBet = 0);
+        this.highestBet = 0;
+        this.roundEnder = this.getNextActive(this.dealerIdx); // 下一轮默认从小盲/枪口开始
+        this.currentTurnIdx = this.roundEnder; // 重置行动人
+
+        let activeCount = this.players.filter(p=>p.status!=='folded' && p.status!=='eliminated').length;
+        if(activeCount < 2) {
+            this.showdown();
+            return;
+        }
+
+        if (this.stage === 'preflop') {
+            this.stage = 'flop';
+            this.communityCards.push(this.deck.deal(), this.deck.deal(), this.deck.deal());
+            this.log(`翻牌: ${this.communityCards.join(' ')}`);
+        } else if (this.stage === 'flop') {
+            this.stage = 'turn';
+            this.communityCards.push(this.deck.deal());
+            this.log(`转牌: ${this.communityCards[this.communityCards.length-1]}`);
+        } else if (this.stage === 'turn') {
+            this.stage = 'river';
+            this.communityCards.push(this.deck.deal());
+            this.log(`河牌: ${this.communityCards[this.communityCards.length-1]}`);
+        } else if (this.stage === 'river') {
+            this.showdown();
+            return;
+        }
+        
+        this.updateUI();
+        // 阶段开始时，如果是所有人check，roundEnder 需要转一圈
+        // 这里简化：如果没有人下注，currentTurnIdx 必须走完一圈才能结束
+        // 我们设置 roundEnder 为 dealer 的下一个。如果他又遇到了 roundEnder 且 bet=0，则结束
+        this.processTurn();
+    }
+
+    showdown() {
+        this.stage = 'showdown';
+        document.querySelectorAll('.player').forEach(el => el.classList.remove('active-turn'));
+        
+        let active = this.players.filter(p => p.status !== 'folded' && p.status !== 'eliminated');
+        if (active.length === 0) return;
+
+        let bestPlayer = null;
+        let bestScore = -1;
+
+        let msg = "--- 摊牌 ---\n";
+
+        active.forEach(p => {
+            let fullHand = [...p.hand, ...this.communityCards];
+            let result = evaluateHand(fullHand);
+            let score = result[0] * 10000 + result[1];
+            
+            // 显示手牌
+            this.renderCards(p.id, p.hand, true);
+            
+            let rankName = Object.keys(HandRank)[result[0]];
+            msg += `P${p.id}: ${rankName} \n`;
+
+            if (score > bestScore) {
+                bestScore = score;
+                bestPlayer = p;
+            }
+        });
+
+        this.log(msg);
+        
+        if (bestPlayer) {
+            this.log(`P${bestPlayer.id} 赢得了底池 ${this.pot}!`);
+            bestPlayer.chips += this.pot;
+            document.getElementById(`p${bestPlayer.id}`).classList.add('winner-highlight');
+        }
+
+        this.pot = 0;
+        
+        // 检查破产
+        this.players.forEach(p => {
+            if (p.chips <= 0) {
+                p.chips = 0;
+                p.isEliminated = true;
+                p.status = 'eliminated';
+                this.log(`P${p.id} 已破产退场。`);
+            }
+        });
+
+        this.updateUI();
+        document.getElementById('btn-next').style.display = 'block';
+        this.disableControls(true);
+    }
+
+    // --- Actions ---
+
+    handleAction(player, action, amount=0) {
+        let callAmt = this.highestBet - player.currentBet;
+        
+        if (action === 'fold') {
+            player.status = 'folded';
+            this.log(`P${player.id} 弃牌`);
+        } else if (action === 'call') {
+            this.bet(player.id, callAmt);
+            if (callAmt === 0) this.log(`P${player.id} 过牌`);
+            else this.log(`P${player.id} 跟注 ${callAmt}`);
+        } else if (action === 'raise') {
+            let raiseAmt = callAmt + amount;
+            this.bet(player.id, raiseAmt);
+            this.log(`P${player.id} 加注 ${amount}`);
+            // 既然有人加注，这一轮必须重新跑一圈才能结束（除非大家都call了）
+            this.roundEnder = player.id; 
+        }
+
+        this.updateUI();
+        this.advanceTurn();
+    }
+
+    humanAction(type) {
+        let p = this.players[0];
+        if (type === 'raise') {
+            this.handleAction(p, 'raise', 10); // 简单固定加注10
+        } else {
+            this.handleAction(p, type);
+        }
+    }
+
+    aiAction(player) {
+        // AI 逻辑
+        let callAmt = this.highestBet - player.currentBet;
+        let fullHand = [...player.hand, ...this.communityCards];
+        // 如果还没公牌，只评手牌
+        if (fullHand.length < 5) {
+            // Preflop 简单策略
+            let c1 = player.hand[0].value;
+            let c2 = player.hand[1].value;
+            let isPair = c1 === c2;
+            let highCard = Math.max(c1, c2);
+            
+            // 强牌: 大对子 或 AK/AQ
+            if (isPair && c1 >= 8) this.handleAction(player, 'raise', 10);
+            else if (highCard >= 12 && callAmt <= 10) this.handleAction(player, 'call');
+            else if (callAmt === 0) this.handleAction(player, 'call'); // Check
+            else if (callAmt > 5) this.handleAction(player, 'fold');
+            else this.handleAction(player, 'call');
+        } else {
+            // Postflop 策略
+            let result = evaluateHand(fullHand);
+            let rank = result[0];
+            
+            // rank >= 1 是对子
+            let strength = rank; 
+            
+            // 随机因子
+            let r = Math.random();
+
+            if (strength >= 2) { // 两对或更好
+                if (r > 0.3) this.handleAction(player, 'raise', 10);
+                else this.handleAction(player, 'call');
+            } else if (strength === 1) { // 对子
+                if (callAmt < 20) this.handleAction(player, 'call');
+                else this.handleAction(player, 'fold');
+            } else { // 散牌
+                if (callAmt === 0) this.handleAction(player, 'call');
+                else if (r > 0.9) this.handleAction(player, 'raise', 10); // 诈唬
+                else this.handleAction(player, 'fold');
+            }
+        }
+    }
+
+    // --- UI Helpers ---
+
+    updateUI() {
+        document.getElementById('pot-display').textContent = `Pot: ${this.pot}`;
+        
+        // Render Community
+        let commHtml = this.communityCards.map(c => this.createCardHtml(c)).join('');
+        document.getElementById('community-cards').innerHTML = commHtml;
+
+        // Render Players
+        this.players.forEach(p => {
+            let el = document.getElementById(`p${p.id}`);
+            el.querySelector('.chips').textContent = p.chips;
+            
+            let statusText = '';
+            if (p.status === 'folded') statusText = 'Fold';
+            else if (p.status === 'eliminated') statusText = 'Out';
+            else if (p.currentBet > 0) statusText = `Bet: ${p.currentBet}`;
+            else if (p.id === this.dealerIdx) statusText = 'Dealer';
+            
+            el.querySelector('.status').textContent = statusText;
+            
+            // Dealer button
+            el.querySelector('.dealer-btn').style.display = (this.dealerIdx === p.id) ? 'flex' : 'none';
+
+            // Cards: 只显示人类的牌，或者是 showdown 阶段
+            if (p.hand.length > 0) {
+                if (p.isHuman || this.stage === 'showdown') {
+                    this.renderCards(p.id, p.hand, false);
+                    if (p.status === 'folded') {
+                        el.querySelector('.player-cards').classList.add('folded');
+                    } else {
+                        el.querySelector('.player-cards').classList.remove('folded');
+                    }
+                } else {
+                    // 显示背面
+                    let cardsHtml = `<div class="card back"></div><div class="card back"></div>`;
+                    el.querySelector('.player-cards').innerHTML = cardsHtml;
+                    if (p.status === 'folded') el.querySelector('.player-cards').classList.add('folded');
+                    else el.querySelector('.player-cards').classList.remove('folded');
+                }
+            } else {
+                 el.querySelector('.player-cards').innerHTML = '';
+            }
+            
+            if (p.isEliminated) el.style.opacity = 0.3;
+        });
+    }
+
+    renderCards(pid, cards, forceFaceUp) {
+        let html = cards.map(c => this.createCardHtml(c)).join('');
+        document.getElementById(`p${pid}`).querySelector('.player-cards').innerHTML = html;
+    }
+
+    createCardHtml(card) {
+        return `<div class="card ${card.color}">${card.suit}<br>${card.rank}</div>`;
+    }
+
+    updateControls() {
+        let p = this.players[0];
+        let callAmt = this.highestBet - p.currentBet;
+        
+        document.getElementById('btn-fold').disabled = false;
+        document.getElementById('btn-call').disabled = false;
+        document.getElementById('btn-raise').disabled = (p.chips <= callAmt);
+        
+        document.getElementById('btn-call').textContent = (callAmt === 0) ? "过牌 (Check)" : `跟注 (Call ${callAmt})`;
+    }
+
+    disableControls(disabled) {
+        document.getElementById('btn-fold').disabled = disabled;
+        document.getElementById('btn-call').disabled = disabled;
+        document.getElementById('btn-raise').disabled = disabled;
+    }
+}
+
+// 初始化游戏
+const game = new PokerGame();
+// 第一轮的 roundEnder 设定
+game.roundEnder = 2; // 大盲的下一位 (Preflop)
+
+</script>
+</body>
+</html>
