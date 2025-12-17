@@ -4,11 +4,13 @@ import { useRef, useState, useEffect } from 'react';
 import { motion } from 'framer-motion';
 import Image from 'next/image';
 import { useTheme } from 'next-themes';
+import { useApp } from "@/contexts/AppContext";
 import Clock from '@/components/clocks/jump';
 
 export default function HeroSection() {
   const containerRef = useRef<HTMLDivElement>(null);
   const { theme, resolvedTheme } = useTheme();
+  const { setIsMenuActive } = useApp();
   const [mounted, setMounted] = useState(false);
 
   // 等待客户端挂载后再使用主题
@@ -31,7 +33,7 @@ export default function HeroSection() {
       ref={containerRef}
       className="relative flex-1 w-full flex flex-col items-center justify-center text-center px-4 sm:px-6 lg:px-8 pb-6"
     >
-      <Clock />
+      <Clock onClick={() => setIsMenuActive(true)} className='cursor-can-hover' />
 
       {snakeSvgSrc && (
         <motion.div

@@ -3,7 +3,6 @@
 import { useEffect, useState, useMemo } from "react"
 import { motion } from "framer-motion"
 import { cn } from "@/lib/utils"
-import { useApp } from "@/contexts/AppContext"
 
 const MONTHS = ["JAN", "FEB", "MAR", "APR", "MAY", "JUN", "JUL", "AUG", "SEP", "OCT", "NOV", "DEC"]
 const DAYS = ["SUNDAY", "MONDAY", "TUESDAY", "WEDNESDAY", "THURSDAY", "FRIDAY", "SATURDAY"]
@@ -18,10 +17,10 @@ interface ClockJumpProps {
   size?: string | number
   /** 如果传此值，则为静态展示模式，格式: "10:10:30" 或 Date 对象 */
   staticTime?: string | Date
+  onClick?: () => void
 }
 
-export default function ClockJump({ className, size = "300px", staticTime }: ClockJumpProps) {
-  const { setIsMenuActive } = useApp()
+export default function ClockJump({ className, size = "300px", staticTime, onClick }: ClockJumpProps) {
   const [mounted, setMounted] = useState(false)
 
   // 1. 根据 staticTime 计算初始值
@@ -102,7 +101,8 @@ export default function ClockJump({ className, size = "300px", staticTime }: Clo
       // 这告诉 React：如果服务器时间和客户端时间有微小差异导致文本/属性不同，请忽略警告，直接使用客户端的值
       suppressHydrationWarning
       className={cn(
-        "relative mx-auto rounded-full font-mono select-none transition-colors duration-300 cursor-pointer",
+        "relative mx-auto rounded-full font-mono select-none transition-colors duration-300",
+        onClick ? "cursor-pointer" : "cursor-default",
         "text-[12px]",
         className
       )}
@@ -110,7 +110,7 @@ export default function ClockJump({ className, size = "300px", staticTime }: Clo
         width: size,
         height: size,
       }}
-      onClick={() => setIsMenuActive(true)}
+      onClick={onClick}
     >
       {/* 秒针圈 */}
       {Array.from({ length: 60 }).map((_, i) => (

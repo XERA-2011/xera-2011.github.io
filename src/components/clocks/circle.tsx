@@ -3,13 +3,13 @@
 import React, { useEffect, useRef, useState, useMemo } from "react"
 import { motion } from "framer-motion"
 import { cn } from "@/lib/utils"
-import { useApp } from "@/contexts/AppContext"
 
 interface ClockCircleProps {
   className?: string
   size?: string | number
   /** 如果传此值，则为静态展示模式 */
   staticTime?: string | Date;
+  onClick?: () => void
 }
 
 // 填满容器、间距为0的配置
@@ -20,8 +20,7 @@ const CONFIG = {
   h24: { r: 97, width: 2, color: "stroke-[#999999] dark:stroke-[#666666]", shadow: "drop-shadow-[0_0_2px_rgba(153,153,153,0.4)] dark:drop-shadow-[0_0_2px_rgba(100,100,100,0.4)]" },
 }
 
-export default function ClockCircle({ className, size = "300px", staticTime }: ClockCircleProps) {
-  const { setIsMenuActive } = useApp()
+export default function ClockCircle({ className, size = "300px", staticTime, onClick }: ClockCircleProps) {
   const [mounted, setMounted] = useState(false)
 
   // 动态状态
@@ -137,9 +136,9 @@ export default function ClockCircle({ className, size = "300px", staticTime }: C
   return (
     <Container
       {...containerProps}
-      className={cn("relative mx-auto flex items-center justify-center rounded-full select-none overflow-hidden transition-colors duration-300 cursor-pointer", className)}
+      className={cn("relative mx-auto flex items-center justify-center rounded-full select-none overflow-hidden transition-colors duration-300", onClick ? "cursor-pointer" : "cursor-default", className)}
       style={{ width: size, height: size }}
-      onClick={() => setIsMenuActive(true)}
+      onClick={onClick}
     >
       <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 flex flex-col items-center justify-center z-10 pointer-events-none text-center">
         <div className="text-foreground dark:text-white text-[22px] font-normal tracking-widest mb-1 font-mono drop-shadow-[0_0_20px_rgba(0,0,0,0.5)] dark:drop-shadow-[0_0_20px_rgba(255,255,255,0.9)]">

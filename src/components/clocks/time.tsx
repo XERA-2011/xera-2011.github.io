@@ -2,7 +2,7 @@
 
 import { useEffect, useState, useRef } from 'react';
 import { motion } from 'framer-motion';
-import { useApp } from '@/contexts/AppContext';
+import { cn } from "@/lib/utils";
 
 interface CurrentTime {
   year: number;
@@ -14,12 +14,15 @@ interface CurrentTime {
   milliseconds: number;
 }
 
-export default function ClockTime() {
+interface ClockTimeProps {
+  onClick?: () => void;
+}
+
+export default function ClockTime({ onClick }: ClockTimeProps = {}) {
   const clockRef = useRef<HTMLDivElement>(null);
   const hourHandRef = useRef<HTMLDivElement>(null);
   const minHandRef = useRef<HTMLDivElement>(null);
   const secHandRef = useRef<HTMLDivElement>(null);
-  const { setIsMenuActive } = useApp();
 
   const [currentTime, setCurrentTime] = useState<CurrentTime>({
     year: 0,
@@ -112,8 +115,11 @@ export default function ClockTime() {
         className="flex justify-center"
       >
         <div
-          className="relative w-32 h-32 sm:w-40 sm:h-40 lg:w-48 lg:h-48 cursor-pointer hover:scale-105 transition-transform duration-300"
-          onClick={() => setIsMenuActive(true)}
+          className={cn(
+            "relative w-32 h-32 sm:w-40 sm:h-40 lg:w-48 lg:h-48 transition-transform duration-300",
+            onClick ? "cursor-pointer hover:scale-105" : "cursor-default"
+          )}
+          onClick={onClick}
         >
           <div className="relative w-full h-full flex items-center justify-center cursor-can-hover">
             {/* 时钟表盘 */}

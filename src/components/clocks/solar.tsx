@@ -3,7 +3,6 @@
 import * as React from "react";
 import { motion } from "framer-motion";
 import { cn } from "@/lib/utils";
-import { useApp } from "@/contexts/AppContext";
 
 /**
  * 扩展 React 的 CSSProperties 以支持自定义 CSS 变量
@@ -26,10 +25,10 @@ export interface ClockSolarProps {
    * 如果传入此值，组件将处于静态模式，不执行任何动画。
    */
   staticTime?: string | Date;
+  onClick?: () => void;
 }
 
-export default function ClockSolar({ className, size = "300px", staticTime }: ClockSolarProps) {
-  const { setIsMenuActive } = useApp();
+export default function ClockSolar({ className, size = "300px", staticTime, onClick }: ClockSolarProps) {
   const [mounted, setMounted] = React.useState(false);
 
   // 使用 Ref 获取 DOM 元素 (仅动态模式使用)
@@ -158,14 +157,15 @@ export default function ClockSolar({ className, size = "300px", staticTime }: Cl
     <Container
       {...containerProps}
       className={cn(
-        "relative flex items-center justify-center rounded-full select-none overflow-hidden transition-colors duration-300 cursor-pointer",
+        "relative flex items-center justify-center rounded-full select-none overflow-hidden transition-colors duration-300",
+        onClick ? "cursor-pointer" : "cursor-default",
         className
       )}
       style={{
         width: size,
         height: size,
       }}
-      onClick={() => setIsMenuActive(true)}
+      onClick={onClick}
     >
       {/* 太阳系容器 */}
       <div
