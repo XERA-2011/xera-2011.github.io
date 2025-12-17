@@ -38,7 +38,7 @@ const Nav: React.FC<IndexProps> = ({ setIsActive }) => {
   const isAdmin = !!session?.user?.isAdmin;
 
   return (
-    <div className={styles.nav}>
+    <div onClick={() => setIsActive(false)} className={styles.nav}>
       <motion.div
         variants={height}
         initial="initial"
