@@ -125,7 +125,7 @@ export default function ClockRoulette({ className, staticTime }: ClockRoulettePr
       return (
         <div
           key={i}
-          className="absolute top-1/2 left-1/2 h-3.5 w-0.5 bg-foreground/40 z-5 rounded-full"
+          className="absolute top-1/2 left-1/2 h-3.5 w-0.5 bg-black dark:bg-white z-5 rounded-full"
           style={{
             transform: `translate(-50%, -50%) rotate(${deg}deg) translateY(-${RADIUS}px)`,
           }}
@@ -172,7 +172,7 @@ export default function ClockRoulette({ className, staticTime }: ClockRoulettePr
       }}
     >
       {/* 光环容器 (圆环背景) */}
-      <div className="relative box-border flex h-full w-full items-center justify-center rounded-full border-15 border-foreground/10 bg-transparent">
+      <div className="relative box-border flex h-full w-full items-center justify-center rounded-full border-15 border-transparent bg-transparent">
 
         {/* 中心文字 */}
         <div className="z-1 text-center pointer-events-none flex flex-col items-center">

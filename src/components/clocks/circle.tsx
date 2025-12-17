@@ -145,10 +145,10 @@ export default function ClockCircle({ className, size = "300px", staticTime, onC
       onClick={onClick}
     >
       <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 flex flex-col items-center justify-center z-10 pointer-events-none text-center">
-        <div className="text-foreground dark:text-white text-[22px] font-normal tracking-widest mb-1 font-mono drop-shadow-[0_0_20px_rgba(0,0,0,0.5)] dark:drop-shadow-[0_0_20px_rgba(255,255,255,0.9)]">
+        <div className="text-foreground dark:text-white text-3xl sm:text-4xl font-normal tracking-widest mb-2 font-mono drop-shadow-[0_0_20px_rgba(0,0,0,0.5)] dark:drop-shadow-[0_0_20px_rgba(255,255,255,0.9)]">
           {displayTime || "00:00:00"}
         </div>
-        <div className="text-muted-foreground dark:text-[#d0d0d0] text-[12px] font-semibold tracking-widest font-mono drop-shadow-[0_0_10px_rgba(0,0,0,0.3)] dark:drop-shadow-[0_0_10px_rgba(255,255,255,0.5)]">
+        <div className="text-muted-foreground dark:text-[#d0d0d0] text-sm sm:text-base font-semibold tracking-widest font-mono drop-shadow-[0_0_10px_rgba(0,0,0,0.3)] dark:drop-shadow-[0_0_10px_rgba(255,255,255,0.5)]">
           {displayDate || "2023-01-01"}
         </div>
       </div>
