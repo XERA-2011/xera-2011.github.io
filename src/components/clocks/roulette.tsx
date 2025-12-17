@@ -135,7 +135,7 @@ export default function ClockRoulette({ className, staticTime }: ClockRoulettePr
     });
   }, []);
 
-  if (!mounted && !staticTime) {
+  if (!mounted) {
     return (
       <div className={cn("relative mx-auto h-[300px] w-[300px] flex items-center justify-center bg-card rounded-full", className)}>
         <div className="h-full w-full rounded-full border-15 border-muted/10" />

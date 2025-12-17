@@ -55,7 +55,9 @@ export default function ClockJump({ className, size = "300px", staticTime, onCli
 
   // 防止服务端渲染不一致 (仅动态模式)
   // 如果是动态模式且未挂载，显示占位符
-  if (!mounted && !staticTime) {
+  // 防止服务端渲染不一致 (仅动态模式)
+  // 如果未挂载，显示占位符
+  if (!mounted) {
     return (
       <div
         className={cn("relative flex items-center justify-center rounded-full bg-card", className)}

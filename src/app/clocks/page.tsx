@@ -7,6 +7,7 @@ import ClockJump from '@/components/clocks/jump';
 import ClockRoulette from '@/components/clocks/roulette';
 import ClockSolar from '@/components/clocks/solar';
 import ClockSteampunk from '@/components/clocks/steampunk';
+import ClockClassic from '@/components/clocks/classic';
 
 export default function ClocksPage() {
   usePageTitle('时钟集合');
@@ -51,6 +52,11 @@ export default function ClocksPage() {
           <div className="flex flex-col items-center">
             <h2 className="text-xl font-semibold mb-4">蒸汽朋克时钟</h2>
             <ClockSteampunk staticTime="10:10:30" />
+          </div>
+
+          <div className="flex flex-col items-center">
+            <h2 className="text-xl font-semibold mb-4">经典时钟</h2>
+            <ClockClassic staticTime="10:10:30" />
           </div>
         </div>
       </div>

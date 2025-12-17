@@ -113,7 +113,7 @@ export default function ClockSolar({ className, size = "300px", staticTime, onCl
     return () => cancelAnimationFrame(frameId);
   }, [staticTime]);
 
-  if (!mounted && !staticTime) {
+  if (!mounted) {
     return (
       <div className={cn("flex h-[300px] w-[300px] items-center justify-center overflow-hidden", className)}>
         <div className="h-[200px] w-[200px] rounded-full border border-white/20" />
