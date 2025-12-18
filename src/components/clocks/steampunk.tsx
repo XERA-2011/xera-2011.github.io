@@ -149,24 +149,24 @@ export default function ClockSteampunk({ className, staticTime }: ClockProps) {
       style={{ width: TARGET_SIZE, height: TARGET_SIZE }}>
 
       <div style={{ width: ORIGINAL_SIZE, height: ORIGINAL_SIZE, transform: `scale(${SCALE})`, transformOrigin: "center", flexShrink: 0 }} className="relative">
-        <div className="relative w-[460px] h-[460px] rounded-full">
+        <div className="relative w-115 h-115 rounded-full">
 
           {/* --- 金属外壳 --- */}
           <div
             className="absolute inset-0 rounded-full z-1 border-12 border-[#150f08] shadow-[inset_0_0_10px_rgba(0,0,0,0.8),inset_0_0_0_2px_#221] box-border"
             style={{ background: `conic-gradient(from 145deg, #5e4b35, #8c7048 10%, #ffd700 18%, #8c7048 25%, #5e4b35 40%, #3a2a1a 50%, #5e4b35 60%, #8c7048 75%, #ffd700 85%, #8c7048 90%, #5e4b35)` }}
           >
-            <div className="absolute inset-[15px] rounded-full border border-dashed border-[#3c280a80] shadow-[inset_0_0_20px_#000]" />
+            <div className="absolute inset-3.75 rounded-full border border-dashed border-[#3c280a80] shadow-[inset_0_0_20px_#000]" />
           </div>
 
           {/* --- 表盘 --- */}
-          <div className="absolute inset-[25px] rounded-full z-2 border-2 border-[#5c4305] shadow-[inset_0_0_50px_rgba(0,0,0,1)]"
+          <div className="absolute inset-6.25 rounded-full z-2 border-2 border-[#5c4305] shadow-[inset_0_0_50px_rgba(0,0,0,1)]"
             style={{ background: `radial-gradient(circle, #2b2015 0%, #1a120b 100%), radial-gradient(circle, #2b2015 0%, #100a05 100%)`, backgroundBlendMode: 'normal' }}>
 
             <div className="absolute inset-0 pointer-events-none z-4">{ticks}{numerals}</div>
 
             {/* 机械镂空区 */}
-            <div className="absolute top-1/2 left-1/2 w-[260px] h-[260px] -translate-x-1/2 -translate-y-1/2 rounded-full bg-[#050301] z-3 overflow-hidden shadow-[inset_0_0_30px_#000,0_0_0_1px_#745618,0_0_0_6px_#1a120b]">
+            <div className="absolute top-1/2 left-1/2 w-65 h-65 -translate-x-1/2 -translate-y-1/2 rounded-full bg-[#050301] z-3 overflow-hidden shadow-[inset_0_0_30px_#000,0_0_0_1px_#745618,0_0_0_6px_#1a120b]">
               <svg viewBox="0 0 260 260" className="w-full h-full overflow-visible">
                 <defs>
                   <linearGradient id="brass" x1="0%" y1="0%" x2="100%" y2="100%"><stop offset="0%" stopColor="#edd893" /><stop offset="50%" stopColor="#c5a059" /><stop offset="100%" stopColor="#7a5e28" /></linearGradient>
@@ -183,12 +183,12 @@ export default function ClockSteampunk({ className, staticTime }: ClockProps) {
 
               {/* 指针系统 */}
               <div className="absolute inset-0 z-10 pointer-events-none drop-shadow-[4px_8px_6px_rgba(0,0,0,0.6)]">
-                <div ref={handHourRef} style={getStyle(staticAngles?.h)} className="absolute bottom-1/2 left-1/2 w-4 h-[100px] -ml-2 bg-[#1a1a1a] border-2 border-[#bba060] rounded origin-bottom">
-                  <div className="absolute top-[15px] left-[3px] right-[3px] h-[70px] bg-black border border-[#555]" />
+                <div ref={handHourRef} style={getStyle(staticAngles?.h)} className="absolute bottom-1/2 left-1/2 w-4 h-25 -ml-2 bg-[#1a1a1a] border-2 border-[#bba060] rounded origin-bottom">
+                  <div className="absolute top-3.75 left-0.75 right-0.75 h-17.5 bg-black border border-[#555]" />
                 </div>
-                <div ref={handMinuteRef} style={{ background: 'linear-gradient(to right, #6d4c26, #a0733f, #6d4c26)', ...getStyle(staticAngles?.m) }} className="absolute bottom-1/2 left-1/2 w-1.5 h-[155px] -ml-[3px] rounded-tl-sm rounded-tr-sm rounded-b-[50%] origin-bottom shadow-[inset_0_0_2px_rgba(0,0,0,0.5)]" />
-                <div ref={handSecondRef} style={getStyle(staticAngles?.s)} className="absolute bottom-1/2 left-1/2 w-px h-[180px] -ml-[0.5px] bg-[#ff5252] z-12 shadow-[0_0_4px_rgba(255,82,82,0.6)] origin-bottom">
-                  <div className="absolute -bottom-[50px] -left-[3px] w-1.5 h-10 bg-[#ff5252]" style={{ clipPath: 'polygon(50% 0, 100% 20%, 50% 100%, 0% 20%)' }} />
+                <div ref={handMinuteRef} style={{ background: 'linear-gradient(to right, #6d4c26, #a0733f, #6d4c26)', ...getStyle(staticAngles?.m) }} className="absolute bottom-1/2 left-1/2 w-1.5 h-38.75 -ml-0.75 rounded-tl-sm rounded-tr-sm rounded-b-[50%] origin-bottom shadow-[inset_0_0_2px_rgba(0,0,0,0.5)]" />
+                <div ref={handSecondRef} style={getStyle(staticAngles?.s)} className="absolute bottom-1/2 left-1/2 w-px h-45 -ml-[0.5px] bg-[#ff5252] z-12 shadow-[0_0_4px_rgba(255,82,82,0.6)] origin-bottom">
+                  <div className="absolute -bottom-12.5 -left-0.75 w-1.5 h-10 bg-[#ff5252]" style={{ clipPath: 'polygon(50% 0, 100% 20%, 50% 100%, 0% 20%)' }} />
                 </div>
               </div>
               <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-5 h-5 rounded-full z-20 border border-[#5c4305] shadow-[0_2px_5px_rgba(0,0,0,0.8)]" style={{ background: 'radial-gradient(circle at 30% 30%, #fff, #daa520)' }} />

@@ -86,7 +86,7 @@ const Breadcrumb = () => {
             <React.Fragment key={crumb.href}>
               <BreadcrumbItem className={cn("shrink-0", isVisibleOnMobile ? "" : "hidden md:inline-flex")}>
                 {isLast ? (
-                  <BreadcrumbPage className="font-medium truncate max-w-[120px] sm:max-w-none">{crumb.label}</BreadcrumbPage>
+                  <BreadcrumbPage className="font-medium truncate max-w-30 sm:max-w-none">{crumb.label}</BreadcrumbPage>
                 ) : (
                   <BreadcrumbLink asChild>
                     <Link

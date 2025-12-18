@@ -406,7 +406,7 @@ export default function AssetAllocationPage() {
                     initial={{ opacity: 0, y: -10 }}
                     animate={{ opacity: 1, y: 0 }}
                     exit={{ opacity: 0, y: -10 }}
-                    className="absolute top-full mt-2 left-0 min-w-[280px] bg-card border border-border rounded-lg shadow-2xl z-50 overflow-hidden"
+                    className="absolute top-full mt-2 left-0 min-w-70 bg-card border border-border rounded-lg shadow-2xl z-50 overflow-hidden"
                   >
                     {isLoadingCelebrity ? (
                       <div className="px-4 py-3 text-center text-muted-foreground text-sm flex items-center justify-center gap-2">

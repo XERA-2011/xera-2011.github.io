@@ -122,7 +122,7 @@ export default function TypingSVGPage() {
         >
           <GlowCard className="p-8">
             <h3 className="text-xl font-semibold text-foreground mb-4">实时预览</h3>
-            <div className="bg-secondary border border-border rounded-lg p-6 flex items-center justify-center min-h-[150px]">
+            <div className="bg-secondary border border-border rounded-lg p-6 flex items-center justify-center min-h-37.5">
               {previewUrl && (
                 // eslint-disable-next-line @next/next/no-img-element
                 <img

@@ -190,7 +190,7 @@ export default function RegisterPage() {
                   className="flex-1"
                 />
                 <div className="relative flex items-center gap-2">
-                  <div className="relative h-10 w-[120px] rounded border border-gray-300 dark:border-gray-700 overflow-hidden bg-gray-50 dark:bg-gray-900 flex items-center justify-center">
+                  <div className="relative h-10 w-30 rounded border border-gray-300 dark:border-gray-700 overflow-hidden bg-gray-50 dark:bg-gray-900 flex items-center justify-center">
                     {captchaLoading ? (
                       <div className="animate-spin rounded-full h-5 w-5 border-b-2 border-primary"></div>
                     ) : captchaUrl ? (

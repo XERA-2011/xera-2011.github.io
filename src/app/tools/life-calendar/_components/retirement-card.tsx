@@ -117,7 +117,7 @@ export default function RetirementCard() {
 
   return (
     <Card className={cn(
-      "flex flex-col p-6 text-card-foreground border-border shadow-md h-full min-h-[300px]",
+      "flex flex-col p-6 text-card-foreground border-border shadow-md h-full min-h-75",
       "bg-card"
     )}>
       <div className="flex justify-between items-start mb-6">

@@ -117,7 +117,7 @@ export default function FinancePage() {
         <ScrollReveal delay={0.3}>
           {isLoading && (
             <div className="bg-blue-50 border border-blue-200 text-blue-700 px-4 py-3 rounded-lg relative flex items-center gap-3 max-w-4xl mx-auto mb-8">
-              <Info className="h-5 w-5 flex-shrink-0" />
+              <Info className="h-5 w-5 shrink-0" />
               <div className="text-sm">
                 <strong className="font-bold block sm:inline">正在获取最新市场数据。</strong>
                 <span className="block sm:inline ml-1">由于 API 限制，初次加载可能需要 1-2 分钟，请耐心等待。后续加载将瞬间完成。</span>
@@ -127,7 +127,7 @@ export default function FinancePage() {
 
           {error && (
             <div className="bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded-lg relative flex items-center gap-3 max-w-4xl mx-auto mb-8">
-              <AlertCircle className="h-5 w-5 flex-shrink-0" />
+              <AlertCircle className="h-5 w-5 shrink-0" />
               <div>
                 <strong className="font-bold">数据获取失败:</strong>
                 <span className="block sm:inline ml-2">{error}</span>
@@ -147,7 +147,7 @@ export default function FinancePage() {
                 <Table>
                   <TableHeader>
                     <TableRow>
-                      <TableHead className="w-[100px]">代码</TableHead>
+                      <TableHead className="w-25">代码</TableHead>
                       <TableHead>公司</TableHead>
                       <TableHead>当前股价</TableHead>
                       <TableHead>市盈率(TTM)</TableHead>

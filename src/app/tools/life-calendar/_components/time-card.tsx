@@ -28,7 +28,7 @@ export default function TimeCard() {
 
   return (
     <Card className={cn(
-      "flex flex-col items-center justify-center p-6 text-card-foreground border-border shadow-md h-full min-h-[300px]",
+      "flex flex-col items-center justify-center p-6 text-card-foreground border-border shadow-md h-full min-h-75",
       "bg-card relative overflow-hidden"
     )}>
       <div className="relative z-10 text-center space-y-4">
