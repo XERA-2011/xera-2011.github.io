@@ -22,8 +22,8 @@ export const links: Link[] = [
     href: '/github',
   },
   {
-    title: 'Labs',
-    href: '/labs',
+    title: 'demo',
+    href: '/demo',
   },
   {
     title: 'Tools',

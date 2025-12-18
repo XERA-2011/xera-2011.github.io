@@ -5,16 +5,16 @@ import ScrollReveal from '@/components/scroll-reveal';
 import GlowCardList, { GlowCardItem } from '@/components/ui/glow-cardList';
 import { usePageTitle } from '@/hooks/use-page-title';
 
-const labsData: GlowCardItem[] = [
+const demoData: GlowCardItem[] = [
   {
     id: 'endless',
     title: 'Endless',
-    href: '/labs/endless'
+    href: '/demo/endless'
   },
   {
     id: 'solar-skirmish',
     title: 'Solar Skirmish',
-    href: '/labs/solar-skirmish'
+    href: '/demo/solar-skirmish'
   },
   {
     id: 'texas-holdem',
@@ -38,8 +38,8 @@ const labsData: GlowCardItem[] = [
   },
 ];
 
-export default function LabsPage() {
-  usePageTitle('实验项目');
+export default function DemoPage() {
+  usePageTitle('演示项目');
 
   return (
     <div className="relative w-full min-h-screen pt-32 pb-20">
@@ -53,14 +53,13 @@ export default function LabsPage() {
           viewport={{ once: true }}
         >
           <h1 className="text-3xl sm:text-4xl lg:text-5xl font-bold mb-4">
-            实验项目
+            演示项目
           </h1>
         </motion.div>
 
-        {/* Labs Grid */}
         <ScrollReveal delay={0.3}>
           <GlowCardList
-            items={labsData}
+            items={demoData}
             columns={3}
             gap="lg"
             className="lg:gap-8 max-w-6xl mx-auto"
