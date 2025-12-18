@@ -1,6 +1,6 @@
 "use client"
 
-import { useState } from "react"
+import { useState, useEffect } from "react"
 import { motion } from "framer-motion"
 import { usePageTitle } from "@/hooks/use-page-title"
 import jsyaml from "js-yaml"
@@ -51,6 +51,26 @@ export default function IpCheckPage() {
   const [error, setError] = useState<string | null>(null)
   const [subscriptionInfo, setSubscriptionInfo] = useState<{ count: number } | null>(null)
   const [reportIp, setReportIp] = useState<string | null>(null)
+  const [outboundIpInfo, setOutboundIpInfo] = useState<{ ip: string, source: string } | null>(null)
+  const [outboundIpLoading, setOutboundIpLoading] = useState(false)
+
+  useEffect(() => {
+    const fetchOutboundIp = async () => {
+      setOutboundIpLoading(true)
+      try {
+        const res = await fetch('/api/outbound-ip')
+        if (res.ok) {
+          const data = await res.json()
+          setOutboundIpInfo({ ip: data.outboundIp, source: data.source })
+        }
+      } catch (e) {
+        console.error("Failed to fetch outbound IP", e)
+      } finally {
+        setOutboundIpLoading(false)
+      }
+    }
+    fetchOutboundIp()
+  }, [])
 
   const fetchSubscription = async () => {
     if (!url) return
@@ -246,9 +266,32 @@ export default function IpCheckPage() {
           className="space-y-8"
         >
           <Card>
-            <CardHeader>
-              <CardTitle>Subscription</CardTitle>
-              <CardDescription>Enter your subscription URL (YAML/Base64).</CardDescription>
+            <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-4">
+              <div className="space-y-1">
+                <CardTitle>Subscription</CardTitle>
+                <CardDescription>Enter your subscription URL (YAML/Base64).</CardDescription>
+              </div>
+              <div
+                className={`flex items-center gap-2 bg-secondary/30 px-3 py-1.5 rounded-md border border-border/50 transition-colors ${outboundIpInfo ? 'cursor-pointer hover:bg-secondary/50' : ''}`}
+                onClick={() => outboundIpInfo && setReportIp(outboundIpInfo.ip)}
+              >
+                <div className="flex items-center gap-1.5 text-xs text-muted-foreground border-r border-border/50 pr-2 mr-1">
+                  <Server className="h-3.5 w-3.5" />
+                  <span className="hidden sm:inline">Outbound</span>
+                </div>
+                {outboundIpLoading ? (
+                  <Loader2 className="h-3.5 w-3.5 animate-spin text-muted-foreground" />
+                ) : outboundIpInfo ? (
+                  <div className="flex items-center gap-2">
+                    <span className="font-mono text-sm font-medium cursor-can-hover">{outboundIpInfo.ip}</span>
+                    <span className="text-[10px] text-muted-foreground hidden sm:inline-block" title={`Source: ${outboundIpInfo.source}`}>
+                      ({outboundIpInfo.source})
+                    </span>
+                  </div>
+                ) : (
+                  <span className="text-xs text-muted-foreground">Failed</span>
+                )}
+              </div>
             </CardHeader>
             <CardContent className="space-y-4">
               <div className="flex gap-2">
