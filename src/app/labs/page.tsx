@@ -19,7 +19,7 @@ const labsData: GlowCardItem[] = [
   {
     id: 'texas-holdem',
     title: 'Texas Hold\'em',
-    href: '/labs/texas-holdem'
+    href: '/demo/texas-holdem.html'
   },
   {
     id: 'x-logo',
