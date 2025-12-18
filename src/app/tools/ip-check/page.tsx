@@ -19,6 +19,13 @@ import {
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card"
 import { Badge } from "@/components/ui/badge"
 import { Alert, AlertDescription, AlertTitle } from "@/components/ui/alert"
+import {
+  Dialog,
+  DialogContent,
+  DialogDescription,
+  DialogHeader,
+  DialogTitle,
+} from "@/components/ui/dialog"
 
 interface ProxyNode {
   name: string
@@ -31,8 +38,8 @@ interface ProxyNode {
   ip?: string
   location?: string
   isp?: string
-  riskScore?: number | "N/A"
-  riskLevel?: "Low" | "Medium" | "High" | "Unknown"
+  org?: string
+  as?: string
   checking?: boolean
 }
 
@@ -43,6 +50,7 @@ export default function IpCheckPage() {
   const [nodes, setNodes] = useState<ProxyNode[]>([])
   const [error, setError] = useState<string | null>(null)
   const [subscriptionInfo, setSubscriptionInfo] = useState<{ count: number } | null>(null)
+  const [reportIp, setReportIp] = useState<string | null>(null)
 
   const fetchSubscription = async () => {
     if (!url) return
@@ -93,7 +101,6 @@ export default function IpCheckPage() {
         type: p.type,
         server: p.server,
         port: p.port,
-        riskLevel: "Unknown",
         checking: false
       }))
 
@@ -140,14 +147,41 @@ export default function IpCheckPage() {
       }
 
       // Using a secure proxy for the check (Direct IP check)
-      const response = await fetch(`https://ipwho.is/${ipToCheck}`)
-      const data = await response.json()
+      // Use local server-side proxy to bypass CORS
+      // Add fallback to ip-api.com if ipwho.is fails (e.g. rate limit)
+      let data;
+      try {
+        const response = await fetch(`/api/proxy?url=${encodeURIComponent(`https://ipwho.is/${ipToCheck}`)}`)
+        data = await response.json()
 
-      if (!data.success) {
-        throw new Error(data.message)
+        if (!data.success) {
+          throw new Error(data.message || "ipwho.is failed")
+        }
+      } catch (primaryError) {
+        console.warn("Primary IP API failed, trying fallback:", primaryError)
+        // Fallback to ip-api.com (http only, so must use proxy)
+        const fallbackResponse = await fetch(`/api/proxy?url=${encodeURIComponent(`http://ip-api.com/json/${ipToCheck}`)}`)
+        const fallbackData = await fallbackResponse.json()
+
+        if (fallbackData.status !== "success") {
+          throw new Error(fallbackData.message || "All IP APIs failed")
+        }
+
+        // Normalize data to match ipwho.is structure partially
+        data = {
+          success: true,
+          ip: fallbackData.query,
+          city: fallbackData.city,
+          country: fallbackData.country,
+          isp: fallbackData.isp,
+          org: fallbackData.org,
+          as: fallbackData.as,
+          connection: {
+            isp: fallbackData.isp,
+            org: fallbackData.org
+          }
+        }
       }
-
-      const risk = "Unknown"; // Placeholder as we don't have a real risk API without key
 
       setNodes(prev => {
         const newNodes = [...prev]
@@ -156,8 +190,8 @@ export default function IpCheckPage() {
           ip: data.ip,
           location: `${data.city}, ${data.country}`,
           isp: data.connection?.isp || data.isp,
-          riskLevel: "Low", // Mocking risk
-          riskScore: 0,
+          org: data.connection?.org || data.org,
+          as: data.as,
           checking: false
         }
         return newNodes
@@ -169,7 +203,6 @@ export default function IpCheckPage() {
         newNodes[index] = {
           ...newNodes[index],
           checking: false,
-          riskLevel: "Unknown",
           // Show error in ISP or Location field for visibility if needed
           location: "Check Failed"
         }
@@ -244,7 +277,7 @@ export default function IpCheckPage() {
                     <Check className="h-4 w-4 text-green-500" />
                     <span className="font-medium">Loaded {subscriptionInfo.count} nodes</span>
                   </div>
-                  <Button variant="outline" size="sm" onClick={checkAll}>
+                  <Button className="cursor-can-hover" variant="outline" size="sm" onClick={checkAll}>
                     Check All IPs
                   </Button>
                 </div>
@@ -263,11 +296,11 @@ export default function IpCheckPage() {
                     <TableRow>
                       <TableHead className="w-12.5">#</TableHead>
                       <TableHead>Name</TableHead>
-                      <TableHead>Type</TableHead>
+                      <TableHead className="w-20">Type</TableHead>
                       <TableHead>Server</TableHead>
                       <TableHead>IP Info</TableHead>
-                      <TableHead>Risk</TableHead>
-                      <TableHead className="text-right">Action</TableHead>
+                      <TableHead>Details</TableHead>
+                      <TableHead className="text-right w-20">Action</TableHead>
                     </TableRow>
                   </TableHeader>
                   <TableBody>
@@ -276,7 +309,7 @@ export default function IpCheckPage() {
                         <TableCell>{i + 1}</TableCell>
                         <TableCell className="font-medium">{node.name}</TableCell>
                         <TableCell>
-                          <Badge variant="outline">{node.type}</Badge>
+                          <Badge variant="outline" className="px-1.5 py-0 text-[10px] h-5 font-mono uppercase">{node.type}</Badge>
                         </TableCell>
                         <TableCell className="max-w-50 truncate" title={node.server}>
                           {node.server}
@@ -288,27 +321,45 @@ export default function IpCheckPage() {
                                 <Globe className="h-3 w-3" />
                                 {node.location}
                               </div>
-                              <div className="flex items-center gap-1 text-muted-foreground">
-                                <Server className="h-3 w-3" />
-                                {node.isp}
-                              </div>
-                              <div className="font-mono text-xs text-muted-foreground">{node.ip}</div>
+                              <span
+                                className="inline-block font-mono text-xs text-muted-foreground hover:text-primary hover:underline cursor-pointer cursor-can-hover"
+                                onClick={() => setReportIp(node.ip || null)}
+                              >
+                                {node.ip}
+                              </span>
                             </div>
                           ) : (
                             <span className="text-muted-foreground">-</span>
                           )}
                         </TableCell>
                         <TableCell>
-                          {node.riskLevel !== "Unknown" ? (
-                            <Badge variant={node.riskLevel === "Low" ? "default" : "destructive"}>
-                              {node.riskLevel}
-                            </Badge>
+                          {node.ip ? (
+                            <div className="text-xs space-y-1 max-w-50">
+                              {node.isp && (
+                                <div className="flex items-start gap-1 text-muted-foreground" title="ISP">
+                                  <Server className="h-3 w-3 mt-0.5 shrink-0" />
+                                  <span className="truncate">{node.isp}</span>
+                                </div>
+                              )}
+                              {node.org && node.org !== node.isp && (
+                                <div className="flex items-start gap-1 text-muted-foreground" title="Organization">
+                                  <Shield className="h-3 w-3 mt-0.5 shrink-0" />
+                                  <span className="truncate">{node.org}</span>
+                                </div>
+                              )}
+                              {node.as && (
+                                <div className="font-mono text-[10px] text-muted-foreground/70 truncate" title="AS Number">
+                                  {node.as}
+                                </div>
+                              )}
+                            </div>
                           ) : (
-                            <span className="text-muted-foreground text-sm">N/A</span>
+                            <span className="text-muted-foreground text-sm">-</span>
                           )}
                         </TableCell>
                         <TableCell className="text-right">
                           <Button
+                            className="cursor-can-hover"
                             variant="ghost"
                             size="sm"
                             onClick={() => checkNodeIP(i)}
@@ -326,6 +377,33 @@ export default function IpCheckPage() {
           )}
         </motion.div>
       </div>
-    </div>
+
+      <Dialog open={!!reportIp} onOpenChange={(open) => !open && setReportIp(null)}>
+        <DialogContent className="sm:max-w-md">
+          <DialogHeader>
+            <DialogTitle>IP Reputation Check</DialogTitle>
+            <DialogDescription>
+              Select a service to check details for <span className="font-mono font-bold text-foreground">{reportIp}</span>
+            </DialogDescription>
+          </DialogHeader>
+          <div className="flex flex-col gap-3 py-4">
+            <Button variant="outline" className="w-full justify-start h-auto py-3" onClick={() => window.open(`https://ippure.com/?ip=${reportIp}`, '_blank')}>
+              <Shield className="mr-3 h-5 w-5 text-blue-500" />
+              <div className="flex flex-col items-start">
+                <span className="font-medium">IPPure</span>
+                <span className="text-xs text-muted-foreground">Check IP purity and risk score</span>
+              </div>
+            </Button>
+            <Button variant="outline" className="w-full justify-start h-auto py-3" onClick={() => window.open(`https://www.ping0.cc/ip/${reportIp}`, '_blank')}>
+              <Globe className="mr-3 h-5 w-5 text-green-500" />
+              <div className="flex flex-col items-start">
+                <span className="font-medium">Ping0.cc</span>
+                <span className="text-xs text-muted-foreground">Check IP location and ping</span>
+              </div>
+            </Button>
+          </div>
+        </DialogContent>
+      </Dialog>
+    </div >
   )
 }
