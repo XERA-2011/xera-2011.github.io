@@ -26,6 +26,11 @@ const toolsData: GlowCardItem[] = [
     title: "Gemini",
     href: "/tools/gemini",
   },
+  {
+    id: "ip-check",
+    title: "IP 检测",
+    href: "/tools/ip-check",
+  },
 ];
 
 export default function ToolsPage() {
