@@ -70,18 +70,38 @@ function ItemCard({ item, index }: { item: GlowCardItem; index: number }) {
       viewport={{ once: true }}
       className="h-full"
     >
-      <Link href={item.href} className="block h-full no-underline">
-        <GlowCard
-          spread={80}
-          className="rounded-xl transition duration-300 group h-full overflow-hidden hover:bg-accent"
+      {item.href.endsWith('.html') || item.href.startsWith('http') ? (
+        <a
+          href={item.href}
+          className="block h-full no-underline"
+          target={item.href.startsWith('http') ? "_blank" : undefined}
+          rel={item.href.startsWith('http') ? "noopener noreferrer" : undefined}
         >
-          <div className="relative text-center p-6 h-full flex items-center justify-center">
-            <div className="text-xl font-bold group-hover:text-accent-foreground transition-colors duration-300">
-              {item.title}
+          <GlowCard
+            spread={80}
+            className="rounded-xl transition duration-300 group h-full overflow-hidden hover:bg-accent"
+          >
+            <div className="relative text-center p-6 h-full flex items-center justify-center">
+              <div className="text-xl font-bold group-hover:text-accent-foreground transition-colors duration-300">
+                {item.title}
+              </div>
             </div>
-          </div>
-        </GlowCard>
-      </Link>
+          </GlowCard>
+        </a>
+      ) : (
+        <Link href={item.href} className="block h-full no-underline">
+          <GlowCard
+            spread={80}
+            className="rounded-xl transition duration-300 group h-full overflow-hidden hover:bg-accent"
+          >
+            <div className="relative text-center p-6 h-full flex items-center justify-center">
+              <div className="text-xl font-bold group-hover:text-accent-foreground transition-colors duration-300">
+                {item.title}
+              </div>
+            </div>
+          </GlowCard>
+        </Link>
+      )}
     </motion.div>
   );
 }
