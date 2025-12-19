@@ -16,6 +16,18 @@ export function Player({ player, isActiveTurn, isDealer, gameStage, className = 
 
   return (
     <div className={`absolute flex flex-col items-center transition-all duration-300 ${className}`}>
+
+      {/* Speech Bubble */}
+      {player.currentSpeech && (
+        <div className="absolute -top-10 left-1/2 -translate-x-1/2 whitespace-nowrap z-50 animate-in fade-in slide-in-from-bottom-2 duration-300">
+          <div className="relative bg-white text-black text-xs font-bold px-3 py-1.5 rounded-xl shadow-lg border border-gray-200">
+            {player.currentSpeech}
+            {/* Triangle */}
+            <div className="absolute bottom-[-4px] left-1/2 -translate-x-1/2 w-2 h-2 bg-white rotate-45 border-b border-r border-gray-200"></div>
+          </div>
+        </div>
+      )}
+
       {/* Player Info Box */}
       <div
         className={`
@@ -27,7 +39,9 @@ export function Player({ player, isActiveTurn, isDealer, gameStage, className = 
           ${player.isEliminated ? 'opacity-50 grayscale' : ''}
         `}
       >
-        <div className="font-bold truncate max-w-[60px] sm:max-w-none mx-auto">{player.isHuman ? 'You' : `P${player.id}`}</div>
+        <div className="font-bold truncate max-w-[60px] sm:max-w-none mx-auto text-[9px] sm:text-xs">
+          {player.name}
+        </div>
         <div className="text-emerald-400 font-mono leading-none">${player.chips}</div>
 
         {/* Status Badge */}
