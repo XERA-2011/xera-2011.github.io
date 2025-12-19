@@ -25,22 +25,13 @@ export default function TexasHoldemPage() {
   const canRaise = human.chips > callAmount;
 
   return (
-    <div className="h-[100dvh] w-full bg-neutral-950 text-white selection:bg-orange-500 selection:text-white overflow-hidden flex flex-col">
+    <div className="w-full h-[100dvh] text-white selection:bg-orange-500 selection:text-white overflow-hidden flex flex-col">
 
       {/* Header Area - Compact */}
-      <div className="flex-none p-2 sm:p-4 flex justify-between items-center bg-gradient-to-b from-neutral-900/80 to-transparent z-50">
-        <div>
-          <h1 className="text-xl sm:text-2xl font-bold bg-gradient-to-r from-yellow-200 to-yellow-600 bg-clip-text text-transparent">
-            Texas Hold'em
-          </h1>
-        </div>
-
-        <div className="flex gap-4">
-          {/* Desktop Log Placeholder or Stats */}
-          <div className="hidden md:block text-xs text-gray-500">
-            {gameState && `Blind: $5/$10 | Pot: $${gameState.pot}`}
-          </div>
-        </div>
+      <div className="flex-none pt-24 px-4 pb-4 lg:p-10 flex justify-center items-center">
+        <h1 className="text-3xl sm:text-4xl lg:text-5xl font-bold bg-gradient-to-r from-yellow-200 to-yellow-600 bg-clip-text text-transparent drop-shadow-lg">
+          Texas Hold'em
+        </h1>
       </div>
 
       {/* Main Game Area - Flex Grow to take available space */}
@@ -59,19 +50,17 @@ export default function TexasHoldemPage() {
           />
         </div>
 
-        {/* Floating Log for Desktop (Top Right or Absolute) */}
-        <div className="hidden md:block absolute top-4 right-4 w-64 h-48 pointer-events-none opacity-80">
+        {/* Desktop Log - Side Panel (Left, Absolute) */}
+        {/* Absolute positioning ensures it doesn't affect the table layout */}
+        <div className="hidden lg:block absolute left-4 top-1/2 -translate-y-1/2 w-80 h-[50vh] max-h-[400px] z-10 opacity-80">
           <GameLog logs={logs} />
         </div>
       </div>
 
       {/* Bottom Controls Area */}
       <div className="flex-none pb-safe mb-2 w-full px-2 sm:mb-4">
-        {/* Mobile Log (Brief) - overlap or simple 1-line? 
-             Actually, let's put mobile log above controls if needed, or overlay. 
-             For now, keep it simple.
-         */}
-        <div className="md:hidden w-full max-h-24 overflow-y-auto mb-2 opacity-70 text-[10px]">
+        {/* Mobile/Tablet Log (Brief) - visible below lg */}
+        <div className="lg:hidden w-full max-h-32 overflow-y-auto mb-2 opacity-70 text-[10px]">
           <GameLog logs={logs} />
         </div>
 

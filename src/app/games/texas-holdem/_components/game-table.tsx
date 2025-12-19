@@ -54,7 +54,7 @@ export function GameTable({ players, communityCards, pot, dealerIdx, currentTurn
 
         {/* Pot Display */}
         <div className="absolute top-[35%] left-1/2 -translate-x-1/2 -translate-y-1/2 z-10">
-          <div className="px-4 py-1.5 bg-black/40 rounded-full border border-white/10 text-yellow-400 font-bold font-mono text-sm sm:text-base shadow-sm backdrop-blur-sm">
+          <div className="px-4 py-1.5 bg-black/40 rounded-full border border-white/10 text-yellow-400 font-bold font-mono text-sm sm:text-base md:text-lg lg:text-xl shadow-sm backdrop-blur-sm">
             Pot: ${pot}
           </div>
         </div>
@@ -70,7 +70,7 @@ export function GameTable({ players, communityCards, pot, dealerIdx, currentTurn
         </div>
 
         {/* Brand/Logo (Optional) */}
-        <div className="absolute bottom-[25%] left-1/2 -translate-x-1/2 text-white/10 font-bold tracking-widest pointer-events-none select-none text-xl sm:text-2xl">
+        <div className="absolute bottom-[25%] left-1/2 -translate-x-1/2 text-white/10 font-bold tracking-widest pointer-events-none select-none text-xl sm:text-2xl md:text-3xl lg:text-4xl">
           TEXAS HOLD'EM
         </div>
       </div>

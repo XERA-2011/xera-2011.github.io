@@ -35,7 +35,7 @@ export function GameLog({ logs }: LogProps) {
     <div className="w-full flex flex-col bg-black/40 border border-white/10 rounded-lg backdrop-blur-sm">
       {/* Header */}
       <div className="flex items-center justify-between px-2 py-1 border-b border-white/10 bg-white/5">
-        <span className="text-xs font-bold text-gray-400">Game Log</span>
+        <span className="text-xs md:text-sm font-bold text-gray-400">Game Log</span>
         <button
           onClick={handleCopy}
           className="text-[10px] bg-white/10 hover:bg-white/20 text-gray-300 px-2 py-0.5 rounded transition-colors"
@@ -48,7 +48,7 @@ export function GameLog({ logs }: LogProps) {
       {/* Log Content */}
       <div
         ref={scrollRef}
-        className="h-24 sm:h-36 overflow-y-auto p-2 font-mono text-xs text-gray-300 scrollbar-thin scrollbar-thumb-gray-700 scrollbar-track-transparent"
+        className="h-24 sm:h-36 overflow-y-auto p-2 font-mono text-xs md:text-sm text-gray-300 scrollbar-thin scrollbar-thumb-gray-700 scrollbar-track-transparent"
       >
         {logs.length === 0 && <div className="text-center text-gray-500 italic">Game log...</div>}
         {logs.map((log) => (

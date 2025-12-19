@@ -31,7 +31,10 @@ export function Player({ player, isActiveTurn, isDealer, gameStage, className = 
       {/* Player Info Box */}
       <div
         className={`
-          relative mb-1 px-1.5 py-0.5 sm:px-2 sm:py-1 rounded border text-[10px] sm:text-xs text-center min-w-[60px] sm:min-w-[80px]
+          relative mb-1 px-1.5 py-0.5 sm:px-2 sm:py-1 rounded border 
+          text-[10px] sm:text-xs md:text-sm lg:text-base 
+          text-center 
+          min-w-[60px] sm:min-w-[80px] md:min-w-[100px] lg:min-w-[120px]
           transition-colors duration-300
           ${isActiveTurn ? 'bg-orange-600 border-orange-400 scale-105 z-20 shadow-lg text-white' : ''}
           ${isWinner ? 'bg-yellow-900/80 border-yellow-400 shadow-[0_0_15px_rgba(234,179,8,0.5)] z-20 text-yellow-100' : ''}
@@ -39,28 +42,28 @@ export function Player({ player, isActiveTurn, isDealer, gameStage, className = 
           ${player.isEliminated ? 'opacity-50 grayscale' : ''}
         `}
       >
-        <div className="font-bold truncate max-w-[60px] sm:max-w-none mx-auto text-[9px] sm:text-xs">
+        <div className="font-bold truncate max-w-[60px] sm:max-w-none mx-auto text-[9px] sm:text-xs md:text-sm lg:text-base">
           {player.name}
         </div>
-        <div className="text-emerald-400 font-mono leading-none">${player.chips}</div>
+        <div className="text-emerald-400 font-mono leading-none md:text-lg">${player.chips}</div>
 
         {/* Status Badge */}
         {player.status !== 'active' && (
-          <div className="text-[9px] sm:text-[10px] uppercase font-bold text-slate-400 mt-0.5 leading-none">
+          <div className="text-[9px] sm:text-[10px] md:text-xs lg:text-sm uppercase font-bold text-slate-400 mt-0.5 leading-none">
             {player.status === 'folded' && 'Fold'}
             {player.status === 'allin' && <span className="text-red-400">All-in</span>}
             {player.status === 'eliminated' && 'Out'}
           </div>
         )}
         {player.currentBet > 0 && player.status !== 'folded' && (
-          <div className="text-[9px] sm:text-[10px] text-blue-300 font-bold leading-none">
+          <div className="text-[9px] sm:text-[10px] md:text-xs lg:text-sm text-blue-300 font-bold leading-none">
             ${player.currentBet}
           </div>
         )}
 
         {/* Dealer Button */}
         {isDealer && (
-          <div className="absolute -top-1.5 -right-1.5 sm:-top-2 sm:-right-2 w-4 h-4 sm:w-5 sm:h-5 rounded-full bg-white text-black font-bold text-[8px] sm:text-[10px] flex items-center justify-center border border-gray-400 shadow-sm z-30">
+          <div className="absolute -top-1.5 -right-1.5 sm:-top-2 sm:-right-2 md:-top-3 md:-right-3 w-4 h-4 sm:w-5 sm:h-5 md:w-6 md:h-6 rounded-full bg-white text-black font-bold text-[8px] sm:text-[10px] md:text-xs flex items-center justify-center border border-gray-400 shadow-sm z-30">
             D
           </div>
         )}
