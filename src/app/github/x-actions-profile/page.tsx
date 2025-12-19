@@ -1,12 +1,29 @@
 'use client';
 
 import { motion } from 'framer-motion';
+import { useEffect, useState } from 'react';
+import Image from 'next/image';
+import { useTheme } from 'next-themes';
 import { usePageTitle } from '@/hooks/use-page-title';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 import { GithubIcon } from '@/components/icons/github-icon';
 
 export default function XActionsProfilePage() {
   usePageTitle('X Actions Profile');
+  const { theme, resolvedTheme } = useTheme();
+  const [mounted, setMounted] = useState(false);
+
+  useEffect(() => {
+    setMounted(true);
+  }, []);
+
+  const getThemeSrc = (name: string) => {
+    const currentTheme = mounted ? (resolvedTheme || theme || 'dark') : 'dark';
+    const filename = `${name}-${currentTheme === 'light' ? 'light' : 'dark'}.svg`;
+    return `/api/redirect?url=${encodeURIComponent(
+      `https://cdn.jsdelivr.net/gh/XERA-2011/x-actions@output/${filename}`
+    )}`;
+  };
 
   return (
     <div className="relative w-full min-h-screen pt-32 pb-20">
@@ -45,10 +62,48 @@ export default function XActionsProfilePage() {
                 </a>
               </CardDescription>
             </CardHeader>
-            <CardContent>
-              <div className="flex flex-col items-center justify-center py-12 text-center text-muted-foreground">
-                <p>Markdown 内容显示已移除。</p>
-                <p className="mt-2 text-sm">请点击上方链接前往 GitHub 查看详细文档。</p>
+            <CardContent className="space-y-8">
+              {/* Snake Animation */}
+              <div className="flex justify-center">
+                <Image
+                  alt="github-snake"
+                  src={getThemeSrc('snake')}
+                  width={800}
+                  height={200}
+                  className="w-full max-w-3xl h-auto"
+                  style={{ width: "auto", height: "auto" }}
+                  unoptimized
+                  priority
+                />
+              </div>
+
+              {/* Language Stats */}
+              <div className="flex flex-wrap items-center justify-center gap-4">
+                {['top-langs-donut', 'top-langs-cloud', 'top-langs-compact', 'top-langs'].map((name) => (
+                  <Image
+                    key={name}
+                    alt={name}
+                    src={getThemeSrc(name)}
+                    width={400}
+                    height={300}
+                    className="h-auto max-w-full object-contain"
+                    style={{ width: "auto", height: "auto" }}
+                    unoptimized
+                  />
+                ))}
+              </div>
+
+              {/* General Stats */}
+              <div className="flex justify-center">
+                <Image
+                  alt="github-stats"
+                  src={getThemeSrc('stats')}
+                  width={800}
+                  height={400}
+                  className="w-full max-w-3xl h-auto"
+                  style={{ width: "auto", height: "auto" }}
+                  unoptimized
+                />
               </div>
             </CardContent>
           </Card>
