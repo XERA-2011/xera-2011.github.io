@@ -4,9 +4,10 @@ import { useState, useCallback, useEffect } from 'react';
 import { motion } from 'framer-motion';
 import Image from 'next/image';
 import { cn } from '@/lib/utils';
+import { RefreshCw } from 'lucide-react';
+import { useTheme } from 'next-themes';
 
 interface JokeCardProps {
-  theme?: string;
   className?: string;
   showControls?: boolean;
 }
@@ -16,11 +17,10 @@ interface JokeCardProps {
  * 显示来自 API 的随机编程笑话
  */
 export default function JokeCard({
-  theme = 'default',
   className,
   showControls = true,
 }: JokeCardProps) {
-  const [currentTheme, setCurrentTheme] = useState(theme);
+  const { resolvedTheme } = useTheme();
   const [refreshKey, setRefreshKey] = useState(0);
   const [isLoading, setIsLoading] = useState(false);
   const [isMounted, setIsMounted] = useState(false);
@@ -29,12 +29,6 @@ export default function JokeCard({
   useEffect(() => {
     setIsMounted(true);
   }, []);
-
-  // 可用主题列表
-  const themes = [
-    'default', 'random', 'radical', 'merko', 'gruvbox', 'tokyonight', 'onedark',
-    'cobalt', 'synthwave', 'dracula', 'monokai', 'react', 'vue-dark', 'nightowl',
-  ];
 
   // 刷新笑话
   const refreshJoke = useCallback(() => {
@@ -47,12 +41,9 @@ export default function JokeCard({
   // 获取笑话图片 URL
   const getJokeUrl = useCallback(() => {
     if (!isMounted) return '';
-    const params = new URLSearchParams({
-      theme: currentTheme,
-    });
-    // 添加刷新 key 来强制刷新
-    return `/api/github/joke?${params.toString()}&r=${refreshKey}`;
-  }, [currentTheme, refreshKey, isMounted]);
+    // 只支持 width / height 传参，此处为了预览暂不传宽高，只传刷新 key
+    return `/api/github/joke?r=${refreshKey}`;
+  }, [refreshKey, isMounted]);
 
   return (
     <motion.div
@@ -63,40 +54,19 @@ export default function JokeCard({
     >
       {/* 控制面板 */}
       {showControls && (
-        <div className="flex flex-wrap items-center gap-3">
-          {/* 主题选择器 */}
-          <div className="flex items-center gap-2">
-            <label
-              htmlFor="theme-select"
-              className="text-sm font-medium text-theme-white"
-            >
-              主题:
-            </label>
-            <select
-              id="theme-select"
-              value={currentTheme}
-              onChange={(e) => setCurrentTheme(e.target.value)}
-              className="cursor-can-hover rounded-md border border-theme-white/20 bg-theme-black/50 px-3 py-1.5 text-sm text-theme-white backdrop-blur-sm transition-colors hover:border-theme-white/40 focus:border-theme-white/60 focus:outline-none"
-            >
-              {themes.map((t) => (
-                <option key={t} value={t}>
-                  {t}
-                </option>
-              ))}
-            </select>
-          </div>
-
+        <div className="flex flex-wrap items-center justify-end gap-3">
           {/* 刷新按钮 */}
           <button
             type="button"
             onClick={refreshJoke}
             disabled={isLoading}
             className={cn(
-              'cursor-can-hover rounded-full border border-theme-white/20 bg-theme-black/50 px-4 py-1.5 text-sm font-medium text-theme-white backdrop-blur-sm transition-all hover:border-theme-white/40 hover:bg-theme-white/10',
+              'flex items-center gap-2 rounded-full bg-secondary/50 px-4 py-1.5 text-sm font-medium text-foreground backdrop-blur-sm transition-all hover:bg-secondary hover:border-ring/50',
               isLoading && 'cursor-not-allowed opacity-50'
             )}
           >
-            {isLoading ? '刷新中...' : '🔄 刷新笑话'}
+            <RefreshCw className={cn("w-4 h-4", isLoading && "animate-spin")} />
+            {isLoading ? '刷新中...' : '刷新笑话'}
           </button>
         </div>
       )}
@@ -107,11 +77,11 @@ export default function JokeCard({
         initial={{ opacity: 0, scale: 0.95 }}
         animate={{ opacity: 1, scale: 1 }}
         transition={{ duration: 0.3 }}
-        className="relative overflow-hidden rounded-lg border border-theme-white/10 bg-theme-black/30 p-4 backdrop-blur-sm"
+        className="relative overflow-hidden rounded-lg bg-card/30 p-4 backdrop-blur-sm"
       >
         {isLoading && (
-          <div className="absolute inset-0 z-10 flex items-center justify-center bg-theme-black/50 backdrop-blur-sm">
-            <div className="h-8 w-8 animate-spin rounded-full border-2 border-theme-white/20 border-t-theme-white" />
+          <div className="absolute inset-0 z-10 flex items-center justify-center bg-background/50 backdrop-blur-sm">
+            <div className="h-8 w-8 animate-spin rounded-full border-2 border-primary border-t-transparent" />
           </div>
         )}
 
@@ -127,11 +97,12 @@ export default function JokeCard({
           />
         )}
         {!isMounted && (
-          <div className="w-full h-40 flex items-center justify-center bg-theme-white/5 rounded-lg">
-            <div className="h-8 w-8 animate-spin rounded-full border-2 border-theme-white/20 border-t-theme-white" />
+          <div className="w-full h-40 flex items-center justify-center bg-secondary/10 rounded-lg">
+            <div className="h-8 w-8 animate-spin rounded-full border-2 border-primary border-t-transparent" />
           </div>
         )}
       </motion.div>
     </motion.div>
   );
 }
+

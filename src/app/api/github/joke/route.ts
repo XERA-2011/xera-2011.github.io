@@ -1,17 +1,31 @@
 import { NextRequest, NextResponse } from 'next/server';
 import { jokes } from '@/data/jokes/jokes';
-import { themes } from '@/data/jokes/themes';
 import { renderQnACard, renderQuoteCard } from '@/lib/svg-renderers/joke-render';
 
 // 缓存时间（秒）
 const CACHE_SECONDS = 10;
 
-/**
- * 从数组中随机获取一个元素
- */
-function getRandomElement<T>(arr: T[]): T {
-  return arr[Math.floor(Math.random() * arr.length)];
-}
+// 主题配置
+const THEME_CONFIG = {
+  dark: {
+    borderColor: '#30363d',
+    bgColor: '#000000',
+    qColor: '#ffffff',
+    aColor: '#e5e5e5',
+    quoteColor: '#ffffff',
+    codeColor: '#ffffff',
+  },
+  light: {
+    borderColor: '#e1e4e8',
+    bgColor: '#ffffff',
+    qColor: '#000000',
+    aColor: '#24292e',
+    quoteColor: '#000000',
+    codeColor: '#24292e',
+  },
+};
+
+type ThemeName = keyof typeof THEME_CONFIG;
 
 export async function GET(request: NextRequest) {
   try {
@@ -28,28 +42,18 @@ export async function GET(request: NextRequest) {
 
     // 获取查询参数
     const { searchParams } = request.nextUrl;
-    let theme = searchParams.get('theme')?.toLowerCase() || 'default';
-    const hideBorder = searchParams.has('hideBorder');
-
-    // 处理随机主题
-    if (theme === 'random') {
-      theme = getRandomElement(Object.keys(themes));
-    }
-
-    // 获取主题配置，如果不存在则使用默认主题
-    const themeConfig = themes[theme] || themes.default;
-
-    // 从 URL 参数获取颜色配置，如果没有则使用主题配置
-    const borderColor = searchParams.get('borderColor') || themeConfig.borderColor;
-    const bgColor = searchParams.get('bgColor') || themeConfig.bgColor;
-    const qColor = searchParams.get('qColor') || themeConfig.qColor;
-    const aColor = searchParams.get('aColor') || themeConfig.aColor;
-    const textColor = searchParams.get('textColor') || themeConfig.quoteColor;
-    const codeColor = searchParams.get('codeColor') || themeConfig.codeColor;
-
-    // 从 URL 参数获取宽高配置
     const width = searchParams.get('width') ? parseInt(searchParams.get('width')!) : undefined;
     const height = searchParams.get('height') ? parseInt(searchParams.get('height')!) : undefined;
+
+    // 默认使用 dark 主题配色
+    const themeConfig = THEME_CONFIG.dark;
+
+    const borderColor = themeConfig.borderColor;
+    const bgColor = themeConfig.bgColor;
+    const qColor = themeConfig.qColor;
+    const aColor = themeConfig.aColor;
+    const textColor = themeConfig.quoteColor;
+    const codeColor = themeConfig.codeColor;
 
     // 根据笑话类型渲染 SVG
     let svgContent: string;
@@ -66,7 +70,7 @@ export async function GET(request: NextRequest) {
         bgColor,
         borderColor,
         codeColor,
-        hideBorder,
+        hideBorder: false,
         width,
         height,
       });
@@ -79,7 +83,7 @@ export async function GET(request: NextRequest) {
         bgColor,
         borderColor,
         codeColor,
-        hideBorder,
+        hideBorder: false,
         width,
         height,
       });
@@ -92,7 +96,7 @@ export async function GET(request: NextRequest) {
         bgColor,
         borderColor,
         codeColor,
-        hideBorder,
+        hideBorder: false,
         width,
         height,
       });
@@ -111,3 +115,5 @@ export async function GET(request: NextRequest) {
     return new NextResponse('Error generating joke card', { status: 500 });
   }
 }
+
+

@@ -22,16 +22,10 @@ export default function JokeCardPage() {
     }
   };
 
-
-
   const examples = [
     {
       title: '基础用法',
       code: `<img alt="Joke Card" src="${BASE_URL}/api/github/joke" />`,
-    },
-    {
-      title: '指定主题',
-      code: `<img alt="Joke Card" src="${BASE_URL}/api/github/joke?theme=dracula" />`,
     },
     {
       title: '自定义尺寸',
@@ -60,8 +54,10 @@ export default function JokeCardPage() {
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8, delay: 0.2 }}
         >
-          <GlowCard className="p-8">
-            <JokeCard showControls={true} />
+          <GlowCard className="p-4 sm:p-8">
+            <div className="flex justify-center">
+              <JokeCard showControls={true} className="w-full max-w-2xl" />
+            </div>
           </GlowCard>
         </motion.div>
 
@@ -73,7 +69,6 @@ export default function JokeCardPage() {
           className="mt-8"
         >
           <GlowCard className="p-6">
-            <h2 className="text-xl font-semibold text-foreground mb-4">使用方法</h2>
 
             <div className="space-y-6">
               {examples.map((example, index) => (
@@ -109,52 +104,11 @@ export default function JokeCardPage() {
                 </div>
               ))}
             </div>
-
-            <div className="mt-6 pt-6 border-t border-border space-y-4">
-              <h3 className="text-lg font-semibold text-foreground">API 参数说明</h3>
-              <div className="space-y-3 text-sm">
-                <div>
-                  <span className="text-foreground font-medium">theme</span>
-                  <span className="text-muted-foreground ml-2">(可选) 主题名称</span>
-                  <div className="text-muted-foreground text-xs pl-4 mt-1">
-                    支持 40+ 种主题：default, dracula, tokyonight, monokai, gruvbox, radical, vue, react 等<br />
-                    使用 <code className="bg-secondary px-1 rounded">theme=random</code> 随机选择主题
-                  </div>
-                </div>
-                <div>
-                  <span className="text-foreground font-medium">width / height</span>
-                  <span className="text-muted-foreground ml-2">(可选) 卡片尺寸</span>
-                  <div className="text-muted-foreground text-xs pl-4 mt-1">
-                    自定义卡片宽度和高度（像素），例如：<code className="bg-secondary px-1 rounded">?width=600&height=250</code><br />
-                    默认值：QnA 卡片 500×200，Quote 卡片 500×150
-                  </div>
-                </div>
-                <div>
-                  <span className="text-foreground font-medium">hideBorder</span>
-                  <span className="text-muted-foreground ml-2">(可选) 隐藏边框</span>
-                  <div className="text-muted-foreground text-xs pl-4 mt-1">
-                    添加此参数隐藏卡片边框，例如：<code className="bg-secondary px-1 rounded">?hideBorder</code>
-                  </div>
-                </div>
-                <div>
-                  <span className="text-foreground font-medium">自定义颜色</span>
-                  <span className="text-muted-foreground ml-2">(可选)</span>
-                  <div className="text-muted-foreground text-xs pl-4 mt-1">
-                    borderColor, bgColor, qColor, aColor, textColor, codeColor<br />
-                    使用十六进制颜色值，例如：<code className="bg-secondary px-1 rounded">?bgColor=1a1b27&qColor=70a5fd</code>
-                  </div>
-                </div>
-              </div>
-              <div className="mt-4 text-sm text-muted-foreground space-y-2">
-                <p>✨ <strong>双语支持：</strong>上英文下中文，保留技术梗的原汁原味</p>
-                <p>• 190+ 条精选编程笑话，随机展示</p>
-                <p>• 每次请求随机返回不同笑话</p>
-                <p>• 缓存时间 10 秒，适合动态展示</p>
-              </div>
-            </div>
           </GlowCard>
         </motion.div>
       </div>
     </div>
   );
 }
+
+
