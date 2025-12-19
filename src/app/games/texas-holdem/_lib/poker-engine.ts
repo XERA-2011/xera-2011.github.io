@@ -246,6 +246,7 @@ export class PokerGameEngine {
   actorsLeft: number;
   raisesInRound: number;
   currentTurnIdx: number;
+  isFastForwarding: boolean = false;
 
   constructor(onChange: () => void) {
     this.onChange = onChange;
@@ -454,15 +455,25 @@ export class PokerGameEngine {
 
   prepareBettingRound(startIdx: number) {
     this.currentTurnIdx = startIdx;
+    
+    // Win by Fold Check
+    const nonFolded = this.players.filter(p => !p.isEliminated && p.status !== 'folded');
+    if (nonFolded.length <= 1) {
+        this.stage = 'showdown'; // Ensure stage is set for UI
+        this.showdown();
+        return;
+    }
+
+    // All-In / Auto-Run Check
     this.actorsLeft = this.players.filter(p => p.status === 'active').length;
-    // Check if only 1 active player left (others all-in or folded)
-    // or if only 1 player has chips?
-    // Simplified:
-    if (this.players.filter(p => !p.isEliminated && p.status !== 'folded').length <= 1) {
+    if (this.actorsLeft <= 1 && !this.isFastForwarding) {
         this.runRemainingStages();
         return;
     }
-    this.processTurn();
+
+    if (!this.isFastForwarding) {
+        this.processTurn();
+    }
   }
 
   humanAction(type: 'fold' | 'call' | 'raise') {
@@ -472,27 +483,31 @@ export class PokerGameEngine {
   }
 
   processTurn() {
-    let p = this.players[this.currentTurnIdx];
-    
-    // Skip if player incapable of acting
-    if (p.status === 'folded' || p.isEliminated || p.status === 'allin') {
-        if (this.isBetsSettled()) {
-            this.nextStage();
-        } else {
-            this.currentTurnIdx = this.getNextActive(this.currentTurnIdx);
-            setTimeout(() => this.processTurn(), 100); // Async recursion
+    try {
+        let p = this.players[this.currentTurnIdx];
+        
+        // Skip if player incapable of acting
+        if (p.status === 'folded' || p.isEliminated || p.status === 'allin') {
+            if (this.isBetsSettled()) {
+                this.nextStage();
+            } else {
+                this.currentTurnIdx = this.getNextActive(this.currentTurnIdx);
+                setTimeout(() => this.processTurn(), 100); // Async recursion
+            }
+            return;
         }
-        return;
-    }
 
-    this.notify();
+        this.notify();
 
-    if (!p.isHuman) {
-        setTimeout(() => {
-            this.aiAction(p);
-            // Move to next provided aiAction calls handleAction which calls next turn logic?
-            // aiAction calls handleAction -> check logic there
-        }, 800 + Math.random() * 1000);
+        if (!p.isHuman) {
+            setTimeout(() => {
+                this.aiAction(p);
+            }, 800 + Math.random() * 1000);
+        }
+    } catch (e: any) {
+        this.log(`Critical Error in processTurn: ${e.message}`, 'phase');
+        console.error(e);
+        // Force showdown to unlock UI? Or just stop.
     }
   }
 
@@ -569,6 +584,7 @@ export class PokerGameEngine {
           this.communityCards.push(this.deck.deal()!);
           this.log(`河牌: ${this.communityCards[4]}`, 'phase');
       } else {
+          this.stage = 'showdown';
           this.showdown();
           return;
       }
@@ -578,9 +594,19 @@ export class PokerGameEngine {
   }
 
   runRemainingStages() {
-      // Just fast forward
-      while(this.stage !== 'showdown') {
-         this.nextStage();
+      if (this.isFastForwarding) return;
+      this.isFastForwarding = true;
+      try {
+          // Just fast forward
+          while(this.stage !== 'showdown') {
+             this.nextStage();
+             // Safety break
+             if (this.players.filter(p => !p.isEliminated && p.status !== 'folded').length <= 1) break;
+          }
+      } catch (e: any) {
+         this.log(`Error in runRemainingStages: ${e.message}`, 'phase');
+      } finally {
+         this.isFastForwarding = false;
       }
   }
   
@@ -612,6 +638,17 @@ export class PokerGameEngine {
   }
 
   aiAction(player: Player) {
+    try {
+        this._aiActionLogic(player);
+    } catch (e: any) {
+        this.log(`AI Error (${player.name}): ${e.message}`, 'action');
+        console.error(e);
+        // Fallback: Fold if error to keep game moving
+        this.handleAction(player, 'fold');
+    }
+  }
+
+  _aiActionLogic(player: Player) {
     let callAmt = this.highestBet - player.currentBet;
     let fullHand = [...player.hand, ...this.communityCards];
     let strength = 0;
