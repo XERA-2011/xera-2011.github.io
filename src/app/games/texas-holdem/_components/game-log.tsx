@@ -1,12 +1,27 @@
-import { useEffect, useRef } from 'react';
-import { GameLog as GameLogType } from '../_lib/poker-engine';
+import { useEffect, useRef, useState } from 'react';
+import { GameLog as GameLogType, Player, Card, evaluateHand, HandRankType } from '../_lib/poker-engine';
 
 interface LogProps {
   logs: GameLogType[];
+  players?: Player[];
+  communityCards?: Card[];
 }
 
-export function GameLog({ logs }: LogProps) {
+const RANK_NAMES: Record<HandRankType, string> = {
+  [HandRankType.HIGH_CARD]: 'High Card 高牌',
+  [HandRankType.PAIR]: 'Pair 对子',
+  [HandRankType.TWO_PAIR]: 'Two Pair 两对',
+  [HandRankType.TRIPS]: 'Trips 三条',
+  [HandRankType.STRAIGHT]: 'Straight 顺子',
+  [HandRankType.FLUSH]: 'Flush 同花',
+  [HandRankType.FULL_HOUSE]: 'Full House 葫芦',
+  [HandRankType.QUADS]: 'Quads 四条',
+  [HandRankType.STRAIGHT_FLUSH]: 'Straight Flush 同花顺'
+};
+
+export function GameLog({ logs, players, communityCards }: LogProps) {
   const scrollRef = useRef<HTMLDivElement>(null);
+  const [copyState, setCopyState] = useState<'idle' | 'copied'>('idle');
 
   useEffect(() => {
     if (scrollRef.current) {
@@ -15,20 +30,41 @@ export function GameLog({ logs }: LogProps) {
   }, [logs]);
 
   const handleCopy = () => {
-    if (!logs.length) return;
+    if (!players || !communityCards) {
+      // Fallback
+      const text = logs.map(log => {
+        const cleanMessage = log.message.replace(/<[^>]*>/g, '').replace(/&nbsp;/g, ' ');
+        return `[${log.type}] ${cleanMessage}`;
+      }).join('\n');
+      navigator.clipboard.writeText(text);
 
-    // Convert logs to plain text
-    const text = logs.map(log => {
-      // Simple HTML strip
-      const cleanMessage = log.message.replace(/<[^>]*>/g, '').replace(/&nbsp;/g, ' ');
-      return `[${log.type}] ${cleanMessage}`;
-    }).join('\n');
+      setCopyState('copied');
+      setTimeout(() => setCopyState('idle'), 2000);
+      return;
+    }
 
-    navigator.clipboard.writeText(text).then(() => {
-      alert('Game log copied to clipboard!');
-    }).catch(err => {
-      console.error('Failed to copy log:', err);
+    const activePlayers = players.filter(p => !p.isEliminated && p.status !== 'folded');
+
+    let report = `Texas Hold'em Showdown\n`;
+    report += `Community Cards: [${communityCards.map(c => c.toString()).join(' ')}]\n`;
+    report += `--------------------------------\n`;
+
+    activePlayers.forEach(p => {
+      const fullHand = [...p.hand, ...communityCards];
+      if (fullHand.length >= 5) {
+        const result = evaluateHand(fullHand);
+        const rankStr = RANK_NAMES[result.rank];
+        const cardsStr = p.hand.map(c => c.toString()).join(' ');
+        report += `Player ${p.name}: [${cardsStr}] - ${rankStr}\n`;
+      } else {
+        report += `Player ${p.name}: [${p.hand.map(c => c.toString()).join(' ')}] - (Folded/Incomplete)\n`;
+      }
     });
+
+    navigator.clipboard.writeText(report).then(() => {
+      setCopyState('copied');
+      setTimeout(() => setCopyState('idle'), 2000);
+    }).catch(err => console.error(err));
   };
 
   return (
@@ -38,10 +74,14 @@ export function GameLog({ logs }: LogProps) {
         <span className="text-xs md:text-sm font-bold text-gray-400">Game Log</span>
         <button
           onClick={handleCopy}
-          className="text-[10px] bg-white/10 hover:bg-white/20 text-gray-300 px-2 py-0.5 rounded transition-colors"
-          title="Copy log to clipboard"
+          disabled={copyState === 'copied'}
+          className={`text-[10px] px-2 py-0.5 rounded transition-all duration-300 ${copyState === 'copied'
+              ? 'bg-emerald-500/20 text-emerald-400 cursor-default'
+              : 'bg-white/10 hover:bg-white/20 text-gray-300'
+            }`}
+          title="Copy showdown details"
         >
-          Copy
+          {copyState === 'copied' ? '已复制' : '复制摊牌内容'}
         </button>
       </div>
 
@@ -64,6 +104,9 @@ export function GameLog({ logs }: LogProps) {
             )}
             {log.type === 'normal' && (
               <div className="text-gray-300" dangerouslySetInnerHTML={{ __html: log.message }} />
+            )}
+            {log.type === 'showdown' && (
+              <div className="text-orange-300 font-bold" dangerouslySetInnerHTML={{ __html: log.message }} />
             )}
           </div>
         ))}

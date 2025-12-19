@@ -431,7 +431,17 @@ export class PokerGameEngine {
   }
 
   getRankName(rank: HandRankType): string {
-    const names = ['High Card', 'Pair', 'Two Pair', 'Trips', 'Straight', 'Flush', 'Full House', 'Quads', 'Straight Flush'];
+    const names = [
+      'High Card 高牌',
+      'Pair 对子',
+      'Two Pair 两对',
+      'Trips 三条',
+      'Straight 顺子',
+      'Flush 同花',
+      'Full House 葫芦',
+      'Quads 四条',
+      'Straight Flush 同花顺'
+    ];
     return names[rank];
   }
 

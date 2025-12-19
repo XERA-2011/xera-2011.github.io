@@ -38,7 +38,7 @@ export function GameTable({ players, communityCards, pot, dealerIdx, currentTurn
         <div className="absolute top-[28%] left-1/2 -translate-x-1/2 -translate-y-1/2 w-3/4 sm:w-1/2 z-0 pointer-events-auto">
           {/* Scale down slightly on mobile to fit */}
           <div className="origin-top scale-75 sm:scale-100">
-            <GameLog logs={logs} />
+            <GameLog logs={logs} players={players} communityCards={communityCards} />
           </div>
         </div>
 
