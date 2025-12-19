@@ -7,21 +7,6 @@ import { usePageTitle } from '@/hooks/use-page-title';
 
 const demoData: GlowCardItem[] = [
   {
-    id: 'endless',
-    title: 'Endless',
-    href: '/demo/endless'
-  },
-  {
-    id: 'solar-skirmish',
-    title: 'Solar Skirmish',
-    href: '/demo/solar-skirmish'
-  },
-  {
-    id: 'texas-holdem',
-    title: 'Texas Hold\'em',
-    href: '/demo/texas-holdem.html'
-  },
-  {
     id: 'x-logo',
     title: 'X Logo',
     href: '/demo/x-logo.html'
