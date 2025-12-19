@@ -164,7 +164,22 @@ export default function TypingSVGPage() {
                       <input
                         type="radio"
                         checked={config.type === 'movie-quotes'}
-                        onChange={() => setConfig({ ...config, type: 'movie-quotes', multiline: true, height: '100' })}
+                        onChange={() => setConfig({
+                          ...config,
+                          type: 'movie-quotes',
+                          font: 'monospace',
+                          size: '14',
+                          width: '750',
+                          height: '52',
+                          repeat: true,
+                          center: true,
+                          vCenter: true,
+                          multiline: true,
+                          duration: '5000',
+                          pause: '1000',
+                          letterSpacing: 'normal',
+                          bold: true
+                        })}
                         className="accent-primary"
                       />
                       <span className="text-foreground">随机电影台词</span>
