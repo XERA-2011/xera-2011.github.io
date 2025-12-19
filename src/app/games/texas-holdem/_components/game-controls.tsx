@@ -23,7 +23,7 @@ export function GameControls({
       <div className="fixed bottom-0 left-0 right-0 p-4 bg-neutral-900/90 border-t border-white/10 backdrop-blur md:static md:bg-transparent md:border-none md:p-0 flex justify-center z-50">
         <button
           onClick={onNextRound}
-          className="w-full max-w-md bg-orange-600 hover:bg-orange-500 text-white font-bold py-3 px-6 rounded-lg shadow-lg active:scale-95 transition-all text-lg md:text-xl"
+          className="w-full max-w-md bg-orange-600 hover:bg-orange-500 text-white font-bold h-14 flex items-center justify-center px-6 rounded-lg shadow-lg active:scale-95 transition-all text-lg md:text-xl"
         >
           Start Next Round
         </button>
@@ -38,7 +38,7 @@ export function GameControls({
       <button
         onClick={() => onAction('fold')}
         disabled={isDisabled}
-        className="flex-1 max-w-[140px] md:max-w-[180px] bg-rose-700 hover:bg-rose-600 disabled:opacity-50 disabled:cursor-not-allowed text-white font-bold py-3 px-4 rounded-lg shadow-lg active:scale-95 transition-all md:text-lg"
+        className="flex-1 max-w-[140px] md:max-w-[180px] bg-rose-700 hover:bg-rose-600 disabled:opacity-50 disabled:cursor-not-allowed text-white font-bold h-14 flex items-center justify-center px-4 rounded-lg shadow-lg active:scale-95 transition-all md:text-lg"
       >
         Fold
       </button>
@@ -46,7 +46,7 @@ export function GameControls({
       <button
         onClick={() => onAction('call')}
         disabled={isDisabled}
-        className="flex-1 max-w-[140px] md:max-w-[180px] bg-blue-700 hover:bg-blue-600 disabled:opacity-50 disabled:cursor-not-allowed text-white font-bold py-3 px-4 rounded-lg shadow-lg active:scale-95 transition-all md:text-lg"
+        className="flex-1 max-w-[140px] md:max-w-[180px] bg-blue-700 hover:bg-blue-600 disabled:opacity-50 disabled:cursor-not-allowed text-white font-bold h-14 flex items-center justify-center px-4 rounded-lg shadow-lg active:scale-95 transition-all md:text-lg"
       >
         {callAmount === 0 ? 'Check' : `Call $${callAmount}`}
       </button>
@@ -54,7 +54,7 @@ export function GameControls({
       <button
         onClick={() => onAction('raise')}
         disabled={isDisabled || !canRaise}
-        className="flex-1 max-w-[140px] md:max-w-[180px] bg-emerald-700 hover:bg-emerald-600 disabled:opacity-50 disabled:cursor-not-allowed text-white font-bold py-3 px-4 rounded-lg shadow-lg active:scale-95 transition-all md:text-lg"
+        className="flex-1 max-w-[140px] md:max-w-[180px] bg-emerald-700 hover:bg-emerald-600 disabled:opacity-50 disabled:cursor-not-allowed text-white font-bold h-14 flex items-center justify-center px-4 rounded-lg shadow-lg active:scale-95 transition-all md:text-lg"
       >
         Raise (+20)
       </button>

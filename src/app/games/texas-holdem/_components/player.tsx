@@ -8,11 +8,11 @@ interface PlayerProps {
   gameStage: string;
   className?: string;
   winningCards?: CardType[];
+  isWinner?: boolean;
 }
 
-export function Player({ player, isActiveTurn, isDealer, gameStage, className = "", winningCards }: PlayerProps) {
+export function Player({ player, isActiveTurn, isDealer, gameStage, className = "", winningCards, isWinner }: PlayerProps) {
   const showFace = player.isHuman || gameStage === 'showdown';
-  const isWinner = !!winningCards;
 
   return (
     <div className={`absolute flex flex-col items-center transition-all duration-300 ${className}`}>
@@ -55,8 +55,8 @@ export function Player({ player, isActiveTurn, isDealer, gameStage, className = 
             {player.status === 'eliminated' && 'Out'}
           </div>
         )}
-        {player.currentBet > 0 && player.status !== 'folded' && (
-          <div className="text-[9px] sm:text-[10px] md:text-xs lg:text-sm text-blue-300 font-bold leading-none">
+        {player.status !== 'folded' && player.status !== 'eliminated' && player.currentBet > 0 && (
+          <div className={`text-[9px] sm:text-[10px] md:text-xs lg:text-sm text-blue-300 font-bold leading-none ${gameStage === 'showdown' ? 'invisible' : ''}`}>
             ${player.currentBet}
           </div>
         )}

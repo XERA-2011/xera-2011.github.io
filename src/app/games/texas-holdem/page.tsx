@@ -16,7 +16,7 @@ export default function TexasHoldemPage() {
     );
   }
 
-  const { players, communityCards, pot, dealerIdx, currentTurnIdx, stage, logs, highestBet } = gameState;
+  const { players, communityCards, pot, dealerIdx, currentTurnIdx, stage, logs, highestBet, winners, winningCards } = gameState;
   const human = players[0];
   const isHumanTurn = stage !== 'showdown' && currentTurnIdx === 0 && human.status === 'active';
   const callAmount = highestBet - human.currentBet;
@@ -47,6 +47,8 @@ export default function TexasHoldemPage() {
             currentTurnIdx={currentTurnIdx}
             stage={stage}
             logs={logs}
+            winners={winners}
+            winningCards={winningCards}
           />
         </div>
       </div>

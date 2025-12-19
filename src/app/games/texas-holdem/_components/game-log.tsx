@@ -55,7 +55,12 @@ export function GameLog({ logs, players, communityCards }: LogProps) {
         const result = evaluateHand(fullHand);
         const rankStr = RANK_NAMES[result.rank];
         const cardsStr = p.hand.map(c => c.toString()).join(' ');
-        report += `Player ${p.name}: [${cardsStr}] - ${rankStr}\n`;
+
+        // Calculate Kickers
+        const kickers = result.bestHand.filter(c => !result.winningCards.some(wc => wc.suit === c.suit && wc.rank === c.rank));
+        const kickerText = kickers.length > 0 ? ` (Kicker: ${kickers.map(c => c.toString()).join(' ')})` : '';
+
+        report += `Player ${p.name}: [${cardsStr}] - ${rankStr}${kickerText}\n`;
       } else {
         report += `Player ${p.name}: [${p.hand.map(c => c.toString()).join(' ')}] - (Folded/Incomplete)\n`;
       }
@@ -76,8 +81,8 @@ export function GameLog({ logs, players, communityCards }: LogProps) {
           onClick={handleCopy}
           disabled={copyState === 'copied'}
           className={`text-[10px] px-2 py-0.5 rounded transition-all duration-300 ${copyState === 'copied'
-              ? 'bg-emerald-500/20 text-emerald-400 cursor-default'
-              : 'bg-white/10 hover:bg-white/20 text-gray-300'
+            ? 'bg-emerald-500/20 text-emerald-400 cursor-default'
+            : 'bg-white/10 hover:bg-white/20 text-gray-300'
             }`}
           title="Copy showdown details"
         >

@@ -74,6 +74,7 @@ export interface HandResult {
   rank: HandRankType;
   score: number;
   winningCards: Card[];
+  bestHand: Card[];
 }
 
 export function evaluateHand(cards: Card[]): HandResult {
@@ -127,7 +128,7 @@ export function evaluateHand(cards: Card[]): HandResult {
     return s;
   };
 
-  if (straightFlushCards) return { rank: HandRankType.STRAIGHT_FLUSH, score: calcScore(8, straightFlushCards), winningCards: straightFlushCards };
+  if (straightFlushCards) return { rank: HandRankType.STRAIGHT_FLUSH, score: calcScore(8, straightFlushCards), winningCards: straightFlushCards, bestHand: straightFlushCards };
 
   let quadsValStr = Object.keys(rankCounts).find(r => rankCounts[parseInt(r)] === 4);
   if (quadsValStr) {
@@ -135,7 +136,7 @@ export function evaluateHand(cards: Card[]): HandResult {
     let quads = sorted.filter(c => c.value === quadsVal);
     let kicker = sorted.find(c => c.value !== quadsVal);
     let best5 = [...quads, ...(kicker ? [kicker] : [])];
-    return { rank: HandRankType.QUADS, score: calcScore(7, best5), winningCards: best5 };
+    return { rank: HandRankType.QUADS, score: calcScore(7, best5), winningCards: quads, bestHand: best5 };
   }
 
   let tripsVals = Object.keys(rankCounts).filter(r => rankCounts[parseInt(r)] === 3).map(Number).sort((a, b) => b - a);
@@ -151,23 +152,23 @@ export function evaluateHand(cards: Card[]): HandResult {
       let tCards = sorted.filter(c => c.value === tVal);
       let pCards = sorted.filter(c => c.value === pVal).slice(0, 2);
       let best5 = [...tCards, ...pCards];
-      return { rank: HandRankType.FULL_HOUSE, score: calcScore(6, best5), winningCards: best5 };
+      return { rank: HandRankType.FULL_HOUSE, score: calcScore(6, best5), winningCards: best5, bestHand: best5 };
     }
   }
 
   if (flushCards.length >= 5) {
     let best5 = flushCards.slice(0, 5);
-    return { rank: HandRankType.FLUSH, score: calcScore(5, best5), winningCards: best5 };
+    return { rank: HandRankType.FLUSH, score: calcScore(5, best5), winningCards: best5, bestHand: best5 };
   }
 
-  if (straightCards) return { rank: HandRankType.STRAIGHT, score: calcScore(4, straightCards), winningCards: straightCards };
+  if (straightCards) return { rank: HandRankType.STRAIGHT, score: calcScore(4, straightCards), winningCards: straightCards, bestHand: straightCards };
 
   if (tripsVals.length > 0) {
     let tVal = tripsVals[0];
     let trips = sorted.filter(c => c.value === tVal);
     let kickers = sorted.filter(c => c.value !== tVal).slice(0, 2);
     let best5 = [...trips, ...kickers];
-    return { rank: HandRankType.TRIPS, score: calcScore(3, best5), winningCards: best5 };
+    return { rank: HandRankType.TRIPS, score: calcScore(3, best5), winningCards: trips, bestHand: best5 };
   }
 
   if (pairVals.length >= 2) {
@@ -176,7 +177,7 @@ export function evaluateHand(cards: Card[]): HandResult {
     let pair2 = sorted.filter(c => c.value === p2);
     let kicker = sorted.find(c => c.value !== p1 && c.value !== p2);
     let best5 = [...pair1, ...pair2, ...(kicker ? [kicker] : [])];
-    return { rank: HandRankType.TWO_PAIR, score: calcScore(2, best5), winningCards: best5 };
+    return { rank: HandRankType.TWO_PAIR, score: calcScore(2, best5), winningCards: [...pair1, ...pair2], bestHand: best5 };
   }
 
   if (pairVals.length === 1) {
@@ -184,11 +185,11 @@ export function evaluateHand(cards: Card[]): HandResult {
     let pair = sorted.filter(c => c.value === p1);
     let kickers = sorted.filter(c => c.value !== p1).slice(0, 3);
     let best5 = [...pair, ...kickers];
-    return { rank: HandRankType.PAIR, score: calcScore(1, best5), winningCards: best5 };
+    return { rank: HandRankType.PAIR, score: calcScore(1, best5), winningCards: pair, bestHand: best5 };
   }
 
   let best5 = sorted.slice(0, 5);
-  return { rank: HandRankType.HIGH_CARD, score: calcScore(0, best5), winningCards: best5 };
+  return { rank: HandRankType.HIGH_CARD, score: calcScore(0, best5), winningCards: [best5[0]], bestHand: best5 };
 }
 
 // ... (previous code unchanged, we only replace the relevant parts)
@@ -247,6 +248,8 @@ export class PokerGameEngine {
   raisesInRound: number;
   currentTurnIdx: number;
   isFastForwarding: boolean = false;
+  winners: number[] = [];
+  winningCards: Card[] = [];
 
   constructor(onChange: () => void) {
     this.onChange = onChange;
@@ -281,6 +284,8 @@ export class PokerGameEngine {
     this.actorsLeft = 0;
     this.raisesInRound = 0;
     this.currentTurnIdx = 0;
+    this.winners = [];
+    this.winningCards = [];
   }
 
   startNextRound() {
@@ -288,7 +293,10 @@ export class PokerGameEngine {
     this.communityCards = [];
     this.pot = 0;
     this.highestBet = 0;
+    this.highestBet = 0;
     this.raisesInRound = 0;
+    this.winners = [];
+    this.winningCards = [];
 
     // Rotate dealer
     this.dealerIdx = (this.dealerIdx + 1) % this.players.length;
@@ -355,11 +363,19 @@ export class PokerGameEngine {
     let winner = results[0].player;
     let winningResult = results[0].result;
 
+    this.winners = [winner.id];
+    this.winningCards = winningResult.winningCards;
+
     results.forEach(({ player, result }) => {
-      this.log(`${player.name} 亮牌: ${this.formatCards(player.hand)} (${this.getRankName(result.rank)})`, 'showdown');
+      let kickers = result.bestHand.filter(c => !result.winningCards.includes(c));
+      let kickerText = kickers.length > 0 ? ` (Kicker: ${this.formatCards(kickers)})` : '';
+      this.log(`${player.name} 亮牌: ${this.formatCards(player.hand)} (${this.getRankName(result.rank)}${kickerText})`, 'showdown');
     });
 
-    this.log(`${winner.name} 赢得了 $${this.pot}，手牌: ${this.formatCards(winner.hand)} (${this.getRankName(winningResult.rank)})`, 'win');
+    let kickers = winningResult.bestHand.filter(c => !winningResult.winningCards.includes(c));
+    let kickerText = kickers.length > 0 ? ` (Kicker: ${this.formatCards(kickers)})` : '';
+    this.log(`${winner.name} 赢得了 $${this.pot}，手牌: ${this.formatCards(winner.hand)} (${this.getRankName(winningResult.rank)}${kickerText})`, 'win');
+    
     winner.chips += this.pot;
     this.pot = 0;
     this.notify();
@@ -408,7 +424,9 @@ export class PokerGameEngine {
       highestBet: this.highestBet,
       currentTurnIdx: this.currentTurnIdx,
       stage: this.stage,
-      logs: this.logs
+      logs: this.logs,
+      winners: this.winners,
+      winningCards: this.winningCards
     };
   }
 

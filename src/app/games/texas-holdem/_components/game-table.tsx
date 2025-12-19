@@ -11,9 +11,11 @@ interface TableProps {
   currentTurnIdx: number;
   stage: string;
   logs: GameLogType[];
+  winners?: number[];
+  winningCards?: CardType[];
 }
 
-export function GameTable({ players, communityCards, pot, dealerIdx, currentTurnIdx, stage, logs }: TableProps) {
+export function GameTable({ players, communityCards, pot, dealerIdx, currentTurnIdx, stage, logs, winners, winningCards }: TableProps) {
   // Mobile/Desktop positions
   // Updated aspect ratios for better mobile spacing (taller table)
 
@@ -51,11 +53,12 @@ export function GameTable({ players, communityCards, pot, dealerIdx, currentTurn
 
         {/* Community Cards - Centered */}
         <div className="absolute bottom-[15%] left-1/2 -translate-x-1/2 -translate-y-1/2 flex gap-1 sm:gap-2 items-center justify-center z-10 w-full px-2">
-          {communityCards.map((card, i) => (
-            <Card key={i} card={card} />
-          ))}
+          {communityCards.map((card, i) => {
+            const isWinningCard = winningCards?.some(wc => wc.rank === card.rank && wc.suit === card.suit);
+            return <Card key={i} card={card} isWinning={isWinningCard} />;
+          })}
           {Array.from({ length: 5 - communityCards.length }).map((_, i) => (
-            <div key={`empty-${i}`} className="w-8 h-12 sm:w-14 sm:h-20 border-2 border-dashed border-white/20 rounded-md bg-black/10" />
+            <div key={`empty-${i}`} className="w-8 h-11 sm:w-12 sm:h-16 border-[1px] sm:border-2 border-dashed border-white/20 rounded-sm sm:rounded-md bg-black/10" />
           ))}
         </div>
       </div>
@@ -69,6 +72,8 @@ export function GameTable({ players, communityCards, pot, dealerIdx, currentTurn
           isDealer={p.id === dealerIdx}
           gameStage={stage}
           className={positions[p.id]}
+          isWinner={winners?.includes(p.id)}
+          winningCards={winningCards}
         />
       ))}
     </div>
