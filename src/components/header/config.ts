@@ -38,6 +38,10 @@ export const links: Link[] = [
     href: '/finance',
   },
   {
+    title: 'Games',
+    href: '/games',
+  },
+  {
     title: 'Admin',
     href: '/admin',
     adminOnly: true,

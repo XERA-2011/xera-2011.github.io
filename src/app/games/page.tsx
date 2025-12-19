@@ -1,0 +1,51 @@
+'use client';
+
+import { motion } from 'framer-motion';
+import ScrollReveal from '@/components/scroll-reveal';
+import GlowCardList, { GlowCardItem } from '@/components/ui/glow-cardList';
+import { usePageTitle } from '@/hooks/use-page-title';
+
+const gamesData: GlowCardItem[] = [
+  {
+    id: "texas-holdem",
+    title: "Texas Hold'em",
+    href: "/games/texas-holdem",
+  },
+  // Future games can be added here
+];
+
+export default function GamesPage() {
+  usePageTitle('游戏实验室');
+
+  return (
+    <div className="relative w-full min-h-screen pt-32 pb-20">
+      <div className="container mx-auto px-4 sm:px-6 lg:px-8">
+        {/* Page Title */}
+        <motion.div
+          className="text-center mb-16"
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.8 }}
+          viewport={{ once: true }}
+        >
+          <h1 className="text-3xl sm:text-4xl lg:text-5xl font-bold mb-4">
+            游戏实验室
+          </h1>
+          <p className="text-gray-400 max-w-2xl mx-auto">
+            Explore experimental game demos and interactive experiences.
+          </p>
+        </motion.div>
+
+        {/* Games Grid */}
+        <ScrollReveal delay={0.3}>
+          <GlowCardList
+            items={gamesData}
+            columns={3}
+            gap="lg"
+            className="lg:gap-8 max-w-6xl mx-auto"
+          />
+        </ScrollReveal>
+      </div>
+    </div>
+  );
+}
