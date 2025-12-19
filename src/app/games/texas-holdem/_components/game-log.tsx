@@ -48,7 +48,7 @@ export function GameLog({ logs }: LogProps) {
       {/* Log Content */}
       <div
         ref={scrollRef}
-        className="h-24 sm:h-36 overflow-y-auto p-2 font-mono text-xs md:text-sm text-gray-300 scrollbar-thin scrollbar-thumb-gray-700 scrollbar-track-transparent"
+        className="h-16 sm:h-24 overflow-y-auto p-2 font-mono text-xs md:text-sm text-gray-300 scrollbar-thin scrollbar-thumb-gray-700 scrollbar-track-transparent"
       >
         {logs.length === 0 && <div className="text-center text-gray-500 italic">Game log...</div>}
         {logs.map((log) => (

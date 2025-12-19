@@ -3,7 +3,7 @@
 import { usePokerGame } from './_hooks/use-poker-game';
 import { GameTable } from './_components/game-table';
 import { GameControls } from './_components/game-controls';
-import { GameLog } from './_components/game-log';
+
 
 export default function TexasHoldemPage() {
   const { gameState, humanAction, startNextRound } = usePokerGame();
@@ -49,21 +49,10 @@ export default function TexasHoldemPage() {
             logs={logs}
           />
         </div>
-
-        {/* Desktop Log - Side Panel (Left, Absolute) */}
-        {/* Absolute positioning ensures it doesn't affect the table layout */}
-        <div className="hidden lg:block absolute left-4 top-1/2 -translate-y-1/2 w-80 h-[50vh] max-h-[400px] z-10 opacity-80">
-          <GameLog logs={logs} />
-        </div>
       </div>
 
       {/* Bottom Controls Area */}
       <div className="flex-none pb-safe mb-2 w-full px-2 sm:mb-4">
-        {/* Mobile/Tablet Log (Brief) - visible below lg */}
-        <div className="lg:hidden w-full max-h-32 overflow-y-auto mb-2 opacity-70 text-[10px]">
-          <GameLog logs={logs} />
-        </div>
-
         <div className="flex justify-center">
           <GameControls
             onAction={humanAction}
