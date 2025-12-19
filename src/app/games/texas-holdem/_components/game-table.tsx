@@ -48,7 +48,7 @@ export function GameTable({ players, communityCards, pot, dealerIdx, currentTurn
   ];
 
   return (
-    <div className="relative w-full max-w-[900px] aspect-[1/0.6] sm:aspect-[1/0.5] mx-auto mt-8 mb-20">
+    <div className="relative w-full max-w-[900px] h-auto max-h-[60vh] aspect-[1/0.6] sm:aspect-[1/0.5] mx-auto flex-shrink-0">
       {/* The Felt Table */}
       <div className="absolute inset-0 bg-[#35654d] border-[12px] border-[#5d4037] rounded-[100px] sm:rounded-[200px] shadow-[inset_0_0_60px_rgba(0,0,0,0.8)]">
 
@@ -60,12 +60,12 @@ export function GameTable({ players, communityCards, pot, dealerIdx, currentTurn
         </div>
 
         {/* Community Cards */}
-        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 flex gap-1 sm:gap-2 items-center justify-center z-10">
+        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 flex gap-1 sm:gap-2 items-center justify-center z-10 w-full px-8">
           {communityCards.map((card, i) => (
             <Card key={i} card={card} />
           ))}
           {Array.from({ length: 5 - communityCards.length }).map((_, i) => (
-            <div key={`empty-${i}`} className="w-10 h-14 sm:w-12 sm:h-16 border-2 border-dashed border-white/20 rounded-md" />
+            <div key={`empty-${i}`} className="w-10 h-14 sm:w-14 sm:h-20 border-2 border-dashed border-white/20 rounded-md" />
           ))}
         </div>
 
