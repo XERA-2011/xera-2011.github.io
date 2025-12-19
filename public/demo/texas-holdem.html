@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>德州扑克 (竖屏沉浸版)</title>
+    <title>德州扑克 (详细记录版)</title>
     <style>
         :root {
             --felt-color: #35654d;
@@ -21,256 +21,222 @@
             align-items: center;
             min-height: 100vh;
             margin: 0;
-            padding: 10px;
+            padding: 0;
             box-sizing: border-box;
             overflow-x: hidden;
             -webkit-tap-highlight-color: transparent;
         }
 
+        /* 顶部牌型提示栏 */
+        #hand-ranks-bar {
+            width: 100%;
+            background: rgba(0,0,0,0.9);
+            display: flex; justify-content: center; gap: 4px;
+            padding: 4px 0; z-index: 200;
+            flex-wrap: wrap;
+            border-bottom: 1px solid #444;
+        }
+        .rank-item { font-size: 10px; color: #777; padding: 2px 5px; border-radius: 3px; background: #222; }
+        .rank-active { color: #000; background: var(--highlight-color); font-weight: bold; }
+
+        /* === 游戏主容器 === */
         #game-container {
             width: 100%;
             max-width: 800px;
             position: relative;
-            margin-bottom: 15px;
+            flex: 1;
+            display: flex;
+            justify-content: center;
+            align-items: center;
             margin-top: 10px;
         }
         
-        /* === 桌面端默认样式 (横向) === */
+        /* === 牌桌 === */
         #game-table {
             position: relative;
-            width: 100%;
-            padding-bottom: 60%; /* 桌面端保持扁平椭圆 */
+            width: 95%;
+            padding-bottom: 60%;
             background-color: var(--felt-color);
-            border: 10px solid #5d4037;
+            border: 12px solid #5d4037;
             border-radius: 300px;
-            box-shadow: inset 0 0 50px rgba(0,0,0,0.6), 0 10px 20px rgba(0,0,0,0.5);
+            box-shadow: inset 0 0 60px rgba(0,0,0,0.8);
             margin: 0 auto;
         }
 
+        /* === 日志区域 (新增) === */
+        #log-area {
+            position: absolute;
+            top: 10px;
+            left: 10px;
+            width: 240px;
+            height: 120px;
+            background: rgba(0, 0, 0, 0.6);
+            border: 1px solid #444;
+            border-radius: 6px;
+            color: #ccc;
+            font-family: "Menlo", "Consolas", monospace;
+            font-size: 11px;
+            padding: 8px;
+            overflow-y: auto;
+            z-index: 90;
+            pointer-events: auto; /* 允许滚动 */
+            backdrop-filter: blur(2px);
+        }
+        #log-area div { margin-bottom: 2px; line-height: 1.3; }
+        .log-phase { color: #ffd700; font-weight: bold; margin-top: 4px; border-top: 1px dashed #555; padding-top: 2px; }
+        .log-win { color: #69f0ae; font-weight: bold; }
+        .log-action { color: #bbb; }
+        .log-card { color: #fff; font-weight: bold; }
+
         #community-cards {
             position: absolute;
-            top: 50%;
-            left: 50%;
+            top: 50%; left: 50%;
             transform: translate(-50%, -50%);
-            display: flex;
-            gap: 4px;
-            z-index: 5;
-            width: 100%;
-            justify-content: center;
+            display: flex; gap: 5px; z-index: 5;
         }
 
         #pot-display {
             position: absolute;
-            top: 35%;
-            left: 50%;
+            top: 32%; left: 50%;
             transform: translate(-50%, -50%);
-            font-size: 1em;
-            background: rgba(0,0,0,0.4);
+            font-size: 14px;
+            background: rgba(0,0,0,0.6);
             padding: 4px 12px;
             border-radius: 12px;
-            border: 1px solid rgba(255,255,255,0.3);
+            border: 1px solid rgba(255,255,255,0.2);
             z-index: 5;
-            white-space: nowrap;
+            color: #ffd700; font-weight: bold;
         }
 
+        /* === 玩家 === */
         .player {
             position: absolute;
             width: var(--card-w);
-            min-width: 60px;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            z-index: 10;
+            display: flex; flex-direction: column; align-items: center;
+            z-index: 10; transition: all 0.3s;
         }
-
         .player-info {
-            background: rgba(0,0,0,0.7);
-            padding: 2px 5px;
-            border-radius: 4px;
-            text-align: center;
-            font-size: 11px;
-            width: 130%;
-            margin-bottom: 3px;
-            white-space: nowrap;
-            position: relative;
+            background: rgba(20,20,20,0.85);
+            padding: 2px 4px; border-radius: 4px;
+            text-align: center; font-size: 10px;
+            width: 140%; margin-bottom: 4px;
+            border: 1px solid #444;
             box-shadow: 0 2px 4px rgba(0,0,0,0.5);
-            transition: all 0.3s;
-        }
-
-        .player-cards {
-            display: flex;
-            justify-content: center;
-            gap: 1px;
-        }
-
-        /* === 桌面端坐标 === */
-        #p0 { bottom: -12%; left: 50%; transform: translateX(-50%); }
-        #p1 { bottom: 15%; left: -5%; }
-        #p2 { top: 25%; left: -5%; }
-        #p3 { top: -10%; left: 25%; }
-        #p4 { top: -10%; right: 25%; }
-        #p5 { top: 25%; right: -5%; }
-        #p6 { bottom: 15%; right: -5%; }
-
-        .card {
-            width: var(--card-w);
-            height: var(--card-h);
-            background: white;
-            border-radius: 4px;
-            color: black;
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
-            font-weight: bold;
-            font-size: 18px;
-            line-height: 1;
-            box-shadow: 1px 1px 3px rgba(0,0,0,0.3);
             position: relative;
-            transition: box-shadow 0.3s;
         }
-        .card.red { color: #d00; }
+        .player-cards { display: flex; justify-content: center; gap: 1px; }
+
+        /* 桌面端坐标 */
+        #p0 { bottom: -12%; left: 50%; transform: translateX(-50%); }
+        #p1 { bottom: 10%; left: -5%; }
+        #p2 { top: 15%; left: -5%; }
+        #p3 { top: -12%; left: 30%; }
+        #p4 { top: -12%; right: 30%; }
+        #p5 { top: 15%; right: -5%; }
+        #p6 { bottom: 10%; right: -5%; }
+
+        /* 卡牌 */
+        .card {
+            width: var(--card-w); height: var(--card-h);
+            background: white; border-radius: 4px;
+            color: black; display: flex; flex-direction: column;
+            justify-content: center; align-items: center;
+            font-weight: 900; font-size: 18px; line-height: 1;
+            box-shadow: 1px 1px 3px rgba(0,0,0,0.4);
+            position: relative;
+        }
+        .card.red { color: #d32f2f; }
         .card.back {
-            background: repeating-linear-gradient(45deg, #606dbc, #606dbc 5px, #465298 5px, #465298 10px);
-            border: 2px solid #fff;
+            background: repeating-linear-gradient(45deg, #303f9f, #303f9f 5px, #283593 5px, #283593 10px);
+            border: 2px solid #eee;
         }
-        
         .card.winning-card {
             border: 2px solid #ffd700;
-            box-shadow: 0 0 15px rgba(255, 215, 0, 1);
-            z-index: 100;
+            box-shadow: 0 0 10px gold; z-index: 100;
         }
-
         .winner-highlight .player-info { 
-            border: 1px solid var(--highlight-color); 
-            background: rgba(255, 215, 0, 0.4); 
-            color: #fff;
-            box-shadow: 0 0 10px gold;
+            border: 1px solid gold; background: rgba(255, 215, 0, 0.3); color: #fff;
         }
         .active-turn .player-info {
-            background: #e65100;
-            box-shadow: 0 0 10px #ff9800;
-            transform: scale(1.1);
-            z-index: 50;
+            background: #e65100; border-color: #ff9800; transform: scale(1.1); z-index: 50;
         }
-        .folded { opacity: 0.4; filter: grayscale(100%); }
-
         .dealer-btn {
             background: white; color: black; border-radius: 50%;
-            width: 18px; height: 18px; font-size: 11px; font-weight: bold;
+            width: 16px; height: 16px; font-size: 10px; font-weight: bold;
             display: flex; align-items: center; justify-content: center;
-            position: absolute; top: -8px; right: -8px; z-index: 30;
-            display: none; box-shadow: 0 0 3px black; border: 1px solid #333;
+            position: absolute; top: -6px; right: -6px; z-index: 30;
+            border: 1px solid #333; display: none;
         }
 
+        /* === 控制栏 === */
         #controls {
-            margin-top: 30px;
-            display: grid;
+            width: 100%; max-width: 600px;
+            padding: 10px; display: grid;
             grid-template-columns: 1fr 1fr 1fr;
-            gap: 12px;
-            width: 100%;
-            max-width: 600px;
-            z-index: 50;
-            padding: 0 10px;
+            gap: 10px; z-index: 100; box-sizing: border-box;
+            margin-bottom: 10px;
         }
         button {
-            padding: 14px 0;
-            font-size: 16px;
-            cursor: pointer;
-            border: none;
-            border-radius: 8px;
-            font-weight: bold;
-            touch-action: manipulation;
-            box-shadow: 0 4px 0 rgba(0,0,0,0.2);
-            transition: transform 0.1s;
+            padding: 12px 0; font-size: 16px; border: none;
+            border-radius: 6px; font-weight: bold; color: white;
+            box-shadow: 0 3px 0 rgba(0,0,0,0.3); cursor: pointer;
         }
-        button:active { transform: translateY(3px); box-shadow: none; }
-        .btn-fold { background: #c62828; color: white; }
-        .btn-check { background: #1565c0; color: white; }
-        .btn-raise { background: #2e7d32; color: white; }
-        .btn-next { background: #ef6c00; color: white; grid-column: span 3; display: none; margin-top: 5px; animation: popIn 0.3s ease; }
-        button:disabled { background: #444; color: #888; box-shadow: none; transform: none; }
+        button:active { transform: translateY(2px); box-shadow: none; }
+        .btn-fold { background: #c62828; }
+        .btn-check { background: #1565c0; }
+        .btn-raise { background: #2e7d32; }
+        .btn-next { background: #ef6c00; grid-column: span 3; display: none; margin-top: 5px; }
+        button:disabled { background: #444; color: #777; transform: none; box-shadow: none; }
 
-        @keyframes popIn { from { transform: scale(0.8); opacity: 0; } to { transform: scale(1); opacity: 1; } }
-
-        #log-area {
-            width: 100%; max-width: 800px; height: 100px;
-            background: #222; margin-top: 15px;
-            overflow-y: auto; padding: 8px;
-            font-family: monospace; font-size: 12px;
-            border: 1px solid #444; color: #ccc;
-            border-radius: 6px;
-        }
-
-        #hand-ranks-bar {
-            width: 100%; max-width: 800px;
-            display: flex; flex-wrap: wrap; 
-            justify-content: center; gap: 4px;
-            margin-top: 10px; padding: 5px 0;
-        }
-        .rank-item {
-            font-size: 11px; color: #666; 
-            padding: 4px 8px; border-radius: 4px;
-            background: #111;
-        }
-        .rank-active {
-            color: #000; background-color: var(--highlight-color);
-            font-weight: bold;
-        }
-
-        /* === 📱 移动端 竖屏 深度适配 === */
+        /* === 移动端适配 === */
         @media (max-width: 600px) {
-            :root {
-                /* 稍微减小卡牌尺寸，让画面不拥挤 */
-                --card-w: 12vw; 
-                --card-h: 16.5vw;
-            }
-
-            #game-container {
-                /* 顶部留出更多空间，防止P3/P4贴边 */
-                margin-top: 20px;
-            }
-
-            #game-table {
-                /* 关键修改：增加高度比例，充分利用竖屏空间 */
-                /* 135% 意味着高度是宽度的 1.35倍，形成瘦长椭圆 */
-                padding-bottom: 135%; 
-                border-radius: 50%; /* 变成正椭圆 */
-                border-width: 6px;
-            }
-
-            /* === 玩家坐标重排 (针对长桌) === */
+            :root { --card-w: 11vw; --card-h: 15vw; }
+            #game-table { width: 90%; padding-bottom: 135%; border-radius: 150px; }
             
-            /* 顶部玩家 (P3, P4) 往里收一点，别太高 */
-            #p3 { top: -4%; left: 20%; }
-            #p4 { top: -4%; right: 20%; }
-
-            /* 左侧玩家 (P1, P2) 均匀分布 */
-            #p2 { top: 20%; left: -6%; }   /* 上方侧边 */
-            #p1 { top: auto; bottom: 25%; left: -6%; } /* 下方侧边 */
-
-            /* 右侧玩家 (P5, P6) 均匀分布 */
-            #p5 { top: 20%; right: -6%; }  /* 上方侧边 */
-            #p6 { top: auto; bottom: 25%; right: -6%; } /* 下方侧边 */
-
-            /* 自己 (P0) */
-            #p0 { bottom: -6%; }
-
-            /* 公共牌位置微调 */
-            #community-cards { top: 48%; gap: 2px; }
-            #pot-display { top: 35%; font-size: 0.9em; }
-
-            .card { font-size: 14px; border-radius: 3px; }
-            .player-info { font-size: 10px; width: 110%; padding: 2px; }
+            #p3 { top: -6%; left: 50%; transform: translateX(-50%); }
+            #p4 { top: 8%; right: 6%; }
+            #p2 { top: 8%; left: 6%; }
+            #p5 { top: 38%; right: -8%; }
+            #p1 { top: 38%; left: -8%; }
+            #p6 { bottom: 18%; right: -5%; }
+            #p0 { bottom: -8%; z-index: 60; }
             
-            #controls { margin-top: 35px; gap: 8px; }
-            button { font-size: 15px; padding: 12px 0; }
+            #controls {
+                position: fixed; bottom: 0; left: 0; right: 0;
+                background: rgba(20,20,20,0.95);
+                padding-bottom: 20px; margin: 0;
+            }
+            #game-container { padding-bottom: 80px; }
+            
+            /* 移动端日志位置微调 */
+            #log-area {
+                top: 55px; /* 避开顶部Rank条 */
+                left: 50%; transform: translateX(-50%);
+                width: 90%; height: 80px;
+                background: rgba(0,0,0,0.7);
+            }
         }
     </style>
 </head>
 <body>
 
+    <div id="hand-ranks-bar">
+        <div id="rank-0" class="rank-item">高牌</div>
+        <div id="rank-1" class="rank-item">一对</div>
+        <div id="rank-2" class="rank-item">两对</div>
+        <div id="rank-3" class="rank-item">三条</div>
+        <div id="rank-4" class="rank-item">顺子</div>
+        <div id="rank-5" class="rank-item">同花</div>
+        <div id="rank-6" class="rank-item">葫芦</div>
+        <div id="rank-7" class="rank-item">四条</div>
+        <div id="rank-8" class="rank-item">同花顺</div>
+    </div>
+
     <div id="game-container">
+        <div id="log-area">
+            <div style="text-align:center; color:#888;">--- 游戏记录 ---</div>
+        </div>
+
         <div id="game-table">
             <div id="pot-display">Pot: 0</div>
             <div id="community-cards"></div>
@@ -288,27 +254,11 @@
     <div id="controls">
         <button id="btn-fold" class="btn-fold" onclick="game.humanAction('fold')">弃牌</button>
         <button id="btn-call" class="btn-check" onclick="game.humanAction('call')">跟注/过牌</button>
-        <button id="btn-raise" class="btn-raise" onclick="game.humanAction('raise')">加注 (10)</button>
+        <button id="btn-raise" class="btn-raise" onclick="game.humanAction('raise')">加注 (20)</button>
         <button id="btn-next" class="btn-next" onclick="game.startNextRound()">下一局</button>
     </div>
 
-    <div id="hand-ranks-bar">
-        <div id="rank-0" class="rank-item">高牌</div>
-        <div id="rank-1" class="rank-item">一对</div>
-        <div id="rank-2" class="rank-item">两对</div>
-        <div id="rank-3" class="rank-item">三条</div>
-        <div id="rank-4" class="rank-item">顺子</div>
-        <div id="rank-5" class="rank-item">同花</div>
-        <div id="rank-6" class="rank-item">葫芦</div>
-        <div id="rank-7" class="rank-item">四条</div>
-        <div id="rank-8" class="rank-item">同花顺</div>
-    </div>
-
-    <div id="log-area"></div>
-
 <script>
-// === 逻辑代码 (Evaluate & Game Logic) 保持完全一致 ===
-
 const SUITS = ['♠', '♥', '♣', '♦'];
 const RANKS = ['2', '3', '4', '5', '6', '7', '8', '9', 'T', 'J', 'Q', 'K', 'A'];
 const RANK_VALUE = {'2':2, '3':3, '4':4, '5':5, '6':6, '7':7, '8':8, '9':9, 'T':10, 'J':11, 'Q':12, 'K':13, 'A':14};
@@ -320,6 +270,7 @@ class Card {
         this.value = RANK_VALUE[rank];
     }
     get color() { return (this.suit === '♥' || this.suit === '♦') ? 'red' : 'black'; }
+    toString() { return `${this.suit}${this.rank}`; } // 方便日志记录
 }
 
 class Deck {
@@ -343,6 +294,7 @@ const HandRank = {
     FLUSH: 5, FULL_HOUSE: 6, QUADS: 7, STRAIGHT_FLUSH: 8
 };
 
+// === 核心逻辑：修复后的胜负判定 ===
 function evaluateHand(cards) {
     let sorted = [...cards].sort((a,b) => b.value - a.value);
     
@@ -372,45 +324,78 @@ function evaluateHand(cards) {
     let straightCards = getStraight(sorted);
     let straightFlushCards = flushSuit ? getStraight(flushCards) : null;
 
-    if (straightFlushCards) return { rank: HandRank.STRAIGHT_FLUSH, score: straightFlushCards[0].value, winningCards: straightFlushCards };
+    const calcScore = (rankIdx, best5) => {
+        let s = rankIdx * 10000000000;
+        s += (best5[0].value * 100000000);
+        s += (best5[1].value * 1000000);
+        s += (best5[2].value * 10000);
+        s += (best5[3].value * 100);
+        s += (best5[4].value * 1);
+        return s;
+    };
+
+    if (straightFlushCards) return { rank: HandRank.STRAIGHT_FLUSH, score: calcScore(8, straightFlushCards), winningCards: straightFlushCards };
+
     let quadsVal = Object.keys(rankCounts).find(r => rankCounts[r] === 4);
     if (quadsVal) {
         quadsVal = parseInt(quadsVal);
         let quads = sorted.filter(c => c.value === quadsVal);
-        return { rank: HandRank.QUADS, score: quadsVal, winningCards: quads };
+        let kicker = sorted.find(c => c.value !== quadsVal);
+        let best5 = [...quads, kicker];
+        return { rank: HandRank.QUADS, score: calcScore(7, best5), winningCards: best5 };
     }
+
     let tripsVals = Object.keys(rankCounts).filter(r => rankCounts[r] === 3).map(Number).sort((a,b)=>b-a);
     let pairVals = Object.keys(rankCounts).filter(r => rankCounts[r] === 2).map(Number).sort((a,b)=>b-a);
+    
     if (tripsVals.length > 0) {
         let tVal = tripsVals[0];
         let pVal = -1;
         if (tripsVals.length > 1) pVal = tripsVals[1];
         else if (pairVals.length > 0) pVal = pairVals[0];
+
         if (pVal !== -1) {
             let tCards = sorted.filter(c => c.value === tVal);
             let pCards = sorted.filter(c => c.value === pVal).slice(0, 2);
-            return { rank: HandRank.FULL_HOUSE, score: tVal * 100 + pVal, winningCards: [...tCards, ...pCards] };
+            let best5 = [...tCards, ...pCards];
+            return { rank: HandRank.FULL_HOUSE, score: calcScore(6, best5), winningCards: best5 };
         }
     }
-    if (flushCards.length >= 5) return { rank: HandRank.FLUSH, score: flushCards[0].value, winningCards: flushCards.slice(0, 5) };
-    if (straightCards) return { rank: HandRank.STRAIGHT, score: straightCards[0].value, winningCards: straightCards };
+
+    if (flushCards.length >= 5) {
+        let best5 = flushCards.slice(0, 5);
+        return { rank: HandRank.FLUSH, score: calcScore(5, best5), winningCards: best5 };
+    }
+
+    if (straightCards) return { rank: HandRank.STRAIGHT, score: calcScore(4, straightCards), winningCards: straightCards };
+
     if (tripsVals.length > 0) {
         let tVal = tripsVals[0];
         let trips = sorted.filter(c => c.value === tVal);
-        return { rank: HandRank.TRIPS, score: tVal, winningCards: trips };
+        let kickers = sorted.filter(c => c.value !== tVal).slice(0, 2);
+        let best5 = [...trips, ...kickers];
+        return { rank: HandRank.TRIPS, score: calcScore(3, best5), winningCards: best5 };
     }
+
     if (pairVals.length >= 2) {
         let p1 = pairVals[0], p2 = pairVals[1];
         let pair1 = sorted.filter(c => c.value === p1);
         let pair2 = sorted.filter(c => c.value === p2);
-        return { rank: HandRank.TWO_PAIR, score: p1*100 + p2, winningCards: [...pair1, ...pair2] };
+        let kicker = sorted.find(c => c.value !== p1 && c.value !== p2);
+        let best5 = [...pair1, ...pair2, kicker];
+        return { rank: HandRank.TWO_PAIR, score: calcScore(2, best5), winningCards: best5 };
     }
+
     if (pairVals.length === 1) {
         let p1 = pairVals[0];
         let pair = sorted.filter(c => c.value === p1);
-        return { rank: HandRank.PAIR, score: p1, winningCards: pair };
+        let kickers = sorted.filter(c => c.value !== p1).slice(0, 3);
+        let best5 = [...pair, ...kickers];
+        return { rank: HandRank.PAIR, score: calcScore(1, best5), winningCards: best5 };
     }
-    return { rank: HandRank.HIGH_CARD, score: sorted[0].value, winningCards: [sorted[0]] };
+
+    let best5 = sorted.slice(0, 5);
+    return { rank: HandRank.HIGH_CARD, score: calcScore(0, best5), winningCards: best5 };
 }
 
 class PokerGame {
@@ -418,7 +403,7 @@ class PokerGame {
         this.players = [];
         for(let i=0; i<7; i++) {
             this.players.push({
-                id: i, isHuman: i === 0, chips: 100, hand: [], 
+                id: i, isHuman: i === 0, chips: 1000, hand: [], 
                 status: 'active', currentBet: 0, isEliminated: false
             });
         }
@@ -428,18 +413,27 @@ class PokerGame {
         this.dealerIdx = Math.floor(Math.random() * 7);
         this.highestBet = 0;
         this.stage = 'preflop';
-        this.logElem = document.getElementById('log-area');
         this.actorsLeft = 0; 
         this.raisesInRound = 0;
+        this.logElem = document.getElementById('log-area');
         
         this.disableControls(true);
         this.startNextRound();
     }
 
-    log(msg) {
+    // === 新增：增强的日志记录函数 ===
+    log(msg, type='normal') {
         let div = document.createElement('div');
-        div.textContent = msg;
-        this.logElem.prepend(div);
+        div.innerHTML = msg;
+        if (type === 'phase') div.className = 'log-phase';
+        if (type === 'win') div.className = 'log-win';
+        if (type === 'action') div.className = 'log-action';
+        this.logElem.appendChild(div);
+        this.logElem.scrollTop = this.logElem.scrollHeight; // 自动滚动到底部
+    }
+
+    formatCards(cards) {
+        return cards.map(c => c.toString()).join(' ');
     }
 
     startNextRound() {
@@ -453,6 +447,7 @@ class PokerGame {
         document.querySelectorAll('.player').forEach(el => el.classList.remove('winner-highlight'));
         document.querySelectorAll('.card').forEach(el => el.classList.remove('winning-card')); 
         document.getElementById('btn-next').style.display = 'none';
+        this.logElem.innerHTML = '<div style="text-align:center; color:#888;">--- 新回合开始 ---</div>'; // 清空上局日志
         
         this.deck.reset();
         this.communityCards = [];
@@ -475,11 +470,11 @@ class PokerGame {
         let sbIdx = this.getNextActive(this.dealerIdx);
         let bbIdx = this.getNextActive(sbIdx);
         
-        this.bet(sbIdx, 5);
-        this.bet(bbIdx, 10);
+        this.bet(sbIdx, 5, true); // true 表示强制盲注，不记入"action"日志避免刷屏
+        this.bet(bbIdx, 10, true);
         this.highestBet = 10;
         
-        this.log(`--- 新回合 (D: P${this.dealerIdx}) ---`);
+        this.log(`庄家 P${this.dealerIdx}, 盲注 $5/$10`, 'phase');
         this.updateUI();
         this.prepareBettingRound(this.getNextActive(bbIdx)); 
     }
@@ -501,7 +496,7 @@ class PokerGame {
         return next;
     }
 
-    bet(playerIdx, amount) {
+    bet(playerIdx, amount, isBlind = false) {
         let p = this.players[playerIdx];
         if (amount > p.chips) amount = p.chips;
         p.chips -= amount;
@@ -509,6 +504,7 @@ class PokerGame {
         this.pot += amount;
         if (p.currentBet > this.highestBet) this.highestBet = p.currentBet;
         if (p.chips === 0 && p.status !== 'folded') p.status = 'allin';
+        // 盲注不在这里记录日志，在startNextRound统一提示
     }
 
     async processTurn() {
@@ -535,14 +531,11 @@ class PokerGame {
         document.querySelectorAll('.player').forEach(el => el.classList.remove('active-turn'));
         document.getElementById(`p${p.id}`).classList.add('active-turn');
         
-        this.logElem.scrollTop = 0;
-
         if (p.isHuman) {
-            this.log(">>> 轮到你了");
             this.updateControls();
         } else {
             this.disableControls(true);
-            setTimeout(() => this.aiAction(p), 600);
+            setTimeout(() => this.aiAction(p), 500); // 稍微加快AI速度
         }
     }
 
@@ -557,23 +550,28 @@ class PokerGame {
         this.players.forEach(p => p.currentBet = 0);
         this.highestBet = 0;
         
+        let newCards = [];
+        let stageName = "";
+
         if (this.stage === 'preflop') {
             this.stage = 'flop';
-            this.communityCards.push(this.deck.deal(), this.deck.deal(), this.deck.deal());
-            this.log(`--- 翻牌 ---`);
+            newCards = [this.deck.deal(), this.deck.deal(), this.deck.deal()];
+            stageName = "翻牌";
         } else if (this.stage === 'flop') {
             this.stage = 'turn';
-            this.communityCards.push(this.deck.deal());
-            this.log(`--- 转牌 ---`);
+            newCards = [this.deck.deal()];
+            stageName = "转牌";
         } else if (this.stage === 'turn') {
             this.stage = 'river';
-            this.communityCards.push(this.deck.deal());
-            this.log(`--- 河牌 ---`);
+            newCards = [this.deck.deal()];
+            stageName = "河牌";
         } else if (this.stage === 'river') {
             this.showdown();
             return;
         }
 
+        this.communityCards.push(...newCards);
+        this.log(`--- ${stageName}: <span class="log-card">[${this.formatCards(newCards)}]</span> ---`, 'phase');
         this.updateUI();
         let startIdx = this.getNextActive(this.dealerIdx);
         this.prepareBettingRound(startIdx);
@@ -592,36 +590,45 @@ class PokerGame {
         this.updateUI(); 
 
         let active = this.players.filter(p => p.status !== 'folded' && p.status !== 'eliminated');
-        let bestPlayer = null;
         let bestScore = -1;
-        let bestRes = null;
+        let winners = [];
 
-        this.log("--- 摊牌时刻 ---");
+        this.log('>>> 摊牌决胜 <<<', 'phase');
 
-        active.forEach(p => {
+        // 计算并显示所有人的牌型
+        let results = active.map(p => {
             let fullHand = [...p.hand, ...this.communityCards];
             let res = evaluateHand(fullHand);
-            let score = res.rank * 1000000 + res.score; 
-            
             this.renderCards(p.id, p.hand, true);
-            this.log(`P${p.id}: ${this.getRankName(res.rank)}`);
-
-            if (score > bestScore) {
-                bestScore = score;
-                bestPlayer = p;
-                bestRes = res;
-            }
+            // 记录每个人的手牌结果
+            // this.log(`P${p.id}: ${this.getRankName(res.rank)} (${this.formatCards(res.winningCards)})`, 'action');
+            return { player: p, result: res };
         });
 
-        if (bestPlayer && bestRes) {
-            this.log(`🎉 P${bestPlayer.id} 获胜! 赢得 $${this.pot}`);
-            bestPlayer.chips += this.pot;
+        results.forEach(r => {
+            if (r.result.score > bestScore) bestScore = r.result.score;
+        });
+
+        winners = results.filter(r => r.result.score === bestScore);
+        let winAmount = Math.floor(this.pot / winners.length);
+
+        winners.forEach(w => {
+            let p = w.player;
+            p.chips += winAmount;
             
-            document.getElementById(`p${bestPlayer.id}`).classList.add('winner-highlight');
-            let rankEl = document.getElementById(`rank-${bestRes.rank}`);
+            document.getElementById(`p${p.id}`).classList.add('winner-highlight');
+            let rankEl = document.getElementById(`rank-${w.result.rank}`);
             if(rankEl) rankEl.classList.add('rank-active');
-            this.highlightWinningCards(bestPlayer.id, bestRes.winningCards);
-        }
+            
+            this.highlightWinningCards(p.id, w.result.winningCards);
+            
+            // === 详细的获胜日志 ===
+            let rankName = this.getRankName(w.result.rank);
+            let winCardsStr = this.formatCards(w.result.winningCards);
+            this.log(`🏆 P${p.id} 赢了 $${winAmount}!`, 'win');
+            this.log(`&nbsp;&nbsp;牌型: ${rankName}`, 'win');
+            this.log(`&nbsp;&nbsp;最佳五张: ${winCardsStr}`, 'win');
+        });
 
         this.players.forEach(p => {
             if (p.chips <= 0) {
@@ -632,17 +639,22 @@ class PokerGame {
         this.pot = 0;
         document.getElementById('pot-display').textContent = `Pot: 0`;
         this.players.forEach(p => document.querySelector(`#p${p.id} .chips`).textContent = p.chips);
-        
         document.getElementById('btn-next').style.display = 'block';
         this.disableControls(true);
     }
 
     highlightWinningCards(winnerId, winningCards) {
-        const isWinner = (c) => winningCards.some(wc => wc.suit === c.suit && wc.rank === c.rank);
         let p = this.players[winnerId];
-        let pCardsHtml = p.hand.map(c => this.createCardHtml(c, isWinner(c))).join('');
+        let pCardsHtml = p.hand.map(c => {
+            let isWin = winningCards.some(wc => wc.rank === c.rank && wc.suit === c.suit);
+            return this.createCardHtml(c, isWin);
+        }).join('');
         document.querySelector(`#p${winnerId} .player-cards`).innerHTML = pCardsHtml;
-        let commHtml = this.communityCards.map(c => this.createCardHtml(c, isWinner(c))).join('');
+
+        let commHtml = this.communityCards.map(c => {
+             let isWin = winningCards.some(wc => wc.rank === c.rank && wc.suit === c.suit);
+             return this.createCardHtml(c, isWin);
+        }).join('');
         document.getElementById('community-cards').innerHTML = commHtml;
     }
     
@@ -653,23 +665,29 @@ class PokerGame {
 
     handleAction(player, action, amount=0) {
         let callAmt = this.highestBet - player.currentBet;
+        let actionStr = "";
+        
         if (action === 'fold') {
             player.status = 'folded';
-            this.log(`P${player.id} 弃牌`);
+            actionStr = "弃牌";
         } else if (action === 'call') {
             this.bet(player.id, callAmt);
-            let msg = (callAmt === 0) ? "过牌" : "跟注";
-            this.log(`P${player.id} ${msg}`);
+            actionStr = callAmt === 0 ? "过牌" : `跟注 $${callAmt}`;
         } else if (action === 'raise') {
             let raiseAmt = callAmt + amount;
             this.bet(player.id, raiseAmt);
-            this.log(`P${player.id} 加注 ${amount}`);
             this.raisesInRound++;
+            actionStr = `加注 到 $${player.currentBet}`; // 显示当前总下注额更直观
             let activeNotAllIn = this.players.filter(p => 
                 p.status !== 'folded' && p.status !== 'eliminated' && p.status !== 'allin'
             ).length;
             this.actorsLeft = activeNotAllIn; 
         }
+
+        // 记录日志
+        let name = player.isHuman ? "你" : `P${player.id}`;
+        this.log(`${name}: ${actionStr}`, 'action');
+
         this.actorsLeft--;
         this.updateUI();
         this.currentTurnIdx = this.getNextActive(this.currentTurnIdx);
@@ -678,7 +696,7 @@ class PokerGame {
 
     humanAction(type) {
         let p = this.players[0];
-        if (type === 'raise') this.handleAction(p, 'raise', 10);
+        if (type === 'raise') this.handleAction(p, 'raise', 20);
         else this.handleAction(p, type);
     }
 
@@ -687,24 +705,33 @@ class PokerGame {
         let fullHand = [...player.hand, ...this.communityCards];
         let action = 'fold';
         let strength = 0; 
+        
         if (fullHand.length < 5) {
             let v1 = player.hand[0].value, v2 = player.hand[1].value;
-            if (v1 === v2) strength = 2;
-            else if (v1 > 10 && v2 > 10) strength = 1.5;
-            else if (v1 > 12 || v2 > 12) strength = 1;
+            if (v1 === v2) strength = 0.8; 
+            else if (v1 > 10 && v2 > 10) strength = 0.6; 
+            else if (v1 > 12 || v2 > 12) strength = 0.4; 
         } else {
             let res = evaluateHand(fullHand);
-            strength = res.rank + (res.score / 1000000); 
+            strength = (res.rank + (res.score % 10000000000) / 10000000000) / 9; 
+            if (res.rank >= 2) strength = 0.8;
+            else if (res.rank === 1) strength = 0.5;
+            else strength = 0.2;
         }
-        let canRaise = (this.raisesInRound < 4); 
-        if (strength >= 2) { 
-            if (canRaise && Math.random() > 0.4) action = 'raise'; else action = 'call';
-        } else if (strength >= 1) { 
-            if (callAmt < 20) action = 'call'; else action = Math.random() > 0.6 ? 'call' : 'fold';
-        } else { 
-            if (callAmt === 0) action = 'call'; else action = Math.random() > 0.85 ? 'raise' : 'fold';
+
+        let rnd = Math.random();
+        if (strength > 0.7) {
+            if (rnd > 0.3) action = 'raise'; else action = 'call';
+        } else if (strength > 0.4) {
+            if (callAmt < 50) action = 'call'; else action = (rnd > 0.6 ? 'call' : 'fold');
+        } else {
+            if (callAmt === 0) action = 'call'; else action = (rnd > 0.8 ? 'call' : 'fold');
         }
-        if (action === 'raise') this.handleAction(player, 'raise', 10);
+
+        if (action === 'raise' && this.raisesInRound >= 3) action = 'call';
+        if (action === 'raise' && player.chips <= callAmt + 20) action = 'call';
+
+        if (action === 'raise') this.handleAction(player, 'raise', 20);
         else this.handleAction(player, action);
     }
 
@@ -734,7 +761,7 @@ class PokerGame {
             
             if (p.status === 'folded') el.querySelector('.player-cards').classList.add('folded');
             else el.querySelector('.player-cards').classList.remove('folded');
-            if (p.isEliminated) el.style.opacity = 0.3;
+            if (p.isEliminated) el.style.opacity = 0.4;
         });
     }
 
