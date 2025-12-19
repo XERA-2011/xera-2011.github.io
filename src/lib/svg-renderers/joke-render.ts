@@ -49,7 +49,7 @@ export function renderQnACard(options: QnACardOptions): string {
   const border = hideBorder ? '2px solid transparent' : `2px solid ${borderColor}`;
 
   return `
-<svg width="${width}" height="${height}" viewBox="0 0 ${width} ${height}" fill="none" xmlns="http://www.w3.org/2000/svg">/www.w3.org/2000/svg">
+<svg width="${width}" height="${height}" viewBox="0 0 ${width} ${height}" fill="none" xmlns="http://www.w3.org/2000/svg">
   <foreignObject width="${width}" height="${height}">
     <div xmlns="http://www.w3.org/1999/xhtml">
       <style>
@@ -71,7 +71,7 @@ export function renderQnACard(options: QnACardOptions): string {
         }
         .question {
           color: ${qColor};
-          margin-bottom: 0.75rem;
+          margin-bottom: 0.5rem;
         }
         .answer {
           color: ${aColor};
@@ -81,7 +81,7 @@ export function renderQnACard(options: QnACardOptions): string {
           line-height: 1.5;
         }
         .zh {
-          margin-top: 0.3rem;
+          margin-top: 2px;
           opacity: 0.85;
           font-size: 0.9em;
         }
@@ -125,7 +125,7 @@ export function renderQuoteCard(options: QuoteCardOptions): string {
   const border = hideBorder ? '2px solid transparent' : `2px solid ${borderColor}`;
 
   return `
-<svg width="${width}" height="${height}" viewBox="0 0 ${width} ${height}" fill="none" xmlns="http://www.w3.org/2000/svg">/www.w3.org/2000/svg">
+<svg width="${width}" height="${height}" viewBox="0 0 ${width} ${height}" fill="none" xmlns="http://www.w3.org/2000/svg">
   <foreignObject width="${width}" height="${height}">
     <div xmlns="http://www.w3.org/1999/xhtml">
       <style>
@@ -153,7 +153,7 @@ export function renderQuoteCard(options: QuoteCardOptions): string {
           line-height: 1.5;
         }
         .zh {
-          margin-top: 0.3rem;
+          margin-top: 2px;
           opacity: 0.85;
           font-size: 0.9em;
         }

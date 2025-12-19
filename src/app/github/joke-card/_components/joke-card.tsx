@@ -41,9 +41,9 @@ export default function JokeCard({
   // 获取笑话图片 URL
   const getJokeUrl = useCallback(() => {
     if (!isMounted) return '';
-    // 只支持 width / height 传参，此处为了预览暂不传宽高，只传刷新 key
-    return `/api/github/joke?r=${refreshKey}`;
-  }, [refreshKey, isMounted]);
+    const currentTheme = resolvedTheme === 'dark' ? 'dark' : 'light';
+    return `/api/github/joke?r=${refreshKey}&theme=${currentTheme}`;
+  }, [refreshKey, isMounted, resolvedTheme]);
 
   return (
     <motion.div

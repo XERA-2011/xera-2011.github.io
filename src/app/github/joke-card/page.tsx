@@ -31,6 +31,14 @@ export default function JokeCardPage() {
       title: '自定义尺寸',
       code: `<img alt="Joke Card" src="${BASE_URL}/api/github/joke?width=600&height=250" />`,
     },
+    {
+      title: '自适应主题',
+      code: `<picture>
+  <source media="(prefers-color-scheme: dark)" srcset="${BASE_URL}/api/github/joke?theme=dark" />
+  <source media="(prefers-color-scheme: light)" srcset="${BASE_URL}/api/github/joke?theme=light" />
+  <img alt="Joke Card" src="${BASE_URL}/api/github/joke?theme=dark" />
+</picture>`,
+    },
   ];
 
   return (
