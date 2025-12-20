@@ -307,6 +307,8 @@ export class PokerGameEngine {
   isFastForwarding: boolean = false;
   winners: number[] = [];
   winningCards: Card[] = [];
+  lastRaiseAmount: number = 0;
+  bigBlind: number = 10;
 
   constructor(onChange: (snapshot: ReturnType<PokerGameEngine['getSnapshot']>) => void) {
     this.onChange = onChange;
@@ -362,6 +364,7 @@ export class PokerGameEngine {
     this.pot = 0;
     this.highestBet = 0;
     this.raisesInRound = 0;
+    this.lastRaiseAmount = this.bigBlind; // Base raise delta is BB
     this.winners = [];
     this.logs = []; // Clear logs for new round
     this.winningCards = [];
@@ -406,6 +409,13 @@ export class PokerGameEngine {
 
     // Blinds
     let sbIdx = this.getNextActive(this.dealerIdx);
+    
+    // Heads-Up Rule Fix: In 2-player games, Dealer is Small Blind
+    const activePlayers = this.players.filter(p => !p.isEliminated);
+    if (activePlayers.length === 2) {
+        sbIdx = this.dealerIdx;
+    }
+
     let bbIdx = this.getNextActive(sbIdx);
 
     this.bet(this.players[sbIdx], 5);
@@ -608,12 +618,32 @@ export class PokerGameEngine {
         }
         break;
       case 'raise':
+        // RULE FIX: Minimum raise must be at least the size of the previous raise (or BB)
+        // Ensure raiseAmount is valid.
+        // User UI sends fixed 20 sometimes, but we should validate.
+        const minRaise = Math.max(this.bigBlind, this.lastRaiseAmount);
+        
+        // If player tries to raise less than min (but has chips), force min? 
+        // Or if UI sends just "Raise", we default to Min Raise?
+        if (raiseAmount < minRaise) raiseAmount = minRaise;
+
         let totalBet = callAmount + raiseAmount;
+        
         if (totalBet >= player.chips) { // Treat as All-in
           this.handleAction(player, 'allin'); 
           return;
         }
+
         this.bet(player, totalBet);
+
+        // Update Raise Delta
+        // New Highest = player.currentBet.
+        // Delta = New Highest - Old Highest.
+        // Wait, raising *by* raiseAmount means `currentBet` increases by `callAmount + raiseAmount`.
+        // So `currentBet` becomes `highestBet + raiseAmount`.
+        // The *increase* in `highestBet` is `raiseAmount`.
+        this.lastRaiseAmount = raiseAmount; 
+        
         this.highestBet = player.currentBet;
         this.raisesInRound++;
         this.log(`${player.name} 加注到 $${player.currentBet}`, 'action');
@@ -830,6 +860,7 @@ export class PokerGameEngine {
       });
       this.highestBet = 0;
       this.raisesInRound = 0;
+      this.lastRaiseAmount = this.bigBlind; // Reset min raise for new street
 
       if (this.stage === 'preflop') {
           this.stage = 'flop';
