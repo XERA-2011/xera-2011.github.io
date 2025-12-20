@@ -1,18 +1,23 @@
 "use client";
 
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { motion } from 'framer-motion';
 import Image from 'next/image';
 import { usePageTitle } from '@/hooks/use-page-title';
 import GlowCard from '@/components/ui/glow-card';
 import { Button } from '@/components/ui/button';
 import { BASE_URL } from '@/lib/constants';
+import { useTheme } from 'next-themes';
 
 export default function CoinPage() {
   usePageTitle('Crypto Prices');
   const [copiedIndex, setCopiedIndex] = useState<number | null>(null);
-  const [layout, setLayout] = useState('grid');
-  const [theme, setTheme] = useState('dark');
+  const { resolvedTheme } = useTheme();
+  const [isMounted, setIsMounted] = useState(false);
+
+  useEffect(() => {
+    setIsMounted(true);
+  }, []);
 
   const handleCopy = async (text: string, index: number) => {
     try {
@@ -24,135 +29,87 @@ export default function CoinPage() {
     }
   };
 
-
   const coins = 'btc,eth,sol,bnb';
-
-  // 布局选项
-  const layoutOptions = [
-    { value: 'grid', label: '常规网格布局' },
-    { value: 'horizontal', label: '紧凑水平布局' }
-  ];
+  const currentTheme = isMounted && resolvedTheme === 'dark' ? 'dark' : 'light';
 
   const examples = [
     {
-      title: '单币种卡片',
-      code: `<img alt="BTC Price" src="${BASE_URL}/api/github/crypto-coin?coin=btc" />`,
-      preview: `/api/github/crypto-coin?coin=btc`,
+      title: '基础用法',
+      code: `<img alt="Crypto Prices" src="${BASE_URL}/api/github/crypto-coin?coin=${coins}" />`,
     },
     {
-      title: '多币种卡片 (网格布局)',
-      code: `<img alt="Crypto Prices" src="${BASE_URL}/api/github/crypto-coin?coin=${coins}&mode=multi" />`,
-      preview: `/api/github/crypto-coin?coin=${coins}&mode=multi`,
+      title: '自定义尺寸',
+      code: `<img alt="Crypto Prices" src="${BASE_URL}/api/github/crypto-coin?coin=${coins}&width=800" />`,
     },
     {
-      title: '多币种卡片 (紧凑水平布局)',
-      code: `<img alt="Crypto Prices" src="${BASE_URL}/api/github/crypto-coin?coin=${coins}&mode=multi&layout=horizontal&theme=${theme}" />`,
-      preview: `/api/github/crypto-coin?coin=${coins}&mode=multi&layout=horizontal&theme=${theme}`,
+      title: '自适应主题',
+      code: `<picture>
+  <source media="(prefers-color-scheme: dark)" srcset="${BASE_URL}/api/github/crypto-coin?coin=${coins}&theme=dark" />
+  <source media="(prefers-color-scheme: light)" srcset="${BASE_URL}/api/github/crypto-coin?coin=${coins}&theme=light" />
+  <img alt="Crypto Prices" src="${BASE_URL}/api/github/crypto-coin?coin=${coins}&theme=dark" />
+</picture>`,
     },
   ];
 
   return (
     <div className="relative w-full min-h-screen pt-32 pb-20">
-      <div className="container mx-auto px-4 sm:px-6 lg:px-8 max-w-6xl">
+      <div className="container mx-auto px-4 sm:px-6 lg:px-8 max-w-4xl">
         {/* Page Title */}
         <motion.div
-          className="text-center mb-8"
+          className="text-center mb-16"
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8 }}
         >
-          <h2 className="text-3xl sm:text-4xl font-bold text-foreground mb-2">
+          <h2 className="text-3xl sm:text-4xl lg:text-5xl font-bold text-foreground mb-4">
             Crypto Coin Prices
           </h2>
         </motion.div>
 
-        {/* Interactive Preview */}
+        {/* Crypto Coin Card */}
         <motion.div
           initial={{ opacity: 0, y: 30 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8, delay: 0.2 }}
         >
-          <GlowCard className="p-6 sm:p-8 mb-8">
-            <h3 className="text-2xl font-bold text-foreground mb-6">实时预览</h3>
-
-            <div className="space-y-6">
-              {/* 布局选择 */}
-              <div>
-                <label className="block text-sm font-medium text-muted-foreground mb-2">
-                  布局类型
-                </label>
-                <div className="grid grid-cols-2 gap-2">
-                  {layoutOptions.map((option) => (
-                    <button
-                      key={option.value}
-                      onClick={() => setLayout(option.value)}
-                      className={`px-4 py-2 rounded-lg border transition-all duration-300 ${layout === option.value
-                        ? 'bg-accent border-ring text-accent-foreground'
-                        : 'bg-secondary border-border text-muted-foreground hover:border-ring'
-                        }`}
-                    >
-                      {option.label}
-                    </button>
-                  ))}
+          <GlowCard className="p-4 sm:p-8">
+            <div className="flex justify-center">
+              {isMounted ? (
+                <div className="relative overflow-hidden rounded-xl bg-secondary/10 p-4 border border-border/50">
+                  <Image
+                    src={`/api/github/crypto-coin?coin=${coins}&theme=${currentTheme}`}
+                    alt="Crypto Prices Preview"
+                    key={`preview-${currentTheme}`}
+                    width={600}
+                    height={150}
+                    style={{ width: "auto", height: "auto" }}
+                    priority
+                    unoptimized
+                  />
                 </div>
-              </div>
-
-              {/* 主题选择 */}
-              <div>
-                <label className="block text-sm font-medium text-muted-foreground mb-2">
-                  主题
-                </label>
-                <div className="flex gap-2">
-                  {['dark', 'light'].map((t) => (
-                    <button
-                      key={t}
-                      onClick={() => setTheme(t)}
-                      className={`px-4 py-2 rounded-lg border transition-all duration-300 ${theme === t
-                        ? 'bg-accent border-ring text-accent-foreground'
-                        : 'bg-secondary border-border text-muted-foreground hover:border-ring'
-                        }`}
-                    >
-                      {t}
-                    </button>
-                  ))}
+              ) : (
+                <div className="h-[150px] w-[600px] flex items-center justify-center text-muted-foreground animate-pulse rounded-xl bg-secondary/10">
+                  Loading...
                 </div>
-              </div>
-
-              {/* 预览区域 */}
-              <div className="flex justify-center bg-secondary border border-border rounded-lg p-8 mt-6" style={{ minHeight: '250px' }}>
-                <Image
-                  src={`/api/github/crypto-coin?coin=${coins}&mode=multi&layout=${layout}&theme=${theme}`}
-                  alt="Crypto Prices Preview"
-                  key={`${layout}-${theme}`}
-                  width={layout === 'horizontal' ? 600 : 400}
-                  height={layout === 'horizontal' ? 150 : 300}
-                  style={{ width: "auto", height: "auto" }}
-                  priority
-                  unoptimized
-                />
-              </div>
+              )}
             </div>
           </GlowCard>
         </motion.div>
 
-        {/* API Documentation */}
+        {/* Usage Section */}
         <motion.div
           initial={{ opacity: 0, y: 30 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8, delay: 0.4 }}
-          className="mt-6"
+          className="mt-8"
         >
-          <GlowCard className="p-4 sm:p-6">
-            <h2 className="text-2xl font-bold text-foreground mb-6">使用方法</h2>
-
-            <div className="space-y-8">
+          <GlowCard className="p-6">
+            <div className="space-y-6">
               {examples.map((example, index) => (
-                <div key={index} className="space-y-3">
-                  <h3 className="text-lg font-semibold text-foreground">{example.title}</h3>
-
-                  {/* Code Block with Copy Button */}
+                <div key={index} className="space-y-2">
+                  <p className="text-sm font-medium text-muted-foreground">{example.title}</p>
                   <div className="relative">
-                    <pre className="bg-secondary border border-border rounded-lg p-4 overflow-x-auto">
+                    <pre className="bg-secondary border border-border rounded-lg p-3 overflow-x-auto">
                       <code className="text-sm text-foreground">{example.code}</code>
                     </pre>
                     <Button
@@ -178,19 +135,6 @@ export default function CoinPage() {
                       )}
                     </Button>
                   </div>
-
-                  {/* Preview */}
-                  <div className="flex justify-center bg-secondary border border-border rounded-lg p-4">
-                    <Image
-                      src={example.preview}
-                      alt={example.title}
-                      className="max-w-full"
-                      width={900}
-                      height={600}
-                      style={{ width: "auto", height: "auto" }}
-                      unoptimized
-                    />
-                  </div>
                 </div>
               ))}
             </div>
@@ -198,6 +142,8 @@ export default function CoinPage() {
             <div className="mt-6 pt-6 border-t border-border">
               <p className="text-sm text-muted-foreground">
                 <strong className="text-foreground">支持的币种:</strong> BTC、ETH、ETC、BNB、SOL、USDT、XRP、ADA、DOGE、TRX
+                <br />
+                <span className="text-xs mt-2 block">支持暗黑模式和浅色模式自适应，背景透明。</span>
               </p>
             </div>
           </GlowCard>
