@@ -10,7 +10,7 @@ export default function TexasHoldemPage() {
 
   if (!gameState) {
     return (
-      <div className="flex h-screen items-center justify-center bg-neutral-900 text-white">
+      <div className="flex h-screen items-center justify-center bg-white dark:bg-zinc-950 text-black dark:text-white">
         Loading Poker Engine...
       </div>
     );
@@ -25,11 +25,11 @@ export default function TexasHoldemPage() {
   const canRaise = human.chips > callAmount;
 
   return (
-    <div className="w-full h-[100dvh] text-white selection:bg-orange-500 selection:text-white overflow-hidden flex flex-col">
+    <div className="w-full h-[100dvh] bg-white dark:bg-black text-zinc-900 dark:text-zinc-100 selection:bg-zinc-300 dark:selection:bg-zinc-700 selection:text-black overflow-hidden flex flex-col">
 
       {/* Header Area - Compact */}
       <div className="flex-none pt-24 px-4 pb-4 lg:p-10 flex justify-center items-center">
-        <h1 className="text-3xl sm:text-4xl lg:text-5xl font-bold bg-gradient-to-r from-yellow-200 to-yellow-600 bg-clip-text text-transparent drop-shadow-lg">
+        <h1 className="text-3xl sm:text-4xl lg:text-5xl font-bold text-zinc-900 dark:text-white drop-shadow-sm">
           Texas Hold'em
         </h1>
       </div>

@@ -73,16 +73,16 @@ export function GameLog({ logs, players, communityCards }: LogProps) {
   };
 
   return (
-    <div className="w-full flex flex-col bg-black/40 border border-white/10 rounded-lg backdrop-blur-sm">
+    <div className="w-full flex flex-col bg-white/90 dark:bg-black/40 border border-zinc-200 dark:border-white/10 rounded-lg backdrop-blur-sm shadow-sm">
       {/* Header */}
-      <div className="flex items-center justify-between px-2 py-1 border-b border-white/10 bg-white/5">
-        <span className="text-xs md:text-sm font-bold text-gray-400">Game Log</span>
+      <div className="flex items-center justify-between px-2 py-1 border-b border-zinc-200 dark:border-white/10 bg-zinc-50/50 dark:bg-white/5">
+        <span className="text-xs md:text-sm font-bold text-zinc-700 dark:text-gray-400">Game Log</span>
         <button
           onClick={handleCopy}
           disabled={copyState === 'copied'}
           className={`text-[10px] px-2 py-0.5 rounded transition-all duration-300 ${copyState === 'copied'
-            ? 'bg-emerald-500/20 text-emerald-400 cursor-default'
-            : 'bg-white/10 hover:bg-white/20 text-gray-300'
+            ? 'bg-zinc-200 dark:bg-zinc-800 text-zinc-900 dark:text-zinc-100 cursor-default'
+            : 'bg-zinc-100 dark:bg-white/10 hover:bg-zinc-200 dark:hover:bg-white/20 text-zinc-600 dark:text-gray-300'
             }`}
           title="Copy showdown details"
         >
@@ -93,25 +93,25 @@ export function GameLog({ logs, players, communityCards }: LogProps) {
       {/* Log Content */}
       <div
         ref={scrollRef}
-        className="h-16 sm:h-24 overflow-y-auto p-2 font-mono text-xs md:text-sm text-gray-300 scrollbar-thin scrollbar-thumb-gray-700 scrollbar-track-transparent"
+        className="h-16 sm:h-24 overflow-y-auto p-2 font-mono text-xs md:text-sm text-zinc-700 dark:text-gray-300 scrollbar-thin scrollbar-thumb-zinc-300 dark:scrollbar-thumb-gray-700 scrollbar-track-transparent"
       >
         {logs.length === 0 && <div className="text-center text-gray-500 italic">Game log...</div>}
         {logs.map((log) => (
           <div key={log.id} className="mb-0.5 leading-tight">
             {log.type === 'phase' && (
-              <div className="text-yellow-400 font-bold border-t border-white/10 mt-1 pt-1" dangerouslySetInnerHTML={{ __html: log.message }} />
+              <div className="text-zinc-900 dark:text-zinc-100 font-bold border-t border-zinc-200 dark:border-white/10 mt-1 pt-1" dangerouslySetInnerHTML={{ __html: log.message }} />
             )}
             {log.type === 'win' && (
-              <div className="text-emerald-400 font-bold" dangerouslySetInnerHTML={{ __html: log.message }} />
+              <div className="text-zinc-900 dark:text-white font-extrabold underline decoration-dotted decoration-zinc-500" dangerouslySetInnerHTML={{ __html: log.message }} />
             )}
             {log.type === 'action' && (
-              <div className="text-gray-400" dangerouslySetInnerHTML={{ __html: log.message }} />
+              <div className="text-zinc-600 dark:text-zinc-400" dangerouslySetInnerHTML={{ __html: log.message }} />
             )}
             {log.type === 'normal' && (
-              <div className="text-gray-300" dangerouslySetInnerHTML={{ __html: log.message }} />
+              <div className="text-zinc-500 dark:text-zinc-500" dangerouslySetInnerHTML={{ __html: log.message }} />
             )}
             {log.type === 'showdown' && (
-              <div className="text-orange-300 font-bold" dangerouslySetInnerHTML={{ __html: log.message }} />
+              <div className="text-zinc-800 dark:text-zinc-200 font-bold italic" dangerouslySetInnerHTML={{ __html: log.message }} />
             )}
           </div>
         ))}

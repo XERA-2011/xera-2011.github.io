@@ -36,27 +36,26 @@ export function Player({ player, isActiveTurn, isDealer, gameStage, className = 
           text-center 
           min-w-[60px] sm:min-w-[80px] md:min-w-[100px] lg:min-w-[120px]
           transition-colors duration-300
-          ${isActiveTurn ? 'bg-orange-600 border-orange-400 scale-105 z-20 shadow-lg text-white' : ''}
-          ${isWinner ? 'bg-yellow-900/80 border-yellow-400 shadow-[0_0_15px_rgba(234,179,8,0.5)] z-20 text-yellow-100' : ''}
-          ${!isActiveTurn && !isWinner ? 'bg-neutral-900/80 border-neutral-700 text-neutral-300' : ''}
+          ${isActiveTurn || isWinner ? 'bg-black border-black text-white dark:bg-white dark:border-white dark:text-black scale-105 z-20 shadow-lg' : ''}
+          ${!isActiveTurn && !isWinner ? 'bg-white/90 border-zinc-200 text-zinc-900 dark:bg-neutral-900/80 dark:border-neutral-700 dark:text-neutral-300' : ''}
           ${player.isEliminated ? 'opacity-50 grayscale' : ''}
         `}
       >
         <div className="font-bold truncate max-w-[60px] sm:max-w-none mx-auto text-[9px] sm:text-xs md:text-sm lg:text-base">
           {player.name}
         </div>
-        <div className="text-emerald-400 font-mono leading-none md:text-lg">${player.chips}</div>
+        <div className={`font-mono leading-none md:text-lg ${(isActiveTurn || isWinner) ? 'text-zinc-200 dark:text-zinc-800' : 'text-zinc-600 dark:text-zinc-400'}`}>${player.chips}</div>
 
         {/* Status Badge */}
         {player.status !== 'active' && (
           <div className="text-[9px] sm:text-[10px] md:text-xs lg:text-sm uppercase font-bold text-slate-400 mt-0.5 leading-none">
             {player.status === 'folded' && 'Fold'}
-            {player.status === 'allin' && <span className="text-red-400">All-in</span>}
+            {player.status === 'allin' && <span className="text-zinc-900 dark:text-white font-black underline decoration-zinc-500">All-in</span>}
             {player.status === 'eliminated' && 'Out'}
           </div>
         )}
         {player.status !== 'folded' && player.status !== 'eliminated' && player.currentBet > 0 && (
-          <div className={`text-[9px] sm:text-[10px] md:text-xs lg:text-sm text-blue-300 font-bold leading-none ${gameStage === 'showdown' ? 'invisible' : ''}`}>
+          <div className={`text-[9px] sm:text-[10px] md:text-xs lg:text-sm font-bold leading-none ${(isActiveTurn || isWinner) ? 'text-zinc-300 dark:text-zinc-600' : 'text-zinc-500 dark:text-zinc-400'} ${gameStage === 'showdown' ? 'invisible' : ''}`}>
             ${player.currentBet}
           </div>
         )}

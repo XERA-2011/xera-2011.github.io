@@ -34,33 +34,34 @@ export function GameTable({ players, communityCards, pot, dealerIdx, currentTurn
     // Mobile: much taller (1/1.5) to fit logs. Desktop: wider (1/0.6).
     <div className="relative w-full max-w-[900px] h-auto max-h-[85vh] aspect-[1/1] sm:aspect-[1/0.6] mx-auto flex-shrink-0 transition-all duration-300">
       {/* The Felt Table */}
-      <div className="absolute inset-0 bg-[#35654d] border-[8px] sm:border-[12px] border-[#5d4037] rounded-[100px] sm:rounded-[200px] shadow-[inset_0_0_60px_rgba(0,0,0,0.8)]">
+      <div className="absolute inset-0 bg-gray-200 dark:bg-zinc-900 border-[8px] sm:border-[12px] border-gray-300 dark:border-zinc-800 rounded-[100px] sm:rounded-[200px] shadow-[inset_0_0_60px_rgba(0,0,0,0.1)] dark:shadow-[inset_0_0_60px_rgba(0,0,0,0.5)]">
 
-        {/* Game Log - Embedded in Table (Top Center) */}
-        <div className="absolute top-[28%] left-1/2 -translate-x-1/2 -translate-y-1/2 w-3/4 sm:w-1/2 z-0 pointer-events-auto">
+        {/* Pot Display */}
+        <div className="absolute top-[15%] left-1/2 -translate-x-1/2 -translate-y-1/2 z-10">
+          <div className="px-3 py-1 sm:px-4 sm:py-1.5 bg-white/80 dark:bg-black/60 rounded-full border border-zinc-200 dark:border-white/10 text-zinc-900 dark:text-zinc-100 font-bold font-mono text-sm sm:text-lg shadow-sm backdrop-blur-sm whitespace-nowrap">
+            Pot: ${pot}
+          </div>
+        </div>
+
+        {/* Community Cards */}
+        <div className="absolute top-[35%] left-1/2 -translate-x-1/2 -translate-y-1/2 flex gap-1 sm:gap-2 items-center justify-center z-10 w-full px-2">
+          {communityCards.map((card, i) => {
+            const isWinningCard = winningCards?.some(wc => wc.rank === card.rank && wc.suit === card.suit);
+            return <Card key={i} card={card} isWinning={isWinningCard} />;
+          })}
+          {Array.from({ length: 5 - communityCards.length }).map((_, i) => (
+            <div key={`empty-${i}`} className="w-8 h-11 sm:w-12 sm:h-16 border-[1px] sm:border-2 border-dashed border-zinc-400 dark:border-white/20 rounded-sm sm:rounded-md bg-transparent" />
+          ))}
+        </div>
+
+        {/* Game Log */}
+        <div className="absolute bottom-[10%] left-1/2 -translate-x-1/2 -translate-y-1/2 w-3/4 sm:w-1/2 z-0 pointer-events-auto">
           {/* Scale down slightly on mobile to fit */}
           <div className="origin-top scale-75 sm:scale-100">
             <GameLog logs={logs} players={players} communityCards={communityCards} />
           </div>
         </div>
 
-        {/* Pot Display - Lowered slightly to clear logs */}
-        <div className="absolute bottom-[40%] left-1/2 -translate-x-1/2 -translate-y-1/2 z-10">
-          <div className="px-3 py-1 sm:px-4 sm:py-1.5 bg-black/40 rounded-full border border-white/10 text-yellow-400 font-bold font-mono text-sm sm:text-lg shadow-sm backdrop-blur-sm whitespace-nowrap">
-            Pot: ${pot}
-          </div>
-        </div>
-
-        {/* Community Cards - Centered */}
-        <div className="absolute bottom-[15%] left-1/2 -translate-x-1/2 -translate-y-1/2 flex gap-1 sm:gap-2 items-center justify-center z-10 w-full px-2">
-          {communityCards.map((card, i) => {
-            const isWinningCard = winningCards?.some(wc => wc.rank === card.rank && wc.suit === card.suit);
-            return <Card key={i} card={card} isWinning={isWinningCard} />;
-          })}
-          {Array.from({ length: 5 - communityCards.length }).map((_, i) => (
-            <div key={`empty-${i}`} className="w-8 h-11 sm:w-12 sm:h-16 border-[1px] sm:border-2 border-dashed border-white/20 rounded-sm sm:rounded-md bg-black/10" />
-          ))}
-        </div>
       </div>
 
       {/* Players */}
