@@ -15,7 +15,7 @@ export function Player({ player, isActiveTurn, isDealer, gameStage, className = 
   const showFace = player.isHuman || gameStage === 'showdown';
 
   return (
-    <div className={`absolute flex flex-col items-center transition-all duration-300 ${className}`}>
+    <div className={`absolute flex flex-col items-center transition-all duration-300 ${className} ${(player.status === 'folded' || player.isEliminated) ? 'opacity-40' : ''}`}>
 
       {/* Speech Bubble */}
       {player.currentSpeech && (

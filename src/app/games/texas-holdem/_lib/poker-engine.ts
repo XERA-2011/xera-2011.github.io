@@ -1,3 +1,4 @@
+import { p } from "node_modules/@upstash/redis/zmscore-DhpQcqpW.mjs";
 
 export type Suit = '♠' | '♥' | '♣' | '♦';
 export type Rank = '2' | '3' | '4' | '5' | '6' | '7' | '8' | '9' | 'T' | 'J' | 'Q' | 'K' | 'A';
@@ -279,6 +280,8 @@ export interface Player {
   isEliminated: boolean;
   currentSpeech?: string;
   speechTs?: number;
+  totalHandBet: number;
+  hasActed: boolean;
 }
 
 export interface GameLog {
@@ -324,7 +327,9 @@ export class PokerGameEngine {
             hand: [],
             status: 'active', 
             currentBet: 0, 
-            isEliminated: false
+            isEliminated: false,
+            totalHandBet: 0,
+            hasActed: false
         });
     }
     
@@ -346,7 +351,6 @@ export class PokerGameEngine {
     this.communityCards = [];
     this.pot = 0;
     this.highestBet = 0;
-    this.highestBet = 0;
     this.raisesInRound = 0;
     this.winners = [];
     this.winningCards = [];
@@ -362,6 +366,8 @@ export class PokerGameEngine {
       p.hand = [];
       p.status = p.isEliminated ? 'eliminated' : 'active';
       p.currentBet = 0;
+      p.totalHandBet = 0;
+      p.hasActed = false;
       p.currentSpeech = undefined;
       p.speechTs = undefined;
     });
@@ -390,47 +396,134 @@ export class PokerGameEngine {
 
   showdown() {
     this.log('摊牌!', 'phase');
-    let activePlayers = this.players.filter(p => p.status !== 'folded' && !p.isEliminated);
+    let activePlayers = this.players.filter(p => !p.isEliminated && p.status !== 'folded');
+    let foldedPlayers = this.players.filter(p => !p.isEliminated && p.status === 'folded');
 
+    // If only one player stands (others folded)
+    // Note: This block is usually handled before calling showdown in 'prepareBettingRound', 
+    // but as a fallback:
     if (activePlayers.length === 1) {
-      let winner = activePlayers[0];
-      this.log(`${winner.name} 赢得了 $${this.pot} (所有人都弃牌了)`, 'win');
-      winner.chips += this.pot;
-      this.pot = 0;
-      this.notify();
-      return;
+       let winner = activePlayers[0];
+       // Winner takes entire pot
+       winner.chips += this.pot;
+       this.log(`${winner.name} 赢得了 $${this.pot} (其他玩家弃牌)`, 'win');
+       this.winners = [winner.id];
+       this.pot = 0;
+       this.notify();
+       return;
     }
 
+    // Evaluate Hands
     let results = activePlayers.map(p => ({
       player: p,
       result: evaluateHand([...p.hand, ...this.communityCards])
     }));
 
-    results.sort((a, b) => {
-      if (a.result.rank !== b.result.rank) {
-        return b.result.rank - a.result.rank;
-      }
-      return b.result.score - a.result.score;
-    });
-
-    let winner = results[0].player;
-    let winningResult = results[0].result;
-
-    this.winners = [winner.id];
-    this.winningCards = winningResult.winningCards;
-
+    // Show cards
     results.forEach(({ player, result }) => {
-      let kickers = result.bestHand.filter(c => !result.winningCards.includes(c));
-      let kickerText = kickers.length > 0 ? ` (Kicker: ${this.formatCards(kickers)})` : '';
-      this.log(`${player.name} 亮牌: ${this.formatCards(player.hand)} (${this.getRankName(result.rank)}${kickerText})`, 'showdown');
+         let info = `(${this.getRankName(result.rank)})`;
+         this.log(`${player.name} 亮牌: ${this.formatCards(player.hand)} ${info}`, 'showdown');
     });
 
-    let kickers = winningResult.bestHand.filter(c => !winningResult.winningCards.includes(c));
-    let kickerText = kickers.length > 0 ? ` (Kicker: ${this.formatCards(kickers)})` : '';
-    this.log(`${winner.name} 赢得了 $${this.pot}，手牌: ${this.formatCards(winner.hand)} (${this.getRankName(winningResult.rank)}${kickerText})`, 'win');
+    // --- Side Pot & Split Pot Logic ---
     
-    winner.chips += this.pot;
-    this.pot = 0;
+    // 1. Calculate Contributions
+    // We consider all players who put money in (active + folded)
+    let allContributors = [...activePlayers, ...foldedPlayers];
+    let contributions = allContributors.map(p => ({ id: p.id, amount: p.totalHandBet }));
+    
+    // 2. Identify unique bet levels (sorted asc)
+    let betLevels = Array.from(new Set(contributions.map(c => c.amount).filter(a => a > 0))).sort((a, b) => a - b);
+    
+    let currentPotIdx = 0;
+    this.winners = [];
+    this.winningCards = [];
+    
+    let processedBet = 0;
+
+    for (let level of betLevels) {
+        let step = level - processedBet;
+        if (step <= 0) continue;
+        
+        // Calculate pot at this level
+        // Everyone who bet at least 'level' contributes 'step'
+        let contributorsAtLevel = contributions.filter(c => c.amount >= level);
+        let potAmount = contributorsAtLevel.length * step;
+        
+        // Eligible winners: Active players who bet at least 'level'
+        let eligiblePlayerIds = activePlayers
+            .filter(p => p.totalHandBet >= level)
+            .map(p => p.id);
+
+        if (eligiblePlayerIds.length > 0) {
+             // Find winner(s) among eligible
+             let eligibleResults = results.filter(r => eligiblePlayerIds.includes(r.player.id));
+             
+             // Sort to find best score
+             eligibleResults.sort((a, b) => {
+                if (a.result.rank !== b.result.rank) return b.result.rank - a.result.rank;
+                return b.result.score - a.result.score;
+             });
+             
+             let bestRes = eligibleResults[0];
+             let winners = eligibleResults.filter(r => 
+                 r.result.rank === bestRes.result.rank && 
+                 Math.abs(r.result.score - bestRes.result.score) < 0.001
+             );
+             
+             // Split pot
+             let share = Math.floor(potAmount / winners.length);
+             let remainder = potAmount % winners.length;
+             
+             winners.forEach((w, idx) => {
+                 let winAmt = share + (idx < remainder ? 1 : 0);
+                 w.player.chips += winAmt;
+                 
+                 // Track main winners for UI (purely visual: use the highest pot winners)
+                 // Or just accumulate all?
+                 if (!this.winners.includes(w.player.id)) {
+                     this.winners.push(w.player.id);
+                 }
+                 // Track winning cards of the BEST hand found so far (usually main pot)
+                 if (this.winningCards.length === 0) {
+                     this.winningCards = w.result.winningCards;
+                 }
+                 
+                 this.log(`${w.player.name} 赢得 ${winAmt} (Pot Lv ${currentPotIdx+1})`, 'win');
+             });
+        } else {
+            // No eligible active players? (Should not happen if pots are correct)
+            // Money goes to... house? Or returned to last contributor?
+            // If everyone folded, we wouldn't be here.
+            // If active players are All-in for LESS than this level?
+            // Meaning Side Pot is created by 2 folds??
+            // Actually, if active players bet less than this level, they are not eligible.
+            // But 'contributorsAtLevel' has folks.
+            // Example: A bets 1000 (Fold), B bets 100 (Allin).
+            // Level 100: A and B contrib. Eligible: B. B wins.
+            // Level 1000: A contribs (900 more). Eligible: None.
+            // This 900 should be returned to A? But A folded.
+            // Standard rule: If you fold, you forfeit.
+            // If NO active player is eligible for this side pot?
+            // It goes to the active player who lasted longest? 
+            // Or technically, if checks folded, the pot should have been awarded already.
+            // In Showdown, at least 2 active players OR 1 active + side pots?
+            // Actually, `activePlayers` only includes non-folded.
+            // If I bet 1000 and everyone else folds, I win immediately.
+            // If I bet 1000, B call 100 (AI). 
+            // Pot 1: 200. Eligible A, B.
+            // Pot 2: 900. Eligible A.
+            // A wins Pot 2 automatically.
+             
+             // So if eligiblePlayerIds includes A (active), A wins.
+             // So this block handles it.
+        }
+        
+        processedBet = level;
+        currentPotIdx++;
+    }
+
+    this.pot = 0; // Cleared
     this.notify();
   }
 
@@ -447,10 +540,12 @@ export class PokerGameEngine {
       case 'call':
         if (callAmount === 0) { // Check
           this.log(`${player.name} 让牌/过牌`, 'action');
+          player.hasActed = true;
         } else {
           let chipsToBet = Math.min(callAmount, player.chips);
           this.bet(player, chipsToBet);
           this.log(`${player.name} 跟注 $${chipsToBet}`, 'action');
+          player.hasActed = true;
         }
         break;
       case 'raise':
@@ -463,6 +558,7 @@ export class PokerGameEngine {
         this.highestBet = player.currentBet;
         this.raisesInRound++;
         this.log(`${player.name} 加注到 $${player.currentBet}`, 'action');
+        player.hasActed = true;
         break;
     }
     this.finishTurn();
@@ -530,6 +626,7 @@ export class PokerGameEngine {
     if (player.chips < amount) amount = player.chips; // All in
     player.chips -= amount;
     player.currentBet += amount;
+    player.totalHandBet += amount;
     this.pot += amount;
     if (player.chips === 0) player.status = 'allin';
   }
@@ -630,7 +727,9 @@ export class PokerGameEngine {
       // All active players must have bet equal to highestBet OR be all-in
       // AND everyone must have had a chance to act?
       // Simplified: checks if all active players match the highest bet.
-      return active.every(p => p.currentBet === amount || p.status === 'allin') && (this.actorsLeft <= 0 || active.every(p => p.currentBet === amount)); 
+      // All active players must have bet equal to highestBet OR be all-in
+      // AND everyone must have acted in this round.
+      return active.every(p => (p.currentBet === amount || p.status === 'allin') && p.hasActed);  
       // actorsLeft logic is tricky. Let's just check if everyone matches bet and we went around?
       // We'll rely on a simple check:
       // If everyone matches bet, and we aren't in middle of a round... 
@@ -647,7 +746,9 @@ export class PokerGameEngine {
       // Standard: Bets gathered into pot at end of stage.
       this.players.forEach(p => {
           // this.pot += p.currentBet; // Already added in bet()
+          // this.pot += p.currentBet; // Already added in bet()
           p.currentBet = 0;
+          p.hasActed = false;
       });
       this.highestBet = 0;
       this.raisesInRound = 0;
