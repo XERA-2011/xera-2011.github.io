@@ -1,4 +1,4 @@
-import { p } from "node_modules/@upstash/redis/zmscore-DhpQcqpW.mjs";
+
 
 export type Suit = '♠' | '♥' | '♣' | '♦';
 export type Rank = '2' | '3' | '4' | '5' | '6' | '7' | '8' | '9' | 'T' | 'J' | 'Q' | 'K' | 'A';
@@ -527,9 +527,15 @@ export class PokerGameEngine {
                  
                  // Track main winners for UI (purely visual: use the highest pot winners)
                  // Or just accumulate all?
-                 if (!this.winners.includes(w.player.id)) {
-                     this.winners.push(w.player.id);
-                 }
+                  if (!this.winners.includes(w.player.id)) {
+                      // Only mark as winner if it was a contested pot OR if everyone else folded
+                      // If eligiblePlayerIds.length === 1 && activePlayers.length > 1, it implies this player 
+                      // is just getting their unmatched Money back (surplus), while losing/not-competing in main pot.
+                      const isUncontestedRefund = eligiblePlayerIds.length === 1 && activePlayers.length > 1;
+                      if (!isUncontestedRefund) {
+                         this.winners.push(w.player.id);
+                      }
+                  }
                  // Track winning cards of the BEST hand found so far (usually main pot)
                  if (this.winningCards.length === 0) {
                      this.winningCards = w.result.winningCards;
