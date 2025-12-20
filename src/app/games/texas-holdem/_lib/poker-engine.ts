@@ -466,10 +466,16 @@ export class PokerGameEngine {
 
     // Show cards & Set Description
     results.forEach(({ player, result }) => {
-         let info = this.getRankName(result.rank);
+         // Generate Detailed Description
+         let info = this.getHandDetailedDescription(result);
          
-         // Check if playing the board (all winning cards are in community cards)
-         const isPlayingBoard = result.winningCards.every(wc => 
+         // Check if playing the board (all best 5 cards are in community cards)
+         // We must check strict equality of card objects or value/suit
+         // Note: evaluateHand creates NEW card instances for A-low straight or generic combinations?
+         // Actually evaluateHand mostly passes references from 'sorted' which are references from input.
+         // Except A-low straight creates new 'Ace' with value 1 (line 101).
+         // So we should match by rank/suit.
+         const isPlayingBoard = result.bestHand.every(wc => 
              this.communityCards.some(cc => cc.suit === wc.suit && cc.rank === wc.rank)
          );
 
@@ -744,6 +750,39 @@ export class PokerGameEngine {
       'Straight Flush 同花顺'
     ];
     return names[rank];
+  }
+
+  getHandDetailedDescription(result: HandResult): string {
+    const rank = result.rank;
+    const cards = result.winningCards;
+    
+    // Helper to get formatted rank
+    const r = (i: number) => cards[i].rank;
+
+    switch (rank) {
+        case HandRankType.STRAIGHT_FLUSH:
+            return `同花顺 (${r(0)} High)`;
+        case HandRankType.QUADS:
+            return `四条 (${r(0)})`;
+        case HandRankType.FULL_HOUSE:
+            // Full House: winningCards[0] is trip, winningCards[3] is pair
+            return `葫芦 (${r(0)} & ${r(3)})`;
+        case HandRankType.FLUSH:
+            return `同花 (${r(0)} High)`;
+        case HandRankType.STRAIGHT:
+            return `顺子 (${r(0)} High)`;
+        case HandRankType.TRIPS:
+            return `三条 (${r(0)})`;
+        case HandRankType.TWO_PAIR:
+            // Two Pair: P1 at [0], P2 at [2]
+            return `两对 (${r(0)} & ${r(2)})`;
+        case HandRankType.PAIR:
+            return `对子 (${r(0)})`;
+        case HandRankType.HIGH_CARD:
+            return `高牌 (${r(0)})`;
+        default:
+            return this.getRankName(rank);
+    }
   }
 
   getNextActive(idx: number): number {
