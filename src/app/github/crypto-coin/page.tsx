@@ -30,23 +30,25 @@ export default function CoinPage() {
   };
 
   const coins = 'btc,eth,sol,bnb';
+  // srcset parses commas as separators for multiple images, so we must encode commas in the URL
+  const encodedCoins = coins.replace(/,/g, '%2C');
   const currentTheme = isMounted && resolvedTheme === 'dark' ? 'dark' : 'light';
 
   const examples = [
     {
       title: '基础用法',
-      code: `<img alt="Crypto Prices" src="${BASE_URL}/api/github/crypto-coin?coin=${coins}" />`,
+      code: `<img alt="Crypto Prices" src="${BASE_URL}/api/github/crypto-coin?coin=${encodedCoins}&mode=multi" />`,
     },
     {
       title: '自定义尺寸',
-      code: `<img alt="Crypto Prices" src="${BASE_URL}/api/github/crypto-coin?coin=${coins}&width=800" />`,
+      code: `<img alt="Crypto Prices" src="${BASE_URL}/api/github/crypto-coin?coin=${encodedCoins}&mode=multi&width=800" />`,
     },
     {
       title: '自适应主题',
       code: `<picture>
-  <source media="(prefers-color-scheme: dark)" srcset="${BASE_URL}/api/github/crypto-coin?coin=${coins}&theme=dark" />
-  <source media="(prefers-color-scheme: light)" srcset="${BASE_URL}/api/github/crypto-coin?coin=${coins}&theme=light" />
-  <img alt="Crypto Prices" src="${BASE_URL}/api/github/crypto-coin?coin=${coins}&theme=dark" />
+  <source media="(prefers-color-scheme: dark)" srcset="${BASE_URL}/api/github/crypto-coin?coin=${encodedCoins}&mode=multi&theme=dark" />
+  <source media="(prefers-color-scheme: light)" srcset="${BASE_URL}/api/github/crypto-coin?coin=${encodedCoins}&mode=multi&theme=light" />
+  <img alt="Crypto Prices" src="${BASE_URL}/api/github/crypto-coin?coin=${encodedCoins}&mode=multi&theme=dark" />
 </picture>`,
     },
   ];
@@ -77,7 +79,7 @@ export default function CoinPage() {
               {isMounted ? (
                 <div className="relative overflow-hidden rounded-xl bg-secondary/10 p-4 border border-border/50">
                   <Image
-                    src={`/api/github/crypto-coin?coin=${coins}&theme=${currentTheme}`}
+                    src={`/api/github/crypto-coin?coin=${encodedCoins}&theme=${currentTheme}`}
                     alt="Crypto Prices Preview"
                     key={`preview-${currentTheme}`}
                     width={600}
