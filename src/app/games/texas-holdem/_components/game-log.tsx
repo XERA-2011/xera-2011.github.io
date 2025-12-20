@@ -21,7 +21,7 @@ const RANK_NAMES: Record<HandRankType, string> = {
 
 export function GameLog({ logs, players, communityCards }: LogProps) {
   const scrollRef = useRef<HTMLDivElement>(null);
-  const [copyState, setCopyState] = useState<'idle' | 'copied'>('idle');
+  const [copyState, setCopyState] = useState<'idle' | 'copied' | 'history_copied' | 'showdown_copied'>('idle');
 
   useEffect(() => {
     if (scrollRef.current) {
@@ -77,17 +77,81 @@ export function GameLog({ logs, players, communityCards }: LogProps) {
       {/* Header */}
       <div className="flex items-center justify-between px-2 py-1 border-b border-zinc-200 dark:border-white/10 bg-zinc-50/50 dark:bg-white/5">
         <span className="text-xs md:text-sm font-bold text-zinc-700 dark:text-gray-400">Game Log</span>
-        <button
-          onClick={handleCopy}
-          disabled={copyState === 'copied'}
-          className={`text-[10px] px-2 py-0.5 rounded transition-all duration-300 ${copyState === 'copied'
-            ? 'bg-zinc-200 dark:bg-zinc-800 text-zinc-900 dark:text-zinc-100 cursor-default'
-            : 'bg-zinc-100 dark:bg-white/10 hover:bg-zinc-200 dark:hover:bg-white/20 text-zinc-600 dark:text-gray-300'
-            }`}
-          title="Copy showdown details"
-        >
-          {copyState === 'copied' ? '已复制' : '复制摊牌内容'}
-        </button>
+        <div className="flex gap-2">
+          <button
+            onClick={() => {
+              if (!players) return;
+              let text = "=== Hand History ===\n\n";
+
+              if (communityCards && communityCards.length > 0) {
+                text += `Public Cards: [${communityCards.map(c => c.toString()).join(' ')}]\n\n`;
+              }
+
+              text += "-- Player Status --\n";
+              players.forEach(p => {
+                let status: string = p.status;
+                if (p.isEliminated) status = 'Eliminated';
+
+                // For debugging: Always show hands if available
+                const handStr = p.hand.map(c => c.toString()).join(' ');
+
+                text += `${p.name}: $${p.chips} (Bet: $${p.currentBet}) [${status}] {${handStr}}\n`;
+              });
+              text += "\n-- Action Logs --\n";
+              // Reverse logs to show chronological order if displayed reversed, 
+              // but usually logs are [Newest ... Oldest]. 
+              // If we want history, we might want chronological? 
+              // The UI shows Newest at bottom?
+              // "logs" prop usually has Newest first (unshift).
+              // Let's reverse for readability in text file.
+              [...logs].reverse().forEach(l => {
+                const clean = l.message.replace(/<[^>]+>/g, '').replace(/&nbsp;/g, ' ');
+                text += `[${l.type.toUpperCase()}] ${clean}\n`;
+              });
+
+              navigator.clipboard.writeText(text);
+              setCopyState('history_copied');
+              setTimeout(() => setCopyState('idle'), 2000);
+            }}
+            className={`text-[10px] px-2 py-0.5 rounded transition-all duration-300 ${copyState === 'history_copied'
+              ? 'bg-green-100 text-green-900'
+              : 'bg-zinc-100 dark:bg-white/10 hover:bg-zinc-200 dark:hover:bg-white/20 text-zinc-600 dark:text-gray-300'}`}
+          >
+            {copyState === 'history_copied' ? '已复制' : '复制对局'}
+          </button>
+
+          <button
+            onClick={() => {
+              // Showdown Copy Logic
+              if (!players || !communityCards) return;
+
+              const activePlayers = players.filter(p => !p.isEliminated && p.status !== 'folded');
+              let report = `=== Showdown Summary ===\n`;
+              report += `Community Cards: [${communityCards.map(c => c.toString()).join(' ')}]\n\n`;
+
+              activePlayers.forEach(p => {
+                const fullHand = [...p.hand, ...communityCards];
+                if (fullHand.length >= 5) {
+                  const result = evaluateHand(fullHand);
+                  const rankStr = RANK_NAMES[result.rank];
+                  const cardsStr = p.hand.map(c => c.toString()).join(' ');
+
+                  // Simple Kicker Logic for text
+                  report += `Player ${p.name}: [${cardsStr}] -> ${rankStr}\n`;
+                }
+              });
+
+              navigator.clipboard.writeText(report);
+              setCopyState('showdown_copied');
+              setTimeout(() => setCopyState('idle'), 2000);
+            }}
+            className={`text-[10px] px-2 py-0.5 rounded transition-all duration-300 ${copyState === 'showdown_copied'
+              ? 'bg-green-100 text-green-900'
+              : 'bg-zinc-100 dark:bg-white/10 hover:bg-zinc-200 dark:hover:bg-white/20 text-zinc-600 dark:text-gray-300'}`}
+          >
+            {copyState === 'showdown_copied' ? '已复制' : '复制摊牌'}
+          </button>
+        </div>
       </div>
 
       {/* Log Content */}

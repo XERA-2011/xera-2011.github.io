@@ -25,7 +25,7 @@ export default function TexasHoldemPage() {
   const canRaise = human.chips > callAmount;
 
   return (
-    <div className="w-full h-[100dvh] bg-white dark:bg-black text-zinc-900 dark:text-zinc-100 selection:bg-zinc-300 dark:selection:bg-zinc-700 selection:text-black overflow-hidden flex flex-col">
+    <div className="w-full h-[100dvh] text-zinc-900 dark:text-zinc-100 selection:bg-zinc-300 dark:selection:bg-zinc-700 selection:text-black overflow-hidden flex flex-col">
 
       {/* Header Area - Compact */}
       <div className="flex-none pt-24 px-4 pb-4 lg:p-10 flex justify-center items-center">

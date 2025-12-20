@@ -41,9 +41,6 @@ export default function GamesPage() {
           <h1 className="text-3xl sm:text-4xl lg:text-5xl font-bold mb-4">
             游戏实验室
           </h1>
-          <p className="text-gray-400 max-w-2xl mx-auto">
-            Explore experimental game demos and interactive experiences.
-          </p>
         </motion.div>
 
         {/* Games Grid */}

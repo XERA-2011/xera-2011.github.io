@@ -55,8 +55,20 @@ export function Player({ player, isActiveTurn, isDealer, gameStage, className = 
           </div>
         )}
         {player.status !== 'folded' && player.status !== 'eliminated' && player.currentBet > 0 && (
-          <div className={`text-[9px] sm:text-[10px] md:text-xs lg:text-sm font-bold leading-none ${(isActiveTurn || isWinner) ? 'text-zinc-300 dark:text-zinc-600' : 'text-zinc-500 dark:text-zinc-400'} ${gameStage === 'showdown' ? 'invisible' : ''}`}>
-            ${player.currentBet}
+          <div className="absolute top-full left-1/2 -translate-x-1/2 mt-1 z-30">
+            <div className="bg-yellow-400 dark:bg-yellow-600 text-black dark:text-white px-2 py-0.5 rounded-full text-[10px] sm:text-xs font-bold shadow-md border border-yellow-500 dark:border-yellow-400 flex flex-col items-center leading-tight">
+              <span className="text-[8px] opacity-80 uppercase leading-none mb-0.5">Bet</span>
+              ${player.currentBet}
+            </div>
+          </div>
+        )}
+
+        {/* Hand Description Badge (Showdown) */}
+        {player.handDescription && (
+          <div className="absolute bottom-full mb-1 left-1/2 -translate-x-1/2 z-40 whitespace-nowrap">
+            <div className="bg-zinc-900 text-white dark:bg-white dark:text-black px-2 py-1 rounded text-[10px] sm:text-xs font-bold shadow-lg border border-zinc-700 dark:border-zinc-300 backdrop-blur-sm animate-in zoom-in-50 duration-300">
+              {player.handDescription}
+            </div>
           </div>
         )}
 

@@ -195,73 +195,72 @@ export function evaluateHand(cards: Card[]): HandResult {
 
 // ... (previous code unchanged, we only replace the relevant parts)
 
-export type PersonaType = 'human' | 'tiger' | 'poker_face' | 'crazy' | 'calm' | 'simple' |'luck';
+// Bot Names Pool
+const BOT_NAMES = [
+  'Alex', 'Sam', 'Jordan', 'Taylor', 'Casey', 'Morgan', 'Riley', 'Jamie', 
+  'Quinn', 'Avery', 'Parker', 'Reese', 'Blake', 'Charlie', 'Dakota', 'River',
+  'Phoenix', 'Sage', 'Sky', 'Sidney', 'Maverick', 'Ace', 'Lucky', 'Chip'
+];
 
-export interface Persona {
-  id: PersonaType;
-  name: string;
-  desc: string;
-}
+export type PersonaType = 'human' | 'bot';
 
-export const PERSONAS: Record<PersonaType, Persona> = {
-  'human': { id: 'human', name: 'You', desc: 'User' },
-  'tiger': { id: 'tiger', name: '今晚打老虎', desc: 'Aggressive (Always Raise)' },
-  'poker_face': { id: 'poker_face', name: '扑克脸', desc: 'Tight (Only plays good hands)' },
-  'crazy': { id: 'crazy', name: '疯狂的玩家', desc: 'Loose/Aggressive (Random)' },
-  'calm': { id: 'calm', name: '冷静的玩家', desc: 'Tight/Aggressive' },
-  'simple': { id: 'simple', name: '简单的玩家', desc: 'Passport/Passive' },
-  'luck': { id: 'luck', name: '运气王', desc: 'Random' },
-};
-
-export const SPEECH_LINES: Record<PersonaType, {
+export const SPEECH_LINES: Record<'bot', {
   raise: string[];
   call: string[];
   fold: string[];
   check: string[];
   allin: string[];
+  bluff_act: string[];
+  bluff_win: string[];
+  bluff_fail: string[];
 }> = {
-  human: { raise: [], call: [], fold: [], check: [], allin: [] },
-  tiger: {
-    raise: ["加注!", "这就怕了?", "再来点刺激的!", "这才刚开始!", "这点钱不够看!", "我看你有多少筹码!"],
-    call: ["看看你的底牌.", "别想偷鸡.", "跟!", "我也来.", "这点钱我跟得起.", "陪你玩玩."],
-    fold: ["算你运气好.", "这把放过你.", "暂避锋芒.", "不跟了.", "好汉不吃眼前亏."],
-    check: ["这把我不加.", "过.", "看看下面什么牌.", "你先请."],
-    allin: ["Show hand!", "全压了!", "这就让你回家!", "要么赢，要么回家!"]
-  },
-  poker_face: {
-    raise: ["...", "加注.", "Raising."],
-    call: ["...", "跟.", "Call."],
-    fold: ["...", "弃牌.", "Fold."],
-    check: ["...", "过.", "Check."],
-    allin: ["...", "All in."]
-  },
-  crazy: {
-    raise: ["全压了! 哈哈!", "这就对了!", "Show hand!", "必须加!", "来啊互相伤害啊!", "我就是钱多!"],
-    call: ["我也来凑热闹!", "这把我有预感!", "谁怕谁啊!", "跟跟跟!", "好像有好牌!"],
-    fold: ["没意思.", "这牌有鬼.", "晦气!", "不玩了.", "把把烂牌!"],
-    check: ["快点快点!", "过过过!", "别墨迹!", "快出牌!"],
-    allin: ["梭哈!", "赢了会所嫩模!", "输了下海干活!", "这把定生死!"]
-  },
-  calm: {
-    raise: ["这牌值得加注.", "目前的赔率不错.", "稍微加一点.", "不得不加.", "根据概率..."],
-    call: ["我看一看.", "这注跟得起.", "保持跟进.", "还在很多范围内.", "合理."],
-    fold: ["与其冒险不如放弃.", "这局胜率不高.", "我退出.", "冷静...", "等待时机."],
-    check: ["先看看.", "过牌.", "暂且不动.", "观察一下."],
-    allin: ["经过计算，全压是最佳策略.", "胜率很高.", "这是最合理的选择."]
-  },
-  simple: {
-    raise: ["这牌好像不错?", "我也加点试试.", "真的吗?", "是不是该加注了?", "我是不是按错了?"],
-    call: ["那就跟吧.", "多少钱?", "我也玩玩.", "别太贵就行.", "跟你看一看.", "嘿嘿."],
-    fold: ["太大了不跟.", "我不行了.", "这牌太烂了.", "算了.", "有点怕."],
-    check: ["不用给钱? 那我过.", "过.", "怎么玩来着? 哦过.", "那我看一眼."],
-    allin: ["All in 是什么意思?", "全都给你!", "不管了!", "反正也是虚拟币."]
-  },
-  luck: {
-    raise: ["今天运气不错!", "感觉来了!", "幸运女神眷顾我!", "这把稳了!", "一定是好牌!"],
-    call: ["拼一把运气!", "听天由命吧!", "试试手气.", "希望能中!", "保佑我!"],
-    fold: ["运气不好.", "风水不对.", "下把再来.", "今天不宜赌博.", "没感觉."],
-    check: ["看看运气.", "转运!", "天灵灵地灵灵.", "发张A给我!"],
-    allin: ["赌神附体!", "一波肥!", "单车变摩托!", "就在这一把!"]
+  bot: {
+     raise: [
+       "加注!", "这就怕了?", "再来点刺激的!", "这才刚开始!", "这点钱不够看!", 
+       "我看你有多少筹码!", "全压了! 哈哈!", "这就对了!", "Show hand!", 
+       "必须加!", "来啊互相伤害啊!", "我就是钱多!", "这牌值得加注.", 
+       "目前的赔率不错.", "稍微加一点.", "不得不加.", "根据概率...", 
+       "今天运气不错!", "感觉来了!", "幸运女神眷顾我!", "这把稳了!", "一定是好牌!"
+     ],
+     call: [
+       "看看你的底牌.", "别想偷鸡.", "跟!", "我也来.", "这点钱我跟得起.", 
+       "陪你玩玩.", "我也来凑热闹!", "这把我有预感!", "谁怕谁啊!", "跟跟跟!", 
+       "好像有好牌!", "我看一看.", "这注跟得起.", "保持跟进.", "还在很多范围内.", 
+       "合理.", "那就跟吧.", "多少钱?", "我也玩玩.", "别太贵就行.", "跟你看一看.", 
+       "拼一把运气!", "听天由命吧!", "试试手气.", "希望能中!", "保佑我!"
+     ],
+     fold: [
+       "算你运气好.", "这把放过你.", "暂避锋芒.", "不跟了.", "好汉不吃眼前亏.", 
+       "没意思.", "这牌有鬼.", "晦气!", "不玩了.", "把把烂牌!", "与其冒险不如放弃.", 
+       "这局胜率不高.", "我退出.", "冷静...", "等待时机.", "太大了不跟.", 
+       "我不行了.", "这牌太烂了.", "算了.", "有点怕.", "运气不好.", 
+       "风水不对.", "下把再来.", "今天不宜赌博.", "没感觉."
+     ],
+     check: [
+       "这把我不加.", "过.", "看看下面什么牌.", "你先请.", "快点快点!", 
+       "过过过!", "别墨迹!", "快出牌!", "先看看.", "过牌.", "暂且不动.", 
+       "观察一下.", "不用给钱? 那我过.", "怎么玩来着? 哦过.", "那我看一眼.", 
+       "看看运气.", "转运!", "天灵灵地灵灵.", "发张A给我!"
+     ],
+     allin: [
+       "Show hand!", "全压了!", "这就让你回家!", "要么赢，要么回家!", 
+       "梭哈!", "赢了会所嫩模!", "输了下海干活!", "这把定生死!", 
+       "经过计算，全压是最佳策略.", "胜率很高.", "这是最合理的选择.", 
+       "All in 是什么意思?", "全都给你!", "不管了!", "反正也是虚拟币.", 
+       "赌神附体!", "一波肥!", "单车变摩托!", "就在这一把!"
+     ],
+     bluff_act: [
+       "看这次谁怕谁!", "感觉到了恐惧吗?", "你真的敢跟吗?", "不加注怎么赢?", 
+       "这把底牌绝了!", "猜猜我有什么牌?", "别犹豫了，弃牌吧."
+     ],
+     bluff_win: [ // Won with bluff (by fold) or showdown
+       "哈哈，被我骗到了吧!", "其实我什么都没有!", "全靠演技!", "偷鸡成功!", 
+       "承让承让.", "有时候运气也是实力.", "下次别这么胆小."
+     ],
+     bluff_fail: [ // Lost with bluff
+       "这就很尴尬了.", "被看穿了?", "也是拼了.", "哎呀，演砸了.", 
+       "你是怎么知道的?", "好抓!", "不该偷鸡的."
+     ]
   }
 };
 
@@ -282,6 +281,8 @@ export interface Player {
   speechTs?: number;
   totalHandBet: number;
   hasActed: boolean;
+  isBluffing?: boolean; // Track if current strategy is bluffing
+  handDescription?: string; // e.g. "Two Pair" for display in Showdown
 }
 
 export interface GameLog {
@@ -312,17 +313,16 @@ export class PokerGameEngine {
     this.players = [];
     this.logs = [];
 
-    // Initialize Personas
-    const personaList: PersonaType[] = ['human', 'tiger', 'poker_face', 'crazy', 'calm', 'simple', 'luck'];
-    // Ensure we have enough for 7 players. 
+    // Initialize Random Expert Players
+    const shuffledNames = [...BOT_NAMES].sort(() => 0.5 - Math.random());
     
     for (let i = 0; i < 7; i++) {
-        let pType = personaList[i] || 'simple';
+        let isHuman = i === 0;
         this.players.push({
             id: i, 
-            persona: pType,
-            name: PERSONAS[pType].name,
-            isHuman: i === 0, 
+            persona: isHuman ? 'human' : 'bot',
+            name: isHuman ? 'You' : shuffledNames[i - 1],
+            isHuman: isHuman, 
             chips: 1000, 
             hand: [],
             status: 'active', 
@@ -353,7 +353,17 @@ export class PokerGameEngine {
     this.highestBet = 0;
     this.raisesInRound = 0;
     this.winners = [];
+    this.logs = []; // Clear logs for new round
     this.winningCards = [];
+
+    // Eliminate players with no chips
+    this.players.forEach(p => {
+      if (p.chips <= 0) {
+        p.isEliminated = true;
+        p.status = 'eliminated'; 
+        p.chips = 0; // Ensure no negative
+      }
+    });
 
     // Rotate dealer
     this.dealerIdx = (this.dealerIdx + 1) % this.players.length;
@@ -366,10 +376,13 @@ export class PokerGameEngine {
       p.hand = [];
       p.status = p.isEliminated ? 'eliminated' : 'active';
       p.currentBet = 0;
+      p.currentBet = 0;
       p.totalHandBet = 0;
       p.hasActed = false;
       p.currentSpeech = undefined;
       p.speechTs = undefined;
+      p.isBluffing = false;
+      p.handDescription = undefined;
     });
 
     this.deck = new Deck();
@@ -419,10 +432,11 @@ export class PokerGameEngine {
       result: evaluateHand([...p.hand, ...this.communityCards])
     }));
 
-    // Show cards
+    // Show cards & Set Description
     results.forEach(({ player, result }) => {
-         let info = `(${this.getRankName(result.rank)})`;
-         this.log(`${player.name} 亮牌: ${this.formatCards(player.hand)} ${info}`, 'showdown');
+         let info = this.getRankName(result.rank);
+         player.handDescription = info;
+         this.log(`${player.name} 亮牌: ${this.formatCards(player.hand)} (${info})`, 'showdown');
     });
 
     // --- Side Pot & Split Pot Logic ---
@@ -490,6 +504,23 @@ export class PokerGameEngine {
                  }
                  
                  this.log(`${w.player.name} 赢得 ${winAmt} (Pot Lv ${currentPotIdx+1})`, 'win');
+                 
+                 // Bluff Succcess Speech
+                 if (w.player.isBluffing && w.player.totalHandBet > 100 && !w.player.isHuman) {
+                     this.speakRandom(w.player, 'bluff_win');
+                 }
+                 // If not bluffing but won a big pot? Maybe normal happy speech? (Already generic)
+             });
+             
+             // Bluff Fail Speech for active losers
+             eligiblePlayerIds.forEach(pid => {
+                 const pl = this.players.find(p => p.id === pid);
+                 if (pl && !winners.some(w => w.player.id === pid)) {
+                     // Loser
+                     if (pl.isBluffing && !pl.isHuman) {
+                         this.speakRandom(pl, 'bluff_fail');
+                     }
+                 }
              });
         } else {
             // No eligible active players? (Should not happen if pots are correct)
@@ -729,7 +760,10 @@ export class PokerGameEngine {
       // Simplified: checks if all active players match the highest bet.
       // All active players must have bet equal to highestBet OR be all-in
       // AND everyone must have acted in this round.
-      return active.every(p => (p.currentBet === amount || p.status === 'allin') && p.hasActed);  
+      return active.every(p => {
+          if (p.status === 'allin') return true; 
+          return p.currentBet === amount && p.hasActed;
+      });  
       // actorsLeft logic is tricky. Let's just check if everyone matches bet and we went around?
       // We'll rely on a simple check:
       // If everyone matches bet, and we aren't in middle of a round... 
@@ -830,83 +864,129 @@ export class PokerGameEngine {
     }
   }
 
+  _getHandStrength(player: Player): number {
+      // 0.0 to 1.0 (Approximate equity)
+      const hole = player.hand;
+      if (hole.length < 2) return 0;
+      
+      const community = this.communityCards;
+      const fullHand = [...hole, ...community];
+      
+      // Pre-flop Heuristics
+      if (community.length === 0) {
+          const v1 = hole[0].value;
+          const v2 = hole[1].value;
+          const suited = hole[0].suit === hole[1].suit;
+          const pair = v1 === v2;
+          const highVal = Math.max(v1, v2);
+          const lowVal = Math.min(v1, v2);
+          const gap = highVal - lowVal;
+          
+          let score = 0;
+          if (pair) score = highVal * 2.5; // Pairs are strong
+          else score = highVal + (lowVal / 2); // High cards
+          
+          if (suited) score += 4;
+          if (gap === 1) score += 2; // Connectors
+          else if (gap === 2) score += 1;
+          
+          // Max score approx 35 (AA) -> 1.0
+          // Min score approx 3 (72o) -> 0.1
+          // Normalize roughly
+          return Math.min(score / 30, 1.0);
+      }
+      
+      // Post-flop: Hand Rank + Outs approximation
+      const res = evaluateHand(fullHand);
+      let strength = 0;
+      
+      // Base strength on Rank
+      // Rank 0 (High) -> 0.1
+      // Rank 1 (Pair) -> 0.3 - 0.5
+      // Rank 2 (TwoPair) -> 0.6
+      // Rank 3 (Trips) -> 0.75
+      // Rank 4+ (Str/Flush) -> 0.9+
+      
+      switch(res.rank) {
+          case HandRankType.HIGH_CARD: strength = 0.1; break;
+          case HandRankType.PAIR: strength = 0.35 + (res.score % 15 / 100); break; // Higher pair better
+          case HandRankType.TWO_PAIR: strength = 0.6; break;
+          case HandRankType.TRIPS: strength = 0.75; break;
+          case HandRankType.STRAIGHT: strength = 0.85; break;
+          case HandRankType.FLUSH: strength = 0.9; break;
+          case HandRankType.FULL_HOUSE: strength = 0.95; break;
+          case HandRankType.QUADS: strength = 0.99; break;
+          case HandRankType.STRAIGHT_FLUSH: strength = 1.0; break;
+      }
+      
+      return strength;
+  }
+
   _aiActionLogic(player: Player) {
     let callAmt = this.highestBet - player.currentBet;
-    let fullHand = [...player.hand, ...this.communityCards];
-    let strength = 0;
-
-    // Calc Strength
-    if (fullHand.length < 5) {
-        if(player.hand.length === 2) {
-             let v1 = player.hand[0].value, v2 = player.hand[1].value;
-             // Basic pre-flop strength
-             if (v1 === v2) strength = 0.8; // Pair
-             else if (v1 > 10 && v2 > 10) strength = 0.6; // High cards
-             else if ((v1 > 12 || v2 > 12) && player.hand[0].suit === player.hand[1].suit) strength = 0.5; // Suited high
-             else if (v1 > 12 || v2 > 12) strength = 0.4; // High card
-             else strength = 0.2;
-        }
-    } else {
-        let res = evaluateHand(fullHand);
-        // Normalized score roughly
-        strength = (res.rank + (res.score % 10000000000) / 10000000000) / 9;
-        if (res.rank >= 2) strength = 0.8;
-        else if (res.rank === 1) strength = 0.4 + (res.score % 100) / 100; // Pair strength varies
-        else strength = 0.1;
-    }
-
+    let strength = this._getHandStrength(player);
+    let potOdds = callAmt > 0 ? callAmt / (this.pot + callAmt) : 0;
+    
+    // Position/Strategy Factors
     let action: 'fold' | 'call' | 'raise' = 'fold';
     let rnd = Math.random();
-
-    // Strategy Switching
-    switch (player.persona) {
-        case 'tiger': // Aggressive
-            if (strength > 0.15) {
-                action = 'raise';
+    
+    // Expert Logic
+    // If Strength is high relative to what's needed (pot odds)
+    
+    // Fear Factor: If raises are high, be more conservative unless holding nuts
+    if (this.raisesInRound >= 3 && strength < 0.8) {
+        strength -= 0.15; // Penalty for fear
+    }
+    
+    // Adjust Strength Threshold based on Round
+    let foldThresh = 0.2;
+    let raiseThresh = 0.7;
+    
+    if (this.stage === 'preflop') {
+        foldThresh = 0.35; // Tighter preflop
+        if (callAmt <= 20) foldThresh = 0.2; // Limp if cheap
+    }
+    
+    const bluffChance = 0.15; // 15% chance to bluff regardless of cards
+    const isBluff = (rnd < bluffChance && strength < 0.4 && this.raisesInRound < 3); // Don't bluff into heavy fire
+    
+    if (isBluff) {
+         player.isBluffing = true;
+         // Bluff: Aggressive raise
+         action = 'raise';
+         // Check if we switch to All-In for bluff? No, keep standard raise for now.
+    } else {
+        // Standard Value Logic
+        player.isBluffing = false;
+        
+        // Betting Decision
+        if (strength > raiseThresh) {
+            // Strong hand -> Value Bet / Raise
+            // Sometimes slowplay (check/call) if acting early?
+            if (rnd > 0.2) action = 'raise'; // 80% raise
+            else action = 'call'; // 20% trap
+        } else if (strength > foldThresh) {
+            // Marginal/Decent -> Call usually, sometimes bluff raise
+            if (callAmt === 0) {
+                 action = (rnd > 0.7) ? 'raise' : 'call'; // Stab at pot if checked to
             } else {
-                action = (callAmt > 0) ? 'fold' : 'call';
+                 // Calculate if worth calling
+                 // Heuristic: if strength > potOdds, call
+                 // Normalized strength is rough win prob
+                 if (strength > potOdds + 0.05) action = 'call';
+                 else if (rnd > 0.9) action = 'raise'; // Semi-bluff
+                 else action = 'fold';
             }
-            break;
-
-        case 'poker_face': // Tight
-            if (strength > 0.6) {
-                action = (rnd > 0.3) ? 'raise' : 'call';
-            } else {
-                action = (callAmt === 0) ? 'call' : 'fold';
-            }
-            break;
-
-        case 'crazy': // Loose/Aggressive
-            if (rnd > 0.3) action = 'raise';
-            else if (rnd > 0.1) action = 'call';
+        } else {
+            // Weak Hand
+            if (callAmt === 0) action = (rnd > 0.8) ? 'raise' : 'call'; // Occasional pure bluff or check
             else action = 'fold';
-            break;
-            
-        case 'calm': // Balanced
-            if (strength > 0.6) action = 'raise';
-            else if (strength > 0.35) {
-                if (callAmt < 50) action = 'call';
-                else action = 'fold';
-            } else {
-                if (callAmt === 0) action = 'call';
-                else action = 'fold';
-            }
-            break;
-            
-        case 'simple': // Passive
-            if (strength > 0.7) action = 'call';
-            else if (callAmt < 20 && strength > 0.2) action = 'call';
-            else action = (callAmt === 0) ? 'call' : 'fold';
-            break;
-            
-        case 'luck': // Random
-        default:
-             action = rnd > 0.5 ? 'call' : (rnd > 0.25 ? 'raise' : 'fold');
-             break;
+        }
     }
 
     // Protection constraints
-    if (action === 'raise' && (this.raisesInRound >= 3 || player.chips <= callAmt + 20)) {
+    if (action === 'raise' && (this.raisesInRound >= 4 || player.chips <= callAmt + 20)) {
         action = 'call';
     }
     
@@ -914,13 +994,15 @@ export class PokerGameEngine {
     let performedAction = action;
     let isCheck = (action === 'call' && callAmt === 0);
     
-    if (action === 'raise') this.handleAction(player, 'raise', 20);
+    if (action === 'raise') this.handleAction(player, 'raise', 20); // Fixed raise for simplicity or logic
     else this.handleAction(player, action);
     
-    // Determine Speech
-    // We want a high chance of speaking to show off the feature/styles
-    const speakChance = 0.6; // 60%
-    if (Math.random() < speakChance) {
+    // Expert Speech (Generic or Bluff)
+    const speakChance = 0.5; 
+    // Always speak if bluffing (to sell it)
+    if (player.isBluffing && action === 'raise') {
+        this.speakRandom(player, 'bluff_act');
+    } else if (Math.random() < speakChance) {
         let type: 'raise' | 'call' | 'fold' | 'check' | 'allin' = 'call';
         
         if (player.status === 'folded') type = 'fold';
@@ -929,11 +1011,16 @@ export class PokerGameEngine {
         else if (isCheck) type = 'check';
         else type = 'call';
         
-        const lines = SPEECH_LINES[player.persona][type];
+        this.speakRandom(player, type);
+    }
+  }
+  
+  // Helper for random speech
+  speakRandom(player: Player, type: keyof typeof SPEECH_LINES['bot']) {
+      const lines = SPEECH_LINES['bot'][type];
         if (lines && lines.length > 0) {
             const text = lines[Math.floor(Math.random() * lines.length)];
             this.speak(player, text);
         }
-    }
   }
 }
