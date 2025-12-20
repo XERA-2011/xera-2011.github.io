@@ -77,7 +77,7 @@ export default function JokeCard({
         initial={{ opacity: 0, scale: 0.95 }}
         animate={{ opacity: 1, scale: 1 }}
         transition={{ duration: 0.3 }}
-        className="relative overflow-hidden rounded-lg bg-card/30 p-4 backdrop-blur-sm"
+        className="relative overflow-hidden rounded-lg p-4 backdrop-blur-sm"
       >
         {isLoading && (
           <div className="absolute inset-0 z-10 flex items-center justify-center bg-background/50 backdrop-blur-sm">

@@ -8,20 +8,20 @@ const CACHE_SECONDS = 10;
 // 主题配置
 const THEME_CONFIG = {
   dark: {
-    borderColor: '#30363d',
-    bgColor: '#000000',
+    borderColor: '#ffffff',
+    bgColor: 'transparent',
     qColor: '#ffffff',
-    aColor: '#e5e5e5',
+    aColor: '#ffffff',
     quoteColor: '#ffffff',
     codeColor: '#ffffff',
   },
   light: {
-    borderColor: '#e1e4e8',
-    bgColor: '#ffffff',
+    borderColor: '#000000',
+    bgColor: 'transparent',
     qColor: '#000000',
-    aColor: '#24292e',
+    aColor: '#000000',
     quoteColor: '#000000',
-    codeColor: '#24292e',
+    codeColor: '#000000',
   },
 };
 
