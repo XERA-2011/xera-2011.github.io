@@ -66,7 +66,13 @@ export function Player({ player, isActiveTurn, isDealer, gameStage, className = 
         {/* Hand Description Badge (Showdown) */}
         {player.handDescription && (
           <div className="absolute bottom-full mb-1 left-1/2 -translate-x-1/2 z-40 whitespace-nowrap">
-            <div className="bg-zinc-900 text-white dark:bg-white dark:text-black px-2 py-1 rounded text-[10px] sm:text-xs font-bold shadow-lg border border-zinc-700 dark:border-zinc-300 backdrop-blur-sm animate-in zoom-in-50 duration-300">
+            <div className={`
+              px-2 py-1 rounded text-[10px] sm:text-xs font-bold shadow-lg border backdrop-blur-sm animate-in zoom-in-50 duration-300
+              ${isWinner
+                ? 'bg-gradient-to-r from-yellow-300 to-amber-400 text-black border-yellow-500 shadow-yellow-500/50'
+                : 'bg-zinc-900 text-white dark:bg-white dark:text-black border-zinc-700 dark:border-zinc-300'
+              }
+            `}>
               {player.handDescription}
             </div>
           </div>

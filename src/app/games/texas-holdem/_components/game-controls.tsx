@@ -1,11 +1,13 @@
 interface ControlsProps {
-  onAction: (action: 'fold' | 'call' | 'raise') => void;
+  onAction: (action: 'fold' | 'call' | 'raise' | 'allin') => void;
   canRaise: boolean;
   callAmount: number;
   playerChips: number;
   isHumanTurn: boolean;
   showNextRound: boolean;
   onNextRound: () => void;
+  isGameOver?: boolean;
+  onReset?: () => void;
 }
 
 export function GameControls({
@@ -15,10 +17,25 @@ export function GameControls({
   playerChips,
   isHumanTurn,
   showNextRound,
-  onNextRound
+  onNextRound,
+  isGameOver,
+  onReset
 }: ControlsProps) {
 
   if (showNextRound) {
+    if (isGameOver && onReset) {
+      return (
+        <div className="fixed bottom-0 left-0 right-0 p-4 bg-white/90 dark:bg-neutral-900/90 border-t border-zinc-200 dark:border-white/10 backdrop-blur md:static md:bg-transparent md:border-none md:p-0 flex justify-center z-50">
+          <button
+            onClick={onReset}
+            className="w-full max-w-md bg-green-600 hover:bg-green-700 text-white font-bold h-14 flex items-center justify-center px-6 rounded-lg shadow-lg active:scale-95 transition-all text-lg md:text-xl"
+          >
+            Game Over! Restart Game 🔄
+          </button>
+        </div>
+      );
+    }
+
     return (
       <div className="fixed bottom-0 left-0 right-0 p-4 bg-white/90 dark:bg-neutral-900/90 border-t border-zinc-200 dark:border-white/10 backdrop-blur md:static md:bg-transparent md:border-none md:p-0 flex justify-center z-50">
         <button
@@ -38,7 +55,7 @@ export function GameControls({
       <button
         onClick={() => onAction('fold')}
         disabled={isDisabled}
-        className="flex-1 max-w-[140px] md:max-w-[180px] bg-zinc-200 dark:bg-zinc-800 hover:bg-zinc-300 dark:hover:bg-zinc-700 disabled:opacity-50 disabled:cursor-not-allowed text-black dark:text-white font-bold h-14 flex items-center justify-center px-4 rounded-lg shadow-lg active:scale-95 transition-all md:text-lg"
+        className="flex-1 max-w-[100px] md:max-w-[140px] bg-zinc-200 dark:bg-zinc-800 hover:bg-zinc-300 dark:hover:bg-zinc-700 disabled:opacity-50 disabled:cursor-not-allowed text-black dark:text-white font-bold h-14 flex items-center justify-center px-2 rounded-lg shadow-lg active:scale-95 transition-all md:text-lg"
       >
         Fold
       </button>
@@ -46,7 +63,7 @@ export function GameControls({
       <button
         onClick={() => onAction('call')}
         disabled={isDisabled}
-        className="flex-1 max-w-[140px] md:max-w-[180px] bg-zinc-800 dark:bg-zinc-700 hover:bg-zinc-700 dark:hover:bg-zinc-600 disabled:opacity-50 disabled:cursor-not-allowed text-white font-bold h-14 flex items-center justify-center px-4 rounded-lg shadow-lg active:scale-95 transition-all md:text-lg"
+        className="flex-1 max-w-[100px] md:max-w-[140px] bg-zinc-800 dark:bg-zinc-700 hover:bg-zinc-700 dark:hover:bg-zinc-600 disabled:opacity-50 disabled:cursor-not-allowed text-white font-bold h-14 flex items-center justify-center px-2 rounded-lg shadow-lg active:scale-95 transition-all md:text-lg"
       >
         {callAmount === 0 ? 'Check' : `Call $${callAmount}`}
       </button>
@@ -54,9 +71,18 @@ export function GameControls({
       <button
         onClick={() => onAction('raise')}
         disabled={isDisabled || !canRaise}
-        className="flex-1 max-w-[140px] md:max-w-[180px] bg-black dark:bg-white hover:bg-zinc-800 dark:hover:bg-zinc-200 disabled:opacity-50 disabled:cursor-not-allowed text-white dark:text-black font-bold h-14 flex items-center justify-center px-4 rounded-lg shadow-lg active:scale-95 transition-all md:text-lg"
+        className="flex-1 max-w-[100px] md:max-w-[140px] bg-black dark:bg-white hover:bg-zinc-800 dark:hover:bg-zinc-200 disabled:opacity-50 disabled:cursor-not-allowed text-white dark:text-black font-bold h-14 flex items-center justify-center px-2 rounded-lg shadow-lg active:scale-95 transition-all md:text-lg"
       >
         Raise (+20)
+      </button>
+
+      <button
+        onClick={() => onAction('allin')}
+        disabled={isDisabled}
+        className="flex-none w-[80px] md:w-[100px] bg-red-600 hover:bg-red-700 disabled:opacity-50 disabled:cursor-not-allowed text-white font-black h-14 flex flex-col items-center justify-center px-2 rounded-lg shadow-lg active:scale-95 transition-all md:text-lg border-2 border-red-500"
+      >
+        <span className="leading-none text-sm md:text-base">ALL</span>
+        <span className="leading-none text-sm md:text-base">IN</span>
       </button>
     </div>
   );

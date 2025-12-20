@@ -6,7 +6,7 @@ import { GameControls } from './_components/game-controls';
 
 
 export default function TexasHoldemPage() {
-  const { gameState, humanAction, startNextRound } = usePokerGame();
+  const { gameState, humanAction, startNextRound, resetGame } = usePokerGame();
 
   if (!gameState) {
     return (
@@ -23,6 +23,9 @@ export default function TexasHoldemPage() {
 
   // Calculate if raise is allowed (example logic)
   const canRaise = human.chips > callAmount;
+
+  const survivorCount = players.filter(p => !p.isEliminated).length;
+  const isGameOver = survivorCount <= 1;
 
   return (
     <div className="w-full h-[100dvh] text-zinc-900 dark:text-zinc-100 selection:bg-zinc-300 dark:selection:bg-zinc-700 selection:text-black overflow-hidden flex flex-col">
@@ -64,6 +67,8 @@ export default function TexasHoldemPage() {
             isHumanTurn={isHumanTurn}
             showNextRound={stage === 'showdown'}
             onNextRound={startNextRound}
+            isGameOver={isGameOver}
+            onReset={resetGame}
           />
         </div>
       </div>

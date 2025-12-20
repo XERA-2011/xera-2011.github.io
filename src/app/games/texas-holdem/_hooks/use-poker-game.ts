@@ -9,8 +9,8 @@ export function usePokerGame() {
 
   useEffect(() => {
     // Initialize engine only once
-    const engine = new PokerGameEngine(() => {
-        setGameState(engine.getSnapshot());
+    const engine = new PokerGameEngine((snapshot) => {
+        setGameState(snapshot);
     });
     engineRef.current = engine;
     
@@ -26,7 +26,7 @@ export function usePokerGame() {
     };
   }, []);
 
-  const humanAction = useCallback((type: 'fold' | 'call' | 'raise') => {
+  const humanAction = useCallback((type: 'fold' | 'call' | 'raise' | 'allin') => {
     if (engineRef.current) {
         engineRef.current.humanAction(type);
     }
@@ -38,9 +38,16 @@ export function usePokerGame() {
     }
   }, []);
 
+  const resetGame = useCallback(() => {
+    if (engineRef.current) {
+        engineRef.current.resetGame();
+    }
+  }, []);
+
   return {
     gameState,
     humanAction,
-    startNextRound
+    startNextRound,
+    resetGame
   };
 }

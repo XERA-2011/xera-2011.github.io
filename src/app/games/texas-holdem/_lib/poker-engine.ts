@@ -292,27 +292,34 @@ export interface GameLog {
 }
 
 export class PokerGameEngine {
-  onChange: () => void;
+  onChange: (snapshot: ReturnType<PokerGameEngine['getSnapshot']>) => void;
   players: Player[];
   logs: GameLog[];
-  deck: Deck;
-  communityCards: Card[];
-  pot: number;
-  dealerIdx: number;
-  highestBet: number;
-  stage: 'preflop' | 'flop' | 'turn' | 'river' | 'showdown';
-  actorsLeft: number;
-  raisesInRound: number;
-  currentTurnIdx: number;
+  deck!: Deck;
+  communityCards!: Card[];
+  pot!: number;
+  dealerIdx!: number;
+  highestBet!: number;
+  stage!: 'preflop' | 'flop' | 'turn' | 'river' | 'showdown';
+  actorsLeft!: number;
+  raisesInRound!: number;
+  currentTurnIdx!: number;
   isFastForwarding: boolean = false;
   winners: number[] = [];
   winningCards: Card[] = [];
 
-  constructor(onChange: () => void) {
+  constructor(onChange: (snapshot: ReturnType<PokerGameEngine['getSnapshot']>) => void) {
     this.onChange = onChange;
     this.players = [];
     this.logs = [];
 
+    this.resetGame();
+  }
+
+  resetGame() {
+    this.players = [];
+    this.logs = [];
+    
     // Initialize Random Expert Players
     const shuffledNames = [...BOT_NAMES].sort(() => 0.5 - Math.random());
     
@@ -344,6 +351,9 @@ export class PokerGameEngine {
     this.currentTurnIdx = 0;
     this.winners = [];
     this.winningCards = [];
+    
+    this.notify();
+    this.startNextRound();
   }
 
   startNextRound() {
@@ -417,6 +427,18 @@ export class PokerGameEngine {
     // but as a fallback:
     if (activePlayers.length === 1) {
        let winner = activePlayers[0];
+       
+       // Evaluate hand to show description (Gold Text) even if won by fold
+       try {
+           let result = evaluateHand([...winner.hand, ...this.communityCards]);
+           let info = this.getRankName(result.rank);
+           winner.handDescription = info;
+           this.winningCards = result.winningCards;
+       } catch (e) {
+           // Fallback if evaluation fails (e.g. too few cards??)
+           console.error("Eval Error in Fold Win", e);
+       }
+
        // Winner takes entire pot
        winner.chips += this.pot;
        this.log(`${winner.name} 赢得了 $${this.pot} (其他玩家弃牌)`, 'win');
@@ -558,8 +580,8 @@ export class PokerGameEngine {
     this.notify();
   }
 
-  handleAction(player: Player, action: 'fold' | 'call' | 'raise', raiseAmount: number = 0) {
-    if (player.status === 'folded' || player.isEliminated) return;
+  handleAction(player: Player, action: 'fold' | 'call' | 'raise' | 'allin', raiseAmount: number = 0) {
+    if (player.status === 'folded' || player.isEliminated || player.status === 'allin') return;
 
     let callAmount = this.highestBet - player.currentBet;
 
@@ -573,22 +595,44 @@ export class PokerGameEngine {
           this.log(`${player.name} 让牌/过牌`, 'action');
           player.hasActed = true;
         } else {
+          // Check if call puts player all-in
           let chipsToBet = Math.min(callAmount, player.chips);
           this.bet(player, chipsToBet);
-          this.log(`${player.name} 跟注 $${chipsToBet}`, 'action');
+          
+          if (player.chips === 0) {
+             this.log(`${player.name} All In (跟注) $${chipsToBet}`, 'action');
+          } else {
+             this.log(`${player.name} 跟注 $${chipsToBet}`, 'action');
+          }
           player.hasActed = true;
         }
         break;
       case 'raise':
         let totalBet = callAmount + raiseAmount;
-        if (totalBet > player.chips) { // All-in
-          totalBet = player.chips;
-          raiseAmount = totalBet - callAmount;
+        if (totalBet >= player.chips) { // Treat as All-in
+          this.handleAction(player, 'allin'); 
+          return;
         }
         this.bet(player, totalBet);
         this.highestBet = player.currentBet;
         this.raisesInRound++;
         this.log(`${player.name} 加注到 $${player.currentBet}`, 'action');
+        player.hasActed = true;
+        break;
+      case 'allin':
+        let allInAmt = player.chips;
+        this.bet(player, allInAmt);
+        
+        // If this raise increases the highest bet
+        if (player.currentBet > this.highestBet) {
+             this.highestBet = player.currentBet;
+             this.raisesInRound++;
+             this.log(`${player.name} All In! ($${player.currentBet})`, 'action');
+        } else {
+             // Short stack all-in (less than current raise)
+             // This does NOT reopen betting for others usually, but simplified here.
+             this.log(`${player.name} All In (短码) $${player.currentBet}`, 'action');
+        }
         player.hasActed = true;
         break;
     }
@@ -621,7 +665,7 @@ export class PokerGameEngine {
   }
 
   notify() {
-    this.onChange();
+    this.onChange(this.getSnapshot());
   }
 
   formatCards(cards: Card[]) {
@@ -685,7 +729,7 @@ export class PokerGameEngine {
     }
   }
 
-  humanAction(type: 'fold' | 'call' | 'raise') {
+  humanAction(type: 'fold' | 'call' | 'raise' | 'allin') {
     const p = this.players[0];
     if (this.currentTurnIdx !== 0 || p.status !== 'active') return;
     this.handleAction(p, type, 20); // Default raise 20
@@ -928,12 +972,10 @@ export class PokerGameEngine {
     let potOdds = callAmt > 0 ? callAmt / (this.pot + callAmt) : 0;
     
     // Position/Strategy Factors
-    let action: 'fold' | 'call' | 'raise' = 'fold';
+    let action: 'fold' | 'call' | 'raise' | 'allin' = 'fold';
     let rnd = Math.random();
     
     // Expert Logic
-    // If Strength is high relative to what's needed (pot odds)
-    
     // Fear Factor: If raises are high, be more conservative unless holding nuts
     if (this.raisesInRound >= 3 && strength < 0.8) {
         strength -= 0.15; // Penalty for fear
@@ -942,76 +984,109 @@ export class PokerGameEngine {
     // Adjust Strength Threshold based on Round
     let foldThresh = 0.2;
     let raiseThresh = 0.7;
+    let allInThresh = 0.92; // Very high threshold for value All-in
     
     if (this.stage === 'preflop') {
         foldThresh = 0.35; // Tighter preflop
         if (callAmt <= 20) foldThresh = 0.2; // Limp if cheap
+        allInThresh = 0.96; // Only AA/KK typically
     }
     
-    const bluffChance = 0.15; // 15% chance to bluff regardless of cards
-    const isBluff = (rnd < bluffChance && strength < 0.4 && this.raisesInRound < 3); // Don't bluff into heavy fire
+    // --- 1. Decision Logic ---
+    
+    const bluffChance = 0.15; 
+    const isBluff = (rnd < bluffChance && strength < 0.4 && this.raisesInRound < 2); 
     
     if (isBluff) {
          player.isBluffing = true;
-         // Bluff: Aggressive raise
-         action = 'raise';
-         // Check if we switch to All-In for bluff? No, keep standard raise for now.
+         // Bluff Strategy
+         // 10% of bluffs are All-In bluffs (Steal)
+         if (rnd < 0.015) { // 1.5% total chance (10% of 15%)
+             action = 'allin';
+         } else {
+             action = 'raise';
+         }
     } else {
-        // Standard Value Logic
+        // Value / Standard Logic
         player.isBluffing = false;
         
-        // Betting Decision
-        if (strength > raiseThresh) {
+        // Check for All-In Strength
+        if (strength > allInThresh) {
+            // Monster hand.
+            // 40% chance to shove immediately, 60% chance to raise/trap
+            if (rnd < 0.4) action = 'allin';
+            else action = 'raise';
+        } else if (strength > raiseThresh) {
             // Strong hand -> Value Bet / Raise
-            // Sometimes slowplay (check/call) if acting early?
             if (rnd > 0.2) action = 'raise'; // 80% raise
             else action = 'call'; // 20% trap
         } else if (strength > foldThresh) {
-            // Marginal/Decent -> Call usually, sometimes bluff raise
+            // Marginal/Decent
             if (callAmt === 0) {
-                 action = (rnd > 0.7) ? 'raise' : 'call'; // Stab at pot if checked to
+                 action = (rnd > 0.7) ? 'raise' : 'call'; 
             } else {
-                 // Calculate if worth calling
-                 // Heuristic: if strength > potOdds, call
-                 // Normalized strength is rough win prob
-                 if (strength > potOdds + 0.05) action = 'call';
-                 else if (rnd > 0.9) action = 'raise'; // Semi-bluff
-                 else action = 'fold';
+                 // Facing a bet
+                 // If facing All-In (large bet relative to stack)
+                 const isLifeOrDeath = callAmt > player.chips * 0.6;
+                 
+                 if (isLifeOrDeath) {
+                     // Only call if decent strength or great odds
+                     if (strength > 0.6 || strength > potOdds + 0.1) action = 'call';
+                     else action = 'fold';
+                 } else {
+                     // Standard call logic
+                     if (strength > potOdds + 0.05) action = 'call';
+                     else if (rnd > 0.9) action = 'raise'; // Occasional semi-bluff
+                     else action = 'fold';
+                 }
             }
         } else {
             // Weak Hand
-            if (callAmt === 0) action = (rnd > 0.8) ? 'raise' : 'call'; // Occasional pure bluff or check
+            if (callAmt === 0) action = (rnd > 0.8) ? 'raise' : 'call'; 
             else action = 'fold';
         }
     }
 
-    // Protection constraints
-    if (action === 'raise' && (this.raisesInRound >= 4 || player.chips <= callAmt + 20)) {
-        action = 'call';
+    // --- 2. Sanity Checks & Overrides ---
+
+    // Don't raise if already capped or facing huge aggression with weak hand
+    if (action === 'raise') {
+         if (this.raisesInRound >= 4 || player.chips <= callAmt + 20) {
+            // If basically no chips left to raise, just call or all-in?
+            // If we really like the hand, All in.
+            if (strength > 0.8) action = 'allin';
+            else action = 'call';
+         }
     }
     
+    // If we decided to 'call' but we don't have enough chips, it becomes a forced All-In (Call)
+    if (action === 'call' && callAmt >= player.chips) {
+        // Valid, handled by handleAction('call') which bets max chips
+    }
+
     // Execute Action
-    let performedAction = action;
     let isCheck = (action === 'call' && callAmt === 0);
     
-    if (action === 'raise') this.handleAction(player, 'raise', 20); // Fixed raise for simplicity or logic
+    if (action === 'raise') this.handleAction(player, 'raise', 20); 
     else this.handleAction(player, action);
     
-    // Expert Speech (Generic or Bluff)
+    // --- 3. Speech ---
     const speakChance = 0.5; 
-    // Always speak if bluffing (to sell it)
-    if (player.isBluffing && action === 'raise') {
+    
+    // Determine speech type
+    let speechType: keyof typeof SPEECH_LINES['bot'] = 'call';
+    if (action === 'allin') speechType = 'allin';
+    else if (player.status === 'folded') speechType = 'fold';
+    else if (action === 'raise') speechType = 'raise';
+    else if (isCheck) speechType = 'check';
+
+    // Priority Speech
+    if (player.isBluffing && (action === 'raise' || action === 'allin')) {
         this.speakRandom(player, 'bluff_act');
+    } else if (action === 'allin') {
+        this.speakRandom(player, 'allin'); // Always speak on All In
     } else if (Math.random() < speakChance) {
-        let type: 'raise' | 'call' | 'fold' | 'check' | 'allin' = 'call';
-        
-        if (player.status === 'folded') type = 'fold';
-        else if (player.status === 'allin') type = 'allin';
-        else if (action === 'raise') type = 'raise';
-        else if (isCheck) type = 'check';
-        else type = 'call';
-        
-        this.speakRandom(player, type);
+        this.speakRandom(player, speechType);
     }
   }
   
