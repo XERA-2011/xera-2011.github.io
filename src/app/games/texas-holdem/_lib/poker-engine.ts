@@ -212,6 +212,59 @@ export const PERSONAS: Record<PersonaType, Persona> = {
   'luck': { id: 'luck', name: '运气王', desc: 'Random' },
 };
 
+export const SPEECH_LINES: Record<PersonaType, {
+  raise: string[];
+  call: string[];
+  fold: string[];
+  check: string[];
+  allin: string[];
+}> = {
+  human: { raise: [], call: [], fold: [], check: [], allin: [] },
+  tiger: {
+    raise: ["加注!", "这就怕了?", "再来点刺激的!", "这才刚开始!", "这点钱不够看!", "我看你有多少筹码!"],
+    call: ["看看你的底牌.", "别想偷鸡.", "跟!", "我也来.", "这点钱我跟得起.", "陪你玩玩."],
+    fold: ["算你运气好.", "这把放过你.", "暂避锋芒.", "不跟了.", "好汉不吃眼前亏."],
+    check: ["这把我不加.", "过.", "看看下面什么牌.", "你先请."],
+    allin: ["Show hand!", "全压了!", "这就让你回家!", "要么赢，要么回家!"]
+  },
+  poker_face: {
+    raise: ["...", "加注.", "Raising."],
+    call: ["...", "跟.", "Call."],
+    fold: ["...", "弃牌.", "Fold."],
+    check: ["...", "过.", "Check."],
+    allin: ["...", "All in."]
+  },
+  crazy: {
+    raise: ["全压了! 哈哈!", "这就对了!", "Show hand!", "必须加!", "来啊互相伤害啊!", "我就是钱多!"],
+    call: ["我也来凑热闹!", "这把我有预感!", "谁怕谁啊!", "跟跟跟!", "好像有好牌!"],
+    fold: ["没意思.", "这牌有鬼.", "晦气!", "不玩了.", "把把烂牌!"],
+    check: ["快点快点!", "过过过!", "别墨迹!", "快出牌!"],
+    allin: ["梭哈!", "赢了会所嫩模!", "输了下海干活!", "这把定生死!"]
+  },
+  calm: {
+    raise: ["这牌值得加注.", "目前的赔率不错.", "稍微加一点.", "不得不加.", "根据概率..."],
+    call: ["我看一看.", "这注跟得起.", "保持跟进.", "还在很多范围内.", "合理."],
+    fold: ["与其冒险不如放弃.", "这局胜率不高.", "我退出.", "冷静...", "等待时机."],
+    check: ["先看看.", "过牌.", "暂且不动.", "观察一下."],
+    allin: ["经过计算，全压是最佳策略.", "胜率很高.", "这是最合理的选择."]
+  },
+  simple: {
+    raise: ["这牌好像不错?", "我也加点试试.", "真的吗?", "是不是该加注了?", "我是不是按错了?"],
+    call: ["那就跟吧.", "多少钱?", "我也玩玩.", "别太贵就行.", "跟你看一看.", "嘿嘿."],
+    fold: ["太大了不跟.", "我不行了.", "这牌太烂了.", "算了.", "有点怕."],
+    check: ["不用给钱? 那我过.", "过.", "怎么玩来着? 哦过.", "那我看一眼."],
+    allin: ["All in 是什么意思?", "全都给你!", "不管了!", "反正也是虚拟币."]
+  },
+  luck: {
+    raise: ["今天运气不错!", "感觉来了!", "幸运女神眷顾我!", "这把稳了!", "一定是好牌!"],
+    call: ["拼一把运气!", "听天由命吧!", "试试手气.", "希望能中!", "保佑我!"],
+    fold: ["运气不好.", "风水不对.", "下把再来.", "今天不宜赌博.", "没感觉."],
+    check: ["看看运气.", "转运!", "天灵灵地灵灵.", "发张A给我!"],
+    allin: ["赌神附体!", "一波肥!", "单车变摩托!", "就在这一把!"]
+  }
+};
+
+
 export type PlayerStatus = 'active' | 'folded' | 'allin' | 'eliminated';
 
 export interface Player {
@@ -706,52 +759,29 @@ export class PokerGameEngine {
 
     // Strategy Switching
     switch (player.persona) {
-        case 'tiger': // 今晚打老虎: Aggressive, Only Raises (or Folds)
-            // Strategy: Never just "Call" a bet > 0. Either Raise or Fold.
-            // If checking is possible (callAmt == 0), might Raise or Check.
+        case 'tiger': // Aggressive
             if (strength > 0.15) {
-                // If we can raise, we raise. If we can't raise (chips), we call (all-in).
-                // If callAmt == 0, we raise often.
-                // Aggression factor high.
                 action = 'raise';
             } else {
-                // Garbage hand, fold if we have to pay
-                action = (callAmt > 0) ? 'fold' : 'call'; // Check if possible
-            }
-
-            // Speech
-            if (action === 'raise') {
-                if (rnd > 0.7) this.speak(player, "加倍!");
-                else if (rnd > 0.4) this.speak(player, "大一点!");
+                action = (callAmt > 0) ? 'fold' : 'call';
             }
             break;
 
-        case 'poker_face': // 扑克脸: Tight, Only plays good hands
-            // Threshold high.
-            if (strength > 0.6) { // Top 20-30% hands approx?
-                 // Good hand.
-                 // Mix Call/Raise but mostly Call to trap or play safe?
-                 // "Only good hands follow" -> implying they follow (call/raise)
+        case 'poker_face': // Tight
+            if (strength > 0.6) {
                 action = (rnd > 0.3) ? 'raise' : 'call';
-                
-                // Poker Face speaks on operation
-                if (action === 'raise') this.speak(player, "..."); 
-                if (action === 'call') this.speak(player, "跟了");
             } else {
-                // Bad/Mediocre hand
                 action = (callAmt === 0) ? 'call' : 'fold';
             }
             break;
 
-        case 'crazy': // 疯狂的玩家: Loose/Aggressive
+        case 'crazy': // Loose/Aggressive
             if (rnd > 0.3) action = 'raise';
             else if (rnd > 0.1) action = 'call';
             else action = 'fold';
-            
-            if (action === 'raise' && rnd > 0.7) this.speak(player, "All in! (骗你的)");
             break;
             
-        case 'calm': // 冷静的玩家: Balanced
+        case 'calm': // Balanced
             if (strength > 0.6) action = 'raise';
             else if (strength > 0.35) {
                 if (callAmt < 50) action = 'call';
@@ -760,21 +790,17 @@ export class PokerGameEngine {
                 if (callAmt === 0) action = 'call';
                 else action = 'fold';
             }
-            if (action === 'fold' && rnd > 0.8) this.speak(player, "牌不好");
             break;
             
-        case 'simple': // 简单的玩家: Passive
-            if (strength > 0.7) action = 'call'; // Even with good hand, prefers call
+        case 'simple': // Passive
+            if (strength > 0.7) action = 'call';
             else if (callAmt < 20 && strength > 0.2) action = 'call';
             else action = (callAmt === 0) ? 'call' : 'fold';
-            
-            if (rnd > 0.9) this.speak(player, "只是玩玩");
             break;
             
-        case 'luck': // 运气王: Random
+        case 'luck': // Random
         default:
              action = rnd > 0.5 ? 'call' : (rnd > 0.25 ? 'raise' : 'fold');
-             if (rnd > 0.9) this.speak(player, "看运气咯");
              break;
     }
 
@@ -782,9 +808,31 @@ export class PokerGameEngine {
     if (action === 'raise' && (this.raisesInRound >= 3 || player.chips <= callAmt + 20)) {
         action = 'call';
     }
-    // Cannot call if no chips needed and not raising? Check/Call is same in handlers
+    
+    // Execute Action
+    let performedAction = action;
+    let isCheck = (action === 'call' && callAmt === 0);
     
     if (action === 'raise') this.handleAction(player, 'raise', 20);
     else this.handleAction(player, action);
+    
+    // Determine Speech
+    // We want a high chance of speaking to show off the feature/styles
+    const speakChance = 0.6; // 60%
+    if (Math.random() < speakChance) {
+        let type: 'raise' | 'call' | 'fold' | 'check' | 'allin' = 'call';
+        
+        if (player.status === 'folded') type = 'fold';
+        else if (player.status === 'allin') type = 'allin';
+        else if (action === 'raise') type = 'raise';
+        else if (isCheck) type = 'check';
+        else type = 'call';
+        
+        const lines = SPEECH_LINES[player.persona][type];
+        if (lines && lines.length > 0) {
+            const text = lines[Math.floor(Math.random() * lines.length)];
+            this.speak(player, text);
+        }
+    }
   }
 }
