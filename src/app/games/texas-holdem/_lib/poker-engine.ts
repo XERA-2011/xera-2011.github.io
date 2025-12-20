@@ -467,6 +467,16 @@ export class PokerGameEngine {
     // Show cards & Set Description
     results.forEach(({ player, result }) => {
          let info = this.getRankName(result.rank);
+         
+         // Check if playing the board (all winning cards are in community cards)
+         const isPlayingBoard = result.winningCards.every(wc => 
+             this.communityCards.some(cc => cc.suit === wc.suit && cc.rank === wc.rank)
+         );
+
+         if (isPlayingBoard) {
+             info += " (Board)";
+         }
+
          player.handDescription = info;
          this.log(`${player.name} 亮牌: ${this.formatCards(player.hand)} (${info})`, 'showdown');
     });
@@ -521,12 +531,15 @@ export class PokerGameEngine {
              let share = Math.floor(potAmount / winners.length);
              let remainder = potAmount % winners.length;
              
+             let winnersLogInfo: { name: string, amt: number }[] = [];
+
              winners.forEach((w, idx) => {
                  let winAmt = share + (idx < remainder ? 1 : 0);
                  w.player.chips += winAmt;
                  
+                 winnersLogInfo.push({ name: w.player.name, amt: winAmt });
+
                  // Track main winners for UI (purely visual: use the highest pot winners)
-                 // Or just accumulate all?
                   if (!this.winners.includes(w.player.id)) {
                       // Only mark as winner if it was a contested pot OR if everyone else folded
                       // If eligiblePlayerIds.length === 1 && activePlayers.length > 1, it implies this player 
@@ -541,14 +554,24 @@ export class PokerGameEngine {
                      this.winningCards = w.result.winningCards;
                  }
                  
-                 this.log(`${w.player.name} 赢得 ${winAmt} (Pot Lv ${currentPotIdx+1})`, 'win');
-                 
                  // Bluff Succcess Speech
                  if (w.player.isBluffing && w.player.totalHandBet > 100 && !w.player.isHuman) {
                      this.speakRandom(w.player, 'bluff_win');
                  }
-                 // If not bluffing but won a big pot? Maybe normal happy speech? (Already generic)
              });
+
+             // Consolidated Log for this Pot Level
+             if (winnersLogInfo.length > 0) {
+                 if (winnersLogInfo.every(x => x.amt === winnersLogInfo[0].amt)) {
+                     // All same amount
+                     const names = winnersLogInfo.map(x => x.name).join(', ');
+                     this.log(`${names} 赢得 ${winnersLogInfo[0].amt} (Pot Lv ${currentPotIdx+1})`, 'win');
+                 } else {
+                     // Differing amounts (due to remainder)
+                     const details = winnersLogInfo.map(x => `${x.name} $${x.amt}`).join(', ');
+                     this.log(`${details} 赢得 (Pot Lv ${currentPotIdx+1})`, 'win');
+                 }
+             }
              
              // Bluff Fail Speech for active losers
              eligiblePlayerIds.forEach(pid => {
