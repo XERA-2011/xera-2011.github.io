@@ -52,7 +52,7 @@ const renderHorizontalLayout = (
   const cardWidth = 140;
   const cardHeight = 90;
   const gap = 12;
-  const padding = 12;
+  const padding = 0;
 
   const contentWidth = itemCount * cardWidth + (itemCount - 1) * gap + padding * 2;
   const contentHeight = cardHeight + padding * 2;
