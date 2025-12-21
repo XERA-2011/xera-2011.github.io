@@ -28,14 +28,14 @@ export default function TexasHoldemPage() {
   const isGameOver = survivorCount <= 1;
 
   return (
-    <div className="w-full h-[100dvh] text-zinc-900 dark:text-zinc-100 selection:bg-zinc-300 dark:selection:bg-zinc-700 selection:text-black overflow-hidden flex flex-col">
+    <div className="w-full h-[calc(100dvh-60px)] text-zinc-900 dark:text-zinc-100 selection:bg-zinc-300 dark:selection:bg-zinc-700 selection:text-black overflow-hidden flex flex-col">
 
       {/* Header Area - Compact */}
-      <div className="flex-none pt-24 px-4 pb-4 lg:p-10 flex justify-center items-center">
+      {/* <div className="flex-none pt-24 px-4 pb-4 lg:p-10 flex justify-center items-center">
         <h1 className="text-3xl sm:text-4xl lg:text-5xl font-bold text-zinc-900 dark:text-white drop-shadow-sm">
           Texas Hold'em
         </h1>
-      </div>
+      </div> */}
 
       {/* Main Game Area - Flex Grow to take available space */}
       <div className="flex-1 relative flex items-center justify-center w-full max-w-7xl mx-auto px-2">

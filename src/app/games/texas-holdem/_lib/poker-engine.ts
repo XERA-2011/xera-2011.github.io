@@ -96,21 +96,16 @@ export function evaluateHand(cards: Card[]): HandResult {
     let unique: Card[] = [];
     cardList.forEach(c => { if (!unique.find(u => u.value === c.value)) unique.push(c); });
     
-    // Check for Ace low straight (A, 2, 3, 4, 5)
+    // 检查 A 小顺子 (A, 2, 3, 4, 5)
     if (unique.some(c => c.value === 14)) {
       let aceLow = new Card('A', unique.find(c => c.value === 14)!.suit);
       aceLow.value = 1;
       unique.push(aceLow);
     }
-    // Re-sort because we might have added Ace as 1 at the end
+    // 重新排序，因为可能在最后添加了作为 1 的 A
     unique.sort((a, b) => b.value - a.value);
 
     for (let i = 0; i <= unique.length - 5; i++) {
-        // Check if 5 consecutive cards have values decreasing by 1
-        // Since we allow Ace as 1, the values can handle straight logic.
-        // However, unique array might have gaps if we blindly push.
-        // Correct logic: check if unique[i].value - unique[i+4].value === 4
-        // Logic from original code:
         if (unique[i].value - unique[i+4].value === 4) return unique.slice(i, i + 5);
     }
     return null;
@@ -193,9 +188,6 @@ export function evaluateHand(cards: Card[]): HandResult {
   return { rank: HandRankType.HIGH_CARD, score: calcScore(0, best5), winningCards: [best5[0]], bestHand: best5 };
 }
 
-// ... (previous code unchanged, we only replace the relevant parts)
-
-// Bot Names Pool
 const BOT_NAMES = [
   'Alex', 'Sam', 'Jordan', 'Taylor', 'Casey', 'Morgan', 'Riley', 'Jamie', 
   'Quinn', 'Avery', 'Parker', 'Reese', 'Blake', 'Charlie', 'Dakota', 'River',
@@ -211,8 +203,6 @@ export const SPEECH_LINES: Record<'bot', {
   check: string[];
   allin: string[];
   bluff_act: string[];
-  bluff_win: string[];
-  bluff_fail: string[];
 }> = {
   bot: {
      raise: [
@@ -253,14 +243,6 @@ export const SPEECH_LINES: Record<'bot', {
        "看这次谁怕谁!", "感觉到了恐惧吗?", "你真的敢跟吗?", "不加注怎么赢?", 
        "这把底牌绝了!", "猜猜我有什么牌?", "别犹豫了，弃牌吧."
      ],
-     bluff_win: [ // Won with bluff (by fold) or showdown
-       "哈哈，被我骗到了吧!", "其实我什么都没有!", "全靠演技!", "偷鸡成功!", 
-       "承让承让.", "有时候运气也是实力.", "下次别这么胆小."
-     ],
-     bluff_fail: [ // Lost with bluff
-       "这就很尴尬了.", "被看穿了?", "也是拼了.", "哎呀，演砸了.", 
-       "你是怎么知道的?", "好抓!", "不该偷鸡的."
-     ]
   }
 };
 
@@ -281,8 +263,8 @@ export interface Player {
   speechTs?: number;
   totalHandBet: number;
   hasActed: boolean;
-  isBluffing?: boolean; // Track if current strategy is bluffing
-  handDescription?: string; // e.g. "Two Pair" for display in Showdown
+  isBluffing?: boolean; // 追踪当前策略是否为诈唬
+  handDescription?: string; // 例如 "Two Pair" 用于摊牌时显示
 }
 
 export interface GameLog {
@@ -364,7 +346,7 @@ export class PokerGameEngine {
     this.pot = 0;
     this.highestBet = 0;
     this.raisesInRound = 0;
-    this.lastRaiseAmount = this.bigBlind; // Base raise delta is BB
+    this.lastRaiseAmount = this.bigBlind; // 基础加注增量为大盲注
     this.winners = [];
     this.logs = []; // Clear logs for new round
     this.winningCards = [];
@@ -374,7 +356,7 @@ export class PokerGameEngine {
       if (p.chips <= 0) {
         p.isEliminated = true;
         p.status = 'eliminated'; 
-        p.chips = 0; // Ensure no negative
+        p.chips = 0; // 确保不为负数
       }
     });
 
@@ -384,7 +366,7 @@ export class PokerGameEngine {
       this.dealerIdx = (this.dealerIdx + 1) % this.players.length;
     }
 
-    // Reset player states
+    // 重置玩家状态
     this.players.forEach(p => {
       p.hand = [];
       p.status = p.isEliminated ? 'eliminated' : 'active';
@@ -401,16 +383,16 @@ export class PokerGameEngine {
     this.deck = new Deck();
     this.deck.shuffle();
 
-    // Deal cards
+    // 发牌
     this.players.filter(p => !p.isEliminated).forEach(p => {
       p.hand.push(this.deck.deal()!);
       p.hand.push(this.deck.deal()!);
     });
 
-    // Blinds
+    // 盲注
     let sbIdx = this.getNextActive(this.dealerIdx);
     
-    // Heads-Up Rule Fix: In 2-player games, Dealer is Small Blind
+    // 单挑规则修正：在双人游戏中，庄家是小盲注
     const activePlayers = this.players.filter(p => !p.isEliminated);
     if (activePlayers.length === 2) {
         sbIdx = this.dealerIdx;
@@ -432,24 +414,24 @@ export class PokerGameEngine {
     let activePlayers = this.players.filter(p => !p.isEliminated && p.status !== 'folded');
     let foldedPlayers = this.players.filter(p => !p.isEliminated && p.status === 'folded');
 
-    // If only one player stands (others folded)
-    // Note: This block is usually handled before calling showdown in 'prepareBettingRound', 
-    // but as a fallback:
+    // 如果只剩一名玩家（其他玩家已弃牌）
+    // 注意：此块通常在调用 'prepareBettingRound' 中的摊牌之前处理，
+    // 但作为后备：
     if (activePlayers.length === 1) {
        let winner = activePlayers[0];
        
-       // Evaluate hand to show description (Gold Text) even if won by fold
+       // 评估手牌以显示描述（金色文本），即使因弃牌获胜
        try {
            let result = evaluateHand([...winner.hand, ...this.communityCards]);
            let info = this.getRankName(result.rank);
            winner.handDescription = info;
            this.winningCards = result.winningCards;
        } catch (e) {
-           // Fallback if evaluation fails (e.g. too few cards??)
+           // 如果评估失败的后备方案（例如牌太少？？）
            console.error("Eval Error in Fold Win", e);
        }
 
-       // Winner takes entire pot
+       // 获胜者赢得所有底池
        winner.chips += this.pot;
        this.log(`${winner.name} 赢得了 $${this.pot} (其他玩家弃牌)`, 'win');
        this.winners = [winner.id];
@@ -458,23 +440,16 @@ export class PokerGameEngine {
        return;
     }
 
-    // Evaluate Hands
+    // 评估手牌
     let results = activePlayers.map(p => ({
       player: p,
       result: evaluateHand([...p.hand, ...this.communityCards])
     }));
 
-    // Show cards & Set Description
+    // 显示牌并设置描述
     results.forEach(({ player, result }) => {
-         // Generate Detailed Description
          let info = this.getHandDetailedDescription(result);
          
-         // Check if playing the board (all best 5 cards are in community cards)
-         // We must check strict equality of card objects or value/suit
-         // Note: evaluateHand creates NEW card instances for A-low straight or generic combinations?
-         // Actually evaluateHand mostly passes references from 'sorted' which are references from input.
-         // Except A-low straight creates new 'Ace' with value 1 (line 101).
-         // So we should match by rank/suit.
          const isPlayingBoard = result.bestHand.every(wc => 
              this.communityCards.some(cc => cc.suit === wc.suit && cc.rank === wc.rank)
          );
@@ -487,14 +462,9 @@ export class PokerGameEngine {
          this.log(`${player.name} 亮牌: ${this.formatCards(player.hand)} (${info})`, 'showdown');
     });
 
-    // --- Side Pot & Split Pot Logic ---
-    
-    // 1. Calculate Contributions
-    // We consider all players who put money in (active + folded)
+    // --- 边池和分池逻辑 ---
     let allContributors = [...activePlayers, ...foldedPlayers];
     let contributions = allContributors.map(p => ({ id: p.id, amount: p.totalHandBet }));
-    
-    // 2. Identify unique bet levels (sorted asc)
     let betLevels = Array.from(new Set(contributions.map(c => c.amount).filter(a => a > 0))).sort((a, b) => a - b);
     
     let currentPotIdx = 0;
@@ -507,21 +477,21 @@ export class PokerGameEngine {
         let step = level - processedBet;
         if (step <= 0) continue;
         
-        // Calculate pot at this level
-        // Everyone who bet at least 'level' contributes 'step'
+        // 计算此级别的底池
+        // 所有下注至少为 'level' 的人都贡献 'step'
         let contributorsAtLevel = contributions.filter(c => c.amount >= level);
         let potAmount = contributorsAtLevel.length * step;
         
-        // Eligible winners: Active players who bet at least 'level'
+        // 合格获胜者：下注至少为 'level' 的活跃玩家
         let eligiblePlayerIds = activePlayers
             .filter(p => p.totalHandBet >= level)
             .map(p => p.id);
 
         if (eligiblePlayerIds.length > 0) {
-             // Find winner(s) among eligible
+             // 在合格玩家中寻找获胜者
              let eligibleResults = results.filter(r => eligiblePlayerIds.includes(r.player.id));
              
-             // Sort to find best score
+             // 排序以找到最高分
              eligibleResults.sort((a, b) => {
                 if (a.result.rank !== b.result.rank) return b.result.rank - a.result.rank;
                 return b.result.score - a.result.score;
@@ -533,7 +503,7 @@ export class PokerGameEngine {
                  Math.abs(r.result.score - bestRes.result.score) < 0.001
              );
              
-             // Split pot
+             // 分池
              let share = Math.floor(potAmount / winners.length);
              let remainder = potAmount % winners.length;
              
@@ -545,83 +515,45 @@ export class PokerGameEngine {
                  
                  winnersLogInfo.push({ name: w.player.name, amt: winAmt });
 
-                 // Track main winners for UI (purely visual: use the highest pot winners)
+                 // 追踪 UI 的主要获胜者（纯视觉效果：使用最高底池获胜者）
                   if (!this.winners.includes(w.player.id)) {
-                      // Only mark as winner if it was a contested pot OR if everyone else folded
-                      // If eligiblePlayerIds.length === 1 && activePlayers.length > 1, it implies this player 
-                      // is just getting their unmatched Money back (surplus), while losing/not-competing in main pot.
+                      // 仅当这是竞争底池或其他人全部弃牌时才标记为获胜者
+                      // 如果 eligiblePlayerIds.length === 1 && activePlayers.length > 1，这意味着该玩家
+                      // 只是拿回他们未被匹配的钱（盈余），而在主底池中输掉/未竞争。
                       const isUncontestedRefund = eligiblePlayerIds.length === 1 && activePlayers.length > 1;
                       if (!isUncontestedRefund) {
                          this.winners.push(w.player.id);
                       }
                   }
-                 // Track winning cards of the BEST hand found so far (usually main pot)
+                 // 追踪目前发现的最佳手牌的获胜牌（通常是主底池）
                  if (this.winningCards.length === 0) {
                      this.winningCards = w.result.winningCards;
                  }
                  
-                 // Bluff Succcess Speech
-                 if (w.player.isBluffing && w.player.totalHandBet > 100 && !w.player.isHuman) {
-                     this.speakRandom(w.player, 'bluff_win');
-                 }
              });
 
-             // Consolidated Log for this Pot Level
+             // 此底池级别的合并日志
              if (winnersLogInfo.length > 0) {
                  if (winnersLogInfo.every(x => x.amt === winnersLogInfo[0].amt)) {
-                     // All same amount
+                     // 全部金额相同
                      const names = winnersLogInfo.map(x => x.name).join(', ');
                      this.log(`${names} 赢得 ${winnersLogInfo[0].amt} (Pot Lv ${currentPotIdx+1})`, 'win');
                  } else {
-                     // Differing amounts (due to remainder)
+                     // 金额不同（由于余数）
                      const details = winnersLogInfo.map(x => `${x.name} $${x.amt}`).join(', ');
                      this.log(`${details} 赢得 (Pot Lv ${currentPotIdx+1})`, 'win');
                  }
              }
              
-             // Bluff Fail Speech for active losers
-             eligiblePlayerIds.forEach(pid => {
-                 const pl = this.players.find(p => p.id === pid);
-                 if (pl && !winners.some(w => w.player.id === pid)) {
-                     // Loser
-                     if (pl.isBluffing && !pl.isHuman) {
-                         this.speakRandom(pl, 'bluff_fail');
-                     }
-                 }
-             });
         } else {
-            // No eligible active players? (Should not happen if pots are correct)
-            // Money goes to... house? Or returned to last contributor?
-            // If everyone folded, we wouldn't be here.
-            // If active players are All-in for LESS than this level?
-            // Meaning Side Pot is created by 2 folds??
-            // Actually, if active players bet less than this level, they are not eligible.
-            // But 'contributorsAtLevel' has folks.
-            // Example: A bets 1000 (Fold), B bets 100 (Allin).
-            // Level 100: A and B contrib. Eligible: B. B wins.
-            // Level 1000: A contribs (900 more). Eligible: None.
-            // This 900 should be returned to A? But A folded.
-            // Standard rule: If you fold, you forfeit.
-            // If NO active player is eligible for this side pot?
-            // It goes to the active player who lasted longest? 
-            // Or technically, if checks folded, the pot should have been awarded already.
-            // In Showdown, at least 2 active players OR 1 active + side pots?
-            // Actually, `activePlayers` only includes non-folded.
-            // If I bet 1000 and everyone else folds, I win immediately.
-            // If I bet 1000, B call 100 (AI). 
-            // Pot 1: 200. Eligible A, B.
-            // Pot 2: 900. Eligible A.
-            // A wins Pot 2 automatically.
-             
-             // So if eligiblePlayerIds includes A (active), A wins.
-             // So this block handles it.
+             // 没有合格的活跃玩家 - 逻辑由循环结构处理或未使用
         }
         
         processedBet = level;
         currentPotIdx++;
     }
 
-    this.pot = 0; // Cleared
+    this.pot = 0; // 已清空
     this.notify();
   }
 
@@ -636,11 +568,11 @@ export class PokerGameEngine {
         this.log(`${player.name} 弃牌`, 'action');
         break;
       case 'call':
-        if (callAmount === 0) { // Check
+        if (callAmount === 0) { // 过牌
           this.log(`${player.name} 让牌/过牌`, 'action');
           player.hasActed = true;
         } else {
-          // Check if call puts player all-in
+          // 检查跟注是否让玩家全压
           let chipsToBet = Math.min(callAmount, player.chips);
           this.bet(player, chipsToBet);
           
@@ -653,30 +585,19 @@ export class PokerGameEngine {
         }
         break;
       case 'raise':
-        // RULE FIX: Minimum raise must be at least the size of the previous raise (or BB)
-        // Ensure raiseAmount is valid.
-        // User UI sends fixed 20 sometimes, but we should validate.
         const minRaise = Math.max(this.bigBlind, this.lastRaiseAmount);
         
-        // If player tries to raise less than min (but has chips), force min? 
-        // Or if UI sends just "Raise", we default to Min Raise?
         if (raiseAmount < minRaise) raiseAmount = minRaise;
 
         let totalBet = callAmount + raiseAmount;
         
-        if (totalBet >= player.chips) { // Treat as All-in
+        if (totalBet >= player.chips) { // 视为全压
           this.handleAction(player, 'allin'); 
           return;
         }
 
         this.bet(player, totalBet);
 
-        // Update Raise Delta
-        // New Highest = player.currentBet.
-        // Delta = New Highest - Old Highest.
-        // Wait, raising *by* raiseAmount means `currentBet` increases by `callAmount + raiseAmount`.
-        // So `currentBet` becomes `highestBet + raiseAmount`.
-        // The *increase* in `highestBet` is `raiseAmount`.
         this.lastRaiseAmount = raiseAmount; 
         
         this.highestBet = player.currentBet;
@@ -688,14 +609,11 @@ export class PokerGameEngine {
         let allInAmt = player.chips;
         this.bet(player, allInAmt);
         
-        // If this raise increases the highest bet
         if (player.currentBet > this.highestBet) {
              this.highestBet = player.currentBet;
              this.raisesInRound++;
              this.log(`${player.name} All In! ($${player.currentBet})`, 'action');
         } else {
-             // Short stack all-in (less than current raise)
-             // This does NOT reopen betting for others usually, but simplified here.
              this.log(`${player.name} All In (短码) $${player.currentBet}`, 'action');
         }
         player.hasActed = true;
@@ -725,7 +643,7 @@ export class PokerGameEngine {
       message,
       type
     });
-    // Keep max 50 logs
+    // 保留最多 50 条日志
     if (this.logs.length > 50) this.logs.pop();
   }
 
@@ -756,7 +674,7 @@ export class PokerGameEngine {
     const rank = result.rank;
     const cards = result.winningCards;
     
-    // Helper to get formatted rank
+    // 获取格式化等级的助手
     const r = (i: number) => cards[i].rank;
 
     switch (rank) {
@@ -765,7 +683,7 @@ export class PokerGameEngine {
         case HandRankType.QUADS:
             return `四条 (${r(0)})`;
         case HandRankType.FULL_HOUSE:
-            // Full House: winningCards[0] is trip, winningCards[3] is pair
+            // 葫芦：winningCards[0] 是三条，winningCards[3] 是对子
             return `葫芦 (${r(0)} & ${r(3)})`;
         case HandRankType.FLUSH:
             return `同花 (${r(0)} High)`;
@@ -774,7 +692,7 @@ export class PokerGameEngine {
         case HandRankType.TRIPS:
             return `三条 (${r(0)})`;
         case HandRankType.TWO_PAIR:
-            // Two Pair: P1 at [0], P2 at [2]
+            // 两对：P1 在 [0]，P2 在 [2]
             return `两对 (${r(0)} & ${r(2)})`;
         case HandRankType.PAIR:
             return `对子 (${r(0)})`;
@@ -796,7 +714,7 @@ export class PokerGameEngine {
   }
 
   bet(player: Player, amount: number) {
-    if (player.chips < amount) amount = player.chips; // All in
+    if (player.chips < amount) amount = player.chips; // 全压
     player.chips -= amount;
     player.currentBet += amount;
     player.totalHandBet += amount;
@@ -807,15 +725,15 @@ export class PokerGameEngine {
   prepareBettingRound(startIdx: number) {
     this.currentTurnIdx = startIdx;
     
-    // Win by Fold Check
+    // 弃牌获胜检查
     const nonFolded = this.players.filter(p => !p.isEliminated && p.status !== 'folded');
     if (nonFolded.length <= 1) {
-        this.stage = 'showdown'; // Ensure stage is set for UI
+        this.stage = 'showdown'; // 确保为 UI 设置阶段
         this.showdown();
         return;
     }
 
-    // All-In / Auto-Run Check
+    // 全压 / 自动运行检查
     this.actorsLeft = this.players.filter(p => p.status === 'active').length;
     if (this.actorsLeft <= 1 && !this.isFastForwarding) {
         this.runRemainingStages();
@@ -830,20 +748,19 @@ export class PokerGameEngine {
   humanAction(type: 'fold' | 'call' | 'raise' | 'allin') {
     const p = this.players[0];
     if (this.currentTurnIdx !== 0 || p.status !== 'active') return;
-    this.handleAction(p, type, 20); // Default raise 20
+    this.handleAction(p, type, 20); // 默认加注 20
   }
 
   processTurn() {
     try {
         let p = this.players[this.currentTurnIdx];
         
-        // Skip if player incapable of acting
         if (p.status === 'folded' || p.isEliminated || p.status === 'allin') {
             if (this.isBetsSettled()) {
                 this.nextStage();
             } else {
                 this.currentTurnIdx = this.getNextActive(this.currentTurnIdx);
-                setTimeout(() => this.processTurn(), 100); // Async recursion
+                setTimeout(() => this.processTurn(), 100); 
             }
             return;
         }
@@ -858,77 +775,39 @@ export class PokerGameEngine {
     } catch (e: any) {
         this.log(`Critical Error in processTurn: ${e.message}`, 'phase');
         console.error(e);
-        // Force showdown to unlock UI? Or just stop.
     }
   }
-
-  // Need to update handleAction to call processTurn or next player
-  // NOTE: The existing handleAction calls notify but doesn't rotate turn?
-  // I need to intercept handleAction or ensure it rotates.
-  // The existing handleAction just updates state and logs.
-  // So I should modify handleAction to Rotate Turn.
-  // However, I can't easily modify handleAction in THIS block (it is elsewhere).
-  // Wait, handleAction was visible in previous view, lines 368-400.
-  // It ENDS with this.notify(). It does NOT rotate turn.
-  // So the game loop is broken.
-  // I will override handleAction here as well since I can replace the comment block extensively?
-  // No, handleAction is AFTER this block in the file (lines 352+ in original view, but wait, where was the comment?)
-  // The comment was at line 402, AFTER handleAction ??
-  // Let's re-read step 23/29.
-  // Line 368: handleAction defined.
-  // Line 402: // ... methods ...
-  // This is confusing. handleAction IS defined, but the comment SAYS it is "unchanged".
-  // Duplication?
-  // The comment at line 402 lists handleAction.
-  // But handleAction is ALSO at line 368.
-  // This means I have valid handleAction at 368, but missing other methods.
-  // AND the handleAction at 368 does NOT call next turn.
-  // I will implement a `advanceTurn` helper and append it to `handleAction` if possible,
-  // OR I will just fully implement `nextTurn` logic inside basic methods and assume I need to fix `handleAction` later.
-  // actually, let's look at `aiAction` calls `this.handleAction`.
-  // If `handleAction` doesn't rotate, the game stalls.
-  // I should probably DELETE the existing `handleAction` (if it's before this block) and re-implement it here correctly?
-  // No, `handleAction` is lines 368-400. The comment is at 402.
-  // So `handleAction` is ABOVE the comment.
-  // I will fix `handleAction` in a separate step.
-  // For now, I implement others.
 
   isBetsSettled(): boolean {
       const active = this.players.filter(p => !p.isEliminated && p.status !== 'folded');
       if (active.length === 0) return true;
       const amount = this.highestBet;
-      // All active players must have bet equal to highestBet OR be all-in
-      // AND everyone must have had a chance to act?
-      // Simplified: checks if all active players match the highest bet.
-      // All active players must have bet equal to highestBet OR be all-in
-      // AND everyone must have acted in this round.
+       // 所有活跃玩家必须下注等于 highestBet 或全压
+       // 并且每个人都必须有机会行动？
+       // 简化：检查所有活跃玩家是否匹配最高下注。
+       // 所有活跃玩家必须下注等于 highestBet 或全压
+       // 并且每个人都必须在本轮行动。
       return active.every(p => {
           if (p.status === 'allin') return true; 
           return p.currentBet === amount && p.hasActed;
       });  
-      // actorsLeft logic is tricky. Let's just check if everyone matches bet and we went around?
-      // We'll rely on a simple check:
-      // If everyone matches bet, and we aren't in middle of a round... 
-      // Ideally we track 'playersYetToAct'.
-      // For this MV logic, let's update `advanceTurn` to check this.
+      // actorsLeft 逻辑比较棘手。我们要不只是检查每个人是否匹配下注并且我们已经转了一圈？
+      // 我们将依赖一个简单的检查：
+      // 如果每个人都匹配下注，并且我们不是在回合中间...
+      // 理想情况下我们追踪 'playersYetToAct'。
+      // 对于这个 MV 逻辑，让我们更新 `advanceTurn` 来检查这个。
   }
 
   nextStage() {
-      this.currentTurnIdx = -1; // clear turn
+      this.currentTurnIdx = -1; // 清除回合
       
-      // Move chips to pot? (Already done in bet)
-      // Reset current bets for next round?
-      // Actually chips stay in currentBet until end of round or stage?
-      // Standard: Bets gathered into pot at end of stage.
       this.players.forEach(p => {
-          // this.pot += p.currentBet; // Already added in bet()
-          // this.pot += p.currentBet; // Already added in bet()
           p.currentBet = 0;
           p.hasActed = false;
       });
       this.highestBet = 0;
       this.raisesInRound = 0;
-      this.lastRaiseAmount = this.bigBlind; // Reset min raise for new street
+      this.lastRaiseAmount = this.bigBlind; // 重置新一轮的最小加注
 
       if (this.stage === 'preflop') {
           this.stage = 'flop';
@@ -956,10 +835,10 @@ export class PokerGameEngine {
       if (this.isFastForwarding) return;
       this.isFastForwarding = true;
       try {
-          // Just fast forward
+          // 仅仅快进
           while(this.stage !== 'showdown') {
              this.nextStage();
-             // Safety break
+             // 安全中断
              if (this.players.filter(p => !p.isEliminated && p.status !== 'folded').length <= 1) break;
           }
       } catch (e: any) {
@@ -969,10 +848,8 @@ export class PokerGameEngine {
       }
   }
   
-  // finish handleAction logic here is safer:
+  // 在这里完成 handleAction 逻辑更安全：
   finishTurn() {
-       // If bets are settled (everyone matches the highest bet), we move to next stage.
-       // Note: This simplified logic might skip BB option if everyone just calls, but prevents infinite loops.
        if (this.isBetsSettled()) {
            this.nextStage();
        } else {
@@ -980,14 +857,14 @@ export class PokerGameEngine {
             this.processTurn();
        }
   }
-  // Re-implementing aiAction and adding speak helper
+  // 重新实现 aiAction 并添加发言助手
 
   speak(player: Player, text: string) {
       player.currentSpeech = text;
       player.speechTs = Date.now();
       this.notify();
       
-      // Auto clear after 3s
+      // 3秒后自动清除
       setTimeout(() => {
           if (player.currentSpeech === text) {
               player.currentSpeech = undefined;
@@ -1002,20 +879,20 @@ export class PokerGameEngine {
     } catch (e: any) {
         this.log(`AI Error (${player.name}): ${e.message}`, 'action');
         console.error(e);
-        // Fallback: Fold if error to keep game moving
+        // 后备方案：如果出错则弃牌以保持游戏进行
         this.handleAction(player, 'fold');
     }
   }
 
   _getHandStrength(player: Player): number {
-      // 0.0 to 1.0 (Approximate equity)
+      // 0.0 到 1.0 (近似胜率)
       const hole = player.hand;
       if (hole.length < 2) return 0;
       
       const community = this.communityCards;
       const fullHand = [...hole, ...community];
       
-      // Pre-flop Heuristics
+      // 翻牌前启发式
       if (community.length === 0) {
           const v1 = hole[0].value;
           const v2 = hole[1].value;
@@ -1026,33 +903,33 @@ export class PokerGameEngine {
           const gap = highVal - lowVal;
           
           let score = 0;
-          if (pair) score = highVal * 2.5; // Pairs are strong
-          else score = highVal + (lowVal / 2); // High cards
+          if (pair) score = highVal * 2.5; // 对子很强
+          else score = highVal + (lowVal / 2); // 高牌
           
           if (suited) score += 4;
-          if (gap === 1) score += 2; // Connectors
+          if (gap === 1) score += 2; // 连张
           else if (gap === 2) score += 1;
           
-          // Max score approx 35 (AA) -> 1.0
-          // Min score approx 3 (72o) -> 0.1
-          // Normalize roughly
+          // 最高分约 35 (AA) -> 1.0
+          // 最低分约 3 (72o) -> 0.1
+          // 粗略归一化
           return Math.min(score / 30, 1.0);
       }
       
-      // Post-flop: Hand Rank + Outs approximation
+      // 翻牌后：手牌等级 + 补牌近似
       const res = evaluateHand(fullHand);
       let strength = 0;
       
-      // Base strength on Rank
-      // Rank 0 (High) -> 0.1
-      // Rank 1 (Pair) -> 0.3 - 0.5
-      // Rank 2 (TwoPair) -> 0.6
-      // Rank 3 (Trips) -> 0.75
-      // Rank 4+ (Str/Flush) -> 0.9+
+      // 基于等级的基础强度
+      // Rank 0 (高牌) -> 0.1
+      // Rank 1 (对子) -> 0.3 - 0.5
+      // Rank 2 (两对) -> 0.6
+      // Rank 3 (三条) -> 0.75
+      // Rank 4+ (顺子/同花) -> 0.9+
       
       switch(res.rank) {
           case HandRankType.HIGH_CARD: strength = 0.1; break;
-          case HandRankType.PAIR: strength = 0.35 + (res.score % 15 / 100); break; // Higher pair better
+          case HandRankType.PAIR: strength = 0.35 + (res.score % 15 / 100); break; // 更大的对子更好
           case HandRankType.TWO_PAIR: strength = 0.6; break;
           case HandRankType.TRIPS: strength = 0.75; break;
           case HandRankType.STRAIGHT: strength = 0.85; break;
@@ -1070,126 +947,126 @@ export class PokerGameEngine {
     let strength = this._getHandStrength(player);
     let potOdds = callAmt > 0 ? callAmt / (this.pot + callAmt) : 0;
     
-    // Position/Strategy Factors
+    // 位置/策略因素
     let action: 'fold' | 'call' | 'raise' | 'allin' = 'fold';
     let rnd = Math.random();
     
-    // Expert Logic
-    // Fear Factor: If raises are high, be more conservative unless holding nuts
+    // 专家逻辑
+    // 恐惧因素：如果加注很高，除非持有坚果牌，否则更保守
     if (this.raisesInRound >= 3 && strength < 0.8) {
-        strength -= 0.15; // Penalty for fear
+        strength -= 0.15; // 恐惧惩罚
     }
     
-    // Adjust Strength Threshold based on Round
+    // 基于回合调整强度阈值
     let foldThresh = 0.2;
     let raiseThresh = 0.7;
-    let allInThresh = 0.92; // Very high threshold for value All-in
+    let allInThresh = 0.92; // 极高的价值全压阈值
     
     if (this.stage === 'preflop') {
-        foldThresh = 0.35; // Tighter preflop
-        if (callAmt <= 20) foldThresh = 0.2; // Limp if cheap
-        allInThresh = 0.96; // Only AA/KK typically
+        foldThresh = 0.35; // 翻牌前更紧
+        if (callAmt <= 20) foldThresh = 0.2; // 如果便宜就平跟
+        allInThresh = 0.96; // 通常只有 AA/KK
     }
     
-    // --- 1. Decision Logic ---
+    // --- 1. 决策逻辑 ---
     
     const bluffChance = 0.15; 
     const isBluff = (rnd < bluffChance && strength < 0.4 && this.raisesInRound < 2); 
     
     if (isBluff) {
          player.isBluffing = true;
-         // Bluff Strategy
-         // 10% of bluffs are All-In bluffs (Steal)
-         if (rnd < 0.015) { // 1.5% total chance (10% of 15%)
+         // 诈唬策略
+         // 10% 的诈唬是全压诈唬（偷底）
+         if (rnd < 0.015) { // 1.5% 总几率 (15% 的 10%)
              action = 'allin';
          } else {
              action = 'raise';
          }
     } else {
-        // Value / Standard Logic
+        // 价值 / 标准逻辑
         player.isBluffing = false;
         
-        // Check for All-In Strength
+        // 检查全压强度
         if (strength > allInThresh) {
-            // Monster hand.
-            // 40% chance to shove immediately, 60% chance to raise/trap
+            // 大牌。
+            // 40% 几率立即全推，60% 几率加注/设陷阱
             if (rnd < 0.4) action = 'allin';
             else action = 'raise';
         } else if (strength > raiseThresh) {
-            // Strong hand -> Value Bet / Raise
-            if (rnd > 0.2) action = 'raise'; // 80% raise
-            else action = 'call'; // 20% trap
+            // 强牌 -> 价值下注 / 加注
+            if (rnd > 0.2) action = 'raise'; // 80% 加注
+            else action = 'call'; // 20% 设陷阱
         } else if (strength > foldThresh) {
-            // Marginal/Decent
+            // 边缘/不错
             if (callAmt === 0) {
                  action = (rnd > 0.7) ? 'raise' : 'call'; 
             } else {
-                 // Facing a bet
-                 // If facing All-In (large bet relative to stack)
+                 // 面对下注
+                 // 如果面对全压（相对于筹码的大额下注）
                  const isLifeOrDeath = callAmt > player.chips * 0.6;
                  
                  if (isLifeOrDeath) {
-                     // Only call if decent strength or great odds
+                     // 仅在强度不错或赔率极好时跟注
                      if (strength > 0.6 || strength > potOdds + 0.1) action = 'call';
                      else action = 'fold';
                  } else {
-                     // Standard call logic
+                     // 标准跟注逻辑
                      if (strength > potOdds + 0.05) action = 'call';
-                     else if (rnd > 0.9) action = 'raise'; // Occasional semi-bluff
+                     else if (rnd > 0.9) action = 'raise'; // 偶尔半诈唬
                      else action = 'fold';
                  }
             }
         } else {
-            // Weak Hand
+            // 弱牌
             if (callAmt === 0) action = (rnd > 0.8) ? 'raise' : 'call'; 
             else action = 'fold';
         }
     }
 
-    // --- 2. Sanity Checks & Overrides ---
+    // --- 2. 合理性检查和覆盖 ---
 
-    // Don't raise if already capped or facing huge aggression with weak hand
+    // 如果已经封顶或持弱牌面对巨大激进，不要加注
     if (action === 'raise') {
          if (this.raisesInRound >= 4 || player.chips <= callAmt + 20) {
-            // If basically no chips left to raise, just call or all-in?
-            // If we really like the hand, All in.
+            // 如果基本没筹码加注了，只是跟注或全压？
+            // 如果我们真喜欢这手牌，全压。
             if (strength > 0.8) action = 'allin';
             else action = 'call';
          }
     }
     
-    // If we decided to 'call' but we don't have enough chips, it becomes a forced All-In (Call)
+    // 如果我们决定 '跟注' 但筹码不足，变成强制全压（跟注）
     if (action === 'call' && callAmt >= player.chips) {
-        // Valid, handled by handleAction('call') which bets max chips
+        // 有效，由押注最大筹码的 handleAction('call') 处理
     }
 
-    // Execute Action
+    // 执行行动
     let isCheck = (action === 'call' && callAmt === 0);
     
     if (action === 'raise') this.handleAction(player, 'raise', 20); 
     else this.handleAction(player, action);
     
-    // --- 3. Speech ---
+    // --- 3. 发言 ---
     const speakChance = 0.5; 
     
-    // Determine speech type
+    // 确定发言类型
     let speechType: keyof typeof SPEECH_LINES['bot'] = 'call';
     if (action === 'allin') speechType = 'allin';
     else if (player.status === 'folded') speechType = 'fold';
     else if (action === 'raise') speechType = 'raise';
     else if (isCheck) speechType = 'check';
 
-    // Priority Speech
+    // 优先发言
     if (player.isBluffing && (action === 'raise' || action === 'allin')) {
         this.speakRandom(player, 'bluff_act');
     } else if (action === 'allin') {
-        this.speakRandom(player, 'allin'); // Always speak on All In
+        this.speakRandom(player, 'allin'); // 全压时总是发言
     } else if (Math.random() < speakChance) {
         this.speakRandom(player, speechType);
     }
   }
   
-  // Helper for random speech
+  // 随机发言助手
   speakRandom(player: Player, type: keyof typeof SPEECH_LINES['bot']) {
       const lines = SPEECH_LINES['bot'][type];
         if (lines && lines.length > 0) {
