@@ -1,5 +1,10 @@
 # XERA-2011
 
+## Games (游戏)
+
+- [Texas Hold'em (单机德州扑克)](src/app/games/texas-holdem) - A single-player Texas Hold'em game.
+
+
 ## Requirements
 
 - Node.js 22+
