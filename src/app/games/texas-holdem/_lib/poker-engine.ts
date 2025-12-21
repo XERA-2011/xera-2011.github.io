@@ -532,16 +532,23 @@ export class PokerGameEngine {
                  
              });
 
-             // 此底池级别的合并日志
+             // Consolidated Log for this Pot Level (Updated for Better Clarity)
              if (winnersLogInfo.length > 0) {
+                 const isSidePot = eligiblePlayerIds.length < activePlayers.length;
+                 const isRefund = eligiblePlayerIds.length === 1 && activePlayers.length > 1; // Uncontested surplus
+                 
+                 let potLabel = isRefund ? '退回' : (isSidePot ? '边池' : '主池');
+                 if (!isRefund && currentPotIdx > 0 && !isSidePot) potLabel = `主池 Lv${currentPotIdx + 1}`; // Rare multi-main case
+
                  if (winnersLogInfo.every(x => x.amt === winnersLogInfo[0].amt)) {
-                     // 全部金额相同
+                     // All same amount
                      const names = winnersLogInfo.map(x => x.name).join(', ');
-                     this.log(`${names} 赢得 ${winnersLogInfo[0].amt} (Pot Lv ${currentPotIdx+1})`, 'win');
+                     const action = isRefund ? '拿回' : '赢得';
+                     this.log(`${names} ${action} ${winnersLogInfo[0].amt} (${potLabel})`, 'win');
                  } else {
-                     // 金额不同（由于余数）
+                     // Differing amounts (due to remainder)
                      const details = winnersLogInfo.map(x => `${x.name} $${x.amt}`).join(', ');
-                     this.log(`${details} 赢得 (Pot Lv ${currentPotIdx+1})`, 'win');
+                     this.log(`${details} 赢得 (${potLabel})`, 'win');
                  }
              }
              

@@ -37,7 +37,7 @@ export function GameTable({ players, communityCards, pot, dealerIdx, currentTurn
       <div className="absolute inset-0 bg-gray-200 dark:bg-zinc-900 border-[8px] sm:border-[12px] border-gray-300 dark:border-zinc-800 rounded-[100px] sm:rounded-[200px] shadow-[inset_0_0_60px_rgba(0,0,0,0.1)] dark:shadow-[inset_0_0_60px_rgba(0,0,0,0.5)]">
 
         {/* Pot Display */}
-        <div className="absolute top-[15%] left-1/2 -translate-x-1/2 -translate-y-1/2 z-10">
+        <div className="absolute top-[18%] left-1/2 -translate-x-1/2 -translate-y-1/2 z-10">
           <div className="px-3 py-1 sm:px-4 sm:py-1.5 bg-white/80 dark:bg-black/60 rounded-full border border-zinc-200 dark:border-white/10 text-zinc-900 dark:text-zinc-100 font-bold font-mono text-sm sm:text-lg shadow-sm backdrop-blur-sm whitespace-nowrap">
             Pot: ${pot}
           </div>
@@ -55,7 +55,7 @@ export function GameTable({ players, communityCards, pot, dealerIdx, currentTurn
         </div>
 
         {/* Game Log */}
-        <div className="absolute bottom-[10%] left-1/2 -translate-x-1/2 -translate-y-1/2 w-3/4 sm:w-1/2 z-0 pointer-events-auto">
+        <div className="absolute bottom-[12%] left-1/2 -translate-x-1/2 -translate-y-1/2 w-3/4 sm:w-1/2 z-0 pointer-events-auto">
           {/* Scale down slightly on mobile to fit */}
           <div className="origin-top scale-75 sm:scale-100">
             <GameLog logs={logs} players={players} communityCards={communityCards} />
