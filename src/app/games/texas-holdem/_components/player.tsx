@@ -50,7 +50,7 @@ export function Player({ player, isActiveTurn, isDealer, gameStage, className = 
         {player.status !== 'active' && (
           <div className="text-[9px] sm:text-[10px] md:text-xs lg:text-sm uppercase font-bold text-slate-400 mt-0.5 leading-none">
             {player.status === 'folded' && 'Fold'}
-            {player.status === 'allin' && <span className="text-zinc-900 dark:text-white font-black underline decoration-zinc-500">All-in</span>}
+            {player.status === 'allin' && <span className={`font-black underline decoration-zinc-500 ${(isActiveTurn || isWinner) ? 'text-white dark:text-black' : 'text-zinc-900 dark:text-white'}`}>All-in</span>}
             {player.status === 'eliminated' && 'Out'}
           </div>
         )}
