@@ -18,11 +18,6 @@ export default function sitemap(): MetadataRoute.Sitemap {
     { url: '/tools/life-calendar', priority: 0.7, changeFrequency: 'monthly' as const },
     { url: '/tools/asset-allocation', priority: 0.7, changeFrequency: 'monthly' as const },
 
-    // 演示项目页面
-    { url: '/demo', priority: 0.9, changeFrequency: 'weekly' as const },
-    { url: '/demo/solar-skirmish', priority: 0.7, changeFrequency: 'monthly' as const },
-    { url: '/demo/endless', priority: 0.7, changeFrequency: 'monthly' as const },
-
     // 生成工具页面
     { url: '/generate', priority: 0.9, changeFrequency: 'weekly' as const },
     { url: '/generate/news', priority: 0.7, changeFrequency: 'weekly' as const },

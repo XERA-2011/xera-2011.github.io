@@ -11,16 +11,6 @@ const gamesData: GlowCardItem[] = [
     title: "Texas Hold'em",
     href: "/games/texas-holdem",
   },
-  {
-    id: 'endless',
-    title: 'Endless',
-    href: '/games/endless'
-  },
-  {
-    id: 'solar-skirmish',
-    title: 'Solar Skirmish',
-    href: '/games/solar-skirmish'
-  },
   // Future games can be added here
 ];
 
