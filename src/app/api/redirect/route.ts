@@ -33,11 +33,42 @@ export async function GET(request: Request) {
       });
     }
 
-    // 验证 URL 格式
+    // 验证 URL 格式及白名单
     let decodedUrl: string;
+    let urlObj: URL;
     try {
       decodedUrl = decodeURIComponent(targetUrl);
-      new URL(decodedUrl); // 验证是否为有效 URL
+      urlObj = new URL(decodedUrl);
+      
+      // 允许的协议
+      if (!['http:', 'https:'].includes(urlObj.protocol)) {
+        return new NextResponse('Invalid protocol', { status: 400 });
+      }
+
+      // 域名白名单
+      const ALLOWED_DOMAINS = [
+        'api.dicebear.com',
+        'cdn.jsdelivr.net',
+        'raw.githubusercontent.com',
+        'github.com',
+        'avatars.githubusercontent.com',
+        'lh3.googleusercontent.com',
+        'img.shields.io',
+        'pic.twitter.com',
+        'pbs.twimg.com'
+      ];
+
+      // 检查域名是否在白名单中（支持子域名匹配，如 xxx.github.com 需谨慎，这里采用精确后缀匹配或完全匹配）
+      // 为安全起见，这里使用严格匹配或特定子域匹配
+      const hostname = urlObj.hostname.toLowerCase();
+      const isAllowed = ALLOWED_DOMAINS.some(domain => 
+        hostname === domain || hostname.endsWith('.' + domain)
+      );
+
+      if (!isAllowed) {
+        return new NextResponse('Domain not allowed', { status: 403 });
+      }
+
     } catch {
       return new NextResponse('Invalid URL format', { 
         status: 400 
