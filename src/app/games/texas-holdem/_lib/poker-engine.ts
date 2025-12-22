@@ -402,6 +402,7 @@ export class PokerGameEngine {
 
     this.bet(this.players[sbIdx], 5);
     this.bet(this.players[bbIdx], 10);
+    this.highestBet = 10;
 
     this.log(`庄家 ${this.players[this.dealerIdx].name}, 盲注 $5/$10`, 'phase');
     
