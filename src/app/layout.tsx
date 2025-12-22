@@ -1,86 +1,14 @@
-import type { Metadata, Viewport } from "next/types";
-import { BASE_URL } from "@/lib/constants";
+import { siteMetadata, siteViewport } from "@/config/site";
 import '../styles/globals.css';
 import Background from "@/components/background/star";
 import Footer from "@/components/footer";
 import Header from "@/components/header";
 import UserAuth from "@/components/header/user-auth";
-import SmoothScroll from "@/components/smooth-scroll";
 import ElasticCursor from "@/components/ui/elastic-cursor";
-import { AppProvider } from "@/contexts/AppContext";
-import SessionProvider from "@/components/session-provider";
-import { ThemeProvider } from "@/components/theme-provider";
+import { Providers } from "@/components/providers";
 
-export const viewport: Viewport = {
-  width: 'device-width',
-  initialScale: 1,
-  maximumScale: 5,
-  userScalable: true,
-  themeColor: [
-    { media: '(prefers-color-scheme: light)', color: '#ffffff' },
-    { media: '(prefers-color-scheme: dark)', color: '#0a0a0a' },
-  ],
-};
-
-export const metadata: Metadata = {
-  metadataBase: new URL(BASE_URL),
-  title: {
-    default: "XERA-2011 - Pocket Universe",
-    template: "%s | XERA-2011",
-  },
-  description: "Pocket Universe - 探索工具、实验项目和创意项目的个人空间",
-  keywords: ["XERA-2011", "开发工具", "在线工具", "实验项目", "Web开发", "个人网站"],
-  authors: [{ name: "XERA" }],
-  creator: "XERA",
-  publisher: "XERA",
-  robots: {
-    index: true,
-    follow: true,
-    googleBot: {
-      index: true,
-      follow: true,
-      'max-video-preview': -1,
-      'max-image-preview': 'large',
-      'max-snippet': -1,
-    },
-  },
-  openGraph: {
-    type: 'website',
-    locale: 'zh_CN',
-    alternateLocale: ['en_US'],
-    url: BASE_URL,
-    siteName: 'XERA-2011',
-    title: 'XERA-2011 - Pocket Universe',
-    description: 'Pocket Universe - 探索工具、实验项目和创意项目的个人空间',
-    images: [
-      {
-        url: '/favicon.ico',
-        width: 48,
-        height: 48,
-        alt: 'XERA-2011 Logo',
-      },
-    ],
-  },
-  twitter: {
-    card: 'summary_large_image',
-    title: 'XERA-2011 - Pocket Universe',
-    description: 'Pocket Universe - 探索工具、实验项目和创意项目的个人空间',
-    creator: '@XERA',
-    images: ['/favicon.ico'],
-  },
-  verification: {
-    google: '7fda4c6923f8758a',
-  },
-  alternates: {
-    canonical: BASE_URL,
-  },
-  icons: {
-    icon: '/favicon.ico',
-    shortcut: '/favicon.ico',
-    apple: '/favicon.ico',
-  },
-  manifest: '/manifest.json',
-};
+export const viewport = siteViewport;
+export const metadata = siteMetadata;
 
 export default function RootLayout({
   children,
@@ -88,29 +16,17 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en" className="theme-selection" data-scroll-behavior="smooth" suppressHydrationWarning>
+    <html lang="zh" className="theme-selection" data-scroll-behavior="smooth" suppressHydrationWarning>
       <body
         className="antialiased theme-scrollbar"
-        suppressHydrationWarning
       >
-        <ThemeProvider
-          attribute="class"
-          defaultTheme="dark"
-          enableSystem={false}
-          disableTransitionOnChange
-        >
-          <SessionProvider>
-            <AppProvider>
-              <SmoothScroll>
-                <Background />
-                <Header userAuth={<UserAuth />} />
-                {children}
-                <Footer />
-                <ElasticCursor />
-              </SmoothScroll>
-            </AppProvider>
-          </SessionProvider>
-        </ThemeProvider>
+        <Providers>
+          <Background />
+          <Header userAuth={<UserAuth />} />
+          {children}
+          <Footer />
+          <ElasticCursor />
+        </Providers>
       </body>
     </html>
   );
