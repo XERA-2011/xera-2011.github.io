@@ -172,19 +172,29 @@ export function GameLog({ logs, players, communityCards }: LogProps) {
         {logs.map((log) => (
           <div key={log.id} className="mb-0.5 leading-tight">
             {log.type === 'phase' && (
-              <div className="text-zinc-900 dark:text-zinc-100 font-bold border-t border-zinc-200 dark:border-white/10 mt-1 pt-1" dangerouslySetInnerHTML={{ __html: log.message }} />
+              <div className="text-zinc-900 dark:text-zinc-100 font-bold border-t border-zinc-200 dark:border-white/10 mt-1 pt-1">
+                {log.message}
+              </div>
             )}
             {log.type === 'win' && (
-              <div className="text-zinc-900 dark:text-white font-extrabold underline decoration-dotted decoration-zinc-500" dangerouslySetInnerHTML={{ __html: log.message }} />
+              <div className="text-zinc-900 dark:text-white font-extrabold underline decoration-dotted decoration-zinc-500">
+                {log.message}
+              </div>
             )}
             {log.type === 'action' && (
-              <div className="text-zinc-600 dark:text-zinc-400" dangerouslySetInnerHTML={{ __html: log.message }} />
+              <div className="text-zinc-600 dark:text-zinc-400">
+                {log.message}
+              </div>
             )}
             {log.type === 'normal' && (
-              <div className="text-zinc-500 dark:text-zinc-500" dangerouslySetInnerHTML={{ __html: log.message }} />
+              <div className="text-zinc-500 dark:text-zinc-500">
+                {log.message}
+              </div>
             )}
             {log.type === 'showdown' && (
-              <div className="text-zinc-800 dark:text-zinc-200 font-bold italic" dangerouslySetInnerHTML={{ __html: log.message }} />
+              <div className="text-zinc-800 dark:text-zinc-200 font-bold italic">
+                {log.message}
+              </div>
             )}
           </div>
         ))}
