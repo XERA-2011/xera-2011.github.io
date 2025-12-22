@@ -28,50 +28,49 @@ export default function TexasHoldemPage() {
   const isGameOver = survivorCount <= 1;
 
   return (
-    <div className="w-full h-[calc(100dvh-60px)] text-zinc-900 dark:text-zinc-100 selection:bg-zinc-300 dark:selection:bg-zinc-700 selection:text-black overflow-hidden flex flex-col">
+    <>
+      <style dangerouslySetInnerHTML={{
+        __html: `
+        footer { display: none !important; }
+      `}} />
+      <div className="w-full h-dvh pt-24 text-zinc-900 dark:text-zinc-100 selection:bg-zinc-300 dark:selection:bg-zinc-700 selection:text-black overflow-hidden flex flex-col overscroll-none">
 
-      {/* Header Area - Compact */}
-      {/* <div className="flex-none pt-24 px-4 pb-4 lg:p-10 flex justify-center items-center">
-        <h1 className="text-3xl sm:text-4xl lg:text-5xl font-bold text-zinc-900 dark:text-white drop-shadow-sm">
-          Texas Hold'em
-        </h1>
-      </div> */}
+        {/* Main Game Area - Flex Grow to take available space */}
+        <div className="flex-1 relative flex items-center justify-center w-full max-w-7xl mx-auto px-2">
 
-      {/* Main Game Area - Flex Grow to take available space */}
-      <div className="flex-1 relative flex items-center justify-center w-full max-w-7xl mx-auto px-2">
+          {/* Table Container - Centered and SCALED to fit */}
+          <div className="w-full h-full flex items-center justify-center">
+            <GameTable
+              players={players}
+              communityCards={communityCards}
+              pot={pot}
+              dealerIdx={dealerIdx}
+              currentTurnIdx={currentTurnIdx}
+              stage={stage}
+              logs={logs}
+              winners={winners}
+              winningCards={winningCards}
+            />
+          </div>
+        </div>
 
-        {/* Table Container - Centered and SCALED to fit */}
-        <div className="w-full h-full flex items-center justify-center">
-          <GameTable
-            players={players}
-            communityCards={communityCards}
-            pot={pot}
-            dealerIdx={dealerIdx}
-            currentTurnIdx={currentTurnIdx}
-            stage={stage}
-            logs={logs}
-            winners={winners}
-            winningCards={winningCards}
-          />
+        {/* Bottom Controls Area */}
+        <div className="flex-none pb-safe mb-2 w-full px-2 sm:mb-4">
+          <div className="flex justify-center">
+            <GameControls
+              onAction={humanAction}
+              canRaise={canRaise}
+              callAmount={callAmount}
+              playerChips={human.chips}
+              isHumanTurn={isHumanTurn}
+              showNextRound={stage === 'showdown'}
+              onNextRound={startNextRound}
+              isGameOver={isGameOver}
+              onReset={resetGame}
+            />
+          </div>
         </div>
       </div>
-
-      {/* Bottom Controls Area */}
-      <div className="flex-none pb-safe mb-2 w-full px-2 sm:mb-4">
-        <div className="flex justify-center">
-          <GameControls
-            onAction={humanAction}
-            canRaise={canRaise}
-            callAmount={callAmount}
-            playerChips={human.chips}
-            isHumanTurn={isHumanTurn}
-            showNextRound={stage === 'showdown'}
-            onNextRound={startNextRound}
-            isGameOver={isGameOver}
-            onReset={resetGame}
-          />
-        </div>
-      </div>
-    </div>
+    </>
   );
 }

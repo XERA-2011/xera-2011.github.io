@@ -30,7 +30,7 @@ export function Card({ card, hidden, className = "", isWinning }: CardProps) {
     >
       {isWinning && (
         <div className="absolute bottom-0 right-0 z-20 pointer-events-none">
-          <div className="w-5 h-5 sm:w-7 sm:h-7 bg-black dark:bg-black" style={{ clipPath: 'polygon(100% 0, 0 100%, 100% 100%)' }} />
+          <div className="w-5 h-5 sm:w-7 sm:h-7 bg-yellow-500" style={{ clipPath: 'polygon(100% 0, 0 100%, 100% 100%)' }} />
           <Check className="absolute bottom-[1px] right-[1px] w-3 h-3 sm:w-4 sm:h-4 text-white stroke-[4]" />
         </div>
       )}

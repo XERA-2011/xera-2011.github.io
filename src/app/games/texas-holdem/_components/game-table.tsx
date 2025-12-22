@@ -32,7 +32,7 @@ export function GameTable({ players, communityCards, pot, dealerIdx, currentTurn
 
   return (
     // Mobile: much taller (1/1.5) to fit logs. Desktop: wider (1/0.6).
-    <div className="relative w-full max-w-[900px] h-auto max-h-[85vh] aspect-[1/1] sm:aspect-[1/0.6] mx-auto flex-shrink-0 transition-all duration-300">
+    <div className="relative w-full max-w-[900px] h-auto max-h-[55vh] aspect-[1/1] sm:aspect-[1/0.6] mx-auto flex-shrink-0 transition-all duration-300">
       {/* The Felt Table */}
       <div className="absolute inset-0 bg-gray-200 dark:bg-zinc-900 border-[8px] sm:border-[12px] border-gray-300 dark:border-zinc-800 rounded-[100px] sm:rounded-[200px] shadow-[inset_0_0_60px_rgba(0,0,0,0.1)] dark:shadow-[inset_0_0_60px_rgba(0,0,0,0.5)]">
 
@@ -55,7 +55,7 @@ export function GameTable({ players, communityCards, pot, dealerIdx, currentTurn
         </div>
 
         {/* Game Log */}
-        <div className="absolute bottom-[12%] left-1/2 -translate-x-1/2 -translate-y-1/2 w-3/4 sm:w-1/2 z-0 pointer-events-auto">
+        <div className="absolute bottom-[8%] left-1/2 -translate-x-1/2 -translate-y-1/2 w-3/4 sm:w-1/2 z-0 pointer-events-auto">
           {/* Scale down slightly on mobile to fit */}
           <div className="origin-top scale-75 sm:scale-100">
             <GameLog logs={logs} players={players} communityCards={communityCards} />

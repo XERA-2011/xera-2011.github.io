@@ -29,6 +29,16 @@ export function Player({ player, isActiveTurn, isDealer, gameStage, className = 
       )}
 
       {/* Player Info Box */}
+
+      {/* Bet Badge - In flow (pushes info box down) */}
+      {player.status !== 'folded' && player.status !== 'eliminated' && player.currentBet > 0 && (
+        <div className="mb-1 z-30 animate-in fade-in zoom-in-50 duration-200">
+          <div className="bg-yellow-400 dark:bg-yellow-600 text-black dark:text-white px-2 py-0.5 rounded-full text-[10px] sm:text-xs font-bold shadow-md border border-yellow-500 dark:border-yellow-400 flex flex-col items-center leading-tight">
+            <span className="text-[8px] opacity-80 uppercase leading-none mb-0.5">Bet</span>
+            ${player.currentBet}
+          </div>
+        </div>
+      )}
       <div
         className={`
           relative mb-1 px-1.5 py-0.5 sm:px-2 sm:py-1 rounded border 
@@ -36,7 +46,8 @@ export function Player({ player, isActiveTurn, isDealer, gameStage, className = 
           text-center 
           min-w-[60px] sm:min-w-[80px] md:min-w-[100px] lg:min-w-[120px]
           transition-colors duration-300
-          ${isActiveTurn || isWinner ? 'bg-black border-black text-white dark:bg-white dark:border-white dark:text-black scale-105 z-20 shadow-lg' : ''}
+          ${isWinner ? 'bg-gradient-to-r from-yellow-300 to-amber-500 border-yellow-600 text-black scale-110 z-30 shadow-[0_0_15px_rgba(234,179,8,0.5)]' : ''}
+          ${isActiveTurn && !isWinner ? 'bg-black border-black text-white dark:bg-white dark:border-white dark:text-black scale-105 z-20 shadow-lg' : ''}
           ${!isActiveTurn && !isWinner ? 'bg-white/90 border-zinc-200 text-zinc-900 dark:bg-neutral-900/80 dark:border-neutral-700 dark:text-neutral-300' : ''}
           ${player.isEliminated ? 'opacity-50 grayscale' : ''}
         `}
@@ -44,24 +55,17 @@ export function Player({ player, isActiveTurn, isDealer, gameStage, className = 
         <div className="font-bold truncate max-w-[60px] sm:max-w-none mx-auto text-[9px] sm:text-xs md:text-sm lg:text-base">
           {player.name}
         </div>
-        <div className={`font-mono leading-none md:text-lg ${(isActiveTurn || isWinner) ? 'text-zinc-200 dark:text-zinc-800' : 'text-zinc-600 dark:text-zinc-400'}`}>${player.chips}</div>
+        <div className={`font-mono leading-none md:text-lg ${isWinner ? 'text-black font-black' : (isActiveTurn ? 'text-zinc-200 dark:text-zinc-800' : 'text-zinc-600 dark:text-zinc-400')}`}>${player.chips}</div>
 
         {/* Status Badge */}
         {player.status !== 'active' && (
-          <div className="text-[9px] sm:text-[10px] md:text-xs lg:text-sm uppercase font-bold text-slate-400 mt-0.5 leading-none">
+          <div className={`text-[9px] sm:text-[10px] md:text-xs lg:text-sm uppercase font-bold mt-0.5 leading-none ${isWinner ? 'text-amber-900' : 'text-slate-400'}`}>
             {player.status === 'folded' && 'Fold'}
-            {player.status === 'allin' && <span className={`font-black underline decoration-zinc-500 ${(isActiveTurn || isWinner) ? 'text-white dark:text-black' : 'text-zinc-900 dark:text-white'}`}>All-in</span>}
+            {player.status === 'allin' && <span className={`font-black underline decoration-zinc-500 ${(isActiveTurn || isWinner) ? (isWinner ? 'text-black' : 'text-white dark:text-black') : 'text-zinc-900 dark:text-white'}`}>All-in</span>}
             {player.status === 'eliminated' && 'Out'}
           </div>
         )}
-        {player.status !== 'folded' && player.status !== 'eliminated' && player.currentBet > 0 && (
-          <div className="absolute top-full left-1/2 -translate-x-1/2 mt-1 z-30">
-            <div className="bg-yellow-400 dark:bg-yellow-600 text-black dark:text-white px-2 py-0.5 rounded-full text-[10px] sm:text-xs font-bold shadow-md border border-yellow-500 dark:border-yellow-400 flex flex-col items-center leading-tight">
-              <span className="text-[8px] opacity-80 uppercase leading-none mb-0.5">Bet</span>
-              ${player.currentBet}
-            </div>
-          </div>
-        )}
+
 
         {/* Hand Description Badge (Showdown) */}
         {player.handDescription && (
@@ -85,6 +89,7 @@ export function Player({ player, isActiveTurn, isDealer, gameStage, className = 
           </div>
         )}
       </div>
+
 
       {/* Cards */}
       <div className={`flex gap-0.5 sm:gap-1 ${player.status === 'folded' ? 'opacity-40 grayscale' : ''}`}>
