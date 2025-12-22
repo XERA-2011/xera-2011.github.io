@@ -23,10 +23,10 @@ export function GameTable({ players, communityCards, pot, dealerIdx, currentTurn
   const positions = [
     "bottom-[0%] left-1/2 -translate-x-1/2 translate-y-[25%] z-20", // P0 (You) - Center bottom
     "bottom-[0%] left-[5%] sm:bottom-[10%] sm:left-[-5%] z-10",       // P1 - Bottom Left
-    "top-[-10%] left-[5%] sm:top-[12%] sm:left-[-5%] z-10",           // P2 - Top Left
-    "top-[-22%] left-[20%] sm:top-[-15%] sm:left-[25%] z-10",         // P3 - Top Left-Center
-    "top-[-22%] right-[20%] sm:top-[-15%] sm:right-[25%] z-10",       // P4 - Top Right-Center
-    "top-[-10%] right-[5%] sm:top-[12%] sm:right-[-5%] z-10",         // P5 - Top Right
+    "top-[-8%] left-[5%] sm:top-[12%] sm:left-[-5%] z-10",           // P2 - Top Left
+    "top-[-20%] left-[26%] sm:top-[-15%] sm:left-[25%] z-10",         // P3 - Top Left-Center
+    "top-[-20%] right-[26%] sm:top-[-15%] sm:right-[25%] z-10",       // P4 - Top Right-Center
+    "top-[-8%] right-[5%] sm:top-[12%] sm:right-[-5%] z-10",         // P5 - Top Right
     "bottom-[0%] right-[5%] sm:bottom-[10%] sm:right-[-5%] z-10",     // P6 - Bottom Right
   ];
 
