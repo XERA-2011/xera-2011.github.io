@@ -33,7 +33,7 @@ export default function TexasHoldemPage() {
         __html: `
         footer { display: none !important; }
       `}} />
-      <div className="w-full h-dvh pt-24 text-zinc-900 dark:text-zinc-100 selection:bg-zinc-300 dark:selection:bg-zinc-700 selection:text-black overflow-hidden flex flex-col overscroll-none">
+      <div className="w-full h-dvh pt-16 text-zinc-900 dark:text-zinc-100 selection:bg-zinc-300 dark:selection:bg-zinc-700 selection:text-black overflow-hidden flex flex-col overscroll-none">
 
         {/* Main Game Area - Flex Grow to take available space */}
         <div className="flex-1 relative flex items-center justify-center w-full max-w-7xl mx-auto px-2">

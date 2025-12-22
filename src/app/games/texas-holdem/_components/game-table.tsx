@@ -23,16 +23,16 @@ export function GameTable({ players, communityCards, pot, dealerIdx, currentTurn
   const positions = [
     "bottom-[0%] left-1/2 -translate-x-1/2 translate-y-[25%] z-20", // P0 (You) - Center bottom
     "bottom-[0%] left-[5%] sm:bottom-[10%] sm:left-[-5%] z-10",       // P1 - Bottom Left
-    "top-[0%] left-[5%] sm:top-[12%] sm:left-[-5%] z-10",             // P2 - Top Left
-    "top-[-10%] left-[25%] sm:top-[-15%] sm:left-[25%] z-10",          // P3 - Top Left-Center
-    "top-[-10%] right-[25%] sm:top-[-15%] sm:right-[25%] z-10",        // P4 - Top Right-Center
-    "top-[0%] right-[5%] sm:top-[12%] sm:right-[-5%] z-10",           // P5 - Top Right
+    "top-[-10%] left-[5%] sm:top-[12%] sm:left-[-5%] z-10",           // P2 - Top Left
+    "top-[-22%] left-[20%] sm:top-[-15%] sm:left-[25%] z-10",         // P3 - Top Left-Center
+    "top-[-22%] right-[20%] sm:top-[-15%] sm:right-[25%] z-10",       // P4 - Top Right-Center
+    "top-[-10%] right-[5%] sm:top-[12%] sm:right-[-5%] z-10",         // P5 - Top Right
     "bottom-[0%] right-[5%] sm:bottom-[10%] sm:right-[-5%] z-10",     // P6 - Bottom Right
   ];
 
   return (
     // Mobile: much taller (1/1.5) to fit logs. Desktop: wider (1/0.6).
-    <div className="relative w-full max-w-[900px] h-auto max-h-[55vh] aspect-[1/1] sm:aspect-[1/0.6] mx-auto flex-shrink-0 transition-all duration-300">
+    <div className="relative w-full max-w-[900px] h-auto max-h-[65vh] aspect-[1/1] sm:aspect-[1/0.7] mx-auto flex-shrink-0 transition-all duration-300">
       {/* The Felt Table */}
       <div className="absolute inset-0 bg-gray-200 dark:bg-zinc-900 border-[8px] sm:border-[12px] border-gray-300 dark:border-zinc-800 rounded-[100px] sm:rounded-[200px] shadow-[inset_0_0_60px_rgba(0,0,0,0.1)] dark:shadow-[inset_0_0_60px_rgba(0,0,0,0.5)]">
 
