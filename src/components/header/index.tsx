@@ -41,10 +41,12 @@ const Header = ({ loader, userAuth }: HeaderProps) => {
       >
         <Breadcrumb />
 
-        <div className="flex items-center gap-4 shrink-0">
-          {userAuth}
+        <div className="flex items-center gap-2 sm:gap-4 shrink-0">
+          <div className="hidden sm:block">
+            {userAuth}
+          </div>
 
-          <div onClick={(e) => e.stopPropagation()} className="flex items-center justify-center cursor-can-hover">
+          <div onClick={(e) => e.stopPropagation()} className="hidden sm:flex items-center justify-center cursor-can-hover">
             <ThemeToggle />
           </div>
 
@@ -76,7 +78,7 @@ const Header = ({ loader, userAuth }: HeaderProps) => {
       ></motion.div>
 
       <AnimatePresence mode="wait">
-        {isActive && <Nav setIsActive={setIsActive} />}
+        {isActive && <Nav setIsActive={setIsActive} userAuth={userAuth} />}
       </AnimatePresence>
     </motion.header>
   );

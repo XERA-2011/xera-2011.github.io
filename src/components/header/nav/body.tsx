@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, ReactNode } from "react";
 import { motion } from "framer-motion";
 import Link from "next/link";
 import styles from "./body.module.scss";
@@ -8,6 +8,7 @@ import { blur, translate } from "../anim";
 import { Link as LinkType } from "../config";
 import { cn } from "@/lib/utils";
 import { usePathname } from "next/navigation";
+import { ThemeToggle } from "@/components/theme-toggle";
 
 interface SelectedLink {
   isActive: boolean;
@@ -19,6 +20,7 @@ interface BodyProps {
   selectedLink: SelectedLink;
   setSelectedLink: (selectedLink: SelectedLink) => void;
   setIsActive: (isActive: boolean) => void;
+  userAuth?: ReactNode;
 }
 
 export default function Body({
@@ -26,6 +28,7 @@ export default function Body({
   selectedLink,
   setSelectedLink,
   setIsActive,
+  userAuth,
 }: BodyProps) {
   const pathname = usePathname();
   const [currentHref, setCurrentHref] = useState("/");
@@ -58,6 +61,24 @@ export default function Body({
 
   return (
     <div className={cn(styles.body, "flex flex-col items-end md:flex-row gap-6 md:gap-12")}>
+      {/* Mobile Settings Block - Aligned with links */}
+      <motion.div
+        custom={[0, 0]}
+        variants={translate}
+        initial="initial"
+        animate="enter"
+        exit="exit"
+        className="flex items-center justify-end gap-4 md:hidden w-full"
+      >
+        <div onClick={(e) => e.stopPropagation()} className="flex items-center justify-center">
+          <ThemeToggle />
+        </div>
+        {userAuth && (
+          <div onClick={(e) => e.stopPropagation()} className="flex items-center justify-center">
+            {userAuth}
+          </div>
+        )}
+      </motion.div>
       {links.map((link, index) => {
         const { title, href, target } = link;
         const isActive = currentHref === href || (href !== '/' && currentHref.startsWith(href));
@@ -76,8 +97,16 @@ export default function Body({
                 "cursor-can-hover",
                 isActive ? "underline" : "opacity-60"
               )}
-              onMouseOver={() => setSelectedLink({ isActive: true, index })}
-              onMouseLeave={() => setSelectedLink({ isActive: false, index })}
+              onMouseOver={() => {
+                if (window.innerWidth > 768) {
+                  setSelectedLink({ isActive: true, index });
+                }
+              }}
+              onMouseLeave={() => {
+                if (window.innerWidth > 768) {
+                  setSelectedLink({ isActive: false, index });
+                }
+              }}
               variants={blur}
               animate={
                 selectedLink.isActive && selectedLink.index !== index

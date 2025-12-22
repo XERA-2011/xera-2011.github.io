@@ -2,6 +2,7 @@ import { useEffect, useRef, useState } from 'react';
 import {
   Dialog,
   DialogContent,
+  DialogDescription,
   DialogHeader,
   DialogTitle,
 } from "@/components/ui/dialog";
@@ -64,6 +65,9 @@ export function GameLog({ logs, players, communityCards }: LogProps) {
             <DialogContent className="sm:max-w-[400px] max-h-[85vh] overflow-y-auto w-[95%] rounded-xl">
               <DialogHeader>
                 <DialogTitle>牌型大小 (由大到小)</DialogTitle>
+                <DialogDescription className="sr-only">
+                  常见的德州扑克牌型排行榜。
+                </DialogDescription>
               </DialogHeader>
               <div className="space-y-1">
                 {HAND_EXAMPLES.map((ex, i) => (

@@ -1,15 +1,17 @@
 "use client";
 
-import { useState, useEffect } from "react";
+import { useState, useEffect, ReactNode } from "react";
 import { motion } from "framer-motion";
 import styles from "./style.module.scss";
 import { height } from "../anim";
 import Body from "./body";
 import { links } from "../config";
 import { useSession } from "next-auth/react";
+import { ThemeToggle } from "@/components/theme-toggle";
 
 interface IndexProps {
   setIsActive: (isActive: boolean) => void;
+  userAuth?: ReactNode;
 }
 
 interface SelectedLinkState {
@@ -17,7 +19,7 @@ interface SelectedLinkState {
   index: number;
 }
 
-const Nav: React.FC<IndexProps> = ({ setIsActive }) => {
+const Nav: React.FC<IndexProps> = ({ setIsActive, userAuth }) => {
   const [selectedLink, setSelectedLink] = useState<SelectedLinkState>({
     isActive: false,
     index: 0,
@@ -53,6 +55,7 @@ const Nav: React.FC<IndexProps> = ({ setIsActive }) => {
               selectedLink={selectedLink}
               setSelectedLink={setSelectedLink}
               setIsActive={setIsActive}
+              userAuth={userAuth}
             />
           </div>
         </div>

@@ -3,6 +3,7 @@ import { Button } from "@/components/ui/button";
 import {
   Dialog,
   DialogContent,
+  DialogDescription,
   DialogFooter,
   DialogHeader,
   DialogTitle,
@@ -67,6 +68,9 @@ export function GameControls({
         <DialogContent className="sm:max-w-[425px]">
           <DialogHeader>
             <DialogTitle>Confirm All In?</DialogTitle>
+            <DialogDescription className="sr-only">
+              Are you sure you want to go all in? This action cannot be undone.
+            </DialogDescription>
           </DialogHeader>
           <DialogFooter className="flex flex-col sm:flex-col gap-3 w-full items-center">
             <Button
