@@ -10,7 +10,13 @@
     "nextjs",
     "react",
     "utilities",
-    "creative-projects"
+    "creative-projects",
+    "texas-holdem",
+    "poker",
+    "game",
+    "single-player",
+    "单机德州扑克",
+    "德州扑克"
   ],
   "homepage": "https://xera-2011.vercel.app",
   "repository": {
