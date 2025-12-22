@@ -58,7 +58,7 @@ export default function IpCheckPage() {
     const fetchOutboundIp = async () => {
       setOutboundIpLoading(true)
       try {
-        const res = await fetch('/api/outbound-ip')
+        const res = await fetch('/api/ip/outbound')
         if (res.ok) {
           const data = await res.json()
           setOutboundIpInfo({ ip: data.outboundIp, source: data.source })
@@ -87,7 +87,7 @@ export default function IpCheckPage() {
 
       // Use local server-side proxy to bypass CORS
       let response;
-      const proxyUrl = `/api/proxy?url=${encodeURIComponent(url)}`;
+      const proxyUrl = `/api/ip/proxy?url=${encodeURIComponent(url)}`;
       response = await fetch(proxyUrl);
 
       if (!response.ok) {
@@ -153,7 +153,7 @@ export default function IpCheckPage() {
 
       if (!isIp) {
         try {
-          const dnsRes = await fetch(`/api/dns?domain=${node.server}`);
+          const dnsRes = await fetch(`/api/ip/dns?domain=${node.server}`);
           const dnsData = await dnsRes.json();
           if (dnsData.ip) {
             ipToCheck = dnsData.ip;
@@ -171,7 +171,7 @@ export default function IpCheckPage() {
       // Add fallback to ip-api.com if ipwho.is fails (e.g. rate limit)
       let data;
       try {
-        const response = await fetch(`/api/proxy?url=${encodeURIComponent(`https://ipwho.is/${ipToCheck}`)}`)
+        const response = await fetch(`/api/ip/proxy?url=${encodeURIComponent(`https://ipwho.is/${ipToCheck}`)}`)
         data = await response.json()
 
         if (!data.success) {
@@ -180,7 +180,7 @@ export default function IpCheckPage() {
       } catch (primaryError) {
         console.warn("Primary IP API failed, trying fallback:", primaryError)
         // Fallback to ip-api.com (http only, so must use proxy)
-        const fallbackResponse = await fetch(`/api/proxy?url=${encodeURIComponent(`http://ip-api.com/json/${ipToCheck}`)}`)
+        const fallbackResponse = await fetch(`/api/ip/proxy?url=${encodeURIComponent(`http://ip-api.com/json/${ipToCheck}`)}`)
         const fallbackData = await fallbackResponse.json()
 
         if (fallbackData.status !== "success") {
