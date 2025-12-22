@@ -75,8 +75,8 @@ export default function TypingSVGPage() {
       bold: config.bold.toString(),
     });
 
-    if (config.type === 'movie-quotes') {
-      params.set('type', 'movie-quotes');
+    if (config.type === 'movie-quotes' || config.type === 'famous-quotes') {
+      params.set('type', config.type);
     } else {
       params.set('lines', config.lines);
     }
@@ -183,6 +183,30 @@ export default function TypingSVGPage() {
                         className="accent-primary"
                       />
                       <span className="text-foreground">随机电影台词</span>
+                    </label>
+                    <label className="flex items-center gap-2 cursor-pointer">
+                      <input
+                        type="radio"
+                        checked={config.type === 'famous-quotes'}
+                        onChange={() => setConfig({
+                          ...config,
+                          type: 'famous-quotes',
+                          font: 'monospace',
+                          size: '14',
+                          width: '750',
+                          height: '52',
+                          repeat: true,
+                          center: true,
+                          vCenter: true,
+                          multiline: true,
+                          duration: '5000',
+                          pause: '1000',
+                          letterSpacing: 'normal',
+                          bold: true
+                        })}
+                        className="accent-primary"
+                      />
+                      <span className="text-foreground">随机名人名言</span>
                     </label>
                   </div>
                 </div>

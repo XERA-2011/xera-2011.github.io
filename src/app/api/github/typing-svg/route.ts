@@ -1,6 +1,7 @@
 import { NextRequest, NextResponse } from 'next/server';
 import { BASE_URL } from '@/lib/constants';
 import { MOVIE_QUOTES } from '@/data/typing-svg/movie-quotes';
+import { FAMOUS_QUOTES } from '@/data/typing-svg/famous-quotes';
 import {
   parseBoolean,
   parsePositiveInt,
@@ -225,6 +226,13 @@ export async function GET(request: NextRequest) {
     // 如果指定了 type=movie-quotes，则随机获取一条电影台词
     if (type === 'movie-quotes') {
       const quote = MOVIE_QUOTES[Math.floor(Math.random() * MOVIE_QUOTES.length)];
+      linesParam = [
+        quote.english,
+        quote.chinese
+      ].join(separator);
+    } else if (type === 'famous-quotes') {
+      // 随机获取一条名人名言
+      const quote = FAMOUS_QUOTES[Math.floor(Math.random() * FAMOUS_QUOTES.length)];
       linesParam = [
         quote.english,
         quote.chinese
