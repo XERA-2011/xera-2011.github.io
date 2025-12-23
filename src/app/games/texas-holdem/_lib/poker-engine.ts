@@ -1075,93 +1075,71 @@ export class PokerGameEngine {
     let action: 'fold' | 'call' | 'raise' | 'allin' = 'fold';
     let rnd = Math.random();
     
-    // 专家逻辑
-    // 恐惧因素：如果加注很高，除非持有坚果牌，否则更保守
     if (this.raisesInRound >= 3 && strength < 0.8) {
-        strength -= 0.15; // 恐惧惩罚
+        strength -= 0.15;
     }
     
-    // 基于回合调整强度阈值
     let foldThresh = 0.2;
     let raiseThresh = 0.7;
-    let allInThresh = 0.92; // 极高的价值全压阈值
+    let allInThresh = 0.92;
     
     if (this.stage === 'preflop') {
-        foldThresh = 0.35; // 翻牌前更紧
-        if (callAmt <= 20) foldThresh = 0.2; // 如果便宜就平跟
-        allInThresh = 0.96; // 通常只有 AA/KK
+        foldThresh = 0.35;
+        if (callAmt <= 20) foldThresh = 0.2;
+        allInThresh = 0.96;
     }
     
     // --- 1. 决策逻辑 ---
-    
     const bluffChance = 0.15; 
     const isBluff = (rnd < bluffChance && strength < 0.4 && this.raisesInRound < 2); 
     
     if (isBluff) {
          player.isBluffing = true;
-         // 诈唬策略
-         // 10% 的诈唬是全压诈唬（偷底）
-         if (rnd < 0.015) { // 1.5% 总几率 (15% 的 10%)
+         if (rnd < 0.015) {
              action = 'allin';
          } else {
              action = 'raise';
          }
     } else {
-        // 价值 / 标准逻辑
         player.isBluffing = false;
-        
-        // 检查全压强度
+
         if (strength > allInThresh) {
-            // 大牌。
-            // 40% 几率立即全推，60% 几率加注/设陷阱
             if (rnd < 0.4) action = 'allin';
             else action = 'raise';
         } else if (strength > raiseThresh) {
-            // 强牌 -> 价值下注 / 加注
-            if (rnd > 0.2) action = 'raise'; // 80% 加注
-            else action = 'call'; // 20% 设陷阱
+            if (rnd > 0.2) action = 'raise';
+            else action = 'call';
         } else if (strength > foldThresh) {
-            // 边缘/不错
             if (callAmt === 0) {
                  action = (rnd > 0.7) ? 'raise' : 'call'; 
             } else {
-                 // 面对下注
-                 // 如果面对全压（相对于筹码的大额下注）
                  const isLifeOrDeath = callAmt > player.chips * 0.6;
                  
                  if (isLifeOrDeath) {
-                     // 仅在强度不错或赔率极好时跟注
                      if (strength > 0.6 || strength > potOdds + 0.1) action = 'call';
                      else action = 'fold';
                  } else {
-                     // 标准跟注逻辑
                      if (strength > potOdds + 0.05) action = 'call';
-                     else if (rnd > 0.9) action = 'raise'; // 偶尔半诈唬
+                     else if (rnd > 0.9) action = 'raise';
                      else action = 'fold';
                  }
             }
         } else {
-            // 弱牌
             if (callAmt === 0) action = (rnd > 0.8) ? 'raise' : 'call'; 
             else action = 'fold';
         }
     }
 
     // --- 2. 合理性检查和覆盖 ---
-
-    // 如果已经封顶或持弱牌面对巨大激进，不要加注
     if (action === 'raise') {
          if (this.raisesInRound >= 4 || player.chips <= callAmt + 20) {
-            // 如果基本没筹码加注了，只是跟注或全压？
-            // 如果我们真喜欢这手牌，全压。
             if (strength > 0.8) action = 'allin';
             else action = 'call';
          }
     }
     
-    // 如果我们决定 '跟注' 但筹码不足，变成强制全压（跟注）
     if (action === 'call' && callAmt >= player.chips) {
-        // 有效，由押注最大筹码的 handleAction('call') 处理
+        // pass
     }
 
     // 执行行动
@@ -1173,18 +1151,16 @@ export class PokerGameEngine {
     // --- 3. 发言 ---
     const speakChance = 0.5; 
     
-    // 确定发言类型
     let speechType: keyof typeof SPEECH_LINES['bot'] = 'call';
     if (action === 'allin') speechType = 'allin';
     else if (player.status === 'folded') speechType = 'fold';
     else if (action === 'raise') speechType = 'raise';
     else if (isCheck) speechType = 'check';
 
-    // 优先发言
     if (player.isBluffing && (action === 'raise' || action === 'allin')) {
         this.speakRandom(player, 'bluff_act');
     } else if (action === 'allin') {
-        this.speakRandom(player, 'allin'); // 全压时总是发言
+        this.speakRandom(player, 'allin');
     } else if (Math.random() < speakChance) {
         this.speakRandom(player, speechType);
     }
