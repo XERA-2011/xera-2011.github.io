@@ -296,8 +296,6 @@ export class PokerGameEngine {
   winningCards: Card[] = [];
   lastRaiseAmount: number = 0;
   bigBlind: number = 10;
-  
-  public testMode: boolean = false; // Enable for zero-delay actions
 
   constructor(onChange: (snapshot: ReturnType<PokerGameEngine['getSnapshot']>) => void) {
     this.onChange = onChange;
@@ -873,10 +871,9 @@ export class PokerGameEngine {
                 if (this._isDestroyed) return;
                 this.currentTurnIdx = this.getNextActive(this.currentTurnIdx);
                 const currentRoundId = this.roundId;
-                const delay = this.testMode ? 0 : 100;
                 setTimeout(() => {
                     if (this.roundId === currentRoundId) this.processTurn();
-                }, delay); 
+                }, 100); 
             }
             return;
 
@@ -886,12 +883,10 @@ export class PokerGameEngine {
 
         if (!p.isHuman) {
             const currentRoundId = this.roundId;
-            const delay = this.testMode ? 0 : 800 + Math.random() * 1000;
-            
             setTimeout(() => {
                 if (this._isDestroyed || this.roundId !== currentRoundId) return;
                 this.aiAction(p);
-            }, delay);
+            }, 800 + Math.random() * 1000);
         }
 
     } catch (e: any) {

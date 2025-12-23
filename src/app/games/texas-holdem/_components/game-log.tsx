@@ -45,7 +45,7 @@ const HAND_EXAMPLES = [
 
 export function GameLog({ logs, players, communityCards }: LogProps) {
   const scrollRef = useRef<HTMLDivElement>(null);
-  const [copyState, setCopyState] = useState<'idle' | 'copied' | 'history_copied' | 'showdown_copied'>('idle');
+  const [copyState, setCopyState] = useState<'idle' | 'copied' | 'history_copied'>('idle');
   const [showRules, setShowRules] = useState(false);
 
   useEffect(() => {
@@ -133,37 +133,7 @@ export function GameLog({ logs, players, communityCards }: LogProps) {
             {copyState === 'history_copied' ? '已复制' : '复制对局'}
           </button>
 
-          <button
-            onClick={() => {
-              // Showdown Copy Logic
-              if (!players || !communityCards) return;
 
-              const activePlayers = players.filter(p => !p.isEliminated && p.status !== 'folded');
-              let report = `=== Showdown Summary ===\n`;
-              report += `Community Cards: [${communityCards.map(c => c.toString()).join(' ')}]\n\n`;
-
-              activePlayers.forEach(p => {
-                const fullHand = [...p.hand, ...communityCards];
-                if (fullHand.length >= 5) {
-                  const result = evaluateHand(fullHand);
-                  const rankStr = RANK_NAMES[result.rank];
-                  const cardsStr = p.hand.map(c => c.toString()).join(' ');
-
-                  // Simple Kicker Logic for text
-                  report += `Player ${p.name}: [${cardsStr}] -> ${rankStr}\n`;
-                }
-              });
-
-              navigator.clipboard.writeText(report);
-              setCopyState('showdown_copied');
-              setTimeout(() => setCopyState('idle'), 2000);
-            }}
-            className={`text-[10px] px-2 py-0.5 rounded transition-all duration-300 ${copyState === 'showdown_copied'
-              ? 'bg-green-100 text-green-900'
-              : 'bg-zinc-100 dark:bg-white/10 hover:bg-zinc-200 dark:hover:bg-white/20 text-zinc-600 dark:text-gray-300'}`}
-          >
-            {copyState === 'showdown_copied' ? '已复制' : '复制摊牌'}
-          </button>
         </div>
       </div>
 
