@@ -925,8 +925,11 @@ export class PokerGameEngine {
 
   processTurn() {
     try {
+        if (this._isDestroyed) return;
         let p = this.players[this.currentTurnIdx];
         
+        if (!p) return;
+
         if (p.status === 'folded' || p.isEliminated || p.status === 'allin') {
             if (this.isBetsSettled()) {
                 this.nextStage();

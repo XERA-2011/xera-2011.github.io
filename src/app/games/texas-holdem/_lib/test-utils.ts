@@ -81,8 +81,102 @@ export class ScenarioTester {
         });
 
         this.engine.communityCards = board.map(s => Card.fromString(s));
+        
+        // Auto-detect stage based on board
+        if (this.engine.communityCards.length === 0) this.engine.stage = 'preflop';
+        else if (this.engine.communityCards.length === 3) this.engine.stage = 'flop';
+        else if (this.engine.communityCards.length === 4) this.engine.stage = 'turn';
+        else if (this.engine.communityCards.length === 5) this.engine.stage = 'river';
+
         this.engine.pot = 0;
         this.engine.currentTurnIdx = this.engine.players.find(p => p.name === config[0].name)?.id || 0;
+    }
+
+    /**
+     * 运行一个完全随机的对局场景
+     * 用于压力测试和发现潜在的边缘情况
+     */
+    async runRandomGame() {
+        this.reset();
+        
+        // 1. 随机化玩家筹码 (500 - 5000)
+        this.engine.players.forEach(p => {
+            p.chips = Math.floor(Math.random() * 4500) + 500;
+        });
+        
+        this.log(`Starting Random Game with ${this.engine.players.length} players...`);
+
+        let steps = 0;
+        const maxSteps = 200; // 防止无限循环
+
+        // 循环直到游戏结束 (showdown 或 只剩一人)
+        while (this.engine.stage !== 'showdown' && this.engine.winners.length === 0 && steps < maxSteps) {
+            // 检查是否只剩一人（有时引擎状态更新有延迟，双重检查）
+            const active = this.engine.players.filter(p => !p.isEliminated && p.status !== 'folded');
+            if (active.length <= 1) break;
+
+            const currentPlayer = this.engine.players[this.engine.currentTurnIdx];
+            
+            // 如果当前玩家状态不正确，尝试跳过或中断
+            if (!currentPlayer || currentPlayer.status !== 'active') {
+                 // 可能是引擎正在处理状态转换
+                 break;
+            }
+
+            // 决策逻辑
+            const callAmt = this.engine.highestBet - currentPlayer.currentBet;
+            const canRaise = currentPlayer.chips > callAmt;
+            
+            // 动作权重
+            let action: 'fold' | 'call' | 'raise' | 'allin' = 'call';
+            const rand = Math.random();
+            
+            if (canRaise) {
+                if (rand < 0.1) action = 'fold';
+                else if (rand < 0.6) action = 'call';
+                else if (rand < 0.9) action = 'raise';
+                else action = 'allin';
+            } else {
+                // 筹码不足以加注，只能 call (allin) 或 fold
+                if (rand < 0.2) action = 'fold';
+                else action = 'call'; // 这里 call 会变成 allin 如果筹码不够
+            }
+
+            let amount = 0;
+            if (action === 'raise') {
+                const minRaise = this.engine.lastRaiseAmount || this.engine.bigBlind;
+                // 确保不超过拥有的筹码
+                const maxRaise = currentPlayer.chips - callAmt; 
+                
+                if (maxRaise < minRaise) {
+                    action = 'allin';
+                } else {
+                    // 随机加注额
+                    amount = Math.floor(Math.random() * (maxRaise - minRaise)) + minRaise;
+                }
+            }
+
+            try {
+                this.act(currentPlayer.name, action, amount);
+            } catch (e) {
+                // 如果动作非法（例如加注额不对），回退到 Call/Fold
+                try {
+                    this.act(currentPlayer.name, 'call');
+                } catch (e2) {
+                    try {
+                         this.act(currentPlayer.name, 'fold');
+                    } catch (e3) {
+                        this.log(`Player ${currentPlayer.name} stuck: ${e3}`);
+                        break;
+                    }
+                }
+            }
+            
+            await new Promise(r => setTimeout(r, 5));
+            steps++;
+        }
+        
+        this.log(`Random Game Ended. Stage: ${this.engine.stage}, Steps: ${steps}`);
     }
 }
 
@@ -262,6 +356,13 @@ export async function runDebugScenarios(): Promise<string[]> {
             tester.log("Passed.");
         } else {
              tester.log(`Failed: You=${py.chips}, Alex=${pa.chips}, Sam=${ps.chips}. (Likely A-low straight logic diff coverage)`);
+        }
+
+        // --- Scenario 11: Random Simulations ---
+        tester.log("11. Random Simulations (3 rounds)");
+        for(let i=0; i<3; i++) {
+            tester.log(`Random Round ${i+1}`);
+            await tester.runRandomGame();
         }
 
         tester.log("All Scenarios Completed.");
