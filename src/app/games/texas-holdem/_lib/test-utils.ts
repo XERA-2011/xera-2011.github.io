@@ -358,8 +358,52 @@ export async function runDebugScenarios(): Promise<string[]> {
              tester.log(`Failed: You=${py.chips}, Alex=${pa.chips}, Sam=${ps.chips}. (Likely A-low straight logic diff coverage)`);
         }
 
-        // --- Scenario 11: Random Simulations ---
-        tester.log("11. Random Simulations (3 rounds)");
+        // --- Scenario 11: Playing the Board (Split Pot) ---
+        tester.log("11. Playing the Board (Split Pot)");
+        tester.setupScenario([
+            { name: 'You', chips: 3204, hand: ['Tc', 'Js'] },      
+            { name: 'Morgan', chips: 1743, hand: ['5s', 'Qs'] },   
+            { name: 'Taylor', chips: 593, hand: ['2h', '8c'] }
+        ], ['3h', '3d', '3s', 'Ad', 'Kc']);
+        tester.act('Taylor', 'allin');
+        tester.act('Morgan', 'allin');
+        tester.act('You', 'allin');
+        await new Promise(r => setTimeout(r, 100));
+        
+        let pYou11 = tester.engine.players.find(p => p.name === 'You')!;
+        let pMorgan11 = tester.engine.players.find(p => p.name === 'Morgan')!;
+        let pTaylor11 = tester.engine.players.find(p => p.name === 'Taylor')!;
+        
+        if (Math.abs(pYou11.chips - 3204) <= 2 && 
+            Math.abs(pMorgan11.chips - 1743) <= 2 && 
+            Math.abs(pTaylor11.chips - 593) <= 2) {
+            tester.log("Passed.");
+        } else {
+            throw new Error(`Split failed: You=${pYou11.chips}, Morgan=${pMorgan11.chips}, Taylor=${pTaylor11.chips}`);
+        }
+
+        // --- Scenario 12: Counterfeited Two Pair (Split Pot) ---
+        tester.log("12. Counterfeited Two Pair (Split Pot)");
+        tester.setupScenario([
+            { name: 'You', chips: 3053, hand: ['Jh', '6s'] },      
+            { name: 'Parker', chips: 1802, hand: ['9h', '6d'] }
+        ], ['4c', '7c', '7s', '6h', 'Ac']);
+        tester.act('Parker', 'allin');
+        tester.act('You', 'allin');
+        await new Promise(r => setTimeout(r, 100));
+        
+        let pYou12 = tester.engine.players.find(p => p.name === 'You')!;
+        let pParker12 = tester.engine.players.find(p => p.name === 'Parker')!;
+        
+        if (Math.abs(pYou12.chips - 3053) <= 2 && 
+            Math.abs(pParker12.chips - 1802) <= 2) {
+            tester.log("Passed.");
+        } else {
+             throw new Error(`Split failed: You=${pYou12.chips}, Parker=${pParker12.chips}`);
+        }
+
+        // --- Scenario 13: Random Simulations ---
+        tester.log("13. Random Simulations (3 rounds)");
         for(let i=0; i<3; i++) {
             tester.log(`Random Round ${i+1}`);
             await tester.runRandomGame();
