@@ -15,14 +15,13 @@ export function usePokerGame() {
     engineRef.current = engine;
     
     // Start first round
-    setTimeout(() => {
-        // Only start if not already started? 
-        // Logic: if new game, start.
+    const timer = setTimeout(() => {
         engine.startNextRound();
     }, 100);
 
     return () => {
-        // cleanup if needed (e.g. stop timers)
+        clearTimeout(timer);
+        engine.destroy();
     };
   }, []);
 

@@ -275,9 +275,11 @@ export interface GameLog {
 
 export class PokerGameEngine {
   onChange: (snapshot: ReturnType<PokerGameEngine['getSnapshot']>) => void;
+
   players: Player[];
   logs: GameLog[];
   deck!: Deck;
+  roundId: number = 0;
   communityCards!: Card[];
   pot!: number;
   dealerIdx!: number;
@@ -286,7 +288,10 @@ export class PokerGameEngine {
   actorsLeft!: number;
   raisesInRound!: number;
   currentTurnIdx!: number;
+  
   isFastForwarding: boolean = false;
+  private _isDestroyed: boolean = false;
+
   winners: number[] = [];
   winningCards: Card[] = [];
   lastRaiseAmount: number = 0;
@@ -300,8 +305,15 @@ export class PokerGameEngine {
     this.resetGame();
   }
 
+  destroy() {
+    this._isDestroyed = true;
+  }
+
+
   resetGame() {
+    if (this._isDestroyed) return;
     this.players = [];
+
     this.logs = [];
     
     // Initialize Random Expert Players
@@ -327,7 +339,7 @@ export class PokerGameEngine {
     this.deck = new Deck();
     this.communityCards = [];
     this.pot = 0;
-    this.dealerIdx = Math.floor(Math.random() * 7);
+    this.dealerIdx = -1; // Initialize to -1 so first round rotation sets it to 0 (User)
     this.highestBet = 0;
     this.stage = 'preflop';
     this.actorsLeft = 0;
@@ -337,11 +349,15 @@ export class PokerGameEngine {
     this.winningCards = [];
     
     this.notify();
-    this.startNextRound();
+    // Do NOT auto start. Let the UI/Control invoke startNextRound.
+    // this.startNextRound(); 
   }
 
   startNextRound() {
+    if (this._isDestroyed) return;
+    this.roundId++; // Invalidate previous timers
     this.stage = 'preflop';
+
     this.communityCards = [];
     this.pot = 0;
     this.highestBet = 0;
@@ -410,6 +426,47 @@ export class PokerGameEngine {
     this.notify();
   }
 
+  handleFoldWin(winner: Player) {
+      // 1. 退还 winner 没有被匹配的下注 (Uncalled Bet)
+      // 计算其实际被匹配的金额（即第二高下注额）
+      // 注意：这里需要遍历所有玩家本轮（或本局？）的下注来决定。
+      // 为简化：如果获胜者这轮下注了 X，而其他人这轮最多下注了 Y (Y < X)，那么 (X - Y) 退回。
+      // 但对于复杂的边池，Fold Win 通常意味着他拿走底池中所有钱。
+      // 唯一例外：如果他是因为 All-in 吓跑所有人，他这轮的 Action 其实是 "跟注" 或 "加注"。
+      // 正确做法：将 winner.currentBet 与第二高 currentBet 比较。
+      
+      const others = this.players.filter(p => p.id !== winner.id);
+      const maxOpponentBet = Math.max(0, ...others.map(p => p.currentBet));
+      
+      let returnAmount = 0;
+      if (winner.currentBet > maxOpponentBet) {
+          returnAmount = winner.currentBet - maxOpponentBet;
+          // 从底池扣除
+          this.pot -= returnAmount;
+          // 退还
+          winner.chips += returnAmount;
+          // 修正 winner 的数据以反映实际投入 (用于日志或逻辑？虽然现在游戏结束了)
+          winner.currentBet = maxOpponentBet; 
+          winner.totalHandBet -= returnAmount;
+      }
+      
+      // 赢走剩余底池（死钱）
+      const winAmount = this.pot;
+      winner.chips += winAmount;
+      this.pot = 0;
+      
+      this.winners = [winner.id];
+      // 清空 winning cards 因为没有摊牌
+      this.winningCards = []; 
+      
+      if (returnAmount > 0) {
+          this.log(`${winner.name} 拿回 $${returnAmount} (未被跟注)`, 'win');
+      }
+      this.log(`${winner.name} 赢得了 $${winAmount} (其他玩家弃牌)`, 'win');
+      
+      this.notify();
+  }
+
   showdown() {
     this.log('摊牌!', 'phase');
     let activePlayers = this.players.filter(p => !p.isEliminated && p.status !== 'folded');
@@ -421,23 +478,7 @@ export class PokerGameEngine {
     if (activePlayers.length === 1) {
        let winner = activePlayers[0];
        
-       // 评估手牌以显示描述（金色文本），即使因弃牌获胜
-       try {
-           let result = evaluateHand([...winner.hand, ...this.communityCards]);
-           let info = this.getRankName(result.rank);
-           winner.handDescription = info;
-           this.winningCards = result.winningCards;
-       } catch (e) {
-           // 如果评估失败的后备方案（例如牌太少？？）
-           console.error("Eval Error in Fold Win", e);
-       }
-
-       // 获胜者赢得所有底池
-       winner.chips += this.pot;
-       this.log(`${winner.name} 赢得了 $${this.pot} (其他玩家弃牌)`, 'win');
-       this.winners = [winner.id];
-       this.pot = 0;
-       this.notify();
+       this.handleFoldWin(winner);
        return;
     }
 
@@ -464,104 +505,157 @@ export class PokerGameEngine {
     });
 
     // --- 边池和分池逻辑 ---
-    let allContributors = [...activePlayers, ...foldedPlayers];
-    let contributions = allContributors.map(p => ({ id: p.id, amount: p.totalHandBet }));
-    let betLevels = Array.from(new Set(contributions.map(c => c.amount).filter(a => a > 0))).sort((a, b) => a - b);
-    
-    let currentPotIdx = 0;
-    this.winners = [];
-    this.winningCards = [];
-    
-    let processedBet = 0;
-
-    for (let level of betLevels) {
-        let step = level - processedBet;
-        if (step <= 0) continue;
+    try {
+        let allContributors = [...activePlayers, ...foldedPlayers];
+        let contributions = allContributors.map(p => ({ id: p.id, amount: p.totalHandBet }));
+        // 过滤出所有非零下注点，从小到大排序
+        let betLevels = Array.from(new Set(contributions.map(c => c.amount).filter(a => a > 0))).sort((a, b) => a - b);
         
-        // 计算此级别的底池
-        // 所有下注至少为 'level' 的人都贡献 'step'
-        let contributorsAtLevel = contributions.filter(c => c.amount >= level);
-        let potAmount = contributorsAtLevel.length * step;
-        
-        // 合格获胜者：下注至少为 'level' 的活跃玩家
-        let eligiblePlayerIds = activePlayers
-            .filter(p => p.totalHandBet >= level)
-            .map(p => p.id);
+        // 聚合日志 Map
+        let winLogMap = new Map<string, { amount: number, label: string }>();
 
-        if (eligiblePlayerIds.length > 0) {
-             // 在合格玩家中寻找获胜者
-             let eligibleResults = results.filter(r => eligiblePlayerIds.includes(r.player.id));
-             
-             // 排序以找到最高分
-             eligibleResults.sort((a, b) => {
-                if (a.result.rank !== b.result.rank) return b.result.rank - a.result.rank;
-                return b.result.score - a.result.score;
-             });
-             
-             let bestRes = eligibleResults[0];
-             let winners = eligibleResults.filter(r => 
-                 r.result.rank === bestRes.result.rank && 
-                 Math.abs(r.result.score - bestRes.result.score) < 0.001
-             );
-             
-             // 分池
-             let share = Math.floor(potAmount / winners.length);
-             let remainder = potAmount % winners.length;
-             
-             let winnersLogInfo: { name: string, amt: number }[] = [];
+        let processedBet = 0;
+        let currentPotIdx = 0;
+        this.winners = [];
+        this.winningCards = [];
 
-             winners.forEach((w, idx) => {
-                 let winAmt = share + (idx < remainder ? 1 : 0);
-                 w.player.chips += winAmt;
-                 
-                 winnersLogInfo.push({ name: w.player.name, amt: winAmt });
+        for (let level of betLevels) {
+            let step = level - processedBet;
+            if (step <= 0) continue;
+            
+            // 1. 计算当前 Slice 的底池大小
+            // 有多少人下注达到了这个 level (包括已弃牌的人)
+            let contributorsAtLevel = contributions.filter(c => c.amount >= level);
+            let potAmount = contributorsAtLevel.length * step;
+            
+            // 2. 找出有资格赢得这个 Slice 的人 (必须是 active 且下注达到 level)
+            let eligiblePlayerIds = activePlayers
+                .filter(p => p.totalHandBet >= level)
+                .map(p => p.id);
 
-                 // 追踪 UI 的主要获胜者（纯视觉效果：使用最高底池获胜者）
-                  if (!this.winners.includes(w.player.id)) {
-                      // 仅当这是竞争底池或其他人全部弃牌时才标记为获胜者
-                      // 如果 eligiblePlayerIds.length === 1 && activePlayers.length > 1，这意味着该玩家
-                      // 只是拿回他们未被匹配的钱（盈余），而在主底池中输掉/未竞争。
-                      const isUncontestedRefund = eligiblePlayerIds.length === 1 && activePlayers.length > 1;
-                      if (!isUncontestedRefund) {
-                         this.winners.push(w.player.id);
-                      }
-                  }
-                 // 追踪目前发现的最佳手牌的获胜牌（通常是主底池）
-                 if (this.winningCards.length === 0) {
-                     this.winningCards = w.result.winningCards;
-                 }
-                 
-             });
+            if (eligiblePlayerIds.length === 0) {
+                // 极端情况：这一层的钱没人有资格赢（例如所有人这层都弃牌了？）
+                // 这种情况应该归入“死钱”并被上一层的赢家拿走，或者直接销毁？
+                // 在德扑中，只要没弃牌，就有资格。如果所有人都弃牌了，早在 showdown 前就结束了。
+                // 唯一可能：有些 foldedPlayers 贡献了这层，但没有 activePlayers 达到这层。
+                // 这种钱通常被视为“僵尸死钱”，这里简单归给上一层的赢家，或者随机给一个 active。
+                // 为稳妥起见，跳过分配（钱会消失？不妥）。
+                // 这里暂不处理，假设必须有 active player。
+                processedBet = level;
+                continue;
+            }
 
-             // Consolidated Log for this Pot Level (Updated for Better Clarity)
-             if (winnersLogInfo.length > 0) {
-                 const isSidePot = eligiblePlayerIds.length < activePlayers.length;
-                 const isRefund = eligiblePlayerIds.length === 1 && activePlayers.length > 1; // Uncontested surplus
-                 
-                 let potLabel = isRefund ? '退回' : (isSidePot ? '边池' : '主池');
-                 if (!isRefund && currentPotIdx > 0 && !isSidePot) potLabel = `主池 Lv${currentPotIdx + 1}`; // Rare multi-main case
+            // 3. 判断是否为退款 (Refund)
+            // 退款条件：当前层只有 1 个贡献者。也就是只有 1 个人下注到了这个深度。
+            // 注意：eligiblePlayerIds.length === 1 并不一定是退款（可能是别人 match 了但弃牌了）。
+            // 真正的退款是：这一层只有我自己放了钱。
+            const isRefund = contributorsAtLevel.length === 1;
 
-                 if (winnersLogInfo.every(x => x.amt === winnersLogInfo[0].amt)) {
-                     // All same amount
-                     const names = winnersLogInfo.map(x => x.name).join(', ');
-                     const action = isRefund ? '拿回' : '赢得';
-                     this.log(`${names} ${action} ${winnersLogInfo[0].amt} (${potLabel})`, 'win');
-                 } else {
-                     // Differing amounts (due to remainder)
-                     const details = winnersLogInfo.map(x => `${x.name} $${x.amt}`).join(', ');
-                     this.log(`${details} 赢得 (${potLabel})`, 'win');
-                 }
-             }
-             
-        } else {
-             // 没有合格的活跃玩家 - 逻辑由循环结构处理或未使用
+            let winnersForSlice: Player[] = [];
+
+            if (isRefund) {
+                // 退款模式：直接退给该唯一贡献者
+                // 找到那个 contributor
+                let refundPlayerId = contributorsAtLevel[0].id; // 甚至不需要是 active? 
+                // 肯定是 active，因为他是这一层的唯一 reacher。
+                let refundPlayer = this.players.find(p => p.id === refundPlayerId);
+                if (refundPlayer) {
+                    winnersForSlice = [refundPlayer];
+                }
+            } else {
+                // 竞争模式：比较牌力
+                let eligibleResults = results.filter(r => eligiblePlayerIds.includes(r.player.id));
+                
+                // 排序：Rank 大的在前；Score 大的在前
+                eligibleResults.sort((a, b) => {
+                    if (a.result.rank !== b.result.rank) return b.result.rank - a.result.rank;
+                    return b.result.score - a.result.score;
+                });
+                
+                let bestRes = eligibleResults[0];
+                // 找到所有平分底池的人
+                let winnersStructs = eligibleResults.filter(r => 
+                    r.result.rank === bestRes.result.rank && 
+                    Math.abs(r.result.score - bestRes.result.score) < 0.001
+                );
+                winnersForSlice = winnersStructs.map(r => r.player);
+
+                // 记录最佳手牌 (仅第一次，主池)
+                if (this.winningCards.length === 0) {
+                    this.winningCards = bestRes.result.winningCards;
+                }
+            }
+
+            // 4. 分钱
+            if (winnersForSlice.length > 0) {
+                let share = Math.floor(potAmount / winnersForSlice.length);
+                let remainder = potAmount % winnersForSlice.length;
+
+                winnersForSlice.forEach((w, idx) => {
+                    let winAmt = share + (idx < remainder ? 1 : 0);
+                    w.chips += winAmt;
+
+                    // 记录到日志聚合 Map
+                    const key = w.name;
+                    // 类型后缀
+                    const typeKey = isRefund ? `${key}_refund` : `${key}_win`;
+                    
+                    const existing = winLogMap.get(typeKey) || { amount: 0, label: isRefund ? '退回' : '主池' };
+                    existing.amount += winAmt;
+
+                    // 标签升级逻辑
+                    if (!isRefund) {
+                        // 如果之前是主池，保持主池
+                        if (existing.label === '主池') { /* no-op */ }
+                        // 如果当前是主池 (第一个竞争池)，标记为主池
+                        else if (currentPotIdx === 0) existing.label = '主池'; 
+                        // 否则（后续竞争池），如果是初始状态，标记为边池
+                        else if (existing.label === '退回') existing.label = '边池'; // Reset if needed (unlikely)
+                    }
+                    winLogMap.set(typeKey, existing);
+
+                    // UI 高亮：如果是竞争获胜（非退款），加入高亮列表
+                    // 只要赢了主池边池都算赢
+                    if (!isRefund && !this.winners.includes(w.id)) {
+                        this.winners.push(w.id);
+                    }
+                });
+            }
+
+            processedBet = level;
+            // 只有当这是竞争池时，才增加池索引
+            if (!isRefund) currentPotIdx++;
         }
-        
-        processedBet = level;
-        currentPotIdx++;
+
+        // 5. 最终输出日志
+        winLogMap.forEach((val, key) => {
+            const isRefund = key.endsWith('_refund');
+            const name = key.replace('_refund', '').replace('_win', '');
+            const action = isRefund ? '拿回' : '赢得';
+            
+            // 优化显示标签
+            let displayLabel = val.label;
+            if (!isRefund) {
+                // 如果是 '主池'，就显示 '主池'
+                // 如果是 '边池'，显示 '底池'
+                if (displayLabel === '边池') displayLabel = '底池';
+            }
+
+            this.log(`${name} ${action} ${val.amount} (${displayLabel})`, 'win');
+        });
+
+    } catch (e: any) {
+        console.error("Critical Error in Showdown Pot Dist:", e);
+        this.log(`结算出错: ${e.message}`, 'phase');
+        // Fallback: 把所有剩余 Pot 给第一个 Active Player 为了不吞币
+        if (activePlayers.length > 0 && this.pot > 0) {
+             const luckyOne = activePlayers[0];
+             luckyOne.chips += this.pot;
+             this.log(`${luckyOne.name} 拿走了剩余底池 (Fallback)`, 'win');
+        }
     }
 
-    this.pot = 0; // 已清空
+    this.pot = 0;
     this.notify();
   }
 
@@ -621,6 +715,8 @@ export class PokerGameEngine {
              this.highestBet = player.currentBet;
              this.raisesInRound++;
              this.log(`${player.name} All In! ($${player.currentBet})`, 'action');
+        } else if (player.currentBet === this.highestBet) {
+             this.log(`${player.name} All In (跟注) $${player.currentBet}`, 'action');
         } else {
              this.log(`${player.name} All In (短码) $${player.currentBet}`, 'action');
         }
@@ -656,6 +752,7 @@ export class PokerGameEngine {
   }
 
   notify() {
+    if (this._isDestroyed) return;
     this.onChange(this.getSnapshot());
   }
 
@@ -736,8 +833,10 @@ export class PokerGameEngine {
     // 弃牌获胜检查
     const nonFolded = this.players.filter(p => !p.isEliminated && p.status !== 'folded');
     if (nonFolded.length <= 1) {
-        this.stage = 'showdown'; // 确保为 UI 设置阶段
-        this.showdown();
+        // 不要进入 Showdown 阶段，而是直接结算
+        if (nonFolded.length === 1) {
+            this.handleFoldWin(nonFolded[0]);
+        }
         return;
     }
 
@@ -767,19 +866,27 @@ export class PokerGameEngine {
             if (this.isBetsSettled()) {
                 this.nextStage();
             } else {
+                if (this._isDestroyed) return;
                 this.currentTurnIdx = this.getNextActive(this.currentTurnIdx);
-                setTimeout(() => this.processTurn(), 100); 
+                const currentRoundId = this.roundId;
+                setTimeout(() => {
+                    if (this.roundId === currentRoundId) this.processTurn();
+                }, 100); 
             }
             return;
+
         }
 
         this.notify();
 
         if (!p.isHuman) {
+            const currentRoundId = this.roundId;
             setTimeout(() => {
+                if (this._isDestroyed || this.roundId !== currentRoundId) return;
                 this.aiAction(p);
             }, 800 + Math.random() * 1000);
         }
+
     } catch (e: any) {
         this.log(`Critical Error in processTurn: ${e.message}`, 'phase');
         console.error(e);
@@ -858,6 +965,13 @@ export class PokerGameEngine {
   
   // 在这里完成 handleAction 逻辑更安全：
   finishTurn() {
+       // 检查是否只剩一名玩家 (其他人都弃牌了)
+       const active = this.players.filter(p => !p.isEliminated && p.status !== 'folded');
+       if (active.length === 1) {
+           this.handleFoldWin(active[0]);
+           return;
+       }
+
        if (this.isBetsSettled()) {
            this.nextStage();
        } else {
@@ -874,11 +988,13 @@ export class PokerGameEngine {
       
       // 3秒后自动清除
       setTimeout(() => {
+          if (this._isDestroyed) return;
           if (player.currentSpeech === text) {
               player.currentSpeech = undefined;
               this.notify();
           }
       }, 3000);
+
   }
 
   aiAction(player: Player) {
