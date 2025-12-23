@@ -464,6 +464,8 @@ export class PokerGameEngine {
       }
       this.log(`${winner.name} 赢得了 $${winAmount} (其他玩家弃牌)`, 'win');
       
+      this.stage = 'showdown';
+      this.currentTurnIdx = -1;
       this.notify();
   }
 
