@@ -189,9 +189,9 @@ export function evaluateHand(cards: Card[]): HandResult {
 }
 
 const BOT_NAMES = [
-  'Alex', 'Sam', 'Jordan', 'Taylor', 'Casey', 'Morgan', 'Riley', 'Jamie', 
-  'Quinn', 'Avery', 'Parker', 'Reese', 'Blake', 'Charlie', 'Dakota', 'River',
-  'Phoenix', 'Sage', 'Sky', 'Sidney', 'Maverick', 'Ace', 'Lucky', 'Chip'
+  '亚历克斯', '萨姆', '乔丹', '泰勒', '凯西', '摩根', '赖利', '杰米', 
+  '奎因', '艾弗里', '帕克', '瑞思', '布雷克', '查理', '达科塔', '里弗',
+  '菲尼克斯', '塞奇', '斯凯', '西德尼', '马弗里克', '埃斯', '拉克', '奇普'
 ];
 
 export type PersonaType = 'human' | 'bot';
