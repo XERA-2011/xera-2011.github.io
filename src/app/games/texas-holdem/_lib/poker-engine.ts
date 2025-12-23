@@ -27,6 +27,27 @@ export class Card {
   toString(): string {
     return `${this.suit}${this.rank}`;
   }
+
+  static fromString(str: string): Card {
+      // str like "Ah", "Td", "2s", "Tc"
+      const suitChar = str.slice(-1).toLowerCase();
+      const rankChar = str.slice(0, -1).toUpperCase();
+      
+      let suit: Suit;
+      switch(suitChar) {
+          case 's': suit = '♠'; break;
+          case 'h': suit = '♥'; break;
+          case 'd': suit = '♦'; break;
+          case 'c': suit = '♣'; break;
+          default: suit = '♠'; // fallback
+      }
+      
+      // Handle '10' if strictly passed, but mostly 'T' is expected
+      let rank: Rank = rankChar as Rank;
+      if (rankChar === '10') rank = 'T';
+      
+      return new Card(rank, suit);
+  }
 }
 
 export class Deck {
@@ -289,6 +310,7 @@ export class PokerGameEngine {
   raisesInRound!: number;
   currentTurnIdx!: number;
   
+  testMode: boolean = false;
   isFastForwarding: boolean = false;
   private _isDestroyed: boolean = false;
 
@@ -710,6 +732,63 @@ export class PokerGameEngine {
         break;
     }
     this.finishTurn();
+  }
+
+  // Debug / AI Testing Mechanism
+  // 生成并结算随机All-in局 (Synchronous Simulation)
+  simulateRandomHand() {
+      // 1. Reset lightweight state
+      const deck = new Deck();
+      this.communityCards = [deck.deal()!, deck.deal()!, deck.deal()!, deck.deal()!, deck.deal()!];
+      this.pot = 0;
+      this.logs = [];
+      this.winners = [];
+      this.winningCards = [];
+      this.players = [];
+
+      // 2. Create random players (2-9)
+      const numPlayers = 2 + Math.floor(Math.random() * 8);
+      for(let i=0; i<numPlayers; i++) {
+          // Random stack sizes for side-pot complexity
+          const startingChips = 100 + Math.floor(Math.random() * 1900); 
+          
+          this.players.push({
+             id: i,
+             name: `Bot${i}`,
+             persona: 'bot',
+             isHuman: false,
+             chips: 0, // Assuming All-in
+             hand: [deck.deal()!, deck.deal()!],
+             status: 'active',
+             currentBet: 0,
+             totalHandBet: startingChips, // They bet everything
+             hasActed: true,
+             isEliminated: false
+          });
+          this.pot += startingChips;
+      }
+      
+      // 3. Invoke Showdown directly
+      // showdown() uses logs, players, pot.
+      this.showdown();
+      
+      // 4. Return summary for AI analysis
+      return {
+          id: Math.random().toString(36).substr(2, 5),
+          board: this.formatCards(this.communityCards),
+          potTotal: this.players.reduce((acc, p) => acc + p.totalHandBet, 0),
+          payoutTotal: this.players.reduce((acc, p) => acc + p.chips, 0),
+          players: this.players.map(p => ({
+              name: p.name,
+              hand: this.formatCards(p.hand),
+              bet: p.totalHandBet,
+              win: p.chips, // Chips they have now (which they won, since they started at 0 after all-in)
+              desc: p.handDescription,
+              bestHand: p.handDescription // Simplification
+          })),
+          logs: this.logs.map(l => l.message),
+          valid: Math.abs(this.players.reduce((acc, p) => acc + p.chips, 0) - this.players.reduce((acc, p) => acc + p.totalHandBet, 0)) < 1
+      };
   }
 
   getSnapshot() {
