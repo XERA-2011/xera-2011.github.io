@@ -536,7 +536,7 @@ export class PokerGameEngine {
         let processedBet = 0;
         
         // 临时记录每个玩家赢得的总金额，用于最后日志汇总
-        let playerWins: Record<number, { amount: number, types: string[] }> = {}; 
+        let playerWins: Record<number, { winnings: number, refund: number, types: string[] }> = {}; 
         
         this.winners = [];
         this.winningCards = []; // 主池赢家的牌
@@ -557,30 +557,22 @@ export class PokerGameEngine {
 
             if (eligiblePlayers.length === 0) {
                 // 异常情况：此层无人有资格赢 (例如大家都弃牌了？不可能，这里是showdown)
-                // 理论上不可能，因为至少有1个 active player 达到了这个 bet level
-                // 如果真的发生，这笔钱就变成死钱，或者给上一个赢家。
-                // 简单处理：跳过
             } else if (eligiblePlayers.length === 1) {
                 // 3) 退款情况 (Run-off / Refund)
                 // 只有1个人达到了这个注额深度（通常是最大的那个 All-in 者）。
-                // 对手这部分钱没得赢，因为没人那是他的钱。
-                // 但实际上这里的 potSlice 是 contributors * sliceAmount。
-                // 如果 contributor 也是 1 (只有他自己下注到这)，那这就是纯退款。
-                // 如果 contributor > 1 (有人下注了但弃牌了)，那这就是赢“死钱”。
-                
                 let winner = eligiblePlayers[0];
                 
-                // 记录赢钱
-                if (!playerWins[winner.id]) playerWins[winner.id] = { amount: 0, types: [] };
-                playerWins[winner.id].amount += potSlice;
+                if (!playerWins[winner.id]) playerWins[winner.id] = { winnings: 0, refund: 0, types: [] };
                 
                 // 区分是 “退款” 还是 “赢取弃牌死钱”
-                // 如果 contributors 只有他自己，说明没人跟这一层，是退款。
-                // 如果 contributors > 1，说明有人跟了但弃牌了，是赢钱。
                 if (contributors.length === 1) {
+                     // 只有他自己下注到这 -> 纯退款
+                     playerWins[winner.id].refund += potSlice;
                      playerWins[winner.id].types.push('退回');
                 } else {
-                     playerWins[winner.id].types.push('边池'); // 独自赢走弃牌者的钱
+                     // 有人跟了但弃牌了 -> 赢死钱
+                     playerWins[winner.id].winnings += potSlice;
+                     playerWins[winner.id].types.push('边池'); 
                      if (!this.winners.includes(winner.id)) this.winners.push(winner.id);
                 }
                 
@@ -614,8 +606,8 @@ export class PokerGameEngine {
                     let w = r.player;
                     let winAmt = share + (idx < remainder ? 1 : 0); // 分配零头
                     
-                    if (!playerWins[w.id]) playerWins[w.id] = { amount: 0, types: [] };
-                    playerWins[w.id].amount += winAmt;
+                    if (!playerWins[w.id]) playerWins[w.id] = { winnings: 0, refund: 0, types: [] };
+                    playerWins[w.id].winnings += winAmt;
                     
                     // 标记类型
                     let isMainPot = eligiblePlayers.length === activePlayers.length;
@@ -638,20 +630,20 @@ export class PokerGameEngine {
             const winData = playerWins[pid];
             
             if (p) {
-                p.chips += winData.amount;
+                p.chips += winData.refund + winData.winnings;
                 
-                // 优化日志显示：合并类型 (例如 "主池 & 边池")
-                const uniqueTypes = Array.from(new Set(winData.types));
-                // 优先显示：如果是退回，就写退回。如果是主池/边池，写“赢得”。
-                
-                let actionStr = '赢得';
-                let typeStr = uniqueTypes.join(' & ');
-                
-                if (uniqueTypes.length === 1 && uniqueTypes[0] === '退回') {
-                    actionStr = '拿回';
+                // 1. 先报退款
+                if (winData.refund > 0) {
+                    this.log(`${p.name} 拿回 $${winData.refund} (退回)`, 'win');
                 }
                 
-                this.log(`${p.name} ${actionStr} $${winData.amount} (${typeStr})`, 'win');
+                // 2. 再报盈利
+                if (winData.winnings > 0) {
+                   // 过滤掉 '退回' 类型，只保留主池/边池
+                   const realTypes = Array.from(new Set(winData.types.filter(t => t !== '退回')));
+                   let typeStr = realTypes.length > 0 ? realTypes.join(' & ') : '主池';
+                   this.log(`${p.name} 赢得 $${winData.winnings} (${typeStr})`, 'win');
+                }
             }
         });
 
