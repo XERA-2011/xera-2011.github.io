@@ -618,7 +618,8 @@ export class PokerGameEngine {
                     playerWins[w.id].amount += winAmt;
                     
                     // 标记类型
-                    let type = (processedBet === 0) ? '主池' : '边池';
+                    let isMainPot = eligiblePlayers.length === activePlayers.length;
+                    let type = isMainPot ? '主池' : '边池';
                     if (!playerWins[w.id].types.includes(type)) {
                          playerWins[w.id].types.push(type);
                     }
