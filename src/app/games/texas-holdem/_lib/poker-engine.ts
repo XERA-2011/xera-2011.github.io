@@ -1164,11 +1164,20 @@ export class PokerGameEngine {
     
     // 动态调整阈值
     if (this.stage === 'preflop') {
-        foldThresh = 0.25; // 起手牌要求
-        // 如果没人加注，且需要跟注很少(或0)，即使烂牌也可能看一眼
-        if (callAmt <= this.bigBlind) foldThresh = 0.1;
+        // Preflop 宽松策略：为了增加博弈感，大幅降低弃牌门槛
+        // 只要不是极端的垃圾牌 (72o 这种)，或者对方加注极其离谱，都尽量看翻牌
+        
+        const bb = this.bigBlind;
+        const isSmallBet = callAmt <= bb * 3;
+        
+        if (isSmallBet) {
+            foldThresh = 0.15; // 面对小注，几乎全跟
+        } else {
+            foldThresh = 0.22; // 面对正常加注，也比较松
+        }
+        
+        allInThresh = 0.96;
     }
-
     // 面对大注的"恐惧"逻辑
     // 如果跟注额超过底池的 50% 或者超过自己筹码的 40%，需要更强的牌
     const isBigBet = (callAmt > this.pot * 0.5) || (callAmt > player.chips * 0.4);
@@ -1230,7 +1239,21 @@ export class PokerGameEngine {
         }
     }
 
-    // --- 2. 修正与兜底 ---
+    // --- 1.5 好奇心机制 (Curiosity Catch) ---
+    // 如果决定 Fold，但目前是 Preflop 且代价不高，有概率强行 Call
+    // 模拟玩家 "我就看一眼翻牌" 的心态
+    if (action === 'fold' && this.stage === 'preflop') {
+        const costRatio = callAmt / player.chips;
+        // 如果跟注额小于筹码的 10%，且小于 5倍大盲 (相对便宜)
+        if (costRatio < 0.10 && callAmt <= this.bigBlind * 5) {
+             // 随机给予 30% - 60% 的跟注机会 (取决于性格 boldness)
+             if (rnd < 0.4 * boldness) {
+                 action = 'call';
+             }
+        }
+    }
+
+    // --- 2. 合理性检查和覆盖 ---
     // 如果没钱了，只能 Allin 或 Fold
     if (callAmt >= player.chips) {
         if (action === 'raise' || action === 'call') action = 'allin';
