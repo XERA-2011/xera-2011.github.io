@@ -1187,6 +1187,28 @@ export class PokerGameEngine {
         if (player.isBluffing) perceivedStrength -= 0.2; 
     }
 
+    // --- Progressive All-in Logic (User Request) ---
+    // 能够主动 All-in 的概率随着公共牌数量增加而增加
+    // Preflop(0): 0.1%, Flop(3): 2%, Turn(4): 5%, River(5): 10%
+    const cardCount = this.communityCards.length;
+    let randomAllInProb = 0;
+    switch (cardCount) {
+        case 0: randomAllInProb = 0.001; break;
+        case 3: randomAllInProb = 0.02; break;
+        case 4: randomAllInProb = 0.05; break;
+        case 5: randomAllInProb = 0.10; break;
+    }
+
+    // 个性加成: 越激进(boldness高)概率越大
+    randomAllInProb *= boldness;
+
+    let forceAllIn = false;
+    // 只有手牌还可以(>0.25)或者正在诈唬时，才触发这种“上头”式 All-in
+    // 避免 72o 这种纯垃圾牌无意义送死 (除非是在偷鸡)
+    if ((strength > 0.25 || player.isBluffing) && Math.random() < randomAllInProb) {
+        forceAllIn = true;
+    }
+
     // --- 决策核心 ---
     let action: 'fold' | 'call' | 'raise' | 'allin' = 'fold';
     let rnd = Math.random();
@@ -1196,8 +1218,12 @@ export class PokerGameEngine {
     const isLatePosition = this.currentTurnIdx > (this.players.length * 0.6); // 粗略位置
     const canSteal = (this.raisesInRound === 0 && callAmt === 0 && isLatePosition);
     
+    // 0. 强制 All-in (Over-rides everything)
+    if (forceAllIn) {
+        action = 'allin';
+    }
     // 激进策略：如果能偷，且 boldness 高，就偷
-    if (canSteal && boldness > 1.0 && rnd < 0.4) {
+    else if (canSteal && boldness > 1.0 && rnd < 0.4) {
         player.isBluffing = true;
         action = 'raise'; // 偷鸡加注
     } 
