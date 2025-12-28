@@ -1,9 +1,10 @@
 "use client";
 
-import React, { useState } from "react";
-import { motion, AnimatePresence } from "framer-motion";
+import { useState } from "react";
+import { motion, AnimatePresence, HTMLMotionProps } from "framer-motion";
 import { usePageTitle } from '@/hooks/use-page-title';
 import { cn } from "@/lib/utils";
+import { Calculator, Binary, Delete } from "lucide-react";
 
 export default function CalculatorPage() {
   usePageTitle("计算器");
@@ -22,13 +23,20 @@ export default function CalculatorPage() {
     setDisplayValue("0");
   };
 
+  const backspace = () => {
+    if (expr.length === 0) return;
+    const newExpr = expr.slice(0, -1);
+    setExpr(newExpr);
+    setDisplayValue(newExpr || "0");
+  };
+
   const calculate = () => {
     try {
       // eslint-disable-next-line no-new-func
       const result = new Function(`"use strict";return (${expr})`)();
       let resultStr = String(result);
-      if (resultStr.length > 12) {
-        resultStr = String(Number(result).toPrecision(12));
+      if (resultStr.length > 16) {
+        resultStr = String(Number(result).toPrecision(16));
       }
       setExpr(resultStr);
       setDisplayValue(resultStr);
@@ -36,13 +44,6 @@ export default function CalculatorPage() {
       setDisplayValue("Error");
       setExpr("");
     }
-  };
-
-  const toggleSign = () => {
-    if (!expr) return;
-    const newExpr = expr.startsWith("-") ? expr.slice(1) : "-" + expr;
-    setExpr(newExpr);
-    setDisplayValue(newExpr);
   };
 
   const percent = () => {
@@ -56,155 +57,208 @@ export default function CalculatorPage() {
     setScientific(!scientific);
   };
 
-  // 基础按钮样式 - 适配黑白极简主题
+  const getFontSize = (len: number) => {
+    if (len > 12) return "text-5xl";
+    if (len > 8) return "text-6xl";
+    return "text-7xl font-normal";
+  };
+
+  const isSci = scientific;
+  const noop = () => { };
+
+  // Button Size & Style Logic
+  // CSS transitions for colors only. Layout/Size handled by Motion.
+  const buttonClassRaw = cn(
+    "flex justify-center items-center select-none shadow-[0_2px_5px_rgba(0,0,0,0.05)]",
+    isSci
+      ? "h-[3.1rem] w-[3.3rem] rounded-[1rem] text-lg font-medium"
+      : "h-[4.4rem] w-[4.4rem] rounded-[1.8rem] text-3xl font-normal"
+  );
+
   const BUTTON_BASE = cn(
-    "h-14 rounded-xl text-xl cursor-pointer flex justify-center items-center select-none border-none p-0",
-    "active:translate-y-[2px] transition-all duration-150",
-    "shadow-[inset_0_1px_1px_rgba(255,255,255,0.1),inset_0_-2px_4px_rgba(0,0,0,0.3),0_2px_4px_rgba(0,0,0,0.2)]",
-    // 默认数字键：主体深色，文字浅色
-    "bg-card text-foreground border border-border/10",
-    "hover:bg-accent hover:text-accent-foreground"
+    buttonClassRaw,
+    "bg-[#2C2C2C] text-white",
+    "dark:bg-white dark:text-black"
   );
 
-  // 功能键 (AC, +/-, %)：稍亮一些
-  const BUTTON_FN = cn(
-    "bg-muted text-muted-foreground font-medium",
-    "hover:bg-muted/80 hover:text-foreground"
+  const BUTTON_NUM = cn(BUTTON_BASE);
+
+  const BUTTON_FN_TEXT_ORANGE = cn(
+    BUTTON_BASE,
+    "text-[#FF9F0A] font-medium",
+    "dark:text-[#FF9F0A]"
   );
 
-  // 运算键 (+, -, *, /)：强调色 (使用项目原本的强调设计，比如黑色背景白色文字，或者反之)
-  const BUTTON_OP = cn(
-    "bg-foreground text-background font-bold",
-    "shadow-[inset_0_1px_1px_rgba(255,255,255,0.1),0_2px_4px_rgba(0,0,0,0.3)]",
-    "hover:opacity-90 active:scale-[0.98]"
+  const BUTTON_OP_TEXT_ORANGE = cn(
+    BUTTON_BASE,
+    "text-[#FF9F0A] font-medium",
+    isSci ? "text-xl pb-0.5" : "text-4xl pb-1"
   );
 
-  // 等号键：最强强调
   const BUTTON_EQUAL = cn(
-    "bg-foreground text-background font-bold",
-    "shadow-[inset_0_1px_1px_rgba(255,255,255,0.2),0_4px_12px_rgba(0,0,0,0.3)]",
-    "hover:scale-[1.02] active:scale-[0.98]"
+    BUTTON_BASE,
+    "bg-[#FF9F0A] text-white shadow-[#FF9F0A]/30",
+    "dark:bg-[#FF9F0A] dark:text-white"
   );
+
+  const BUTTON_TOGGLE = cn(BUTTON_FN_TEXT_ORANGE);
+
+  const BUTTON_SCI = cn(
+    BUTTON_BASE,
+    "text-white",
+    "dark:text-black",
+    "text-base"
+  );
+
+  // Animation Transition Config
+  // Stiffer spring for faster snap, less wobble
+  const springTransition = {
+    type: "spring" as const,
+    stiffness: 350,
+    damping: 25,
+    mass: 0.4
+  };
+
+  // Reusable Button Component
+  const CalcButton = ({ className, ...props }: HTMLMotionProps<"button">) => {
+    return (
+      <motion.button
+        layout
+        transition={springTransition}
+        whileTap={{ scale: 0.9 }}
+        className={cn(className, "transition-colors duration-200")}
+        {...props}
+      />
+    );
+  };
 
   return (
     <div className="relative w-full min-h-screen pt-32 pb-20">
       <div className="container mx-auto px-0 sm:px-6 lg:px-8 flex flex-col items-center">
-        {/* Page Title */}
         <h1 className="sr-only">计算器</h1>
 
-        {/* Calculator Body */}
         <motion.div
-          initial={{ opacity: 0, y: 30 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.8, delay: 0.2 }}
+          initial={{ opacity: 0, scale: 0.95 }}
+          animate={{ opacity: 1, scale: 1 }}
+          transition={{ duration: 0.4, ease: "easeOut" }}
         >
-          <div className={cn(
-            "w-[340px] max-w-full p-3.5 rounded-[26px] transition-all duration-300 ease-in-out mx-auto",
-            // 外壳使用卡片背景色，添加边框和细腻的阴影
-            "bg-card border border-border",
-            "shadow-[0_20px_40px_rgba(0,0,0,0.2),inset_0_1px_1px_rgba(255,255,255,0.1)]",
-            "dark:shadow-[0_20px_40px_rgba(0,0,0,0.5),inset_0_1px_1px_rgba(255,255,255,0.05)]"
-          )}>
-
-            {/* Top Bar with Toggle */}
-            <div className="flex justify-between items-center mb-4 px-2 text-muted-foreground text-[13px] font-medium tracking-wide">
-              <span>{scientific ? "科学模式" : "普通模式"}</span>
-              <div
-                className={cn(
-                  "w-[60px] h-7 rounded-full bg-muted relative cursor-pointer shadow-inner transition-colors",
-                  "hover:bg-muted/80",
-                  "after:content-[''] after:absolute after:w-[26px] after:h-[22px] after:top-[3px] after:rounded-full after:bg-foreground after:shadow-sm after:transition-all after:duration-300 after:ease-out",
-                  scientific
-                    ? "after:left-[31px]"
-                    : "after:left-[3px]"
-                )}
-                onClick={toggleMode}
-              />
-            </div>
+          <motion.div
+            layout
+            transition={springTransition}
+            className={cn(
+              "w-[360px] max-w-full p-5 rounded-[48px] overflow-hidden mx-auto",
+              "bg-[#000000] dark:bg-[#F2F2F2]"
+            )}>
 
             {/* Display Screen */}
             <div className={cn(
-              "h-20 mb-5 rounded-xl flex items-center justify-end px-5 text-[40px] overflow-hidden whitespace-nowrap font-mono tracking-tight",
-              // 屏幕背景调整为深色（日间）或更深色（夜间），保持高对比度
-              "bg-foreground/5 text-foreground font-light shadow-inner border border-black/5 dark:border-white/5"
+              "h-40 mb-4 flex flex-col justify-end px-2 overflow-hidden",
             )}>
-              {displayValue}
+              <p className={cn(
+                "w-full text-right break-all whitespace-pre-wrap leading-tight transition-all duration-200 tracking-tight px-1 font-sans",
+                getFontSize(displayValue.length),
+                "!text-white",
+                "dark:!text-black"
+              )}>
+                {displayValue}
+              </p>
             </div>
 
-            {/* Scientific Keys */}
-            <AnimatePresence>
-              {scientific && (
-                <motion.div
-                  className="grid grid-cols-4 gap-3 overflow-hidden"
-                  initial={{ height: 0, opacity: 0, marginBottom: 0, y: -20, scaleY: 0.8 }}
-                  animate={{
-                    height: "auto",
-                    opacity: 1,
-                    marginBottom: 12,
-                    y: 0,
-                    scaleY: 1,
-                    transition: {
-                      height: { type: "spring", stiffness: 400, damping: 30 },
-                      marginBottom: { type: "spring", stiffness: 400, damping: 30 },
-                      opacity: { duration: 0.2 },
-                      default: { type: "spring", stiffness: 400, damping: 30 }
-                    }
-                  }}
-                  exit={{
-                    height: 0,
-                    opacity: 0,
-                    marginBottom: 0,
-                    y: -10,
-                    scaleY: 0.8,
-                    transition: {
-                      height: { duration: 0.3, ease: [0.4, 0, 0.2, 1] },
-                      marginBottom: { duration: 0.3, ease: [0.4, 0, 0.2, 1] },
-                      opacity: { duration: 0.2 },
-                      y: { duration: 0.3, ease: [0.4, 0, 0.2, 1] },
-                      scaleY: { duration: 0.3, ease: [0.4, 0, 0.2, 1] }
-                    }
-                  }}
-                >
-                  <button className={cn(BUTTON_BASE, BUTTON_FN)} onClick={() => append('Math.sin(')}>sin</button>
-                  <button className={cn(BUTTON_BASE, BUTTON_FN)} onClick={() => append('Math.cos(')}>cos</button>
-                  <button className={cn(BUTTON_BASE, BUTTON_FN)} onClick={() => append('Math.tan(')}>tan</button>
-                  <button className={cn(BUTTON_BASE, BUTTON_FN)} onClick={() => append('Math.PI')}>π</button>
-
-                  <button className={cn(BUTTON_BASE, BUTTON_FN)} onClick={() => append('Math.log(')}>ln</button>
-                  <button className={cn(BUTTON_BASE, BUTTON_FN)} onClick={() => append('Math.log10(')}>log</button>
-                  <button className={cn(BUTTON_BASE, BUTTON_FN)} onClick={() => append('Math.sqrt(')}>√</button>
-                  <button className={cn(BUTTON_BASE, BUTTON_FN)} onClick={() => append('Math.E')}>e</button>
-                </motion.div>
+            {/* Main Grid: Explicit Grid Coordinates for Stability */}
+            {/* Added 'layout' back and 'justify-center' to prevent left-collapse glitch */}
+            <motion.div
+              layout
+              transition={springTransition}
+              className={cn(
+                "grid gap-3 relative justify-center content-center",
+                isSci ? "grid-cols-5" : "grid-cols-4"
               )}
-            </AnimatePresence>
+            >
+              <AnimatePresence mode="popLayout" initial={false}>
 
-            {/* Standard Keys */}
-            <div className="grid grid-cols-4 gap-3">
-              <button className={cn(BUTTON_BASE, BUTTON_FN)} onClick={clearAll}>AC</button>
-              <button className={cn(BUTTON_BASE, BUTTON_FN)} onClick={toggleSign}>±</button>
-              <button className={cn(BUTTON_BASE, BUTTON_FN)} onClick={percent}>%</button>
-              <button className={cn(BUTTON_BASE, BUTTON_OP)} onClick={() => append('/')}>÷</button>
+                {/* Scientific Rows (Top) */}
+                {isSci && (
+                  <>
+                    <CalcButton key="sci-2nd" initial={{ opacity: 0, scale: 0 }} animate={{ opacity: 1, scale: 1 }} exit={{ opacity: 0, scale: 0 }} className={BUTTON_SCI} onClick={noop} style={{ gridRow: 1, gridColumn: 1 }}>2nd</CalcButton>
+                    <CalcButton key="sci-deg" initial={{ opacity: 0, scale: 0 }} animate={{ opacity: 1, scale: 1 }} exit={{ opacity: 0, scale: 0 }} className={BUTTON_SCI} onClick={noop} style={{ gridRow: 1, gridColumn: 2 }}>deg</CalcButton>
+                    <CalcButton key="sci-sin" initial={{ opacity: 0, scale: 0 }} animate={{ opacity: 1, scale: 1 }} exit={{ opacity: 0, scale: 0 }} className={BUTTON_SCI} onClick={() => append('Math.sin(')} style={{ gridRow: 1, gridColumn: 3 }}>sin</CalcButton>
+                    <CalcButton key="sci-cos" initial={{ opacity: 0, scale: 0 }} animate={{ opacity: 1, scale: 1 }} exit={{ opacity: 0, scale: 0 }} className={BUTTON_SCI} onClick={() => append('Math.cos(')} style={{ gridRow: 1, gridColumn: 4 }}>cos</CalcButton>
+                    <CalcButton key="sci-tan" initial={{ opacity: 0, scale: 0 }} animate={{ opacity: 1, scale: 1 }} exit={{ opacity: 0, scale: 0 }} className={BUTTON_SCI} onClick={() => append('Math.tan(')} style={{ gridRow: 1, gridColumn: 5 }}>tan</CalcButton>
 
-              <button className={BUTTON_BASE} onClick={() => append('7')}>7</button>
-              <button className={BUTTON_BASE} onClick={() => append('8')}>8</button>
-              <button className={BUTTON_BASE} onClick={() => append('9')}>9</button>
-              <button className={cn(BUTTON_BASE, BUTTON_OP)} onClick={() => append('*')}>×</button>
+                    <CalcButton key="sci-pow" initial={{ opacity: 0, scale: 0 }} animate={{ opacity: 1, scale: 1 }} exit={{ opacity: 0, scale: 0 }} className={BUTTON_SCI} onClick={() => append('**')} style={{ gridRow: 2, gridColumn: 1 }}>xʸ</CalcButton>
+                    <CalcButton key="sci-lg" initial={{ opacity: 0, scale: 0 }} animate={{ opacity: 1, scale: 1 }} exit={{ opacity: 0, scale: 0 }} className={BUTTON_SCI} onClick={() => append('Math.log10(')} style={{ gridRow: 2, gridColumn: 2 }}>lg</CalcButton>
+                    <CalcButton key="sci-ln" initial={{ opacity: 0, scale: 0 }} animate={{ opacity: 1, scale: 1 }} exit={{ opacity: 0, scale: 0 }} className={BUTTON_SCI} onClick={() => append('Math.log(')} style={{ gridRow: 2, gridColumn: 3 }}>ln</CalcButton>
+                    <CalcButton key="sci-(" initial={{ opacity: 0, scale: 0 }} animate={{ opacity: 1, scale: 1 }} exit={{ opacity: 0, scale: 0 }} className={BUTTON_SCI} onClick={() => append('(')} style={{ gridRow: 2, gridColumn: 4 }}>(</CalcButton>
+                    <CalcButton key="sci-)" initial={{ opacity: 0, scale: 0 }} animate={{ opacity: 1, scale: 1 }} exit={{ opacity: 0, scale: 0 }} className={BUTTON_SCI} onClick={() => append(')')} style={{ gridRow: 2, gridColumn: 5 }}>)</CalcButton>
+                  </>
+                )}
 
-              <button className={BUTTON_BASE} onClick={() => append('4')}>4</button>
-              <button className={BUTTON_BASE} onClick={() => append('5')}>5</button>
-              <button className={BUTTON_BASE} onClick={() => append('6')}>6</button>
-              <button className={cn(BUTTON_BASE, BUTTON_OP)} onClick={() => append('-')}>−</button>
+                {/* Standard R1 (Sci R3) */}
+                {isSci && <CalcButton key="sci-sqrt" initial={{ opacity: 0, scale: 0 }} animate={{ opacity: 1, scale: 1 }} exit={{ opacity: 0, scale: 0 }} className={BUTTON_SCI} onClick={() => append('Math.sqrt(')} style={{ gridRow: 3, gridColumn: 1 }}>√</CalcButton>}
 
-              <button className={BUTTON_BASE} onClick={() => append('1')}>1</button>
-              <button className={BUTTON_BASE} onClick={() => append('2')}>2</button>
-              <button className={BUTTON_BASE} onClick={() => append('3')}>3</button>
-              <button className={cn(BUTTON_BASE, BUTTON_EQUAL)} onClick={calculate}>=</button>
+                <CalcButton key="AC" className={BUTTON_FN_TEXT_ORANGE} onClick={clearAll}
+                  style={{ gridRow: isSci ? 3 : 1, gridColumn: isSci ? 2 : 1 }}>AC</CalcButton>
+                <CalcButton key="DEL" className={BUTTON_FN_TEXT_ORANGE} onClick={backspace}
+                  style={{ gridRow: isSci ? 3 : 1, gridColumn: isSci ? 3 : 2 }}><Delete size={isSci ? 20 : 32} /></CalcButton>
+                <CalcButton key="PCT" className={BUTTON_FN_TEXT_ORANGE} onClick={percent}
+                  style={{ gridRow: isSci ? 3 : 1, gridColumn: isSci ? 4 : 3 }}>%</CalcButton>
+                <CalcButton key="DIV" className={BUTTON_OP_TEXT_ORANGE} onClick={() => append('/')}
+                  style={{ gridRow: isSci ? 3 : 1, gridColumn: isSci ? 5 : 4 }}>÷</CalcButton>
 
-              <button className={cn(BUTTON_BASE, "col-span-2")} onClick={() => append('0')}>0</button>
-              <button className={BUTTON_BASE} onClick={() => append('.')}>.</button>
-              <button className={cn(BUTTON_BASE, BUTTON_OP)} onClick={() => append('+')}>+</button>
-            </div>
-          </div>
+                {/* Standard R2 (Sci R4) */}
+                {isSci && <CalcButton key="sci-fac" initial={{ opacity: 0, scale: 0 }} animate={{ opacity: 1, scale: 1 }} exit={{ opacity: 0, scale: 0 }} className={BUTTON_SCI} onClick={() => append('!')} style={{ gridRow: 4, gridColumn: 1 }}>x!</CalcButton>}
+
+                <CalcButton key="7" className={BUTTON_NUM} onClick={() => append('7')}
+                  style={{ gridRow: isSci ? 4 : 2, gridColumn: isSci ? 2 : 1 }}>7</CalcButton>
+                <CalcButton key="8" className={BUTTON_NUM} onClick={() => append('8')}
+                  style={{ gridRow: isSci ? 4 : 2, gridColumn: isSci ? 3 : 2 }}>8</CalcButton>
+                <CalcButton key="9" className={BUTTON_NUM} onClick={() => append('9')}
+                  style={{ gridRow: isSci ? 4 : 2, gridColumn: isSci ? 4 : 3 }}>9</CalcButton>
+                <CalcButton key="MUL" className={BUTTON_OP_TEXT_ORANGE} onClick={() => append('*')}
+                  style={{ gridRow: isSci ? 4 : 2, gridColumn: isSci ? 5 : 4 }}>×</CalcButton>
+
+                {/* Standard R3 (Sci R5) */}
+                {isSci && <CalcButton key="sci-inv" initial={{ opacity: 0, scale: 0 }} animate={{ opacity: 1, scale: 1 }} exit={{ opacity: 0, scale: 0 }} className={BUTTON_SCI} onClick={() => append('1/')} style={{ gridRow: 5, gridColumn: 1 }}>1/x</CalcButton>}
+
+                <CalcButton key="4" className={BUTTON_NUM} onClick={() => append('4')}
+                  style={{ gridRow: isSci ? 5 : 3, gridColumn: isSci ? 2 : 1 }}>4</CalcButton>
+                <CalcButton key="5" className={BUTTON_NUM} onClick={() => append('5')}
+                  style={{ gridRow: isSci ? 5 : 3, gridColumn: isSci ? 3 : 2 }}>5</CalcButton>
+                <CalcButton key="6" className={BUTTON_NUM} onClick={() => append('6')}
+                  style={{ gridRow: isSci ? 5 : 3, gridColumn: isSci ? 4 : 3 }}>6</CalcButton>
+                <CalcButton key="SUB" className={BUTTON_OP_TEXT_ORANGE} onClick={() => append('-')}
+                  style={{ gridRow: isSci ? 5 : 3, gridColumn: isSci ? 5 : 4 }}>−</CalcButton>
+
+                {/* Standard R4 (Sci R6) */}
+                {isSci && <CalcButton key="sci-pi" initial={{ opacity: 0, scale: 0 }} animate={{ opacity: 1, scale: 1 }} exit={{ opacity: 0, scale: 0 }} className={BUTTON_SCI} onClick={() => append('Math.PI')} style={{ gridRow: 6, gridColumn: 1 }}>π</CalcButton>}
+
+                <CalcButton key="1" className={BUTTON_NUM} onClick={() => append('1')}
+                  style={{ gridRow: isSci ? 6 : 4, gridColumn: isSci ? 2 : 1 }}>1</CalcButton>
+                <CalcButton key="2" className={BUTTON_NUM} onClick={() => append('2')}
+                  style={{ gridRow: isSci ? 6 : 4, gridColumn: isSci ? 3 : 2 }}>2</CalcButton>
+                <CalcButton key="3" className={BUTTON_NUM} onClick={() => append('3')}
+                  style={{ gridRow: isSci ? 6 : 4, gridColumn: isSci ? 4 : 3 }}>3</CalcButton>
+                <CalcButton key="ADD" className={BUTTON_OP_TEXT_ORANGE} onClick={() => append('+')}
+                  style={{ gridRow: isSci ? 6 : 4, gridColumn: isSci ? 5 : 4 }}>+</CalcButton>
+
+                {/* Standard R5 (Sci R7) */}
+                <CalcButton key="TOGGLE" className={BUTTON_TOGGLE} onClick={toggleMode}
+                  style={{ gridRow: isSci ? 7 : 5, gridColumn: 1 }}>
+                  {scientific ? <Binary size={20} /> : <Calculator size={28} />}
+                </CalcButton>
+
+                {isSci && <CalcButton key="sci-e" initial={{ opacity: 0, scale: 0 }} animate={{ opacity: 1, scale: 1 }} exit={{ opacity: 0, scale: 0 }} className={BUTTON_SCI} onClick={() => append('Math.E')} style={{ gridRow: 7, gridColumn: 2 }}>e</CalcButton>}
+
+                <CalcButton key="0" className={BUTTON_NUM} onClick={() => append('0')}
+                  style={{ gridRow: isSci ? 7 : 5, gridColumn: isSci ? 3 : 2 }}>0</CalcButton>
+                <CalcButton key="DOT" className={BUTTON_NUM} onClick={() => append('.')}
+                  style={{ gridRow: isSci ? 7 : 5, gridColumn: isSci ? 4 : 3 }}>.</CalcButton>
+                <CalcButton key="EQUAL" className={BUTTON_EQUAL} onClick={calculate}
+                  style={{ gridRow: isSci ? 7 : 5, gridColumn: isSci ? 5 : 4 }}>=</CalcButton>
+
+              </AnimatePresence>
+            </motion.div>
+          </motion.div>
         </motion.div>
       </div>
     </div>
