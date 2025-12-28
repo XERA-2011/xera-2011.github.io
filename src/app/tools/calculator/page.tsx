@@ -1,7 +1,7 @@
 "use client";
 
 import { useState } from "react";
-import { motion, AnimatePresence, HTMLMotionProps } from "framer-motion";
+import { motion, AnimatePresence } from "framer-motion";
 import { usePageTitle } from '@/hooks/use-page-title';
 import { cn } from "@/lib/utils";
 import { Calculator, Binary, Delete } from "lucide-react";
@@ -66,10 +66,9 @@ export default function CalculatorPage() {
   const isSci = scientific;
   const noop = () => { };
 
-  // Button Size & Style Logic
-  // CSS transitions for colors only. Layout/Size handled by Motion.
+  // Button Size Logic
   const buttonClassRaw = cn(
-    "flex justify-center items-center select-none shadow-[0_2px_5px_rgba(0,0,0,0.05)]",
+    "flex justify-center items-center select-none active:scale-95 shadow-[0_2px_5px_rgba(0,0,0,0.05)]",
     isSci
       ? "h-[3.1rem] w-[3.3rem] rounded-[1rem] text-lg font-medium"
       : "h-[4.4rem] w-[4.4rem] rounded-[1.8rem] text-3xl font-normal"
@@ -110,26 +109,12 @@ export default function CalculatorPage() {
     "text-base"
   );
 
-  // Animation Transition Config
-  // Stiffer spring for faster snap, less wobble
+  const MotionButton = motion.button;
   const springTransition = {
     type: "spring" as const,
-    stiffness: 350,
-    damping: 25,
-    mass: 0.4
-  };
-
-  // Reusable Button Component
-  const CalcButton = ({ className, ...props }: HTMLMotionProps<"button">) => {
-    return (
-      <motion.button
-        layout
-        transition={springTransition}
-        whileTap={{ scale: 0.9 }}
-        className={cn(className, "transition-colors duration-200")}
-        {...props}
-      />
-    );
+    stiffness: 280,
+    damping: 24,
+    mass: 0.5
   };
 
   return (
@@ -165,12 +150,10 @@ export default function CalculatorPage() {
             </div>
 
             {/* Main Grid: Explicit Grid Coordinates for Stability */}
-            {/* Added 'layout' back and 'justify-center' to prevent left-collapse glitch */}
+            {/* Removed layout from container to avoid grid-gap animation issues */}
             <motion.div
-              layout
-              transition={springTransition}
               className={cn(
-                "grid gap-3 relative justify-center content-center",
+                "grid gap-3 relative",
                 isSci ? "grid-cols-5" : "grid-cols-4"
               )}
             >
@@ -179,82 +162,82 @@ export default function CalculatorPage() {
                 {/* Scientific Rows (Top) */}
                 {isSci && (
                   <>
-                    <CalcButton key="sci-2nd" initial={{ opacity: 0, scale: 0 }} animate={{ opacity: 1, scale: 1 }} exit={{ opacity: 0, scale: 0 }} className={BUTTON_SCI} onClick={noop} style={{ gridRow: 1, gridColumn: 1 }}>2nd</CalcButton>
-                    <CalcButton key="sci-deg" initial={{ opacity: 0, scale: 0 }} animate={{ opacity: 1, scale: 1 }} exit={{ opacity: 0, scale: 0 }} className={BUTTON_SCI} onClick={noop} style={{ gridRow: 1, gridColumn: 2 }}>deg</CalcButton>
-                    <CalcButton key="sci-sin" initial={{ opacity: 0, scale: 0 }} animate={{ opacity: 1, scale: 1 }} exit={{ opacity: 0, scale: 0 }} className={BUTTON_SCI} onClick={() => append('Math.sin(')} style={{ gridRow: 1, gridColumn: 3 }}>sin</CalcButton>
-                    <CalcButton key="sci-cos" initial={{ opacity: 0, scale: 0 }} animate={{ opacity: 1, scale: 1 }} exit={{ opacity: 0, scale: 0 }} className={BUTTON_SCI} onClick={() => append('Math.cos(')} style={{ gridRow: 1, gridColumn: 4 }}>cos</CalcButton>
-                    <CalcButton key="sci-tan" initial={{ opacity: 0, scale: 0 }} animate={{ opacity: 1, scale: 1 }} exit={{ opacity: 0, scale: 0 }} className={BUTTON_SCI} onClick={() => append('Math.tan(')} style={{ gridRow: 1, gridColumn: 5 }}>tan</CalcButton>
+                    <MotionButton key="sci-2nd" layout transition={springTransition} initial={{ opacity: 0, scale: 0 }} animate={{ opacity: 1, scale: 1 }} exit={{ opacity: 0, scale: 0 }} className={BUTTON_SCI} onClick={noop} style={{ gridRow: 1, gridColumn: 1 }}>2nd</MotionButton>
+                    <MotionButton key="sci-deg" layout transition={springTransition} initial={{ opacity: 0, scale: 0 }} animate={{ opacity: 1, scale: 1 }} exit={{ opacity: 0, scale: 0 }} className={BUTTON_SCI} onClick={noop} style={{ gridRow: 1, gridColumn: 2 }}>deg</MotionButton>
+                    <MotionButton key="sci-sin" layout transition={springTransition} initial={{ opacity: 0, scale: 0 }} animate={{ opacity: 1, scale: 1 }} exit={{ opacity: 0, scale: 0 }} className={BUTTON_SCI} onClick={() => append('Math.sin(')} style={{ gridRow: 1, gridColumn: 3 }}>sin</MotionButton>
+                    <MotionButton key="sci-cos" layout transition={springTransition} initial={{ opacity: 0, scale: 0 }} animate={{ opacity: 1, scale: 1 }} exit={{ opacity: 0, scale: 0 }} className={BUTTON_SCI} onClick={() => append('Math.cos(')} style={{ gridRow: 1, gridColumn: 4 }}>cos</MotionButton>
+                    <MotionButton key="sci-tan" layout transition={springTransition} initial={{ opacity: 0, scale: 0 }} animate={{ opacity: 1, scale: 1 }} exit={{ opacity: 0, scale: 0 }} className={BUTTON_SCI} onClick={() => append('Math.tan(')} style={{ gridRow: 1, gridColumn: 5 }}>tan</MotionButton>
 
-                    <CalcButton key="sci-pow" initial={{ opacity: 0, scale: 0 }} animate={{ opacity: 1, scale: 1 }} exit={{ opacity: 0, scale: 0 }} className={BUTTON_SCI} onClick={() => append('**')} style={{ gridRow: 2, gridColumn: 1 }}>xʸ</CalcButton>
-                    <CalcButton key="sci-lg" initial={{ opacity: 0, scale: 0 }} animate={{ opacity: 1, scale: 1 }} exit={{ opacity: 0, scale: 0 }} className={BUTTON_SCI} onClick={() => append('Math.log10(')} style={{ gridRow: 2, gridColumn: 2 }}>lg</CalcButton>
-                    <CalcButton key="sci-ln" initial={{ opacity: 0, scale: 0 }} animate={{ opacity: 1, scale: 1 }} exit={{ opacity: 0, scale: 0 }} className={BUTTON_SCI} onClick={() => append('Math.log(')} style={{ gridRow: 2, gridColumn: 3 }}>ln</CalcButton>
-                    <CalcButton key="sci-(" initial={{ opacity: 0, scale: 0 }} animate={{ opacity: 1, scale: 1 }} exit={{ opacity: 0, scale: 0 }} className={BUTTON_SCI} onClick={() => append('(')} style={{ gridRow: 2, gridColumn: 4 }}>(</CalcButton>
-                    <CalcButton key="sci-)" initial={{ opacity: 0, scale: 0 }} animate={{ opacity: 1, scale: 1 }} exit={{ opacity: 0, scale: 0 }} className={BUTTON_SCI} onClick={() => append(')')} style={{ gridRow: 2, gridColumn: 5 }}>)</CalcButton>
+                    <MotionButton key="sci-pow" layout transition={springTransition} initial={{ opacity: 0, scale: 0 }} animate={{ opacity: 1, scale: 1 }} exit={{ opacity: 0, scale: 0 }} className={BUTTON_SCI} onClick={() => append('**')} style={{ gridRow: 2, gridColumn: 1 }}>xʸ</MotionButton>
+                    <MotionButton key="sci-lg" layout transition={springTransition} initial={{ opacity: 0, scale: 0 }} animate={{ opacity: 1, scale: 1 }} exit={{ opacity: 0, scale: 0 }} className={BUTTON_SCI} onClick={() => append('Math.log10(')} style={{ gridRow: 2, gridColumn: 2 }}>lg</MotionButton>
+                    <MotionButton key="sci-ln" layout transition={springTransition} initial={{ opacity: 0, scale: 0 }} animate={{ opacity: 1, scale: 1 }} exit={{ opacity: 0, scale: 0 }} className={BUTTON_SCI} onClick={() => append('Math.log(')} style={{ gridRow: 2, gridColumn: 3 }}>ln</MotionButton>
+                    <MotionButton key="sci-(" layout transition={springTransition} initial={{ opacity: 0, scale: 0 }} animate={{ opacity: 1, scale: 1 }} exit={{ opacity: 0, scale: 0 }} className={BUTTON_SCI} onClick={() => append('(')} style={{ gridRow: 2, gridColumn: 4 }}>(</MotionButton>
+                    <MotionButton key="sci-)" layout transition={springTransition} initial={{ opacity: 0, scale: 0 }} animate={{ opacity: 1, scale: 1 }} exit={{ opacity: 0, scale: 0 }} className={BUTTON_SCI} onClick={() => append(')')} style={{ gridRow: 2, gridColumn: 5 }}>)</MotionButton>
                   </>
                 )}
 
                 {/* Standard R1 (Sci R3) */}
-                {isSci && <CalcButton key="sci-sqrt" initial={{ opacity: 0, scale: 0 }} animate={{ opacity: 1, scale: 1 }} exit={{ opacity: 0, scale: 0 }} className={BUTTON_SCI} onClick={() => append('Math.sqrt(')} style={{ gridRow: 3, gridColumn: 1 }}>√</CalcButton>}
+                {isSci && <MotionButton key="sci-sqrt" layout transition={springTransition} initial={{ opacity: 0, scale: 0 }} animate={{ opacity: 1, scale: 1 }} exit={{ opacity: 0, scale: 0 }} className={BUTTON_SCI} onClick={() => append('Math.sqrt(')} style={{ gridRow: 3, gridColumn: 1 }}>√</MotionButton>}
 
-                <CalcButton key="AC" className={BUTTON_FN_TEXT_ORANGE} onClick={clearAll}
-                  style={{ gridRow: isSci ? 3 : 1, gridColumn: isSci ? 2 : 1 }}>AC</CalcButton>
-                <CalcButton key="DEL" className={BUTTON_FN_TEXT_ORANGE} onClick={backspace}
-                  style={{ gridRow: isSci ? 3 : 1, gridColumn: isSci ? 3 : 2 }}><Delete size={isSci ? 20 : 32} /></CalcButton>
-                <CalcButton key="PCT" className={BUTTON_FN_TEXT_ORANGE} onClick={percent}
-                  style={{ gridRow: isSci ? 3 : 1, gridColumn: isSci ? 4 : 3 }}>%</CalcButton>
-                <CalcButton key="DIV" className={BUTTON_OP_TEXT_ORANGE} onClick={() => append('/')}
-                  style={{ gridRow: isSci ? 3 : 1, gridColumn: isSci ? 5 : 4 }}>÷</CalcButton>
+                <MotionButton key="AC" layout transition={springTransition} className={BUTTON_FN_TEXT_ORANGE} onClick={clearAll}
+                  style={{ gridRow: isSci ? 3 : 1, gridColumn: isSci ? 2 : 1 }}>AC</MotionButton>
+                <MotionButton key="DEL" layout transition={springTransition} className={BUTTON_FN_TEXT_ORANGE} onClick={backspace}
+                  style={{ gridRow: isSci ? 3 : 1, gridColumn: isSci ? 3 : 2 }}><Delete size={isSci ? 20 : 32} /></MotionButton>
+                <MotionButton key="PCT" layout transition={springTransition} className={BUTTON_FN_TEXT_ORANGE} onClick={percent}
+                  style={{ gridRow: isSci ? 3 : 1, gridColumn: isSci ? 4 : 3 }}>%</MotionButton>
+                <MotionButton key="DIV" layout transition={springTransition} className={BUTTON_OP_TEXT_ORANGE} onClick={() => append('/')}
+                  style={{ gridRow: isSci ? 3 : 1, gridColumn: isSci ? 5 : 4 }}>÷</MotionButton>
 
                 {/* Standard R2 (Sci R4) */}
-                {isSci && <CalcButton key="sci-fac" initial={{ opacity: 0, scale: 0 }} animate={{ opacity: 1, scale: 1 }} exit={{ opacity: 0, scale: 0 }} className={BUTTON_SCI} onClick={() => append('!')} style={{ gridRow: 4, gridColumn: 1 }}>x!</CalcButton>}
+                {isSci && <MotionButton key="sci-fac" layout transition={springTransition} initial={{ opacity: 0, scale: 0 }} animate={{ opacity: 1, scale: 1 }} exit={{ opacity: 0, scale: 0 }} className={BUTTON_SCI} onClick={() => append('!')} style={{ gridRow: 4, gridColumn: 1 }}>x!</MotionButton>}
 
-                <CalcButton key="7" className={BUTTON_NUM} onClick={() => append('7')}
-                  style={{ gridRow: isSci ? 4 : 2, gridColumn: isSci ? 2 : 1 }}>7</CalcButton>
-                <CalcButton key="8" className={BUTTON_NUM} onClick={() => append('8')}
-                  style={{ gridRow: isSci ? 4 : 2, gridColumn: isSci ? 3 : 2 }}>8</CalcButton>
-                <CalcButton key="9" className={BUTTON_NUM} onClick={() => append('9')}
-                  style={{ gridRow: isSci ? 4 : 2, gridColumn: isSci ? 4 : 3 }}>9</CalcButton>
-                <CalcButton key="MUL" className={BUTTON_OP_TEXT_ORANGE} onClick={() => append('*')}
-                  style={{ gridRow: isSci ? 4 : 2, gridColumn: isSci ? 5 : 4 }}>×</CalcButton>
+                <MotionButton key="7" layout transition={springTransition} className={BUTTON_NUM} onClick={() => append('7')}
+                  style={{ gridRow: isSci ? 4 : 2, gridColumn: isSci ? 2 : 1 }}>7</MotionButton>
+                <MotionButton key="8" layout transition={springTransition} className={BUTTON_NUM} onClick={() => append('8')}
+                  style={{ gridRow: isSci ? 4 : 2, gridColumn: isSci ? 3 : 2 }}>8</MotionButton>
+                <MotionButton key="9" layout transition={springTransition} className={BUTTON_NUM} onClick={() => append('9')}
+                  style={{ gridRow: isSci ? 4 : 2, gridColumn: isSci ? 4 : 3 }}>9</MotionButton>
+                <MotionButton key="MUL" layout transition={springTransition} className={BUTTON_OP_TEXT_ORANGE} onClick={() => append('*')}
+                  style={{ gridRow: isSci ? 4 : 2, gridColumn: isSci ? 5 : 4 }}>×</MotionButton>
 
                 {/* Standard R3 (Sci R5) */}
-                {isSci && <CalcButton key="sci-inv" initial={{ opacity: 0, scale: 0 }} animate={{ opacity: 1, scale: 1 }} exit={{ opacity: 0, scale: 0 }} className={BUTTON_SCI} onClick={() => append('1/')} style={{ gridRow: 5, gridColumn: 1 }}>1/x</CalcButton>}
+                {isSci && <MotionButton key="sci-inv" layout transition={springTransition} initial={{ opacity: 0, scale: 0 }} animate={{ opacity: 1, scale: 1 }} exit={{ opacity: 0, scale: 0 }} className={BUTTON_SCI} onClick={() => append('1/')} style={{ gridRow: 5, gridColumn: 1 }}>1/x</MotionButton>}
 
-                <CalcButton key="4" className={BUTTON_NUM} onClick={() => append('4')}
-                  style={{ gridRow: isSci ? 5 : 3, gridColumn: isSci ? 2 : 1 }}>4</CalcButton>
-                <CalcButton key="5" className={BUTTON_NUM} onClick={() => append('5')}
-                  style={{ gridRow: isSci ? 5 : 3, gridColumn: isSci ? 3 : 2 }}>5</CalcButton>
-                <CalcButton key="6" className={BUTTON_NUM} onClick={() => append('6')}
-                  style={{ gridRow: isSci ? 5 : 3, gridColumn: isSci ? 4 : 3 }}>6</CalcButton>
-                <CalcButton key="SUB" className={BUTTON_OP_TEXT_ORANGE} onClick={() => append('-')}
-                  style={{ gridRow: isSci ? 5 : 3, gridColumn: isSci ? 5 : 4 }}>−</CalcButton>
+                <MotionButton key="4" layout transition={springTransition} className={BUTTON_NUM} onClick={() => append('4')}
+                  style={{ gridRow: isSci ? 5 : 3, gridColumn: isSci ? 2 : 1 }}>4</MotionButton>
+                <MotionButton key="5" layout transition={springTransition} className={BUTTON_NUM} onClick={() => append('5')}
+                  style={{ gridRow: isSci ? 5 : 3, gridColumn: isSci ? 3 : 2 }}>5</MotionButton>
+                <MotionButton key="6" layout transition={springTransition} className={BUTTON_NUM} onClick={() => append('6')}
+                  style={{ gridRow: isSci ? 5 : 3, gridColumn: isSci ? 4 : 3 }}>6</MotionButton>
+                <MotionButton key="SUB" layout transition={springTransition} className={BUTTON_OP_TEXT_ORANGE} onClick={() => append('-')}
+                  style={{ gridRow: isSci ? 5 : 3, gridColumn: isSci ? 5 : 4 }}>−</MotionButton>
 
                 {/* Standard R4 (Sci R6) */}
-                {isSci && <CalcButton key="sci-pi" initial={{ opacity: 0, scale: 0 }} animate={{ opacity: 1, scale: 1 }} exit={{ opacity: 0, scale: 0 }} className={BUTTON_SCI} onClick={() => append('Math.PI')} style={{ gridRow: 6, gridColumn: 1 }}>π</CalcButton>}
+                {isSci && <MotionButton key="sci-pi" layout transition={springTransition} initial={{ opacity: 0, scale: 0 }} animate={{ opacity: 1, scale: 1 }} exit={{ opacity: 0, scale: 0 }} className={BUTTON_SCI} onClick={() => append('Math.PI')} style={{ gridRow: 6, gridColumn: 1 }}>π</MotionButton>}
 
-                <CalcButton key="1" className={BUTTON_NUM} onClick={() => append('1')}
-                  style={{ gridRow: isSci ? 6 : 4, gridColumn: isSci ? 2 : 1 }}>1</CalcButton>
-                <CalcButton key="2" className={BUTTON_NUM} onClick={() => append('2')}
-                  style={{ gridRow: isSci ? 6 : 4, gridColumn: isSci ? 3 : 2 }}>2</CalcButton>
-                <CalcButton key="3" className={BUTTON_NUM} onClick={() => append('3')}
-                  style={{ gridRow: isSci ? 6 : 4, gridColumn: isSci ? 4 : 3 }}>3</CalcButton>
-                <CalcButton key="ADD" className={BUTTON_OP_TEXT_ORANGE} onClick={() => append('+')}
-                  style={{ gridRow: isSci ? 6 : 4, gridColumn: isSci ? 5 : 4 }}>+</CalcButton>
+                <MotionButton key="1" layout transition={springTransition} className={BUTTON_NUM} onClick={() => append('1')}
+                  style={{ gridRow: isSci ? 6 : 4, gridColumn: isSci ? 2 : 1 }}>1</MotionButton>
+                <MotionButton key="2" layout transition={springTransition} className={BUTTON_NUM} onClick={() => append('2')}
+                  style={{ gridRow: isSci ? 6 : 4, gridColumn: isSci ? 3 : 2 }}>2</MotionButton>
+                <MotionButton key="3" layout transition={springTransition} className={BUTTON_NUM} onClick={() => append('3')}
+                  style={{ gridRow: isSci ? 6 : 4, gridColumn: isSci ? 4 : 3 }}>3</MotionButton>
+                <MotionButton key="ADD" layout transition={springTransition} className={BUTTON_OP_TEXT_ORANGE} onClick={() => append('+')}
+                  style={{ gridRow: isSci ? 6 : 4, gridColumn: isSci ? 5 : 4 }}>+</MotionButton>
 
-                {/* Standard R5 (Sci R7) */}
-                <CalcButton key="TOGGLE" className={BUTTON_TOGGLE} onClick={toggleMode}
+                {/* Standard R5 (Sci R7) - Explicit Placement for Toggle Button */}
+                <MotionButton key="TOGGLE" layout transition={springTransition} className={BUTTON_TOGGLE} onClick={toggleMode}
                   style={{ gridRow: isSci ? 7 : 5, gridColumn: 1 }}>
                   {scientific ? <Binary size={20} /> : <Calculator size={28} />}
-                </CalcButton>
+                </MotionButton>
 
-                {isSci && <CalcButton key="sci-e" initial={{ opacity: 0, scale: 0 }} animate={{ opacity: 1, scale: 1 }} exit={{ opacity: 0, scale: 0 }} className={BUTTON_SCI} onClick={() => append('Math.E')} style={{ gridRow: 7, gridColumn: 2 }}>e</CalcButton>}
+                {isSci && <MotionButton key="sci-e" layout transition={springTransition} initial={{ opacity: 0, scale: 0 }} animate={{ opacity: 1, scale: 1 }} exit={{ opacity: 0, scale: 0 }} className={BUTTON_SCI} onClick={() => append('Math.E')} style={{ gridRow: 7, gridColumn: 2 }}>e</MotionButton>}
 
-                <CalcButton key="0" className={BUTTON_NUM} onClick={() => append('0')}
-                  style={{ gridRow: isSci ? 7 : 5, gridColumn: isSci ? 3 : 2 }}>0</CalcButton>
-                <CalcButton key="DOT" className={BUTTON_NUM} onClick={() => append('.')}
-                  style={{ gridRow: isSci ? 7 : 5, gridColumn: isSci ? 4 : 3 }}>.</CalcButton>
-                <CalcButton key="EQUAL" className={BUTTON_EQUAL} onClick={calculate}
-                  style={{ gridRow: isSci ? 7 : 5, gridColumn: isSci ? 5 : 4 }}>=</CalcButton>
+                <MotionButton key="0" layout transition={springTransition} className={BUTTON_NUM} onClick={() => append('0')}
+                  style={{ gridRow: isSci ? 7 : 5, gridColumn: isSci ? 3 : 2 }}>0</MotionButton>
+                <MotionButton key="DOT" layout transition={springTransition} className={BUTTON_NUM} onClick={() => append('.')}
+                  style={{ gridRow: isSci ? 7 : 5, gridColumn: isSci ? 4 : 3 }}>.</MotionButton>
+                <MotionButton key="EQUAL" layout transition={springTransition} className={BUTTON_EQUAL} onClick={calculate}
+                  style={{ gridRow: isSci ? 7 : 5, gridColumn: isSci ? 5 : 4 }}>=</MotionButton>
 
               </AnimatePresence>
             </motion.div>
