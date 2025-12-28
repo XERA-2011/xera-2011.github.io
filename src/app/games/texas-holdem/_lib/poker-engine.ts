@@ -1077,44 +1077,44 @@ export class PokerGameEngine {
       const community = this.communityCards;
       const fullHand = [...hole, ...community];
       
-      // 翻牌前启发式
+      // --- 翻牌前启发式 (Preflop) ---
       if (community.length === 0) {
           const v1 = hole[0].value;
           const v2 = hole[1].value;
           const suited = hole[0].suit === hole[1].suit;
           const pair = v1 === v2;
           const highVal = Math.max(v1, v2);
-          const lowVal = Math.min(v1, v2);
-          const gap = highVal - lowVal;
+          const gap = highVal - Math.min(v1, v2);
           
           let score = 0;
-          if (pair) score = highVal * 2.5; // 对子很强
-          else score = highVal + (lowVal / 2); // 高牌
+          if (pair) {
+              score = Math.max(20, highVal * 3); // 对子价值: 22=20分, AA=42分
+          } else {
+              score = highVal + (Math.min(v1, v2) / 2); // 高牌
+          }
           
-          if (suited) score += 4;
+          if (suited) score += 3;
           if (gap === 1) score += 2; // 连张
           else if (gap === 2) score += 1;
           
-          // 最高分约 35 (AA) -> 1.0
-          // 最低分约 3 (72o) -> 0.1
-          // 粗略归一化
-          return Math.min(score / 30, 1.0);
+          // AA ~ 45分 -> 1.0 (Strong)
+          // 72o ~ 8.5分 -> 0.2 (Weak)
+          // JTs ~ 11+5+3+2 = 21 -> 0.5 (Medium)
+          return Math.min(Math.max(score / 45, 0.1), 1.0);
       }
       
-      // 翻牌后：手牌等级 + 补牌近似
+      // --- 翻牌后 (Postflop) ---
       const res = evaluateHand(fullHand);
       let strength = 0;
       
-      // 基于等级的基础强度
-      // Rank 0 (高牌) -> 0.1
-      // Rank 1 (对子) -> 0.3 - 0.5
-      // Rank 2 (两对) -> 0.6
-      // Rank 3 (三条) -> 0.75
-      // Rank 4+ (顺子/同花) -> 0.9+
-      
+      // 1. 成牌强度 (Made Hand)
       switch(res.rank) {
-          case HandRankType.HIGH_CARD: strength = 0.1; break;
-          case HandRankType.PAIR: strength = 0.35 + (res.score % 15 / 100); break; // 更大的对子更好
+          case HandRankType.HIGH_CARD: strength = 0.1 + (res.score % 15 / 150); break; // 0.1 - 0.2
+          case HandRankType.PAIR: 
+              // 顶对(Top Pair) vs底对(Bottom Pair)
+              // 简单处理: 只要是对子，基础分 0.3，越大越好，最高0.55
+              strength = 0.25 + (res.score % 15 / 50); 
+              break; 
           case HandRankType.TWO_PAIR: strength = 0.6; break;
           case HandRankType.TRIPS: strength = 0.75; break;
           case HandRankType.STRAIGHT: strength = 0.85; break;
@@ -1123,8 +1123,23 @@ export class PokerGameEngine {
           case HandRankType.QUADS: strength = 0.99; break;
           case HandRankType.STRAIGHT_FLUSH: strength = 1.0; break;
       }
+
+      // 2. 听牌潜力 (Draw Potential) - 鼓励半诈唬 (Semi-Bluff)
+      // 检查有没有同花听牌 (4张同花)
+      if (res.rank < HandRankType.FLUSH) {
+          const suitCounts: Record<string, number> = {};
+          fullHand.forEach(c => suitCounts[c.suit] = (suitCounts[c.suit] || 0) + 1);
+          const isFlushDraw = Object.values(suitCounts).some(count => count === 4);
+          if (isFlushDraw) strength += 0.15; // 听花很强
+      }
+
+      // 检查顺子听牌 (简化版：这也是最耗性能的部分，简单检查是否有4张连或间断连)
+      if (res.rank < HandRankType.STRAIGHT) {
+          // 这里不做复杂检查，简单假设如果 strength 很低但有两张高牌或连张，给予一点点潜力分
+          // 真正的顺子听牌检查比较复杂，暂略，用 FlushDraw 代表听牌倾向
+      }
       
-      return strength;
+      return Math.min(strength, 1.0);
   }
 
   _aiActionLogic(player: Player) {
@@ -1132,87 +1147,116 @@ export class PokerGameEngine {
     let strength = this._getHandStrength(player);
     let potOdds = callAmt > 0 ? callAmt / (this.pot + callAmt) : 0;
     
-    // 位置/策略因素
+    // 个性化因子 (每回合、每个玩家随机波动，模拟情绪)
+    // boldness > 1.0: 激进/上头, boldness < 1.0: 谨慎/害怕
+    let boldness = 0.8 + Math.random() * 0.4; // 0.8 ~ 1.2
+    
+    // 如果之前赢过/输过，可以影响 boldness (暂略)
+    
+    // 修正强度感知
+    let perceivedStrength = strength * boldness;
+
+    // 行动阈值 (更激进的默认设置)
+    let foldThresh = 0.25;  // 低于此直接弃
+    let callThresh = 0.4;   // 高于此考虑跟/加
+    let raiseThresh = 0.65; // 高于此强烈考虑加注
+    let allInThresh = 0.90; // 绝杀
+    
+    // 动态调整阈值
+    if (this.stage === 'preflop') {
+        foldThresh = 0.25; // 起手牌要求
+        // 如果没人加注，且需要跟注很少(或0)，即使烂牌也可能看一眼
+        if (callAmt <= this.bigBlind) foldThresh = 0.1;
+    }
+
+    // 面对大注的"恐惧"逻辑
+    // 如果跟注额超过底池的 50% 或者超过自己筹码的 40%，需要更强的牌
+    const isBigBet = (callAmt > this.pot * 0.5) || (callAmt > player.chips * 0.4);
+    if (isBigBet) {
+        perceivedStrength -= 0.1; // 吓到了，手牌感觉变弱了
+        // 甚至可能诈唬失败
+        if (player.isBluffing) perceivedStrength -= 0.2; 
+    }
+
+    // --- 决策核心 ---
     let action: 'fold' | 'call' | 'raise' | 'allin' = 'fold';
     let rnd = Math.random();
-    
-    if (this.raisesInRound >= 3 && strength < 0.8) {
-        strength -= 0.15;
-    }
-    
-    let foldThresh = 0.2;
-    let raiseThresh = 0.7;
-    let allInThresh = 0.92;
-    
-    if (this.stage === 'preflop') {
-        foldThresh = 0.35;
-        if (callAmt <= 20) foldThresh = 0.2;
-        allInThresh = 0.96;
-    }
-    
-    // --- 1. 决策逻辑 ---
-    const bluffChance = 0.15; 
-    const isBluff = (rnd < bluffChance && strength < 0.4 && this.raisesInRound < 2); 
-    
-    if (isBluff) {
-         player.isBluffing = true;
-         if (rnd < 0.015) {
-             action = 'allin';
-         } else {
-             action = 'raise';
-         }
-    } else {
-        player.isBluffing = false;
 
-        if (strength > allInThresh) {
-            if (rnd < 0.4) action = 'allin';
-            else action = 'raise';
-        } else if (strength > raiseThresh) {
-            if (rnd > 0.2) action = 'raise';
+    // 1. 偷鸡 / 诈唬逻辑 (Bluff / Steal)
+    // 条件：位置靠后(比如最后2人)，且没人加注(raisesInRound=0)，且手牌极烂
+    const isLatePosition = this.currentTurnIdx > (this.players.length * 0.6); // 粗略位置
+    const canSteal = (this.raisesInRound === 0 && callAmt === 0 && isLatePosition);
+    
+    // 激进策略：如果能偷，且 boldness 高，就偷
+    if (canSteal && boldness > 1.0 && rnd < 0.4) {
+        player.isBluffing = true;
+        action = 'raise'; // 偷鸡加注
+    } 
+    // 常规诈唬：牌力弱但还没到弃牌，偶尔诈唬
+    else if (strength < 0.4 && strength > 0.15 && rnd < 0.15 * boldness) {
+        player.isBluffing = true;
+        action = 'raise';
+    } 
+    // 正常决策
+    else {
+        player.isBluffing = false;
+        
+        if (perceivedStrength > allInThresh) {
+            // 强牌：大部分时候加注/全压，偶尔慢打(Call)钓鱼
+            if (rnd < 0.7) action = 'allin'; 
+            else if (rnd < 0.9) action = 'raise';
+            else action = 'call'; // 慢打
+        } 
+        else if (perceivedStrength > raiseThresh) {
+            if (rnd < 0.6 * boldness) action = 'raise';
             else action = 'call';
-        } else if (strength > foldThresh) {
-            if (callAmt === 0) {
-                 action = (rnd > 0.7) ? 'raise' : 'call'; 
-            } else {
-                 const isLifeOrDeath = callAmt > player.chips * 0.6;
-                 
-                 if (isLifeOrDeath) {
-                     if (strength > 0.6 || strength > potOdds + 0.1) action = 'call';
-                     else action = 'fold';
-                 } else {
-                     if (strength > potOdds + 0.05) action = 'call';
-                     else if (rnd > 0.9) action = 'raise';
-                     else action = 'fold';
-                 }
-            }
-        } else {
-            if (callAmt === 0) action = (rnd > 0.8) ? 'raise' : 'call'; 
+        } 
+        else if (perceivedStrength > callThresh) {
+            // 中等牌：跟注为主，偶尔试探性加注
+            if (rnd < 0.2 * boldness && this.raisesInRound < 2) action = 'raise';
+            else action = 'call';
+        }
+        else if (perceivedStrength > foldThresh) {
+            // 边缘牌：看赔率
+            // 如果赔率好(potOdds低) 或者 只需要过牌(callAmt=0) -> 跟/过
+            if (callAmt === 0) action = 'call'; // Check
+            else if (strength > potOdds) action = 'call';
+            else action = 'fold';
+        } 
+        else {
+            // 垃圾牌
+            if (callAmt === 0) action = 'call'; // 免费看牌
             else action = 'fold';
         }
     }
 
-    // --- 2. 合理性检查和覆盖 ---
-    if (action === 'raise') {
-         if (this.raisesInRound >= 4 || player.chips <= callAmt + 20) {
-            if (strength > 0.8) action = 'allin';
-            else action = 'call';
-         }
+    // --- 2. 修正与兜底 ---
+    // 如果没钱了，只能 Allin 或 Fold
+    if (callAmt >= player.chips) {
+        if (action === 'raise' || action === 'call') action = 'allin';
     }
     
-    if (action === 'call' && callAmt >= player.chips) {
-        // pass
+    // 如果 Raise 意图，但其实只能 Allin (筹码不足最小加注)
+    if (action === 'raise' && player.chips <= callAmt + this.bigBlind) {
+        action = 'allin';
+    }
+    
+    // 如果 Allin 但其实牌力不够强，再次确认 (防止诈唬送死)
+    if (action === 'allin' && strength < 0.6 && !player.isBluffing) {
+        // 除非只有一点点筹码了，那就赌了
+        if (player.chips > this.pot * 0.2) action = 'fold'; 
     }
 
-    // 执行行动
-    let isCheck = (action === 'call' && callAmt === 0);
-    
-    if (action === 'raise') this.handleAction(player, 'raise', 20); 
+    // 执行
+    if (action === 'raise') this.handleAction(player, 'raise', this.bigBlind * (Math.floor(Math.random()*3) + 1)); 
     else this.handleAction(player, action);
     
-    // --- 3. 发言 ---
-    const speakChance = 0.5; 
+    // --- 3. 发言 (保持原样) ---
+    const speakChance = 0.4; // 稍微降低说话频率
     
     let speechType: keyof typeof SPEECH_LINES['bot'] = 'call';
+    let isCheck = (action === 'call' && callAmt === 0);
+
     if (action === 'allin') speechType = 'allin';
     else if (player.status === 'folded') speechType = 'fold';
     else if (action === 'raise') speechType = 'raise';
@@ -1220,8 +1264,6 @@ export class PokerGameEngine {
 
     if (player.isBluffing && (action === 'raise' || action === 'allin')) {
         this.speakRandom(player, 'bluff_act');
-    } else if (action === 'allin') {
-        this.speakRandom(player, 'allin');
     } else if (Math.random() < speakChance) {
         this.speakRandom(player, speechType);
     }
