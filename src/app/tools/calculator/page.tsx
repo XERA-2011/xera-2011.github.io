@@ -1,26 +1,21 @@
 "use client";
 
 import { useState } from "react";
-import { motion, AnimatePresence } from "framer-motion";
+import { motion, AnimatePresence, scale } from "framer-motion";
 import { usePageTitle } from '@/hooks/use-page-title';
 import { cn } from "@/lib/utils";
 import { Calculator, Binary, Delete } from "lucide-react";
-import { create, all } from 'mathjs';
+import { evaluateExpression } from './_lib/engine';
 
-// Configure mathjs for high precision
-import { ConfigOptions } from 'mathjs';
-
-const config: ConfigOptions = {
-  number: 'BigNumber',
-  precision: 64
-};
-const math = create(all, config);
+// ... (clean up unused mathjs imports in the next step or here if possible, but replace tool focuses on blocks)
 
 export default function CalculatorPage() {
   usePageTitle("计算器");
   const [expr, setExpr] = useState("");
   const [scientific, setScientific] = useState(false);
   const [displayValue, setDisplayValue] = useState("0");
+
+  // ... (append, clearAll, backspace remain same)
 
   const append = (v: string) => {
     // If the last character is an operator and the new input is an operator, replace it
@@ -54,14 +49,7 @@ export default function CalculatorPage() {
   const calculate = () => {
     try {
       if (!expr) return;
-      // Evaluate using mathjs
-      const result = math.evaluate(expr);
-
-      // Format the result to avoid scientific notation for common numbers if possible, 
-      // or use a clean string representation.
-      // precision: 14 ensures we don't get overly long decimals that overflow UI too easily
-      const resultStr = math.format(result, { precision: 14 });
-
+      const resultStr = evaluateExpression(expr);
       setExpr(resultStr);
       setDisplayValue(resultStr);
     } catch {
@@ -74,8 +62,7 @@ export default function CalculatorPage() {
     if (!expr) return;
     try {
       // Calculate current expression then divide by 100
-      const result = math.evaluate(`(${expr}) / 100`);
-      const resultStr = math.format(result, { precision: 14 });
+      const resultStr = evaluateExpression(`(${expr}) / 100`);
       setExpr(resultStr);
       setDisplayValue(resultStr);
     } catch {
