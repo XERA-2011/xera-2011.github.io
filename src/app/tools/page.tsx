@@ -31,6 +31,11 @@ const toolsData: GlowCardItem[] = [
     title: "IP 检测",
     href: "/tools/ip-check",
   },
+  {
+    id: "calculator",
+    title: "计算器",
+    href: "/tools/calculator",
+  },
 ];
 
 export default function ToolsPage() {
