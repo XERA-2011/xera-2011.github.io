@@ -68,8 +68,8 @@ export const FAMOUS_QUOTES = [
         "chinese": "未来属于那些今天就做好准备的人。——马尔克姆·X"
     },
     {
-        "english": "Life is really simple, but we insist on making it complicated. – Confucius",
-        "chinese": "生活其实很简单，但我们坚持把它变得复杂。——孔子"
+        "english": "In three words I can sum up everything I've learned about life: it goes on. – Robert Frost",
+        "chinese": "我可以用三个字概括我对生活学到的一切：继续前行。——罗伯特·弗罗斯特"
     },
     {
         "english": "Life itself is the most wonderful fairy tale. – Hans Christian Andersen",
@@ -144,8 +144,8 @@ export const FAMOUS_QUOTES = [
         "chinese": "如果你不能做伟大的事情，那就以伟大的方式做小事。——拿破仑·希尔"
     },
     {
-        "english": "Happiness is not something ready made. It comes from your own actions. – Dalai Lama",
-        "chinese": "幸福不是现成的东西。它源于你自己的行动。——达赖喇嘛"
+        "english": "The secret of getting ahead is getting started. – Mark Twain",
+        "chinese": "取得领先的秘诀在于开始行动。——马克·吐温"
     },
     {
         "english": "We may encounter many defeats but we must not be defeated. – Maya Angelou",
@@ -260,8 +260,8 @@ export const FAMOUS_QUOTES = [
         "chinese": "一个从未犯错的人，是因为他从未尝试过新事物。——阿尔伯特·爱因斯坦"
     },
     {
-        "english": "The mind is everything. What you think you become. – Buddha",
-        "chinese": "心是一切。你想成为什么样的人，就会成为什么样的人。——佛陀"
+        "english": "You are never too old to set another goal or to dream a new dream. – C.S. Lewis",
+        "chinese": "你永远不会太老而不能设定另一个目标或梦想一个新的梦想。——C.S.路易斯"
     },
     {
         "english": "The unexamined life is not worth living. – Socrates",
@@ -308,8 +308,8 @@ export const FAMOUS_QUOTES = [
         "chinese": "天才是百分之一的灵感，加百分之九十九的汗水。——托马斯·爱迪生"
     },
     {
-        "english": "A journey of a thousand miles begins with a single step. – Lao Tzu",
-        "chinese": "千里之行，始于足下。——老子"
+        "english": "In the end, it's not the years in your life that count. It's the life in your years. – Abraham Lincoln",
+        "chinese": "最终，重要的不是你活了多少年，而是这些年你活得怎么样。——亚伯拉罕·林肯"
     },
     {
         "english": "If you tell the truth, you don't have to remember anything. – Mark Twain",
@@ -392,8 +392,8 @@ export const FAMOUS_QUOTES = [
         "chinese": "让每一天都成为你的杰作。——约翰·伍登"
     },
     {
-        "english": "Wherever you go, go with all your heart. – Confucius",
-        "chinese": "无论你去哪里，都要全心全意。——孔子"
+        "english": "Be kind, for everyone you meet is fighting a hard battle. – Plato",
+        "chinese": "要善良，因为你遇到的每个人都在打一场硬仗。——柏拉图"
     },
     {
         "english": "Tough times never last, but tough people do. – Robert H. Schuller",
