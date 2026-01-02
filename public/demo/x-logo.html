@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="zh-CN">
+
 <head>
   <meta charset="UTF-8">
   <title>SVG 导出 PNG（黑/白双版本）</title>
@@ -10,18 +11,50 @@
       flex-direction: column;
       align-items: center;
       justify-content: center;
-      height: 100vh;
+      min-height: 100vh;
       color: white;
       font-family: sans-serif;
+      padding: 40px 20px;
     }
-    svg {
+
+    h1 {
+      margin-bottom: 30px;
+      font-size: 24px;
+    }
+
+    .logos {
+      display: flex;
+      gap: 40px;
+      flex-wrap: wrap;
+      justify-content: center;
+      margin-bottom: 30px;
+    }
+
+    .logo-card {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .logo-card span {
+      font-size: 14px;
+      color: #aaa;
+    }
+
+    svg,
+    canvas {
       border: 1px solid #555;
-      margin-bottom: 20px;
+      border-radius: 8px;
     }
+
     .btns {
       display: flex;
       gap: 12px;
+      flex-wrap: wrap;
+      justify-content: center;
     }
+
     button {
       background: #00bcd4;
       color: white;
@@ -29,105 +62,148 @@
       padding: 10px 20px;
       border-radius: 8px;
       cursor: pointer;
-      transition: background 0.2s;
+      transition: all 0.2s;
     }
+
     button:hover {
-      background: #0097a7;
+      transform: scale(1.05);
+      box-shadow: 0 0 15px rgba(0, 188, 212, 0.5);
     }
   </style>
 </head>
+
 <body>
 
-  <!-- SVG 动画 -->
-  <svg id="mySvg" viewBox="0 0 100 100" width="150" height="150" xmlns="http://www.w3.org/2000/svg">
-    <rect width="100" height="100" fill="black" />
-    <line x1="25" y1="25" x2="75" y2="75" stroke="white" stroke-width="12"
-          stroke-dasharray="71" stroke-dashoffset="71">
-      <animate attributeName="stroke-dashoffset" from="71" to="0" dur="0.5s" fill="freeze" />
-    </line>
-    <line x1="25" y1="75" x2="75" y2="25" stroke="white" stroke-width="12"
-          stroke-dasharray="71" stroke-dashoffset="71">
-      <animate attributeName="stroke-dashoffset" from="71" to="0" dur="0.5s" begin="0.5s" fill="freeze" />
-    </line>
-  </svg>
+  <h1>X-MONOREPO Logo 导出工具</h1>
 
-  <div class="btns">
-    <button id="btnBlack">🖤 黑色 Logo + 透明底</button>
-    <button id="btnWhite">⚪ 白色 Logo + 黑底</button>
+  <div class="logos">
+    <!-- 黑色 Logo -->
+    <div class="logo-card">
+      <svg viewBox="0 0 100 100" width="120" height="120" xmlns="http://www.w3.org/2000/svg">
+        <line x1="25" y1="25" x2="75" y2="75" stroke="black" stroke-width="12" />
+        <line x1="25" y1="75" x2="75" y2="25" stroke="black" stroke-width="12" />
+      </svg>
+      <span>黑色 Logo</span>
+      <button id="btnBlack">🖤 下载</button>
+    </div>
+
+    <!-- 白色 Logo -->
+    <div class="logo-card">
+      <svg viewBox="0 0 100 100" width="120" height="120" xmlns="http://www.w3.org/2000/svg">
+        <line x1="25" y1="25" x2="75" y2="75" stroke="white" stroke-width="12" />
+        <line x1="25" y1="75" x2="75" y2="25" stroke="white" stroke-width="12" />
+      </svg>
+      <span>白色 Logo</span>
+      <button id="btnWhite">⚪ 下载</button>
+    </div>
+
+    <!-- 蒸汽朋克风 Logo -->
+    <div class="logo-card">
+      <canvas id="vaporwavePreview" width="120" height="120" style="width: 120px; height: 120px;"></canvas>
+      <span>蒸汽朋克风</span>
+      <button id="btnVaporwave" style="background: linear-gradient(135deg, #FF00FF, #00FFFF);">🌴 下载</button>
+    </div>
   </div>
 
   <script>
-    const svg = document.getElementById('mySvg');
+    // 绘制蒸汽朋克风 Logo 到 Canvas
+    function drawVaporwave(canvas, size) {
+      const ctx = canvas.getContext('2d');
+      canvas.width = size;
+      canvas.height = size;
 
-    function exportPNG({ color = 'white', background = 'black', filename = 'logo.png' }) {
-      setTimeout(() => {
-        // 克隆并去掉动画
-        const clone = svg.cloneNode(true);
-        clone.querySelectorAll('animate').forEach(a => a.remove());
-        clone.querySelectorAll('line').forEach(line => {
-          line.setAttribute('stroke-dashoffset', '0');
-          line.setAttribute('stroke', color);
-        });
+      // 透明背景（不填充）
+      ctx.clearRect(0, 0, size, size);
 
-        // 背景处理
-        const rect = clone.querySelector('rect');
-        if (background) {
-          if (!rect) {
-            const bg = document.createElementNS('http://www.w3.org/2000/svg', 'rect');
-            bg.setAttribute('width', '100');
-            bg.setAttribute('height', '100');
-            bg.setAttribute('fill', background);
-            clone.insertBefore(bg, clone.firstChild);
-          } else {
-            rect.setAttribute('fill', background);
-          }
-        } else if (rect) {
-          rect.remove(); // 去掉背景
-        }
+      // 创建渐变 (与 web-nuxt Vaporwave 风格一致)
+      const gradient = ctx.createLinearGradient(0, 0, size, size);
+      gradient.addColorStop(0, '#FF9900');   // 霓虹橙
+      gradient.addColorStop(0.5, '#FF00FF'); // 霓虹洋红
+      gradient.addColorStop(1, '#00FFFF');   // 霓虹青
 
-        // 序列化并导出
-        const serializer = new XMLSerializer();
-        const svgStr = serializer.serializeToString(clone);
-        const blob = new Blob([svgStr], { type: 'image/svg+xml;charset=utf-8' });
-        const url = URL.createObjectURL(blob);
+      ctx.strokeStyle = gradient;
+      ctx.lineWidth = size * 0.12;
+      ctx.lineCap = 'butt';
 
-        const img = new Image();
-        img.onload = () => {
-          const size = 1024;
-          const canvas = document.createElement('canvas');
-          canvas.width = size;
-          canvas.height = size;
-          const ctx = canvas.getContext('2d');
-          ctx.clearRect(0, 0, size, size);
-          ctx.drawImage(img, 0, 0, size, size);
-          URL.revokeObjectURL(url);
+      // 画 X
+      const margin = size * 0.25;
+      ctx.beginPath();
+      ctx.moveTo(margin, margin);
+      ctx.lineTo(size - margin, size - margin);
+      ctx.stroke();
 
-          const png = canvas.toDataURL('image/png');
-          const a = document.createElement('a');
-          a.href = png;
-          a.download = filename;
-          a.click();
-        };
-        img.src = url;
-      }, 1100); // 等动画结束
+      ctx.beginPath();
+      ctx.moveTo(margin, size - margin);
+      ctx.lineTo(size - margin, margin);
+      ctx.stroke();
     }
 
+    // 页面加载时渲染预览
+    const previewCanvas = document.getElementById('vaporwavePreview');
+    drawVaporwave(previewCanvas, 120);
+
+    // 导出简单 SVG Logo
+    function exportSimplePNG({ color, background, filename }) {
+      const size = 1024;
+      const canvas = document.createElement('canvas');
+      canvas.width = size;
+      canvas.height = size;
+      const ctx = canvas.getContext('2d');
+
+      // 透明背景
+      ctx.clearRect(0, 0, size, size);
+
+      // 画 X
+      ctx.strokeStyle = color;
+      ctx.lineWidth = size * 0.12;
+      ctx.lineCap = 'butt';
+      const margin = size * 0.25;
+
+      ctx.beginPath();
+      ctx.moveTo(margin, margin);
+      ctx.lineTo(size - margin, size - margin);
+      ctx.stroke();
+
+      ctx.beginPath();
+      ctx.moveTo(margin, size - margin);
+      ctx.lineTo(size - margin, margin);
+      ctx.stroke();
+
+      const png = canvas.toDataURL('image/png');
+      const a = document.createElement('a');
+      a.href = png;
+      a.download = filename;
+      a.click();
+    }
+
+    // 黑色 Logo
     document.getElementById('btnBlack').addEventListener('click', () => {
-      exportPNG({
+      exportSimplePNG({
         color: 'black',
-        background: null, // 透明背景
-        filename: 'cross-black-transparent.png'
+        filename: 'cross-black.png'
       });
     });
 
+    // 白色 Logo
     document.getElementById('btnWhite').addEventListener('click', () => {
-      exportPNG({
+      exportSimplePNG({
         color: 'white',
-        background: 'black',
-        filename: 'cross-white-black.png'
+        filename: 'cross-white.png'
       });
+    });
+
+    // 蒸汽朋克风 Logo
+    document.getElementById('btnVaporwave').addEventListener('click', () => {
+      const canvas = document.createElement('canvas');
+      drawVaporwave(canvas, 1024);
+      const png = canvas.toDataURL('image/png');
+      const a = document.createElement('a');
+      a.href = png;
+      a.download = 'cross-vaporwave.png';
+      a.click();
     });
   </script>
 
 </body>
+
 </html>
