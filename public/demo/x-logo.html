@@ -80,8 +80,8 @@
     <!-- 黑色 Logo -->
     <div class="logo-card">
       <svg viewBox="0 0 100 100" width="120" height="120" xmlns="http://www.w3.org/2000/svg">
-        <line x1="25" y1="25" x2="75" y2="75" stroke="black" stroke-width="12" />
-        <line x1="25" y1="75" x2="75" y2="25" stroke="black" stroke-width="12" />
+        <line x1="25" y1="25" x2="75" y2="75" stroke="black" stroke-width="15" />
+        <line x1="25" y1="75" x2="75" y2="25" stroke="black" stroke-width="15" />
       </svg>
       <span>黑色 Logo</span>
       <button id="btnBlack">🖤 下载</button>
@@ -90,8 +90,8 @@
     <!-- 白色 Logo -->
     <div class="logo-card">
       <svg viewBox="0 0 100 100" width="120" height="120" xmlns="http://www.w3.org/2000/svg">
-        <line x1="25" y1="25" x2="75" y2="75" stroke="white" stroke-width="12" />
-        <line x1="25" y1="75" x2="75" y2="25" stroke="white" stroke-width="12" />
+        <line x1="25" y1="25" x2="75" y2="75" stroke="white" stroke-width="15" />
+        <line x1="25" y1="75" x2="75" y2="25" stroke="white" stroke-width="15" />
       </svg>
       <span>白色 Logo</span>
       <button id="btnWhite">⚪ 下载</button>
@@ -101,11 +101,11 @@
     <div class="logo-card">
       <svg viewBox="0 0 100 100" width="120" height="120" xmlns="http://www.w3.org/2000/svg">
         <!-- 底层黑色 -->
-        <line x1="29.2" y1="29.2" x2="70.8" y2="70.8" stroke="black" stroke-width="12" stroke-linecap="square" />
-        <line x1="29.2" y1="70.8" x2="70.8" y2="29.2" stroke="black" stroke-width="12" stroke-linecap="square" />
+        <line x1="30.3" y1="30.3" x2="69.7" y2="69.7" stroke="black" stroke-width="15" stroke-linecap="square" />
+        <line x1="30.3" y1="69.7" x2="69.7" y2="30.3" stroke="black" stroke-width="15" stroke-linecap="square" />
         <!-- 上层白色 -->
-        <line x1="29.2" y1="29.2" x2="70.8" y2="70.8" stroke="white" stroke-width="9" stroke-linecap="square" />
-        <line x1="29.2" y1="70.8" x2="70.8" y2="29.2" stroke="white" stroke-width="9" stroke-linecap="square" />
+        <line x1="30.3" y1="30.3" x2="69.7" y2="69.7" stroke="white" stroke-width="12" stroke-linecap="square" />
+        <line x1="30.3" y1="69.7" x2="69.7" y2="30.3" stroke="white" stroke-width="12" stroke-linecap="square" />
       </svg>
       <span>黑白双层</span>
       <button id="btnLayered" style="background: #333; border: 1px solid #555;">🐼 下载</button>
@@ -114,10 +114,10 @@
     <!-- 黑白交叉 Logo -->
     <div class="logo-card">
       <svg viewBox="0 0 100 100" width="120" height="120" xmlns="http://www.w3.org/2000/svg">
-        <line x1="29.2" y1="29.2" x2="70.8" y2="70.8" stroke="black" stroke-width="12" stroke-linecap="square" />
+        <line x1="30.3" y1="30.3" x2="69.7" y2="69.7" stroke="black" stroke-width="15" stroke-linecap="square" />
         <!-- 上层白色 (带黑边) -->
-        <line x1="29.2" y1="70.8" x2="70.8" y2="29.2" stroke="black" stroke-width="12" stroke-linecap="square" />
-        <line x1="29.2" y1="70.8" x2="70.8" y2="29.2" stroke="white" stroke-width="9" stroke-linecap="square" />
+        <line x1="30.3" y1="69.7" x2="69.7" y2="30.3" stroke="black" stroke-width="15" stroke-linecap="square" />
+        <line x1="30.3" y1="69.7" x2="69.7" y2="30.3" stroke="white" stroke-width="12" stroke-linecap="square" />
       </svg>
       <span>黑白交叉</span>
       <button id="btnCrossing"
@@ -160,7 +160,7 @@
       gradient.addColorStop(0.7, '#00FFFF');   // 霓虹青
 
       ctx.strokeStyle = gradient;
-      ctx.lineWidth = size * 0.12;
+      ctx.lineWidth = size * 0.15;
       ctx.lineCap = 'butt';
 
       // 画 X
@@ -193,7 +193,7 @@
 
       // 画 X
       ctx.strokeStyle = color;
-      ctx.lineWidth = size * 0.12;
+      ctx.lineWidth = size * 0.15;
       ctx.lineCap = 'butt';
       const margin = size * 0.25;
 
@@ -240,13 +240,13 @@
       ctx.clearRect(0, 0, size, size);
 
       // Square Cap 校正：由于 square 会延伸半个线宽，需要内缩起点以保持视觉尺寸一致
-      // 偏移量 = (lineWidth/2) * cos(45) = (0.12/2 * 0.707) * size ≈ 0.042 * size
-      // 原 Margin 0.25 -> 新 Margin 0.292
-      const margin = size * 0.292;
+      // 偏移量 = (lineWidth/2) * cos(45) = (0.15/2 * 0.707) * size ≈ 0.053 * size
+      // 原 Margin 0.25 -> 新 Margin 0.303
+      const margin = size * 0.303;
 
       // 1. 绘制底层黑色 (粗)
       ctx.strokeStyle = 'black';
-      ctx.lineWidth = size * 0.12; // 12% width
+      ctx.lineWidth = size * 0.15; // 15% width
       ctx.lineCap = 'square';
 
       ctx.beginPath();
@@ -261,7 +261,7 @@
 
       // 2. 绘制上层白色 (细)
       ctx.strokeStyle = 'white';
-      ctx.lineWidth = size * 0.09; // 9% width
+      ctx.lineWidth = size * 0.12; // 12% width
 
       ctx.beginPath();
       ctx.moveTo(margin, margin);
@@ -292,9 +292,9 @@
       canvas.height = size;
       ctx.clearRect(0, 0, size, size);
       // Square Cap 校正 margin
-      const margin = size * 0.292;
+      const margin = size * 0.303;
 
-      ctx.lineWidth = size * 0.12;
+      ctx.lineWidth = size * 0.15;
       ctx.lineCap = 'square';
 
       // 1. 底层黑色 (\)
@@ -307,7 +307,7 @@
       // 2. 上层白色 (/) 带黑边
       // 背景黑
       ctx.strokeStyle = 'black';
-      ctx.lineWidth = size * 0.12;
+      ctx.lineWidth = size * 0.15;
       ctx.beginPath();
       ctx.moveTo(margin, size - margin);
       ctx.lineTo(size - margin, margin);
@@ -315,7 +315,7 @@
 
       // 前景白
       ctx.strokeStyle = 'white';
-      ctx.lineWidth = size * 0.09;
+      ctx.lineWidth = size * 0.12;
       ctx.beginPath();
       ctx.moveTo(margin, size - margin);
       ctx.lineTo(size - margin, margin);
