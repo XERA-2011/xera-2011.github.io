@@ -97,6 +97,33 @@
       <button id="btnWhite">⚪ 下载</button>
     </div>
 
+    <!-- 黑白双层 Logo -->
+    <div class="logo-card">
+      <svg viewBox="0 0 100 100" width="120" height="120" xmlns="http://www.w3.org/2000/svg">
+        <!-- 底层黑色 -->
+        <line x1="29.2" y1="29.2" x2="70.8" y2="70.8" stroke="black" stroke-width="12" stroke-linecap="square" />
+        <line x1="29.2" y1="70.8" x2="70.8" y2="29.2" stroke="black" stroke-width="12" stroke-linecap="square" />
+        <!-- 上层白色 -->
+        <line x1="29.2" y1="29.2" x2="70.8" y2="70.8" stroke="white" stroke-width="9" stroke-linecap="square" />
+        <line x1="29.2" y1="70.8" x2="70.8" y2="29.2" stroke="white" stroke-width="9" stroke-linecap="square" />
+      </svg>
+      <span>黑白双层</span>
+      <button id="btnLayered" style="background: #333; border: 1px solid #555;">🐼 下载</button>
+    </div>
+
+    <!-- 黑白交叉 Logo -->
+    <div class="logo-card">
+      <svg viewBox="0 0 100 100" width="120" height="120" xmlns="http://www.w3.org/2000/svg">
+        <line x1="29.2" y1="29.2" x2="70.8" y2="70.8" stroke="black" stroke-width="12" stroke-linecap="square" />
+        <!-- 上层白色 (带黑边) -->
+        <line x1="29.2" y1="70.8" x2="70.8" y2="29.2" stroke="black" stroke-width="12" stroke-linecap="square" />
+        <line x1="29.2" y1="70.8" x2="70.8" y2="29.2" stroke="white" stroke-width="9" stroke-linecap="square" />
+      </svg>
+      <span>黑白交叉</span>
+      <button id="btnCrossing"
+        style="background: linear-gradient(135deg, #000 50%, #fff 50%); border: 1px solid #555;">❌ 下载</button>
+    </div>
+
     <!-- 蒸汽朋克风 Logo -->
     <div class="logo-card">
       <canvas id="vaporwavePreview" width="120" height="120" style="width: 120px; height: 120px;"></canvas>
@@ -109,6 +136,9 @@
   <div class="btns" style="margin-top: 16px;">
     <button id="btnFaviconBlack">🖤 黑色 Favicon</button>
     <button id="btnFaviconWhite">⚪ 白色 Favicon</button>
+    <button id="btnFaviconLayered" style="background: #333; border: 1px solid #555;">🐼 黑白 Favicon</button>
+    <button id="btnFaviconCrossing"
+      style="background: linear-gradient(135deg, #000 50%, #fff 50%); border: 1px solid #555;">❌ 交叉 Favicon</button>
     <button id="btnFaviconVaporwave" style="background: linear-gradient(135deg, #FF00FF, #00FFFF);">🌴 蒸汽朋克
       Favicon</button>
   </div>
@@ -198,6 +228,109 @@
         color: 'white',
         filename: 'cross-white.png'
       });
+    });
+
+    // 绘制黑白双层 Logo
+    function drawLayered(canvas, size) {
+      const ctx = canvas.getContext('2d');
+      canvas.width = size;
+      canvas.height = size;
+
+      // 透明背景
+      ctx.clearRect(0, 0, size, size);
+
+      // Square Cap 校正：由于 square 会延伸半个线宽，需要内缩起点以保持视觉尺寸一致
+      // 偏移量 = (lineWidth/2) * cos(45) = (0.12/2 * 0.707) * size ≈ 0.042 * size
+      // 原 Margin 0.25 -> 新 Margin 0.292
+      const margin = size * 0.292;
+
+      // 1. 绘制底层黑色 (粗)
+      ctx.strokeStyle = 'black';
+      ctx.lineWidth = size * 0.12; // 12% width
+      ctx.lineCap = 'square';
+
+      ctx.beginPath();
+      ctx.moveTo(margin, margin);
+      ctx.lineTo(size - margin, size - margin);
+      ctx.stroke();
+
+      ctx.beginPath();
+      ctx.moveTo(margin, size - margin);
+      ctx.lineTo(size - margin, margin);
+      ctx.stroke();
+
+      // 2. 绘制上层白色 (细)
+      ctx.strokeStyle = 'white';
+      ctx.lineWidth = size * 0.09; // 9% width
+
+      ctx.beginPath();
+      ctx.moveTo(margin, margin);
+      ctx.lineTo(size - margin, size - margin);
+      ctx.stroke();
+
+      ctx.beginPath();
+      ctx.moveTo(margin, size - margin);
+      ctx.lineTo(size - margin, margin);
+      ctx.stroke();
+    }
+
+    // 黑白双层 Logo 下载
+    document.getElementById('btnLayered').addEventListener('click', () => {
+      const canvas = document.createElement('canvas');
+      drawLayered(canvas, 1024);
+      const png = canvas.toDataURL('image/png');
+      const a = document.createElement('a');
+      a.href = png;
+      a.download = 'cross-layered.png';
+      a.click();
+    });
+
+    // 绘制黑白交叉 Logo
+    function drawCrossing(canvas, size) {
+      const ctx = canvas.getContext('2d');
+      canvas.width = size;
+      canvas.height = size;
+      ctx.clearRect(0, 0, size, size);
+      // Square Cap 校正 margin
+      const margin = size * 0.292;
+
+      ctx.lineWidth = size * 0.12;
+      ctx.lineCap = 'square';
+
+      // 1. 底层黑色 (\)
+      ctx.strokeStyle = 'black';
+      ctx.beginPath();
+      ctx.moveTo(margin, margin);
+      ctx.lineTo(size - margin, size - margin);
+      ctx.stroke();
+
+      // 2. 上层白色 (/) 带黑边
+      // 背景黑
+      ctx.strokeStyle = 'black';
+      ctx.lineWidth = size * 0.12;
+      ctx.beginPath();
+      ctx.moveTo(margin, size - margin);
+      ctx.lineTo(size - margin, margin);
+      ctx.stroke();
+
+      // 前景白
+      ctx.strokeStyle = 'white';
+      ctx.lineWidth = size * 0.09;
+      ctx.beginPath();
+      ctx.moveTo(margin, size - margin);
+      ctx.lineTo(size - margin, margin);
+      ctx.stroke();
+    }
+
+    // 黑白交叉 Logo 下载
+    document.getElementById('btnCrossing').addEventListener('click', () => {
+      const canvas = document.createElement('canvas');
+      drawCrossing(canvas, 1024);
+      const png = canvas.toDataURL('image/png');
+      const a = document.createElement('a');
+      a.href = png;
+      a.download = 'cross-crossing.png';
+      a.click();
     });
 
     // 蒸汽朋克风 Logo
@@ -320,6 +453,16 @@
     // 白色 Favicon
     document.getElementById('btnFaviconWhite').addEventListener('click', () => {
       exportFavicon((c, s) => drawSimpleFavicon(c, s, 'white'), 'favicon.ico');
+    });
+
+    // 黑白 Favicon
+    document.getElementById('btnFaviconLayered').addEventListener('click', () => {
+      exportFavicon(drawLayered, 'favicon.ico');
+    });
+
+    // 交叉 Favicon
+    document.getElementById('btnFaviconCrossing').addEventListener('click', () => {
+      exportFavicon(drawCrossing, 'favicon.ico');
     });
 
     // 蒸汽朋克 Favicon
