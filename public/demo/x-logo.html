@@ -3,7 +3,7 @@
 
 <head>
   <meta charset="UTF-8">
-  <title>SVG 导出 PNG（黑/白双版本）</title>
+  <title>SVG 导出 PNG ICO</title>
   <style>
     body {
       background: #222;
@@ -124,6 +124,15 @@
         style="background: linear-gradient(135deg, #000 50%, #fff 50%); border: 1px solid #555;">❌ 下载</button>
     </div>
 
+    <!-- 黑红配色 Logo -->
+    <div class="logo-card">
+      <canvas id="redBlackPreview" width="120" height="120"
+        style="width: 120px; height: 120px; border-radius: 8px; border: 1px solid #555;"></canvas>
+      <span>黑红配色</span>
+      <button id="btnRedBlack"
+        style="background: linear-gradient(135deg, #2B2B2B 50%, #F03A17 50%); border: 1px solid #555;">♦️ 下载</button>
+    </div>
+
     <!-- 蒸汽朋克风 Logo -->
     <div class="logo-card">
       <canvas id="vaporwavePreview" width="120" height="120" style="width: 120px; height: 120px;"></canvas>
@@ -139,6 +148,9 @@
     <button id="btnFaviconLayered" style="background: #333; border: 1px solid #555;">🐼 黑白 Favicon</button>
     <button id="btnFaviconCrossing"
       style="background: linear-gradient(135deg, #000 50%, #fff 50%); border: 1px solid #555;">❌ 交叉 Favicon</button>
+    <button id="btnFaviconRedBlack"
+      style="background: linear-gradient(135deg, #2B2B2B 50%, #F03A17 50%); border: 1px solid #555;">♦️ 黑红
+      Favicon</button>
     <button id="btnFaviconVaporwave" style="background: linear-gradient(135deg, #FF00FF, #00FFFF);">🌴 蒸汽朋克
       Favicon</button>
   </div>
@@ -179,6 +191,9 @@
     // 页面加载时渲染预览
     const previewCanvas = document.getElementById('vaporwavePreview');
     drawVaporwave(previewCanvas, 120);
+
+    const redBlackPreview = document.getElementById('redBlackPreview');
+    drawRedBlack(redBlackPreview, 120);
 
     // 导出简单 SVG Logo
     function exportSimplePNG({ color, background, filename }) {
@@ -344,6 +359,64 @@
       a.click();
     });
 
+    // 绘制黑红交叉 Logo
+    function drawRedBlack(canvas, size) {
+      const ctx = canvas.getContext('2d');
+      canvas.width = size;
+      canvas.height = size;
+      ctx.clearRect(0, 0, size, size);
+      // Square Cap 校正 margin
+      const margin = size * 0.303;
+
+      ctx.lineWidth = size * 0.15;
+      ctx.lineCap = 'square';
+
+      // 1. 底层黑色 (\)
+      // 描边 (纯黑)
+      ctx.strokeStyle = '#000000';
+      ctx.lineWidth = size * 0.15; // 15% width (Outter)
+      ctx.beginPath();
+      ctx.moveTo(margin, margin);
+      ctx.lineTo(size - margin, size - margin);
+      ctx.stroke();
+
+      // 填充 (#2B2B2B)
+      ctx.strokeStyle = '#2B2B2B';
+      ctx.lineWidth = size * 0.12; // 12% width (Inner)
+      ctx.beginPath();
+      ctx.moveTo(margin, margin);
+      ctx.lineTo(size - margin, size - margin);
+      ctx.stroke();
+
+      // 2. 上层红色 (/)
+      // 描边 (纯黑)
+      ctx.strokeStyle = '#000000';
+      ctx.lineWidth = size * 0.15;
+      ctx.beginPath();
+      ctx.moveTo(margin, size - margin);
+      ctx.lineTo(size - margin, margin);
+      ctx.stroke();
+
+      // 填充 (#F03A17)
+      ctx.strokeStyle = '#F03A17';
+      ctx.lineWidth = size * 0.12;
+      ctx.beginPath();
+      ctx.moveTo(margin, size - margin);
+      ctx.lineTo(size - margin, margin);
+      ctx.stroke();
+    }
+
+    // 黑红 Logo 下载
+    document.getElementById('btnRedBlack').addEventListener('click', () => {
+      const canvas = document.createElement('canvas');
+      drawRedBlack(canvas, 1024);
+      const png = canvas.toDataURL('image/png');
+      const a = document.createElement('a');
+      a.href = png;
+      a.download = 'cross-redblack.png';
+      a.click();
+    });
+
     // Favicon 导出函数 (64x64 ICO)
     function exportFavicon(drawFn, filename) {
       const canvas = document.createElement('canvas');
@@ -468,6 +541,11 @@
     // 蒸汽朋克 Favicon
     document.getElementById('btnFaviconVaporwave').addEventListener('click', () => {
       exportFavicon(drawVaporwave, 'favicon.ico');
+    });
+
+    // 黑红 Favicon
+    document.getElementById('btnFaviconRedBlack').addEventListener('click', () => {
+      exportFavicon(drawRedBlack, 'favicon.ico');
     });
   </script>
 
