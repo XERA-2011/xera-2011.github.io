@@ -130,7 +130,7 @@
         style="width: 120px; height: 120px; border-radius: 8px; border: 1px solid #555;"></canvas>
       <span>黑红配色</span>
       <button id="btnRedBlack"
-        style="background: linear-gradient(135deg, #2B2B2B 50%, #F03A17 50%); border: 1px solid #555;">♦️ 下载</button>
+        style="background: linear-gradient(135deg, #101828 50%, #E7000B 50%); border: 1px solid #555;">♦️ 下载</button>
     </div>
 
     <!-- 蒸汽朋克风 Logo -->
@@ -149,7 +149,7 @@
     <button id="btnFaviconCrossing"
       style="background: linear-gradient(135deg, #000 50%, #fff 50%); border: 1px solid #555;">❌ 交叉 Favicon</button>
     <button id="btnFaviconRedBlack"
-      style="background: linear-gradient(135deg, #2B2B2B 50%, #F03A17 50%); border: 1px solid #555;">♦️ 黑红
+      style="background: linear-gradient(135deg, #101828 50%, #E7000B 50%); border: 1px solid #555;">♦️ 黑红
       Favicon</button>
     <button id="btnFaviconVaporwave" style="background: linear-gradient(135deg, #FF00FF, #00FFFF);">🌴 蒸汽朋克
       Favicon</button>
@@ -369,36 +369,17 @@
       const margin = size * 0.303;
 
       ctx.lineWidth = size * 0.15;
-      ctx.lineCap = 'square';
-
       // 1. 底层黑色 (\)
-      // 描边 (纯黑)
-      ctx.strokeStyle = '#000000';
-      ctx.lineWidth = size * 0.15; // 15% width (Outter)
-      ctx.beginPath();
-      ctx.moveTo(margin, margin);
-      ctx.lineTo(size - margin, size - margin);
-      ctx.stroke();
-
-      // 填充 (#2B2B2B)
-      ctx.strokeStyle = '#2B2B2B';
-      ctx.lineWidth = size * 0.12; // 12% width (Inner)
+      ctx.strokeStyle = '#101828';
+      ctx.lineWidth = size * 0.15;
+      ctx.lineCap = 'square';
       ctx.beginPath();
       ctx.moveTo(margin, margin);
       ctx.lineTo(size - margin, size - margin);
       ctx.stroke();
 
       // 2. 上层红色 (/)
-      // 描边 (纯黑)
-      ctx.strokeStyle = '#000000';
-      ctx.lineWidth = size * 0.15;
-      ctx.beginPath();
-      ctx.moveTo(margin, size - margin);
-      ctx.lineTo(size - margin, margin);
-      ctx.stroke();
-
-      // 填充 (#F03A17)
-      ctx.strokeStyle = '#F03A17';
+      ctx.strokeStyle = '#E7000B';
       ctx.lineWidth = size * 0.12;
       ctx.beginPath();
       ctx.moveTo(margin, size - margin);
