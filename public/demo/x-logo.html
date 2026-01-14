@@ -100,12 +100,12 @@
     <!-- 黑白双层 Logo -->
     <div class="logo-card">
       <svg viewBox="0 0 100 100" width="120" height="120" xmlns="http://www.w3.org/2000/svg">
-        <!-- 底层黑色 -->
-        <line x1="30.3" y1="30.3" x2="69.7" y2="69.7" stroke="black" stroke-width="15" stroke-linecap="square" />
-        <line x1="30.3" y1="69.7" x2="69.7" y2="30.3" stroke="black" stroke-width="15" stroke-linecap="square" />
-        <!-- 上层白色 -->
-        <line x1="30.3" y1="30.3" x2="69.7" y2="69.7" stroke="white" stroke-width="12" stroke-linecap="square" />
-        <line x1="30.3" y1="69.7" x2="69.7" y2="30.3" stroke="white" stroke-width="12" stroke-linecap="square" />
+        <!-- 底层边框色 -->
+        <line x1="30.3" y1="30.3" x2="69.7" y2="69.7" stroke="#282828" stroke-width="21" stroke-linecap="square" />
+        <line x1="30.3" y1="69.7" x2="69.7" y2="30.3" stroke="#282828" stroke-width="21" stroke-linecap="square" />
+        <!-- 上层内部色 -->
+        <line x1="30.3" y1="30.3" x2="69.7" y2="69.7" stroke="#CCCCCC" stroke-width="12" stroke-linecap="square" />
+        <line x1="30.3" y1="69.7" x2="69.7" y2="30.3" stroke="#CCCCCC" stroke-width="12" stroke-linecap="square" />
       </svg>
       <span>黑白双层</span>
       <button id="btnLayered" style="background: #333; border: 1px solid #555;">🐼 下载</button>
@@ -259,9 +259,9 @@
       // 原 Margin 0.25 -> 新 Margin 0.303
       const margin = size * 0.303;
 
-      // 1. 绘制底层黑色 (粗)
-      ctx.strokeStyle = 'black';
-      ctx.lineWidth = size * 0.15; // 15% width
+      // 1. 绘制底层边框色 (粗)
+      ctx.strokeStyle = '#282828';
+      ctx.lineWidth = size * 0.21; // 21% width
       ctx.lineCap = 'square';
 
       ctx.beginPath();
@@ -274,8 +274,8 @@
       ctx.lineTo(size - margin, margin);
       ctx.stroke();
 
-      // 2. 绘制上层白色 (细)
-      ctx.strokeStyle = 'white';
+      // 2. 绘制上层内部色 (细)
+      ctx.strokeStyle = '#CCCCCC';
       ctx.lineWidth = size * 0.12; // 12% width
 
       ctx.beginPath();
