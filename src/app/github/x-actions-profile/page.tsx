@@ -21,7 +21,7 @@ export default function XActionsProfilePage() {
     const currentTheme = mounted ? (resolvedTheme || theme || 'dark') : 'dark';
     const filename = `${name}-${currentTheme === 'light' ? 'light' : 'dark'}.svg`;
     return `/api/redirect?url=${encodeURIComponent(
-      `https://cdn.jsdelivr.net/gh/XERA-2011/x-actions@output/${filename}`
+      `https://cdn.jsdelivr.net/gh/XERA-2011/x-actions-profile@output/${filename}`
     )}`;
   };
 
