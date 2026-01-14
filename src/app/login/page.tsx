@@ -1,7 +1,7 @@
 "use client"
 
 import { signIn } from "next-auth/react"
-import { useState, useEffect, Suspense } from "react"
+import { useState, useMemo, Suspense } from "react"
 import { useRouter, useSearchParams } from "next/navigation"
 import Link from "next/link"
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
@@ -21,12 +21,10 @@ function LoginForm() {
     password: '',
   })
   const [error, setError] = useState('')
-  const [successMessage, setSuccessMessage] = useState('')
 
-  useEffect(() => {
-    if (searchParams.get('registered') === 'true') {
-      setSuccessMessage('注册成功！请登录')
-    }
+  // 使用 useMemo 从 URL 参数派生成功消息
+  const successMessage = useMemo(() => {
+    return searchParams.get('registered') === 'true' ? '注册成功！请登录' : ''
   }, [searchParams])
 
   const handleOAuthSignIn = async (provider: 'google' | 'github') => {

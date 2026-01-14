@@ -26,12 +26,10 @@ interface QuickSetters {
   sy?: (value: number) => void;
 }
 
-function useInstance<T>(value: T | (() => T)): T {
-  const ref = useRef<T | null>(null);
-  if (ref.current === null) {
-    ref.current = typeof value === "function" ? (value as () => T)() : value;
-  }
-  return ref.current;
+// 使用 useState 惰性初始化模式，避免在 render 期间访问 ref.current
+function useInstance<T>(initializer: () => T): T {
+  const [instance] = useState(initializer);
+  return instance;
 }
 
 // 优化的速度计算 - 使用更平滑的距离映射

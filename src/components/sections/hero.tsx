@@ -1,22 +1,18 @@
 "use client";
 
-import { useRef, useState, useEffect } from 'react';
+import { useRef } from 'react';
 import { motion } from 'framer-motion';
 import Image from 'next/image';
 import { useTheme } from 'next-themes';
 import { useApp } from "@/contexts/AppContext";
 import Clock from '@/components/clocks/jump';
+import { useHasMounted } from '@/hooks/use-has-mounted';
 
 export default function HeroSection() {
   const containerRef = useRef<HTMLDivElement>(null);
   const { theme, resolvedTheme } = useTheme();
   const { setIsMenuActive } = useApp();
-  const [mounted, setMounted] = useState(false);
-
-  // 等待客户端挂载后再使用主题
-  useEffect(() => {
-    setMounted(true);
-  }, []);
+  const mounted = useHasMounted();
 
   // 根据主题获取对应的 SVG
   const currentTheme = mounted ? (resolvedTheme || theme || 'dark') : 'dark';

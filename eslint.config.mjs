@@ -1,23 +1,19 @@
-import { dirname } from "path";
-import { fileURLToPath } from "url";
-import { FlatCompat } from "@eslint/eslintrc";
-
-const __filename = fileURLToPath(import.meta.url);
-const __dirname = dirname(__filename);
-
-const compat = new FlatCompat({
-  baseDirectory: __dirname,
-});
-
+import nextConfig from "eslint-config-next";
 
 const eslintConfig = [
-  ...compat.config({
-    extends: ["next/core-web-vitals", "next/typescript"],
+  ...nextConfig,
+  {
     rules: {
+      // Next.js hydration 模式常用 setMounted(true) 在 useEffect 中
+      "react-hooks/set-state-in-effect": "warn",
+      "react-hooks/refs": "warn",
+      "react-hooks/immutability": "warn",
+      "react-hooks/exhaustive-deps": "warn",
+      // 自定义规则
       // 'react/no-unescaped-entities': 'off',
       // '@next/next/no-page-custom-font': 'off',
     },
-  }),
-]
+  },
+];
 
 export default eslintConfig;

@@ -1,11 +1,12 @@
 "use client";
 
-import { useState, useCallback, useEffect } from 'react';
+import { useState, useCallback } from 'react';
 import { motion } from 'framer-motion';
 import Image from 'next/image';
 import { cn } from '@/lib/utils';
 import { RefreshCw } from 'lucide-react';
 import { useTheme } from 'next-themes';
+import { useHasMounted } from '@/hooks/use-has-mounted';
 
 interface JokeCardProps {
   className?: string;
@@ -23,12 +24,7 @@ export default function JokeCard({
   const { resolvedTheme } = useTheme();
   const [refreshKey, setRefreshKey] = useState(0);
   const [isLoading, setIsLoading] = useState(false);
-  const [isMounted, setIsMounted] = useState(false);
-
-  // 确保只在客户端挂载后渲染
-  useEffect(() => {
-    setIsMounted(true);
-  }, []);
+  const isMounted = useHasMounted();
 
   // 刷新笑话
   const refreshJoke = useCallback(() => {

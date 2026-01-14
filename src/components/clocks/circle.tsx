@@ -3,6 +3,7 @@
 import React, { useEffect, useRef, useState, useMemo } from "react"
 import { motion } from "framer-motion"
 import { cn } from "@/lib/utils"
+import { useHasMounted } from "@/hooks/use-has-mounted"
 
 interface ClockCircleProps {
   className?: string
@@ -21,7 +22,7 @@ const CONFIG = {
 }
 
 export default function ClockCircle({ className, size = "300px", staticTime, onClick }: ClockCircleProps) {
-  const [mounted, setMounted] = useState(false)
+  const mounted = useHasMounted()
 
   // 动态状态
   const [dynamicTime, setDynamicTime] = useState("")
@@ -61,7 +62,6 @@ export default function ClockCircle({ className, size = "300px", staticTime, onC
   }, [staticTime]);
 
   useEffect(() => {
-    setMounted(true)
     if (staticTime) return; // 静态模式：不启动动画循环
 
     const updateClock = () => {

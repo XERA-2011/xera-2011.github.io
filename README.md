@@ -46,6 +46,12 @@ pnpm build
 pnpm audit
 ```
 
+## Lint
+
+```bash
+pnpm lint
+```
+
 ## Eslint
 
 ```bash

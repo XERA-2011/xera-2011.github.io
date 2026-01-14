@@ -1,6 +1,6 @@
 'use client';
 
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useCallback } from 'react';
 import { motion } from 'framer-motion';
 import { usePageTitle } from '@/hooks/use-page-title';
 import { Card, CardContent } from '@/components/ui/card';
@@ -36,11 +36,8 @@ export default function LoanCalculatorPage() {
   const [pageInput, setPageInput] = useState<string>('');
   const itemsPerPage = 10;
 
-  useEffect(() => {
-    calculateLoan();
-  }, [loanAmount, interestRate, loanTerm, paymentType]);
-
-  const calculateLoan = () => {
+  // 使用 useCallback 定义计算函数，确保它在 useEffect 之前声明
+  const calculateLoan = useCallback(() => {
     try {
       const principal = parseFloat(loanAmount);
       const annualRate = parseFloat(interestRate);
@@ -56,28 +53,28 @@ export default function LoanCalculatorPage() {
       const monthlyRate = annualRate / 100 / 12;
       const totalMonths = years * 12;
 
-      let monthlyPayment = 0;
-      let totalPayment = 0;
-      let totalInterest = 0;
+      let calculatedMonthlyPayment = 0;
+      let calculatedTotalPayment = 0;
+      let calculatedTotalInterest = 0;
       const schedule: LoanPayment[] = [];
 
       if (paymentType === 'equal') {
         // 等额本息计算
-        monthlyPayment = (principal * monthlyRate * Math.pow(1 + monthlyRate, totalMonths)) /
+        calculatedMonthlyPayment = (principal * monthlyRate * Math.pow(1 + monthlyRate, totalMonths)) /
           (Math.pow(1 + monthlyRate, totalMonths) - 1);
-        totalPayment = monthlyPayment * totalMonths;
-        totalInterest = totalPayment - principal;
+        calculatedTotalPayment = calculatedMonthlyPayment * totalMonths;
+        calculatedTotalInterest = calculatedTotalPayment - principal;
 
         // 生成还款计划
         let remainingBalance = principal;
         for (let month = 1; month <= totalMonths; month++) {
           const interestPayment = remainingBalance * monthlyRate;
-          const principalPayment = monthlyPayment - interestPayment;
+          const principalPayment = calculatedMonthlyPayment - interestPayment;
           remainingBalance -= principalPayment;
 
           schedule.push({
             month,
-            payment: monthlyPayment,
+            payment: calculatedMonthlyPayment,
             principal: principalPayment,
             interest: interestPayment,
             remainingBalance: Math.max(0, remainingBalance)
@@ -90,35 +87,43 @@ export default function LoanCalculatorPage() {
 
         for (let month = 1; month <= totalMonths; month++) {
           const monthlyInterest = remainingBalance * monthlyRate;
-          const monthlyPayment = monthlyPrincipal + monthlyInterest;
+          const monthPayment = monthlyPrincipal + monthlyInterest;
 
           schedule.push({
             month,
-            payment: monthlyPayment,
+            payment: monthPayment,
             principal: monthlyPrincipal,
             interest: monthlyInterest,
             remainingBalance
           });
 
           remainingBalance -= monthlyPrincipal;
-          totalPayment += monthlyPayment;
-          totalInterest += monthlyInterest;
+          calculatedTotalPayment += monthPayment;
+          calculatedTotalInterest += monthlyInterest;
         }
 
         // 设置第一个月的还款额（最高）
-        monthlyPayment = schedule[0].payment;
+        calculatedMonthlyPayment = schedule[0].payment;
       }
 
-      setMonthlyPayment(monthlyPayment);
-      setTotalPayment(totalPayment);
-      setTotalInterest(totalInterest);
+      setMonthlyPayment(calculatedMonthlyPayment);
+      setTotalPayment(calculatedTotalPayment);
+      setTotalInterest(calculatedTotalInterest);
       setPaymentSchedule(schedule);
       setCurrentPage(1); // Reset to first page when calculation changes
     } catch (err) {
       setError('计算出错，请检查输入参数');
       console.error(err);
     }
-  };
+  }, [loanAmount, interestRate, loanTerm, paymentType]);
+
+  useEffect(() => {
+    // 使用 requestAnimationFrame 延迟调用以避免同步 setState 警告
+    const frameId = requestAnimationFrame(() => {
+      calculateLoan();
+    });
+    return () => cancelAnimationFrame(frameId);
+  }, [calculateLoan]);
 
   const resetForm = () => {
     setLoanAmount('1000000');

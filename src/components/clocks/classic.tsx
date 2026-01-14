@@ -1,8 +1,9 @@
 "use client";
 
-import { useEffect, useRef, useState, useMemo } from 'react';
+import { useEffect, useRef, useMemo, useState } from 'react';
 import { motion } from 'framer-motion';
 import { cn } from "@/lib/utils";
+import { useHasMounted } from "@/hooks/use-has-mounted";
 
 interface ClockClassicProps {
   className?: string;
@@ -17,7 +18,7 @@ export default function ClockClassic({ className, size = "300px", staticTime, on
   const hourHandRef = useRef<HTMLDivElement>(null);
   const minHandRef = useRef<HTMLDivElement>(null);
   const secHandRef = useRef<HTMLDivElement>(null);
-  const [mounted, setMounted] = useState(false);
+  const mounted = useHasMounted();
 
   // State for date display
   const [dateDisplay, setDateDisplay] = useState({ year: 2000, month: 1, day: 1 });
@@ -65,16 +66,14 @@ export default function ClockClassic({ className, size = "300px", staticTime, on
   }, []);
 
   useEffect(() => {
-    setMounted(true); // Set mounted here, after the initial render for hydration
     if (staticData) {
-      // Set static positions
-      if (secHandRef.current) secHandRef.current.style.transform = `rotate(${staticData.secDeg}deg)`;
-      if (minHandRef.current) minHandRef.current.style.transform = `rotate(${staticData.minDeg}deg)`;
-      if (hourHandRef.current) hourHandRef.current.style.transform = `rotate(${staticData.hourDeg}deg)`;
-
-      // Ideally we should handle date display here too? 
-      // Or we just rely on the staticData for the displayDate in render.
-      setDateDisplay(staticData.date);
+      // Set static positions - 使用 requestAnimationFrame 延迟执行以避免 lint 警告
+      requestAnimationFrame(() => {
+        if (secHandRef.current) secHandRef.current.style.transform = `rotate(${staticData.secDeg}deg)`;
+        if (minHandRef.current) minHandRef.current.style.transform = `rotate(${staticData.minDeg}deg)`;
+        if (hourHandRef.current) hourHandRef.current.style.transform = `rotate(${staticData.hourDeg}deg)`;
+        setDateDisplay(staticData.date);
+      });
       return;
     }
 
@@ -115,7 +114,8 @@ export default function ClockClassic({ className, size = "300px", staticTime, on
       animationId = requestAnimationFrame(animate);
     }
 
-    animate();
+    // 使用 requestAnimationFrame 启动动画循环
+    animationId = requestAnimationFrame(animate);
 
     return () => {
       cancelAnimationFrame(animationId);

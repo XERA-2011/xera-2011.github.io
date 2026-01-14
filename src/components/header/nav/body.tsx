@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useEffect, useState, ReactNode } from "react";
+import React, { useMemo, ReactNode } from "react";
 import { motion } from "framer-motion";
 import Link from "next/link";
 import styles from "./body.module.scss";
@@ -31,12 +31,12 @@ export default function Body({
   userAuth,
 }: BodyProps) {
   const pathname = usePathname();
-  const [currentHref, setCurrentHref] = useState("/");
 
-  useEffect(() => {
-    if (typeof window === "undefined") return;
-    const { pathname, hash } = window.location;
-    setCurrentHref(pathname + hash);
+  // 使用 useMemo 计算当前完整路径，依赖 pathname 变化时重新计算
+  // 注意: hash 在客户端才有，所以这里只用 pathname
+  const currentHref = useMemo(() => {
+    if (typeof window === "undefined") return pathname;
+    return pathname + window.location.hash;
   }, [pathname]);
 
   const getChars = (word: string) => {

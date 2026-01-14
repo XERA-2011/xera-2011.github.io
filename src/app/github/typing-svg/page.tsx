@@ -1,20 +1,25 @@
 "use client";
 
-import { useState, useEffect, useCallback } from 'react';
+import { useState, useEffect, useCallback, useMemo } from 'react';
 import { motion } from 'framer-motion';
 import { useTheme } from 'next-themes';
 import { usePageTitle } from '@/hooks/use-page-title';
 import GlowCard from '@/components/ui/glow-card';
 import { Button } from '@/components/ui/button';
 import { CheckboxWithLabel } from '@/components/ui/checkbox-with-label';
+import { useHasMounted } from '@/hooks/use-has-mounted';
 
 export default function TypingSVGPage() {
   usePageTitle('打字机效果 SVG');
   const { theme } = useTheme();
+  const isMounted = useHasMounted();
   const [copiedIndex, setCopiedIndex] = useState<number | null>(null);
-  const [previewUrl, setPreviewUrl] = useState<string>('');
-  const [refreshKey, setRefreshKey] = useState<number>(0);
-  const [baseUrl, setBaseUrl] = useState<string>('');
+
+  // 使用 useMemo 计算 baseUrl，依赖 isMounted
+  const baseUrl = useMemo(() => {
+    if (!isMounted) return '';
+    return typeof window !== 'undefined' ? window.location.origin : '';
+  }, [isMounted]);
 
   // 根据主题获取默认文字颜色
   const getDefaultTextColor = useCallback(() => {
@@ -41,49 +46,39 @@ export default function TypingSVGPage() {
     bold: true,
   });
 
-  // 设置 baseUrl（仅在客户端运行）
-  useEffect(() => {
-    setBaseUrl(window.location.origin);
-  }, []);
+  // 使用 useMemo 计算当前主题对应的颜色并更新 config
+  const currentColor = useMemo(() => getDefaultTextColor(), [getDefaultTextColor]);
 
-  // 当主题变化时更新文字颜色
-  useEffect(() => {
-    setConfig((prev) => ({
-      ...prev,
-      color: getDefaultTextColor(),
-    }));
-  }, [getDefaultTextColor]);
+  // 使用 useMemo 生成预览 URL，避免在 useEffect 中调用 setState
+  const previewUrl = useMemo(() => {
+    if (!baseUrl) return '';
 
-  // 生成预览 URL
-  useEffect(() => {
-    if (!baseUrl) return;
-
+    const currentConfig = { ...config, color: currentColor };
     const params = new URLSearchParams({
-      font: config.font,
-      size: config.size,
-      color: config.color,
-      background: config.background,
-      width: config.width,
-      height: config.height,
-      center: config.center.toString(),
-      vCenter: config.vCenter.toString(),
-      multiline: config.multiline.toString(),
-      duration: config.duration,
-      pause: config.pause,
-      repeat: config.repeat.toString(),
-      letterSpacing: config.letterSpacing,
-      bold: config.bold.toString(),
+      font: currentConfig.font,
+      size: currentConfig.size,
+      color: currentConfig.color,
+      background: currentConfig.background,
+      width: currentConfig.width,
+      height: currentConfig.height,
+      center: currentConfig.center.toString(),
+      vCenter: currentConfig.vCenter.toString(),
+      multiline: currentConfig.multiline.toString(),
+      duration: currentConfig.duration,
+      pause: currentConfig.pause,
+      repeat: currentConfig.repeat.toString(),
+      letterSpacing: currentConfig.letterSpacing,
+      bold: currentConfig.bold.toString(),
     });
 
-    if (config.type === 'movie-quotes' || config.type === 'famous-quotes') {
-      params.set('type', config.type);
+    if (currentConfig.type === 'movie-quotes' || currentConfig.type === 'famous-quotes') {
+      params.set('type', currentConfig.type);
     } else {
-      params.set('lines', config.lines);
+      params.set('lines', currentConfig.lines);
     }
 
-    setPreviewUrl(`${baseUrl}/api/github/typing-svg?${params.toString()}`);
-    setRefreshKey(Date.now());
-  }, [config, baseUrl]);
+    return `${baseUrl}/api/github/typing-svg?${params.toString()}`;
+  }, [config, baseUrl, currentColor]);
 
   const handleCopy = async (text: string, index: number) => {
     try {
@@ -126,7 +121,7 @@ export default function TypingSVGPage() {
               {previewUrl && (
                 // eslint-disable-next-line @next/next/no-img-element
                 <img
-                  src={`${previewUrl}&t=${refreshKey}`}
+                  src={previewUrl}
                   alt="Typing SVG Preview"
                   className="max-w-full"
                 />

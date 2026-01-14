@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useEffect } from 'react';
+import { useState } from 'react';
 import { motion } from 'framer-motion';
 import Image from 'next/image';
 import { usePageTitle } from '@/hooks/use-page-title';
@@ -8,16 +8,13 @@ import GlowCard from '@/components/ui/glow-card';
 import { Button } from '@/components/ui/button';
 import { BASE_URL } from '@/lib/constants';
 import { useTheme } from 'next-themes';
+import { useHasMounted } from '@/hooks/use-has-mounted';
 
 export default function CoinPage() {
   usePageTitle('Crypto Prices');
   const [copiedIndex, setCopiedIndex] = useState<number | null>(null);
   const { resolvedTheme } = useTheme();
-  const [isMounted, setIsMounted] = useState(false);
-
-  useEffect(() => {
-    setIsMounted(true);
-  }, []);
+  const isMounted = useHasMounted();
 
   const handleCopy = async (text: string, index: number) => {
     try {

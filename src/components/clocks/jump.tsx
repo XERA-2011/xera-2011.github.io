@@ -3,6 +3,7 @@
 import { useEffect, useState, useMemo } from "react"
 import { motion } from "framer-motion"
 import { cn } from "@/lib/utils"
+import { useHasMounted } from "@/hooks/use-has-mounted"
 
 const MONTHS = ["JAN", "FEB", "MAR", "APR", "MAY", "JUN", "JUL", "AUG", "SEP", "OCT", "NOV", "DEC"]
 const DAYS = ["SUNDAY", "MONDAY", "TUESDAY", "WEDNESDAY", "THURSDAY", "FRIDAY", "SATURDAY"]
@@ -21,7 +22,7 @@ interface ClockJumpProps {
 }
 
 export default function ClockJump({ className, size = "300px", staticTime, onClick }: ClockJumpProps) {
-  const [mounted, setMounted] = useState(false)
+  const mounted = useHasMounted()
 
   // 1. 根据 staticTime 计算初始值
   const initialTime = useMemo(() => {
@@ -35,20 +36,17 @@ export default function ClockJump({ className, size = "300px", staticTime, onCli
   const [time, setTime] = useState<Date | null>(initialTime)
 
   useEffect(() => {
-    setMounted(true)
-
     // 情况 A: 静态模式 - 不需要定时器，time 已经在 initialTime 设置好了
     if (staticTime) return;
 
-    // 情况 B: 动态模式
-    setTime(new Date()) // 立即更新一次
-
+    // 情况 B: 动态模式 - 使用 requestAnimationFrame 来更新时间
     let frameId: number
     const update = () => {
       setTime(new Date())
       frameId = requestAnimationFrame(update)
     }
-    update()
+    // 开始动画循环
+    frameId = requestAnimationFrame(update)
 
     return () => cancelAnimationFrame(frameId)
   }, [staticTime])

@@ -1,21 +1,17 @@
 'use client';
 
 import { motion } from 'framer-motion';
-import { useEffect, useState } from 'react';
 import Image from 'next/image';
 import { useTheme } from 'next-themes';
 import { usePageTitle } from '@/hooks/use-page-title';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 import { GithubIcon } from '@/components/icons/github-icon';
+import { useHasMounted } from '@/hooks/use-has-mounted';
 
 export default function XActionsProfilePage() {
   usePageTitle('X Actions Profile');
   const { theme, resolvedTheme } = useTheme();
-  const [mounted, setMounted] = useState(false);
-
-  useEffect(() => {
-    setMounted(true);
-  }, []);
+  const mounted = useHasMounted();
 
   const getThemeSrc = (name: string) => {
     const currentTheme = mounted ? (resolvedTheme || theme || 'dark') : 'dark';

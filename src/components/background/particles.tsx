@@ -38,6 +38,8 @@ export default function Particles({
   const mouse = useRef<{ x: number; y: number }>({ x: 0, y: 0 });
   const canvasSize = useRef<{ w: number; h: number }>({ w: 0, h: 0 });
   const dpr = typeof window !== "undefined" ? window.devicePixelRatio : 1;
+  // 使用 useRef 存储动画函数以避免递归声明序警告
+  const animateRef = useRef<(() => void) | null>(null);
 
   const resizeCanvas = useCallback(() => {
     if (canvasContainerRef.current && canvasRef.current && context.current) {
@@ -182,7 +184,7 @@ export default function Particles({
         );
       }
     });
-    window.requestAnimationFrame(animate);
+    window.requestAnimationFrame(() => animateRef.current?.());
   }, [ease, staticity, clearContext, remapValue, circleParams, drawCircle]);
 
   const initCanvas = useCallback(() => {
@@ -205,6 +207,9 @@ export default function Particles({
   }, [mousePosition.x, mousePosition.y]);
 
   useEffect(() => {
+    // 将 animate 函数存储到 ref 中（在 effect 内部更新 ref 是安全的）
+    animateRef.current = animate;
+
     if (canvasRef.current) {
       context.current = canvasRef.current.getContext("2d");
     }

@@ -2,7 +2,7 @@
 
 import { usePathname } from "next/navigation";
 import Link from "next/link";
-import { useMemo, useEffect, useState } from "react";
+import { useMemo } from "react";
 import {
   Breadcrumb as BreadcrumbRoot,
   BreadcrumbItem,
@@ -15,14 +15,11 @@ import {
 import { cn } from "@/lib/utils";
 import React from "react";
 import { Home } from "lucide-react";
+import { useHasMounted } from "@/hooks/use-has-mounted";
 
 const Breadcrumb = () => {
   const pathname = usePathname();
-  const [mounted, setMounted] = useState(false);
-
-  useEffect(() => {
-    setMounted(true);
-  }, []);
+  const mounted = useHasMounted();
 
   const breadcrumbs = useMemo(() => {
     const paths = pathname.split("/").filter(Boolean);
