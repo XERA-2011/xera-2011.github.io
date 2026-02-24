@@ -86,7 +86,7 @@
     "undici": "^7.22.0"
   },
   "devDependencies": {
-    "@eslint/eslintrc": "^3.3.3",
+    "@eslint/eslintrc": "^3.3.4",
     "@tailwindcss/postcss": "^4.2.1",
     "@types/bcryptjs": "^3.0.0",
     "@types/js-yaml": "^4.0.9",
@@ -97,7 +97,7 @@
     "cross-env": "^10.1.0",
     "dotenv": "^17.3.1",
     "dotenv-cli": "^11.0.0",
-    "eslint": "^10.0.1",
+    "eslint": "^10.0.2",
     "eslint-config-next": "16.1.6",
     "global-agent": "^4.1.2",
     "sass": "^1.97.3",
