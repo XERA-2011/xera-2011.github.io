@@ -19,7 +19,7 @@ if (!globalForPrisma.pool) {
   })
 }
 
-const adapter = new PrismaPg(globalForPrisma.pool)
+const adapter = new PrismaPg(globalForPrisma.pool as any)
 
 export const prisma =
   globalForPrisma.prisma ??
