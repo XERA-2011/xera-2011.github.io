@@ -9,7 +9,7 @@ export async function register() {
       // 动态导入 undici
       const { setGlobalDispatcher, ProxyAgent, request } = await import('undici')
       
-      const proxyUrl = process.env.HTTPS_PROXY || process.env.HTTP_PROXY
+      const proxyUrl = process.env.HTTPS_PROXY || process.env.HTTP_PROXY || process.env.https_proxy || process.env.http_proxy
       
       if (proxyUrl) {
         console.log('🔧 检测到代理配置:', proxyUrl)

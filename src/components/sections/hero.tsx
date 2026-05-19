@@ -47,6 +47,7 @@ export default function HeroSection() {
             height={200}
             style={{ width: "auto", height: "auto" }}
             unoptimized
+            priority
           />
         </motion.div>
       )}

@@ -36,6 +36,11 @@ const toolsData: GlowCardItem[] = [
     title: "计算器",
     href: "/tools/calculator",
   },
+  {
+    id: "aes-decrypt",
+    title: "AES 加解密",
+    href: "/tools/aes-decrypt",
+  },
 ];
 
 export default function ToolsPage() {
