@@ -84,7 +84,7 @@
     "react-dom": "19.2.7",
     "tailwind-merge": "^3.6.0",
     "tailwindcss-animate": "^1.0.7",
-    "undici": "^8.4.0"
+    "undici": "^8.4.1"
   },
   "devDependencies": {
     "@eslint/eslintrc": "^3.3.5",
