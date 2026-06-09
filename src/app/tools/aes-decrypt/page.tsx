@@ -3,6 +3,7 @@
 import { useState, useMemo } from 'react';
 import { motion } from 'framer-motion';
 import { usePageTitle } from '@/hooks/use-page-title';
+import { useLocalStorage } from '@/hooks/use-local-storage';
 import GlowCard from '@/components/ui/glow-card';
 import { Button } from '@/components/ui/button';
 import { Label } from '@/components/ui/label';
@@ -47,7 +48,7 @@ function syntaxHighlight(json: string): string {
 export default function AesDecryptPage() {
   usePageTitle('AES 解密工具');
   const [ciphertext, setCiphertext] = useState('');
-  const [keyStr, setKeyStr] = useState('');
+  const [keyStr, setKeyStr] = useLocalStorage('aes_tool_saved_key', '');
   const [output, setOutput] = useState('');
   const [outputHtml, setOutputHtml] = useState('');
   const [error, setError] = useState('');
