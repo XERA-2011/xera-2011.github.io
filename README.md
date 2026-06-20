@@ -135,27 +135,6 @@ npm install -g @qwen-code/qwen-code@latest
 qwen
 ```
 
-## Gemini cli
-
-```bash
-npx https://github.com/google-gemini/gemini-cli
-
-or
-
-npm install -g @google/gemini-cli
-
-or
-
-brew install gemini-cli
-
-# win
-set GEMINI_API_KEY=YOUR_API_KEY
-# mac
-export GEMINI_API_KEY=YOUR_API_KEY
-
-gemini
-```
-
 ## Claude Code
 
 ```bash
