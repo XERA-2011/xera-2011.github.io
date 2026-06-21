@@ -127,14 +127,6 @@ vercel env pull .env.local
 
 ```
 
-## Qwen Code
-
-```bash
-npm install -g @qwen-code/qwen-code@latest
-
-qwen
-```
-
 ## Claude Code
 
 ```bash
