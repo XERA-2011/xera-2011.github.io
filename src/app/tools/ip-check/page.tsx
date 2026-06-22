@@ -3,7 +3,7 @@
 import { useState, useEffect } from "react"
 import { motion } from "framer-motion"
 import { usePageTitle } from "@/hooks/use-page-title"
-import jsyaml from "js-yaml"
+import * as jsyaml from "js-yaml"
 import { Loader2, Check, AlertTriangle, Shield, Globe, Server } from "lucide-react"
 
 import { Button } from "@/components/ui/button"
