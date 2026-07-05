@@ -108,8 +108,8 @@ importers:
         specifier: ^1.0.7
         version: 1.0.7(tailwindcss@4.3.2)
       undici:
-        specifier: ^8.6.0
-        version: 8.6.0
+        specifier: ^8.7.0
+        version: 8.7.0
     devDependencies:
       '@eslint/eslintrc':
         specifier: ^3.3.5
@@ -3122,8 +3122,8 @@ packages:
   undici-types@8.3.0:
     resolution: {integrity: sha512-j375ScV60dom+YkPFIfTLcOiPxkN/buHz5GobjLhixFuANaNs3C9l4GmrWqejgXWJ7BbJcFYpTEUkS1Ge8bpZQ==}
 
-  undici@8.6.0:
-    resolution: {integrity: sha512-l2FlC6I510GawyEd1qgcE/okihKrzy+BRTEBlu6T0fdbM9m5yxtIH5Oa3ysRsH0zC4EhmWUEaSDsy2QngBeRlw==}
+  undici@8.7.0:
+    resolution: {integrity: sha512-N7iQtfyLhIMOFgQubvmLV26svHpO0bqKnAiWotTQCVKCmWrcGbBotPuW1x+xwYZ2VHdSTVUfPQQnlEt1/LouTQ==}
     engines: {node: '>=22.19.0'}
 
   unrs-resolver@1.12.2:
@@ -6261,7 +6261,7 @@ snapshots:
 
   undici-types@8.3.0: {}
 
-  undici@8.6.0: {}
+  undici@8.7.0: {}
 
   unrs-resolver@1.12.2:
     dependencies:
