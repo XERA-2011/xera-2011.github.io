@@ -15,6 +15,7 @@ interface QnACardOptions {
   hideBorder?: boolean;
   width?: number;  // 卡片宽度
   height?: number; // 卡片高度
+  fontSize?: number; // 字体大小
 }
 
 interface QuoteCardOptions {
@@ -27,6 +28,7 @@ interface QuoteCardOptions {
   hideBorder?: boolean;
   width?: number;  // 卡片宽度
   height?: number; // 卡片高度
+  fontSize?: number; // 字体大小
 }
 
 /**
@@ -44,6 +46,7 @@ export function renderQnACard(options: QnACardOptions): string {
     hideBorder = false,
     width = 500,
     height = 200,
+    fontSize = 14,
   } = options;
 
   const border = hideBorder ? '2px solid transparent' : `2px solid ${borderColor}`;
@@ -64,7 +67,7 @@ export function renderQnACard(options: QnACardOptions): string {
         .text {
           padding: 1rem;
           font-family: Arial, Helvetica, sans-serif;
-          font-size: 14px;
+          font-size: ${fontSize}px;
           height: 100%;
           overflow: hidden;
           box-sizing: border-box;
@@ -120,6 +123,7 @@ export function renderQuoteCard(options: QuoteCardOptions): string {
     hideBorder = false,
     width = 500,
     height = 150,
+    fontSize = 14,
   } = options;
 
   const border = hideBorder ? '2px solid transparent' : `2px solid ${borderColor}`;
@@ -140,7 +144,7 @@ export function renderQuoteCard(options: QuoteCardOptions): string {
         .text {
           padding: 1rem;
           font-family: Arial, Helvetica, sans-serif;
-          font-size: 14px;
+          font-size: ${fontSize}px;
           height: 100%;
           overflow: hidden;
           box-sizing: border-box;

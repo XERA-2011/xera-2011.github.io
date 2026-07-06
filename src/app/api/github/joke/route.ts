@@ -27,21 +27,35 @@ const THEME_CONFIG = {
 
 type ThemeName = keyof typeof THEME_CONFIG;
 
-// 估算文本所需行数
+// 估算文本所需行数 (剥离 HTML 标签，并正确处理换行)
 function estimateLines(text: string, fontSize: number, containerWidth: number): number {
   if (!text) return 0;
-  // 简单估算：每个字符平均宽度为 fontSize * 0.6 (考虑中英文混排)
-  // 中文字符宽度 = fontSize
-  // 英文字符宽度 ≈ fontSize * 0.6
-  let width = 0;
-  for (const char of text) {
-    if (char.charCodeAt(0) > 255) {
-      width += fontSize;
-    } else {
-      width += fontSize * 0.55;
+  
+  // 将常见的换行/段落标签（如 <p>, <br>, <div> 等）转换为换行符，并剥离其他所有 HTML 标签
+  const cleanText = text
+    .replace(/<\/?(p|br|div|h[1-6])[^>]*>/gi, '\n')
+    .replace(/<[^>]*>/g, '');
+    
+  const paragraphs = cleanText.split('\n');
+  let totalLines = 0;
+  
+  for (const para of paragraphs) {
+    const trimmed = para.trim();
+    if (!trimmed) continue;
+    
+    let width = 0;
+    for (const char of trimmed) {
+      if (char.charCodeAt(0) > 255) {
+        width += fontSize;
+      } else {
+        width += fontSize * 0.55;
+      }
     }
+    // 每个非空段落/行至少占用 1 行
+    totalLines += Math.max(1, Math.ceil(width / containerWidth));
   }
-  return Math.ceil(width / containerWidth);
+  
+  return totalLines;
 }
 
 export async function GET(request: NextRequest) {
@@ -75,63 +89,77 @@ export async function GET(request: NextRequest) {
 
     // 布局常量
     const PADDING = 32; // 1rem * 2
-    const FONT_SIZE = 14;
+    const DEFAULT_FONT_SIZE = 14;
     const LINE_HEIGHT = 1.5; // CSS line-height: 1.5
     const GAP = 8; // .question margin-bottom: 0.5rem (8px)
     const ZH_GAP = 2; // .zh margin-top: 2px
     const DEFAULT_WIDTH = 500;
+    const MIN_FONT_SIZE = 10;
     
     // 计算有效宽度
     const configWidth = requestedWidth || DEFAULT_WIDTH;
     const contentWidth = configWidth - PADDING;
 
-    // 估算所需高度
-    let estimatedHeight = 0;
-
-    if (typeof joke === 'object' && joke !== null && 'q' in joke && 'a' in joke) {
-      // QnA 类型的笑话
-      // 加上前缀 "Q. " 和 "A. " 的宽度估算 (约为 3 个宽字符)
-      const qPrefix = "Q. ";
-      const aPrefix = "A. ";
-      
-      const qLines = estimateLines(qPrefix + joke.q, FONT_SIZE, contentWidth);
-      const aLines = estimateLines(aPrefix + joke.a, FONT_SIZE, contentWidth);
-      
-      estimatedHeight = PADDING + (qLines * FONT_SIZE * LINE_HEIGHT) + GAP + (aLines * FONT_SIZE * LINE_HEIGHT);
-
-      if ('q_zh' in joke) {
-        const qZhLines = estimateLines("问：" + joke.q_zh!, FONT_SIZE * 0.9, contentWidth);
-        estimatedHeight += (qZhLines * FONT_SIZE * 0.9 * LINE_HEIGHT) + ZH_GAP;
-      }
-      if ('a_zh' in joke) {
-        const aZhLines = estimateLines("答：" + joke.a_zh!, FONT_SIZE * 0.9, contentWidth);
-        estimatedHeight += (aZhLines * FONT_SIZE * 0.9 * LINE_HEIGHT) + ZH_GAP;
-      }
-
-    } else {
-      // Quote 类型的笑话
-      let text = '';
-      let textZh = '';
-      if (typeof joke === 'object' && joke !== null && 'text' in joke) {
-        text = joke.text;
-        textZh = 'text_zh' in joke ? joke.text_zh! : '';
+    // 根据字体大小估算所需高度的辅助函数
+    const getEstimatedHeight = (fs: number): number => {
+      if (typeof joke === 'object' && joke !== null && 'q' in joke && 'a' in joke) {
+        const qPrefix = "Q. ";
+        const aPrefix = "A. ";
+        
+        const qLines = estimateLines(qPrefix + joke.q, fs, contentWidth);
+        const aLines = estimateLines(aPrefix + joke.a, fs, contentWidth);
+        
+        let height = PADDING + (qLines * fs * LINE_HEIGHT) + GAP + (aLines * fs * LINE_HEIGHT);
+  
+        if ('q_zh' in joke) {
+          const qZhLines = estimateLines("问：" + joke.q_zh!, fs * 0.9, contentWidth);
+          height += (qZhLines * fs * 0.9 * LINE_HEIGHT) + ZH_GAP;
+        }
+        if ('a_zh' in joke) {
+          const aZhLines = estimateLines("答：" + joke.a_zh!, fs * 0.9, contentWidth);
+          height += (aZhLines * fs * 0.9 * LINE_HEIGHT) + ZH_GAP;
+        }
+        return height;
       } else {
-        text = typeof joke === 'string' ? joke : JSON.stringify(joke);
+        let text = '';
+        let textZh = '';
+        if (typeof joke === 'object' && joke !== null && 'text' in joke) {
+          text = joke.text;
+          textZh = 'text_zh' in joke ? joke.text_zh! : '';
+        } else {
+          text = typeof joke === 'string' ? joke : JSON.stringify(joke);
+        }
+        
+        const lines = estimateLines(text, fs, contentWidth);
+        let height = PADDING + (lines * fs * LINE_HEIGHT);
+        
+        if (textZh) {
+          const zhLines = estimateLines(textZh, fs * 0.9, contentWidth);
+          height += (zhLines * fs * 0.9 * LINE_HEIGHT) + ZH_GAP;
+        }
+        return height;
       }
-      
-      const lines = estimateLines(text, FONT_SIZE, contentWidth);
-      estimatedHeight = PADDING + (lines * FONT_SIZE * LINE_HEIGHT);
-      
-      if (textZh) {
-        const zhLines = estimateLines(textZh, FONT_SIZE * 0.9, contentWidth);
-        estimatedHeight += (zhLines * FONT_SIZE * 0.9 * LINE_HEIGHT) + ZH_GAP;
+    };
+
+    // 动态计算最佳字体大小
+    let fontSize = DEFAULT_FONT_SIZE;
+    let estimatedHeight = getEstimatedHeight(fontSize);
+
+    // 如果指定了高度，且初始字体大小时内容溢出，则逐步缩小字体大小（最小缩至 MIN_FONT_SIZE）
+    if (requestedHeight) {
+      while (estimatedHeight > requestedHeight && fontSize > MIN_FONT_SIZE) {
+        fontSize -= 0.5;
+        estimatedHeight = getEstimatedHeight(fontSize);
       }
     }
 
     // 确定最终宽高
     // 如果没有指定 height，使用估算高度（最小 100）
+    // 如果指定了 height 但在最小字体下内容依然超出，则自适应增高防止截断
     const minHeight = 100;
-    const finalHeight = requestedHeight || Math.max(minHeight, Math.ceil(estimatedHeight));
+    const finalHeight = requestedHeight 
+      ? Math.max(requestedHeight, Math.ceil(estimatedHeight))
+      : Math.max(minHeight, Math.ceil(estimatedHeight));
 
     // 根据笑话类型渲染 SVG
     let svgContent: string;
@@ -151,6 +179,7 @@ export async function GET(request: NextRequest) {
         hideBorder: false,
         width: configWidth,
         height: finalHeight,
+        fontSize,
       });
     } else if (typeof joke === 'object' && joke !== null && 'text' in joke) {
       // Quote 类型的笑话（对象形式）
@@ -164,6 +193,7 @@ export async function GET(request: NextRequest) {
         hideBorder: false,
         width: configWidth,
         height: finalHeight,
+        fontSize,
       });
     } else {
       // Quote 类型的笑话（字符串形式）
@@ -177,6 +207,7 @@ export async function GET(request: NextRequest) {
         hideBorder: false,
         width: configWidth,
         height: finalHeight,
+        fontSize,
       });
     }
 
