@@ -10,6 +10,9 @@ updates:
       interval: "daily"               # 检查更新的频率：每天
       time: "00:00"                   # 检查的具体时间：00:00
       timezone: "Asia/Shanghai"       # 检查的时间标准：北京时间 (Asia/Shanghai)
+    ignore:                           # 忽略特定依赖的更新，避免自动升级至不兼容的版本
+      - dependency-name: "typescript"
+        versions: [">= 7.0.0"]
     groups:                           # 分组配置，用于减少 PR 数量
       dependencies:                   # 组名：dependencies
         patterns:
