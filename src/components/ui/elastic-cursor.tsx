@@ -131,18 +131,8 @@ function ElasticCursor() {
         setCursorMoved(true);
       }
 
-      const el = e.target as HTMLElement;
-
-      // 查找带有 cursor-can-hover 类的元素
-      let hoverElement: HTMLElement | null = null;
-      let current: HTMLElement | null = el;
-      while (current && current !== document.body) {
-        if (current.classList.contains("cursor-can-hover")) {
-          hoverElement = current;
-          break;
-        }
-        current = current.parentElement;
-      }
+      const targetEl = e.target as Element | null;
+      const hoverElement = targetEl?.closest?.(".cursor-can-hover") as HTMLElement | null;
 
       const mouseX = e.clientX;
       const mouseY = e.clientY;

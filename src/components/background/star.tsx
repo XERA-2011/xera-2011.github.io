@@ -32,19 +32,38 @@ type Circle = {
   dx: number;
   dy: number;
   magnetism: number;
-  color: string; // 颜色属性
+  colorIndex: number;
+  spriteType: "small" | "medium" | "large";
   twinkleSpeed: number; // 闪烁速度
   twinkleDirection: number; // 闪烁方向 (1 或 -1)
   depth: number; // 星星深度感，用于视差效果
 };
+
+interface StarSprite {
+  small: HTMLCanvasElement;
+  medium: HTMLCanvasElement;
+  large: HTMLCanvasElement;
+}
+
+// 辅助函数：十六进制颜色转RGB
+function hexToRgb(hex: string): { r: number; g: number; b: number } | null {
+  const shorthandRegex = /^#?([a-f\d])([a-f\d])([a-f\d])$/i;
+  const fullHex = hex.replace(shorthandRegex, (_, r, g, b) => r + r + g + g + b + b);
+  const result = /^#?([a-f\d]{2})([a-f\d]{2})([a-f\d]{2})$/i.exec(fullHex);
+  return result ? {
+    r: parseInt(result[1], 16),
+    g: parseInt(result[2], 16),
+    b: parseInt(result[3], 16)
+  } : null;
+}
 
 export default function Particles({
   quantity = 100,
   staticity = 20,
   ease = 20,
   refresh = false,
-  starMode = true, // 默认启用星空模式
-  colorful = true, // 默认启用彩色模式
+  starMode = true,
+  colorful = true,
 }: ParticlesProps) {
   const { theme, resolvedTheme } = useTheme();
   const canvasRef = useRef<HTMLCanvasElement>(null);
@@ -54,7 +73,25 @@ export default function Particles({
   const mousePosition = useMousePosition();
   const mouse = useRef<{ x: number; y: number }>({ x: 0, y: 0 });
   const canvasSize = useRef<{ w: number; h: number }>({ w: 0, h: 0 });
-  // 确保服务器端和客户端使用相同的 dpr 值
+  const rafRef = useRef<number | null>(null);
+  const isVisibleRef = useRef<boolean>(true);
+  
+  // 缓存 Sprites 的 Ref
+  const sprites = useRef<StarSprite[]>([]);
+
+  // 将 props 存入 refs 避免 raf 闭包过期问题
+  const quantityRef = useRef(quantity);
+  const staticityRef = useRef(staticity);
+  const easeRef = useRef(ease);
+  const starModeRef = useRef(starMode);
+  const colorfulRef = useRef(colorful);
+
+  useEffect(() => { quantityRef.current = quantity; }, [quantity]);
+  useEffect(() => { staticityRef.current = staticity; }, [staticity]);
+  useEffect(() => { easeRef.current = ease; }, [ease]);
+  useEffect(() => { starModeRef.current = starMode; }, [starMode]);
+  useEffect(() => { colorfulRef.current = colorful; }, [colorful]);
+
   const dpr = 1;
 
   const clearContext = () => {
@@ -95,36 +132,111 @@ export default function Particles({
 
   // 星空颜色调色板 - 根据主题切换
   const starColors = useMemo(() => {
-    const currentTheme = resolvedTheme || theme || 'dark';
+    const currentTheme = resolvedTheme || theme || "dark";
 
-    if (currentTheme === 'light') {
-      // Light 主题：深色星星，更明显
+    if (currentTheme === "light") {
       return [
-        "#000000", // 纯黑
-        "#1a1a1a", // 深灰
-        "#2d2d2d", // 炭灰
-        "#404040", // 中灰
-        "#333333", // 深灰
-        "#262626", // 接近黑
-        "#4a4a4a", // 灰色
-        "#1f1f1f", // 深灰黑
+        "#000000",
+        "#1a1a1a",
+        "#2d2d2d",
+        "#404040",
+        "#333333",
+        "#262626",
+        "#4a4a4a",
+        "#1f1f1f",
       ];
     } else {
-      // Dark 主题：浅色星星
       return [
-        "#ffffff", // 纯白
-        "#fffaf0", // 花白
-        "#f8f8ff", // 幽灵白
-        "#f0f8ff", // 爱丽丝蓝
-        "#f5f5f5", // 白烟
-        "#fffafa", // 雪白
-        "#ffe4e1", // 薄雾玫瑰
-        "#e6e6fa", // 薰衣草
-        "#b0e0e6", // 粉蓝
-        "#87cefa", // 浅天蓝
+        "#ffffff",
+        "#fffaf0",
+        "#f8f8ff",
+        "#f0f8ff",
+        "#f5f5f5",
+        "#fffafa",
+        "#ffe4e1",
+        "#e6e6fa",
+        "#b0e0e6",
+        "#87cefa",
       ];
     }
   }, [theme, resolvedTheme]);
+
+  // 预渲染星星纹理精灵 (Offscreen Sprites)
+  const buildSprites = useCallback(() => {
+    sprites.current = starColors.map((color) => {
+      const rgb = hexToRgb(color) || { r: 255, g: 255, b: 255 };
+      const { r, g, b } = rgb;
+
+      // 1. Small Sprite: 纯圆形。基础尺寸 8x8 (中心点 4, 4, 星体半径 2)
+      const small = document.createElement("canvas");
+      small.width = 8;
+      small.height = 8;
+      const ctxS = small.getContext("2d")!;
+      ctxS.beginPath();
+      ctxS.arc(4, 4, 2, 0, 2 * Math.PI);
+      ctxS.fillStyle = `rgb(${r}, ${g}, ${b})`;
+      ctxS.fill();
+
+      // 2. Medium Sprite: 带径向渐变光晕。基础尺寸 24x24 (中心点 12, 12, 星体半径 2, 光晕半径 8)
+      const medium = document.createElement("canvas");
+      medium.width = 24;
+      medium.height = 24;
+      const ctxM = medium.getContext("2d")!;
+      
+      const gradM = ctxM.createRadialGradient(12, 12, 0, 12, 12, 8);
+      gradM.addColorStop(0, `rgba(${r}, ${g}, ${b}, 1)`);
+      gradM.addColorStop(0.5, `rgba(${r}, ${g}, ${b}, 0.2)`);
+      gradM.addColorStop(1, `rgba(${r}, ${g}, ${b}, 0)`);
+      ctxM.beginPath();
+      ctxM.arc(12, 12, 8, 0, 2 * Math.PI);
+      ctxM.fillStyle = gradM;
+      ctxM.fill();
+      
+      ctxM.beginPath();
+      ctxM.arc(12, 12, 2, 0, 2 * Math.PI);
+      ctxM.fillStyle = `rgb(${r}, ${g}, ${b})`;
+      ctxM.fill();
+
+      // 3. Large Sprite: 带渐变光晕和十字光芒。基础尺寸 36x36 (中心点 18, 18, 星体半径 2, 光晕半径 8, 星芒半径 10)
+      const large = document.createElement("canvas");
+      large.width = 36;
+      large.height = 36;
+      const ctxL = large.getContext("2d")!;
+      
+      const gradL = ctxL.createRadialGradient(18, 18, 0, 18, 18, 8);
+      gradL.addColorStop(0, `rgba(${r}, ${g}, ${b}, 1)`);
+      gradL.addColorStop(0.5, `rgba(${r}, ${g}, ${b}, 0.2)`);
+      gradL.addColorStop(1, `rgba(${r}, ${g}, ${b}, 0)`);
+      ctxL.beginPath();
+      ctxL.arc(18, 18, 8, 0, 2 * Math.PI);
+      ctxL.fillStyle = gradL;
+      ctxL.fill();
+
+      // 十字光芒
+      ctxL.beginPath();
+      ctxL.moveTo(18 - 10, 18);
+      ctxL.lineTo(18 + 10, 18);
+      ctxL.moveTo(18, 18 - 10);
+      ctxL.lineTo(18, 18 + 10);
+      // 对角线光芒
+      ctxL.moveTo(18 - 7, 18 - 7);
+      ctxL.lineTo(18 + 7, 18 + 7);
+      ctxL.moveTo(18 - 7, 18 + 7);
+      ctxL.lineTo(18 + 7, 18 - 7);
+
+      ctxL.strokeStyle = `rgba(${r}, ${g}, ${b}, 0.25)`;
+      ctxL.lineWidth = 0.5;
+      ctxL.stroke();
+
+      // 中心实体
+      ctxL.beginPath();
+      ctxL.arc(18, 18, 2, 0, 2 * Math.PI);
+      ctxL.fillStyle = `rgb(${r}, ${g}, ${b})`;
+      ctxL.fill();
+
+      return { small, medium, large };
+    });
+  }, [starColors]);
 
   const circleParams = useCallback((): Circle => {
     const x = Math.floor(Math.random() * canvasSize.current.w);
@@ -132,46 +244,43 @@ export default function Particles({
     const translateX = 0;
     const translateY = 0;
 
-    // 星空大小分布 - 漫天繁星效果：85%小星星, 12%中星星, 3%大星星
+    // 星空大小分布 - 85%小星星, 12%中星星, 3%大星星
     const sizeDistribution = Math.random();
     let size;
 
     if (sizeDistribution < 0.85) {
-      // 85% 的星星较小 (0.5-0.8)
       size = Math.random() * 0.3 + 0.5;
     } else if (sizeDistribution < 0.97) {
-      // 12% 的星星中等 (0.8-1.2)
       size = Math.random() * 0.4 + 0.8;
     } else {
-      // 3% 的星星较大 (1.2-1.8)
       size = Math.random() * 0.6 + 1.2;
     }
 
     const alpha = 0;
-
-    // 亮度与大小相关 - 更大的星星更亮
-    const brightnessBase = Math.random() * 0.4 + 0.2; // 基础亮度在0.2-0.6之间
-    const sizeFactor = size * 0.3; // 大小因子，大星星更亮
+    const brightnessBase = Math.random() * 0.4 + 0.2;
+    const sizeFactor = size * 0.3;
     const targetAlpha = parseFloat((brightnessBase + sizeFactor).toFixed(1));
 
-    // 星空模式下移动更慢 - 真实星空几乎静止
-    const movementSpeed = starMode ? 0.01 : 0.2;
+    const movementSpeed = starModeRef.current ? 0.01 : 0.2;
     const dx = (Math.random() - 0.5) * movementSpeed;
     const dy = (Math.random() - 0.5) * movementSpeed;
 
-    // 磁力因子 - 控制鼠标影响
     const magnetism = 0.1 + Math.random() * 4;
 
-    // 选择颜色 - 更自然的星空色彩
-    const color = colorful
-      ? starColors[Math.floor(Math.random() * starColors.length)]
-      : "#ffffff";
+    const colorIndex = Math.floor(Math.random() * starColors.length);
 
-    // 闪烁效果参数 - 更自然的闪烁
-    const twinkleSpeed = Math.random() * 0.01 + 0.002; // 更缓慢的闪烁
+    // 决定使用的 Sprite 类型
+    let spriteType: "small" | "medium" | "large" = "small";
+    if (starModeRef.current) {
+      if (size > 0.8) {
+        spriteType = "large";
+      } else if (size > 0.7) {
+        spriteType = "medium";
+      }
+    }
+
+    const twinkleSpeed = Math.random() * 0.01 + 0.002;
     const twinkleDirection = Math.random() > 0.5 ? 1 : -1;
-
-    // 深度感，用于视差效果 - 模拟三维星空
     const depth = Math.random();
 
     return {
@@ -185,88 +294,55 @@ export default function Particles({
       dx,
       dy,
       magnetism,
-      color,
+      colorIndex,
+      spriteType,
       twinkleSpeed,
       twinkleDirection,
-      depth
+      depth,
     };
-  }, [starColors, colorful, starMode]);
+  }, [starColors]);
 
   const drawCircle = useCallback((circle: Circle, update = false) => {
-    if (context.current) {
-      const { x, y, translateX, translateY, size, alpha, color } = circle;
-      context.current.translate(translateX, translateY);
+    if (context.current && sprites.current[circle.colorIndex]) {
+      const { x, y, translateX, translateY, size, alpha, spriteType, colorIndex } = circle;
+      const spriteSet = sprites.current[colorIndex];
+      const sprite = spriteSet[spriteType];
 
-      // 只为较大的星星绘制光晕和光芒
-      if (starMode && size > 0.7) {
-        // 光晕效果 - 更柔和的渐变
-        const haloSize = size * 2;
-        const gradient = context.current.createRadialGradient(
-          x, y, 0,
-          x, y, haloSize
-        );
-        gradient.addColorStop(0, color.replace(')', ', ' + alpha + ')').replace('rgb', 'rgba'));
-        gradient.addColorStop(0.5, color.replace(')', ', ' + alpha * 0.2 + ')').replace('rgb', 'rgba'));
-        gradient.addColorStop(1, color.replace(')', ', 0)').replace('rgb', 'rgba'));
+      // 缩放因子：Sprite 中星体半径是 2 (直径 4)；实际星体直径为 size * 2
+      const scale = size / 2;
+      const destWidth = sprite.width * scale;
+      const destHeight = sprite.height * scale;
 
-        context.current.beginPath();
-        context.current.arc(x, y, haloSize, 0, 2 * Math.PI);
-        context.current.fillStyle = gradient;
-        context.current.fill();
+      // 居中对齐到物理渲染点
+      const destX = x + translateX - destWidth / 2;
+      const destY = y + translateY - destHeight / 2;
 
-        // 光芒效果 - 更细腻的十字星芒
-        if (size > 0.8) {
-          context.current.save();
-
-          // 光芒长度与亮度
-          const rayLength = size * 2.5;
-          const rayAlpha = alpha * 0.1;
-
-          // 绘制光芒
-          context.current.beginPath();
-
-          // 主光芒
-          context.current.moveTo(x - rayLength, y);
-          context.current.lineTo(x + rayLength, y);
-          context.current.moveTo(x, y - rayLength);
-          context.current.lineTo(x, y + rayLength);
-
-          // 对角线光芒 - 更短
-          const diagonalLength = rayLength * 0.7;
-          context.current.moveTo(x - diagonalLength * 0.7, y - diagonalLength * 0.7);
-          context.current.lineTo(x + diagonalLength * 0.7, y + diagonalLength * 0.7);
-          context.current.moveTo(x - diagonalLength * 0.7, y + diagonalLength * 0.7);
-          context.current.lineTo(x + diagonalLength * 0.7, y - diagonalLength * 0.7);
-
-          context.current.strokeStyle = color.replace(')', ', ' + rayAlpha + ')').replace('rgb', 'rgba');
-          context.current.lineWidth = size / 8; // 更细的光芒
-          context.current.stroke();
-          context.current.restore();
-        }
-      }
-
-      // 绘制星星主体 - 所有星星都有
-      context.current.beginPath();
-      context.current.arc(x, y, size, 0, 2 * Math.PI);
-      context.current.fillStyle = color.replace(')', ', ' + alpha + ')').replace('rgb', 'rgba');
-      context.current.fill();
-
-      context.current.setTransform(dpr, 0, 0, dpr, 0, 0);
+      context.current.save();
+      context.current.globalAlpha = alpha;
+      context.current.drawImage(sprite, destX, destY, destWidth, destHeight);
+      context.current.restore();
 
       if (!update) {
         circles.current.push(circle);
       }
     }
-  }, [starMode, dpr]);
+  }, []);
 
   const drawParticles = useCallback(() => {
     clearContext();
-    const particleCount = quantity;
-    for (let i = 0; i < particleCount; i++) {
+    circles.current.length = 0;
+    
+    // 移动端自适应减少星星数量
+    const isMobile = canvasSize.current.w <= 768;
+    const actualQuantity = isMobile 
+      ? Math.min(40, quantityRef.current) 
+      : quantityRef.current;
+
+    for (let i = 0; i < actualQuantity; i++) {
       const circle = circleParams();
       drawCircle(circle);
     }
-  }, [quantity, circleParams, drawCircle]);
+  }, [circleParams, drawCircle]);
 
   const initCanvas = useCallback(() => {
     resizeCanvas();
@@ -288,34 +364,36 @@ export default function Particles({
   }, [mousePosition.x, mousePosition.y]);
 
   const animate = useCallback(() => {
+    if (!isVisibleRef.current) {
+      rafRef.current = requestAnimationFrame(animate);
+      return;
+    }
+
     clearContext();
-    circles.current.forEach((circle: Circle, i: number) => {
+    circles.current.forEach((circle: Circle) => {
       // 处理边缘透明度
       const edge = [
-        circle.x + circle.translateX - circle.size, // 左边缘距离
-        canvasSize.current.w - circle.x - circle.translateX - circle.size, // 右边缘距离
-        circle.y + circle.translateY - circle.size, // 上边缘距离
-        canvasSize.current.h - circle.y - circle.translateY - circle.size, // 下边缘距离
+        circle.x + circle.translateX - circle.size,
+        canvasSize.current.w - circle.x - circle.translateX - circle.size,
+        circle.y + circle.translateY - circle.size,
+        canvasSize.current.h - circle.y - circle.translateY - circle.size,
       ];
       const closestEdge = edge.reduce((a, b) => Math.min(a, b));
       const remapClosestEdge = parseFloat(
         remapValue(closestEdge, 0, 20, 0, 1).toFixed(2)
       );
 
-      // 星空模式下添加闪烁效果 - 更自然的闪烁
-      if (starMode) {
-        // 闪烁效果 - 大小星星闪烁频率不同
-        const twinkleSpeedFactor = 1 - circle.size * 0.5; // 小星星闪烁更快
+      // 星空模式下添加闪烁效果
+      if (starModeRef.current) {
+        const twinkleSpeedFactor = 1 - circle.size * 0.5;
         circle.targetAlpha += circle.twinkleSpeed * circle.twinkleDirection * twinkleSpeedFactor;
 
-        // 改变闪烁方向 - 更自然的亮度范围
-        if (circle.targetAlpha > 0.7 + circle.size * 0.2) { // 大星星可以更亮
+        if (circle.targetAlpha > 0.7 + circle.size * 0.2) {
           circle.twinkleDirection = -1;
-        } else if (circle.targetAlpha < 0.2 + circle.size * 0.1) { // 大星星最暗时也比小星星亮
+        } else if (circle.targetAlpha < 0.2 + circle.size * 0.1) {
           circle.twinkleDirection = 1;
         }
 
-        // 限制透明度范围 - 基于星星大小
         const minAlpha = 0.1 + circle.size * 0.1;
         const maxAlpha = 0.6 + circle.size * 0.3;
         circle.targetAlpha = Math.max(minAlpha, Math.min(maxAlpha, circle.targetAlpha));
@@ -323,7 +401,7 @@ export default function Particles({
 
       // 透明度渐变
       if (remapClosestEdge > 1) {
-        circle.alpha += 0.01; // 更缓慢的淡入
+        circle.alpha += 0.01;
         if (circle.alpha > circle.targetAlpha) {
           circle.alpha = circle.targetAlpha;
         }
@@ -331,24 +409,19 @@ export default function Particles({
         circle.alpha = circle.targetAlpha * remapClosestEdge;
       }
 
-      // 更新位置 - 星空模式下几乎静止
+      // 更新位置
       circle.x += circle.dx;
       circle.y += circle.dy;
 
-      // 视差效果 - 深度越大的星星移动越慢，模拟三维空间
-      const depthFactor = starMode ? (0.1 + circle.depth * 0.9) : 1;
-
-      // 鼠标交互 - 考虑深度因素，更自然的移动
-      const mouseInfluence = mouse.current.x !== 0 || mouse.current.y !== 0
-        ? 1
-        : 0; // 鼠标不动时星星也不动
+      const depthFactor = starModeRef.current ? (0.1 + circle.depth * 0.9) : 1;
+      const mouseInfluence = mouse.current.x !== 0 || mouse.current.y !== 0 ? 1 : 0;
 
       circle.translateX +=
-        (mouse.current.x / (staticity / (circle.magnetism * depthFactor)) - circle.translateX) /
-        ease * mouseInfluence;
+        (mouse.current.x / (staticityRef.current / (circle.magnetism * depthFactor)) - circle.translateX) /
+        easeRef.current * mouseInfluence;
       circle.translateY +=
-        (mouse.current.y / (staticity / (circle.magnetism * depthFactor)) - circle.translateY) /
-        ease * mouseInfluence;
+        (mouse.current.y / (staticityRef.current / (circle.magnetism * depthFactor)) - circle.translateY) /
+        easeRef.current * mouseInfluence;
 
       // 检查是否超出画布
       if (
@@ -357,12 +430,10 @@ export default function Particles({
         circle.y < -circle.size ||
         circle.y > canvasSize.current.h + circle.size
       ) {
-        // 移除并创建新星星
-        circles.current.splice(i, 1);
-        const newCircle = circleParams();
-        drawCircle(newCircle);
+        // 原地重置以避免使用 splice 引发的索引偏移问题及内存分配抖动
+        const newParams = circleParams();
+        Object.assign(circle, newParams);
       } else {
-        // 更新星星位置
         drawCircle(
           {
             ...circle,
@@ -376,37 +447,53 @@ export default function Particles({
         );
       }
     });
-    window.requestAnimationFrame(animate);
-  }, [circleParams, drawCircle, staticity, ease, starMode]);
 
+    rafRef.current = requestAnimationFrame(animate);
+  }, [circleParams, drawCircle]);
+
+  // 初始化画布
   useEffect(() => {
     if (canvasRef.current) {
       context.current = canvasRef.current.getContext("2d");
     }
+    buildSprites();
     initCanvas();
-    animate();
     window.addEventListener("resize", initCanvas);
 
     return () => {
       window.removeEventListener("resize", initCanvas);
     };
+  }, [starColors, initCanvas, buildSprites]);
+
+  // 控制 Tab 切换时的后台挂起，降低能耗
+  useEffect(() => {
+    const handleVisibilityChange = () => {
+      isVisibleRef.current = document.visibilityState === "visible";
+    };
+    document.addEventListener("visibilitychange", handleVisibilityChange);
+    return () => {
+      document.removeEventListener("visibilitychange", handleVisibilityChange);
+    };
   }, []);
+
+  // 启动唯一的动画循环
+  useEffect(() => {
+    rafRef.current = requestAnimationFrame(animate);
+    return () => {
+      if (rafRef.current) {
+        cancelAnimationFrame(rafRef.current);
+      }
+    };
+  }, [animate]);
 
   useEffect(() => {
     onMouseMove();
   }, [mousePosition.x, mousePosition.y]);
 
   useEffect(() => {
+    buildSprites();
     initCanvas();
   }, [refresh]);
-
-  // 主题切换时重新创建所有星星
-  useEffect(() => {
-    if (theme || resolvedTheme) {
-      circles.current = [];
-      initCanvas();
-    }
-  }, [theme, resolvedTheme]);
 
   return (
     <div

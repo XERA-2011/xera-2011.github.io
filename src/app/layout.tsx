@@ -1,10 +1,8 @@
 import { siteMetadata, siteViewport } from "@/config/site";
 import '../styles/globals.css';
-import Background from "@/components/background/star";
 import Footer from "@/components/footer";
 import Header from "@/components/header";
 import UserAuth from "@/components/header/user-auth";
-import ElasticCursor from "@/components/ui/elastic-cursor";
 import { Providers } from "@/components/providers";
 
 export const viewport = siteViewport;
@@ -21,11 +19,9 @@ export default function RootLayout({
         className="antialiased theme-scrollbar"
       >
         <Providers>
-          <Background />
           <Header userAuth={<UserAuth />} />
           {children}
           <Footer />
-          <ElasticCursor />
         </Providers>
       </body>
     </html>
