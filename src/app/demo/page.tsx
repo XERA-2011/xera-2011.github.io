@@ -12,6 +12,11 @@ const demoData: GlowCardItem[] = [
     href: '/demo/x-logo.html'
   },
   {
+    id: 'x-circle',
+    title: 'X Circle',
+    href: '/demo/x-circle.html'
+  },
+  {
     id: 'solar',
     title: 'Solar',
     href: '/demo/solar.html'

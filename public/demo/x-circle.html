@@ -1,0 +1,785 @@
+<!DOCTYPE html>
+<html lang="zh-CN" data-theme="light">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>X Logo 导出工具</title>
+  <style>
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    :root {
+      --bg-color: #141414;
+      --card-bg: #1e1e1e;
+      --card-border: #2e2e2e;
+      --text-main: #ffffff;
+      --text-sub: #888888;
+      --btn-sec-bg: #2a2a2a;
+      --btn-sec-border: #3d3d3d;
+      --btn-sec-text: #e0e0e0;
+      --btn-sec-hover: #333333;
+      --btn-dark-bg: #0a0a0a;
+      --btn-dark-border: #333333;
+      --btn-dark-text: #ffffff;
+      --shadow: 0 12px 32px rgba(0, 0, 0, 0.4);
+      --toast-bg: rgba(10, 10, 10, 0.9);
+      --toast-border: #00bcd4;
+      --toast-text: #ffffff;
+      --switch-bg: #222222;
+      --switch-active-bg: #333333;
+      --switch-active-text: #ffffff;
+      --switch-inactive-text: #888888;
+      --label-color: #777777;
+      --svg-shadow: drop-shadow(0 4px 16px rgba(0, 0, 0, 0.35));
+      --preview-svg-shadow: none;
+    }
+
+    [data-theme="light"] {
+      --bg-color: #f3f4f6;
+      --card-bg: #ffffff;
+      --card-border: #e5e7eb;
+      --text-main: #111827;
+      --text-sub: #6b7280;
+      --btn-sec-bg: #f3f4f6;
+      --btn-sec-border: #d1d5db;
+      --btn-sec-text: #1f2937;
+      --btn-sec-hover: #e5e7eb;
+      --btn-dark-bg: #f9fafb;
+      --btn-dark-border: #d1d5db;
+      --btn-dark-text: #111827;
+      --shadow: 0 12px 32px rgba(0, 0, 0, 0.08);
+      --toast-bg: rgba(17, 24, 39, 0.95);
+      --toast-border: #00bcd4;
+      --toast-text: #ffffff;
+      --switch-bg: #e5e7eb;
+      --switch-active-bg: #ffffff;
+      --switch-active-text: #111827;
+      --switch-inactive-text: #6b7280;
+      --label-color: #9ca3af;
+      --svg-shadow: drop-shadow(0 2px 8px rgba(0, 0, 0, 0.06));
+      --preview-svg-shadow: none;
+    }
+
+    body {
+      background: var(--bg-color);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      min-height: 100vh;
+      color: var(--text-main);
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+      padding: 40px 20px;
+      transition: background 0.3s ease, color 0.3s ease;
+    }
+
+    .container {
+      max-width: 800px;
+      width: 100%;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 28px;
+    }
+
+    .header-bar {
+      width: 100%;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 20px;
+    }
+
+    .header-info {
+      text-align: left;
+    }
+
+    h1 {
+      font-size: 24px;
+      font-weight: 700;
+      letter-spacing: -0.5px;
+      margin-bottom: 4px;
+    }
+
+    p.subtitle {
+      font-size: 13px;
+      color: var(--text-sub);
+      transition: color 0.3s ease;
+    }
+
+    /* 顶部控制栏按钮组 */
+    .controls-group {
+      display: flex;
+      align-items: center;
+      gap: 16px;
+      flex-wrap: wrap;
+    }
+
+    .switch-container {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    .switch-label {
+      font-size: 12px;
+      font-weight: 600;
+      color: var(--label-color);
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+    }
+
+    .toggle-switch {
+      display: inline-flex;
+      background: var(--switch-bg);
+      border-radius: 24px;
+      padding: 3px;
+      gap: 3px;
+      border: 1px solid var(--card-border);
+      transition: all 0.3s ease;
+    }
+
+    .toggle-option {
+      display: inline-flex;
+      align-items: center;
+      gap: 5px;
+      padding: 5px 12px;
+      border-radius: 20px;
+      font-size: 13px;
+      font-weight: 600;
+      cursor: pointer;
+      border: none;
+      background: transparent;
+      color: var(--switch-inactive-text);
+      transition: all 0.2s ease;
+      user-select: none;
+    }
+
+    .toggle-option.active {
+      background: var(--switch-active-bg);
+      color: var(--switch-active-text);
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.12);
+    }
+
+    .toggle-option:hover:not(.active) {
+      color: var(--text-main);
+    }
+
+    .main-card {
+      background: var(--card-bg);
+      border: 1px solid var(--card-border);
+      border-radius: 16px;
+      padding: 32px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 24px;
+      box-shadow: var(--shadow);
+      width: 100%;
+      transition: all 0.3s ease;
+    }
+
+    .logo-display {
+      padding: 16px 24px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .logo-display svg {
+      filter: var(--svg-shadow);
+      transition: transform 0.3s ease, filter 0.3s ease;
+      border-radius: 8px;
+    }
+
+    .logo-display svg:hover {
+      transform: scale(1.04);
+    }
+
+    .size-preview-section {
+      width: 100%;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .size-preview-title {
+      font-size: 12px;
+      color: var(--text-sub);
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+      font-weight: 600;
+    }
+
+    .size-previews {
+      display: flex;
+      gap: 20px;
+      align-items: flex-end;
+      justify-content: center;
+      flex-wrap: wrap;
+    }
+
+    .preview-item {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 6px;
+    }
+
+    .preview-item svg {
+      filter: var(--preview-svg-shadow);
+      transition: filter 0.3s ease;
+      border-radius: 4px;
+    }
+
+    .preview-item span {
+      font-size: 11px;
+      color: var(--text-sub);
+    }
+
+    .btns {
+      display: flex;
+      gap: 12px;
+      flex-wrap: wrap;
+      justify-content: center;
+      width: 100%;
+    }
+
+    button.action-btn {
+      background: #00bcd4;
+      color: #ffffff;
+      border: none;
+      padding: 12px 20px;
+      border-radius: 10px;
+      font-size: 14px;
+      font-weight: 600;
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+
+    button.action-btn:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 6px 20px rgba(0, 188, 212, 0.4);
+    }
+
+    button.action-btn:active {
+      transform: translateY(0);
+    }
+
+    button.btn-secondary {
+      background: var(--btn-sec-bg);
+      border: 1px solid var(--btn-sec-border);
+      color: var(--btn-sec-text);
+    }
+
+    button.btn-secondary:hover {
+      background: var(--btn-sec-hover);
+      border-color: var(--text-sub);
+      box-shadow: 0 6px 20px rgba(0, 0, 0, 0.1);
+    }
+
+    button.btn-dark {
+      background: var(--btn-dark-bg);
+      border: 1px solid var(--btn-dark-border);
+      color: var(--btn-dark-text);
+    }
+
+    button.btn-dark:hover {
+      border-color: #00bcd4;
+      box-shadow: 0 6px 20px rgba(0, 188, 212, 0.25);
+    }
+
+    .toast {
+      position: fixed;
+      bottom: 24px;
+      background: var(--toast-bg);
+      border: 1px solid var(--toast-border);
+      color: var(--toast-text);
+      padding: 10px 20px;
+      border-radius: 8px;
+      font-size: 13px;
+      opacity: 0;
+      transform: translateY(10px);
+      transition: all 0.3s ease;
+      pointer-events: none;
+      box-shadow: 0 8px 24px rgba(0, 0, 0, 0.3);
+    }
+
+    .toast.show {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  </style>
+</head>
+
+<body>
+
+  <div class="container">
+    <div class="header-bar">
+      <div class="header-info">
+        <h1>X Logo 导出工具</h1>
+        <p id="themeSubtitle" class="subtitle">白色 (#ffffff) 全部填充底色 · 黑白交叉 ❌</p>
+      </div>
+
+      <div class="controls-group">
+        <!-- 模式切换 (全部填充 / 圆圈 / 透明) -->
+        <div class="switch-container" role="group" aria-label="模式选择">
+          <span class="switch-label">模式</span>
+          <div class="toggle-switch">
+            <button id="modeFill" class="toggle-option active" title="全屏方块填充背景">
+              <span>⬛</span> 全部填充
+            </button>
+            <button id="modeCircle" class="toggle-option" title="圆圈背景">
+              <span>⭕</span> 圆圈
+            </button>
+            <button id="modeTransparent" class="toggle-option" title="透明背景">
+              <span>🏁</span> 透明
+            </button>
+          </div>
+        </div>
+
+        <!-- 主题切换 (浅色 / 深色) -->
+        <div class="switch-container" role="group" aria-label="主题选择">
+          <span class="switch-label">主题</span>
+          <div class="toggle-switch">
+            <button id="themeLight" class="toggle-option active" title="浅色主题">
+              <span>⚪</span> 浅色
+            </button>
+            <button id="themeDark" class="toggle-option" title="深色主题">
+              <span>🖤</span> 深色
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="main-card">
+      <!-- SVG 视觉展示 -->
+      <div class="logo-display">
+        <svg id="mainSvg" viewBox="0 0 100 100" width="180" height="180" xmlns="http://www.w3.org/2000/svg">
+        </svg>
+      </div>
+
+      <!-- 多尺寸效果预览 -->
+      <div class="size-preview-section">
+        <span class="size-preview-title">多尺寸效果预览</span>
+        <div class="size-previews" id="previewContainer">
+          <div class="preview-item">
+            <svg class="preview-svg" viewBox="0 0 100 100" width="16" height="16" xmlns="http://www.w3.org/2000/svg"></svg>
+            <span>16px</span>
+          </div>
+
+          <div class="preview-item">
+            <svg class="preview-svg" viewBox="0 0 100 100" width="32" height="32" xmlns="http://www.w3.org/2000/svg"></svg>
+            <span>32px</span>
+          </div>
+
+          <div class="preview-item">
+            <svg class="preview-svg" viewBox="0 0 100 100" width="48" height="48" xmlns="http://www.w3.org/2000/svg"></svg>
+            <span>48px</span>
+          </div>
+
+          <div class="preview-item">
+            <svg class="preview-svg" viewBox="0 0 100 100" width="64" height="64" xmlns="http://www.w3.org/2000/svg"></svg>
+            <span>64px</span>
+          </div>
+
+          <div class="preview-item">
+            <svg class="preview-svg" viewBox="0 0 100 100" width="96" height="96" xmlns="http://www.w3.org/2000/svg"></svg>
+            <span>96px</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- 操作按钮组 -->
+      <div class="btns">
+        <button id="btnPng" class="action-btn">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path>
+            <polyline points="7 10 12 15 17 10"></polyline>
+            <line x1="12" y1="15" x2="12" y2="3"></line>
+          </svg>
+          下载 PNG (1024×1024)
+        </button>
+
+        <button id="btnFavicon" class="action-btn btn-dark">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <circle cx="12" cy="12" r="10"></circle>
+            <path d="M12 8v8"></path>
+            <path d="M8 12h8"></path>
+          </svg>
+          下载 Favicon (.ico)
+        </button>
+
+        <button id="btnSvg" class="action-btn btn-secondary">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <polygon points="12 2 2 7 12 12 22 7 12 2"></polygon>
+            <polyline points="2 17 12 22 22 17"></polyline>
+            <polyline points="2 12 12 17 22 12"></polyline>
+          </svg>
+          下载 SVG
+        </button>
+
+        <button id="btnCopySvg" class="action-btn btn-secondary">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect>
+            <path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path>
+          </svg>
+          复制 SVG
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <div id="toast" class="toast">SVG 代码已复制到剪贴板</div>
+
+  <script>
+    // 状态配置
+    let currentTheme = 'light'; // 'light' | 'dark'
+    let currentMode = 'fill';    // 'fill' | 'circle' | 'transparent'
+
+    const THEME_CONFIG = {
+      light: {
+        name: '浅色',
+        bg: '#ffffff',
+        xMain: '#0a0a0a',
+        xMask: '#ffffff',
+        fileSuffix: 'light'
+      },
+      dark: {
+        name: '深色',
+        bg: '#0a0a0a',
+        xMain: '#ffffff',
+        xMask: '#0a0a0a',
+        fileSuffix: 'dark'
+      }
+    };
+
+    const MODE_CONFIG = {
+      fill: {
+        name: '全部填充',
+        filePrefix: 'x-fill'
+      },
+      circle: {
+        name: '圆圈',
+        filePrefix: 'x-circle'
+      },
+      transparent: {
+        name: '透明',
+        filePrefix: 'x-transparent'
+      }
+    };
+
+    // 生成 SVG 内容 HTML
+    function getSvgInnerHtml(theme, mode) {
+      const config = THEME_CONFIG[theme];
+
+      let bgElement = '';
+      let maskColor = config.xMask;
+
+      if (mode === 'circle') {
+        bgElement = `<circle cx="50" cy="50" r="50" fill="${config.bg}" />`;
+      } else if (mode === 'fill') {
+        bgElement = `<rect width="100" height="100" fill="${config.bg}" />`;
+      } else {
+        // 透明模式：在展示卡片上使用当前主题的卡片背景色作为视觉穿插切割
+        maskColor = theme === 'light' ? '#ffffff' : '#1e1e1e';
+      }
+
+      return `
+        ${bgElement}
+        <line x1="30.3" y1="30.3" x2="69.7" y2="69.7" stroke="${config.xMain}" stroke-width="12" stroke-linecap="square" />
+        <line x1="30.3" y1="69.7" x2="69.7" y2="30.3" stroke="${maskColor}" stroke-width="18" stroke-linecap="square" />
+        <line x1="30.3" y1="69.7" x2="69.7" y2="30.3" stroke="${config.xMain}" stroke-width="12" stroke-linecap="square" />
+      `;
+    }
+
+    // 更新界面渲染
+    function updateUI() {
+      // 1. 更新网页主体主题属性
+      document.documentElement.setAttribute('data-theme', currentTheme);
+
+      // 2. 更新模式开关按钮激活状态
+      document.getElementById('modeFill').classList.toggle('active', currentMode === 'fill');
+      document.getElementById('modeCircle').classList.toggle('active', currentMode === 'circle');
+      document.getElementById('modeTransparent').classList.toggle('active', currentMode === 'transparent');
+
+      // 3. 更新主题开关按钮激活状态
+      document.getElementById('themeLight').classList.toggle('active', currentTheme === 'light');
+      document.getElementById('themeDark').classList.toggle('active', currentTheme === 'dark');
+
+      // 4. 更新副标题描述
+      const themeConfig = THEME_CONFIG[currentTheme];
+      if (currentMode === 'transparent') {
+        document.getElementById('themeSubtitle').textContent = `透明背景 · ${themeConfig.name} ❌`;
+      } else if (currentMode === 'circle') {
+        document.getElementById('themeSubtitle').textContent = `${themeConfig.bg} 无边框底圆 · 黑白交叉 ❌`;
+      } else {
+        document.getElementById('themeSubtitle').textContent = `${themeConfig.bg} 全部填充底色 · 黑白交叉 ❌`;
+      }
+
+      // 5. 更新主展示 SVG
+      const innerHtml = getSvgInnerHtml(currentTheme, currentMode);
+      document.getElementById('mainSvg').innerHTML = innerHtml;
+
+      // 6. 更新所有多尺寸预览 SVG
+      document.querySelectorAll('.preview-svg').forEach(svg => {
+        svg.innerHTML = innerHtml;
+      });
+    }
+
+    // 绑定模式切换事件
+    document.getElementById('modeFill').addEventListener('click', () => {
+      currentMode = 'fill';
+      updateUI();
+    });
+
+    document.getElementById('modeCircle').addEventListener('click', () => {
+      currentMode = 'circle';
+      updateUI();
+    });
+
+    document.getElementById('modeTransparent').addEventListener('click', () => {
+      currentMode = 'transparent';
+      updateUI();
+    });
+
+    // 绑定主题切换事件
+    document.getElementById('themeLight').addEventListener('click', () => {
+      currentTheme = 'light';
+      updateUI();
+    });
+
+    document.getElementById('themeDark').addEventListener('click', () => {
+      currentTheme = 'dark';
+      updateUI();
+    });
+
+    // 绘制 Logo 到 Canvas (用于 PNG / ICO 导出)
+    function drawLogoCanvas(canvas, size, theme = currentTheme, mode = currentMode) {
+      const ctx = canvas.getContext('2d');
+      canvas.width = size;
+      canvas.height = size;
+      const config = THEME_CONFIG[theme];
+
+      // 透明背景清除
+      ctx.clearRect(0, 0, size, size);
+
+      const margin = size * 0.303;
+      ctx.lineCap = 'square';
+
+      if (mode === 'transparent') {
+        // 透明模式：
+        // 1. 底层线 (\)
+        ctx.strokeStyle = config.xMain;
+        ctx.lineWidth = size * 0.12;
+        ctx.beginPath();
+        ctx.moveTo(margin, margin);
+        ctx.lineTo(size - margin, size - margin);
+        ctx.stroke();
+
+        // 2. 擦除中间交错缝隙 (/)
+        ctx.globalCompositeOperation = 'destination-out';
+        ctx.strokeStyle = '#000000';
+        ctx.lineWidth = size * 0.18;
+        ctx.beginPath();
+        ctx.moveTo(size * 0.40, size * 0.60);
+        ctx.lineTo(size * 0.60, size * 0.40);
+        ctx.stroke();
+
+        // 3. 正常模式画上层主体 (/)
+        ctx.globalCompositeOperation = 'source-over';
+        ctx.strokeStyle = config.xMain;
+        ctx.lineWidth = size * 0.12;
+        ctx.beginPath();
+        ctx.moveTo(margin, size - margin);
+        ctx.lineTo(size - margin, margin);
+        ctx.stroke();
+      } else {
+        // 1. 绘制背景 (圆圈 or 全部填充)
+        ctx.fillStyle = config.bg;
+        if (mode === 'circle') {
+          ctx.beginPath();
+          ctx.arc(size / 2, size / 2, size / 2, 0, Math.PI * 2);
+          ctx.fill();
+        } else {
+          ctx.fillRect(0, 0, size, size);
+        }
+
+        // 2. 底层线 (\)
+        ctx.strokeStyle = config.xMain;
+        ctx.lineWidth = size * 0.12;
+        ctx.beginPath();
+        ctx.moveTo(margin, margin);
+        ctx.lineTo(size - margin, size - margin);
+        ctx.stroke();
+
+        // 3. 上层遮罩切割线 (/)
+        ctx.strokeStyle = config.xMask;
+        ctx.lineWidth = size * 0.18;
+        ctx.beginPath();
+        ctx.moveTo(margin, size - margin);
+        ctx.lineTo(size - margin, margin);
+        ctx.stroke();
+
+        // 4. 上层前景色主体 (/)
+        ctx.strokeStyle = config.xMain;
+        ctx.lineWidth = size * 0.12;
+        ctx.beginPath();
+        ctx.moveTo(margin, size - margin);
+        ctx.lineTo(size - margin, margin);
+        ctx.stroke();
+      }
+    }
+
+    // 获取导出文件名
+    function getExportFilename(extension) {
+      const prefix = MODE_CONFIG[currentMode].filePrefix;
+      return `${prefix}-${THEME_CONFIG[currentTheme].fileSuffix}.${extension}`;
+    }
+
+    // 下载 PNG (1024x1024)
+    document.getElementById('btnPng').addEventListener('click', () => {
+      const canvas = document.createElement('canvas');
+      drawLogoCanvas(canvas, 1024, currentTheme, currentMode);
+      const png = canvas.toDataURL('image/png');
+      const filename = getExportFilename('png');
+      const a = document.createElement('a');
+      a.href = png;
+      a.download = filename;
+      a.click();
+    });
+
+    // 下载 SVG
+    document.getElementById('btnSvg').addEventListener('click', () => {
+      const svgElement = document.getElementById('mainSvg');
+      const svgData = new XMLSerializer().serializeToString(svgElement);
+      const blob = new Blob([svgData], { type: 'image/svg+xml;charset=utf-8' });
+      const url = URL.createObjectURL(blob);
+      const filename = getExportFilename('svg');
+      const a = document.createElement('a');
+      a.href = url;
+      a.download = filename;
+      a.click();
+      URL.revokeObjectURL(url);
+    });
+
+    // 复制 SVG 代码
+    document.getElementById('btnCopySvg').addEventListener('click', () => {
+      const svgElement = document.getElementById('mainSvg');
+      const svgData = new XMLSerializer().serializeToString(svgElement);
+      navigator.clipboard.writeText(svgData).then(() => {
+        showToast('SVG 代码已复制到剪贴板');
+      }).catch(() => {
+        showToast('复制失败，请手动复制');
+      });
+    });
+
+    function showToast(msg) {
+      const toast = document.getElementById('toast');
+      toast.textContent = msg;
+      toast.classList.add('show');
+      setTimeout(() => {
+        toast.classList.remove('show');
+      }, 2000);
+    }
+
+    // 创建 ICO 文件二进制数据
+    function createICO(imageData, width, height) {
+      const bmpInfoSize = 40;
+      const pixelDataSize = width * height * 4;
+      const maskSize = Math.ceil(width / 8) * height;
+      const imageSize = bmpInfoSize + pixelDataSize + maskSize;
+
+      // ICO 文件头 (6 bytes) + 目录项 (16 bytes) + 图像数据
+      const buffer = new ArrayBuffer(6 + 16 + imageSize);
+      const view = new DataView(buffer);
+
+      // ICO 文件头
+      view.setUint16(0, 0, true);      // 保留
+      view.setUint16(2, 1, true);      // 类型 (1 = ICO)
+      view.setUint16(4, 1, true);      // 图像数量
+
+      // 目录项
+      view.setUint8(6, width === 256 ? 0 : width);   // 宽度
+      view.setUint8(7, height === 256 ? 0 : height); // 高度
+      view.setUint8(8, 0);             // 调色板数
+      view.setUint8(9, 0);             // 保留
+      view.setUint16(10, 1, true);     // 颜色平面
+      view.setUint16(12, 32, true);    // 位深度
+      view.setUint32(14, imageSize, true);  // 图像大小
+      view.setUint32(18, 22, true);    // 图像数据偏移
+
+      // BMP 信息头 (BITMAPINFOHEADER)
+      let offset = 22;
+      view.setUint32(offset, bmpInfoSize, true); offset += 4;
+      view.setInt32(offset, width, true); offset += 4;
+      view.setInt32(offset, height * 2, true); offset += 4; // 高度 x2 (包含掩码)
+      view.setUint16(offset, 1, true); offset += 2;  // 平面数
+      view.setUint16(offset, 32, true); offset += 2; // 位深度
+      view.setUint32(offset, 0, true); offset += 4;  // 压缩方式
+      view.setUint32(offset, pixelDataSize + maskSize, true); offset += 4;
+      view.setInt32(offset, 0, true); offset += 4;
+      view.setInt32(offset, 0, true); offset += 4;
+      view.setUint32(offset, 0, true); offset += 4;
+      view.setUint32(offset, 0, true); offset += 4;
+
+      // 像素数据 (BGRA, 从下到上)
+      const pixels = imageData.data;
+      for (let y = height - 1; y >= 0; y--) {
+        for (let x = 0; x < width; x++) {
+          const srcIdx = (y * width + x) * 4;
+          view.setUint8(offset++, pixels[srcIdx + 2]); // B
+          view.setUint8(offset++, pixels[srcIdx + 1]); // G
+          view.setUint8(offset++, pixels[srcIdx + 0]); // R
+          view.setUint8(offset++, pixels[srcIdx + 3]); // A
+        }
+      }
+
+      // AND 掩码 (全 0 = 完全不透明, 由 alpha 通道处理)
+      for (let i = 0; i < maskSize; i++) {
+        view.setUint8(offset++, 0);
+      }
+
+      return buffer;
+    }
+
+    // 下载 Favicon (.ico)
+    document.getElementById('btnFavicon').addEventListener('click', () => {
+      const canvas = document.createElement('canvas');
+      const size = 64;
+      canvas.width = size;
+      canvas.height = size;
+      drawLogoCanvas(canvas, size, currentTheme, currentMode);
+
+      const ctx = canvas.getContext('2d');
+      const imageData = ctx.getImageData(0, 0, size, size);
+
+      const ico = createICO(imageData, size, size);
+      const blob = new Blob([ico], { type: 'image/x-icon' });
+      const url = URL.createObjectURL(blob);
+
+      const filename = `favicon-${currentMode}-${THEME_CONFIG[currentTheme].fileSuffix}.ico`;
+      const a = document.createElement('a');
+      a.href = url;
+      a.download = filename;
+      a.click();
+      URL.revokeObjectURL(url);
+    });
+
+    // 初始化界面渲染
+    updateUI();
+  </script>
+
+</body>
+
+</html>
