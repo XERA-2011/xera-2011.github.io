@@ -671,27 +671,26 @@
       }
     };
 
-    // 生成 SVG 内容 HTML
+    // 生成 SVG 内容 HTML (纯矢量数学分割，无需遮罩，全透明、无阴影伪影、100% 规整锐利)
     function getSvgInnerHtml(theme, mode, lineWidth = currentLineWidth, borderWidth = currentBorderWidth) {
       const config = THEME_CONFIG[theme];
-      const maskWidth = lineWidth + borderWidth * 2;
+      const deltaCut = (lineWidth + borderWidth) / Math.SQRT2;
+      const x1Cut = (50 - deltaCut).toFixed(3);
+      const y1Cut = (50 - deltaCut).toFixed(3);
+      const x2Cut = (50 + deltaCut).toFixed(3);
+      const y2Cut = (50 + deltaCut).toFixed(3);
 
       let bgElement = '';
-      let maskColor = config.xMask;
-
       if (mode === 'circle') {
         bgElement = `<circle cx="50" cy="50" r="50" fill="${config.bg}" />`;
       } else if (mode === 'fill') {
         bgElement = `<rect width="100" height="100" fill="${config.bg}" />`;
-      } else {
-        // 透明模式：在展示卡片上使用当前主题的卡片背景色作为视觉穿插切割
-        maskColor = theme === 'light' ? '#ffffff' : '#1e1e1e';
       }
 
       return `
         ${bgElement}
-        <line x1="30.3" y1="30.3" x2="69.7" y2="69.7" stroke="${config.xMain}" stroke-width="${lineWidth}" stroke-linecap="square" />
-        <line x1="30.3" y1="69.7" x2="69.7" y2="30.3" stroke="${maskColor}" stroke-width="${maskWidth}" stroke-linecap="square" />
+        <line x1="30.3" y1="30.3" x2="${x1Cut}" y2="${y1Cut}" stroke="${config.xMain}" stroke-width="${lineWidth}" stroke-linecap="square" />
+        <line x1="${x2Cut}" y1="${y2Cut}" x2="69.7" y2="69.7" stroke="${config.xMain}" stroke-width="${lineWidth}" stroke-linecap="square" />
         <line x1="30.3" y1="69.7" x2="69.7" y2="30.3" stroke="${config.xMain}" stroke-width="${lineWidth}" stroke-linecap="square" />
       `;
     }
