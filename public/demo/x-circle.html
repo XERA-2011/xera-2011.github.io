@@ -462,7 +462,7 @@
     <div class="header-bar">
       <div class="header-info">
         <h1>X Logo 导出工具</h1>
-        <p id="themeSubtitle" class="subtitle">#ffffff 全部填充底色 · 黑白交叉 ❌ (线宽: 12px, 间隙: 3px)</p>
+        <p id="themeSubtitle" class="subtitle">#ffffff 全部填充底色 · 黑白交叉 ❌ (线宽: 12px, 间隙: 6px)</p>
       </div>
 
       <div class="controls-group">
@@ -470,10 +470,10 @@
         <div class="switch-container" role="group" aria-label="图标样式选择">
           <span class="switch-label">样式</span>
           <div class="toggle-switch">
-            <button id="styleX" class="toggle-option active" title="经典交叉 ❌ (线宽 12px / 间隙 3px)">
+            <button id="styleX" class="toggle-option active" title="经典交叉 ❌ (线宽 12px / 间隙 6px)">
               <span>❌</span> 默认
             </button>
-            <button id="styleDivide" class="toggle-option" title="除号风格 ➗ (线宽 16px / 间隙 12px)">
+            <button id="styleDivide" class="toggle-option" title="五正方形比例 ➗ (线宽 14px / 间隙 14px，比例 1:1:1:1:1)">
               <span>➗</span> 选项
             </button>
           </div>
@@ -521,7 +521,7 @@
       <div class="params-section">
         <div class="param-header">
           <span class="params-heading">参数微调</span>
-          <button id="btnResetParams" class="btn-reset" title="恢复为默认 ❌ (12px / 3px)">↺ 恢复默认</button>
+          <button id="btnResetParams" class="btn-reset" title="恢复为默认 ❌ (12px / 6px)">↺ 恢复默认</button>
         </div>
 
         <div class="param-row">
@@ -535,9 +535,9 @@
         <div class="param-row">
           <div class="param-label-group">
             <span id="paramLabelBorder" class="param-title">❌ 边框 / 切割间隙</span>
-            <span id="borderWidthVal" class="param-value">3px</span>
+            <span id="borderWidthVal" class="param-value">6px</span>
           </div>
-          <input type="range" id="sliderBorderWidth" min="0" max="14" step="0.5" value="3" class="param-slider" />
+          <input type="range" id="sliderBorderWidth" min="0" max="20" step="0.5" value="6" class="param-slider" />
         </div>
       </div>
 
@@ -620,7 +620,7 @@
     let currentMode = 'fill';          // 'fill' | 'circle' | 'transparent'
     let currentStyle = 'x';            // 'x' | 'divide'
     let currentLineWidth = 12;         // 默认 12
-    let currentBorderWidth = 3;        // 默认 3
+    let currentBorderWidth = 6;        // 默认 6
 
     const THEME_CONFIG = {
       light: {
@@ -660,14 +660,14 @@
         icon: '❌',
         prefix: 'x',
         lineWidth: 12,
-        borderWidth: 3
+        borderWidth: 6
       },
       divide: {
-        name: '除号风格',
+        name: '五正方形',
         icon: '➗',
         prefix: 'divide',
-        lineWidth: 16,
-        borderWidth: 12
+        lineWidth: 14,
+        borderWidth: 14
       }
     };
 
@@ -851,8 +851,8 @@
         ctx.strokeStyle = '#000000';
         ctx.lineWidth = mw;
         ctx.beginPath();
-        ctx.moveTo(size * 0.40, size * 0.60);
-        ctx.lineTo(size * 0.60, size * 0.40);
+        ctx.moveTo(margin, size - margin);
+        ctx.lineTo(size - margin, margin);
         ctx.stroke();
 
         // 3. 正常模式画上层主体 (/)
