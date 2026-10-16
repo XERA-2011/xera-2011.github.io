@@ -31,7 +31,7 @@ export function CheckboxWithLabel({
         <Checkbox
           id={checkboxId}
           checked={checked}
-          onCheckedChange={onCheckedChange}
+          onCheckedChange={(checked) => onCheckedChange(checked === true)}
         />
         <span className="text-sm text-foreground">{label}</span>
       </Label>
