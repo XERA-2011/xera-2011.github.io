@@ -1,4 +1,4 @@
-# XERA-2011
+# XERAFUN
 
 ## Requirements
 

@@ -78,7 +78,7 @@ export default function PrivacyPage() {
     //   title: '10. Contact Us',
     //   content: 'If you have any questions or suggestions about this privacy policy, please contact us:',
     //   items: [],
-    //   contact: 'support@xera-2011.com'
+    //   contact: 'support@xerafun.com'
     // }
   ];
 

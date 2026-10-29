@@ -17,7 +17,7 @@ export default function XActionsProfilePage() {
     const currentTheme = mounted ? (resolvedTheme || theme || 'dark') : 'dark';
     const filename = `${name}-${currentTheme === 'light' ? 'light' : 'dark'}.svg`;
     return `/api/redirect?url=${encodeURIComponent(
-      `https://cdn.jsdelivr.net/gh/XERA-2011/x-actions-profile@output/${filename}`
+      `https://cdn.jsdelivr.net/gh/xerafun/x-actions-profile@output/${filename}`
     )}`;
   };
 
@@ -49,7 +49,7 @@ export default function XActionsProfilePage() {
               <CardDescription className="flex items-center gap-2">
                 来自 GitHub 仓库的 README 文档
                 <a
-                  href="https://github.com/XERA-2011/x-actions-profile"
+                  href="https://github.com/xerafun/x-actions-profile"
                   target="_blank"
                   rel="noopener noreferrer"
                   className="inline-flex items-center gap-1 text-muted-foreground hover:text-foreground transition-colors underline"

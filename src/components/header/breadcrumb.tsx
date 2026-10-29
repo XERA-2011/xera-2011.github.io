@@ -51,11 +51,11 @@ const Breadcrumb = () => {
             <Link href="/" className="flex items-center justify-center cursor-can-hover">
               {/* Desktop: Always show text */}
               <span className="hidden md:inline text-lg font-bold">
-                XERA-2011
+                xerafun
               </span>
               {/* Mobile: Show text if home, else show icon */}
               <span className={cn("md:hidden font-bold text-base", isHome ? "inline" : "hidden")}>
-                XERA-2011
+                xerafun
               </span>
               <Home className={cn("md:hidden w-4 h-4", isHome ? "hidden" : "block")} />
             </Link>

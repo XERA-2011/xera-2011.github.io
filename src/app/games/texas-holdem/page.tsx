@@ -20,7 +20,7 @@ const platforms = [
   },
   {
     name: 'GitHub Pages',
-    url: 'https://xera-2011.github.io/x-texas-holdem/',
+    url: 'https://xerafun.github.io/x-texas-holdem/',
     description: '稳定版本',
   },
 ];
@@ -94,13 +94,13 @@ export default function TexasHoldemPage() {
           <Card className="bg-card/50 backdrop-blur-sm border-border/50">
             <CardContent>
               <a
-                href="https://github.com/XERA-2011/x-texas-holdem"
+                href="https://github.com/xerafun/x-texas-holdem"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="inline-flex items-center gap-2 text-primary hover:underline"
               >
                 <GithubIcon className="w-5 h-5" />
-                XERA-2011/x-texas-holdem
+                xerafun/x-texas-holdem
                 <ExternalLink className="w-4 h-4" />
               </a>
             </CardContent>

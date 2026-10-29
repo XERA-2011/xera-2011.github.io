@@ -16,7 +16,7 @@ export default function Footer() {
       <div className="flex flex-col items-center justify-center gap-2">
         <div className="flex items-center gap-6">
           <Link
-            href="https://github.com/XERA-2011"
+            href="https://github.com/xerafun"
             target="_blank"
             rel="noopener noreferrer"
             className="cursor-can-hover text-muted-foreground hover:text-foreground transition-colors duration-300 relative group"
@@ -60,12 +60,12 @@ export default function Footer() {
         <div className="text-muted-foreground text-xs">
           {`© Copyright ${new Date().getFullYear()} `}
           <Link
-            href="https://github.com/XERA-2011"
+            href="https://github.com/xerafun"
             target="_blank"
             rel="noopener noreferrer"
             className="cursor-can-hover text-muted-foreground hover:text-foreground transition-colors duration-300"
           >
-            XERA-2011
+            xerafun
           </Link>
         </div>
       </div>

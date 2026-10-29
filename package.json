@@ -1,5 +1,5 @@
 {
-  "name": "xera-2011",
+  "name": "xerafun",
   "version": "0.1.0",
   "private": true,
   "description": "Pocket Universe - 探索工具、实验项目和创意项目的个人空间",
@@ -18,17 +18,17 @@
     "单机德州扑克",
     "德州扑克"
   ],
-  "homepage": "https://xera-2011.vercel.app",
+  "homepage": "https://xerafun.github.io",
   "repository": {
     "type": "git",
-    "url": "https://github.com/xera-2011/xera-2011.github.io.git"
+    "url": "https://github.com/xerafun/xerafun.github.io.git"
   },
   "bugs": {
-    "url": "https://github.com/xera-2011/xera-2011.github.io/issues"
+    "url": "https://github.com/xerafun/xerafun.github.io/issues"
   },
   "author": {
-    "name": "XERA",
-    "url": "https://xera-2011.vercel.app"
+    "name": "xerafun",
+    "url": "https://xerafun.github.io"
   },
   "license": "MIT",
   "engines": {

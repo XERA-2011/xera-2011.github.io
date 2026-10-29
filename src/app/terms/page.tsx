@@ -67,7 +67,7 @@ export default function TermsPage() {
     //   title: '10. Contact Us',
     //   content: 'If you have any questions about these terms, please contact us:',
     //   items: [],
-    //   contact: 'support@xera-2011.com'
+    //   contact: 'support@xerafun.com'
     // }
   ];
 

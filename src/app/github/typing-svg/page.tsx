@@ -29,7 +29,7 @@ export default function TypingSVGPage() {
   // 配置状态
   const [config, setConfig] = useState({
     type: 'custom',
-    lines: 'Hello World!;Welcome to XERA-2011;Typing SVG Generator',
+    lines: 'Hello World!;Welcome to xerafun;Typing SVG Generator',
     font: 'monospace',
     size: '24',
     color: getDefaultTextColor(),
