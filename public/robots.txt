@@ -8,4 +8,4 @@ Disallow: /admin/
 Disallow: /_next/
 
 # 站点地图位置
-Sitemap: https://xera-2011.vercel.app/sitemap.xml
+Sitemap: https://xerafun.vercel.app/sitemap.xml

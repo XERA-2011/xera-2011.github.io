@@ -1,5 +1,5 @@
 // 用户相关常量
-export const BASE_URL = 'https://xera-2011.vercel.app';
+export const BASE_URL = 'https://xerafun.vercel.app';
 
 
 // 默认头像 - 使用 DiceBear API 生成头像
